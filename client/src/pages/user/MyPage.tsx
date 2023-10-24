@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../styles/scss/pages/myPage.scss';
+
 import Nickname from '../../components/myPage/Nickname';
 import Introduce from '../../components/myPage/Introduce';
 

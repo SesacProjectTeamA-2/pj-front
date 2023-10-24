@@ -22,8 +22,12 @@ export default function Introduce(): JSX.Element {
                 ref={inputRef}
                 style={{ width: '300px', height: '100px' }}
             />
-            <button onClick={(e) => changeReadOnly()}>
-                <img src="/asset/icons/edit.svg" alt="editImg"></img>
+            <button onClick={(e) => changeReadOnly()} className="edit-btn">
+                <img
+                    src="/asset/icons/edit.svg"
+                    className="edit-img"
+                    alt="editImg"
+                ></img>
             </button>
         </div>
     );

@@ -19,8 +19,12 @@ export default function Nickname(): JSX.Element {
                 value={nickname}
                 ref={inputRef}
             />
-            <button onClick={(e) => changeReadOnly()}>
-                <img src="/asset/icons/edit.svg" alt="editImg"></img>
+            <button onClick={(e) => changeReadOnly()} className="edit-btn">
+                <img
+                    src="/asset/icons/edit.svg"
+                    className="edit-img"
+                    alt="editImg"
+                ></img>
             </button>
         </div>
     );

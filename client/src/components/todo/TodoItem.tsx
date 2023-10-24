@@ -1,5 +1,25 @@
 import React from 'react';
+import { ToDoItem } from '../../types/types';
 
-export default function TodoItem() {
-  return <div>TodoItem</div>;
+interface Props {
+    todo: ToDoItem;
+    toggleComplete: (id: number) => void;
+}
+
+export default function TodoItem({ todo, toggleComplete }: Props) {
+    return (
+        <div>
+            <li>
+                <input
+                    type="checkbox"
+                    defaultChecked={todo.completed}
+                    onChange={() => toggleComplete(todo.id)}
+                />
+                <span className={`${todo.completed ? 'checked' : ''}`}>
+                    {todo.text}
+                </span>
+                <button>delete</button>
+            </li>
+        </div>
+    );
 }
