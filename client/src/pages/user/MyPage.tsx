@@ -3,6 +3,7 @@ import '../../styles/scss/pages/myPage.scss';
 
 import Nickname from '../../components/myPage/Nickname';
 import Introduce from '../../components/myPage/Introduce';
+import Character from '../../components/myPage/Character';
 
 export default function MyPage() {
     return (
@@ -12,6 +13,8 @@ export default function MyPage() {
             <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임
             <Nickname />
             <Introduce />
+            <h5>내 캐릭터</h5>
+            <Character />
         </div>
     );
 }
