@@ -1,18 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Main() {
+export default function Intro() {
   const navigate = useNavigate();
 
   return (
     <div>
-      <h1>Main</h1>
+      <h1>Intro</h1>
       <button
         onClick={() => {
-          navigate('/');
+          navigate('/main');
         }}
       >
-        Home
+        Main
       </button>
     </div>
   );
