@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Intro from './pages/Intro';
 import Main from './pages/Main';
+import Todo from './pages/Todo';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Intro />} />
           <Route path="/main" element={<Main />} />
+          <Route path="/todo" element={<Todo />} />
 
           {/* 404 처리는 제일 밑에 있어야 함 */}
           <Route path="*" element={<NotFound />} />

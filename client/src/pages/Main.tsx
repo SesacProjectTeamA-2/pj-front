@@ -14,6 +14,13 @@ export default function Main() {
       >
         Home
       </button>
+      <button
+        onClick={() => {
+          navigate('/Todo');
+        }}
+      >
+        Todo
+      </button>
     </div>
   );
 }
