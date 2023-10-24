@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
 
 export default function Introduce(): JSX.Element {
-    const [introduce, setIntroduce] = useState<string | number>('');
+    const [introduce, setIntroduce] = useState<string | number>(
+        '문래동 들개입니다.'
+    );
     const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
 

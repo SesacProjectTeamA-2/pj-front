@@ -1,9 +1,32 @@
+@font-face {
+    font-family: 'Pretendard-Light';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff')
+        format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+        format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+        format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: Pretendard-Regular;
 }
 
 html,
@@ -15,16 +38,6 @@ body {
 body {
     font-family: ‘Noto Sans KR’;
 }
-
-// @font-face {
-//   font-family: “Noto Sans KR”;
-//   font-style: normal;
-//   font-weight: 900;
-//   src: local(“NotoSansKR”),
-//     url(“/fonts/NotoSansKR-Black.woff2”) format(“woff2"),
-//     url(“/fonts/NotoSansKR-Black.woff”) format(“woff”);
-//   font-display: swap;
-// }
 
 div#__next {
     width: 100%;
