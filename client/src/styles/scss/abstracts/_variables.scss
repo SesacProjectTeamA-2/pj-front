@@ -1,0 +1,10 @@
+//-- scss 파일명 앞에 _ 의미
+// css 파일로 변환될 필요 없음을 알림
+// import 시, _ 써도 되고 안써도 됨
+
+$color-first: red;
+$color-second: orange;
+$color-third: yellow;
+$animation-duration: 0.4s;
+
+$breakpoint-sm: 360px;
