@@ -1,21 +1,21 @@
-import "./App.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Intro from './pages/Intro';
+import Main from './pages/Main';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Intro />} />
+          <Route path="/main" element={<Main />} />
+
+          {/* 404 처리는 제일 밑에 있어야 함 */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
