@@ -1,6 +1,21 @@
 @import '../abstracts/variables';
 @import '../abstracts/utils';
 
+.myPage-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.myPage-sub-div {
+    background-color: #d9d9d9;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
 .edit-btn {
     @include box(25px);
     position: relative;
@@ -35,6 +50,8 @@
     width: 300px;
     height: 100px;
 }
+
+// Phrase START
 .phrase-radio {
     opacity: 0;
 }
@@ -55,8 +72,17 @@
     border-radius: 5px;
     color: #fff;
 }
+// Phrase END
 
-// setMain
+// setMain START
+.setMain-table {
+    width: 300px;
+    height: 100px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
 .pin-img {
     @include box(20px);
 }
@@ -78,3 +104,19 @@
 // .setDday-radio[type='radio']:checked + label {
 //     src: '/asset/icons/pin_fill.svg';
 // }
+
+// psnCoverImg START
+#input-file {
+    display: none;
+}
+#input-file-label {
+    display: block;
+    text-align: center;
+    padding: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: $color-primary;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+}

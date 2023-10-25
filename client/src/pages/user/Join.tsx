@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/scss/pages/join.scss';
-import Character from '../../components/myPage/Character';
+import Character from '../../components/common/Character';
 
 export default function Join() {
     return (
