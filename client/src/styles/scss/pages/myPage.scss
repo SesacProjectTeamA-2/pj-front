@@ -35,27 +35,46 @@
     width: 300px;
     height: 100px;
 }
-.phraseMode {
+.phrase-radio {
     opacity: 0;
-    // background-color: $color-primary;
-    // border-radius: 10px;
-    // width: 120px;
-    // height: 20px;
 }
-label {
+.phrase-label {
     width: 150px;
     height: 30px;
     border-radius: 5px;
     padding: 5px 10px;
     margin-top: 10px;
-    border: 1px solid gray;
-    color: gray;
+    background-color: #acacac;
+    color: white;
     display: inline-block;
+    font-weight: light;
     text-align: center;
 }
-
-.phraseMode[type='radio']:checked + label {
+.phrase-radio[type='radio']:checked + label {
     background-color: $color-primary;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #fff;
 }
+
+// setMain
+.pin-img {
+    @include box(20px);
+}
+.setDday-radio {
+    opacity: 0;
+}
+.setDday-label {
+    width: 30px;
+    height: 40px;
+}
+
+.setDone-radio {
+    opacity: 0;
+}
+.setDone-label {
+    width: 30px;
+    height: 40px;
+}
+// .setDday-radio[type='radio']:checked + label {
+//     src: '/asset/icons/pin_fill.svg';
+// }

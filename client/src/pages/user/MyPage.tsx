@@ -6,6 +6,7 @@ import Introduce from '../../components/myPage/Introduce';
 import Character from '../../components/myPage/Character';
 import Interested from '../../components/myPage/Interested';
 import Phrase from '../../components/myPage/Phrase';
+import SetMain from './SetMain';
 
 export default function MyPage() {
     return (
@@ -15,12 +16,19 @@ export default function MyPage() {
             <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}
             <Nickname />
             <Introduce />
-            <h5>내 캐릭터</h5>
+            <br></br>
+            <h3>내 캐릭터</h3>
             <Character />
-            <h5>관심분야</h5>
+            <br></br>
+            <h3>관심분야</h3>
             <Interested />
-            <h5>명언</h5>
+            <br></br>
+            <h3>명언</h3>
             <Phrase />
+            <br></br>
+            <hr></hr>
+            <h3>메인화면 설정</h3>
+            <SetMain />
         </div>
     );
 }

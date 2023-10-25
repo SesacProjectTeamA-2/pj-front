@@ -13,24 +13,27 @@ export default function Phrase(): JSX.Element {
     };
 
     //버튼 선택 시 : 배경 핑크, 글씨 하양 변경
-    // 추천 선택 시 : 텍스트area 비활성화 + 안 보임
+    // 추천 선택 시 : 텍스트area 비활성화
     // 내가 선택 시 : 활성화 + 보임
     // 각 버튼 한개만 선택되어야
     const phraseSelect = (e: React.MouseEvent<HTMLElement>): void => {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
-        console.log(phraseModeBtn);
-        // switch (phraseModeBtn.id) {
-        //     case 'btn1':
-        //         phraseModeBtn.style.background = '#ED8D8D';
-        //         phraseModeBtn.style.color = '#fff';
-        //         break;
-        //     case 'btn2':
-        //         phraseModeBtn.style.background = '#ED8D8D';
-        //         phraseModeBtn.style.color = '#fff';
-        //         break;
-        //     default:
-        //         return;
-        // }
+        const phraseModeBtnVal: string | null =
+            phraseModeBtn.getAttribute('for');
+        const phraseInput: HTMLTextAreaElement | null =
+            document.querySelector('.phraseInput');
+        // console.log(phraseInput);
+
+        switch (phraseModeBtnVal) {
+            case 'btn1':
+                setReadOnlyVal(true);
+                break;
+            case 'btn2':
+                setReadOnlyVal(false);
+                break;
+            default:
+                return;
+        }
         // if(phraseModeBtn)
     };
     return (
@@ -53,22 +56,30 @@ export default function Phrase(): JSX.Element {
             <br></br>
 
             <input
-                className="phraseMode"
+                className="phrase-radio"
                 type="radio"
                 id="btn1"
                 name="phraseMode"
             ></input>
-            <label htmlFor="btn1" onClick={(e) => phraseSelect(e)}>
+            <label
+                htmlFor="btn1"
+                className="phrase-label"
+                onClick={(e) => phraseSelect(e)}
+            >
                 추천해주세요
             </label>
 
             <input
-                className="phraseMode"
+                className="phrase-radio"
                 type="radio"
                 id="btn2"
                 name="phraseMode"
             ></input>
-            <label htmlFor="btn2" onClick={(e) => phraseSelect(e)}>
+            <label
+                htmlFor="btn2"
+                className="phrase-label"
+                onClick={(e) => phraseSelect(e)}
+            >
                 내가 적을래요
             </label>
         </div>
