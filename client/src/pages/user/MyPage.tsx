@@ -9,6 +9,8 @@ import Interested from '../../components/common/Interested';
 import Phrase from '../../components/myPage/Phrase';
 import SetMain from '../../components/myPage/SetMain';
 import PsnCoverImg from '../../components/myPage/PsnCoverImg';
+import Quit from '../../components/myPage/Quit';
+import ProfilePic from '../../components/myPage/ProfilePic';
 
 export default function MyPage() {
     return (
@@ -17,6 +19,7 @@ export default function MyPage() {
                 {/* 로그인 안 했을 때: 로그인 버튼 보임 + 채팅 버튼 안 보임 <br></br>
             로그인 했을 때: 로그인 버튼 안 보임 + 채팅 버튼/프로필 보임
             <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}
+                <ProfilePic />
                 <Nickname />
                 <Introduce />
 
@@ -36,7 +39,11 @@ export default function MyPage() {
                 <hr></hr>
                 <h3>메인화면 설정</h3>
                 <SetMain />
+                <br></br>
                 <PsnCoverImg />
+                <br></br>
+                <hr></hr>
+                <Quit />
             </div>
         </div>
     );
