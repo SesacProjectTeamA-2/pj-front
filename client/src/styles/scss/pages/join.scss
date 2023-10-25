@@ -1,4 +1,10 @@
+@import '../abstracts/variables';
+
 img {
     width: 100px;
     height: 100px;
+}
+
+.maximum {
+    color: $color-gray4;
 }
