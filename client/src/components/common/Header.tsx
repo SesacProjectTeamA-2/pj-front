@@ -37,7 +37,7 @@ export default function Header() {
                     ></img>
                 </Link>
                 <img
-                    src="/asset/icons/chat.png"
+                    src="/asset/icons/chat.svg"
                     style={{ width: '40px', height: '40px' }}
                     alt="chatImg"
                 />

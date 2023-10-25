@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/scss/pages/join.scss';
+import Character from '../../components/myPage/Character';
 
 export default function Join() {
     return (
@@ -13,12 +14,7 @@ export default function Join() {
             <div>관심 분야</div>
 
             <h5>캐릭터를 선택해주세요.</h5>
-            <div>
-                <img src="/asset/images/rabbit2.png" />
-                <img src="/asset/images/dog2.png" />
-                <img src="/asset/images/cat2.svg" />
-                <img src="/asset/images/sqr2.svg" />
-            </div>
+            <Character />
 
             <br />
             <Link to="/main">
