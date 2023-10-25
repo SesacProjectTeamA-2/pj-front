@@ -1,17 +1,21 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+
 .edit-btn {
-    width: 25px;
-    height: 25px;
+    @include box(25px);
+    position: relative;
+    left: -25px;
+    top: -3px;
 }
 .edit-img {
-    width: 20px;
-    height: 20px;
+    @include box(20px);
 }
-.selectBtn {
+.selected-btn {
     border: none;
     border-radius: 15px;
     background-color: white;
 }
-.tagBtn {
+.tag-btn {
     border: 1px solid #acacac;
     border-radius: 15px;
     background-color: white;
@@ -19,4 +23,39 @@
     margin: 5px;
     width: 40px;
     height: 20px;
+}
+.inputArea {
+    border: 'none';
+    font-weight: 'bold';
+    font-size: '30px';
+    width: 300px;
+}
+.textArea {
+    border: 'none';
+    width: 300px;
+    height: 100px;
+}
+.phraseMode {
+    opacity: 0;
+    // background-color: $color-primary;
+    // border-radius: 10px;
+    // width: 120px;
+    // height: 20px;
+}
+label {
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: 1px solid gray;
+    color: gray;
+    display: inline-block;
+    text-align: center;
+}
+
+.phraseMode[type='radio']:checked + label {
+    background-color: $color-primary;
+    border-radius: 10px;
+    color: #fff;
 }
