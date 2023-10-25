@@ -1,0 +1,48 @@
+.checked {
+    text-decoration-line: line-through;
+}
+
+.TodoItem-ul1 {
+    background-color: #ff7373;
+    // 그룹 별 색상 변경 가능한 코드 짜야
+    margin: 10px 10px;
+    padding: 20px 20px;
+
+    border-radius: 20px;
+    color: white;
+}
+
+.TodoItem-ul2 {
+    background-color: #ffa471;
+    // 그룹 별 색상 변경 가능한 코드 짜야
+    margin: 10px 10px;
+    padding: 20px 20px;
+
+    border-radius: 20px;
+    color: white;
+}
+
+.TodoList-header {
+    display: flex;
+    justify-content: space-between;
+    .group {
+        color: white;
+        font-weight: 700;
+
+        // background-color: aqua;
+        // padding: 10px 10px;
+        margin: 10px 10px;
+    }
+
+    .dDay {
+        color: white;
+        font-weight: 700;
+        // background-color: bisque;
+        // padding: 10px 10px;
+        margin: 10px 10px;
+    }
+}
+
+.no-button {
+    display: none;
+}
