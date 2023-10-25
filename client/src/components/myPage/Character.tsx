@@ -1,10 +1,13 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 
 export default function Character() {
-    const selectedBtn: any = document.querySelector('button');
     const selectCharacter = (e: React.MouseEvent<HTMLElement>): void => {
-        selectedBtn.style.border = '2px solid blue';
-        console.log(e.target);
+        const selectedBtn: HTMLElement = e.target as HTMLInputElement;
+
+        if (selectedBtn) {
+            selectedBtn.style.border = '2px solid #ED8D8D';
+            selectedBtn.style.borderRadius = '15px';
+        }
     };
     return (
         <>

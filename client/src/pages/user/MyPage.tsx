@@ -4,6 +4,7 @@ import '../../styles/scss/pages/myPage.scss';
 import Nickname from '../../components/myPage/Nickname';
 import Introduce from '../../components/myPage/Introduce';
 import Character from '../../components/myPage/Character';
+import Interested from '../../components/myPage/Interested';
 
 export default function MyPage() {
     return (
@@ -15,6 +16,8 @@ export default function MyPage() {
             <Introduce />
             <h5>내 캐릭터</h5>
             <Character />
+            <h5>관심분야</h5>
+            <Interested />
         </div>
     );
 }
