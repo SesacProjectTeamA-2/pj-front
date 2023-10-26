@@ -1,16 +1,20 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 
 export default function Character() {
-    const selectedBtn: any = document.querySelector('button');
     const selectCharacter = (e: React.MouseEvent<HTMLElement>): void => {
-        selectedBtn.style.border = '2px solid blue';
-        console.log(e.target);
+        const selectedBtn: HTMLElement = e.target as HTMLInputElement;
+
+        if (selectedBtn) {
+            selectedBtn.style.border = '2px solid #ED8D8D';
+            selectedBtn.style.borderRadius = '15px';
+            console.log(selectedBtn);
+        }
     };
     return (
         <>
             <div className="character-div">
                 <button
-                    className="selectBtn"
+                    className="selected-btn"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }
@@ -18,7 +22,7 @@ export default function Character() {
                     <img src="/asset/images/rabbit2.png" alt="img1" />
                 </button>
                 <button
-                    className="selectBtn"
+                    className="selected-btn"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }
@@ -26,7 +30,7 @@ export default function Character() {
                     <img src="/asset/images/dog2.png" alt="img2" />
                 </button>
                 <button
-                    className="selectBtn"
+                    className="selected-btn"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }
@@ -34,7 +38,7 @@ export default function Character() {
                     <img src="/asset/images/cat2.svg" alt="img3" />
                 </button>
                 <button
-                    className="selectBtn"
+                    className="selected-btn"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }

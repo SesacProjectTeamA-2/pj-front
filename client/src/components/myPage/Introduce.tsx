@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 export default function Introduce(): JSX.Element {
-    const [introduce, setIntroduce] = useState<string | number>(
-        '문래동 들개입니다.'
-    );
+    const [content, setContent] = useState<string | number>('');
     const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -17,10 +15,11 @@ export default function Introduce(): JSX.Element {
         <div>
             <textarea
                 readOnly={readOnlyVal}
-                onChange={(e) => setIntroduce(e.target.value)}
-                value={introduce}
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
                 ref={inputRef}
-                style={{ width: '300px', height: '100px' }}
+                maxLength={50}
+                className="textArea"
             />
             <button onClick={(e) => changeReadOnly()} className="edit-btn">
                 <img

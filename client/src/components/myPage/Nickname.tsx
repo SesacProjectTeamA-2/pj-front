@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
 
 export default function Nickname(): JSX.Element {
-    const [nickname, setNickname] = useState<string | number>('달려라하니');
+    const [input, setInput] = useState<string | number>('짜앙구');
     const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLInputElement>(null);
-
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
         inputRef.current?.focus();
@@ -15,9 +14,15 @@ export default function Nickname(): JSX.Element {
         <div>
             <input
                 readOnly={readOnlyVal}
-                onChange={(e) => setNickname(e.target.value)}
-                value={nickname}
+                onChange={(e) => setInput(e.target.value)}
+                value={input}
                 ref={inputRef}
+                className="inputArea"
+                style={{
+                    border: 'none',
+                    fontWeight: 'bold',
+                    fontSize: '30px',
+                }}
             />
             <button onClick={(e) => changeReadOnly()} className="edit-btn">
                 <img
