@@ -1,7 +1,7 @@
 //=== 공통되는 타입 ===
 
-export interface ToDoItem {
-  id: number;
-  text: string;
-  completed: boolean;
+export interface MissionType {
+    id: number;
+    text: string;
+    completed: boolean;
 }
