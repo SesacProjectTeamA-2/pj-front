@@ -1,3 +1,6 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+
 @font-face {
     font-family: 'Pretendard-Light';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff')
@@ -200,12 +203,18 @@ img {
     width: 100vw;
 }
 
-.section {
-    background-color: green;
-    width: 70vw;
+.all-container {
+    display: flex;
+    justify-content: center;
+}
+.sub-container {
+    background-color: $color-gray3;
     height: 100%;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
     padding: 2%;
+    width: 80%;
+}
+.group-sub-container {
+    height: 100%;
+    padding: 2%;
+    background-color: #acacac;
 }

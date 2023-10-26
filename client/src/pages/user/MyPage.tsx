@@ -13,8 +13,8 @@ import Quit from '../../components/myPage/Quit';
 
 export default function MyPage() {
     return (
-        <div className="myPage-div">
-            <div className="myPage-sub-div">
+        <div className="all-container">
+            <div className="sub-container">
                 {/* 로그인 안 했을 때: 로그인 버튼 보임 + 채팅 버튼 안 보임 <br></br>
             로그인 했을 때: 로그인 버튼 안 보임 + 채팅 버튼/프로필 보임
             <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}

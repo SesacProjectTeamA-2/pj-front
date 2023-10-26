@@ -1,13 +1,13 @@
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './styles/scss/base/reset.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import Header from './components/common/Header';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
-
 import Mission from './pages/Mission';
-
 import MyPage from './pages/user/MyPage';
 import NotFound from './pages/NotFound';
 import Management from './pages/Management';
@@ -21,86 +21,91 @@ import GroupMission from './pages/group/GroupMission';
 import GroupMissionDone from './pages/group/GroupMissionDone';
 import GroupCreate from './pages/group/GroupCreate';
 import Chat from './components/common/Chat';
-import Layout from './components/common/Layout';
+import GroupLayout from './components/common/GroupLayout';
 
 function App() {
+    const [showChat, setShowChat] = useState<boolean>(false);
+    const showChatting = (): void => {
+        setShowChat(!showChat);
+        console.log('showChat App', showChat);
+    };
+
     return (
         <div className="App">
-            <Header />
             {/* <Chat /> */}
-
+            <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
-                <Route path="/" element={<Layout children={<Intro />} />} />
-                <Route
-                    path="/login"
-                    element={<Layout children={<Login />} />}
-                />
-                <Route path="/join" element={<Layout children={<Join />} />} />
-                <Route path="/main" element={<Layout children={<Main />} />} />
-                <Route
-                    path="/mission"
-                    element={<Layout children={<Mission />} />}
-                />
-                <Route
-                    path="/group"
-                    element={<Layout children={<Group />} />}
-                />
-                <Route
-                    path="/group/create"
-                    element={<Layout children={<GroupCreate />} />}
-                />
-
-                <Route
-                    path="/group/home/*"
-                    element={<Layout children={<GroupHome />} />}
-                />
-
-                <Route
-                    path="/group/noti/*"
-                    element={<Layout children={<GroupNoti />} />}
-                />
-
-                <Route
-                    path="/group/board/*"
-                    element={<Layout children={<GroupBoard />} />}
-                />
-                <Route
-                    path="/group/mission/*"
-                    element={<Layout children={<GroupMission />} />}
-                />
-
-                <Route
-                    path="/group/mission/done/*"
-                    element={<Layout children={<GroupMissionDone />} />}
-                />
-
-                <Route
-                    path="/mypage"
-                    element={<Layout children={<MyPage />} />}
-                />
-
-                <Route
-                    path="/management"
-                    element={<Layout children={<Management />} />}
-                />
-
-                {/* <Route path="/" element={<Intro />} />
+                <Route path="/" element={<Intro />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/mission" element={<Mission />} />
-                <Route path="/group" element={<Group />} />
-                <Route path="/group/create" element={<GroupCreate />} />
-                <Route path="/group/home/*" element={<GroupHome />} />
-                <Route path="/group/noti/*" element={<GroupNoti />} />
-                <Route path="/group/board/*" element={<GroupBoard />} />
-                <Route path="/group/mission/*" element={<GroupMission />} />
+
+                {/* 그룹에만 그룹 메뉴 존재 */}
+                <Route
+                    path="/group"
+                    element={
+                        <GroupLayout children={<Group />} showChat={showChat} />
+                    }
+                />
+                <Route
+                    path="/group/create"
+                    element={
+                        <GroupLayout
+                            children={<GroupCreate />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/group/home/*"
+                    element={
+                        <GroupLayout
+                            children={<GroupHome />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/group/noti/*"
+                    element={
+                        <GroupLayout
+                            children={<GroupNoti />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/group/board/*"
+                    element={
+                        <GroupLayout
+                            children={<GroupBoard />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/group/mission/*"
+                    element={
+                        <GroupLayout
+                            children={<GroupMission />}
+                            showChat={showChat}
+                        />
+                    }
+                />
                 <Route
                     path="/group/mission/done/*"
-                    element={<GroupMissionDone />}
+                    element={
+                        <GroupLayout
+                            children={<GroupMissionDone />}
+                            showChat={showChat}
+                        />
+                    }
                 />
+                {/* 그룹 라우팅 끝 */}
+
                 <Route path="/mypage" element={<MyPage />} />
-                <Route path="/management" element={<Management />} /> */}
+                <Route path="/management" element={<Management />} />
                 {/* 404 처리는 제일 밑에 있어야 함 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
