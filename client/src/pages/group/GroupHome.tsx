@@ -34,7 +34,7 @@ export default function GroupHome() {
     };
 
     return (
-        <div>
+        <div className="section">
             <div className="title1">코딩학당</div>
 
             <button className="btn-fixed" onClick={onClick}>

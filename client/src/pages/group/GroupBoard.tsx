@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function GroupBoard() {
-    return <div>GroupBoard</div>;
+    return <div className="section">GroupBoard</div>;
 }

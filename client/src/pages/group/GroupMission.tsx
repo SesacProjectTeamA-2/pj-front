@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function GroupMission() {
-    return <div>GroupMission</div>;
+    return <div className="section">GroupMission</div>;
 }
