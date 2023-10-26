@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MissionType } from '../../types/types';
 import MissionItem from './MissionItem';
+import GroupFilterTag from './GroupFilterTag';
 
 export default function MissionList() {
     const [missions, setMissions] = useState<MissionType[]>([
@@ -12,12 +13,14 @@ export default function MissionList() {
     ]);
 
     return (
-        <div>
+        <div className="list">
             <h1>MissionList </h1>
-            <ul className="MissionItem-ul1">
+            <GroupFilterTag />
+
+            <ul className="mission-item-ul1">
                 <div className="MissionList-header">
-                    <div className="group">코딩학당</div>
-                    <div className="dDay">D-3</div>
+                    <div className="title4">코딩학당</div>
+                    <div className="title5">D-3</div>
                 </div>
                 {missions.map((mission) => (
                     <MissionItem
@@ -27,10 +30,10 @@ export default function MissionList() {
                     />
                 ))}
             </ul>
-            <ul className="MissionItem-ul2">
+            <ul className="mission-item-ul2">
                 <div className="MissionList-header">
-                    <div className="group">근손실방지</div>
-                    <div className="dDay">D-3</div>
+                    <div className="title4">근손실방지</div>
+                    <div className="title5">D-3</div>
                 </div>
 
                 {missions.map((mission) => (
