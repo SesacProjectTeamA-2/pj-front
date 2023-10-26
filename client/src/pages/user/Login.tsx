@@ -1,13 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export default function Login() {
     return (
         <div className="section">
-            <h1>Login</h1>
-            <Link to="/join">
-                <button>SSO 로그인</button>
-            </Link>
+            <h1>안녕하세요!</h1>
         </div>
     );
 }

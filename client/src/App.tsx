@@ -1,13 +1,13 @@
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './styles/scss/base/reset.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import Header from './components/common/Header';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
-
 import Mission from './pages/Mission';
-
 import MyPage from './pages/user/MyPage';
 import NotFound from './pages/NotFound';
 import Management from './pages/Management';
@@ -24,13 +24,18 @@ import Chat from './components/common/Chat';
 import Layout from './components/common/Layout';
 
 function App() {
+    const [showChat, setShowChat] = useState<boolean>(false);
+    const showChatting = (): void => {
+        setShowChat(!showChat);
+        console.log(showChat);
+    };
+
     return (
         <div className="App">
-            <Header />
             {/* <Chat /> */}
-
+            <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
-                <Route path="/" element={<Layout children={<Intro />} />} />
+                {/* <Route path="/" element={<Layout children={<Intro />} />} /> */}
                 <Route
                     path="/login"
                     element={<Layout children={<Login />} />}
@@ -84,7 +89,8 @@ function App() {
                     element={<Layout children={<Management />} />}
                 />
 
-                {/* <Route path="/" element={<Intro />} />
+                <Route path="/" element={<Intro />} />
+                {/*
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/main" element={<Main />} />

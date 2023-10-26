@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// src/styles/scss/layout/header.scss
 import '../../styles/scss/layout/header.scss';
 
-export default function Header() {
+export default function Header(props: any) {
     return (
         <div className="header-container">
             <Link to="/">
@@ -43,6 +42,7 @@ export default function Header() {
                     src="/asset/icons/chat.svg"
                     style={{ width: '40px', height: '40px' }}
                     alt="chatImg"
+                    onClick={() => props.showChatting()}
                 />
             </nav>
         </div>
