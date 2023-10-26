@@ -11,8 +11,8 @@ export default function Header() {
                 <Link to="/main">
                     <button>Main</button>
                 </Link>
-                <Link to="/todo">
-                    <button>Todo</button>
+                <Link to="/mission">
+                    <button>Mission</button>
                 </Link>
                 <Link to="/group">
                     <button>Group</button>

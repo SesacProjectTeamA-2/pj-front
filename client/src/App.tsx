@@ -3,7 +3,7 @@ import './styles/scss/base/reset.scss';
 
 import Intro from './pages/Intro';
 import Main from './pages/Main';
-import Todo from './pages/Todo';
+import Mission from './pages/Mission';
 import GroupHome from './pages/group/Group';
 import MyPage from './pages/user/MyPage';
 import Header from './components/common/Header';
@@ -22,7 +22,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/join" element={<Join />} />
                     <Route path="/main" element={<Main />} />
-                    <Route path="/todo" element={<Todo />} />
+                    <Route path="/mission" element={<Mission />} />
                     <Route path="/group/*" element={<GroupHome />} />
                     <Route path="/myPage" element={<MyPage />} />
                     <Route path="/management" element={<Management />} />
