@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// src/styles/scss/layout/header.scss
+import '../../styles/scss/layout/header.scss';
+
 export default function Header() {
     return (
-        <div>
+        <div className="header-container">
             <Link to="/">
                 <h1>로고</h1>
             </Link>
