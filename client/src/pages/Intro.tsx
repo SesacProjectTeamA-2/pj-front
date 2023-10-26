@@ -5,7 +5,7 @@ export default function Intro() {
     const navigate = useNavigate();
 
     return (
-        <div className="all-container">
+        <div className="section">
             <div className="sub-container">
                 <h1>Intro</h1>
                 <button

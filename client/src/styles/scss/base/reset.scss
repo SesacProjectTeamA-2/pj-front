@@ -203,22 +203,19 @@ img {
     width: 100vw;
 }
 
-.all-container {
+.section {
     display: flex;
     justify-content: center;
-}
-.sub-container {
-    background-color: $color-gray3;
-    height: 100%;
-    padding: 2%;
-    width: 80%;
-}
-
-.section {
     // 임의 컬러
     background-color: rgb(180, 179, 179);
     width: 70vw;
     height: 100%;
     padding: 2%;
-    background-color: #acacac;
+}
+
+.sub-container {
+    background-color: $color-gray3;
+    height: 100%;
+    padding: 2%;
+    width: 80%;
 }
