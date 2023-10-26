@@ -203,8 +203,13 @@ img {
     width: 100vw;
 }
 
-.section {
-    background-color: #d9d9d9;
-    height: 100vh;
+.all-container {
+    display: flex;
+    justify-content: center;
+}
+.sub-container {
+    background-color: $color-gray3;
+    height: 100%;
     padding: 2%;
+    width: 80%;
 }

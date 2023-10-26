@@ -5,15 +5,17 @@ export default function Intro() {
     const navigate = useNavigate();
 
     return (
-        <div className="section">
-            <h1>Intro</h1>
-            <button
-                onClick={() => {
-                    navigate('/main');
-                }}
-            >
-                Main
-            </button>
+        <div className="all-container">
+            <div className="sub-container">
+                <h1>Intro</h1>
+                <button
+                    onClick={() => {
+                        navigate('/main');
+                    }}
+                >
+                    Main
+                </button>
+            </div>
         </div>
     );
 }
