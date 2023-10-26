@@ -29,7 +29,7 @@ export default function Header() {
                 </Link>
                 {/* 로그인 시 */}
 
-                <Link to="/myPage">
+                <Link to="/mypage">
                     <img
                         src="/asset/images/user.png"
                         style={{ width: '40px', height: '40px' }}
