@@ -1,9 +1,12 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+
 .checked {
     text-decoration-line: line-through;
 }
 
-.MissionItem-ul1 {
-    background-color: #ff7373;
+.mission-item-ul1 {
+    background-color: $color-IT;
     // 그룹 별 색상 변경 가능한 코드 짜야
     margin: 10px 10px;
     padding: 20px 20px;
@@ -12,8 +15,8 @@
     color: white;
 }
 
-.MissionItem-ul2 {
-    background-color: #ffa471;
+.mission-item-ul2 {
+    background-color: $color-exercise;
     // 그룹 별 색상 변경 가능한 코드 짜야
     margin: 10px 10px;
     padding: 20px 20px;
@@ -45,4 +48,50 @@
 
 .no-button {
     display: none;
+}
+
+.list-face {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0 auto;
+    .list {
+        width: 60%;
+    }
+
+    .face-div {
+        width: 20%;
+        .face-background {
+            position: relative;
+            justify-content: center;
+            align-items: center;
+
+            display: flex;
+            background-color: white;
+            border-radius: 50%;
+            width: 10rem;
+            height: 10rem;
+            margin: 10px 10px;
+            .face {
+                z-index: 20;
+                width: 200px;
+                img {
+                    height: 165px;
+                    // 왜 이미지 크기가 안 변하지
+                }
+            }
+        }
+        .progress-div {
+            .my-progress {
+                width: 100%;
+                background-color: grey;
+
+                .my-bar {
+                    width: 30%;
+                    height: 30px;
+                    background-color: $color-IT;
+                }
+            }
+        }
+    }
 }
