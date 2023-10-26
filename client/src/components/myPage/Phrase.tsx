@@ -20,8 +20,8 @@ export default function Phrase(): JSX.Element {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
         const phraseModeBtnVal: string | null =
             phraseModeBtn.getAttribute('for');
-        const phraseInput: HTMLTextAreaElement | null =
-            document.querySelector('.phraseInput');
+        // const phraseInput: HTMLTextAreaElement | null =
+        //     document.querySelector('.phraseInput');
         // console.log(phraseInput);
 
         switch (phraseModeBtnVal) {
