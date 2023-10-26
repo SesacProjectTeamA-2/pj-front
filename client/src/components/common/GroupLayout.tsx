@@ -17,24 +17,25 @@ export default function GroupLayout({ children, showChat }: any) {
                 <Row>
                     {showChat ? (
                         <>
-                            <Col md={3} sm={2} className="groupMenu-div">
+                            <Col md={2} sm={2} className="groupMenu-div">
                                 그룹 메뉴
                             </Col>
-                            <Col md={6} sm={4} className="section-div">
+                            <Col md={8} sm={4} className="section-div">
                                 {children}
                             </Col>
-                            <Col md={3} sm={6} className="chatting-div">
+                            <Col md={2} sm={6} className="chatting-div">
                                 <Chat />
                             </Col>
                         </>
                     ) : (
                         <>
-                            <Col md={4} sm={3} className="groupMenu-div">
+                            <Col md={2} sm={3} className="groupMenu-div">
                                 그룹 메뉴
                             </Col>
                             <Col md={8} sm={9} className="section-div">
                                 {children}
                             </Col>
+                            <Col md={2} sm={6} className="chatting-div"></Col>
                         </>
                     )}
                 </Row>

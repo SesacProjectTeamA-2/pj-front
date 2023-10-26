@@ -7,7 +7,7 @@ import '../../styles/scss/components/buttons.scss';
 export default function GroupHome() {
     return (
         <div className="all-container">
-            <div className="sub-container">
+            <div className="group-sub-container">
                 <input type="text" placeholder="어떤 모임을 찾으시나요 ?" />
                 <div className="title1">참여한 모임</div>
                 {/* ! 태그 컴포넌트 추가 ! */}
