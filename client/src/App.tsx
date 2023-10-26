@@ -7,7 +7,6 @@ import Intro from './pages/Intro';
 import Main from './pages/Main';
 
 import Mission from './pages/Mission';
-import GroupHome from './pages/group/Group';
 
 import MyPage from './pages/user/MyPage';
 import NotFound from './pages/NotFound';
@@ -25,7 +24,6 @@ import GroupCreate from './pages/group/GroupCreate';
 function App() {
     return (
         <div className="App">
-
             <Header />
 
             <Routes>
@@ -50,7 +48,6 @@ function App() {
                 {/* 404 처리는 제일 밑에 있어야 함 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
-
         </div>
     );
 }
