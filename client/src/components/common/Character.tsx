@@ -13,38 +13,71 @@ export default function Character() {
     return (
         <>
             <div className="character-div">
-                <button
-                    className="selected-btn"
+                <input
+                    type="radio"
+                    name="character-radio"
+                    className="character-radio"
+                    id="character-radio-rabbit"
+                    readOnly
+                ></input>
+                <label
+                    htmlFor="character-radio-rabbit"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }
+                    className="character-label"
                 >
-                    <img src="/asset/images/rabbit2.png" alt="img1" />
-                </button>
-                <button
-                    className="selected-btn"
+                    <img src="/asset/images/rabbit2.svg" alt="img1" />
+                </label>
+
+                <input
+                    type="radio"
+                    name="character-radio"
+                    className="character-radio"
+                    id="character-radio-dog"
+                    readOnly
+                ></input>
+                <label
+                    htmlFor="character-radio-dog"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }
+                    className="character-label"
                 >
-                    <img src="/asset/images/dog2.png" alt="img2" />
-                </button>
-                <button
-                    className="selected-btn"
+                    <img src="/asset/images/dog2.svg" alt="img2" />
+                </label>
+                <input
+                    type="radio"
+                    name="character-radio"
+                    className="character-radio"
+                    id="character-radio-cat"
+                    readOnly
+                ></input>
+                <label
+                    htmlFor="character-radio-cat"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }
+                    className="character-label"
                 >
                     <img src="/asset/images/cat2.svg" alt="img3" />
-                </button>
-                <button
-                    className="selected-btn"
+                </label>
+                <input
+                    type="radio"
+                    name="character-radio"
+                    className="character-radio"
+                    id="character-radio-sqr"
+                    readOnly
+                ></input>
+                <label
+                    htmlFor="character-radio-sqr"
                     onClick={(e: React.MouseEvent<HTMLElement>) =>
                         selectCharacter(e)
                     }
+                    className="character-label"
                 >
                     <img src="/asset/images/sqr2.svg" alt="img4" />
-                </button>
+                </label>
             </div>
         </>
     );

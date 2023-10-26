@@ -12,55 +12,132 @@ export default function Interested() {
     };
     return (
         <div>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                운동
-            </button>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                독서
-            </button>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                언어
-            </button>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                자격증
-            </button>{' '}
+            <div className="interested-div">
+                <label
+                    htmlFor="tag-radio-exercise"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-exercise"
+                    />
+                    운동
+                </label>
+
+                <label
+                    htmlFor="tag-radio-read"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-read"
+                    />
+                    독서
+                </label>
+                <label
+                    htmlFor="tag-radio-language"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-language"
+                    />
+                    언어
+                </label>
+                <label
+                    htmlFor="tag-radio-license"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-license"
+                    />
+                    자격증
+                </label>
+            </div>
             <br></br>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                스터디
-            </button>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                경제
-            </button>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                IT
-            </button>
-            <button
-                onClick={(e: React.MouseEvent<HTMLElement>) => selectedTag(e)}
-                className="tag-btn"
-            >
-                기타
-            </button>
+            <div className="interested-div">
+                <label
+                    htmlFor="tag-radio-study"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-study"
+                    />
+                    스터디
+                </label>
+                <label
+                    htmlFor="tag-radio-economics"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-economics"
+                    />
+                    경제
+                </label>
+                <label
+                    htmlFor="tag-radio-it"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-it"
+                    />
+                    IT
+                </label>
+                <label
+                    htmlFor="tag-radio-etc"
+                    className="tag-btn"
+                    onClick={(e: React.MouseEvent<HTMLElement>) =>
+                        selectedTag(e)
+                    }
+                >
+                    <input
+                        type="checkbox"
+                        name="tag-radio"
+                        className="tag-radio"
+                        id="tag-radio-etc"
+                    />
+                    기타
+                </label>
+            </div>
         </div>
     );
 }

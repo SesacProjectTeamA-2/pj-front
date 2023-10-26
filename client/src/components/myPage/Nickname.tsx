@@ -18,6 +18,7 @@ export default function Nickname(): JSX.Element {
                 value={input}
                 ref={inputRef}
                 className="inputArea"
+                maxLength={10}
                 style={{
                     border: 'none',
                     fontWeight: 'bold',

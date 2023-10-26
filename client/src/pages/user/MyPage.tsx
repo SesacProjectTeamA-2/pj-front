@@ -1,16 +1,15 @@
 import React from 'react';
 import '../../styles/scss/pages/myPage.scss';
 
-import Header from '../../components/common/Header';
 import Nickname from '../../components/myPage/Nickname';
 import Introduce from '../../components/myPage/Introduce';
 import Character from '../../components/common/Character';
 import Interested from '../../components/common/Interested';
 import Phrase from '../../components/myPage/Phrase';
 import SetMain from '../../components/myPage/SetMain';
+import ProfilePic from '../../components/myPage/ProfilePic';
 import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
-import ProfilePic from '../../components/myPage/ProfilePic';
 
 export default function MyPage() {
     return (
@@ -44,6 +43,10 @@ export default function MyPage() {
                 <br></br>
                 <hr></hr>
                 <Quit />
+                <br></br>
+                <button id="myPage-edit-btn" type="submit">
+                    수정 완료
+                </button>
             </div>
         </div>
     );
