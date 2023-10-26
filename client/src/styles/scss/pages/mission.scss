@@ -2,7 +2,7 @@
     text-decoration-line: line-through;
 }
 
-.TodoItem-ul1 {
+.MissionItem-ul1 {
     background-color: #ff7373;
     // 그룹 별 색상 변경 가능한 코드 짜야
     margin: 10px 10px;
@@ -12,7 +12,7 @@
     color: white;
 }
 
-.TodoItem-ul2 {
+.MissionItem-ul2 {
     background-color: #ffa471;
     // 그룹 별 색상 변경 가능한 코드 짜야
     margin: 10px 10px;
@@ -22,7 +22,7 @@
     color: white;
 }
 
-.TodoList-header {
+.MissionList-header {
     display: flex;
     justify-content: space-between;
     .group {

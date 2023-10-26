@@ -5,7 +5,10 @@ import './styles/scss/base/reset.scss';
 import Header from './components/common/Header';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
-import Todo from './pages/Todo';
+
+import Mission from './pages/Mission';
+import GroupHome from './pages/group/Group';
+
 import MyPage from './pages/user/MyPage';
 import NotFound from './pages/NotFound';
 import Management from './pages/Management';
@@ -22,6 +25,7 @@ import GroupCreate from './pages/group/GroupCreate';
 function App() {
     return (
         <div className="App">
+
             <Header />
 
             <Routes>
@@ -30,7 +34,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/main" element={<Main />} />
-                <Route path="/todo" element={<Todo />} />
+                <Route path="/mission" element={<Mission />} />
                 <Route path="/group" element={<Group />} />
                 <Route path="/group/create" element={<GroupCreate />} />
                 <Route path="/group/home/*" element={<GroupHome />} />
@@ -46,6 +50,7 @@ function App() {
                 {/* 404 처리는 제일 밑에 있어야 함 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
+
         </div>
     );
 }
