@@ -17,11 +17,11 @@ export default function BasicLayout({ children, showChat }: any) {
                 <Row>
                     {showChat ? (
                         <>
-                            <Col md={2} sm={2} className="empty-div"></Col>
-                            <Col md={8} sm={4} className="section-div">
+                            <Col md={2} sm={3} className="empty-div"></Col>
+                            <Col md={8} sm={9} className="section-div">
                                 {children}
                             </Col>
-                            <Col md={2} sm={6} className="chatting-div">
+                            <Col md={2} sm={12} className="chatting-div">
                                 <SidebarChat />
                             </Col>
                         </>
@@ -31,7 +31,7 @@ export default function BasicLayout({ children, showChat }: any) {
                             <Col md={8} sm={9} className="section-div">
                                 {children}
                             </Col>
-                            <Col md={2} sm={6} className="chatting-div"></Col>
+                            <Col md={2} sm={12} className="chatting-div"></Col>
                         </>
                     )}
                 </Row>

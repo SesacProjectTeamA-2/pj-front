@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 export default function Nickname(): JSX.Element {
-    const [input, setInput] = useState<string | number>('짜앙구');
+    const [input, setInput] = useState<string | number>('');
     const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLInputElement>(null);
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
@@ -11,7 +11,7 @@ export default function Nickname(): JSX.Element {
     };
 
     return (
-        <div>
+        <div className="nickname-div">
             <input
                 readOnly={readOnlyVal}
                 onChange={(e) => setInput(e.target.value)}

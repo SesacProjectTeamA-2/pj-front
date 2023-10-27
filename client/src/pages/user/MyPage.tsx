@@ -1,12 +1,13 @@
 import React from 'react';
+
 import '../../styles/scss/pages/myPage.scss';
 
-import Nickname from '../../components/myPage/Nickname';
+import Nickname from '../../components/common/Nickname';
 import Introduce from '../../components/myPage/Introduce';
 import CharacterList from '../../components/common/CharacterList';
 import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
-import SetMain from '../../components/myPage/SetMain';
+import SetMainList from '../../components/myPage/SetMainList';
 import ProfilePic from '../../components/myPage/ProfilePic';
 import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
@@ -36,7 +37,7 @@ export default function MyPage() {
             <br></br>
             <hr></hr>
             <h3>메인화면 설정</h3>
-            <SetMain />
+            <SetMainList />
             <br></br>
             <PsnCoverImg />
             <br></br>

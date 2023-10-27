@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    width: 100%;
 }
 .header-divTwo {
     display: flex;
@@ -14,18 +15,10 @@
     background-color: pink;
     color: black;
 }
-#date-input[type='datetime-local'] {
-    // display: none;
-}
-#date-img {
-    width: 3%;
-    height: fit-content;
-}
 nav {
     border: none;
     display: flex;
     align-items: center;
-    padding: 5%;
 }
 button {
     background-color: #e5e5e5;

@@ -9,9 +9,9 @@ export default function CharacterItem(props: any) {
         setSelectedCharacter(characterId);
     };
 
-    useEffect(() => {
-        console.log('Selected Character:', selectedCharacter);
-    }, [selectedCharacter]);
+    // useEffect(() => {
+    //     console.log('Selected Character:', selectedCharacter);
+    // }, [selectedCharacter]);
 
     return (
         <div>
@@ -24,7 +24,7 @@ export default function CharacterItem(props: any) {
                         style={{
                             border:
                                 selectedCharacter === character.id
-                                    ? '1px solid #ed8d8d'
+                                    ? '3px solid #ed8d8d'
                                     : 'none',
                             borderRadius: '15px',
                         }}
