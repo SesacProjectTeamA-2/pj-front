@@ -1,8 +1,9 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/scss';
+import { Link } from 'react-router-dom';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 
+import 'swiper/scss';
 import '../../styles/scss/components/swiper.scss';
 
 export default function SwiperComponent() {
@@ -69,16 +70,25 @@ export default function SwiperComponent() {
                     //     },
                 >
                     <SwiperSlide>
-                        <img src="asset/images/cat1.svg" />
+                        <Link to="/group/home/1">
+                            <img src="asset/images/cat1.svg" />
+                        </Link>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="asset/images/cat2.svg" />
+                        <Link to="/group/home/1">
+                            <img src="asset/images/cat2.svg" />
+                        </Link>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img src="asset/images/rabbit1.svg" />
+                        <Link to="/group/home/1">
+                            <img src="asset/images/rabbit1.svg" />
+                        </Link>
                     </SwiperSlide>
+
                     <SwiperSlide>
-                        <img src="asset/images/rabbit2.svg" />
+                        <Link to="/group/home/1">
+                            <img src="asset/images/rabbit2.svg" />
+                        </Link>
                     </SwiperSlide>
                 </Swiper>
                 <div className="swiper-button-next"></div>

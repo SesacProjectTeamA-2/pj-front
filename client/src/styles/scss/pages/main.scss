@@ -1,4 +1,29 @@
-.main-img-div {
-    background-color: azure;
+.main1-div {
     width: 100%;
+    .main-img-div {
+        // background-color: azure;
+        width: 100%;
+        position: relative;
+        .upload-img {
+            margin: 20px;
+            width: 100%;
+            height: 20vh;
+        }
+
+        .upload-img-icon {
+            width: 36px;
+        }
+
+        label {
+            cursor: pointer;
+            z-index: 20;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        input {
+            display: none;
+        }
+    }
 }

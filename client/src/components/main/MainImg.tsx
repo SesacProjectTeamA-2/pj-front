@@ -9,6 +9,7 @@ export default function MainImg() {
     const fileInput = useRef<HTMLInputElement | null>(null);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        // console.log(e.target.files);
         if (e.target.files && e.target.files[0]) {
             const selectedFile = e.target.files[0];
             setFile(selectedFile);
@@ -20,31 +21,24 @@ export default function MainImg() {
                 }
             };
             reader.readAsDataURL(selectedFile);
-        } else {
-            // 업로드 취소할 시
-            setImage(
-                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-            );
         }
     };
 
     return (
-        <div>
+        <div className="main1-div">
             <div className="main-img-div">
-                <img
-                    src={Image}
-                    style={{ margin: '20px', width: '100%', height: 'auto' }}
-                    onClick={() => {
-                        if (fileInput.current) {
-                            fileInput.current.click();
-                        }
-                    }}
-                />
+                <img src={Image} className="upload-img" />
+                <label htmlFor="main-img-upload">
+                    <img
+                        src="/asset/icons/edit.svg"
+                        alt="사진 수정 아이콘"
+                        className="upload-img-icon"
+                    />
+                </label>
                 <input
                     type="file"
-                    // style={{ display: 'none' }}
-                    accept="image/jpg,image/png,image/jpeg"
-                    name="profile_img"
+                    accept="image/jpg, image/png, image/jpeg"
+                    id="main-img-upload"
                     onChange={onChange}
                     ref={fileInput}
                 />
