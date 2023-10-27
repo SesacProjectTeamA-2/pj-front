@@ -34,13 +34,10 @@ export default function GroupHome() {
 
     return (
         <div className="section">
-            <div className="group-sub-container">
-                <div className="title1">코딩학당</div>
-
-                <button className="btn-fixed" onClick={onClick}>
-                    1등 입니다 ~ !
-                </button>
-            </div>
+            <div className="title1">코딩학당</div>
+            <button className="btn-fixed" onClick={onClick}>
+                1등 입니다 ~ !
+            </button>
         </div>
     );
 }

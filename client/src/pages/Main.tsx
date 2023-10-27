@@ -4,10 +4,8 @@ import MainImg from '../components/main/MainImg';
 export default function Main() {
     return (
         <div className="section">
-            <div className="sub-container">
-                <h1>Main</h1>
-                <MainImg />
-            </div>
+            <h1>Main</h1>
+            <MainImg />
         </div>
     );
 }
