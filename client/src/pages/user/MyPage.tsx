@@ -4,7 +4,7 @@ import '../../styles/scss/pages/myPage.scss';
 import Nickname from '../../components/myPage/Nickname';
 import Introduce from '../../components/myPage/Introduce';
 import CharacterList from '../../components/common/CharacterList';
-import Interested from '../../components/common/Interested';
+import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
 import SetMain from '../../components/myPage/SetMain';
 import ProfilePic from '../../components/myPage/ProfilePic';
@@ -27,7 +27,7 @@ export default function MyPage() {
 
             <br></br>
             <h3>관심분야</h3>
-            <Interested />
+            <InterestedList />
 
             <br></br>
             <h3>명언</h3>

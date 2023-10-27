@@ -24,8 +24,9 @@ export default function CharacterItem(props: any) {
                         style={{
                             border:
                                 selectedCharacter === character.id
-                                    ? '1px solid red'
+                                    ? '1px solid #ed8d8d'
                                     : 'none',
+                            borderRadius: '15px',
                         }}
                     >
                         <input
@@ -33,6 +34,7 @@ export default function CharacterItem(props: any) {
                             name="character-radio"
                             className="character-radio"
                             id={character.id}
+                            value={character.val}
                             readOnly
                         />
                         <img src={character.imgSrc} alt={character.alt} />
