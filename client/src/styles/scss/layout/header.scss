@@ -1,3 +1,39 @@
+@import '../abstracts/variables';
 .header-container {
     background: pink;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 10%;
+}
+.header-divTwo {
+    display: flex;
+    flex-direction: row;
+}
+#date-input {
+    border: none;
+    background-color: pink;
+    color: black;
+}
+#date-input[type='datetime-local'] {
+    // display: none;
+}
+#date-img {
+    width: 3%;
+    height: fit-content;
+}
+nav {
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 5%;
+}
+button {
+    background-color: #e5e5e5;
+    color: #767676;
+    border-radius: 10px;
+}
+button:focus {
+    background-color: black;
+    color: white;
 }

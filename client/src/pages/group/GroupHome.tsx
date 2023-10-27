@@ -33,7 +33,7 @@ export default function GroupHome() {
     };
 
     return (
-        <div className="all-container">
+        <div className="section">
             <div className="group-sub-container">
                 <div className="title1">코딩학당</div>
 

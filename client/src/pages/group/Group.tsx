@@ -11,8 +11,6 @@ import SwiperComponent from '../../components/group/SwiperComponent';
 export default function GroupHome() {
     return (
         <div className="section">
-            {/* <div className="all-container"> */}
-            {/* 충돌난 부분 !!!!!!! */}
             <div className="group-sub-container">
                 <div className="input-wrapper">
                     <input

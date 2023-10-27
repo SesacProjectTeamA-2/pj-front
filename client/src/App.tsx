@@ -22,12 +22,14 @@ import GroupMissionDone from './pages/group/GroupMissionDone';
 import GroupCreate from './pages/group/GroupCreate';
 import Chat from './components/common/Chat';
 import GroupLayout from './components/common/GroupLayout';
+import BasicLayout from './components/common/BasicLayout';
 
 function App() {
+    // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
     const [showChat, setShowChat] = useState<boolean>(false);
     const showChatting = (): void => {
         setShowChat(!showChat);
-        console.log('showChat App', showChat);
+        // console.log('showChat App', showChat);
     };
 
     return (
@@ -35,11 +37,42 @@ function App() {
             {/* <Chat /> */}
             <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
-                <Route path="/" element={<Intro />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/join" element={<Join />} />
-                <Route path="/main" element={<Main />} />
-                <Route path="/mission" element={<Mission />} />
+                <Route
+                    path="/"
+                    element={
+                        <BasicLayout children={<Intro />} showChat={showChat} />
+                    }
+                />
+                <Route
+                    path="/login"
+                    element={
+                        <BasicLayout children={<Login />} showChat={showChat} />
+                    }
+                />
+
+                <Route
+                    path="/join"
+                    element={
+                        <BasicLayout children={<Join />} showChat={showChat} />
+                    }
+                />
+
+                <Route
+                    path="/main"
+                    element={
+                        <BasicLayout children={<Main />} showChat={showChat} />
+                    }
+                />
+
+                <Route
+                    path="/mission"
+                    element={
+                        <BasicLayout
+                            children={<Mission />}
+                            showChat={showChat}
+                        />
+                    }
+                />
 
                 {/* 그룹에만 그룹 메뉴 존재 */}
                 <Route
@@ -104,8 +137,24 @@ function App() {
                 />
                 {/* 그룹 라우팅 끝 */}
 
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/management" element={<Management />} />
+                <Route
+                    path="/mypage"
+                    element={
+                        <BasicLayout
+                            children={<MyPage />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/management"
+                    element={
+                        <BasicLayout
+                            children={<Management />}
+                            showChat={showChat}
+                        />
+                    }
+                />
                 {/* 404 처리는 제일 밑에 있어야 함 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

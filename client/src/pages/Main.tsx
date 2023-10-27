@@ -3,10 +3,10 @@ import MainImg from '../components/main/MainImg';
 
 export default function Main() {
     return (
-        <div className="all-container">
+        <div className="section">
             <div className="sub-container">
                 <h1>Main</h1>
-                <MainImg />         
+                <MainImg />
             </div>
         </div>
     );

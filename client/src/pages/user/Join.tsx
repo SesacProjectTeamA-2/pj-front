@@ -5,7 +5,7 @@ import Character from '../../components/common/Character';
 
 export default function Join() {
     return (
-        <div className="all-container">
+        <div className="section">
             <div className="sub-container">
                 <h1 className="title">회원 가입</h1>
 
