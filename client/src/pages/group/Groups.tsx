@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
 import '../../styles/scss/components/inputs.scss';
-import '../../styles/scss/pages/group/group.scss';
+import '../../styles/scss/pages/group/groups.scss';
 import SwiperComponent from '../../components/group/SwiperComponent';
-// import Test from '../../components/group/Test';
 
-export default function GroupHome() {
+export default function Groups() {
     return (
         <div className="section">
-            <div className="group-sub-container">
+            <div className="group-container">
                 <div className="input-wrapper">
                     <input
                         className="search"
@@ -30,23 +29,21 @@ export default function GroupHome() {
                         <button>코딩학당</button>
                     </Link>
 
-                    <Link to="/group/home/2">
+                    {/* <Link to="/group/home/2">
                         <button>근손실방지</button>
-                    </Link>
+                    </Link> */}
                 </div>
 
                 <SwiperComponent />
-                {/* <Test /> */}
 
-                <div className="created groups">
+                <div className="groups created">
                     <div className="title1">내가 생성한 모임</div>
                     <div>생성한 모임이 없습니다. </div>
                 </div>
 
-                <div className="recommend groups">
+                <div className="groups recommend">
                     <div className="title1">이런 모임 어떠세요 ?</div>
                     <button>추천모임1</button>
-                    <button>추천모임2</button>
                 </div>
 
                 <Link to="/group/create">
