@@ -36,20 +36,20 @@ export default function SwiperComponent() {
                     }}
                     pagination={{ clickable: true }}
                     //-- 반응형
-                    breakpoints={{
-                        700: {
-                            slidesPerView: 2,
-                            slidesPerGroup: 2,
-                        },
-                        1000: {
-                            slidesPerView: 3,
-                            slidesPerGroup: 3,
-                        },
-                        1300: {
-                            slidesPerView: 4,
-                            slidesPerGroup: 4,
-                        },
-                    }}
+                    // breakpoints={{
+                    //     700: {
+                    //         slidesPerView: 2,
+                    //         slidesPerGroup: 2,
+                    //     },
+                    //     1000: {
+                    //         slidesPerView: 3,
+                    //         slidesPerGroup: 3,
+                    //     },
+                    //     1300: {
+                    //         slidesPerView: 4,
+                    //         slidesPerGroup: 4,
+                    //     },
+                    // }}
 
                     //     1378: {
                     //         slidesPerView: 6, // 한번에 보이는 슬라이드 개수

@@ -13,16 +13,16 @@ import NotFound from './pages/NotFound';
 import Management from './pages/Management';
 import Login from './pages/user/Login';
 import Join from './pages/user/Join';
-import Group from './pages/group/Group';
+import Groups from './pages/group/Groups';
 import GroupHome from './pages/group/GroupHome';
 import GroupNoti from './pages/group/GroupNoti';
 import GroupBoard from './pages/group/GroupBoard';
 import GroupMission from './pages/group/GroupMission';
 import GroupMissionDone from './pages/group/GroupMissionDone';
 import GroupCreate from './pages/group/GroupCreate';
-import Chat from './components/common/Chat';
-import GroupLayout from './components/common/GroupLayout';
-import BasicLayout from './components/common/BasicLayout';
+
+import BasicLayout from './components/common/layout/BasicLayout';
+import GroupLayout from './components/common/layout/GroupLayout';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -34,7 +34,6 @@ function App() {
 
     return (
         <div className="App">
-            {/* <Chat /> */}
             <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
                 <Route
@@ -78,7 +77,10 @@ function App() {
                 <Route
                     path="/group"
                     element={
-                        <GroupLayout children={<Group />} showChat={showChat} />
+                        <GroupLayout
+                            children={<Groups />}
+                            showChat={showChat}
+                        />
                     }
                 />
                 <Route
