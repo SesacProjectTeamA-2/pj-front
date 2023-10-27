@@ -46,9 +46,13 @@ export default function Groups() {
                     <button>추천모임1</button>
                 </div>
 
-                <Link to="/group/create">
-                    <button className="btn-fixed">내가 모임 만들기 !</button>
-                </Link>
+                <div className="btn-fixed-wrapper">
+                    <Link to="/group/create">
+                        <button className="btn-fixed">
+                            내가 모임 만들기 !
+                        </button>
+                    </Link>
+                </div>
             </div>
         </div>
     );

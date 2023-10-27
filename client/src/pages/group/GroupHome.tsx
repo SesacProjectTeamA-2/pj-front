@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 
 import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
+import '../../styles/scss/pages/group/groupHome.scss';
+
+import HomeMissionList from '../../components/group/home/HomeMissionList';
+import CurRanking from '../../components/group/home/CurRanking';
+import AccRanking from '../../components/group/home/AccRanking';
 
 // import JSConfetti from 'js-confetti'; //_ 빵빠레
 
@@ -33,10 +38,25 @@ export default function GroupHome() {
     };
 
     return (
-        <div className="section">
-            <div className="title1">코딩학당</div>
+        <div className="section group-home">
+            <div className="cover-img">
+                <div className="title1 cover-title">코딩학당</div>
+            </div>
+
+            <div className="wrapper">
+                <div className="title2">어떤 모임인가요 ?</div>
+                <div className="main-content">모임 소개</div>
+            </div>
+
+            <HomeMissionList />
+
+            <div className="ranking-container">
+                <CurRanking />
+                <AccRanking />
+            </div>
+
             <button className="btn-fixed" onClick={onClick}>
-                1등 입니다 ~ !
+                가입하기
             </button>
         </div>
     );
