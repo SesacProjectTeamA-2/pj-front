@@ -1,9 +1,10 @@
 import React from 'react';
+import '../../styles/scss/layout/sidebarGroup.scss';
 
 export default function SideBarGroup() {
     return (
-        <div>
-            <ul className="title4">
+        <div className="container">
+            <ul className="title4 list-unstyled">
                 <li>홈</li>
                 <li>게시판</li>
                 <ul className="title5">
