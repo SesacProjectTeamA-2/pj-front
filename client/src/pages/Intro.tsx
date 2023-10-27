@@ -6,16 +6,14 @@ export default function Intro() {
 
     return (
         <div className="section">
-            <div className="sub-container">
-                <h1>Intro</h1>
-                <button
-                    onClick={() => {
-                        navigate('/main');
-                    }}
-                >
-                    Main
-                </button>
-            </div>
+            <h1>Intro</h1>
+            <button
+                onClick={() => {
+                    navigate('/main');
+                }}
+            >
+                Main
+            </button>
         </div>
     );
 }

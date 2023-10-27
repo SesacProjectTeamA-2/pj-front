@@ -206,6 +206,8 @@ img {
 .section {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     // 임의 컬러
     background-color: rgb(180, 179, 179);
     width: 70vw;
