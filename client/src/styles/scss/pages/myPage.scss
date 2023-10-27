@@ -34,12 +34,6 @@
 }
 // Nickname END
 
-.selected-btn {
-    border: none;
-    border-radius: 15px;
-    background-color: white;
-}
-
 // Interested START
 .interested-div {
     display: flex;
@@ -78,7 +72,6 @@
 .character-radio {
     display: none;
 }
-
 // Character END
 
 // Phrase START
@@ -106,34 +99,28 @@
 
 // setMain START
 .setMain-table {
-    width: 300px;
-    height: 100px;
-    padding: 5px;
+    width: 20vw;
+    height: 10vh;
     border-radius: 10px;
     background-color: #fff;
 }
-
+th,
+td {
+    text-align: center;
+}
 .pin-img {
-    @include box(20px);
+    width: 80%;
+    height: 70%;
 }
-.setDday-radio {
-    opacity: 0;
-}
-.setDday-label {
-    width: 30px;
-    height: 40px;
-}
-
+.setDday-radio,
 .setDone-radio {
-    opacity: 0;
+    display: none;
 }
+.setDday-label,
 .setDone-label {
-    width: 30px;
-    height: 40px;
+    width: 40px;
+    height: 30px;
 }
-// .setDday-radio[type='radio']:checked + label {
-//     src: '/asset/icons/pin_fill.svg';
-// }
 
 // psnCoverImg START
 #input-file {
@@ -165,7 +152,7 @@
     color: #fff;
 }
 #quit-notice {
-    color: #acacac;
+    color: $color-gray1;
 }
 // Quit END
 
@@ -173,6 +160,7 @@
     width: 20%;
     height: 25px;
     border-radius: 10px;
-    color: white;
+    border: none;
+    color: $color-white;
     background-color: $color-primary;
 }

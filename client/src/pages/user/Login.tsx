@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import '../../styles/scss/pages/user/login.scss';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
     const onClick = async () => {
@@ -18,6 +19,9 @@ export default function Login() {
             <button onClick={onClick}>구글</button>
             <button>네이버</button>
             <button>카카오</button>
+            <button>
+                <Link to="/join">회원 가입</Link>
+            </button>
         </div>
     );
 }

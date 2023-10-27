@@ -1,5 +1,4 @@
 import React from 'react';
-// import CharacterItem from './CharacterItem';
 import CharacterItem from './CharacterItem';
 
 export default function CharacterList() {
@@ -16,14 +15,12 @@ export default function CharacterList() {
             alt: 'img1',
             val: 'rabbit',
         },
-
         {
             id: 'character-radio-dog',
             imgSrc: '/asset/images/dog2.svg',
             alt: 'img2',
             val: 'dog',
         },
-
         {
             id: 'character-radio-cat',
             imgSrc: '/asset/images/cat2.svg',

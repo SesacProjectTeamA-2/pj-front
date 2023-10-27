@@ -14,7 +14,6 @@ export default function Header(props: any) {
 
             <div className="header-divTwo">
                 <input type="date" id="date-input" />
-                {/* <img src="/asset/images/calendar.svg" id="date-img" /> */}
                 <nav>
                     <Link to="/main">
                         <button>Main</button>
