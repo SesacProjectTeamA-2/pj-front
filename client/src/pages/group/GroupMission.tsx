@@ -1,9 +1,5 @@
 import React from 'react';
 
 export default function GroupMission() {
-    return (
-        <div className="section">
-            <div className="group-sub-container">GroupMission</div>;
-        </div>
-    );
+    return <div className="section">GroupMission</div>;
 }
