@@ -1,0 +1,24 @@
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    // margin: 0 auto;
+    .content-grid-box {
+        margin: 0 auto;
+    }
+}
+
+.percentage-div {
+    width: 70%;
+    background-color: white;
+    margin: 2rem 2rem;
+    padding: 2rem 2rem;
+
+    .progress-bar-img-flex {
+        display: flex;
+    }
+
+    .progress-bar-div {
+        display: flex;
+        flex-direction: column;
+    }
+}

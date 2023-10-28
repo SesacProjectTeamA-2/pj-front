@@ -1,0 +1,9 @@
+@import '../../components/buttons.scss';
+@import '../../abstracts/variables';
+@import '../../abstracts/utils';
+
+.main-mission-div {
+    background-color: $color-white;
+    margin: 2rem 2rem;
+    width: 70%;
+}
