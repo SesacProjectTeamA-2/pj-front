@@ -29,8 +29,8 @@ export default function MyPage() {
                 <h3>내 캐릭터</h3>
                 <CharacterList />
             </div>
-
             <br></br>
+
             <div className="myPage-div-three">
                 <h3>관심분야</h3>
                 <InterestedList />
@@ -38,18 +38,18 @@ export default function MyPage() {
                 <h3>명언</h3>
                 <Phrase />
             </div>
-
             <br></br>
             <hr></hr>
+
             <div className="myPage-div-four">
                 <h3>메인화면 설정</h3>
                 <SetMainList />
                 <br></br>
                 <PsnCoverImg />
             </div>
-
             <br></br>
             <hr></hr>
+
             <div className="myPage-div-five">
                 <Quit />
             </div>
