@@ -1,3 +1,10 @@
 .container {
     padding: 30px 10px;
+
+    .title4 li,
+    .title5 li,
+    .title6 li {
+        cursor: pointer;
+        width: fit-content;
+    }
 }

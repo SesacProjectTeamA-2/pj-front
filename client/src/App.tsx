@@ -73,16 +73,17 @@ function App() {
                     }
                 />
 
-                {/* 그룹에만 그룹 메뉴 존재 */}
                 <Route
                     path="/group"
                     element={
-                        <GroupLayout
+                        <BasicLayout
                             children={<Groups />}
                             showChat={showChat}
                         />
                     }
                 />
+
+                {/* 그룹에만 그룹 메뉴 존재 */}
                 <Route
                     path="/group/create"
                     element={
