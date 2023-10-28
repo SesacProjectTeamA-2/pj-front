@@ -9,9 +9,18 @@ export default function HomeMissionList() {
             </div>
             <div className="main-content">
                 <ul>
-                    <li>알고리즘</li>
-                    <li>블로깅</li>
-                    <li>모각코</li>
+                    <li className="mission-li">
+                        <div className="mission-element">알고리즘</div>
+                        <div>인증방법은 문제를 풀고 코드를 제출해주세요 !</div>
+                    </li>
+                    <li className="mission-li">
+                        <div className="mission-element">블로깅</div>
+                        <div>인증방법을 적어주세요 !</div>
+                    </li>
+                    <li className="mission-li">
+                        <div className="mission-element">모각코</div>
+                        <div>인증방법을 적어주세요 !</div>
+                    </li>
                 </ul>
             </div>
         </div>

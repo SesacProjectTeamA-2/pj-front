@@ -8,6 +8,7 @@ import '../../styles/scss/pages/group/groupHome.scss';
 import HomeMissionList from '../../components/group/home/HomeMissionList';
 import CurRanking from '../../components/group/home/CurRanking';
 import AccRanking from '../../components/group/home/AccRanking';
+import MemberList from '../../components/group/home/MemberList';
 
 // import JSConfetti from 'js-confetti'; //_ 빵빠레
 
@@ -54,6 +55,8 @@ export default function GroupHome() {
                 <CurRanking />
                 <AccRanking />
             </div>
+
+            <MemberList />
 
             <button className="btn-fixed" onClick={onClick}>
                 가입하기
