@@ -1,13 +1,11 @@
 import React from 'react';
+import GroupHeader from '../../components/group/content/GroupHeader';
 import '../../styles/scss/pages/group/groupBoard.scss';
 
 export default function GroupNoti() {
     return (
-        <div className="section">
-            <div className="group-header title2">
-                <div>공지사항</div>
-                <div>코딩학당</div>
-            </div>
+        <div className="section section-group">
+            <GroupHeader title={'공지사항'} groupName={'코딩학당'} />
             <div className="noti-container">
                 <div className="noti-header">
                     <div>No.</div>

@@ -18,7 +18,6 @@ export default function SwiperComponent() {
                     grabCursor={true}
                     centeredSlides={true}
                     slidesPerView={3}
-                    slidesPerGroup={1}
                     // slidesPerColumnFill="row"
                     spaceBetween={20}
                     coverflowEffect={{
