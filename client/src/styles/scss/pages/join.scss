@@ -1,10 +1,58 @@
 @import '../abstracts/variables';
+@import '../abstracts/utils';
 
+h3 {
+    font-weight: bolder;
+}
 img {
-    width: 100px;
-    height: 100px;
+    @include box(100%);
 }
 
-.maximum {
-    color: $color-gray4;
+// 버튼 없어짐, flex 질문하기
+.nickname-sub-div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+}
+
+.input-label {
+    width: 40%;
+}
+
+.interested-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.interested-div-one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.interested-div-two {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+.character-sub-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+#join-btn {
+    width: 30vw;
+    height: 5vh;
+    border-radius: 10px;
+    border: none;
+    color: $color-white;
+    background-color: $color-primary;
 }
