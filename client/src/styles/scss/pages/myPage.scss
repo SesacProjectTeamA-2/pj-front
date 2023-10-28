@@ -24,12 +24,12 @@ h3 {
     width: 100%;
 }
 .myPage-div-two {
-    position: relative;
     display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10%;
     align-items: center;
     flex-direction: column;
-    width: 100%;
-    margin-bottom: 10%;
 }
 .myPage-div-three {
     display: flex;
