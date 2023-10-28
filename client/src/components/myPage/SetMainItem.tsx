@@ -27,7 +27,7 @@ export default function SetMainItem(props: any) {
                         <td>
                             <SetMainDday
                                 groupId={group.groupId}
-                                handleCheck={handleCheckDday}
+                                handleCheckDday={handleCheckDday}
                                 dDayPin={dDayPin}
                             />
                         </td>
@@ -35,8 +35,8 @@ export default function SetMainItem(props: any) {
                         <td>
                             <SetMainDone
                                 groupId={group.groupId}
-                                handleCheck2={handleCheckDone}
-                                DonePin={donePin}
+                                handleCheckDone={handleCheckDone}
+                                donePin={donePin}
                             />
                         </td>
                     </tr>

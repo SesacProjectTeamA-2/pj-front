@@ -13,21 +13,27 @@ export default function Introduce(): JSX.Element {
 
     return (
         <div>
-            <textarea
-                readOnly={readOnlyVal}
-                onChange={(e) => setContent(e.target.value)}
-                value={content}
-                ref={inputRef}
-                maxLength={50}
-                className="textArea"
-            />
-            <button onClick={(e) => changeReadOnly()} className="edit-btn">
-                <img
-                    src="/asset/icons/edit.svg"
-                    className="edit-img"
-                    alt="editImg"
-                ></img>
-            </button>
+            <label className="input-label">
+                <textarea
+                    readOnly={readOnlyVal}
+                    onChange={(e) => setContent(e.target.value)}
+                    value={content}
+                    ref={inputRef}
+                    className="input-obj"
+                    id="text-area"
+                />
+                <button
+                    onClick={(e) => changeReadOnly()}
+                    className="edit-btn"
+                    id="introduce-edit"
+                >
+                    <img
+                        src="/asset/icons/edit.svg"
+                        className="edit-img"
+                        alt="editImg"
+                    ></img>
+                </button>
+            </label>
         </div>
     );
 }

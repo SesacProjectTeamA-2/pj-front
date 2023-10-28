@@ -20,16 +20,16 @@ export default function Phrase(): JSX.Element {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
         const phraseModeBtnVal: string | null =
             phraseModeBtn.getAttribute('for');
-        // const phraseInput: HTMLTextAreaElement | null =
-        //     document.querySelector('.phraseInput');
-        // console.log(phraseInput);
 
         switch (phraseModeBtnVal) {
-            case 'btn1':
+            case 'phraseMode-btn1':
                 setReadOnlyVal(true);
+                phraseModeBtn.style.backgroundColor = '#ED8D8D';
+                phraseModeBtn.style.color = 'white';
                 break;
-            case 'btn2':
+            case 'phraseMode-btn2':
                 setReadOnlyVal(false);
+
                 break;
             default:
                 return;
@@ -38,50 +38,57 @@ export default function Phrase(): JSX.Element {
     };
     return (
         <div>
-            <textarea
-                readOnly={readOnlyVal}
-                onChange={(e) => setContent(e.target.value)}
-                value={content}
-                ref={inputRef}
-                maxLength={50}
-                className="textArea"
-            />
-            <button onClick={(e) => changeReadOnly()} className="edit-btn">
-                <img
-                    src="/asset/icons/edit.svg"
-                    className="edit-img"
-                    alt="editImg"
-                ></img>
-            </button>
+            <label className="input-label">
+                <textarea
+                    readOnly={readOnlyVal}
+                    onChange={(e) => setContent(e.target.value)}
+                    value={content}
+                    ref={inputRef}
+                    maxLength={50}
+                    className="input-obj"
+                    id="text-area2"
+                />
+                <button
+                    onClick={(e) => changeReadOnly()}
+                    className="edit-btn"
+                    id="phrase-edit"
+                >
+                    <img
+                        src="/asset/icons/edit.svg"
+                        className="edit-img"
+                        alt="editImg"
+                    ></img>
+                </button>
+            </label>
             <br></br>
 
-            <input
-                className="phrase-radio"
-                type="radio"
-                id="btn1"
-                name="phraseMode"
-            ></input>
-            <label
-                htmlFor="btn1"
-                className="phrase-label"
-                onClick={(e) => phraseSelect(e)}
-            >
-                추천해주세요
-            </label>
+            <div className="phraseMode-btn-div">
+                <label
+                    className="phrase-label"
+                    onClick={(e) => phraseSelect(e)}
+                    id="phraseMode-btn1"
+                >
+                    <input
+                        className="phrase-radio"
+                        type="radio"
+                        name="phraseMode"
+                    ></input>
+                    추천해주세요
+                </label>
 
-            <input
-                className="phrase-radio"
-                type="radio"
-                id="btn2"
-                name="phraseMode"
-            ></input>
-            <label
-                htmlFor="btn2"
-                className="phrase-label"
-                onClick={(e) => phraseSelect(e)}
-            >
-                내가 적을래요
-            </label>
+                <label
+                    className="phrase-label"
+                    onClick={(e) => phraseSelect(e)}
+                    id="phraseMode-btn2"
+                >
+                    <input
+                        className="phrase-radio"
+                        type="radio"
+                        name="phraseMode"
+                    ></input>
+                    내가 적을래요
+                </label>
+            </div>
         </div>
     );
 }

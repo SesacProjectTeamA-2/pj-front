@@ -19,9 +19,13 @@ export default function MyPage() {
                 로그인 했을 때: 로그인 버튼 안 보임 + 채팅 버튼/프로필 보임
                 <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}
             <div className="myPage-div-one">
-                <ProfilePic />
-                <Nickname />
-                <Introduce />
+                <div className="myPage-div-one-one">
+                    <ProfilePic />
+                </div>
+                <div className="myPage-div-one-two">
+                    <Nickname />
+                    <Introduce />
+                </div>
             </div>
 
             <div className="myPage-div-two">
@@ -29,31 +33,33 @@ export default function MyPage() {
                 <h3>내 캐릭터</h3>
                 <CharacterList />
             </div>
-            <br></br>
 
             <div className="myPage-div-three">
-                <h3>관심분야</h3>
-                <InterestedList />
-                <br></br>
-                <h3>명언</h3>
-                <Phrase />
+                <div className="myPage-div-three-one">
+                    <h3>관심분야</h3>
+                    <InterestedList />
+                </div>
+                <div className="myPage-div-three-two">
+                    <h3>명언</h3>
+                    <Phrase />
+                </div>
             </div>
-            <br></br>
             <hr></hr>
 
             <div className="myPage-div-four">
                 <h3>메인화면 설정</h3>
                 <SetMainList />
-                <br></br>
                 <PsnCoverImg />
             </div>
-            <br></br>
-            <hr></hr>
 
             <div className="myPage-div-five">
-                <Quit />
+                <div className="myPage-div-five-one">
+                    <h3>회원탈퇴</h3>
+                </div>
+                <div className="myPage-div-five-two">
+                    <Quit />
+                </div>
             </div>
-            <br></br>
 
             <div className="myPage-div-six">
                 <button id="myPage-edit-btn" type="submit">

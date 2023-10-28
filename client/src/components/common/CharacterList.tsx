@@ -37,7 +37,7 @@ export default function CharacterList() {
 
     return (
         <>
-            <div className="character-div">
+            <div className="character-list-div">
                 <CharacterItem characterArr={characterArr} />
             </div>
         </>

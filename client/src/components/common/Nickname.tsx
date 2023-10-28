@@ -12,26 +12,28 @@ export default function Nickname(): JSX.Element {
 
     return (
         <div className="nickname-div">
-            <input
-                readOnly={readOnlyVal}
-                onChange={(e) => setInput(e.target.value)}
-                value={input}
-                ref={inputRef}
-                className="inputArea"
-                maxLength={10}
-                style={{
-                    border: 'none',
-                    fontWeight: 'bold',
-                    fontSize: '30px',
-                }}
-            />
-            <button onClick={(e) => changeReadOnly()} className="edit-btn">
-                <img
-                    src="/asset/icons/edit.svg"
-                    className="edit-img"
-                    alt="editImg"
-                ></img>
-            </button>
+            <label className="input-label">
+                <input
+                    readOnly={readOnlyVal}
+                    onChange={(e) => setInput(e.target.value)}
+                    value={input}
+                    ref={inputRef}
+                    id="input-area"
+                    className="input-obj"
+                    maxLength={10}
+                />
+                <button
+                    onClick={(e) => changeReadOnly()}
+                    className="edit-btn"
+                    id="nickname-edit"
+                >
+                    <img
+                        src="/asset/icons/edit.svg"
+                        className="edit-img"
+                        alt="editImg"
+                    ></img>
+                </button>
+            </label>
         </div>
     );
 }
