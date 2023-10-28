@@ -20,7 +20,7 @@ export default function BasicLayout({ children, showChat }: any) {
                             {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
                             <Col md={2} sm={2} className="empty-div"></Col>
                             {/* 컨텐츠 컴포넌트 들어갈 곳 */}
-                            <Col md={8} sm={10} className="section-div">
+                            <Col md={8} sm={10} className="section-wrapper">
                                 {children}
                             </Col>
                             {/* 채팅 컴포넌트 들어갈 곳 */}
@@ -36,7 +36,12 @@ export default function BasicLayout({ children, showChat }: any) {
                                 xs={3}
                                 className="empty-div"
                             ></Col>
-                            <Col md={8} sm={9} xs={9} className="section-div">
+                            <Col
+                                md={8}
+                                sm={9}
+                                xs={9}
+                                className="section-wrapper"
+                            >
                                 {children}
                             </Col>
                             <Col

@@ -14,7 +14,7 @@ export default function CharacterItem(props: any) {
     // }, [selectedCharacter]);
 
     return (
-        <div>
+        <div className="character-item-div ">
             {props.characterArr.map((character: any) => {
                 return (
                     <label
@@ -24,7 +24,7 @@ export default function CharacterItem(props: any) {
                         style={{
                             border:
                                 selectedCharacter === character.id
-                                    ? '3px solid #ed8d8d'
+                                    ? '5px solid #ed8d8d'
                                     : 'none',
                             borderRadius: '15px',
                         }}
@@ -37,7 +37,11 @@ export default function CharacterItem(props: any) {
                             value={character.val}
                             readOnly
                         />
-                        <img src={character.imgSrc} alt={character.alt} />
+                        <img
+                            src={character.imgSrc}
+                            alt={character.alt}
+                            className="character-img"
+                        />
                     </label>
                 );
             })}
