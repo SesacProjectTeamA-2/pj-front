@@ -12,7 +12,6 @@ export default function AccRanking() {
                         <div className="ranking-list">
                             <div>1</div>
                             <img src="/asset/images/sqr1.svg" />
-
                             <div className="acc-ranking-content">
                                 <div className="name">닉네임</div>
                                 <div className="score">48</div>
@@ -23,9 +22,9 @@ export default function AccRanking() {
                         <div className="ranking-list">
                             <div>1</div>
                             <img src="/asset/images/sqr1.svg" />
-
-                            <div className="ranking-content">
-                                <div>닉네임</div>
+                            <div className="acc-ranking-content">
+                                <div className="name">닉네임</div>
+                                <div className="score">48</div>
                             </div>
                         </div>
                     </li>
@@ -33,14 +32,9 @@ export default function AccRanking() {
                         <div className="ranking-list">
                             <div>1</div>
                             <img src="/asset/images/sqr1.svg" />
-
-                            <div className="ranking-content">
-                                <div>닉네임</div>
-                                <div className="progress-div">
-                                    <div className="my-progress">
-                                        <div className="my-bar"></div>
-                                    </div>
-                                </div>
+                            <div className="acc-ranking-content">
+                                <div className="name">닉네임</div>
+                                <div className="score">48</div>
                             </div>
                         </div>
                     </li>
@@ -48,14 +42,9 @@ export default function AccRanking() {
                         <div className="ranking-list">
                             <div>1</div>
                             <img src="/asset/images/sqr1.svg" />
-
-                            <div className="ranking-content">
-                                <div>닉네임</div>
-                                <div className="progress-div">
-                                    <div className="my-progress">
-                                        <div className="my-bar"></div>
-                                    </div>
-                                </div>
+                            <div className="acc-ranking-content">
+                                <div className="name">닉네임</div>
+                                <div className="score">48</div>
                             </div>
                         </div>
                     </li>
@@ -63,14 +52,9 @@ export default function AccRanking() {
                         <div className="ranking-list">
                             <div>1</div>
                             <img src="/asset/images/sqr1.svg" />
-
-                            <div className="ranking-content">
-                                <div>닉네임</div>
-                                <div className="progress-div">
-                                    <div className="my-progress">
-                                        <div className="my-bar"></div>
-                                    </div>
-                                </div>
+                            <div className="acc-ranking-content">
+                                <div className="name">닉네임</div>
+                                <div className="score">48</div>
                             </div>
                         </div>
                     </li>

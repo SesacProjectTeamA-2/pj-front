@@ -46,6 +46,15 @@
     }
 }
 
+.mission-li {
+    display: flex;
+    // gap: 3rem;
+}
+
+.mission-element {
+    width: 8rem;
+}
+
 //=== 랭킹 ===
 .ranking-container {
     display: flex;
@@ -79,4 +88,19 @@
 .score {
     font-weight: bold;
     font-size: 2rem;
+}
+
+//=== 멤버 ===
+.members-upper-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.member-count {
+    color: $color-warning;
+}
+
+.member-left {
+    color: $color-gray6;
 }
