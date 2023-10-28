@@ -14,30 +14,39 @@ import SideBarGroup from '../SidebarGroup';
 export default function GroupLayout({ children, showChat }: any) {
     // console.log('showChat', showChat);
     return (
+        // 전체 레이아웃 컨테이너
         <div className="layout-container">
             <Container fluid>
                 <Row>
                     {showChat ? (
                         <>
-                            <Col md={2} sm={3} className="groupMenu-div">
+                            {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
+                            <Col md={2} sm={2} className="groupMenu-div">
                                 <SideBarGroup />
                             </Col>
-                            <Col md={8} sm={9} className="section-div">
+                            {/* 컨텐츠 컴포넌트 들어갈 곳 */}
+                            <Col md={8} sm={10} className="section-div">
                                 {children}
                             </Col>
+                            {/* 채팅 컴포넌트 들어갈 곳 */}
                             <Col md={2} sm={12} className="chatting-div">
                                 <SidebarChat />
                             </Col>
                         </>
                     ) : (
                         <>
-                            <Col md={2} sm={3} className="groupMenu-div">
+                            <Col md={2} sm={2} xs={3} className="groupMenu-div">
                                 <SideBarGroup />
                             </Col>
-                            <Col md={8} sm={9} className="section-div">
+                            <Col md={8} sm={10} xs={9} className="section-div">
                                 {children}
                             </Col>
-                            <Col md={2} sm={12} className="chatting-div"></Col>
+                            <Col
+                                md={2}
+                                sm={12}
+                                xs={12}
+                                className="chatting-div"
+                            ></Col>
                         </>
                     )}
                 </Row>
