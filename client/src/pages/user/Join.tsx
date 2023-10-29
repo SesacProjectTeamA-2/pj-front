@@ -14,7 +14,7 @@ export default function Join() {
             <br />
 
             <div className="nickname-sub-div">
-                <h3>닉네임</h3>
+                <h3 id="nickname-h3">닉네임</h3>
                 {/* 수정 버튼 => 인풋으로 돌려도 됨 */}
                 <Nickname />
             </div>

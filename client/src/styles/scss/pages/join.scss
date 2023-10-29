@@ -13,18 +13,14 @@ img {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
-}
-
-.input-label {
-    width: 40%;
 }
 
 .interested-div {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
 }
