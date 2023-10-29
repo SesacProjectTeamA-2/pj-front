@@ -10,7 +10,9 @@ export default function SwiperComponent() {
     return (
         <div>
             <div className="swiper-button-container">
-                <div className="swiper-button-prev"></div>
+                <div className="swiper-button-prev">
+                    <img src="/asset/icons/left.svg" />
+                </div>
 
                 <Swiper
                     className="swiper"
@@ -90,7 +92,9 @@ export default function SwiperComponent() {
                         </Link>
                     </SwiperSlide>
                 </Swiper>
-                <div className="swiper-button-next"></div>
+                <div className="swiper-button-next">
+                    <img src="/asset/icons/right.svg" />
+                </div>
             </div>
         </div>
     );
