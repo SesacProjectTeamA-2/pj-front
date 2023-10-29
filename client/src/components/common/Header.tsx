@@ -16,23 +16,23 @@ export default function Header(props: any) {
                 <input type="date" id="date-input" />
                 <nav>
                     <Link to="/main">
-                        <button>Main</button>
+                        <button className="menu-button">Main</button>
                     </Link>
                     <Link to="/mission">
-                        <button>Mission</button>
+                        <button className="menu-button">Mission</button>
                     </Link>
                     <Link to="/group">
-                        <button>Group</button>
+                        <button className="menu-button">Group</button>
                     </Link>
 
                     {/* 관리자만 보이는 버튼 */}
                     <Link to="/management">
-                        <button>Management</button>
+                        <button className="menu-button">Management</button>
                     </Link>
 
                     {/* 비로그인 시 */}
                     <Link to="/login">
-                        <button>Login</button>
+                        <button className="menu-button">Login</button>
                     </Link>
                     {/* 로그인 시 */}
 
