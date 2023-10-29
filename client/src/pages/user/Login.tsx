@@ -22,7 +22,6 @@ export default function Login() {
         <div className="section">
             <div className="login-wrapper">
                 <h1 id="login-h1">안녕하세요!</h1>
-
                 <GoogleLogin
                     style={{ marginTop: '20%' }}
                     onClick={(): void => console.log('google')}
