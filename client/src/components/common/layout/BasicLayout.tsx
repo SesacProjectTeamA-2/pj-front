@@ -30,26 +30,11 @@ export default function BasicLayout({ children, showChat }: any) {
                         </>
                     ) : (
                         <>
-                            <Col
-                                md={2}
-                                sm={3}
-                                xs={3}
-                                className="empty-div"
-                            ></Col>
-                            <Col
-                                md={8}
-                                sm={9}
-                                xs={9}
-                                className="section-wrapper"
-                            >
+                            <Col md={2} sm={2} className="empty-div"></Col>
+                            <Col md={8} sm={10} className="section-wrapper">
                                 {children}
                             </Col>
-                            <Col
-                                md={2}
-                                sm={12}
-                                xs={12}
-                                className="chatting-div"
-                            ></Col>
+                            <Col md={2} sm={12} className="chatting-div"></Col>
                         </>
                     )}
                 </Row>
