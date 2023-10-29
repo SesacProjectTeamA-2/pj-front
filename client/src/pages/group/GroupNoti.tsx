@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import '../../styles/scss/pages/group/groupNoti.scss';
+
 import GroupHeader from '../../components/group/content/GroupHeader';
-import '../../styles/scss/pages/group/groupBoard.scss';
 
 export default function GroupNoti() {
     return (
@@ -55,7 +58,9 @@ export default function GroupNoti() {
                 </div>
             </div>
             <div>
-                <img src="/asset/icons/plus.svg" className="plus-fixed" />
+                <Link to="/group/noti/1/post">
+                    <img src="/asset/icons/plus.svg" className="plus-fixed" />
+                </Link>
             </div>
         </div>
     );

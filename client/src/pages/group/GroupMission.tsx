@@ -1,4 +1,8 @@
 import React from 'react';
+
+import '../../styles/scss/pages/group/groupMissionList.scss';
+
+import GroupContent from '../../components/group/content/GroupContent';
 import GroupHeader from '../../components/group/content/GroupHeader';
 
 export default function GroupMission() {
@@ -6,55 +10,18 @@ export default function GroupMission() {
 
     return (
         <div className="section section-group">
-            <GroupHeader title={missionArr[0]} groupName={'코딩학당'} />
-            <div className="noti-container">
-                <div className="noti-header">
-                    <div>No.</div>
-                    <div>제목</div>
-                    <div>작성자</div>
-                    <div>날짜</div>
-                </div>
-                <div className="noti-content">
-                    <ul>
-                        <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li>
-                        <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li>
-                        <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li>
-                        <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li>
-                    </ul>
+            <GroupHeader
+                // [ 추후 ] 넘버링 id 추가
+                title={`미션 1. ${missionArr[0]}`}
+                groupName={'코딩학당'}
+            />
+            <div className="noti-container proof-container">
+                <div className="noti-header proof-header">
+                    <div className="title5">[ 인증방법 ]</div>
+                    <div>주어지는 문제에 대한 코드 풀이를 제출합니다.</div>
                 </div>
             </div>
+            <GroupContent />
             <div>
                 <img src="/asset/icons/plus.svg" className="plus-fixed" />
             </div>
