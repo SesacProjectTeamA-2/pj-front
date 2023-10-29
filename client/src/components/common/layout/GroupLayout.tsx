@@ -41,13 +41,13 @@ export default function GroupLayout({ children, showChat }: any) {
                         </>
                     ) : (
                         <>
-                            <Col md={2} sm={2} xs={3} className="groupMenu-div">
+                            <Col md={2} sm={2} xs={2} className="groupMenu-div">
                                 <SideBarGroup />
                             </Col>
                             <Col
                                 md={8}
                                 sm={10}
-                                xs={9}
+                                xs={10}
                                 className="section-wrapper"
                             >
                                 {children}
