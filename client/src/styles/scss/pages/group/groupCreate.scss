@@ -1,0 +1,71 @@
+@import '../../abstracts/variables';
+
+.group-create-contianer {
+    align-items: flex-start;
+    width: 100%;
+    padding: 30px;
+    gap: 20px;
+}
+
+.group-create-content {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.title-wrapper {
+    display: flex;
+}
+
+.mission-wrapper {
+    width: 100%;
+}
+
+.mission-container {
+    background-color: $color-gray7;
+    display: flex;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    justify-content: center;
+
+    img {
+        width: 30px;
+        cursor: pointer;
+    }
+
+    div {
+        padding: 0 10px;
+    }
+}
+
+input {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.description-container {
+    width: 100%;
+    align-items: flex-start;
+
+    div {
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+
+    textarea {
+        height: 200px;
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+.limit-number {
+    width: 4rem;
+}
+
+.max-number {
+    color: $color-gray6;
+}

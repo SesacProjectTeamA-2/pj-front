@@ -15,14 +15,19 @@ export default function Join() {
 
             <div className="nickname-sub-div">
                 <h3>닉네임</h3>
+                {/* 수정 버튼 => 인풋으로 돌려도 됨 */}
                 <Nickname />
             </div>
             <br />
 
             <div className="interested-div">
-                <h3>관심 분야</h3>
-                <p>최대 3개</p>
-                <InterestedList />
+                <div className="interested-div-one">
+                    <h3>관심 분야</h3>
+                    <p>최대 3개</p>
+                </div>
+                <div className="interested-div-two">
+                    <InterestedList />
+                </div>
             </div>
             <br />
 
