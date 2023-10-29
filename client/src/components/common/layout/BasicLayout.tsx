@@ -18,13 +18,28 @@ export default function BasicLayout({ children, showChat }: any) {
                     {showChat ? (
                         <>
                             {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
-                            <Col md={2} sm={2} className="empty-div"></Col>
+                            <Col
+                                md={2}
+                                sm={2}
+                                xs={2}
+                                className="empty-div"
+                            ></Col>
                             {/* 컨텐츠 컴포넌트 들어갈 곳 */}
-                            <Col md={8} sm={10} className="section-wrapper">
+                            <Col
+                                md={8}
+                                sm={10}
+                                xs={10}
+                                className="section-wrapper"
+                            >
                                 {children}
                             </Col>
                             {/* 채팅 컴포넌트 들어갈 곳 */}
-                            <Col md={2} sm={12} className="chatting-div">
+                            <Col
+                                md={2}
+                                sm={12}
+                                xs={12}
+                                className="chatting-div"
+                            >
                                 <SidebarChat />
                             </Col>
                         </>
@@ -32,14 +47,14 @@ export default function BasicLayout({ children, showChat }: any) {
                         <>
                             <Col
                                 md={2}
-                                sm={3}
-                                xs={3}
+                                sm={2}
+                                xs={2}
                                 className="empty-div"
                             ></Col>
                             <Col
                                 md={8}
-                                sm={9}
-                                xs={9}
+                                sm={10}
+                                xs={10}
                                 className="section-wrapper"
                             >
                                 {children}
