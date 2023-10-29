@@ -42,7 +42,7 @@ h3 {
 .myPage-div-three-one {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     margin-right: 10%;
 }
 .myPage-div-three-two {
@@ -77,14 +77,8 @@ h3 {
 }
 
 // PEN BTN
-.input-label {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    width: 40vw;
-}
 .edit-btn {
-    @include box(2.5vw);
+    @include box(7%);
     position: relative;
     border: none;
     background-color: white;
@@ -97,6 +91,15 @@ h3 {
     border-radius: 10px;
     margin-right: 10px;
 }
+
+//text-area
+.input-label {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 40vw;
+    justify-content: start;
+}
 // nickname
 #input-area {
     font-weight: bold;
@@ -104,14 +107,15 @@ h3 {
 }
 // introduce
 #text-area {
-    height: 17vh;
+    height: 100%;
     font-size: medium;
-    width: 100%;
+    height: 20vh;
 }
 // phrase
 #text-area2 {
-    height: 17vh;
     font-size: medium;
+    width: 80%;
+    height: 20vh;
 }
 
 //  Profile START
