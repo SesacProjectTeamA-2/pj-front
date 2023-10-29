@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import './styles/scss/base/reset.scss';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -33,15 +33,37 @@ function App() {
         setShowChat(!showChat);
         // console.log('showChat App', showChat);
     };
+    const loc = useLocation().pathname;
+    // console.log('current loaction', loc);
+    const [showFooter, setShowFooter] = useState<boolean>(false);
+    const setFooterShowing = (): void => {
+        if (loc === '/') {
+            setShowFooter(true);
+        } else {
+            console.log('no Footer');
+            return;
+        }
+    };
+    useEffect(() => {
+        setFooterShowing();
+    }, [showFooter]);
 
     return (
         <div className="App">
-            <Header showChatting={showChatting} showChat={showChat} />
+            <Header
+                showChatting={showChatting}
+                showChat={showChat}
+                setFooterShowing={setFooterShowing}
+            />
             <Routes>
                 <Route
                     path="/"
                     element={
-                        <BasicLayout children={<Intro />} showChat={showChat} />
+                        <BasicLayout
+                            children={<Intro />}
+                            showChat={showChat}
+                            showFooter={showFooter}
+                        />
                     }
                 />
                 <Route
