@@ -50,6 +50,10 @@
     display: none;
 }
 
+.is-checked-img {
+    width: 20px;
+}
+
 .list-face {
     display: flex;
     justify-content: space-around;
@@ -69,8 +73,8 @@
             display: flex;
             background-color: white;
             border-radius: 50%;
-            width: 10rem;
-            height: 10rem;
+            width: 8em;
+            height: 8em;
             margin: 10px 10px;
             .face {
                 z-index: 20;
