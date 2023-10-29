@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,9 +8,11 @@ import '../../../styles/scss/layout/layout.scss';
 import '../../../styles/scss/layout/sidebarChat.scss';
 
 import SidebarChat from '../SidebarChat';
+import Footer from '../Footer';
 
-export default function BasicLayout({ children, showChat }: any) {
-    console.log('showChat Basic', showChat);
+export default function BasicLayout({ children, showChat, showFooter }: any) {
+    // console.log('showFooter', showFooter);
+
     return (
         <div className="layout-container">
             <Container fluid>
@@ -33,6 +35,7 @@ export default function BasicLayout({ children, showChat }: any) {
                             >
                                 {children}
                             </Col>
+
                             {/* 채팅 컴포넌트 들어갈 곳 */}
                             <Col
                                 md={2}
@@ -42,6 +45,7 @@ export default function BasicLayout({ children, showChat }: any) {
                             >
                                 <SidebarChat />
                             </Col>
+                            {showFooter ? <Footer /> : null}
                         </>
                     ) : (
                         <>
@@ -65,6 +69,7 @@ export default function BasicLayout({ children, showChat }: any) {
                                 xs={12}
                                 className="chatting-div"
                             ></Col>
+                            {showFooter ? <Footer /> : null}
                         </>
                     )}
                 </Row>
