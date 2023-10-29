@@ -6,13 +6,24 @@ import '../../styles/scss/pages/group/post.scss';
 import GroupHeader from '../../components/group/content/GroupHeader';
 
 export default function Post() {
+    // 1. 클릭한 곳 default 값
+    // 1) Header - tilte
+    // 2) select
+    // 3) Link to
+
+    // 2. select 변경 시 변경
+
     return (
         <div className="section section-group">
+            {/* title 값 넘겨 받기 ! */}
             <GroupHeader title={'공지사항'} groupName={'코딩학당'} />
-            <div className="noti-container post-container">
+            <div className="post-container">
                 <div className="noti-content post-header title5">
                     <div>종류</div>
                     <select>
+                        {/* default : + 누른 페이지 */}
+                        {/* select 값에 따라 Link to 달라아야 함 */}
+
                         <option>공지사항</option>
                         <option>자유/질문</option>
                         <option>미션1</option>
@@ -30,7 +41,10 @@ export default function Post() {
                 </div>
             </div>
             <div>
-                <button className="btn-md">작성 완료</button>
+                {/* default : + 누른 페이지 */}
+                <Link to="/group/noti/1">
+                    <button className="btn-lg">작성 완료</button>
+                </Link>
             </div>
         </div>
     );

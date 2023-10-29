@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import '../../styles/scss/pages/group/groupMissionList.scss';
 
-import GroupContent from '../../components/group/content/GroupContent';
+import GroupContent from '../../components/group/content/GroupContentList';
 import GroupHeader from '../../components/group/content/GroupHeader';
 
 export default function GroupMission() {
@@ -22,9 +23,9 @@ export default function GroupMission() {
                 </div>
             </div>
             <GroupContent />
-            <div>
+            <Link to="/group/post/1">
                 <img src="/asset/icons/plus.svg" className="plus-fixed" />
-            </div>
+            </Link>
         </div>
     );
 }
