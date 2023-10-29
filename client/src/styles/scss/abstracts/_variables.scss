@@ -11,6 +11,23 @@ $color-license: #f399ca;
 $color-economy: #b78be3;
 $color-etc: #c4c4c4; // gray3
 
+// https://www.npmjs.com/package/react-social-login-buttons
+// 소셜 로그인 버튼 (1) 구글
+// - 텍스트 왼쪽 및 오른쪽의 여백 : 8dp
+// - 로고 : 18dp
+// - 로고와 버튼 텍스트 사이 : 24dp
+$color-gg-blue: #4285f4;
+$color-gg-red: #ea4335;
+$color-gg-green: #34a853;
+$color-gg-yellow: #fbbc05;
+
+// 소셜 로그인 버튼 (2) 카카오
+// 컨테이너 박스의 radius는 12 pixel
+$color-kk-yellow: #fee500;
+
+// 소셜 로그인 버튼 (3) 네이버
+$color-nv-green: #02c75a;
+
 // gray scale
 $color-white: #fff;
 $color-gray1: #f3f3f3;
