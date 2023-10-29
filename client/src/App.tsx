@@ -23,6 +23,7 @@ import GroupCreate from './pages/group/GroupCreate';
 
 import BasicLayout from './components/common/layout/BasicLayout';
 import GroupLayout from './components/common/layout/GroupLayout';
+import Post from './pages/group/Post';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -136,6 +137,16 @@ function App() {
                             children={<GroupMissionDone />}
                             showChat={showChat}
                         />
+                    }
+                />
+
+                {/* 게시물 작성 */}
+                {/* [추후] 동적으로 수정하기 */}
+                <Route
+                    path="/group/noti/1/post"
+                    // path="*/post"
+                    element={
+                        <GroupLayout children={<Post />} showChat={showChat} />
                     }
                 />
                 {/* 그룹 라우팅 끝 */}

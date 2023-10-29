@@ -15,6 +15,16 @@ button {
     padding: 10px;
 }
 
+.btn-md {
+    background-color: $color-primary;
+    color: $color-white;
+    border: none;
+    padding: 5px 20px;
+    margin: 20px 0;
+    font-size: 1.6rem;
+    width: 60rem;
+}
+
 //=== 하단 Fixed 버튼 ===
 .btn-fixed {
     background-color: $color-primary;
@@ -51,6 +61,7 @@ button {
     z-index: 999;
     width: 100px;
     height: 100px;
+    cursor: pointer;
 }
 
 //=== 빵빠레 버튼 ,,, ====
