@@ -21,7 +21,7 @@ export default function MissionItem({ mission }: Props) {
                 <div>
                     <img
                         src={checkedIcon}
-                        className="edit-img"
+                        className="is-checked-img"
                         alt="isCheckedIcon"
                     />
 
