@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import '../../styles/scss/pages/group/groupNoti.scss';
+
 import GroupHeader from '../../components/group/content/GroupHeader';
-import '../../styles/scss/pages/group/groupBoard.scss';
 
 export default function GroupNoti() {
     return (
@@ -15,15 +18,18 @@ export default function GroupNoti() {
                 </div>
                 <div className="noti-content">
                     <ul>
-                        <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li>
+                        {/* [추후] 동적으로 수정 */}
+                        <Link to="/group/noti/1/1">
+                            <li>
+                                <div>1</div>
+                                <div>
+                                    [필독] 가입 시 채팅방에 간단한 인사말
+                                    남겨주세요 !
+                                </div>
+                                <div>달려라하니</div>
+                                <div>2023.10.28</div>
+                            </li>
+                        </Link>
                         <li>
                             <div>1</div>
                             <div>
@@ -55,7 +61,9 @@ export default function GroupNoti() {
                 </div>
             </div>
             <div>
-                <img src="/asset/icons/plus.svg" className="plus-fixed" />
+                <Link to="/group/post/1">
+                    <img src="/asset/icons/plus.svg" className="plus-fixed" />
+                </Link>
             </div>
         </div>
     );

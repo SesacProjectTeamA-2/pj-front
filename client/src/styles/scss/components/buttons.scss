@@ -8,11 +8,32 @@ button {
     padding: 0;
 }
 
+//=== 버튼 크기별 ===
+// sm md lg xl
+
 .btn-sm {
     background-color: $color-primary;
     color: $color-white;
     border: none;
     padding: 10px;
+}
+
+.btn-md {
+    background-color: $color-primary;
+    color: $color-white;
+    border: none;
+    padding: 1rem 1.2rem;
+    font-size: 1.1rem;
+}
+
+.btn-lg {
+    background-color: $color-primary;
+    color: $color-white;
+    border: none;
+    padding: 5px 20px;
+    margin: 20px 0;
+    font-size: 1.6rem;
+    width: 59rem;
 }
 
 //=== 하단 Fixed 버튼 ===
@@ -51,6 +72,7 @@ button {
     z-index: 999;
     width: 100px;
     height: 100px;
+    cursor: pointer;
 }
 
 //=== 빵빠레 버튼 ,,, ====

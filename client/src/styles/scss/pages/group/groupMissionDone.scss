@@ -1,0 +1,31 @@
+@import '../../abstracts/variables';
+
+.mission-done-header {
+    display: flex;
+    gap: 9rem;
+
+    border-bottom: 1px solid $color-gray4;
+
+    margin-bottom: 1rem;
+
+    // justify-content: space-between; // [추후] 임의
+    background-color: transparent;
+    // font-weight: bold; // [추후] 왜 안먹는거지 ;;
+}
+
+.mission-done-content {
+    border-radius: 10px;
+
+    ul {
+        display: flex;
+    }
+
+    li {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+.mission-done-list {
+    display: flex;
+}
