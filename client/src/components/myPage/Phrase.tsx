@@ -68,12 +68,12 @@ export default function Phrase(): JSX.Element {
                     onClick={(e) => phraseSelect(e)}
                     id="phraseMode-btn1"
                 >
-                    추천해주세요
                     <input
                         className="phrase-radio"
                         type="radio"
                         name="phraseMode"
                     ></input>
+                    추천해주세요
                 </label>
 
                 <label
@@ -81,12 +81,12 @@ export default function Phrase(): JSX.Element {
                     onClick={(e) => phraseSelect(e)}
                     id="phraseMode-btn2"
                 >
-                    내가 적을래요
                     <input
                         className="phrase-radio"
                         type="radio"
                         name="phraseMode"
                     ></input>
+                    내가 적을래요
                 </label>
             </div>
         </div>
