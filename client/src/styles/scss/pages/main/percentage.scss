@@ -1,23 +1,85 @@
+@import '../../abstracts/variables';
+@import '../../abstracts/utils';
+
 .content-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
     // margin: 0 auto;
+    width: 800px;
+    margin: 0 30px;
     .content-grid-box {
+        width: 100%;
+        height: 100%;
         margin: 0 auto;
     }
 }
 
 .percentage-div {
-    width: 70%;
+    width: 100%;
+    height: 100%;
     background-color: white;
-    margin: 2rem 2rem;
+    // margin: 2rem 2rem;
     padding: 2rem 2rem;
 
-    .progress-bar-img-flex {
+    .progress-img-flex {
         display: flex;
+        justify-content: space-between;
+
+        .my-progress-img {
+            width: 5rem;
+        }
     }
 
     .progress-bar-div {
+        display: flex;
+        flex-direction: row;
+
+        width: 100%;
+        margin: 1rem 0;
+        .profile-img-div-flex {
+            display: flex;
+            flex-direction: column;
+
+            .profile-img {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+
+        .progress-bar-flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .progress-div {
+                width: 100%;
+                margin: auto;
+                .my-progress {
+                    width: 130px;
+                    height: 1em;
+                    border-radius: 10px;
+                    background-color: $color-gray1;
+
+                    .my-bar-one {
+                        width: 80%;
+                        height: 1em;
+                        border-radius: 10px;
+
+                        background-color: $color-IT;
+                    }
+                    .my-bar-two {
+                        width: 70%;
+                        height: 1em;
+                        border-radius: 10px;
+
+                        background-color: $color-exercise;
+                    }
+                }
+            }
+        }
+    }
+
+    .team-progress-img-div-flex {
         display: flex;
         flex-direction: column;
     }
