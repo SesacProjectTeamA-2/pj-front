@@ -1,9 +1,6 @@
 import React from 'react';
 import SidebarChat from '../SidebarChat';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import Item from '@mui/material/ListItem';
 
