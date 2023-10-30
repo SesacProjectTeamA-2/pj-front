@@ -1,9 +1,9 @@
+@import '../abstracts/variables.scss';
 @import '../abstracts/utils.scss';
 
 .modal-mission-add-container {
     width: 62%;
     height: 50%;
-    background-color: white;
     border-radius: 10px;
 
     position: fixed;
@@ -19,6 +19,7 @@
     width: 100%;
     height: 100%;
     align-items: center;
+    // position: relative;
 
     button {
         border-radius: 10px;
@@ -42,11 +43,12 @@
     transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-    background-color: white;
     justify-content: center;
     overflow: auto;
     animation: modal-show 0.3s;
     padding: 2rem;
+    background-color: white;
+    // background-color: $color-gray2;
 }
 
 .overlay {
@@ -60,3 +62,52 @@
 }
 
 @include fadeIn(modal-show);
+
+.modal-mission-header {
+    display: flex;
+    width: 90%;
+    align-items: center;
+    gap: 4rem;
+}
+
+.modal-mission-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 80%;
+}
+
+.modal-proof-input {
+    margin: 2rem;
+}
+
+.modal-mission-list {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem;
+    width: 100%;
+
+    ul {
+        padding: 0;
+        margin: 1rem 0;
+    }
+}
+
+.modal-btn-done {
+    margin: 3rem auto 0 auto;
+}
+
+//=== 미션 취소 모달 ===
+.cancel-modal-description {
+    color: $color-gray4;
+}
+
+.modal-cancel-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-mission-cancel-content {
+    display: flex;
+    gap: 2rem;
+}

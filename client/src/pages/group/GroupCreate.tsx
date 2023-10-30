@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import InterestedList from '../../components/common/InterestedList';
+
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 import '../../styles/scss/pages/group/groupCreate.scss';
+
+import InterestedList from '../../components/common/InterestedList';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 
 export default function GroupCreate() {
@@ -17,16 +23,37 @@ export default function GroupCreate() {
             <div className="title2">어떤 모임을 생성하고 싶나요 ?</div>
             <div className="group-create-content group-create-title">
                 <div className="title-wrapper">
-                    <div>모임명</div>
-                    <input
-                        placeholder="10글자 이내로 입력해주세요"
-                        type="text"
-                        className="name-input"
-                    />
+                    <Box
+                        component="form"
+                        sx={{
+                            '& > :not(style)': { m: 1, width: '30ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField
+                            id="filled-basic"
+                            label="모임명"
+                            variant="filled"
+                        />
+                        {/* <TextField
+                            id="standard-basic"
+                            label="모임명"
+                            variant="standard"
+                        /> */}
+                    </Box>
                 </div>
                 <div className="group-create-img">
                     <div>대표 이미지</div>
-                    <button className="btn-sm">추가</button>
+                    <Button
+                        style={{
+                            backgroundColor: '#ed8d8d',
+                            fontSize: '1rem',
+                        }}
+                        variant="contained"
+                    >
+                        추가
+                    </Button>
                 </div>
             </div>
             <div className="group-create-content">
