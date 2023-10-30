@@ -38,11 +38,11 @@ export default function Login() {
                     onClick={(): void => console.log('naver')}
                     align="center"
                 />
-                <button id="link-join-btn">
+                {/* <button id="link-join-btn">
                     <Link to="/join" style={{ textDecoration: 'none' }}>
                         <p>회원이 아니신가요?</p>
                     </Link>
-                </button>
+                </button> */}
             </div>
         </div>
     );
