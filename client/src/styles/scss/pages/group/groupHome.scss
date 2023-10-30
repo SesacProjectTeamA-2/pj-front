@@ -33,6 +33,11 @@
 .upper-content {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+}
+
+.group-home-duration {
+    color: $color-gray6;
 }
 
 .main-content {

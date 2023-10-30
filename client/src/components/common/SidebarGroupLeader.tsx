@@ -17,11 +17,11 @@ export default function SideBarGroupLeader() {
                     <li className="leader-edit">모임 수정</li>
                 </Link>
                 <br />
-                <li className="leader-warning">미션완료 취소</li>
-                <li className="leader-warning">모임장 권한 넘기기</li>
-                <li className="leader-warning">강제 퇴장시키기</li>
+                <li className="title5 leader-warning">미션완료 취소</li>
+                <li className="title5 leader-warning">모임장 권한 넘기기</li>
+                <li className="title5 leader-warning">강제 퇴장시키기</li>
 
-                <li className="leader-warning">모임 삭제</li>
+                <li className="title5 leader-warning">모임 삭제</li>
             </ul>
         </div>
     );

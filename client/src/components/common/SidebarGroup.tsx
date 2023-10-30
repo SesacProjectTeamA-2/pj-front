@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import '../../styles/scss/layout/sidebarGroup.scss';
 import SideBarGroupLeader from './SidebarGroupLeader';
+import SideBarGroupMember from './SidebarGroupMember';
 
 export default function SideBarGroup() {
     return (
@@ -47,6 +48,9 @@ export default function SideBarGroup() {
 
             {/* 모임장 */}
             <SideBarGroupLeader />
+
+            {/* 멤버 */}
+            <SideBarGroupMember />
         </div>
     );
 }
