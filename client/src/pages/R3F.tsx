@@ -28,7 +28,7 @@ export default function R3F() {
                     maxPolarAngle={Math.PI / 0.5}
                 />
                 <ambientLight intensity={0.1} />
-                <directionalLight color="red" position={[0, 1, 0]} />
+                <directionalLight color="#FFF" position={[0, 1, 0]} />
 
                 <PerspectiveCamera
                     fov={40}
