@@ -4,7 +4,7 @@
     align-items: flex-start;
     width: 100%;
     padding: 30px;
-    gap: 20px;
+    gap: 3rem;
 }
 
 .group-create-content {
@@ -14,8 +14,26 @@
     width: 100%;
 }
 
+.group-create-title {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
 .title-wrapper {
     display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.group-create-img {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+
+    button {
+        border-radius: 10px;
+    }
 }
 
 .mission-wrapper {
@@ -43,7 +61,8 @@
 input {
     border: none;
     border-radius: 10px;
-    padding: 10px;
+    padding: 1rem;
+    width: 24rem;
 }
 
 .description-container {
@@ -58,7 +77,9 @@ input {
     textarea {
         height: 200px;
         width: 100%;
-        padding: 10px;
+        padding: 2rem;
+        border-radius: 10px;
+        border: none;
     }
 }
 

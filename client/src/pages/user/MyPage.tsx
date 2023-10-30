@@ -62,7 +62,11 @@ export default function MyPage() {
             </div>
 
             <div className="myPage-div-six">
-                <button id="myPage-edit-btn" type="submit">
+                <button
+                    className="btn-fixed"
+                    id="myPage-edit-btn"
+                    type="submit"
+                >
                     수정 완료
                 </button>
             </div>

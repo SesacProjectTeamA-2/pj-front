@@ -5,7 +5,7 @@ import InterestedList from '../../components/common/InterestedList';
 import '../../styles/scss/pages/group/groupCreate.scss';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 
-export default function GroupCreate() {
+export default function GroupEdit() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
     const missionAddHandler = () => {
@@ -14,7 +14,7 @@ export default function GroupCreate() {
 
     return (
         <div className="section group-create-contianer title5">
-            <div className="title2">어떤 모임을 생성하고 싶나요 ?</div>
+            <div className="title2">모임 수정하기</div>
             <div className="group-create-content group-create-title">
                 <div className="title-wrapper">
                     <div>모임명</div>
@@ -73,9 +73,8 @@ export default function GroupCreate() {
                     setAddModalSwitch={setAddModalSwitch}
                 />
             ) : null}
-
             <Link to="/group/home/1">
-                <button className="btn-fixed">모임 시작하기 !</button>
+                <button className="btn-fixed">모임 수정완료 !</button>
             </Link>
         </div>
     );

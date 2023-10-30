@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import '../../styles/scss/pages/join.scss';
+import '../../styles/scss/pages/user/join.scss';
 
 import Nickname from '../../components/common/Nickname';
 import CharacterList from '../../components/common/CharacterList';
@@ -38,7 +38,9 @@ export default function Join() {
             <br />
 
             <Link to="/main">
-                <button id="join-btn">시작하기</button>
+                <button id="join-btn" className="btn-fixed">
+                    시작하기
+                </button>
             </Link>
         </div>
     );

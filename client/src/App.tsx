@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './styles/scss/base/reset.scss';
 
@@ -24,6 +24,7 @@ import BasicLayout from './components/common/layout/BasicLayout';
 import GroupLayout from './components/common/layout/GroupLayout';
 import Post from './pages/group/Post';
 import GroupPostDetail from './pages/group/GroupPostDetail';
+import GroupEdit from './pages/group/GroupEdit';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -32,37 +33,15 @@ function App() {
         setShowChat(!showChat);
         // console.log('showChat App', showChat);
     };
-    const loc = useLocation().pathname;
-    // console.log('current loaction', loc);
-    const [showFooter, setShowFooter] = useState<boolean>(false);
-    const setFooterShowing = (): void => {
-        if (loc === '/') {
-            setShowFooter(true);
-        } else {
-            console.log('no Footer');
-            return;
-        }
-    };
-    useEffect(() => {
-        setFooterShowing();
-    }, [showFooter]);
 
     return (
         <div className="App">
-            <Header
-                showChatting={showChatting}
-                showChat={showChat}
-                setFooterShowing={setFooterShowing}
-            />
+            <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
                 <Route
                     path="/"
                     element={
-                        <BasicLayout
-                            children={<Intro />}
-                            showChat={showChat}
-                            showFooter={showFooter}
-                        />
+                        <BasicLayout children={<Intro />} showChat={showChat} />
                     }
                 />
                 <Route
@@ -105,17 +84,17 @@ function App() {
                         />
                     }
                 />
-
-                {/* 그룹에만 그룹 메뉴 존재 */}
                 <Route
                     path="/group/create"
                     element={
-                        <GroupLayout
+                        <BasicLayout
                             children={<GroupCreate />}
                             showChat={showChat}
                         />
                     }
                 />
+
+                {/* 그룹에만 그룹 메뉴 존재 */}
                 <Route
                     path="/group/home/*"
                     element={
@@ -183,6 +162,18 @@ function App() {
                         />
                     }
                 />
+
+                {/* 모임 Update */}
+                <Route
+                    path="/group/edit/1"
+                    element={
+                        <GroupLayout
+                            children={<GroupEdit />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
                 {/* 그룹 라우팅 끝 */}
 
                 <Route

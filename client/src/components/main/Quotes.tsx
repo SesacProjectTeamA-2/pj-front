@@ -2,15 +2,14 @@ import React from 'react';
 
 export default function Quotes() {
     return (
-        <div className="content-grid-box">
+        <div className="content-grid-box quotes-div-flex">
             <div className="quotes">
                 <span>"</span>
-                꿈과 야망은 성공의 원동력이 아니다. 보잘것없어 보이는 1인치
-                전진을 위하여 오늘 외롭게 최선을 다하는 힘이 바로 성공의
-                원동력이다.
+                삶의 가장 큰 영예는 넘어지지 않는 것이 아니라, 우리가 넘어질
+                때마다 다시 일어나는데에 있다.
                 <span>"</span>
                 <div className="quotes-author-flex">
-                    <div> - 세이노</div>
+                    <div> - 랄프 왈도 에머슨</div>
                 </div>
                 <div className="quotes-btn-flex">
                     <button>랜덤 생성</button>

@@ -1,4 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+import Item from '@mui/material/ListItem';
 
 import '../../../styles/scss/layout/layout.scss';
 import '../../../styles/scss/layout/sidebarChat.scss';
@@ -6,70 +10,137 @@ import '../../../styles/scss/layout/sidebarChat.scss';
 import SidebarChat from '../SidebarChat';
 import Footer from '../Footer';
 
-export default function BasicLayout({ children, showChat, showFooter }: any) {
-    // console.log('showFooter', showFooter);
+export default function BasicLayout({ children, showChat }: any) {
+    // 인트로에서만 Footer 보이게 하기
+    const loc = useLocation().pathname;
+    console.log(loc);
+
+    const [showFooter, setShowFooter] = useState<boolean>(false);
+
+    // const setFooterShowing = (): void => {
+    //     if (loc === '/') {
+    //         setShowFooter(true);
+    //         // console.log('showFooter', showFooter); // 바로 찍으면 값 안 바뀜!!! useEffect 쓰기
+    //     } else {
+    //         setShowFooter(false);
+    //         // console.log('no Footer');
+    //         // return;
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     setFooterShowing();
+    //     console.log('showFooter', showFooter);
+    // }, [showFooter]);
+    useEffect(() => {
+        console.log('loc', loc, loc === '/');
+        loc === '/' ? setShowFooter(true) : setShowFooter(false);
+    }, [loc]);
 
     return (
-        <div className="layout-container">
-            <Container fluid>
-                <Row>
+        <>
+            <div className="layout-container ">
+                <Grid container>
                     {showChat ? (
                         <>
                             {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
-                            <Col
-                                md={2}
-                                sm={2}
-                                xs={2}
-                                className="empty-div"
-                            ></Col>
+                            <Grid md={2} sm={2} xs={2} className="empty-div">
+                                <Item
+                                    style={{
+                                        paddingLeft: 0,
+                                        paddingRight: 0,
+                                        paddingTop: 0,
+                                    }}
+                                ></Item>
+                            </Grid>
+
                             {/* 컨텐츠 컴포넌트 들어갈 곳 */}
-                            <Col
+                            <Grid
                                 md={8}
                                 sm={10}
                                 xs={10}
                                 className="section-wrapper"
                             >
-                                {children}
-                            </Col>
+                                <Item
+                                    style={{
+                                        paddingLeft: 0,
+                                        paddingRight: 0,
+                                        paddingTop: 0,
+                                    }}
+                                >
+                                    {' '}
+                                    {children}
+                                </Item>
+                            </Grid>
 
                             {/* 채팅 컴포넌트 들어갈 곳 */}
-                            <Col
+                            <Grid
                                 md={2}
                                 sm={12}
                                 xs={12}
                                 className="chatting-div"
                             >
-                                <SidebarChat />
-                            </Col>
+                                <Item
+                                    style={{
+                                        paddingLeft: 0,
+                                        paddingRight: 0,
+                                        paddingTop: 0,
+                                    }}
+                                >
+                                    {' '}
+                                    <SidebarChat />
+                                </Item>
+                            </Grid>
                             {showFooter ? <Footer /> : null}
                         </>
                     ) : (
                         <>
-                            <Col
-                                md={2}
-                                sm={2}
-                                xs={2}
-                                className="empty-div"
-                            ></Col>
-                            <Col
+                            <Grid md={2} sm={2} xs={2} className="empty-div">
+                                <Item
+                                    style={{
+                                        paddingLeft: 0,
+                                        paddingRight: 0,
+                                        paddingTop: 0,
+                                    }}
+                                ></Item>
+                            </Grid>
+
+                            <Grid
                                 md={8}
                                 sm={10}
                                 xs={10}
                                 className="section-wrapper"
                             >
-                                {children}
-                            </Col>
-                            <Col
+                                <Item
+                                    style={{
+                                        paddingLeft: 0,
+                                        paddingRight: 0,
+                                        paddingTop: 0,
+                                    }}
+                                >
+                                    {children}
+                                </Item>
+                            </Grid>
+
+                            <Grid
                                 md={2}
                                 sm={12}
                                 xs={12}
                                 className="chatting-div"
-                            ></Col>
+                            >
+                                <Item
+                                    style={{
+                                        paddingLeft: 0,
+                                        paddingRight: 0,
+                                        paddingTop: 0,
+                                    }}
+                                ></Item>
+                            </Grid>
                             {showFooter ? <Footer /> : null}
                         </>
                     )}
-                </Row>
-            </Container>
-        </div>
+                </Grid>
+            </div>
+        </>
     );
 }
