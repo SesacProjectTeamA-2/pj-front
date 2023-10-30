@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import MissionAddModal from '../../common/modal/MissionAddModal';
 
 export default function HomeMissionList() {
+    const [addModalSwitch, setAddModalSwitch] = useState(false);
+    const missionAddHandler = () => {
+        setAddModalSwitch(true);
+    };
+
     return (
         <div className="wrapper">
             <div className="upper-content">
-                <div className="title2">진행 중인 미션</div>
+                <div className="upper-content-wrapper">
+                    <div className="title2">진행 중인 미션</div>
+
+                    {/* 모임장만 보임 */}
+                    <div onClick={missionAddHandler}>
+                        <div className="title5 mission-edit">수정하기</div>
+                    </div>
+                    {addModalSwitch ? (
+                        <MissionAddModal
+                            addModalSwitch={addModalSwitch}
+                            setAddModalSwitch={setAddModalSwitch}
+                        />
+                    ) : null}
+                </div>
                 <div className="title2">D-3</div>
             </div>
             <div className="main-content">

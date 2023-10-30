@@ -36,6 +36,17 @@
     align-items: flex-end;
 }
 
+.upper-content-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+}
+
+.mission-edit {
+    color: $color-gray6;
+    cursor: pointer;
+}
+
 .group-home-duration {
     color: $color-gray6;
 }

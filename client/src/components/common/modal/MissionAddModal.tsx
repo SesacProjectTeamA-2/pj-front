@@ -1,5 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
+
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
+
+import TextField from '@mui/material/TextField';
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
+import Divider from '@mui/material/Divider';
 
 import '../../../styles/scss/components/modal.scss';
 
@@ -12,13 +25,17 @@ export default function MissionAddModal({
     addModalSwitch,
     setAddModalSwitch,
 }: MissionAddModalProps) {
+    const [editSwitch, useEditSwitch] = useState(false);
+
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
 
     const addMissionModalHandler = () => {
-        setAddModalSwitch(false);
+        console.log(addModalSwitch);
     };
+
+    const editHandler = () => {};
 
     return (
         <div className="modal-mission-add-container">
@@ -37,17 +54,133 @@ export default function MissionAddModal({
                     />
                 </div>
                 <div className="modal-mission-add-content">
-                    <div className="title4">미션 추가하기</div>
-                    <div>
-                        <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ul>
+                    <div className="title3">미션 추가</div>
+                    <div className="title5 modal-mission-header">
+                        <div className="modal-mission-title">
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& > :not(style)': { m: 1, width: '40ch' },
+                                }}
+                                noValidate
+                                autoComplete="off"
+                            >
+                                <TextField
+                                    id="title-basic"
+                                    label="미션 제목"
+                                    variant="standard"
+                                />
+                            </Box>
+                        </div>
+                        <FormControl fullWidth>
+                            <InputLabel
+                                variant="standard"
+                                htmlFor="uncontrolled-native"
+                            >
+                                난이도
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={3}
+                                inputProps={{
+                                    name: 'level',
+                                    id: 'uncontrolled-native',
+                                }}
+                            >
+                                <option value={1}>하</option>
+                                <option value={3}>중</option>
+                                <option value={5}>상</option>
+                            </NativeSelect>
+                        </FormControl>
                     </div>
-                    <button onClick={addMissionModalHandler} className="btn-md">
+
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 4, width: '67ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField
+                            id="filled-multiline-flexible"
+                            label="인증 방법"
+                            multiline
+                            maxRows={4}
+                            variant="filled"
+                        />
+                    </Box>
+
+                    <button
+                        onClick={addMissionModalHandler}
+                        className="btn-md modal-btn-add"
+                    >
                         미션 추가
                     </button>
+
+                    <div className="modal-mission-list">
+                        <div className="title4">Mission List</div>
+                        <List
+                            sx={{
+                                width: '100%',
+                                bgcolor: 'background.paper',
+                            }}
+                        >
+                            <ListItem>
+                                <ListItemText
+                                    primary="미션 1. 알고리즘 ⭐️⭐️⭐️"
+                                    secondary="문제에 대한 코드를 제출합니다."
+                                />
+                                <div>
+                                    <button className="modal-mission-edit-btn btn-sm">
+                                        수정
+                                    </button>
+                                </div>
+                            </ListItem>
+
+                            <Divider component="li" />
+                            <ListItem>
+                                <ListItemText
+                                    primary="미션 2. 블로깅 ⭐️⭐️"
+                                    secondary="게시물 링크를 올립니다."
+                                />
+                                <div>
+                                    <button
+                                        className="modal-mission-edit-btn btn-sm"
+                                        onClick={editHandler}
+                                    >
+                                        수정
+                                    </button>
+                                </div>
+                            </ListItem>
+                            <Divider component="li" />
+                            <ListItem>
+                                <ListItemText
+                                    primary="미션 3. 모각코 ⭐️"
+                                    secondary="문제에 대한 코드를 제출합니다."
+                                />
+                                <div>
+                                    <button className="modal-mission-edit-btn btn-sm">
+                                        수정
+                                    </button>
+                                </div>
+                            </ListItem>
+                        </List>
+
+                        {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
+                        <div className="group-create-content">
+                            <div>마감일</div>
+                            <div>2023-10-30</div>
+                            <input type="date" id="date-input" />
+                            {/* [추후] 디데이 추가 */}
+                        </div>
+
+                        <button
+                            onClick={closeModalHandler}
+                            className="btn-md modal-btn-done"
+                        >
+                            수정 완료
+                        </button>
+                    </div>
                 </div>
             </Modal>
         </div>
