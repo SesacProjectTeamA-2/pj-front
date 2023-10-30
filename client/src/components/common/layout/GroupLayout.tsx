@@ -18,6 +18,7 @@ export default function GroupLayout({ children, showChat }: any) {
                         <>
                             {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
                             <Col md={2} sm={2} xs={2} className="groupMenu-div">
+                                {/* [추후] 모임장, 멤버 사이드바 다름 */}
                                 <SideBarGroup />
                             </Col>
                             {/* 컨텐츠 컴포넌트 들어갈 곳 */}
@@ -42,6 +43,7 @@ export default function GroupLayout({ children, showChat }: any) {
                     ) : (
                         <>
                             <Col md={2} sm={2} xs={2} className="groupMenu-div">
+                                {/* [추후] 모임장, 멤버 사이드바 다름 */}
                                 <SideBarGroup />
                             </Col>
                             <Col

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import '../styles/scss/pages/intro.scss';
 
 export default function Intro() {
@@ -6,7 +8,7 @@ export default function Intro() {
         <div className="section intro-container">
             <div className="intro-header">
                 <div className="video-container">
-                    <video width="70%" height="100%" autoPlay loop>
+                    <video autoPlay loop>
                         <source src="/asset/test.mp4" type="video/mp4" />
                     </video>
                 </div>
@@ -31,8 +33,17 @@ export default function Intro() {
             <div className="intro-img-wrapper-left">
                 <div className="intro-img"></div>
                 <div className="intro-story">
-                    <div className="title3">MOTIMATE 이야기</div>
-                    <div className="intro-content-sub-title">자세히 보기</div>
+                    <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
+                        <div className="title3">MOTIMATE 이야기</div>
+                        <div className="intro-content-sub-title">
+                            자세히 보기
+                            <img
+                                className="intro-right-double-icon"
+                                src="/asset/icons/right_double.svg"
+                                alt="right-double"
+                            />
+                        </div>
+                    </Link>
                 </div>
             </div>
 
