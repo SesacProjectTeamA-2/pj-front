@@ -25,6 +25,7 @@ import BasicLayout from './components/common/layout/BasicLayout';
 import GroupLayout from './components/common/layout/GroupLayout';
 import Post from './pages/group/Post';
 import GroupPostDetail from './pages/group/GroupPostDetail';
+import GroupEdit from './pages/group/GroupEdit';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -184,6 +185,18 @@ function App() {
                         />
                     }
                 />
+
+                {/* 모임 Update */}
+                <Route
+                    path="/group/edit/1"
+                    element={
+                        <GroupLayout
+                            children={<GroupEdit />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
                 {/* 그룹 라우팅 끝 */}
 
                 <Route

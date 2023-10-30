@@ -7,6 +7,7 @@
 .intro-header {
     display: flex;
     position: relative;
+    width: 100%;
 }
 
 .intro-title {
@@ -32,7 +33,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 85.5rem;
+    // width: 85.5rem;
+    width: 100%;
 }
 
 video {
@@ -72,10 +74,15 @@ video {
     align-items: center;
     width: 100%;
     margin-bottom: 4rem;
+    justify-content: flex-end;
 
     .intro-story {
         display: flex;
         flex-direction: column;
-        margin: 0 6rem;
     }
+}
+
+.intro-right-double-icon {
+    width: 1.8rem;
+    margin: 0 0.6rem;
 }
