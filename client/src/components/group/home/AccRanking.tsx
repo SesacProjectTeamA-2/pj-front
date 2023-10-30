@@ -5,6 +5,10 @@ export default function AccRanking() {
         <div className="wrapper">
             <div className="upper-content">
                 <div className="title2">누적 랭킹</div>
+                <div className="title6 group-home-duration">
+                    {/* [추후] 기간 데이터 연동 */}
+                    2023.09.30-2023.10.30
+                </div>
             </div>
             <div className="main-content">
                 <ul className="list-unstyled">

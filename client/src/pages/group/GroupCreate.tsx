@@ -6,10 +6,10 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 
 export default function GroupCreate() {
-    const [addModal, setAddModal] = useState(false);
+    const [addModalSwitch, setAddModalSwitch] = useState(false);
 
     const missionAddHandler = () => {
-        setAddModal(true);
+        setAddModalSwitch(true);
     };
 
     return (
@@ -54,7 +54,8 @@ export default function GroupCreate() {
             <div className="group-create-content">
                 <div>마감일</div>
                 <div>2023-10-30</div>
-                {/* 달력 추가 */}
+                <input type="date" id="date-input" />
+                {/* [추후] 디데이 추가 */}
             </div>
             <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
@@ -66,7 +67,12 @@ export default function GroupCreate() {
                 </div>
             </div>
 
-            {addModal ? <MissionAddModal setAddModal={setAddModal} /> : null}
+            {addModalSwitch ? (
+                <MissionAddModal
+                    addModalSwitch={addModalSwitch}
+                    setAddModalSwitch={setAddModalSwitch}
+                />
+            ) : null}
 
             <Link to="/group/home/1">
                 <button className="btn-fixed">모임 시작하기 !</button>
