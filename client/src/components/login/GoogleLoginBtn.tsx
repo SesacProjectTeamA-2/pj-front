@@ -13,5 +13,5 @@ const config_google = {
     icon: createSvgIcon(googleSvg),
 };
 
-const GoogleLogin = createButton(config_google);
-export default GoogleLogin;
+const GoogleLoginBtn = createButton(config_google);
+export default GoogleLoginBtn;

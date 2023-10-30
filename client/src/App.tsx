@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import './styles/scss/base/reset.scss';
-import 'bootstrap/dist/css/bootstrap.css';
 
 import Header from './components/common/Header';
 import Intro from './pages/Intro';

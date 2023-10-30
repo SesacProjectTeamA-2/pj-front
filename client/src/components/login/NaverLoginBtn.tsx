@@ -9,5 +9,5 @@ const config_naver = {
     icon: createSvgIcon(naverSvg),
 };
 
-const NaverLogin = createButton(config_naver);
-export default NaverLogin;
+const NaverLoginBtn = createButton(config_naver);
+export default NaverLoginBtn;

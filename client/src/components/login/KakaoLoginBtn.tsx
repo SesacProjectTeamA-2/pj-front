@@ -10,5 +10,5 @@ const config_kakao = {
     className: 'a',
 };
 
-const KakaoLogin = createButton(config_kakao);
-export default KakaoLogin;
+const KakaoLoginBtn = createButton(config_kakao);
+export default KakaoLoginBtn;
