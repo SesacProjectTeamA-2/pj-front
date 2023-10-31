@@ -17,8 +17,8 @@ export default function MemberList() {
                             <img src="/asset/images/sqr1.svg" />
 
                             <div className="cur-ranking-content">
-                                <div className="title4">닉네임</div>
-                                <div>자기소개입니다.</div>
+                                <div className="title4">모임장</div>
+                                <div>모임장 주인장입니다.</div>
                             </div>
                         </div>
                     </li>
