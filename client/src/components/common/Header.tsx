@@ -11,7 +11,10 @@ export default function Header(props: any) {
         <div className="header-container">
             <div className="header-divOne">
                 <Link to="/">
-                    <h1>로고</h1>
+                    <div className="logo-container">
+                        {/* <div className="logo-text">MOTI</div> */}
+                        <img src="asset/logo.png" className="logo-img" />
+                    </div>
                 </Link>
             </div>
 

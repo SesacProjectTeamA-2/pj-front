@@ -22,7 +22,7 @@ import GroupCreate from './pages/group/GroupCreate';
 
 import BasicLayout from './components/common/layout/BasicLayout';
 import GroupLayout from './components/common/layout/GroupLayout';
-import Post from './pages/group/Post';
+import BoardPost from './pages/group/BoardPost';
 import GroupPostDetail from './pages/group/GroupPostDetail';
 import GroupEdit from './pages/group/GroupEdit';
 import ManagementLayout from './components/common/layout/ManagementLayout';
@@ -148,10 +148,13 @@ function App() {
                 {/* 게시물 Create */}
                 {/* [추후] 동적으로 수정하기 */}
                 <Route
-                    path="/group/post/1"
+                    path="/group/board/post/1"
                     // path="*/post"
                     element={
-                        <GroupLayout children={<Post />} showChat={showChat} />
+                        <GroupLayout
+                            children={<BoardPost />}
+                            showChat={showChat}
+                        />
                     }
                 />
 
@@ -162,6 +165,17 @@ function App() {
                     element={
                         <GroupLayout
                             children={<GroupPostDetail />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
+                {/* 게시물 Edit */}
+                <Route
+                    path="/group/board/edit/1"
+                    element={
+                        <GroupLayout
+                            children={<GroupEdit />}
                             showChat={showChat}
                         />
                     }

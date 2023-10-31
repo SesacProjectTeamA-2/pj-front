@@ -1,20 +1,9 @@
 import React from 'react';
-import 'react-quill/dist/quill.snow.css';
-import { Link } from 'react-router-dom';
-
-import '../../styles/scss/pages/group/post.scss';
-
-import GroupHeader from '../../components/group/content/GroupHeader';
 import Editor from './Editor';
+import { Link } from 'react-router-dom';
+import GroupHeader from '../../components/group/content/GroupHeader';
 
-export default function Post() {
-    // 1. 클릭한 곳 default 값
-    // 1) Header - tilte
-    // 2) select
-    // 3) Link to
-
-    // 2. select 변경 시 변경
-
+export default function BoardEdit() {
     return (
         <div className="section section-group">
             {/* title 값 넘겨 받기 ! */}
