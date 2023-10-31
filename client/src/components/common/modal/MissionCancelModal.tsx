@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -6,18 +6,57 @@ import TextField from '@mui/material/TextField';
 import '../../../styles/scss/components/modal.scss';
 import ModalMemberList from './ModalMemberList';
 
-// import MemberList from '../../group/home/MemberList';
-
-interface MissionCancelModalProps {
-    missionCancelModalSwitch: boolean;
-    setMissionCancelModalSwitch: (value: boolean) => void;
-}
+// interface MissionCancelModalProps {
+//     missionCancelModalSwitch: boolean;
+//     setMissionCancelModalSwitch: (value: boolean) => void;
+// }
 
 export default function MissionCancelModal({
     missionCancelModalSwitch,
     setMissionCancelModalSwitch,
-}: MissionCancelModalProps) {
+}: any) {
+    interface MissionType {
+        id: number;
+        name: string;
+        selected: boolean;
+    }
+
+    const missionList: MissionType[] = [
+        {
+            id: 1,
+            name: '알고리즘',
+            selected: true,
+        },
+        {
+            id: 2,
+            name: '블로깅',
+            selected: false,
+        },
+        {
+            id: 3,
+            name: '모각코',
+            selected: false,
+        },
+    ];
+
+    // const [missions, setMissions] = useState(missionList);
+
+    const [selectedMissionId, setSelectedMissionId] = useState(1);
+
+    // 모달창 닫기
     const closeModalHandler = () => {
+        setMissionCancelModalSwitch(false);
+    };
+
+    // 미션 타입 선택
+    const missionTypeHandler = (id: number) => {
+        console.log(id);
+        setSelectedMissionId(id);
+    };
+
+    // 미션 인증완료 취소 완료
+    const missionCancelDone = () => {
+        alert('[000]님의 [미션 1. 알고리즘] 완료 인증이 취소되었습니다 !');
         setMissionCancelModalSwitch(false);
     };
 
@@ -30,15 +69,15 @@ export default function MissionCancelModal({
                 onRequestClose={() => setMissionCancelModalSwitch(false)}
                 ariaHideApp={false}
             >
+                <div onClick={closeModalHandler}>
+                    <img
+                        className="modal-mission-add-close-icon"
+                        src="/asset/icons/close.svg"
+                        alt="close-icon"
+                    />
+                </div>
                 <div className="modal-mission-cancel-content">
                     <div className="title5 modal-cancel-header">
-                        <div onClick={closeModalHandler}>
-                            <img
-                                className="modal-mission-add-close-icon"
-                                src="/asset/icons/close.svg"
-                                alt="close-icon"
-                            />
-                        </div>
                         <div className="modal-cancel-title-container">
                             <div className="title3">
                                 미션 완료를 취소합니다.
@@ -51,19 +90,43 @@ export default function MissionCancelModal({
                     </div>
                     <div>
                         <div className="mission-cancel-modal-mission-list">
-                            {/* [추후] btn으로 할지 ? div로 할지 ? */}
-                            {/* [추후] 하나만 클릭 가능하게 - 아닌 것은 회색으로 */}
-                            <button className="btn-sm">미션 1. 알고리즘</button>
-                            <button className="btn-sm">미션 2. 블로깅</button>
-                            <button className="btn-sm">미션 3. 모각코</button>
+                            {missionList.map((mission) => {
+                                return (
+                                    <div key={mission.id}>
+                                        <label
+                                            onClick={() =>
+                                                missionTypeHandler(mission.id)
+                                            }
+                                            style={{
+                                                backgroundColor:
+                                                    selectedMissionId ===
+                                                    mission.id
+                                                        ? '#ed8d8d'
+                                                        : '#acacac',
+                                            }}
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="missionType"
+                                            />
+                                            <div>
+                                                미션 {mission.id}.{' '}
+                                                {mission.name}
+                                            </div>
+                                        </label>
+                                    </div>
+                                );
+                            })}
                         </div>
-                        <ModalMemberList />
+                        <ModalMemberList action="미션인증 취소" />
                     </div>
                     <div>
                         <Box
                             component="form"
                             sx={{
-                                '& .MuiTextField-root': { m: 4, width: '67ch' },
+                                '& .MuiTextField-root': {
+                                    width: '67ch',
+                                },
                             }}
                             noValidate
                             autoComplete="off"
@@ -78,10 +141,16 @@ export default function MissionCancelModal({
                         </Box>
                     </div>
                     <div className="mission-cancel-btn-container">
-                        <button className="btn-md mission-cancel-done-btn">
+                        <button
+                            onClick={missionCancelDone}
+                            className="btn-md mission-cancel-done-btn"
+                        >
                             미션완료 취소
                         </button>
-                        <button className="btn-md mission-cancel-back-btn">
+                        <button
+                            onClick={closeModalHandler}
+                            className="btn-md mission-cancel-back-btn"
+                        >
                             돌아가기
                         </button>
                     </div>

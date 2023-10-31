@@ -1,9 +1,11 @@
 import React from 'react';
+import 'react-quill/dist/quill.snow.css';
 import { Link } from 'react-router-dom';
 
 import '../../styles/scss/pages/group/post.scss';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
+import Editor from './Editor';
 
 export default function Post() {
     // 1. 클릭한 곳 default 값
@@ -37,6 +39,7 @@ export default function Post() {
                 </div>
                 <div>
                     {/* [추후] 에디터가 들어갈 부분입니다. */}
+                    <Editor />
                     <textarea
                         className="editor"
                         placeholder="내용을 작성해주세요"
