@@ -30,6 +30,7 @@ export default function Login() {
                     style={{ marginTop: '20%' }}
                     onClick={() => googleLogin()}
                     align="center"
+                    className="googleLoginBtn"
                 ></GoogleLoginBtn>
                 {/* <GoogleLoginButton /> */}
 
@@ -37,19 +38,15 @@ export default function Login() {
                     style={{ marginTop: '2%' }}
                     onClick={(): void => kakaoLogin()}
                     align="center"
+                    className="kakaoLoginBtn"
                 />
 
                 <NaverLoginBtn
                     style={{ marginTop: '2%' }}
                     onClick={(): void => naverLogin()}
                     align="center"
+                    className="naverLoginBtn"
                 />
-
-                {/* <button id="link-join-btn">
-                    <Link to="/join" style={{ textDecoration: 'none' }}>
-                        <p>회원이 아니신가요?</p>
-                    </Link>
-                </button> */}
             </div>
         </div>
     );

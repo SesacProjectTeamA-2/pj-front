@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -9,31 +9,31 @@ import { PerspectiveCamera, CameraControls } from '@react-three/drei';
 
 const myWidth: number = window.innerWidth;
 const myHeight: number = window.innerHeight;
-// console.log(myWidth, myHeight);
+console.log(myWidth, myHeight);
 
 const Scene = () => {
     // material load
     const txtLoader = new THREE.TextureLoader();
-    // const txt = txtLoader.load('/asset/imagessudang.png');
+    const txt = txtLoader.load('/asset/images/Toad_tex.png');
 
     // fbx load
-    const fbx = useLoader(FBXLoader, '/asset/images/sudang.fbx');
-    fbx.position.set(0, 0, 0);
+    const fbx = useLoader(FBXLoader, '/asset/images/Mush.fbx');
+    fbx.position.set(0, -150, 0);
 
     // add material to fbx model
-    // fbx.traverse((child) => {
-    //     if (child instanceof THREE.Mesh) {
-    //         const mesh: any = child as THREE.Mesh;
-    //         mesh.material.map = txt;
-    //     }
-    // });
+    fbx.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+            const mesh: any = child as THREE.Mesh;
+            mesh.material.map = txt;
+        }
+    });
 
-    return <primitive object={fbx} scale={10} />;
+    return <primitive object={fbx} scale={5} />;
 };
 
 // add animation
 const AddAnimation = () => {
-    const fbx = useLoader(FBXLoader, '/asset/images/sudang.fbx');
+    const fbx = useLoader(FBXLoader, '/asset/images/Mush.fbx');
     const ref = useRef<any>();
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const AddAnimation = () => {
 
     // animation part
     useFrame((state, delta: number) => {
-        // ref.current.rotation.y += delta * 4;
+        ref.current.rotation.y += delta * 4;
     });
 
     return (
@@ -69,22 +69,23 @@ export default function R3F() {
             <Canvas
                 style={{
                     width: '100%',
-                    height: '30vh',
-                    background: 'white',
+                    height: '35vh',
+                    background: '#9681eb',
                 }}
+                camera={{ position: [0, 50, 270] }}
             >
                 <CameraControls
                     minPolarAngle={0}
                     maxPolarAngle={Math.PI / 0.5}
                 />
-                <ambientLight intensity={0.8} />
+                <ambientLight intensity={2.8} />
                 <directionalLight color="#FFF" position={[0, 1, 0]} />
 
                 <PerspectiveCamera
-                    fov={60}
+                    fov={40}
                     near={10}
                     far={1000}
-                    position={[0, 10, 10]}
+                    position={[0, 0, 350]} // 카메라 위치 조정
                 />
                 <AddAnimation />
             </Canvas>
