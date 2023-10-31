@@ -6,6 +6,7 @@ export default function Phrase(): JSX.Element {
     );
     const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
+
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
         inputRef.current?.focus();

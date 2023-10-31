@@ -2,21 +2,32 @@ import React, { useState } from 'react';
 
 export default function InterestedItem(props: any) {
     // 체크박스 상태 관리
-    // const [selected, set]
+    const [selected, setSelected] = useState<boolean>(false);
+
     // 체크박스 개수 제한
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
 
     // 체크박스 색 변경 클릭이벤트
     const selectedTag = (e: React.MouseEvent<HTMLElement>): void => {
-        const selectedBtn: HTMLElement = e.target as HTMLElement;
-        setSelectedArr([...selectedArr, selectedBtn.id]);
-        console.log(selectedArr);
+        setSelected(!selected); //선택 여부 관리
+        const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼
 
-        if (selectedBtn) {
+        if (!selected && selectedArr.includes(selectedBtn.id)) {
+            // 선택 안 되면 배열에서 제거
+            selectedArr.filter((ele) => selectedBtn.id !== ele);
+        } else if (selected && !selectedArr.includes(selectedBtn.id)) {
+            // 선택 되면 배열에 추가
+            setSelectedArr([...selectedArr, selectedBtn.id]);
+            // 색상 변경
             selectedBtn.style.background = '#ED8D8D';
             selectedBtn.style.color = '#fff';
-            // console.log(selectedBtn);
         }
+
+        console.log('selectedArr >> ', selectedArr);
+        console.log('selectedArr >> ', selectedArr.length);
+
+        // if (selectedBtn) {
+        // }
     };
     return (
         <div>
