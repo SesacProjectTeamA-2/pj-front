@@ -76,7 +76,7 @@ export default function GroupMissionDone() {
             </div>
 
             <div>
-                <Link to="/group/post/1">
+                <Link to="/group/board/post/1">
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
                 </Link>
             </div>

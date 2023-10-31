@@ -11,7 +11,10 @@ export default function Header(props: any) {
         <div className="header-container">
             <div className="header-divOne">
                 <Link to="/">
-                    <h1>로고</h1>
+                    <div className="logo-container">
+                        {/* <div className="logo-text">MOTI</div> */}
+                        <img src="asset/logo.png" className="logo-img" />
+                    </div>
                 </Link>
             </div>
 
@@ -29,7 +32,7 @@ export default function Header(props: any) {
                     </Link>
 
                     {/* 관리자만 보이는 버튼 */}
-                    <Link to="/management">
+                    <Link to="/management/users">
                         <button className="menu-button">Management</button>
                     </Link>
 

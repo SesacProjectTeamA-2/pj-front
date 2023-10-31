@@ -16,7 +16,7 @@ export default function GroupBoard() {
             <GroupHeader title={'자유/질문'} groupName={'코딩학당'} />
             <GroupContent />
             <div>
-                <Link to="/group/post/1">
+                <Link to="/group/board/post/1">
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
                 </Link>
             </div>
