@@ -13,7 +13,6 @@ import Footer from '../Footer';
 export default function BasicLayout({ children, showChat }: any) {
     // 인트로에서만 Footer 보이게 하기
     const loc = useLocation().pathname;
-    console.log(loc);
 
     const [showFooter, setShowFooter] = useState<boolean>(false);
 
@@ -33,7 +32,7 @@ export default function BasicLayout({ children, showChat }: any) {
     //     console.log('showFooter', showFooter);
     // }, [showFooter]);
     useEffect(() => {
-        console.log('loc', loc, loc === '/');
+        // console.log('loc', loc, loc === '/');
         loc === '/' ? setShowFooter(true) : setShowFooter(false);
     }, [loc]);
 

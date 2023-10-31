@@ -4,40 +4,47 @@ import axios from 'axios';
 
 import '../../styles/scss/pages/user/login.scss';
 
-import GoogleLogin from '../../components/login/GoogleLogin';
-import NaverLogin from '../../components/login/NaverLogin';
-import KakaoLogin from '../../components/login/KakaoLogin';
-import { GoogleLoginButton } from 'react-social-login-buttons';
+import GoogleLoginBtn from '../../components/login/GoogleLoginBtn';
+import NaverLoginBtn from '../../components/login/NaverLoginBtn';
+import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
+// import { GoogleLoginButton } from 'react-social-login-buttons';
 
 export default function Login() {
-    // const onClick = async () => {
-    // const res = await axios.get(
-    //     `${process.env.REACT_APP_DB_HOST}/user/login/kakao`
-    // );
-    // console.log(res.data);
-    //     console.log('환경변수 >>>', process.env.REACT_APP_DB_HOST);
-    // };
+    const googleLogin = (): void => {
+        window.location.href = 'http://localhost:8888/api/user/login/google';
+    };
+    const kakaoLogin = (): void => {
+        window.location.href =
+            'http://localhost:8888/api/user/login/kakao/authorize';
+    };
+    const naverLogin = (): void => {
+        window.location.href = 'http://localhost:8888/api/user/login/naver';
+    };
 
     return (
         <div className="section">
             <div className="login-wrapper">
                 <h1 id="login-h1">안녕하세요!</h1>
-                <GoogleLogin
+
+                <GoogleLoginBtn
                     style={{ marginTop: '20%' }}
-                    onClick={(): void => console.log('google')}
+                    onClick={() => googleLogin()}
                     align="center"
-                ></GoogleLogin>
+                ></GoogleLoginBtn>
                 {/* <GoogleLoginButton /> */}
-                <KakaoLogin
+
+                <KakaoLoginBtn
                     style={{ marginTop: '2%' }}
-                    onClick={(): void => console.log('naver')}
+                    onClick={(): void => kakaoLogin()}
                     align="center"
                 />
-                <NaverLogin
+
+                <NaverLoginBtn
                     style={{ marginTop: '2%' }}
-                    onClick={(): void => console.log('naver')}
+                    onClick={(): void => naverLogin()}
                     align="center"
                 />
+
                 {/* <button id="link-join-btn">
                     <Link to="/join" style={{ textDecoration: 'none' }}>
                         <p>회원이 아니신가요?</p>

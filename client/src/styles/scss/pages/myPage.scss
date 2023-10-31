@@ -34,7 +34,7 @@
 .myPage-div-three {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: row;
     width: 100%;
     margin-bottom: 10%;
@@ -79,11 +79,13 @@
 
 // PEN BTN
 .edit-btn {
-    @include box(7%);
-    position: relative;
+    @include box(2vw);
     border: none;
     border-radius: 10px;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 // INPUT
@@ -98,7 +100,7 @@
 .input-label {
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    align-items: start;
     width: 40vw;
     justify-content: start;
 }
@@ -116,7 +118,7 @@
 // phrase
 #text-area2 {
     font-size: medium;
-    width: 80%;
+    width: 70%;
     height: 20vh;
 }
 
@@ -141,7 +143,7 @@
 
 // Nickname START
 .edit-img {
-    @include box(100%);
+    @include box(2vw);
     border: none;
 }
 // Nickname END
@@ -188,11 +190,13 @@
     background-color: white;
     color: #acacac;
     margin: 5px;
-    width: 50px;
-    height: 25px;
+    width: 5vw;
+    height: 5vh;
     text-align: center;
+    display: flex;
     align-items: center;
-    display: block;
+    justify-content: center;
+    font-size: small;
 }
 // Interested END
 
@@ -204,19 +208,24 @@
 .phrase-label {
     background-color: $color-gray1;
     color: $color-gray5;
-    width: 30%;
-    height: 30%;
+    width: fit-content;
+    height: 5vh;
     border-radius: 5px;
     font-weight: light;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
 }
 .phraseMode-btn-div {
     display: flex;
-    justify-content: start;
-    width: 100%;
+    justify-content: center;
+    width: 70%;
     text-align: center;
 }
 #phraseMode-btn1 {
-    margin-right: 20%;
+    margin-right: 5%;
     text-align: center;
 }
 #phraseMode-btn2 {
@@ -236,8 +245,7 @@ td {
     text-align: center;
 }
 .pin-img {
-    width: 100%;
-    height: 100%;
+    @include box(2vw);
 }
 .setDday-radio,
 .setDone-radio {
@@ -281,6 +289,9 @@ td {
     border: none;
     border-radius: 20px;
     margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #quit-btn:hover {
     background-color: #e20606;
