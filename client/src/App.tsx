@@ -25,6 +25,10 @@ import GroupLayout from './components/common/layout/GroupLayout';
 import Post from './pages/group/Post';
 import GroupPostDetail from './pages/group/GroupPostDetail';
 import GroupEdit from './pages/group/GroupEdit';
+import ManagementLayout from './components/common/layout/ManagementLayout';
+import AllUser from './components/management/AllUser';
+import AllGroup from './components/management/AllGroup';
+import Report from './components/management/Report';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -188,8 +192,35 @@ function App() {
                 <Route
                     path="/management"
                     element={
-                        <BasicLayout
+                        <ManagementLayout
                             children={<Management />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/management/users"
+                    element={
+                        <ManagementLayout
+                            children={<AllUser />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/management/groups"
+                    element={
+                        <ManagementLayout
+                            children={<AllGroup />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+                <Route
+                    path="/management/reports"
+                    element={
+                        <ManagementLayout
+                            children={<Report />}
                             showChat={showChat}
                         />
                     }
