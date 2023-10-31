@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../../styles/scss/layout/sidebarGroup.scss';
@@ -6,6 +6,17 @@ import SideBarGroupLeader from './SidebarGroupLeader';
 import SideBarGroupMember from './SidebarGroupMember';
 
 export default function SideBarGroup() {
+    // 메뉴 선택
+    const [menu, setMenu] = useState('');
+
+    // 경고 공통 모달
+    const [warningModalSwitch, setWarningModalSwitch] = useState(false);
+
+    const warningModalSwitchHandler = (menu: string) => {
+        setMenu(menu);
+        setWarningModalSwitch(!warningModalSwitch);
+    };
+
     return (
         <div className="sidebar-container">
             <div className="sidebar-content">
@@ -47,10 +58,22 @@ export default function SideBarGroup() {
             </div>
 
             {/* 모임장 */}
-            <SideBarGroupLeader />
+            <SideBarGroupLeader
+                warningModalSwitch={warningModalSwitch}
+                setWarningModalSwitch={setWarningModalSwitch}
+                warningModalSwitchHandler={warningModalSwitchHandler}
+                menu={menu}
+                setMenu={setMenu}
+            />
 
             {/* 멤버 */}
-            <SideBarGroupMember />
+            <SideBarGroupMember
+                warningModalSwitch={warningModalSwitch}
+                setWarningModalSwitch={setWarningModalSwitch}
+                warningModalSwitchHandler={warningModalSwitchHandler}
+                menu={menu}
+                setMenu={setMenu}
+            />
         </div>
     );
 }

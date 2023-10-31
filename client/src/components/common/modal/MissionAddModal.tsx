@@ -25,6 +25,34 @@ export default function MissionAddModal({
     addModalSwitch,
     setAddModalSwitch,
 }: MissionAddModalProps) {
+    interface MissionType {
+        id: number;
+        name: string;
+        proof: string;
+        level: string;
+    }
+
+    const missionList: MissionType[] = [
+        {
+            id: 1,
+            name: '알고리즘',
+            proof: '문제에 대한 코드를 제출합니다.',
+            level: '⭐️⭐️⭐️',
+        },
+        {
+            id: 2,
+            name: '블로깅',
+            proof: '게시물 링크를 올립니다.',
+            level: '⭐️⭐️',
+        },
+        {
+            id: 3,
+            name: '모각코',
+            proof: '게시물 링크를 올립니다.',
+            level: '⭐️',
+        },
+    ];
+
     const [editSwitch, useEditSwitch] = useState(false);
 
     const closeModalHandler = () => {
@@ -54,7 +82,7 @@ export default function MissionAddModal({
                     />
                 </div>
                 <div className="modal-mission-add-content">
-                    <div className="title3">미션 추가</div>
+                    <div className="title3">미션 수정하기</div>
                     <div className="title5 modal-mission-header">
                         <div className="modal-mission-title">
                             <Box
@@ -86,9 +114,9 @@ export default function MissionAddModal({
                                     id: 'uncontrolled-native',
                                 }}
                             >
-                                <option value={1}>하</option>
-                                <option value={3}>중</option>
-                                <option value={5}>상</option>
+                                <option value={1}>⭐️</option>
+                                <option value={3}>⭐️⭐️</option>
+                                <option value={5}>⭐️⭐️⭐️</option>
                             </NativeSelect>
                         </FormControl>
                     </div>
