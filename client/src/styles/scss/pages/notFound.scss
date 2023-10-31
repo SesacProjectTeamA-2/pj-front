@@ -11,7 +11,8 @@
 
 .err-section {
     background: $color-err-bg;
-    color: $color-err-txt;
+    // color: $color-err-txt;
+    color: orangered;
     width: 100%;
     height: 100vh;
     text-align: center;
@@ -21,9 +22,25 @@
 .errMsg-div {
     display: flex;
     flex-direction: row;
-    font-size: 15vh;
+    margin-bottom: 3%;
 }
+.errMsg-div span {
+    font-size: 30vh;
+    transform: skewY(20deg);
+    text-shadow: 5px 15px black;
+}
+
 #err-btn {
-    background-color: $color-err-txt;
+    width: 100%;
+    height: 70%;
+    background-color: whitesmoke;
     color: $color-err-bg;
+    box-shadow: 3px 3px black;
+    font-size: 1.2em;
+}
+
+#err-btn:hover {
+    transform: scale(1.2);
+    background-color: orangered;
+    animation: none;
 }

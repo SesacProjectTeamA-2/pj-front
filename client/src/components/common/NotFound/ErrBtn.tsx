@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ErrBtn() {
     return (
         <div>
-            <button id="err-btn">ErrBtn</button>
+            <Link to="/">
+                <button id="err-btn">RETURN</button>
+            </Link>
         </div>
     );
 }

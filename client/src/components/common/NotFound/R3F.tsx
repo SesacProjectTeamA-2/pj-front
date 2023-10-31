@@ -72,7 +72,7 @@ export default function R3F() {
                     height: '30vh',
                     background: '#0802A3',
                 }}
-                camera={{ position: [0, 50, 250] }}
+                camera={{ position: [0, 50, 280] }}
             >
                 <CameraControls
                     minPolarAngle={0}
