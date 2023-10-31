@@ -104,10 +104,54 @@
 
 .modal-cancel-header {
     display: flex;
+    gap: 1rem;
+}
+
+.modal-cancel-title-container {
+    display: flex;
     flex-direction: column;
 }
 
 .modal-mission-cancel-content {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+}
+
+.mission-cancel-modal-mission-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    button {
+        margin: 2rem 3rem;
+    }
+}
+
+.modal-member-list-container {
+    // background-color: $color-gray2;
+    padding: 0 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-member-list-ul {
+    li {
+        padding: 1rem;
+        border-radius: 14px;
+    }
+}
+
+.mission-cancel-done-btn {
+    width: 40%;
+}
+
+.mission-cancel-back-btn {
+    width: 40%;
+    background-color: $color-gray4;
+}
+
+.mission-cancel-btn-container {
+    display: flex;
+    justify-content: center;
 }
