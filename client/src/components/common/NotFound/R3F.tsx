@@ -9,31 +9,31 @@ import { PerspectiveCamera, CameraControls } from '@react-three/drei';
 
 const myWidth: number = window.innerWidth;
 const myHeight: number = window.innerHeight;
-console.log(myWidth, myHeight);
+// console.log(myWidth, myHeight);
 
 const Scene = () => {
     // material load
     const txtLoader = new THREE.TextureLoader();
-    const txt = txtLoader.load('/asset/images/Toad_up.jpg');
+    // const txt = txtLoader.load('/asset/imagessudang.png');
 
     // fbx load
-    const fbx = useLoader(FBXLoader, '/asset/images/Power_up.fbx');
-    fbx.position.set(0, -150, 0);
+    const fbx = useLoader(FBXLoader, '/asset/images/sudang.fbx');
+    fbx.position.set(0, 0, 0);
 
     // add material to fbx model
-    fbx.traverse((child) => {
-        if (child instanceof THREE.Mesh) {
-            const mesh: any = child as THREE.Mesh;
-            mesh.material.map = txt;
-        }
-    });
+    // fbx.traverse((child) => {
+    //     if (child instanceof THREE.Mesh) {
+    //         const mesh: any = child as THREE.Mesh;
+    //         mesh.material.map = txt;
+    //     }
+    // });
 
-    return <primitive object={fbx} scale={5} />;
+    return <primitive object={fbx} scale={50} />;
 };
 
 // add animation
 const AddAnimation = () => {
-    const fbx = useLoader(FBXLoader, '/asset/images/Power_up.fbx');
+    const fbx = useLoader(FBXLoader, '/asset/images/sudang.fbx');
     const ref = useRef<any>();
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const AddAnimation = () => {
 
     // animation part
     useFrame((state, delta: number) => {
-        ref.current.rotation.y += delta * 4;
+        // ref.current.rotation.y += delta * 4;
     });
 
     return (
@@ -70,22 +70,21 @@ export default function R3F() {
                 style={{
                     width: '100%',
                     height: '30vh',
-                    background: '#0802A3',
+                    background: 'white',
                 }}
-                camera={{ position: [0, 50, 280] }}
             >
                 <CameraControls
                     minPolarAngle={0}
                     maxPolarAngle={Math.PI / 0.5}
                 />
-                <ambientLight intensity={2.5} />
+                <ambientLight intensity={0.8} />
                 <directionalLight color="#FFF" position={[0, 1, 0]} />
 
                 <PerspectiveCamera
-                    fov={40}
+                    fov={60}
                     near={10}
                     far={1000}
-                    position={[0, 0, 350]} // 카메라 위치 조정
+                    position={[0, 10, 10]}
                 />
                 <AddAnimation />
             </Canvas>
