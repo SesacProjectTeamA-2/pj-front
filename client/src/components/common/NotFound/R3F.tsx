@@ -28,7 +28,7 @@ const Scene = () => {
     //     }
     // });
 
-    return <primitive object={fbx} scale={50} />;
+    return <primitive object={fbx} scale={10} />;
 };
 
 // add animation
