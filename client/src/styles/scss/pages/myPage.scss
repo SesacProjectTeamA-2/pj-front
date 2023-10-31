@@ -202,12 +202,12 @@
 
 // Phrase START
 .phrase-radio {
-    opacity: 0;
     width: 100%;
+    display: none;
 }
 .phrase-label {
-    background-color: $color-gray1;
-    color: $color-gray5;
+    background-color: $color-gray2;
+    color: $color-gray7;
     width: fit-content;
     height: 5vh;
     border-radius: 5px;
