@@ -5,29 +5,53 @@ import { Link } from 'react-router-dom';
 
 import '../../styles/scss/layout/sidebarGroup.scss';
 import MissionCancelModal from './modal/MissionCancelModal';
+import ChoiceModal from './modal/ChoiceModal';
+import WarningModal from './modal/WarningModal';
 
-export default function SideBarGroupLeader() {
+export default function SideBarGroupLeader({
+    warningModalSwitch,
+    setWarningModalSwitch,
+    warningModalSwitchHandler,
+    menu,
+    setMenu,
+}: any) {
+    interface MissionType {
+        id: number;
+        name: string;
+        selected: boolean;
+    }
+
+    const missionList: MissionType[] = [
+        {
+            id: 1,
+            name: '알고리즘',
+            selected: true,
+        },
+        {
+            id: 2,
+            name: '블로깅',
+            selected: false,
+        },
+        {
+            id: 3,
+            name: '모각코',
+            selected: false,
+        },
+    ];
+
     const [missionCancelModalSwitch, setMissionCancelModalSwitch] =
         useState(false);
 
-    const [delegateModalSwitch, setDelegateModalSwitch] = useState(false);
-    const [countOutModalSwitch, setCountOutModalSwitch] = useState(false);
-    const [deleteSwitch, setDeleteSwitch] = useState(false);
+    // 멤버 선택하는 공통 모달
+    const [choiceModalSwitch, setChoiceModalSwitch] = useState(false);
+
+    const choiceModalSwitchHandler = (menu: string) => {
+        setMenu(menu);
+        setChoiceModalSwitch(!choiceModalSwitch);
+    };
 
     const missionCancelModalHandler = () => {
         setMissionCancelModalSwitch(true);
-    };
-
-    const delegateModalHandler = () => {
-        setDelegateModalSwitch(true);
-    };
-
-    const countOutModalHandler = () => {
-        setCountOutModalSwitch(true);
-    };
-
-    const deleteModalHandler = () => {
-        setDeleteSwitch(true);
     };
 
     return (
@@ -48,21 +72,25 @@ export default function SideBarGroupLeader() {
                 >
                     미션완료 취소
                 </li>
+
                 <li
-                    onClick={delegateModalHandler}
+                    onClick={() =>
+                        choiceModalSwitchHandler('모임장 권한 넘기기')
+                    }
                     className="title5 leader-warning"
                 >
                     모임장 권한 넘기기
                 </li>
+
                 <li
-                    onClick={countOutModalHandler}
+                    onClick={() => choiceModalSwitchHandler('강제 퇴장')}
                     className="title5 leader-warning"
                 >
                     강제 퇴장시키기
                 </li>
 
                 <li
-                    onClick={deleteModalHandler}
+                    onClick={() => warningModalSwitchHandler('모임 삭제')}
                     className="title5 leader-warning"
                 >
                     모임 삭제
@@ -75,6 +103,29 @@ export default function SideBarGroupLeader() {
                     setMissionCancelModalSwitch={setMissionCancelModalSwitch}
                 />
             ) : null}
+
+            {warningModalSwitch ? (
+                <WarningModal
+                    missionCancelModalSwitch={missionCancelModalSwitch}
+                    setMissionCancelModalSwitch={setMissionCancelModalSwitch}
+                />
+            ) : null}
+
+            {/* 멤버 선택하는 공통 모달 */}
+            <ChoiceModal
+                choiceModalSwitch={choiceModalSwitch}
+                setChoiceModalSwitch={setChoiceModalSwitch}
+                choiceModalSwitchHandler={choiceModalSwitchHandler}
+                action={menu}
+            />
+
+            {/* 경고 공통 모달 */}
+            <WarningModal
+                warningModalSwitch={warningModalSwitch}
+                setWarningModalSwitch={setWarningModalSwitch}
+                warningModalSwitchHandler={warningModalSwitchHandler}
+                action={menu}
+            />
         </div>
     );
 }

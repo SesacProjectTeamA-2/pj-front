@@ -19,7 +19,6 @@
     width: 100%;
     height: 100%;
     align-items: center;
-    // position: relative;
 
     button {
         border-radius: 10px;
@@ -31,6 +30,8 @@
     width: 2rem;
     height: 2rem;
     cursor: pointer;
+    position: fixed;
+    // padding: 1rem;
 }
 
 .modal-style {
@@ -48,7 +49,6 @@
     animation: modal-show 0.3s;
     padding: 2rem;
     background-color: white;
-    // background-color: $color-gray2;
 }
 
 .overlay {
@@ -68,6 +68,15 @@
     width: 90%;
     align-items: center;
     gap: 4rem;
+}
+
+.modal-btn-add {
+    background-color: $color-gray4;
+}
+
+.modal-btn-add:hover {
+    background-color: $color-gray7;
+    transition: all 0.3s;
 }
 
 .modal-mission-title {
@@ -95,6 +104,7 @@
 
 .modal-btn-done {
     margin: 3rem auto 0 auto;
+    font-size: 1.4rem;
 }
 
 //=== 미션 취소 모달 ===
@@ -102,17 +112,20 @@
     color: $color-gray4;
 }
 
+.modal-mission-cancel-content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 90%;
+    width: 90%;
+    margin: 3rem;
+}
+
 .modal-cancel-header {
     display: flex;
-    gap: 1rem;
 }
 
 .modal-cancel-title-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-mission-cancel-content {
     display: flex;
     flex-direction: column;
 }
@@ -121,15 +134,49 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 40rem;
 
-    button {
-        margin: 2rem 3rem;
+    label {
+        width: 100%;
+        display: flex;
+        margin: 1rem;
+        border-radius: 10px;
+        padding: 1rem;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s all;
+
+        box-shadow: 0px 1.7px 2.2px rgba(0, 0, 0, 0.02),
+            0px 4px 5.3px rgba(0, 0, 0, 0.028),
+            0px 7.5px 10px rgba(0, 0, 0, 0.035),
+            0px 13.4px 17.9px rgba(0, 0, 0, 0.042),
+            0px 25.1px 33.4px rgba(0, 0, 0, 0.05),
+            0px 60px 80px rgba(0, 0, 0, 0.07);
     }
+
+    input {
+        display: none;
+    }
+
+    div {
+        color: white;
+    }
+}
+
+.modal-member-list-label {
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: 0.3s all;
+}
+
+.mission-cancel-modal-memeber-input {
+    display: none;
 }
 
 .modal-member-list-container {
     // background-color: $color-gray2;
-    padding: 0 2rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -142,8 +189,25 @@
     }
 }
 
+.modal-member-list-li {
+    cursor: pointer;
+}
+
+.modal-member-list-li:hover {
+    color: white;
+    background-color: $color-warning;
+    transition: 0.4s all;
+}
+
 .mission-cancel-done-btn {
     width: 40%;
+    background-color: $color-gray8;
+}
+
+.mission-cancel-done-btn:hover {
+    width: 40%;
+    background-color: $color-warning;
+    transition: all 0.3s;
 }
 
 .mission-cancel-back-btn {
@@ -154,4 +218,20 @@
 .mission-cancel-btn-container {
     display: flex;
     justify-content: center;
+    margin-top: 1rem;
+}
+
+//=== 탈퇴 모달 ===
+.leave-modal-content {
+    margin: 0;
+    display: flex;
+    margin: 20% auto;
+}
+
+.leave-modal-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 3rem;
 }
