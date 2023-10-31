@@ -5,40 +5,46 @@ export default function InterestedItem(props: any) {
     const [selected, setSelected] = useState<boolean>(false);
 
     // 체크박스 개수 제한
-    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+    const [selectedSet, setSelectedSet] = useState<Set<string>>(
+        new Set<string>()
+    );
 
     // 체크박스 체크 여부 변경 이벤트
-
-    function SelectedTag(e: React.MouseEvent<HTMLElement>): void {
-        const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼
+    function SelectedTag(e: React.ChangeEvent<HTMLElement>): void {
+        const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼(label)
         setSelected((prevSelected) => !prevSelected); //선택 여부 관리 (직전 상태 기반)
         // console.log('selected ', selected);
 
-        if (selectedArr.includes(selectedBtn.id)) {
+        if (selectedSet.has(selectedBtn.id)) {
             // 배열에 있으면 배열에서 제거
-            const newArr: Array<string> = selectedArr.filter(
-                (ele) => selectedBtn.id !== ele
+            selectedSet.delete(
+                selectedBtn.id //마지막으로 선택된 버튼 id 제거
             );
-            setSelectedArr(newArr);
-        } else if (
-            !selectedArr.includes(selectedBtn.id) &&
-            selectedArr.length < 3
-        ) {
-            // 배열에 없으면 배열에 추가
-            setSelectedArr([...selectedArr, selectedBtn.id]);
+        } else if (!selectedSet.has(selectedBtn.id) && selectedSet.size < 3) {
+            // 배열에 없으면 배열에 추가 + 3개 개수 제한
+            setSelectedSet((prevSelectedSet) => {
+                const newSelectedSet = new Set(prevSelectedSet);
+                // if (
+                //     !newSelectedSet.has(selectedBtn.id) &&
+                //     newSelectedSet.size < 3
+                // ) {
+                newSelectedSet.add(selectedBtn.id);
+                // }
+                return newSelectedSet;
+            });
         }
 
-        console.log('selectedArr >> ', selectedArr);
-        console.log('selectedArr.length >> ', selectedArr.length);
+        console.log('selectedSet >> ', selectedSet);
+        console.log('selectedSet.length >> ', selectedSet.size);
 
-        if (selectedArr.length > 2) {
+        if (selectedSet.size > 2) {
+            //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ? : 개수 잘 안 맞고 두번 클릭해야 선택됏음
             props.setWarningInfo('최대 3개까지만 선택해주세요.');
-            setSelectedArr(selectedArr.filter((ele) => ele !== selectedBtn.id));
-
-            console.log(selectedArr.length);
+            selectedSet.delete(selectedBtn.id);
+            // console.log(selectedSet.length);
         } else {
             props.setWarningInfo('');
-            console.log(selectedArr.length);
+            // console.log(selectedSet.length);
         }
     }
     return (
@@ -46,15 +52,15 @@ export default function InterestedItem(props: any) {
             <div className="interested-div">
                 {props.interestedArr.map((interestedArr: any) => {
                     const iId: string = interestedArr.id;
-                    const isSelected: boolean = selectedArr.includes(iId);
+                    const isSelected: boolean = selectedSet.has(iId);
 
                     return (
                         <label
                             key={iId}
                             className="tag-btn"
-                            onClick={(e: React.MouseEvent<HTMLElement>) =>
-                                SelectedTag(e)
-                            }
+                            // onClick={(e: React.MouseEvent<HTMLElement>) =>
+                            //     SelectedTag(e)
+                            // }
                             style={{
                                 background: isSelected ? '#ED8D8D' : 'white',
                                 color: isSelected ? 'white' : 'gray',
@@ -68,6 +74,9 @@ export default function InterestedItem(props: any) {
                                 value={interestedArr.val}
                                 checked={isSelected}
                                 readOnly
+                                onChange={(e: React.ChangeEvent<HTMLElement>) =>
+                                    SelectedTag(e)
+                                }
                             />
                             {interestedArr.category}
                         </label>
