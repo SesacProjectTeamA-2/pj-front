@@ -29,7 +29,7 @@ export default function Header(props: any) {
                     </Link>
 
                     {/* 관리자만 보이는 버튼 */}
-                    <Link to="/management">
+                    <Link to="/management/users">
                         <button className="menu-button">Management</button>
                     </Link>
 

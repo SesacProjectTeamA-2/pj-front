@@ -9,6 +9,9 @@
 .groupMenu-div {
     background-color: $color-gray2;
 }
+.manageMenu-div {
+    background-color: $color-primary;
+}
 
 // Group | Basic Layout
 // 컨텐츠 컴포넌트 들어갈 곳
@@ -18,7 +21,8 @@
     flex-direction: column;
     align-items: center;
     // 임의 컬러
-    background-color: rgb(180, 179, 179);
+    // background-color: rgb(180, 179, 179);
+    background-color: $color-gray1;
     height: 100%;
 }
 
