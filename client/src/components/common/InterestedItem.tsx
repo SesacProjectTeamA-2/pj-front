@@ -21,10 +21,10 @@ export default function InterestedItem(props: any) {
     return (
         <div>
             <div className="interested-div">
-                {props.interestedArr1.map((interestedArr1: any) => {
+                {props.interestedArr.map((interestedArr: any) => {
                     return (
                         <label
-                            key={interestedArr1.id}
+                            key={interestedArr.id}
                             className="tag-btn"
                             onClick={(e: React.MouseEvent<HTMLElement>) =>
                                 selectedTag(e)
@@ -34,33 +34,10 @@ export default function InterestedItem(props: any) {
                                 type="checkbox"
                                 name="tag-radio"
                                 className="tag-radio"
-                                id={interestedArr1.id}
-                                value={interestedArr1.val}
+                                id={interestedArr.id}
+                                value={interestedArr.val}
                             />
-                            {interestedArr1.category}
-                        </label>
-                    );
-                })}
-            </div>
-
-            <div className="interested-div">
-                {props.interestedArr2.map((interestedArr2: any) => {
-                    return (
-                        <label
-                            key={interestedArr2.id}
-                            className="tag-btn"
-                            onClick={(e: React.MouseEvent<HTMLElement>) =>
-                                selectedTag(e)
-                            }
-                        >
-                            <input
-                                type="checkbox"
-                                name="tag-radio"
-                                className="tag-radio"
-                                id={interestedArr2.id}
-                                value={interestedArr2.val}
-                            />
-                            {interestedArr2.category}
+                            {interestedArr.category}
                         </label>
                     );
                 })}

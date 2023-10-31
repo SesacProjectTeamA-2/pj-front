@@ -7,13 +7,11 @@ export default function InterestedList() {
         category: string;
         val: string;
     }
-    const interestedArr1: Interested[] = [
+    const interestedArr: Interested[] = [
         { id: 'tag-radio-exercise', category: '운동', val: '운동' },
         { id: 'tag-radio-read', category: '독서', val: '독서' },
         { id: 'tag-radio-language', category: '언어', val: '언어' },
         { id: 'tag-radio-license', category: '자격증', val: '자격증' },
-    ];
-    const interestedArr2: Interested[] = [
         { id: 'tag-radio-study', category: '스터디', val: '스터디' },
         { id: 'tag-radio-economics', category: '경제', val: '경제' },
         { id: 'tag-radio-IT', category: 'IT', val: 'IT' },
@@ -21,10 +19,7 @@ export default function InterestedList() {
     ];
     return (
         <div>
-            <InterestedItem
-                interestedArr1={interestedArr1}
-                interestedArr2={interestedArr2}
-            />
+            <InterestedItem interestedArr={interestedArr} />
         </div>
     );
 }

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import InterestedList from '../../components/common/InterestedList';
+
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 import '../../styles/scss/pages/group/groupCreate.scss';
+
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
+import InterestedList from '../../components/common/InterestedList';
 
 export default function GroupEdit() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
@@ -17,23 +22,43 @@ export default function GroupEdit() {
             <div className="title2">모임 수정하기</div>
             <div className="group-create-content group-create-title">
                 <div className="title-wrapper">
-                    <div>모임명</div>
-                    <input
-                        placeholder="10글자 이내로 입력해주세요"
-                        type="text"
-                        className="name-input"
-                    />
+                    <Box
+                        component="form"
+                        sx={{
+                            '& > :not(style)': { m: 1, width: '30ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField
+                            id="filled-basic"
+                            label="모임명"
+                            variant="filled"
+                        />
+                        {/* <TextField
+                            id="standard-basic"
+                            label="모임명"
+                            variant="standard"
+                        /> */}
+                    </Box>
                 </div>
                 <div className="group-create-img">
                     <div>대표 이미지</div>
-                    <button className="btn-sm">추가</button>
+                    <Button
+                        style={{
+                            backgroundColor: '#ed8d8d',
+                            fontSize: '1rem',
+                        }}
+                        variant="contained"
+                    >
+                        추가
+                    </Button>
                 </div>
             </div>
             <div className="group-create-content">
                 <div>분야</div>
                 <InterestedList />
             </div>
-
             <div className="group-create-content description-container">
                 <div>모임 설명</div>
                 <textarea
