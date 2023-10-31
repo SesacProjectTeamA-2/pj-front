@@ -176,9 +176,9 @@
 // Interested START
 .interested-div {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-wrap: wrap;
 }
+
 .tag-radio {
     display: none;
 }
