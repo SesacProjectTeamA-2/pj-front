@@ -1,7 +1,7 @@
 @import '../abstracts/variables';
 
 .header-container {
-    background: pink;
+    background: white;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -13,7 +13,6 @@
 }
 #date-input {
     border: none;
-    background-color: pink;
     color: black;
     width: 30%;
 }
@@ -23,12 +22,29 @@ nav {
     align-items: center;
 }
 .menu-button {
-    background-color: #e5e5e5;
-    color: #767676;
+    background-color: $color-gray1;
+    color: $color-gray5;
     border-radius: 10px;
     padding: 5px;
 }
 .menu-button:focus {
     background-color: black;
     color: white;
+}
+
+.logo-text {
+    color: $color-logo;
+    margin: 1rem 2rem;
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-img {
+    width: 10rem;
+    height: 5rem;
 }
