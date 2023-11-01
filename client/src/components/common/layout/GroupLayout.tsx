@@ -99,6 +99,7 @@ export default function GroupLayout({ children, showChat }: any) {
                                         paddingLeft: 0,
                                         paddingRight: 0,
                                         paddingTop: 0,
+                                        justifyContent: 'center',
                                     }}
                                 >
                                     {' '}
