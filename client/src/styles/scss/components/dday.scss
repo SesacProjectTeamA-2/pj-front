@@ -1,0 +1,13 @@
+.dday-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #dday-text {
+        width: 30%;
+    }
+
+    #date-input {
+        width: 80%;
+    }
+}
