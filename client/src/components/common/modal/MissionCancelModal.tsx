@@ -39,8 +39,6 @@ export default function MissionCancelModal({
         },
     ];
 
-    // const [missions, setMissions] = useState(missionList);
-
     const [selectedMissionId, setSelectedMissionId] = useState(1);
 
     // 모달창 닫기

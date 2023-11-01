@@ -54,8 +54,11 @@ export default function ChoiceModal({
                             </div>
                         </div>
                     </div>
-                    <ModalMemberList action={action} />
                     <div>
+                        <div className="modal-line"></div>
+                    </div>
+                    <ModalMemberList action={action} />
+                    <div className="modal-form">
                         <Box
                             component="form"
                             sx={{
@@ -65,6 +68,7 @@ export default function ChoiceModal({
                             }}
                             noValidate
                             autoComplete="off"
+                            // [추후 ] css 수정
                         >
                             <TextField
                                 id="filled-multiline-flexible"

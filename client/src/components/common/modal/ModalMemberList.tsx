@@ -76,6 +76,8 @@ export default function ModalMemberList({ action }: any) {
                                     selectedMemberId === member.id
                                         ? 'white'
                                         : 'black',
+
+                                cursor: 'pointer',
                             }}
                         >
                             <input
