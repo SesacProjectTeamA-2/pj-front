@@ -3,7 +3,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+// import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
+
 import '../../styles/scss/layout/sidebarGroup.scss';
+
 import MissionCancelModal from './modal/MissionCancelModal';
 import ChoiceModal from './modal/ChoiceModal';
 import WarningModal from './modal/WarningModal';
@@ -42,6 +47,9 @@ export default function SideBarGroupLeader({
     const [missionCancelModalSwitch, setMissionCancelModalSwitch] =
         useState(false);
 
+    // const [isInvited, setIsInvited] = useState(false);
+    const [inviteCode, setInviteCode] = useState('');
+
     // 멤버 선택하는 공통 모달
     const [choiceModalSwitch, setChoiceModalSwitch] = useState(false);
 
@@ -54,11 +62,49 @@ export default function SideBarGroupLeader({
         setMissionCancelModalSwitch(true);
     };
 
+    // 초대하기 링크
+    const onClickInviteButton = () => {
+        // "해당 모임의 홈 화면 링크" 복사하기
+
+        const roomId = '123';
+
+        // [lamda] : 암호화
+        // axios.get((API.INVITE as string) + roomId).then((res) => {
+        //     setIsInvited(true);
+        //     setInviteCode(`${process.env.REACT_APP_LAMBDA_INVITE}/${res.data}`);
+        // });
+        // setIsInvited(true);
+        setInviteCode(roomId);
+    };
+
     return (
         <div>
             <ul className="title4 leader-menu">
-                <li className="leader-edit">초대하기</li>
+                {/* {!isInvited ? (
+                    <li className="leader-edit" onClick={onClickInviteButton}>
+                        초대하기
+                    </li>
+                ) : (
+                    <CopyToClipboard
+                        text={inviteCode}
+                        onCopy={() =>
+                            toast.success(`복사되었습니다. ${inviteCode}`)
+                        }
+                    >
+                        복사
+                    </CopyToClipboard>
+                )} */}
                 {/* 링크가 복사되었습니다 ! */}
+
+                <CopyToClipboard
+                    text={inviteCode}
+                    onCopy={() => toast.success(' 초대링크가 복사되었습니다 !')}
+                >
+                    <li className="leader-edit" onClick={onClickInviteButton}>
+                        초대하기
+                    </li>
+                </CopyToClipboard>
+                <Toaster />
 
                 {/* [추후] id 추가 */}
                 <Link to="/group/edit/1">
@@ -104,6 +150,7 @@ export default function SideBarGroupLeader({
                 />
             ) : null}
 
+            {/* 삭제 여부 재확인 */}
             {warningModalSwitch ? (
                 <WarningModal
                     missionCancelModalSwitch={missionCancelModalSwitch}

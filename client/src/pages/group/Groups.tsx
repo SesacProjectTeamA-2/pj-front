@@ -6,6 +6,7 @@ import '../../styles/scss/components/buttons.scss';
 import '../../styles/scss/components/inputs.scss';
 import '../../styles/scss/pages/group/groups.scss';
 import SwiperComponent from '../../components/group/SwiperComponent';
+import InterestedList from '../../components/common/InterestedList';
 
 export default function Groups() {
     return (
@@ -18,6 +19,8 @@ export default function Groups() {
                         placeholder="어떤 모임을 찾으시나요 ?"
                     />
                 </div>
+
+                <InterestedList />
 
                 <div className="groups join">
                     <div className="title1">참여한 모임</div>

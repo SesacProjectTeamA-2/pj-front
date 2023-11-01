@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import '../../styles/scss/pages/group/groupPostDetail.scss';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
+import { Link } from 'react-router-dom';
+import WarningModal from '../../components/common/modal/WarningModal';
 
 export default function GroupPostDetail() {
+    // 메뉴 선택
+    const [menu, setMenu] = useState('');
+
+    // 경고 공통 모달
+    const [warningModalSwitch, setWarningModalSwitch] = useState(false);
+
+    const warningModalSwitchHandler = (menu: string) => {
+        console.log('??????????');
+        setMenu(menu);
+        setWarningModalSwitch(!warningModalSwitch);
+    };
+
     return (
         <div className="section section-group">
             <GroupHeader
@@ -29,10 +43,31 @@ export default function GroupPostDetail() {
                         <div className="date">2023-10-30 22:09</div>
                     </div>
                     <div className="writer-menu">
-                        <div>수정</div>
-                        <div>삭제</div>
+                        <Link to="/group/board/edit/1">
+                            <div>수정</div>
+                        </Link>
+                        <div onClick={() => warningModalSwitchHandler('삭제')}>
+                            삭제
+                        </div>
                     </div>
                 </div>
+
+                {warningModalSwitch ? (
+                    <WarningModal
+                        warningModalSwitch={warningModalSwitch}
+                        setWarningModalSwitch={setWarningModalSwitch}
+                        warningModalSwitchHandler={warningModalSwitchHandler}
+                        action={menu}
+                    />
+                ) : null}
+
+                {/* 경고 공통 모달 */}
+                {/* <WarningModal
+                    warningModalSwitch={warningModalSwitch}
+                    setWarningModalSwitch={setWarningModalSwitch}
+                    warningModalSwitchHandler={warningModalSwitchHandler}
+                    action={menu}
+                /> */}
 
                 <div className="post-detail-content-container">
                     <div className="post-detail-content">

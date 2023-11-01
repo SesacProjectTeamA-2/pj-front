@@ -1,5 +1,6 @@
 import React from 'react';
 import GroupContentFooter from './GroupContentFooter';
+import InfiniteScroll from 'react-infinite-scroller';
 
 export default function GroupContent() {
     return (

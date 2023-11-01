@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-
 import '../../styles/scss/layout/header.scss';
+import Dday from './Dday';
 
 export default function Header(props: any) {
     return (
@@ -23,7 +21,8 @@ export default function Header(props: any) {
             </div>
 
             <div className="header-divTwo">
-                <input type="date" id="date-input" />
+                <Dday />
+
                 <nav>
                     <Link to="/main">
                         <button className="menu-button">Main</button>

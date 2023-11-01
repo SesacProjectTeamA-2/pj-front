@@ -29,6 +29,7 @@ import ManagementLayout from './components/common/layout/ManagementLayout';
 import AllUser from './components/management/AllUser';
 import AllGroup from './components/management/AllGroup';
 import Report from './components/management/Report';
+import BoardEdit from './pages/group/BoardEdit';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -171,6 +172,17 @@ function App() {
                 />
 
                 {/* 게시물 Edit */}
+                <Route
+                    path="/group/board/edit/1"
+                    element={
+                        <GroupLayout
+                            children={<BoardEdit />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
+                {/* 모임 Edit */}
                 <Route
                     path="/group/board/edit/1"
                     element={
