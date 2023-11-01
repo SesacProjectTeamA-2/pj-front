@@ -12,7 +12,7 @@ export default function Header(props: any) {
                     <div className="logo-container">
                         {/* <div className="logo-text">MOTI</div> */}
                         <img
-                            src="/asset/logo1.svg"
+                            src="/asset/logo.svg"
                             className="logo-img"
                             alt="logo"
                         />

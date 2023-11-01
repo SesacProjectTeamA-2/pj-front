@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 export default function Introduce(): JSX.Element {
+    console.log(process.env.REACT_APP_DB_HOST);
     const [content, setContent] = useState<string | number>('');
     const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
