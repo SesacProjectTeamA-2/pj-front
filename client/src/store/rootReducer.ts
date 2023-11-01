@@ -1,15 +1,19 @@
-import { combineReducers } from 'redux';
-import counterReducer from './counterReducer';
-import isVisibleReducer from './isVisibleReducer';
-import moneyReducer from './moneyReducer';
+import { combineReducers } from '@reduxjs/toolkit';
+
+import dummyGroup from './slices/groupSlice';
+import user from './slices/userSlice';
+import mission from './slices/missionSlice';
+import page from './slices/pageSlice';
 
 // combineReducers : 여러 개의 reducer을 하나로 합침
 const rootReducer = combineReducers({
-    counter: counterReducer, // counter : { number: 50 }
-    isVisible: isVisibleReducer,
-    money: moneyReducer,
+    dummyGroup,
+    user,
+    mission,
+    page,
 });
 
+export type RootReducerType = ReturnType<typeof rootReducer>;
 export default rootReducer;
 
 //=== 필요한 데이터 ===

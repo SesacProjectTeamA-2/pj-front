@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootStateType } from '../../../types/types';
 import MissionAddModal from '../../common/modal/MissionAddModal';
 
 export default function HomeMissionList() {
@@ -6,6 +8,49 @@ export default function HomeMissionList() {
     const missionAddHandler = () => {
         setAddModalSwitch(true);
     };
+
+    //=== redux 상태관리 ===
+    const dummyGroupState = useSelector(
+        (state: RootStateType) => state.dummyGroup
+    );
+
+    interface MissionType {
+        id: number;
+        name: string;
+        description: string;
+        level: number | string;
+    }
+
+    const missionList: MissionType[] = [
+        {
+            id: 1,
+            name: dummyGroupState.mTitle,
+            description: dummyGroupState.mContent,
+            level: dummyGroupState.mLevel,
+        },
+        {
+            id: 2,
+            name: dummyGroupState.mTitle,
+            description: dummyGroupState.mContent,
+            level: dummyGroupState.mLevel,
+        },
+        {
+            id: 3,
+            name: dummyGroupState.mTitle,
+            description: dummyGroupState.mContent,
+            level: dummyGroupState.mLevel,
+        },
+    ];
+
+    for (let mission of missionList) {
+        if (mission.level === 5) {
+            mission.level = '⭐️⭐️⭐️';
+        } else if (mission.level === 3) {
+            mission.level = '⭐️⭐️';
+        } else if (mission.level === 1) {
+            mission.level = '⭐️';
+        }
+    }
 
     return (
         <div className="wrapper">
@@ -24,22 +69,23 @@ export default function HomeMissionList() {
                         />
                     ) : null}
                 </div>
+                {/* [추후] 디데이 수정 */}
                 <div className="title2">D-3</div>
+                <div className="title2">{dummyGroupState.gDday}</div>
             </div>
             <div className="main-content">
                 <ul>
-                    <li className="mission-li">
-                        <div className="mission-element">알고리즘</div>
-                        <div>인증방법은 문제를 풀고 코드를 제출해주세요 !</div>
-                    </li>
-                    <li className="mission-li">
-                        <div className="mission-element">블로깅</div>
-                        <div>인증방법을 적어주세요 !</div>
-                    </li>
-                    <li className="mission-li">
-                        <div className="mission-element">모각코</div>
-                        <div>인증방법을 적어주세요 !</div>
-                    </li>
+                    {missionList.map((mission: MissionType) => {
+                        return (
+                            <li key={mission.id} className="mission-li">
+                                <div className="mission-element">
+                                    {mission.name}
+                                </div>
+                                <div>{mission.description}</div>
+                                <div>난이도 : {mission.level}</div>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </div>
