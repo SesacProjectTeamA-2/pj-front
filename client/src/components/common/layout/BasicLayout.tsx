@@ -64,7 +64,6 @@ export default function BasicLayout({ children, showChat }: any) {
                                         paddingLeft: 0,
                                         paddingRight: 0,
                                         paddingTop: 0,
-                                        background: 'aqua',
                                         justifyContent: 'center',
                                     }}
                                 >
