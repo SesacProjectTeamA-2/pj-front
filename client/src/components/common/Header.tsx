@@ -21,8 +21,10 @@ export default function Header(props: any) {
 
             <div className="header-divTwo">
                 <Dday />
+            </div>
 
-                <nav>
+            <div className="header-divThree">
+                <nav className="header-nav">
                     <Link to="/main">
                         <button className="menu-button">Main</button>
                     </Link>
@@ -58,6 +60,11 @@ export default function Header(props: any) {
                         onClick={() => props.showChatting()}
                     />
                 </nav>
+                <div className="tab-menu-div">
+                    <button id="tab-menu-btn">
+                        <img src="/asset/icons/menu.svg" alt="tabMenu" />
+                    </button>
+                </div>
             </div>
         </div>
     );
