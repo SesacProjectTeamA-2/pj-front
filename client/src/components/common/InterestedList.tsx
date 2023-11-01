@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InterestedItem from './InterestedItem';
 
-export default function InterestedList() {
+export default function InterestedList(props: any) {
     interface Interested {
         id: string;
         category: string;
@@ -17,9 +17,14 @@ export default function InterestedList() {
         { id: 'tag-radio-IT', category: 'IT', val: 'IT' },
         { id: 'tag-radio-etc', category: '기타', val: '기타' },
     ];
+
     return (
         <div>
-            <InterestedItem interestedArr={interestedArr} />
+            <InterestedItem
+                interestedArr={interestedArr}
+                warningInfo={props.warningInfo}
+                setWarningInfo={props.setWarningInfo}
+            />
         </div>
     );
 }

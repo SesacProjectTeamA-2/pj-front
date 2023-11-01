@@ -13,7 +13,11 @@ export default function Header(props: any) {
                 <Link to="/">
                     <div className="logo-container">
                         {/* <div className="logo-text">MOTI</div> */}
-                        <img src="asset/logo.png" className="logo-img" />
+                        <img
+                            src="/asset/1.png"
+                            className="logo-img"
+                            alt="logo"
+                        />
                     </div>
                 </Link>
             </div>
