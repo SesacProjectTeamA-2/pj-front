@@ -32,13 +32,13 @@ export default function MyPage() {
 
             <div className="myPage-div-two">
                 <br></br>
-                <h3 className="myPage-h3">내 캐릭터</h3>
+                <h3 className="myPage-p">내 캐릭터</h3>
                 <CharacterList />
             </div>
 
             <div className="myPage-div-three">
                 <div className="myPage-div-three-one">
-                    <h3 className="myPage-h3">관심분야</h3>
+                    <h3 className="myPage-p">관심분야</h3>
                     <p>최대 3개</p>
                     <p>{warningInfo}</p>
                     <InterestedList
@@ -47,7 +47,7 @@ export default function MyPage() {
                     />
                 </div>
                 <div className="myPage-div-three-two">
-                    <h3 className="myPage-h3">명언</h3>
+                    <h3 className="myPage-p">명언</h3>
                     <Phrase />
                 </div>
             </div>
@@ -61,7 +61,7 @@ export default function MyPage() {
 
             <div className="myPage-div-five">
                 <div className="myPage-div-five-one">
-                    <h3 className="myPage-h3">회원탈퇴</h3>
+                    <h3 className="myPage-p">회원탈퇴</h3>
                 </div>
                 <div className="myPage-div-five-two">
                     <Quit />

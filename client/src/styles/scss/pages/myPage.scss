@@ -1,8 +1,8 @@
 @import '../abstracts/variables';
 @import '../abstracts/utils';
 
-.myPage-h3 {
-    font-weight: bolder;
+.myPage-p {
+    font-size: 2em;
 }
 
 .myPage-div {
@@ -112,12 +112,12 @@
 // introduce
 #text-area {
     height: 100%;
-    font-size: medium;
+    font-size: large;
     height: 20vh;
 }
 // phrase
 #text-area2 {
-    font-size: medium;
+    font-size: large;
     width: 70%;
     height: 20vh;
 }
