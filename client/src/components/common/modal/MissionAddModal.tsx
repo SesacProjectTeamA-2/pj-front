@@ -15,6 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 
 import '../../../styles/scss/components/modal.scss';
+import Dday from '../Dday';
 
 interface MissionAddModalProps {
     addModalSwitch: boolean;
@@ -52,8 +53,6 @@ export default function MissionAddModal({
             level: '⭐️',
         },
     ];
-
-    // const [editSwitch, useEditSwitch] = useState(false);
 
     const closeModalHandler = () => {
         setAddModalSwitch(false);
@@ -196,10 +195,7 @@ export default function MissionAddModal({
 
                         {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
                         <div className="group-create-content">
-                            <div>마감일</div>
-                            <div>2023-10-30</div>
-                            <input type="date" id="date-input" />
-                            {/* [추후] 디데이 추가 */}
+                            <Dday />
                         </div>
 
                         <button

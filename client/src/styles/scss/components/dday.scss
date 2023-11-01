@@ -2,12 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 
     #dday-text {
-        width: 30%;
+        width: 100%;
+        margin: 0 2rem;
     }
 
     #date-input {
-        width: 80%;
+        width: 60%;
     }
 }
