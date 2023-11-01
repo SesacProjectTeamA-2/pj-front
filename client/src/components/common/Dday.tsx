@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import '../../styles/scss/components/dday.scss';
 
+//=== [추후] days => redux에 값 저장하기
+
 export default function Dday() {
     const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
 
@@ -64,12 +66,12 @@ export default function Dday() {
 
     return (
         <div className="dday-container">
-            <div id="dday-text">{adjustedDday}</div>
             <input
                 type="date"
                 id="date-input"
                 onChange={(e) => setTargetDate(e.target.value)}
             />
+            <div id="dday-text">{adjustedDday}</div>
         </div>
     );
 }

@@ -80,22 +80,6 @@ export default function SideBarGroupLeader({
     return (
         <div>
             <ul className="title4 leader-menu">
-                {/* {!isInvited ? (
-                    <li className="leader-edit" onClick={onClickInviteButton}>
-                        초대하기
-                    </li>
-                ) : (
-                    <CopyToClipboard
-                        text={inviteCode}
-                        onCopy={() =>
-                            toast.success(`복사되었습니다. ${inviteCode}`)
-                        }
-                    >
-                        복사
-                    </CopyToClipboard>
-                )} */}
-                {/* 링크가 복사되었습니다 ! */}
-
                 <CopyToClipboard
                     text={inviteCode}
                     onCopy={() => toast.success(' 초대링크가 복사되었습니다 !')}
@@ -151,12 +135,12 @@ export default function SideBarGroupLeader({
             ) : null}
 
             {/* 삭제 여부 재확인 */}
-            {warningModalSwitch ? (
+            {/* {warningModalSwitch ? (
                 <WarningModal
                     missionCancelModalSwitch={missionCancelModalSwitch}
                     setMissionCancelModalSwitch={setMissionCancelModalSwitch}
                 />
-            ) : null}
+            ) : null} */}
 
             {/* 멤버 선택하는 공통 모달 */}
             <ChoiceModal

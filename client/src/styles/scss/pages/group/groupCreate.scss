@@ -9,9 +9,13 @@
 
 .group-create-content {
     display: flex;
-    gap: 20px;
+    gap: 1.6rem;
     align-items: center;
     width: 100%;
+
+    .dday-title {
+        width: 4.4rem;
+    }
 }
 
 .group-create-title {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -9,6 +10,7 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 
 import InterestedList from '../../components/common/InterestedList';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
+import Dday from '../../components/common/Dday';
 
 export default function GroupCreate() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
@@ -16,6 +18,80 @@ export default function GroupCreate() {
     const missionAddHandler = () => {
         setAddModalSwitch(true);
     };
+
+    const testGroup = {
+        gName: 'Node 스터디 (중복 안됩니다!)',
+        gDesc: 'Node.js 스터디 모임입니다!',
+        gDday: '2023-10-28',
+        gMaxMem: 10,
+        gCategory: 'st',
+        gCoverImg:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
+        mTitle: 'Node.js 강의 듣기',
+        mContent: 'Node.js 강의 쳅터 1 듣고 오기',
+        mLevel: 5,
+    };
+
+    const groupCreateHandler = async (newGroup: any) => {
+        console.log(newGroup);
+        // console.log(`${process.env.REACT_APP_DB_HOST}`);
+        // const res = await axios.post(
+        //     `${process.env.REACT_APP_DB_HOST}/group`,
+        //     newGroup
+        // );
+        // console.log(res.data);
+    };
+
+    //; /group
+    //] POST
+    //-- req
+    // {
+    //     "gName": "Node 스터디 (중복 안됩니다!)",
+    //     "gDesc": "Node.js 스터디 모임입니다!",
+    //     "gDday": "2023-10-28",
+    //     "gMaxMem": 10,
+    //     "gCategory": "st",
+    //     "gCoverImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU",
+    //     "mTitle": "Node.js 강의 듣기",
+    //     "mContent": "Node.js 강의 쳅터 1 듣고 오기",
+    //     "mLevel": 5
+    //   }
+
+    //-- res
+    // {
+    //     "isSuccess": true,
+    //     "msg": "성공"
+    //   }
+
+    //] PATCH
+    //-- req
+    //     {
+    //   "gSeq": 1,
+    //   "gName": "정보처리기사 실기 대비반 (중복 안됩니다!)",
+    //   "gDesc": "정보처리기사 실기 대비 오프라인 모임입니다!",
+    //   "gDday": "2023-10-31",
+    //   "gMaxMem": 20,
+    //   "gCategory": "cert",
+    //   "gCoverImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVnwfCZtvVrf0NdXWT4YQp_aVEFlZ5-kuUfw&usqp=CAU"
+    // }
+
+    //-- res
+    // {
+    //     "isSuccess": true,
+    //     "msg": "성공"
+    //   }
+
+    //] DELETE
+    //-- req
+    // {
+    //   "gSeq": 1
+    // }
+
+    //-- res
+    // {
+    //     "isSuccess": true,
+    //     "msg": "성공"
+    //   }
 
     return (
         <div className="section group-create-contianer title5">
@@ -77,11 +153,10 @@ export default function GroupCreate() {
                 />
                 <div className="max-number">최대 00명</div>
             </div>
+
             <div className="group-create-content">
-                <div>마감일</div>
-                <div>2023-10-30</div>
-                <input type="date" id="date-input" />
-                {/* [추후] 디데이 추가 */}
+                <div className="dday-title">마감일</div>
+                <Dday />
             </div>
             <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
@@ -100,9 +175,14 @@ export default function GroupCreate() {
                 />
             ) : null}
 
-            <Link to="/group/home/1">
-                <button className="btn-fixed">모임 시작하기 !</button>
-            </Link>
+            {/* <Link to="/group/home/1"> */}
+            <button
+                className="btn-fixed"
+                onClick={() => groupCreateHandler(testGroup)}
+            >
+                모임 시작하기 !
+            </button>
+            {/* </Link> */}
         </div>
     );
 }
