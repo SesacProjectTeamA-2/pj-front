@@ -21,7 +21,7 @@ export default function WarningModal({
     return (
         <div className="modal-mission-add-container">
             <Modal
-                className="modal-style"
+                className="warning-modal-style"
                 overlayClassName="overlay"
                 isOpen={warningModalSwitch}
                 onRequestClose={() => setWarningModalSwitch(false)}
@@ -38,7 +38,9 @@ export default function WarningModal({
                     <div className="modal-cancel-title-container leave-modal-container">
                         <div className="title1">🚨</div>
                         <div className="title3">
-                            [코딩학당] 모임을 정말 {action}하시겠습니까 ?
+                            {action === '삭제'
+                                ? `게시글을 ${action}하시겠습니까 ?`
+                                : `[코딩학당] 모임을 정말 ${action}하시겠습니까 ?`}
                         </div>
                         <div className="title5 cancel-modal-description">
                             모임의 활동 정보가 모두 사라지며 복구되지 않습니다.
