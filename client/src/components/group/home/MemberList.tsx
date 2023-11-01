@@ -59,10 +59,12 @@ export default function MemberList() {
                 <div className="title2">멤버</div>
                 <div className="title5">
                     참석인원{' '}
-                    <span className="member-count">{memberList.length}</span>/
-                    10
+                    <span className="member-count">
+                        {memberList.length + 1}
+                    </span>
+                    / 10{' '}
                     <span className="member-left">
-                        ({10 - memberList.length}자리 남음)
+                        ({10 - 1 - memberList.length}자리 남음)
                     </span>
                 </div>
             </div>

@@ -45,7 +45,7 @@
     border-radius: 10px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
     justify-content: center;
-    overflow: auto;
+    // overflow: auto;
     animation: modal-show 0.3s;
     padding: 2rem;
     background-color: white;
@@ -108,9 +108,9 @@
 }
 
 //=== 미션 취소 모달 ===
-.cancel-modal-description {
-    color: $color-gray4;
-}
+// .cancel-modal-description {
+//     color: $color-gray4;
+// }
 
 .modal-mission-cancel-content {
     display: flex;
@@ -164,7 +164,7 @@
 }
 
 .modal-member-list-label {
-    width: 100%;
+    width: 90%;
     display: flex;
     border-radius: 10px;
     padding: 1rem;
@@ -219,6 +219,15 @@
     display: flex;
     justify-content: center;
     margin-top: 1rem;
+}
+
+.modal-line {
+    margin: 2rem 0;
+    border: 1px solid $color-gray2;
+}
+
+.modal-form {
+    margin-top: 2rem;
 }
 
 //=== 탈퇴 모달 ===
