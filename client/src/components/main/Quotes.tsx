@@ -11,7 +11,7 @@ export default function Quotes() {
                 <div className="quotes-author-flex">
                     <div> - 랄프 왈도 에머슨</div>
                 </div>
-                <div className="quotes-btn-flex">
+                {/* <div className="quotes-btn-flex">
                     <button>랜덤 생성</button>
 
                     <img
@@ -19,7 +19,7 @@ export default function Quotes() {
                         alt="명언 편집 아이콘"
                         className="upload-img-icon"
                     />
-                </div>
+                </div> */}
             </div>
         </div>
     );

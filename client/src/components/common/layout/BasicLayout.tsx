@@ -42,7 +42,6 @@ export default function BasicLayout({ children, showChat }: any) {
                 <Grid container>
                     {showChat ? (
                         <>
-                            {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
                             <Grid md={2} sm={2} xs={2} className="empty-div">
                                 <Item
                                     style={{
@@ -65,6 +64,8 @@ export default function BasicLayout({ children, showChat }: any) {
                                         paddingLeft: 0,
                                         paddingRight: 0,
                                         paddingTop: 0,
+                                        background: 'aqua',
+                                        justifyContent: 'center',
                                     }}
                                 >
                                     {' '}
@@ -115,6 +116,7 @@ export default function BasicLayout({ children, showChat }: any) {
                                         paddingLeft: 0,
                                         paddingRight: 0,
                                         paddingTop: 0,
+                                        justifyContent: 'center',
                                     }}
                                 >
                                     {children}
