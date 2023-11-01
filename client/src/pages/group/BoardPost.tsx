@@ -40,10 +40,10 @@ export default function BoardPost() {
                 <div>
                     {/* [추후] 에디터가 들어갈 부분입니다. */}
                     <Editor />
-                    <textarea
+                    {/* <textarea
                         className="editor"
                         placeholder="내용을 작성해주세요"
-                    ></textarea>
+                    ></textarea> */}
                 </div>
             </div>
             <div>
