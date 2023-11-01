@@ -73,7 +73,6 @@ export default function InterestedItem(props: any) {
                                 id={iId}
                                 value={interestedArr.val}
                                 checked={isSelected}
-                                readOnly
                                 onChange={(e: React.ChangeEvent<HTMLElement>) =>
                                     SelectedTag(e)
                                 }
