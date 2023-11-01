@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MissionType } from '../../types/types';
+import { MissionStateType } from '../../types/types';
 import '../../styles/scss/pages/mission.scss';
 
 interface Props {
-    mission: MissionType;
+    mission: MissionStateType;
     // toggleComplete: (id: number) => void;
 }
 
@@ -26,7 +26,7 @@ export default function MissionItem({ mission }: Props) {
                     />
 
                     <span className={`${mission.completed ? 'checked' : ''}`}>
-                        {mission.text}
+                        {mission.name}
                     </span>
                     <Link to="/group">
                         <button

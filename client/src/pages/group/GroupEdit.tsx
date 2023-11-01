@@ -9,6 +9,7 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 import InterestedList from '../../components/common/InterestedList';
+import Dday from '../../components/common/Dday';
 
 export default function GroupEdit() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
@@ -77,10 +78,8 @@ export default function GroupEdit() {
                 <div className="max-number">최대 00명</div>
             </div>
             <div className="group-create-content">
-                <div>마감일</div>
-                <div>2023-10-30</div>
-                <input type="date" id="date-input" />
-                {/* [추후] 디데이 추가 */}
+                <div className="dday-title">마감일</div>
+                <Dday />
             </div>
             <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
