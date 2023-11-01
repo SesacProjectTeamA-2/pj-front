@@ -26,8 +26,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    align-items: center;
+    // text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
     width: 100%;
 }
 
@@ -55,11 +57,14 @@
 .main-content {
     background: $color-gray2;
     border-radius: 10px;
-    width: 90%;
+    width: 100%;
     margin-top: 20px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    // padding: 30px;
+    // padding-top: 30px;
+    // padding-bottom: 30px;
+    // padding-left: 30px;
+    padding: 30px;
+    box-sizing: border-box;
+
     li {
         padding: 10px 0;
     }
