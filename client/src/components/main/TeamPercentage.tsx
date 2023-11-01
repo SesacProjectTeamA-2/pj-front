@@ -9,17 +9,17 @@ export default function TeamPercentage() {
                     <div className="progress-bar-div">
                         <div className="profile-img-div-flex">
                             <img
-                                src="/asset/images/user.png"
+                                src="/asset/images/user.svg"
                                 alt="프로필 이미지"
                                 className="profile-img"
                             />
                             <img
-                                src="/asset/images/user.png"
+                                src="/asset/images/user.svg"
                                 alt="프로필 이미지"
                                 className="profile-img"
                             />
                             <img
-                                src="/asset/images/user.png"
+                                src="/asset/images/user.svg"
                                 alt="프로필 이미지"
                                 className="profile-img"
                             />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function InterestedItem(props: any) {
     // 체크박스 상태 관리
@@ -39,11 +40,10 @@ export default function InterestedItem(props: any) {
 
         if (selectedSet.size > 2) {
             //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ? : 개수 잘 안 맞고 두번 클릭해야 선택됏음
-            props.setWarningInfo('최대 3개까지만 선택해주세요.');
+            toast.error('최대 3개까지만 선택해주세요!', {
+                position: 'bottom-center',
+            });
             selectedSet.delete(selectedBtn.id);
-            // console.log(selectedSet.length);
-        } else {
-            props.setWarningInfo('');
             // console.log(selectedSet.length);
         }
     }
@@ -55,30 +55,35 @@ export default function InterestedItem(props: any) {
                     const isSelected: boolean = selectedSet.has(iId);
 
                     return (
-                        <label
-                            key={iId}
-                            className="tag-btn"
-                            // onClick={(e: React.MouseEvent<HTMLElement>) =>
-                            //     SelectedTag(e)
-                            // }
-                            style={{
-                                background: isSelected ? '#ED8D8D' : 'white',
-                                color: isSelected ? 'white' : 'gray',
-                            }}
-                        >
-                            <input
-                                type="checkbox"
-                                name="tag-radio"
-                                className="tag-radio"
-                                id={iId}
-                                value={interestedArr.val}
-                                checked={isSelected}
-                                onChange={(e: React.ChangeEvent<HTMLElement>) =>
-                                    SelectedTag(e)
-                                }
-                            />
-                            {interestedArr.category}
-                        </label>
+                        <>
+                            <label
+                                key={iId}
+                                className="tag-btn"
+                                // onClick={(e: React.MouseEvent<HTMLElement>) =>
+                                //     SelectedTag(e)
+                                // }
+                                style={{
+                                    background: isSelected
+                                        ? '#ED8D8D'
+                                        : 'white',
+                                    color: isSelected ? 'white' : 'gray',
+                                }}
+                            >
+                                <input
+                                    type="checkbox"
+                                    name="tag-radio"
+                                    className="tag-radio"
+                                    id={iId}
+                                    value={interestedArr.val}
+                                    checked={isSelected}
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLElement>
+                                    ) => SelectedTag(e)}
+                                />
+                                {interestedArr.category}
+                            </label>
+                            <Toaster />
+                        </>
                     );
                 })}
             </div>

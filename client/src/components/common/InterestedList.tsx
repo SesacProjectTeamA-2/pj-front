@@ -20,11 +20,7 @@ export default function InterestedList(props: any) {
 
     return (
         <div>
-            <InterestedItem
-                interestedArr={interestedArr}
-                warningInfo={props.warningInfo}
-                setWarningInfo={props.setWarningInfo}
-            />
+            <InterestedItem interestedArr={interestedArr} />
         </div>
     );
 }

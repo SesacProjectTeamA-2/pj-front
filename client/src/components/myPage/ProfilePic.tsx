@@ -5,7 +5,7 @@ export default function ProfilePic() {
         <div>
             <label id="profilePic-label">
                 <img
-                    src="/asset/images/user.png"
+                    src="/asset/images/user.svg"
                     alt="profilePic"
                     id="profilePic-user"
                 />

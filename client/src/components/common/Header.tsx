@@ -47,7 +47,7 @@ export default function Header(props: any) {
 
                     <Link to="/mypage">
                         <img
-                            src="/asset/images/user.png"
+                            src="/asset/images/user.svg"
                             style={{ width: '40px', height: '40px' }}
                             alt="userImg"
                         ></img>
