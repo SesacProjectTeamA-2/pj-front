@@ -12,10 +12,7 @@ import { Divider } from '@mui/material';
 import GroupSearch from './GroupSearch';
 
 export default function Groups() {
-    const [selectedSet, setSelectedSet] = useState<Set<string>>(
-        new Set<string>()
-    );
-
+    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
     const [search, setSearch] = useState(false);
 
     const searchHandler = () => {
@@ -33,7 +30,7 @@ export default function Groups() {
         }
     };
 
-    console.log(selectedSet);
+    // console.log(selectedArr);
 
     return (
         <div className="section">
@@ -53,8 +50,8 @@ export default function Groups() {
 
                 <div className="groups-interested">
                     <InterestedList
-                        selectedSet={selectedSet}
-                        setSelectedSet={setSelectedSet}
+                        selectedArr={selectedArr}
+                        setSelectedArr={setSelectedArr}
                         num={8}
                     />
                 </div>
