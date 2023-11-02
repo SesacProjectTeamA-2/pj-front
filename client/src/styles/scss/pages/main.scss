@@ -35,43 +35,83 @@
     }
 }
 
-.quotes-div-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+// .quotes-div-flex {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// .quotes {
+//     // max-width: 300px;
+//     width: 90%;
+//     height: 90%;
+//     background-color: $color-gray2;
+//     padding: 1rem 1rem;
+//     border-radius: 20px;
+//     font-size: medium;
+//     white-space: normal;
+
+//     span {
+//         font-size: 2rem;
+//     }
+
+//     .quotes-author-flex {
+//         display: flex;
+//         justify-content: flex-end;
+//         margin: 0 2rem;
+//     }
+//     .quotes-btn-flex {
+//         display: flex;
+//         justify-content: flex-end;
+//         margin: 1rem 2rem;
+//         button {
+//             background-color: $color-primary;
+//             color: $color-white;
+//             height: 2em;
+//         }
+//         img {
+//             width: 2em;
+//             height: 1em;
+//         }
+//     }
+// }
+
+.sample2 {
+    width: 480px;
+    margin: 50px auto;
 }
 
-.quotes {
-    // max-width: 300px;
-    width: 90%;
-    height: 90%;
-    background-color: $color-gray2;
-    padding: 1rem 1rem;
-    border-radius: 20px;
-    font-size: medium;
-    white-space: normal;
-
-    span {
-        font-size: 2rem;
-    }
-
-    .quotes-author-flex {
-        display: flex;
-        justify-content: flex-end;
-        margin: 0 2rem;
-    }
-    .quotes-btn-flex {
-        display: flex;
-        justify-content: flex-end;
-        margin: 1rem 2rem;
-        button {
-            background-color: $color-primary;
-            color: $color-white;
-            height: 2em;
-        }
-        img {
-            width: 2em;
-            height: 1em;
-        }
-    }
+.sample2 blockquote {
+    position: relative;
+    border: 1px solid $color-white;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: $color-primary;
+    // 색상 고민해볼 것=> 어둡게 눌러줄지 다른 색할지
+    color: $color-white;
+}
+.sample2 blockquote:before {
+    position: absolute;
+    font-family: 'FontAwesome';
+    content: '\f10d';
+    font-size: 20px;
+    color: $color-white;
+    top: 10px;
+    left: 10px;
+}
+.sample2 blockquote:after {
+    position: absolute;
+    font-family: 'FontAwesome';
+    content: '\f10e';
+    font-size: 20px;
+    color: $color-white;
+    right: 10px;
+    bottom: 10px;
+}
+.sample2 blockquote cite {
+    display: block;
+    font-size: 0.8rem;
+    text-align: right;
+    color: $color-white;
+    padding-right: 20px;
 }
