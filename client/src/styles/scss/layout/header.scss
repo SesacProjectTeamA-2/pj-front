@@ -9,13 +9,13 @@
     align-items: center;
     width: 100%;
     flex-direction: row;
-    @include media('<768px') {
-        flex-direction: column;
-    }
 }
 .header-divTwo {
     display: flex;
     flex-direction: row;
+    @include media('<800px') {
+        flex-direction: column;
+    }
 }
 #date-input {
     border: none;
@@ -25,35 +25,42 @@
 .header-nav {
     border: none;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    @include media('<768px') {
-        flex-direction: column;
-    }
+    flex-direction: row;
 }
 
 .tab-menu-div {
-    display: none;
-    @include media('<768px') {
-        display: flex;
-        justify-content: center;
-        padding: 0;
-    }
+    // display: none;
+    display: block;
+    padding: 0;
 }
 #tab-menu-btn {
-    display: none;
-    @include media('<768px') {
-        display: block;
-        border: none;
-        box-shadow: none;
-        background-color: $color-primary;
-        padding: 0;
+    display: block;
+    border: none;
+    box-shadow: none;
+    background-color: $color-primary;
+    padding: 0;
+    width: 50px;
+}
+.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    @include media('<800px') {
+        flex-direction: column;
     }
+}
+.menu a {
+    padding: 0;
 }
 .menu-button {
     background-color: $color-gray1;
     color: $color-gray7;
     border-radius: 10px;
     padding: 5px;
+    margin: 0;
     @include media('<768px') {
         border: none;
         margin: 0.4rem 0.4rem;
