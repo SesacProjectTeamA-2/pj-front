@@ -26,7 +26,7 @@ export default function MissionItem({ mission }: Props) {
                     />
 
                     <span className={`${mission.completed ? 'checked' : ''}`}>
-                        {mission.name}
+                        {mission.mTitle}
                     </span>
                     <Link to="/group">
                         <button

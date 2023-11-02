@@ -5,7 +5,6 @@ import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
 import '../../styles/scss/components/inputs.scss';
 import '../../styles/scss/pages/group/groups.scss';
-import SwiperComponent from '../../components/group/SwiperComponent';
 import InterestedList from '../../components/common/InterestedList';
 import GroupList from './GroupList';
 import { Divider } from '@mui/material';

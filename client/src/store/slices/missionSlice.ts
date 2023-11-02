@@ -18,23 +18,23 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = [
     {
         id: 1,
-        name: '알고리즘',
-        description: '문제에 대한 코드를 제출합니다.',
-        level: '⭐️⭐️⭐️',
-        completed: true,
+        mTitle: '알고리즘',
+        mContent: '문제에 대한 코드를 제출합니다.',
+        mLevel: '⭐️⭐️⭐️',
+        completed: true, // 추후 수정
     },
     {
         id: 2,
-        name: '블로깅',
-        description: '게시물 링크를 올립니다.',
-        level: '⭐️⭐️',
+        mTitle: '블로깅',
+        mContent: '게시물 링크를 올립니다.',
+        mLevel: '⭐️⭐️',
         completed: false,
     },
     {
         id: 3,
-        name: '모각코',
-        description: '게시물 링크를 올립니다.',
-        level: '⭐️',
+        mTitle: '모각코',
+        mContent: '게시물 링크를 올립니다.',
+        mLevel: '⭐️',
         completed: false,
     },
 ];
@@ -62,8 +62,15 @@ const missionSlice = createSlice({
         //   state[번호 + 1].like = !state[번호 + 1].like;
         //   // state[번호 + 1].like ? false : true;
         // },
+
+        addMission(state, action) {
+            const newMission = action.payload;
+            state.push(newMission);
+            console.log(':::', newMission);
+        },
     },
 });
 
 export default missionSlice.reducer;
 // export const { changeGroup } = dummyGroupSlice.actions;
+export const { addMission } = missionSlice.actions;

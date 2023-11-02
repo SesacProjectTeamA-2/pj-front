@@ -29,16 +29,19 @@ export interface GroupStateType {
     gMaxMem: number;
     gCategory: string;
     gCoverImg: string;
+    missionArray: MissionType[];
+}
+
+export interface MissionType {
     mTitle: string;
     mContent: string;
     mLevel: number;
 }
-
 export interface MissionStateType {
     id: number;
-    name: string;
-    description: string;
-    level: number | string;
+    mTitle: string;
+    mContent: string;
+    mLevel: number | string;
     completed: boolean;
     map: any; // [any] 일단 임의로 any 박아놓을게요 ,,,
 }

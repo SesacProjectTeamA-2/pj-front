@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
 import Box from '@mui/material/Box';
@@ -16,8 +16,9 @@ import Divider from '@mui/material/Divider';
 
 import '../../../styles/scss/components/modal.scss';
 import Dday from '../Dday';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MissionStateType, RootStateType } from '../../../types/types';
+import { addMission } from '../../../store/slices/missionSlice';
 
 interface MissionAddModalProps {
     addModalSwitch: boolean;
@@ -31,6 +32,8 @@ export default function MissionAddModal({
     action,
 }: MissionAddModalProps) {
     const missionState = useSelector((state: RootStateType) => state.mission);
+    const dispatch = useDispatch();
+
     // interface MissionType {
     //     id: number;
     //     name: string;
@@ -59,28 +62,63 @@ export default function MissionAddModal({
     //     },
     // ];
 
-    const [missionList, setMissionList] = useState(missionState);
+    // const [missionList, setMissionList] =
+    //     useState<MissionStateType[]>(missionState);
+    // const [missionList, setMissionList] = useState(missionState);
 
-    console.log(missionList);
+    // useEffect(() => {
+    //     setMissionList([...missionState]);
+    // }, [missionState]);
 
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
 
-    const addMissionModalHandler = () => {
-        console.log(addModalSwitch);
-    };
-
     const [input, setInput] = useState({
-        id: 1,
-        name: '',
-        proof: '',
-        level: '',
+        // id: missionState.length + 1,
+        mTitle: '',
+        mContent: '',
+        mLevel: 1,
+        map: '', // map 필드 추가
+        completed: false,
     });
 
-    const oneMissionAddHandler = () => {};
+    const { mTitle, mContent, mLevel } = input;
 
-    const editHandler = () => {};
+    const onChange = (e: any) => {
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
+
+    const oneMissionAddHandler = () => {
+        console.log(input);
+        dispatch(addMission(input));
+
+        // const newMissions = [...missionList, input];
+        // missionList.push(input);
+
+        // setMissionList(newMissions);
+
+        // 입력 필드 초기화
+        setInput({
+            // id: 0,
+            mTitle: '',
+            mContent: '',
+            mLevel: 1,
+            map: '', // map 필드 추가
+            completed: false,
+        });
+    };
+
+    console.log('??', missionState);
+
+    const editHandler = (targetId: number) => {
+        console.log(targetId);
+    };
+
+    const missionAddDoneHandler = () => {
+        console.log(missionState);
+    };
 
     return (
         <div className="modal-mission-add-container">
@@ -124,6 +162,8 @@ export default function MissionAddModal({
                                     id="title-basic"
                                     label="미션 제목"
                                     variant="standard"
+                                    name="mTitle"
+                                    onChange={onChange}
                                 />
                             </Box>
                         </div>
@@ -137,9 +177,10 @@ export default function MissionAddModal({
                             <NativeSelect
                                 defaultValue={1}
                                 inputProps={{
-                                    name: 'level',
+                                    name: 'nLevel',
                                     id: 'uncontrolled-native',
                                 }}
+                                onChange={onChange}
                             >
                                 <option value={1}>⭐️</option>
                                 <option value={3}>⭐️⭐️</option>
@@ -162,11 +203,13 @@ export default function MissionAddModal({
                             multiline
                             maxRows={4}
                             variant="filled"
+                            name="mContent"
+                            onChange={onChange}
                         />
                     </Box>
 
                     <button
-                        onClick={addMissionModalHandler}
+                        onClick={oneMissionAddHandler}
                         className="btn-md modal-btn-add"
                     >
                         미션 추가
@@ -196,26 +239,32 @@ export default function MissionAddModal({
                                     '현재 미션이 없습니다.'
                                 ) : (
                                     <>
-                                        {missionList.map(
-                                            (mission: MissionStateType) => {
-                                                return (
-                                                    <div key={mission.id}>
-                                                        <ListItem>
-                                                            <ListItemText
-                                                                primary={`미션 ${mission.id}. ${mission.name} ${mission.level}`}
-                                                                secondary={`${mission.description}`}
-                                                            />
-                                                            <div>
-                                                                <button className="modal-mission-edit-btn btn-sm">
-                                                                    수정
-                                                                </button>
-                                                            </div>
-                                                        </ListItem>
-                                                        <Divider component="li" />
-                                                    </div>
-                                                );
-                                            }
-                                        )}
+                                        {missionState.map((mission: any) => {
+                                            return (
+                                                <div key={mission.id}>
+                                                    <Divider component="li" />
+
+                                                    <ListItem>
+                                                        <ListItemText
+                                                            primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                            secondary={`${mission.mContent}`}
+                                                        />
+                                                        <div>
+                                                            <button
+                                                                className="modal-mission-edit-btn btn-sm"
+                                                                onClick={() =>
+                                                                    editHandler(
+                                                                        mission.id
+                                                                    )
+                                                                }
+                                                            >
+                                                                수정
+                                                            </button>
+                                                        </div>
+                                                    </ListItem>
+                                                </div>
+                                            );
+                                        })}
 
                                         {/* <ListItem>
                                             <ListItemText
@@ -251,7 +300,7 @@ export default function MissionAddModal({
                 </div>
                 <div className="modal-mission-btn-container">
                     <button
-                        onClick={closeModalHandler}
+                        onClick={missionAddDoneHandler}
                         className="btn-md modal-btn-done"
                     >
                         {action === '미션생성' ? '생성 완료' : '수정 완료'}
