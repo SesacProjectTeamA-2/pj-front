@@ -10,15 +10,11 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 
 import InterestedList from '../../components/common/InterestedList';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
-import Dday from '../../components/common/Dday';
 
 export default function GroupCreate() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
-    const [selectedSet, setSelectedSet] = useState<Set<string>>(
-        new Set<string>()
-    );
-
+    const [selectedArr, setSelectedArr] = useState<string[]>([]);
 
     const [input, setInput] = useState({
         gName: '',
@@ -55,7 +51,6 @@ export default function GroupCreate() {
 
     // console.log('!!!!!!!!', selectedSet);
 
-
     const testGroup = {
         gName: 'Node 스터디 (중복 안됩니다!)',
         gDesc: 'Node.js 스터디 모임입니다!',
@@ -71,14 +66,16 @@ export default function GroupCreate() {
 
     const groupCreateHandler = async (newGroup: any) => {
         console.log(newGroup);
-        // console.log(`${process.env.REACT_APP_DB_HOST}`);
-        // const res = await axios.post(
-        //     `${process.env.REACT_APP_DB_HOST}/group`,
-        //     newGroup
-        // );
-        // console.log(res.data);
+        console.log(`${process.env.REACT_APP_DB_HOST}`);
+        const res = await axios.post(
+            `http://motimates.xyz/api/group`,
+            newGroup
+        );
+        console.log(res.data);
 
         console.log(input);
+
+        // 입력 안했을 시, 로직
     };
 
     //; /group

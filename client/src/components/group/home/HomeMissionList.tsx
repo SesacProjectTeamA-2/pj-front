@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootStateType } from '../../../types/types';
+import {
+    MissionListType,
+    MissionStateType,
+    MissionType,
+    RootStateType,
+} from '../../../types/types';
 import MissionAddModal from '../../common/modal/MissionAddModal';
 
 export default function HomeMissionList() {
@@ -14,43 +19,47 @@ export default function HomeMissionList() {
         (state: RootStateType) => state.dummyGroup
     );
 
-    interface MissionType {
-        id: number;
-        name: string;
-        description: string;
-        level: number | string;
-    }
+    const missionList = useSelector(
+        (state: RootStateType) => state.dummyGroup.missionArray
+    );
 
-    const missionList: MissionType[] = [
-        {
-            id: 1,
-            name: dummyGroupState.mTitle,
-            description: dummyGroupState.mContent,
-            level: dummyGroupState.mLevel,
-        },
-        {
-            id: 2,
-            name: dummyGroupState.mTitle,
-            description: dummyGroupState.mContent,
-            level: dummyGroupState.mLevel,
-        },
-        {
-            id: 3,
-            name: dummyGroupState.mTitle,
-            description: dummyGroupState.mContent,
-            level: dummyGroupState.mLevel,
-        },
-    ];
+    // interface MissionType {
+    //     id: number;
+    //     name: string;
+    //     description: string;
+    //     level: number | string;
+    // }
 
-    for (let mission of missionList) {
-        if (mission.level === 5) {
-            mission.level = '⭐️⭐️⭐️';
-        } else if (mission.level === 3) {
-            mission.level = '⭐️⭐️';
-        } else if (mission.level === 1) {
-            mission.level = '⭐️';
-        }
-    }
+    // const missionList: MissionType[] = [
+    //     {
+    //         id: 1,
+    //         name: dummyGroupState.mTitle,
+    //         description: dummyGroupState.mContent,
+    //         level: dummyGroupState.mLevel,
+    //     },
+    //     {
+    //         id: 2,
+    //         name: dummyGroupState.mTitle,
+    //         description: dummyGroupState.mContent,
+    //         level: dummyGroupState.mLevel,
+    //     },
+    //     {
+    //         id: 3,
+    //         name: dummyGroupState.mTitle,
+    //         description: dummyGroupState.mContent,
+    //         level: dummyGroupState.mLevel,
+    //     },
+    // ];
+
+    // for (let mission of missionList) {
+    //     if (mission.level === 5) {
+    //         mission.level = '⭐️⭐️⭐️';
+    //     } else if (mission.level === 3) {
+    //         mission.level = '⭐️⭐️';
+    //     } else if (mission.level === 1) {
+    //         mission.level = '⭐️';
+    //     }
+    // }
 
     return (
         <div className="wrapper">
@@ -82,14 +91,14 @@ export default function HomeMissionList() {
             </div>
             <div className="main-content">
                 <ul>
-                    {missionList.map((mission: MissionType) => {
+                    {missionList.map((mission: MissionType, idx) => {
                         return (
-                            <li key={mission.id} className="mission-li">
+                            <li key={idx} className="mission-li">
                                 <div className="mission-element">
-                                    {mission.name}
+                                    {mission.mTitle}
                                 </div>
-                                <div>{mission.description}</div>
-                                <div>난이도 : {mission.level}</div>
+                                <div>{mission.mContent}</div>
+                                <div>난이도 : {mission.mLevel}</div>
                             </li>
                         );
                     })}

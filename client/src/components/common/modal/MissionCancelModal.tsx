@@ -5,6 +5,12 @@ import TextField from '@mui/material/TextField';
 
 import '../../../styles/scss/components/modal.scss';
 import ModalMemberList from './ModalMemberList';
+import { useSelector } from 'react-redux';
+import {
+    MissionListType,
+    MissionStateType,
+    RootStateType,
+} from '../../../types/types';
 
 // interface MissionCancelModalProps {
 //     missionCancelModalSwitch: boolean;
@@ -15,29 +21,31 @@ export default function MissionCancelModal({
     missionCancelModalSwitch,
     setMissionCancelModalSwitch,
 }: any) {
-    interface MissionType {
-        id: number;
-        name: string;
-        selected: boolean;
-    }
+    // interface MissionType {
+    //     id: number;
+    //     name: string;
+    //     selected: boolean;
+    // }
 
-    const missionList: MissionType[] = [
-        {
-            id: 1,
-            name: '알고리즘',
-            selected: true,
-        },
-        {
-            id: 2,
-            name: '블로깅',
-            selected: false,
-        },
-        {
-            id: 3,
-            name: '모각코',
-            selected: false,
-        },
-    ];
+    // const missionList: MissionType[] = [
+    //     {
+    //         id: 1,
+    //         name: '알고리즘',
+    //         selected: true,
+    //     },
+    //     {
+    //         id: 2,
+    //         name: '블로깅',
+    //         selected: false,
+    //     },
+    //     {
+    //         id: 3,
+    //         name: '모각코',
+    //         selected: false,
+    //     },
+    // ];
+
+    const missionList = useSelector((state: RootStateType) => state.mission);
 
     const [selectedMissionId, setSelectedMissionId] = useState(1);
 
@@ -88,7 +96,7 @@ export default function MissionCancelModal({
                     </div>
                     <div>
                         <div className="mission-cancel-modal-mission-list">
-                            {missionList.map((mission) => {
+                            {missionList.map((mission: MissionStateType) => {
                                 return (
                                     <div key={mission.id}>
                                         <label
@@ -109,7 +117,7 @@ export default function MissionCancelModal({
                                             />
                                             <div>
                                                 미션 {mission.id}.{' '}
-                                                {mission.name}
+                                                {mission.mTitle}
                                             </div>
                                         </label>
                                     </div>
