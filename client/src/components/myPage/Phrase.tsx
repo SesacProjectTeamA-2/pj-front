@@ -54,7 +54,6 @@ export default function Phrase(): JSX.Element {
                     ></img>
                 </button>
             </label>
-            <br></br>
 
             <div className="phraseMode-btn-div">
                 <label
