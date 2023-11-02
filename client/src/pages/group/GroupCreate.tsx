@@ -15,10 +15,7 @@ import Dday from '../../components/common/Dday';
 export default function GroupCreate() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
-    const [selectedSet, setSelectedSet] = useState<Set<string>>(
-        new Set<string>()
-    );
-
+    const [selectedArr, setSelectedArr] = useState<string[]>([]);
 
     const [input, setInput] = useState({
         gName: '',
@@ -54,7 +51,6 @@ export default function GroupCreate() {
     };
 
     // console.log('!!!!!!!!', selectedSet);
-
 
     const testGroup = {
         gName: 'Node 스터디 (중복 안됩니다!)',

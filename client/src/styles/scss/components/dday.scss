@@ -1,13 +1,14 @@
 .dday-container {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     width: 100%;
+    margin-left: 2.3rem;
 
     #dday-text {
         width: 100%;
         margin: 0 1rem;
-        text-align: center;
+        // text-align: center;
     }
 
     #date-input {

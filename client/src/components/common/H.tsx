@@ -4,39 +4,52 @@ import { Link } from 'react-router-dom';
 import '../../styles/scss/layout/header.scss';
 import Dday from './Dday';
 
-export default function Header(props: any) {
+export default function H(props: any) {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const toggleVal = (): void => {
         setIsVisible((prev) => !prev);
     };
-    useEffect(() => {
-        console.log(isVisible);
-    }, [isVisible]);
+    // useEffect(() => {
+    //     console.log(isVisible);
+    // }, [isVisible]);
+
+    // 모바일모드
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+    const setMobile = (): void => {
+        if (window.innerWidth < 800) {
+            setIsMobile(true);
+            console.log(isMobile);
+        }
+    };
 
     return (
-        <div className="header-container">
-            <div className="header-divOne">
-                <Link to="/">
-                    <div className="logo-container">
-                        <img
-                            src="/asset/lego.svg"
-                            className="logo-img"
-                            alt="logo"
-                        />
-                    </div>
-                </Link>
+        <>
+            <div className="header-container" onChange={() => setMobile}>
+                {/* 로고 */}
+                <div className="header-divOne">
+                    <Link to="/">
+                        <div className="logo-container">
+                            <img
+                                src="/asset/lego.svg"
+                                className="logo-img"
+                                alt="logo"
+                            />
+                        </div>
+                    </Link>
+                </div>
+
+                {/* 메뉴 탭 버튼 */}
+                <div className="tab-menu-div">
+                    <button id="tab-menu-btn" onClick={() => toggleVal()}>
+                        <img src="/asset/icons/menu.svg" alt="tabMenu" />
+                    </button>
+                </div>
             </div>
 
-            {/* 메뉴 탭 버튼 */}
-            <div className="tab-menu-div">
-                <button id="tab-menu-btn" onClick={() => toggleVal()}>
-                    <img src="/asset/icons/menu.svg" alt="tabMenu" />
-                </button>
-            </div>
-
+            {/* 디데이, 메뉴  */}
             <div
                 className="header-divTwo"
-                style={{ display: isVisible ? 'none' : 'flex' }}
+                style={{ display: isVisible ? 'flex' : 'none' }}
             >
                 <Dday />
                 <nav className="header-nav">
@@ -93,6 +106,6 @@ export default function Header(props: any) {
                     </ul>
                 </nav>
             </div>
-        </div>
+        </>
     );
 }
