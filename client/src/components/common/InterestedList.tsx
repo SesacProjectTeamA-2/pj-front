@@ -20,7 +20,12 @@ export default function InterestedList(props: any) {
 
     return (
         <div>
-            <InterestedItem interestedArr={interestedArr} />
+            <InterestedItem
+                interestedArr={interestedArr}
+                selectedSet={props.selectedSet}
+                setSelectedSet={props.setSelectedSet}
+                num={props.num}
+            />
         </div>
     );
 }

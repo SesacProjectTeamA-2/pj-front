@@ -95,6 +95,7 @@ export default function GroupEdit() {
                 <MissionAddModal
                     addModalSwitch={addModalSwitch}
                     setAddModalSwitch={setAddModalSwitch}
+                    action={'미션수정'}
                 />
             ) : null}
             <Link to="/group/home/1">

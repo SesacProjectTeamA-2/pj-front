@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../../styles/scss/components/titles.scss';
@@ -7,8 +7,34 @@ import '../../styles/scss/components/inputs.scss';
 import '../../styles/scss/pages/group/groups.scss';
 import SwiperComponent from '../../components/group/SwiperComponent';
 import InterestedList from '../../components/common/InterestedList';
+import GroupList from './GroupList';
+import { Divider } from '@mui/material';
+import GroupSearch from './GroupSearch';
 
 export default function Groups() {
+    const [selectedSet, setSelectedSet] = useState<Set<string>>(
+        new Set<string>()
+    );
+
+    const [search, setSearch] = useState(false);
+
+    const searchHandler = () => {
+        setSearch(!search);
+    };
+
+    //] key down event 입력 시
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.nativeEvent.isComposing) {
+            return;
+        }
+
+        if (event.key === 'Enter') {
+            setSearch(true);
+        }
+    };
+
+    console.log(selectedSet);
+
     return (
         <div className="section">
             <div className="group-container">
@@ -17,45 +43,25 @@ export default function Groups() {
                         className="search"
                         type="text"
                         placeholder="어떤 모임을 찾으시나요 ?"
+                        onKeyDown={handleKeyDown}
+                    />
+
+                    <button className="btn-sm" onClick={searchHandler}>
+                        {search ? '취소' : '검색'}
+                    </button>
+                </div>
+
+                <div className="groups-interested">
+                    <InterestedList
+                        selectedSet={selectedSet}
+                        setSelectedSet={setSelectedSet}
+                        num={8}
                     />
                 </div>
 
-                <InterestedList />
+                <Divider />
 
-                <div className="groups join">
-                    <div className="title1">참여한 모임</div>
-
-                    {/* ! 태그 컴포넌트 추가 ! */}
-
-                    <SwiperComponent />
-
-                    {/* map 돌리기 - /:id 추가 */}
-                    <Link to="/group/home/1">
-                        <button>코딩학당</button>
-                    </Link>
-
-                    {/* <Link to="/group/home/2">
-                        <button>근손실방지</button>
-                    </Link> */}
-                </div>
-
-                <div className="groups created">
-                    <div className="title1">내가 생성한 모임</div>
-                    <div>생성한 모임이 없습니다. </div>
-                </div>
-
-                <div className="groups recommend">
-                    <div className="title1">이런 모임 어떠세요 ?</div>
-                    <button>추천모임1</button>
-                </div>
-
-                <div className="btn-fixed-wrapper">
-                    <Link to="/group/create">
-                        <button className="btn-fixed">
-                            내가 모임 만들기 !
-                        </button>
-                    </Link>
-                </div>
+                {search ? <GroupSearch /> : <GroupList />}
             </div>
         </div>
     );
