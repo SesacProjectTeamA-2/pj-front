@@ -5,13 +5,21 @@ import '../../styles/scss/layout/header.scss';
 import Dday from './Dday';
 
 export default function Header(props: any) {
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const toggleVal = (): void => {
+        setIsVisible((prev) => !prev);
+    };
+    useEffect(() => {
+        console.log(isVisible);
+    }, [isVisible]);
+
     return (
         <div className="header-container">
             <div className="header-divOne">
                 <Link to="/">
                     <div className="logo-container">
                         <img
-                            src="/asset/logo.svg"
+                            src="/asset/lego.svg"
                             className="logo-img"
                             alt="logo"
                         />
@@ -24,7 +32,10 @@ export default function Header(props: any) {
             </div>
 
             <div className="header-divThree">
-                <nav className="header-nav">
+                <nav
+                    className="header-nav"
+                    style={{ display: !isVisible ? 'none' : 'flex' }}
+                >
                     <Link to="/main">
                         <button className="menu-button">Main</button>
                     </Link>
@@ -61,7 +72,7 @@ export default function Header(props: any) {
                     />
                 </nav>
                 <div className="tab-menu-div">
-                    <button id="tab-menu-btn">
+                    <button id="tab-menu-btn" onClick={() => toggleVal()}>
                         <img src="/asset/icons/menu.svg" alt="tabMenu" />
                     </button>
                 </div>
