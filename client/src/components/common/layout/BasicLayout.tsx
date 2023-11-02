@@ -26,7 +26,6 @@ export default function BasicLayout({ children, showChat }: any) {
     //         // return;
     //     }
     // };
-
     // useEffect(() => {
     //     setFooterShowing();
     //     console.log('showFooter', showFooter);
@@ -42,105 +41,52 @@ export default function BasicLayout({ children, showChat }: any) {
         <>
             <div className="layout-container ">
                 <Grid container>
-                    {showChat ? (
-                        <>
-                            <Grid md={2} sm={2} xs={2} className="empty-div">
-                                <Item
-                                    style={{
-                                        paddingLeft: 0,
-                                        paddingRight: 0,
-                                        paddingTop: 0,
-                                    }}
-                                ></Item>
-                            </Grid>
+                    <>
+                        <Grid md={2} sm={2} xs={2} className="empty-div">
+                            <Item
+                                style={{
+                                    paddingLeft: 0,
+                                    paddingRight: 0,
+                                    paddingTop: 0,
+                                }}
+                            ></Item>
+                        </Grid>
 
-                            {/* 컨텐츠 컴포넌트 들어갈 곳 */}
-                            <Grid
-                                md={8}
-                                sm={10}
-                                xs={10}
-                                className="section-wrapper"
+                        {/* 컨텐츠 컴포넌트 들어갈 곳 */}
+                        <Grid
+                            md={8}
+                            sm={10}
+                            xs={10}
+                            className="section-wrapper"
+                        >
+                            <Item
+                                style={{
+                                    paddingLeft: 0,
+                                    paddingRight: 0,
+                                    paddingTop: 0,
+                                    justifyContent: 'center',
+                                }}
                             >
-                                <Item
-                                    style={{
-                                        paddingLeft: 0,
-                                        paddingRight: 0,
-                                        paddingTop: 0,
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {' '}
-                                    {children}
-                                </Item>
-                            </Grid>
+                                {' '}
+                                {children}
+                            </Item>
+                        </Grid>
 
-                            {/* 채팅 컴포넌트 들어갈 곳 */}
-                            <Grid
-                                md={2}
-                                sm={12}
-                                xs={12}
-                                className="chatting-div"
+                        {/* 채팅 컴포넌트 들어갈 곳 */}
+                        <Grid md={2} sm={12} xs={12} className="chatting-div">
+                            <Item
+                                style={{
+                                    paddingLeft: 0,
+                                    paddingRight: 0,
+                                    paddingTop: 0,
+                                }}
                             >
-                                <Item
-                                    style={{
-                                        paddingLeft: 0,
-                                        paddingRight: 0,
-                                        paddingTop: 0,
-                                    }}
-                                >
-                                    {' '}
-                                    <SidebarChat />
-                                </Item>
-                            </Grid>
-                            <Footer />
-                        </>
-                    ) : (
-                        <>
-                            <Grid md={2} sm={2} xs={2} className="empty-div">
-                                <Item
-                                    style={{
-                                        paddingLeft: 0,
-                                        paddingRight: 0,
-                                        paddingTop: 0,
-                                    }}
-                                ></Item>
-                            </Grid>
-
-                            <Grid
-                                md={8}
-                                sm={10}
-                                xs={10}
-                                className="section-wrapper"
-                            >
-                                <Item
-                                    style={{
-                                        paddingLeft: 0,
-                                        paddingRight: 0,
-                                        paddingTop: 0,
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {children}
-                                </Item>
-                            </Grid>
-
-                            <Grid
-                                md={2}
-                                sm={12}
-                                xs={12}
-                                className="chatting-div"
-                            >
-                                <Item
-                                    style={{
-                                        paddingLeft: 0,
-                                        paddingRight: 0,
-                                        paddingTop: 0,
-                                    }}
-                                ></Item>
-                            </Grid>
-                            <Footer />
-                        </>
-                    )}
+                                {' '}
+                                {showChat ? <SidebarChat /> : null}
+                            </Item>
+                        </Grid>
+                        <Footer />
+                    </>
                 </Grid>
             </div>
         </>
