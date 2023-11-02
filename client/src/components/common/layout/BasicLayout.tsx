@@ -26,7 +26,6 @@ export default function BasicLayout({ children, showChat }: any) {
     //         // return;
     //     }
     // };
-
     // useEffect(() => {
     //     setFooterShowing();
     //     console.log('showFooter', showFooter);
