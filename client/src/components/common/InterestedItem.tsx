@@ -14,7 +14,6 @@ export default function InterestedItem(props: any) {
     function SelectedTag(e: React.ChangeEvent<HTMLElement>): void {
         const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼(label)
         setSelected((prevSelected) => !prevSelected); //선택 여부 관리 (직전 상태 기반)
-        // console.log('selected ', selected);
 
         if (selectedSet.has(selectedBtn.id)) {
             // 배열에 있으면 배열에서 제거
@@ -40,9 +39,7 @@ export default function InterestedItem(props: any) {
 
         if (selectedSet.size > 2) {
             //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ? : 개수 잘 안 맞고 두번 클릭해야 선택됏음
-            toast.error('최대 3개까지만 선택해주세요!', {
-                position: 'bottom-center',
-            });
+            toast.error('최대 3개까지만 선택해주세요!');
             selectedSet.delete(selectedBtn.id);
             // console.log(selectedSet.length);
         }
