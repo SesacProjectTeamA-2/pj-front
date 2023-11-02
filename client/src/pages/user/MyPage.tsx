@@ -13,9 +13,7 @@ import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
 
 export default function MyPage() {
-    const [selectedSet, setSelectedSet] = useState<Set<string>>(
-        new Set<string>()
-    );
+    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
 
     return (
         <div className="section">
@@ -43,8 +41,8 @@ export default function MyPage() {
                     <h3 className="myPage-p">관심분야</h3>
                     <p>최대 3개</p>
                     <InterestedList
-                        selectedSet={selectedSet}
-                        setSelectedSet={setSelectedSet}
+                        selectedArr={selectedArr}
+                        setSelectedArr={setSelectedArr}
                         num={3}
                     />
                 </div>
