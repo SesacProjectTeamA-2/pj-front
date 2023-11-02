@@ -1,4 +1,5 @@
 @import '../../abstracts/variables';
+@import '~include-media/dist/include-media';
 
 .menu a {
     color: $color-white;
@@ -78,4 +79,10 @@
     // color: #444;
     color: $color-primary;
     transition: color 0.3s cubic-bezier(0.33, 0.91, 0.42, 1) 0.2s;
+}
+
+.SMN_effect-42 {
+    @include media('<900px') {
+        display: flex;
+    }
 }
