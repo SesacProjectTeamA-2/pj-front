@@ -16,13 +16,14 @@ export default function ManagementLayout({ children, showChat }: any) {
             <div className="layout-container">
                 <Grid container>
                     {showChat ? (
+                        // 채팅이 있을 경우
                         <>
                             {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
                             <Grid
                                 md={2}
-                                sm={2}
-                                xs={2}
-                                className="manageMenu-div"
+                                sm={12}
+                                xs={12}
+                                className="manageMenu-div "
                             >
                                 <Item
                                     style={{
@@ -35,12 +36,12 @@ export default function ManagementLayout({ children, showChat }: any) {
                                     <SidebarManagement />
                                 </Item>
                             </Grid>
-
+                            {/* 본문 */}
                             <Grid
                                 md={8}
-                                sm={10}
-                                xs={10}
-                                className="section-wrapper"
+                                sm={12}
+                                xs={12}
+                                className="section-wrapper "
                             >
                                 {' '}
                                 <Item
@@ -75,11 +76,12 @@ export default function ManagementLayout({ children, showChat }: any) {
                             </Grid>
                         </>
                     ) : (
+                        // 채팅이 없을 경우
                         <>
                             <Grid
                                 md={2}
-                                sm={2}
-                                xs={2}
+                                sm={12}
+                                xs={12}
                                 className="manageMenu-div"
                             >
                                 <Item
@@ -95,8 +97,8 @@ export default function ManagementLayout({ children, showChat }: any) {
                             </Grid>
                             <Grid
                                 md={8}
-                                sm={10}
-                                xs={10}
+                                sm={12}
+                                xs={12}
                                 className="section-wrapper"
                             >
                                 <Item
