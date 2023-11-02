@@ -53,7 +53,6 @@ export default function MyPage() {
                     <Phrase />
                 </div>
             </div>
-            <hr></hr>
 
             <div className="myPage-div-four">
                 <h3 className="myPage-h3">메인화면 설정</h3>

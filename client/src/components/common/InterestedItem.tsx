@@ -26,7 +26,6 @@ export default function InterestedItem({
     function SelectedTag(e: React.ChangeEvent<HTMLElement>): void {
         const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼(label)
         setSelected((prevSelected) => !prevSelected); //선택 여부 관리 (직전 상태 기반)
-        // console.log('selected ', selected);
 
         // 선택한 요소
         // console.log(selectedBtn.getAttribute('value'));

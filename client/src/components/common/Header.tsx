@@ -34,7 +34,7 @@ export default function Header(props: any) {
             <div className="header-divThree">
                 <nav
                     className="header-nav"
-                    style={{ display: !isVisible ? 'none' : 'flex' }}
+                    style={{ display: isVisible ? 'none' : 'flex' }}
                 >
                     <Link to="/main">
                         <button className="menu-button">Main</button>
