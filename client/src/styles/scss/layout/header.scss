@@ -2,7 +2,7 @@
 @import '~include-media/dist/include-media';
 
 .header-container {
-    background: white;
+    background-color: $color-primary;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,20 +44,21 @@
         display: block;
         border: none;
         box-shadow: none;
-        background-color: white;
+        background-color: $color-primary;
         padding: 0;
     }
 }
 .menu-button {
     background-color: $color-gray1;
-    color: $color-gray5;
+    color: $color-gray7;
     border-radius: 10px;
     padding: 5px;
     @include media('<768px') {
         border: none;
         margin: 0.4rem 0.4rem;
         text-decoration: underline;
-        background-color: white;
+        background-color: $color-primary;
+        color: white;
         box-shadow: none;
     }
 }
