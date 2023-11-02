@@ -12,10 +12,10 @@ import Footer from '../Footer';
 
 export default function BasicLayout({ children, showChat }: any) {
     // 인트로에서만 Footer 보이게 하기
-    const loc = useLocation().pathname;
+    // const loc = useLocation().pathname;
+    // const [showFooter, setShowFooter] = useState<boolean>(false);
 
-    const [showFooter, setShowFooter] = useState<boolean>(false);
-
+    // 고치기 전 코드
     // const setFooterShowing = (): void => {
     //     if (loc === '/') {
     //         setShowFooter(true);
@@ -31,10 +31,12 @@ export default function BasicLayout({ children, showChat }: any) {
     //     setFooterShowing();
     //     console.log('showFooter', showFooter);
     // }, [showFooter]);
-    useEffect(() => {
-        // console.log('loc', loc, loc === '/');
-        loc === '/' ? setShowFooter(true) : setShowFooter(false);
-    }, [loc]);
+
+    //  고친 후 코드
+    // useEffect(() => {
+    //     // console.log('loc', loc, loc === '/');
+    //     loc === '/' ? setShowFooter(true) : setShowFooter(false);
+    // }, [loc]);
 
     return (
         <>
@@ -90,7 +92,7 @@ export default function BasicLayout({ children, showChat }: any) {
                                     <SidebarChat />
                                 </Item>
                             </Grid>
-                            {showFooter ? <Footer /> : null}
+                            <Footer />
                         </>
                     ) : (
                         <>
@@ -136,7 +138,7 @@ export default function BasicLayout({ children, showChat }: any) {
                                     }}
                                 ></Item>
                             </Grid>
-                            {showFooter ? <Footer /> : null}
+                            <Footer />
                         </>
                     )}
                 </Grid>

@@ -31,11 +31,21 @@ export default function Phrase(): JSX.Element {
                     maxLength={50}
                     className="input-obj"
                     id="text-area2"
+                    style={{
+                        display:
+                            phraseModeBtnVal === 'recommend' ? 'block' : 'none',
+                        color: 'white',
+                    }}
                 />
                 <button
                     onClick={(e) => changeReadOnly()}
                     className="edit-btn"
                     id="phrase-edit"
+                    style={{
+                        display:
+                            phraseModeBtnVal === 'recommend' ? 'block' : 'none',
+                        color: 'white',
+                    }}
                 >
                     <img
                         src="/asset/icons/edit.svg"

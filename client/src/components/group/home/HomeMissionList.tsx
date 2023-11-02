@@ -60,7 +60,13 @@ export default function HomeMissionList() {
 
                     {/* 모임장만 보임 */}
                     <div onClick={missionAddHandler}>
-                        <div className="title5 mission-edit">수정하기</div>
+                        <div className="title5 mission-edit">
+                            <img
+                                src="/asset/icons/edit.svg"
+                                alt="edit-img"
+                                className="edit-img"
+                            ></img>
+                        </div>
                     </div>
                     {addModalSwitch ? (
                         <MissionAddModal

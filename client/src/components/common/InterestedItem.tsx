@@ -56,9 +56,7 @@ export default function InterestedItem({
         // 동적 개수 제한
         if (selectedArr.length > num - 1) {
             //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ? : 개수 잘 안 맞고 두번 클릭해야 선택됏음
-            toast.error(`최대 ${num}개까지만 선택해주세요!`, {
-                position: 'bottom-center',
-            });
+            toast.error(`최대 ${num}개까지만 선택해주세요!`);
 
             // 마지막 선택된 id 제거
             selectedArr.filter((ele: string) => ele !== selectedBtn.id);
@@ -85,6 +83,9 @@ export default function InterestedItem({
                                         ? '#ED8D8D'
                                         : 'white',
                                     color: isSelected ? 'white' : 'gray',
+                                    border: isSelected
+                                        ? '1px solid #ED8D8D'
+                                        : ' #acacac',
                                 }}
                             >
                                 <input
