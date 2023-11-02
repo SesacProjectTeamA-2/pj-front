@@ -4,6 +4,21 @@
 .input-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    input {
+        width: 20rem;
+    }
+
+    button {
+        width: 4rem;
+        background-color: $color-gray4;
+    }
+
+    button:hover {
+        transition: 0.4s all;
+        background-color: $color-gray7;
+    }
 }
 
 .group-container {
@@ -20,4 +35,12 @@
 .btn-fixed-wrapper {
     display: flex;
     justify-content: center;
+}
+
+.groups-interested {
+    label {
+        height: 2rem;
+    }
+
+    margin-bottom: 1.6rem;
 }

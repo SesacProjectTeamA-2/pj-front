@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import '../../styles/scss/pages/myPage.scss';
 
@@ -13,6 +13,10 @@ import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
 
 export default function MyPage() {
+    const [selectedSet, setSelectedSet] = useState<Set<string>>(
+        new Set<string>()
+    );
+
     return (
         <div className="section">
             {/* 로그인 안 했을 때: 로그인 버튼 보임 + 채팅 버튼 안 보임 <br></br>
@@ -38,7 +42,11 @@ export default function MyPage() {
                 <div className="myPage-div-three-one">
                     <h3 className="myPage-p">관심분야</h3>
                     <p>최대 3개</p>
-                    <InterestedList />
+                    <InterestedList
+                        selectedSet={selectedSet}
+                        setSelectedSet={setSelectedSet}
+                        num={3}
+                    />
                 </div>
                 <div className="myPage-div-three-two">
                     <h3 className="myPage-p">명언</h3>

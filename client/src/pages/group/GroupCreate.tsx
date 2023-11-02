@@ -15,9 +15,44 @@ import Dday from '../../components/common/Dday';
 export default function GroupCreate() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
+    // const [selectedSet, setSelectedSet] = useState('');
+
+    const [selectedSet, setSelectedSet] = useState<Set<string>>(
+        new Set<string>()
+    );
+
+    const [input, setInput] = useState({
+        gName: '',
+        gDesc: '',
+        gDday: '',
+        gCategory: '',
+        gCoverImg: '',
+        mTitle: [],
+        mContent: [],
+        mLevel: 1,
+    });
+
+    const {
+        gName,
+        gDesc,
+        gDday,
+        gCategory,
+        gCoverImg,
+        mTitle,
+        mContent,
+        mLevel,
+    } = input;
+
+    const onChange = (e: any) => {
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
+
     const missionAddHandler = () => {
         setAddModalSwitch(true);
     };
+
+    console.log('!!!!!!!!', selectedSet);
 
     const testGroup = {
         gName: 'Node 스터디 (중복 안됩니다!)',
@@ -27,8 +62,8 @@ export default function GroupCreate() {
         gCategory: 'st',
         gCoverImg:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
-        mTitle: 'Node.js 강의 듣기',
-        mContent: 'Node.js 강의 쳅터 1 듣고 오기',
+        mTitle: ['Node.js 강의 듣기'],
+        mContent: ['Node.js 강의 쳅터 1 듣고 오기'],
         mLevel: 5,
     };
 
@@ -110,6 +145,7 @@ export default function GroupCreate() {
                             id="filled-basic"
                             label="모임명"
                             variant="filled"
+                            onChange={onChange}
                         />
                         {/* <TextField
                             id="standard-basic"
@@ -129,11 +165,17 @@ export default function GroupCreate() {
                     >
                         추가
                     </Button>
+                    {/* [추후] gCoverImg 이미지 파일 추가 */}
                 </div>
             </div>
             <div className="group-create-content">
                 <div>분야</div>
-                <InterestedList />
+                <InterestedList
+                    selectedSet={selectedSet}
+                    setSelectedSet={setSelectedSet}
+                    num={3}
+                />
+                {/* selected={selected}  */}
             </div>
 
             <div className="group-create-content description-container">
@@ -141,6 +183,7 @@ export default function GroupCreate() {
                 <textarea
                     className="description"
                     placeholder="500자 이내로 입력하세요."
+                    onChange={onChange}
                 ></textarea>
             </div>
 
@@ -150,6 +193,8 @@ export default function GroupCreate() {
                     defaultValue={1}
                     className="limit-number"
                     type="number"
+                    onChange={onChange}
+                    name="gMaxMem"
                 />
                 <div className="max-number">최대 00명</div>
             </div>
@@ -157,6 +202,7 @@ export default function GroupCreate() {
             <div className="group-create-content">
                 <div className="dday-title">마감일</div>
                 <Dday />
+                {/* [추후] 디데이값 받아오기 */}
             </div>
             <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
@@ -165,6 +211,7 @@ export default function GroupCreate() {
                         <img src="/asset/icons/plus.svg" />
                     </div>
                     <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
+                    {/* [추후] 미션 추가되면 리스트 형식으로 추가 */}
                 </div>
             </div>
 
@@ -172,6 +219,7 @@ export default function GroupCreate() {
                 <MissionAddModal
                     addModalSwitch={addModalSwitch}
                     setAddModalSwitch={setAddModalSwitch}
+                    action={'미션생성'}
                 />
             ) : null}
 
