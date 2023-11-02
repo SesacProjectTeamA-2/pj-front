@@ -76,9 +76,8 @@ export default function InterestedItem({
                     const isSelected: boolean = selectedSet.has(iId);
 
                     return (
-                        <>
+                        <div key={iId}>
                             <label
-                                key={iId}
                                 className="tag-btn"
                                 // onClick={(e: React.MouseEvent<HTMLElement>) =>
                                 //     SelectedTag(e)
@@ -104,7 +103,7 @@ export default function InterestedItem({
                                 {interestedArr.category}
                             </label>
                             <Toaster />
-                        </>
+                        </div>
                     );
                 })}
             </div>

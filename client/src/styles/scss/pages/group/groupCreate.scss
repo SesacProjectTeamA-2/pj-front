@@ -18,12 +18,21 @@
         padding: 2rem 0;
         font-weight: bold;
     }
+
+    label {
+        height: 2rem;
+    }
 }
 
 .group-create-title {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
+}
+
+.group-img-title {
+    width: 100%;
+    margin-right: 1rem;
 }
 
 .title-wrapper {
@@ -35,7 +44,6 @@
 .group-create-img {
     display: flex;
     align-items: center;
-    gap: 3rem;
 
     button {
         border-radius: 10px;
@@ -53,6 +61,7 @@
     border-radius: 10px;
     width: 100%;
     justify-content: center;
+    align-items: center;
 
     img {
         width: 30px;
@@ -73,11 +82,11 @@ input {
 
 .description-container {
     width: 100%;
-    align-items: flex-start;
+    // align-items: flex-start;
 
     div {
-        align-items: flex-start;
         padding-top: 10px;
+        width: 3rem;
     }
 
     textarea {
@@ -94,5 +103,6 @@ input {
 }
 
 .max-number {
-    color: $color-gray6;
+    color: $color-gray4;
+    font-weight: normal;
 }

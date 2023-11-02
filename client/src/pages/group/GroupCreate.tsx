@@ -15,8 +15,6 @@ import Dday from '../../components/common/Dday';
 export default function GroupCreate() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
-    // const [selectedSet, setSelectedSet] = useState('');
-
     const [selectedSet, setSelectedSet] = useState<Set<string>>(
         new Set<string>()
     );
@@ -27,6 +25,7 @@ export default function GroupCreate() {
         gDday: '',
         gCategory: '',
         gCoverImg: '',
+        gMaxMem: 1,
         mTitle: [],
         mContent: [],
         mLevel: 1,
@@ -38,6 +37,7 @@ export default function GroupCreate() {
         gDday,
         gCategory,
         gCoverImg,
+        gMaxMem,
         mTitle,
         mContent,
         mLevel,
@@ -52,7 +52,7 @@ export default function GroupCreate() {
         setAddModalSwitch(true);
     };
 
-    console.log('!!!!!!!!', selectedSet);
+    // console.log('!!!!!!!!', selectedSet);
 
     const testGroup = {
         gName: 'Node 스터디 (중복 안됩니다!)',
@@ -75,6 +75,8 @@ export default function GroupCreate() {
         //     newGroup
         // );
         // console.log(res.data);
+
+        console.log(input);
     };
 
     //; /group
@@ -146,6 +148,7 @@ export default function GroupCreate() {
                             label="모임명"
                             variant="filled"
                             onChange={onChange}
+                            name="gName"
                         />
                         {/* <TextField
                             id="standard-basic"
@@ -155,7 +158,7 @@ export default function GroupCreate() {
                     </Box>
                 </div>
                 <div className="group-create-img">
-                    <div>대표 이미지</div>
+                    <div className="group-img-title">대표 이미지</div>
                     <Button
                         style={{
                             backgroundColor: '#ed8d8d',
@@ -184,6 +187,7 @@ export default function GroupCreate() {
                     className="description"
                     placeholder="500자 이내로 입력하세요."
                     onChange={onChange}
+                    name="gDesc"
                 ></textarea>
             </div>
 
@@ -199,11 +203,6 @@ export default function GroupCreate() {
                 <div className="max-number">최대 00명</div>
             </div>
 
-            <div className="group-create-content">
-                <div className="dday-title">마감일</div>
-                <Dday />
-                {/* [추후] 디데이값 받아오기 */}
-            </div>
             <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
                 <div className="mission-container">
