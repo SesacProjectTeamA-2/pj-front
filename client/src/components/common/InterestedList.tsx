@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InterestedItem from './InterestedItem';
 
 export default function InterestedList(props: any) {
@@ -22,8 +22,8 @@ export default function InterestedList(props: any) {
         <div>
             <InterestedItem
                 interestedArr={interestedArr}
-                selectedSet={props.selectedSet}
-                setSelectedSet={props.setSelectedSet}
+                selectedArr={props.selectedArr}
+                setSelectedArr={props.setSelectedArr}
                 num={props.num}
             />
         </div>

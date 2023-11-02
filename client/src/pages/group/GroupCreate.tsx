@@ -19,6 +19,7 @@ export default function GroupCreate() {
         new Set<string>()
     );
 
+
     const [input, setInput] = useState({
         gName: '',
         gDesc: '',
@@ -53,6 +54,7 @@ export default function GroupCreate() {
     };
 
     // console.log('!!!!!!!!', selectedSet);
+
 
     const testGroup = {
         gName: 'Node 스터디 (중복 안됩니다!)',
@@ -174,11 +176,10 @@ export default function GroupCreate() {
             <div className="group-create-content">
                 <div>분야</div>
                 <InterestedList
-                    selectedSet={selectedSet}
-                    setSelectedSet={setSelectedSet}
-                    num={3}
+                    selectedArr={selectedArr}
+                    setSelectedArr={setSelectedArr}
+                    num={1}
                 />
-                {/* selected={selected}  */}
             </div>
 
             <div className="group-create-content description-container">

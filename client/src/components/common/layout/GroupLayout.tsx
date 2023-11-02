@@ -5,6 +5,7 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import Item from '@mui/material/ListItem';
 
 import SideBarGroup from '../SidebarGroup';
+import Footer from '../Footer';
 
 // groupbar section chat
 export default function GroupLayout({ children, showChat }: any) {
@@ -69,6 +70,7 @@ export default function GroupLayout({ children, showChat }: any) {
                                     <SidebarChat />
                                 </Item>
                             </Grid>
+                            <Footer />
                         </>
                     ) : (
                         <>
@@ -115,6 +117,7 @@ export default function GroupLayout({ children, showChat }: any) {
                         </>
                     )}
                 </Grid>
+                <Footer />
             </div>
         </>
     );
