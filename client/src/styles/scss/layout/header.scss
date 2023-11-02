@@ -1,4 +1,5 @@
 @import '../abstracts/variables';
+@import '~include-media/dist/include-media';
 
 .header-container {
     background: white;
@@ -6,6 +7,10 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    flex-direction: row;
+    @include media('<768px') {
+        flex-direction: column;
+    }
 }
 .header-divTwo {
     display: flex;
@@ -16,17 +21,47 @@
     color: black;
     width: 30%;
 }
-nav {
+.header-nav {
     border: none;
     display: flex;
     align-items: center;
+    @include media('<768px') {
+        flex-direction: column;
+    }
+}
+
+.tab-menu-div {
+    display: none;
+    @include media('<768px') {
+        display: flex;
+        justify-content: center;
+        padding: 0;
+    }
+}
+#tab-menu-btn {
+    display: none;
+    @include media('<768px') {
+        display: block;
+        border: none;
+        box-shadow: none;
+        background-color: white;
+        padding: 0;
+    }
 }
 .menu-button {
     background-color: $color-gray1;
     color: $color-gray5;
     border-radius: 10px;
     padding: 5px;
+    @include media('<768px') {
+        border: none;
+        margin: 0.4rem 0.4rem;
+        text-decoration: underline;
+        background-color: white;
+        box-shadow: none;
+    }
 }
+
 .menu-button:focus {
     background-color: black;
     color: white;
