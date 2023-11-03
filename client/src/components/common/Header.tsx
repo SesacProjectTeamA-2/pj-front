@@ -25,7 +25,7 @@ export default function Header(props: any) {
     };
 
     // 헤더 메뉴 보여주기
-    const [isVisibleMobile, setIsVisibleMobile] = useState<boolean>(false);
+    const [isVisibleMobile, setIsVisibleMobile] = useState<boolean>(true);
     const toggleVal = (): void => {
         if (myWidth < 800) {
             setIsVisibleMobile((prev) => !prev);
@@ -34,6 +34,8 @@ export default function Header(props: any) {
     useEffect(() => {
         console.log('isVisibleMobile', isVisibleMobile);
     }, [isVisibleMobile]);
+
+    const [isUser, setIsUser] = useState<boolean>(true);
 
     return (
         <>
@@ -91,45 +93,53 @@ export default function Header(props: any) {
                                 </Link>
                             </ButtonGroup>
                         </ThemeProvider>
-                        <ul className="menu">
-                            <li>
-                                {/* 비로그인 시 */}
-                                <ThemeProvider theme={theme}>
-                                    <Link to="/login">
-                                        <Button
-                                            aria-label="outlined button group"
-                                            variant="outlined"
-                                            color="secondary"
-                                            className="menu-button"
-                                        >
-                                            Login
-                                        </Button>
-                                    </Link>
-                                </ThemeProvider>
-                            </li>
-                            <li>
-                                {/* 로그인 시 */}
 
-                                <Link to="/mypage">
+                        {!isUser ? (
+                            <ul className="menu">
+                                {/* 로그인 시 */}
+                                <li>
+                                    <ThemeProvider theme={theme}>
+                                        <Link to="/login">
+                                            <Button
+                                                aria-label="outlined button group"
+                                                variant="outlined"
+                                                color="secondary"
+                                                className="menu-button"
+                                            >
+                                                Login
+                                            </Button>
+                                        </Link>
+                                    </ThemeProvider>
+                                </li>
+                            </ul>
+                        ) : (
+                            <ul className="menu">
+                                {/* 비 로그인 시 */}
+                                <li>
+                                    <Link to="/mypage">
+                                        <img
+                                            src="/asset/images/user.svg"
+                                            style={{
+                                                width: '40px',
+                                                height: '40px',
+                                            }}
+                                            alt="userImg"
+                                        ></img>
+                                    </Link>
+                                </li>
+                                <li id="chat-li">
                                     <img
-                                        src="/asset/images/user.svg"
+                                        src="/asset/icons/chat.svg"
                                         style={{
                                             width: '40px',
                                             height: '40px',
                                         }}
-                                        alt="userImg"
-                                    ></img>
-                                </Link>
-                            </li>
-                            <li id="chat-li">
-                                <img
-                                    src="/asset/icons/chat.svg"
-                                    style={{ width: '40px', height: '40px' }}
-                                    alt="chatImg"
-                                    onClick={() => props.showChatting()}
-                                />
-                            </li>
-                        </ul>
+                                        alt="chatImg"
+                                        onClick={() => props.showChatting()}
+                                    />
+                                </li>
+                            </ul>
+                        )}
                     </nav>
                 </div>
 
