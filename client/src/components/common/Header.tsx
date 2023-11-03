@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getCookies } from 'typescript-cookie';
 
 import '../../styles/scss/layout/header.scss';
 import Dday from './Dday';
@@ -35,7 +36,23 @@ export default function Header(props: any) {
         console.log('isVisibleMobile', isVisibleMobile);
     }, [isVisibleMobile]);
 
-    const [isUser, setIsUser] = useState<boolean>(true);
+    // 쿠키 확인
+    const cookies = getCookies();
+
+    const [isCookie, setIsCookie] = useState(false);
+
+    // if (Object.keys(cookies).length !== 0) {
+    //     setIsCookie(true);
+    // }
+
+    useEffect(() => {
+        if (Object.keys(cookies).length !== 0) {
+            setIsCookie(true);
+        }
+    }, [cookies]);
+
+    console.log('!!!', cookies);
+    console.log('isCookie', isCookie);
 
     return (
         <>
@@ -93,11 +110,12 @@ export default function Header(props: any) {
                                 </Link>
                             </ButtonGroup>
                         </ThemeProvider>
+                        {!isCookie ? '쿠키 없음' : '쿠키 있음'}
 
-                        {!isUser ? (
-                            <ul className="menu">
-                                {/* 로그인 시 */}
+                        <ul className="menu">
+                            {!isCookie ? (
                                 <li>
+                                    {/* 비로그인 시 */}
                                     <ThemeProvider theme={theme}>
                                         <Link to="/login">
                                             <Button
@@ -111,35 +129,36 @@ export default function Header(props: any) {
                                         </Link>
                                     </ThemeProvider>
                                 </li>
-                            </ul>
-                        ) : (
-                            <ul className="menu">
-                                {/* 비 로그인 시 */}
-                                <li>
-                                    <Link to="/mypage">
+                            ) : (
+                                <>
+                                    <li>
+                                        {/* 로그인 시 */}
+
+                                        <Link to="/mypage">
+                                            <img
+                                                src="/asset/images/user.svg"
+                                                style={{
+                                                    width: '40px',
+                                                    height: '40px',
+                                                }}
+                                                alt="userImg"
+                                            ></img>
+                                        </Link>
+                                    </li>
+                                    <li id="chat-li">
                                         <img
-                                            src="/asset/images/user.svg"
+                                            src="/asset/icons/chat.svg"
                                             style={{
                                                 width: '40px',
                                                 height: '40px',
                                             }}
-                                            alt="userImg"
-                                        ></img>
-                                    </Link>
-                                </li>
-                                <li id="chat-li">
-                                    <img
-                                        src="/asset/icons/chat.svg"
-                                        style={{
-                                            width: '40px',
-                                            height: '40px',
-                                        }}
-                                        alt="chatImg"
-                                        onClick={() => props.showChatting()}
-                                    />
-                                </li>
-                            </ul>
-                        )}
+                                            alt="chatImg"
+                                            onClick={() => props.showChatting()}
+                                        />
+                                    </li>
+                                </>
+                            )}
+                        </ul>
                     </nav>
                 </div>
 
