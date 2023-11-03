@@ -34,6 +34,12 @@ export default function MissionAddModal({
     const missionState = useSelector((state: RootStateType) => state.mission);
     const dispatch = useDispatch();
 
+    console.log('state', missionState);
+
+    // const [listLength, setMissionList] = useState(missionState.length);
+
+    // const missionList: any[] = missionState;
+
     // interface MissionType {
     //     id: number;
     //     name: string;
@@ -75,7 +81,7 @@ export default function MissionAddModal({
     };
 
     const [input, setInput] = useState({
-        // id: missionState.length + 1,
+        id: Object.keys(missionState).length + 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
@@ -101,7 +107,7 @@ export default function MissionAddModal({
 
         // 입력 필드 초기화
         setInput({
-            // id: 0,
+            id: Object.keys(missionState).length + 1,
             mTitle: '',
             mContent: '',
             mLevel: 1,
