@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import { getAllCookies } from 'react-cookie';
+
+import { getCookies, setCookie } from 'typescript-cookie';
 
 import '../../styles/scss/pages/user/login.scss';
 
@@ -9,7 +12,11 @@ import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
 // import { GoogleLoginButton } from 'react-social-login-buttons';
 
+// const cookies = new Cookies();
+
 export default function Login() {
+    const cookies = getCookies();
+
     const nvg = useNavigate();
     // useEffect(() => {
     //     let isUser = new URL(window.location.href).searchParams.get(
@@ -35,6 +42,12 @@ export default function Login() {
     return (
         <div className="section">
             <div className="login-wrapper">
+                <div>
+                    {Object.keys(cookies).length === 0
+                        ? '쿠키 없음'
+                        : '쿠키 있음'}
+                </div>
+
                 <h1 id="login-h1">안녕하세요!</h1>
 
                 <GoogleLoginBtn
