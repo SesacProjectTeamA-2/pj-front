@@ -17,7 +17,7 @@ export default function GroupLayout({ children, showChat }: any) {
                 <Grid container>
                     <>
                         {/* 그룹 메뉴 바 컴포넌트 들어갈 곳 */}
-                        <Grid md={2} sm={2} xs={2} className="groupMenu-div">
+                        <Grid md={2} sm={12} xs={12} className="groupMenu-div">
                             <Item
                                 style={{
                                     paddingLeft: 0,
