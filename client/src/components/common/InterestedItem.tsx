@@ -15,6 +15,8 @@ export default function InterestedItem({
     //     new Set<string>()
     // );
 
+    console.log(selectedArr);
+
     // useEffect로 비동기 useState 처리
     useEffect(() => {
         // console.log('>>>>', selectedArr);
