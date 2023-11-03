@@ -4,7 +4,7 @@ import { kadvice } from 'kadvice';
 export default function Quotes() {
     const advice = kadvice.getOne();
 
-    console.log(advice);
+    // console.log(advice);
     return (
         // <div className="content-grid-box quotes-div-flex">
         //     <div className="quotes ">

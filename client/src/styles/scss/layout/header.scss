@@ -2,22 +2,25 @@
 @import '~include-media/dist/include-media';
 
 .header-container {
-    background-color: $color-primary;
+    // background-color: $color-primary;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     flex-direction: row;
+    position: fixed;
+    z-index: 9999;
+    backdrop-filter: blur(3px);
 }
 .header-divOne {
     // display: flex;
     // flex-direction: row;
-    background-color: $color-primary;
+    // background-color: $color-primary;
 }
 .header-divTwo {
     display: flex;
     flex-direction: row;
-    background-color: $color-primary;
+    // background-color: $color-primary;
     @include media('<800px') {
         display: none;
         flex-direction: column;
@@ -70,7 +73,7 @@
     display: block;
     border: none;
     box-shadow: none;
-    background-color: $color-primary;
+    // background-color: $color-primary;
     padding: 0;
     width: 50px;
 }
@@ -97,7 +100,7 @@
         border: none;
         margin: 0.4rem 0.4rem;
         text-decoration: underline;
-        background-color: $color-primary;
+        // background-color: $color-primary;
         color: white;
         box-shadow: none;
     }

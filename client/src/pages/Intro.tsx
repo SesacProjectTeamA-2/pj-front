@@ -9,7 +9,10 @@ export default function Intro() {
             <div className="intro-header">
                 <div className="video-container">
                     <video autoPlay loop>
-                        <source src="/asset/test.mp4" type="video/mp4" />
+                        <source
+                            src="/asset/people_tunnel.mp4"
+                            type="video/mp4"
+                        />
                     </video>
                 </div>
 

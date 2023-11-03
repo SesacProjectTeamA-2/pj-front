@@ -3,8 +3,20 @@ import { Link } from 'react-router-dom';
 
 import '../../styles/scss/layout/header.scss';
 import Dday from './Dday';
+import { grey } from '@mui/material/colors';
+import { Button, ButtonGroup } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function Header(props: any) {
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: grey[200],
+            },
+            secondary: grey,
+        },
+    });
+
     // 리사이즈 이벤트에 따라 너비값 측정
     const [myWidth, setMyWidth] = useState<number>(0);
     window.onresize = () => {
@@ -31,7 +43,7 @@ export default function Header(props: any) {
                     <Link to="/">
                         <div className="logo-container">
                             <img
-                                src="/asset/lego.svg"
+                                src="/asset/lego2.svg"
                                 className="logo-img"
                                 alt="logo"
                             />
@@ -46,44 +58,54 @@ export default function Header(props: any) {
                     redux에서 date 값 꺼내와서 디데이 커스텀훅 => 디데이 값만 보이게 */}
 
                     <nav className="header-nav ">
-                        <ul className="menu">
-                            <li>
+                        <ThemeProvider theme={theme}>
+                            <ButtonGroup
+                                aria-label="outlined button group"
+                                variant="outlined"
+                                color="secondary"
+                                sx={{ p: 1 }}
+                            >
                                 <Link to="/main">
-                                    <button className="menu-button">
+                                    <Button className="menu-button">
                                         Main
-                                    </button>
+                                    </Button>
                                 </Link>
-                            </li>
-                            <li>
-                                <Link to="/mission">
-                                    <button className="menu-button">
-                                        Mission
-                                    </button>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/group">
-                                    <button className="menu-button">
-                                        Group
-                                    </button>
-                                </Link>
-                            </li>
 
-                            <li>
+                                <Link to="/mission">
+                                    <Button className="menu-button">
+                                        Mission
+                                    </Button>
+                                </Link>
+                                {/* <li> */}
+                                <Link to="/group">
+                                    <Button className="menu-button">
+                                        Group
+                                    </Button>
+                                </Link>
+                                {/* </li> */}
                                 {/* 관리자만 보이는 버튼 */}
                                 <Link to="/management/users">
-                                    <button className="menu-button">
+                                    <Button className="menu-button">
                                         Management
-                                    </button>
+                                    </Button>
                                 </Link>
-                            </li>
+                            </ButtonGroup>
+                        </ThemeProvider>
+                        <ul className="menu">
                             <li>
                                 {/* 비로그인 시 */}
-                                <Link to="/login">
-                                    <button className="menu-button">
-                                        Login
-                                    </button>
-                                </Link>
+                                <ThemeProvider theme={theme}>
+                                    <Link to="/login">
+                                        <Button
+                                            aria-label="outlined button group"
+                                            variant="outlined"
+                                            color="secondary"
+                                            className="menu-button"
+                                        >
+                                            Login
+                                        </Button>
+                                    </Link>
+                                </ThemeProvider>
                             </li>
                             <li>
                                 {/* 로그인 시 */}
