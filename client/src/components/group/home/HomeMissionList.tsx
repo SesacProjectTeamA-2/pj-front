@@ -8,6 +8,8 @@ import {
 } from '../../../types/types';
 import MissionAddModal from '../../common/modal/MissionAddModal';
 
+import useDdayCount from '../../../hooks/useDdayCount';
+
 export default function HomeMissionList() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
     const missionAddHandler = () => {
@@ -85,9 +87,9 @@ export default function HomeMissionList() {
                         />
                     ) : null}
                 </div>
-                {/* [추후] 디데이 수정 */}
-                <div className="title2">D-3</div>
-                <div className="title2">{dummyGroupState.gDday}</div>
+                <div className="title2">
+                    {useDdayCount(dummyGroupState.gDday)}
+                </div>
             </div>
             <div className="main-content">
                 <ul>

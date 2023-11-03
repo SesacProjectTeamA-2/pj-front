@@ -5,7 +5,7 @@ const initialState = {
     gSeq: 0,
     gName: 'Node 스터디 (중복 안됩니다!)',
     gDesc: 'Node.js 스터디 모임입니다!',
-    gDday: '2023-10-28',
+    gDday: '2023-11-10',
     gMaxMem: 10,
     gCategory: 'st',
     gCoverImg:
