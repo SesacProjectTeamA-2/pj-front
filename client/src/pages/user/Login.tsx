@@ -11,17 +11,17 @@ import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
 
 export default function Login() {
     const nvg = useNavigate();
-    useEffect(() => {
-        let isUser = new URL(window.location.href).searchParams.get(
-            'alreadyUser'
-        );
-        console.log(window.location.href);
-        console.log(isUser);
-        console.log('hello');
-        // nvg('/');
-    });
+    // useEffect(() => {
+    //     let isUser = new URL(window.location.href).searchParams.get(
+    //         'alreadyUser'
+    //     );
+    //     console.log('href', window.location.href);
+    //     console.log('isUser', isUser);
+    //     // nvg('/');
+    // });
     const googleLogin = (): void => {
         window.location.href = 'http://localhost:8888/api/user/login/google';
+        // nvg('/');
     };
 
     const kakaoLogin = (): void => {

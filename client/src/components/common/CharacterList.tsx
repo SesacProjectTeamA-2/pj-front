@@ -1,7 +1,7 @@
 import React from 'react';
 import CharacterItem from './CharacterItem';
 
-export default function CharacterList() {
+export default function CharacterList(props: any) {
     interface Character {
         id: string;
         imgSrc: string;
@@ -38,7 +38,12 @@ export default function CharacterList() {
     return (
         <>
             <div className="character-list-div">
-                <CharacterItem characterArr={characterArr} />
+                <CharacterItem
+                    characterArr={characterArr}
+                    selectedCharacter={props.selectedCharacter}
+                    setSelectedCharacter={props.setSelectedCharacter}
+                    selectCharacter={props.selectCharacter}
+                />
             </div>
         </>
     );

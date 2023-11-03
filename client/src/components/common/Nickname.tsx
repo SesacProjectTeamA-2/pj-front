@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-export default function Nickname(): JSX.Element {
+export default function Nickname(props: any): JSX.Element {
     const [input, setInput] = useState<string | number>('');
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -15,7 +15,8 @@ export default function Nickname(): JSX.Element {
                 <input
                     // readOnly={readOnlyVal}
                     onChange={(e) => setInput(e.target.value)}
-                    value={input}
+                    value={input} // 로그인 값으로 닉네임 쓸지말지
+                    // value={props.uName ? props.uName : input}
                     ref={inputRef}
                     id="input-area"
                     className="input-obj"
