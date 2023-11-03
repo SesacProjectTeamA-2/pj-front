@@ -14,8 +14,43 @@ import Dday from '../../components/common/Dday';
 export default function GroupEdit() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
+    const [selectedArr, setSelectedArr] = useState<string[]>([]);
+
+    const [input, setInput] = useState({
+        gName: '',
+        gDesc: '',
+        gDday: '',
+        gCategory: '',
+        gCoverImg: '',
+        gMaxMem: 1,
+        mTitle: [],
+        mContent: [],
+        mLevel: 1,
+    });
+
+    const {
+        gName,
+        gDesc,
+        gDday,
+        gCategory,
+        gCoverImg,
+        gMaxMem,
+        mTitle,
+        mContent,
+        mLevel,
+    } = input;
+
+    const onChange = (e: any) => {
+        const { name, value } = e.target;
+        setInput({ ...input, [name]: value });
+    };
+
     const missionAddHandler = () => {
         setAddModalSwitch(true);
+    };
+
+    const groupEditHandler = () => {
+        console.log(input);
     };
 
     return (
@@ -35,6 +70,8 @@ export default function GroupEdit() {
                             id="filled-basic"
                             label="모임명"
                             variant="filled"
+                            onChange={onChange}
+                            name="gName"
                         />
                         {/* <TextField
                             id="standard-basic"
@@ -44,7 +81,7 @@ export default function GroupEdit() {
                     </Box>
                 </div>
                 <div className="group-create-img">
-                    <div>대표 이미지</div>
+                    <div className="group-img-title">대표 이미지</div>
                     <Button
                         style={{
                             backgroundColor: '#ed8d8d',
@@ -58,13 +95,19 @@ export default function GroupEdit() {
             </div>
             <div className="group-create-content">
                 <div>분야</div>
-                <InterestedList />
+                <InterestedList
+                    selectedArr={selectedArr}
+                    setSelectedArr={setSelectedArr}
+                    num={1}
+                />
             </div>
             <div className="group-create-content description-container">
                 <div>모임 설명</div>
                 <textarea
                     className="description"
                     placeholder="500자 이내로 입력하세요."
+                    onChange={onChange}
+                    name="gDesc"
                 ></textarea>
             </div>
 
@@ -74,6 +117,8 @@ export default function GroupEdit() {
                     defaultValue={1}
                     className="limit-number"
                     type="number"
+                    onChange={onChange}
+                    name="gMaxMem"
                 />
                 <div className="max-number">최대 00명</div>
             </div>
@@ -88,6 +133,7 @@ export default function GroupEdit() {
                         <img src="/asset/icons/plus.svg" />
                     </div>
                     <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
+                    {/* [추후] 미션 추가되면 리스트 형식으로 추가 */}
                 </div>
             </div>
 
@@ -99,7 +145,9 @@ export default function GroupEdit() {
                 />
             ) : null}
             <Link to="/group/home/1">
-                <button className="btn-fixed">모임 수정완료 !</button>
+                <button className="btn-fixed" onClick={groupEditHandler}>
+                    모임 수정완료 !
+                </button>
             </Link>
         </div>
     );

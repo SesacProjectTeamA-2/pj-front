@@ -42,6 +42,8 @@ export default function Header(props: any) {
                 {/* 디데이, 메뉴  */}
                 <div className="header-divTwo pcMode">
                     <Dday />
+                    {/* [추후] 대표 디데이 설정  
+                    redux에서 date 값 꺼내와서 디데이 커스텀훅 => 디데이 값만 보이게 */}
 
                     <nav className="header-nav ">
                         <ul className="menu">
