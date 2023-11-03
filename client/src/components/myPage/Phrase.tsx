@@ -4,7 +4,7 @@ export default function Phrase(): JSX.Element {
     const [content, setContent] = useState<string | number>(
         '여름은 가을로부터 떨어진다'
     );
-    const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
+    // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     //클릭 버튼 값
     const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('');
@@ -12,7 +12,7 @@ export default function Phrase(): JSX.Element {
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
         inputRef.current?.focus();
-        setReadOnlyVal(!readOnlyVal);
+        // setReadOnlyVal(!readOnlyVal);
     };
 
     const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
@@ -24,7 +24,7 @@ export default function Phrase(): JSX.Element {
         <div>
             <label className="input-label">
                 <textarea
-                    readOnly={readOnlyVal}
+                    // readOnly={readOnlyVal}
                     onChange={(e) => setContent(e.target.value)}
                     value={content}
                     ref={inputRef}
