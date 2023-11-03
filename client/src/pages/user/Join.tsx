@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../../styles/scss/pages/user/join.scss';
@@ -8,6 +8,8 @@ import CharacterList from '../../components/common/CharacterList';
 import InterestedList from '../../components/common/InterestedList';
 
 export default function Join() {
+    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+
     return (
         <div className="section">
             <h1 className="join-title">회원 가입</h1>
@@ -26,7 +28,11 @@ export default function Join() {
                     <p>최대 3개</p>
                 </div>
                 <div className="interested-div-two">
-                    <InterestedList />
+                    <InterestedList
+                        selectedArr={selectedArr}
+                        setSelectedArr={setSelectedArr}
+                        num={3}
+                    />
                 </div>
             </div>
             <br />

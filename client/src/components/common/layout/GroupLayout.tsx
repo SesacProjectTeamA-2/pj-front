@@ -62,7 +62,6 @@ export default function GroupLayout({ children, showChat }: any) {
                         <Footer />
                     </>
                 </Grid>
-                <Footer />
             </div>
         </>
     );

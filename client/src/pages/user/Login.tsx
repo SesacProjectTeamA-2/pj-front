@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../../styles/scss/pages/user/login.scss';
@@ -10,10 +10,21 @@ import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
 // import { GoogleLoginButton } from 'react-social-login-buttons';
 
 export default function Login() {
+    const nvg = useNavigate();
+    useEffect(() => {
+        let isUser = new URL(window.location.href).searchParams.get(
+            'alreadyUser'
+        );
+        console.log(window.location.href);
+        console.log(isUser);
+        console.log('hello');
+        // nvg('/');
+    });
     const googleLogin = (): void => {
         window.location.href =
             'http://motimates.xyz:8888/api/user/login/google';
     };
+
     const kakaoLogin = (): void => {
         window.location.href =
             'http://motimates.xyz:8888/api/user/login/kakao/authorize';

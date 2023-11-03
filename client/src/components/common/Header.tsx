@@ -9,7 +9,7 @@ export default function Header(props: any) {
     const [myWidth, setMyWidth] = useState<number>(0);
     window.onresize = () => {
         setMyWidth(window.innerWidth);
-        console.log(myWidth);
+        // console.log(myWidth);
     };
 
     // 헤더 메뉴 보여주기

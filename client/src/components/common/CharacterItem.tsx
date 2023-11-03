@@ -9,9 +9,9 @@ export default function CharacterItem(props: any) {
         setSelectedCharacter(characterId);
     };
 
-    // useEffect(() => {
-    //     console.log('Selected Character:', selectedCharacter);
-    // }, [selectedCharacter]);
+    useEffect(() => {
+        console.log('Selected Character:', selectedCharacter.imgSrc);
+    }, [selectedCharacter]);
 
     return (
         <div className="character-item-div ">
