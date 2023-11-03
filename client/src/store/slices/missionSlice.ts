@@ -63,6 +63,10 @@ const missionSlice = createSlice({
         //   // state[번호 + 1].like ? false : true;
         // },
 
+        lengthMission(state) {
+            const lenMission = state.length;
+        },
+
         addMission(state, action) {
             const newMission = action.payload;
             state.push(newMission);
@@ -74,3 +78,4 @@ const missionSlice = createSlice({
 export default missionSlice.reducer;
 // export const { changeGroup } = dummyGroupSlice.actions;
 export const { addMission } = missionSlice.actions;
+export const { lengthMission } = missionSlice.actions;

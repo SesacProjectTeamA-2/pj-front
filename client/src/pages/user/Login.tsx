@@ -11,14 +11,15 @@ import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
 
 export default function Login() {
     const googleLogin = (): void => {
-        window.location.href = 'http://motimates.xyz/api/user/login/google';
+        window.location.href =
+            'http://motimates.xyz:8888/api/user/login/google';
     };
     const kakaoLogin = (): void => {
         window.location.href =
-            'http://motimates.xyz/api/user/login/kakao/authorize';
+            'http://motimates.xyz:8888/api/user/login/kakao/authorize';
     };
     const naverLogin = (): void => {
-        window.location.href = 'http://motimates.xyz/api/user/login/naver';
+        window.location.href = 'http://motimates.xyz:8888/api/user/login/naver';
     };
 
     return (

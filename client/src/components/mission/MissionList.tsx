@@ -3,6 +3,7 @@ import { MissionStateType, RootStateType } from '../../types/types';
 import MissionItem from './MissionItem';
 import GroupFilterTag from './GroupFilterTag';
 import { useSelector } from 'react-redux';
+import useDdayCount from '../../hooks/useDdayCount';
 
 export default function MissionList() {
     // const [missions, setMissions] = useState<MissionType[]>([
@@ -35,8 +36,8 @@ export default function MissionList() {
             <ul className="mission-item-ul1">
                 <div className="MissionList-header">
                     <div className="title4">{group.gName}</div>
-                    {/* [추후] 디데이로 변경 */}
-                    <div className="title5">{group.gDday}</div>
+
+                    <div className="title5">{useDdayCount(group.gDday)}</div>
                 </div>
                 {missions.map((mission: MissionStateType) => (
                     <MissionItem
@@ -47,7 +48,6 @@ export default function MissionList() {
                 ))}
             </ul>
 
-            {/* [수정 요청] map 돌릴거라 전부 공통 클래스명으로 바꿔주세요..! (ul1, ul2 말고, 공통 클래스명인 ul 로)*/}
             <ul className="mission-item-ul2">
                 <div className="MissionList-header">
                     <div className="title4">근손실방지</div>
