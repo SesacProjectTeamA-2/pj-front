@@ -5,12 +5,13 @@ export default function CharacterItem(props: any) {
         null
     );
 
-    const selectCharacter = (characterId: string): void => {
-        setSelectedCharacter(characterId);
+    const selectCharacter = (characterSrc: string): void => {
+        setSelectedCharacter(characterSrc);
     };
+    // const selectedCharacterSrc:string= props.chracterArr[]
 
     useEffect(() => {
-        console.log('Selected Character:', selectedCharacter.imgSrc);
+        console.log('Selected Character:', selectedCharacter);
     }, [selectedCharacter]);
 
     return (
@@ -19,11 +20,11 @@ export default function CharacterItem(props: any) {
                 return (
                     <label
                         key={character.id}
-                        onClick={() => selectCharacter(character.id)}
+                        onClick={() => selectCharacter(character.imgSrc)}
                         className="character-label"
                         style={{
                             border:
-                                selectedCharacter === character.id
+                                selectedCharacter === character.imgSrc
                                     ? '5px solid #ed8d8d'
                                     : 'none',
                             borderRadius: '15px',
