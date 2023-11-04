@@ -46,13 +46,24 @@
     gap: 2rem;
 }
 
+.group-title-text {
+    display: flex;
+    width: 100%;
+}
+
 .mission-edit {
     color: $color-gray6;
     cursor: pointer;
 }
 
+.group-home-mission-round-text {
+    display: flex;
+    justify-content: flex-end;
+    color: $color-gray4;
+}
+
 .group-home-duration {
-    color: $color-gray6;
+    color: $color-gray3;
 }
 
 .main-content {
@@ -120,6 +131,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    width: 100%;
 }
 
 .member-count {
