@@ -18,9 +18,33 @@ export default function MyPage() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
 
+    // 사용자 데이터 가져오기
+    // const getUserData = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/api/user`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             console.log('user', res);
+    //         });
+    // };
+    // useEffect(() => {
+    //     getUserData();
+    // }, []);
+
+    /////////////////////////////////////
+
     // 1. 닉네임
     const [input, setInput] = useState<string | number>('');
     // console.log('닉네임', input);
+
+    // 1-2. 닉네임 중복검사 결과
+    const [isUsing, setIsUsing] = useState<boolean>(true);
+
+    // 1-3. 닉네임 중복검사 메시지
+    const [msg, setMsg] = useState<string>('');
 
     // 2. 자기소개
     const [content, setContent] = useState<string | number>('');
@@ -41,23 +65,47 @@ export default function MyPage() {
     // console.log(selectedArr[1]);
     // console.log(selectedArr[2]);
 
-    //  5. dDay 설정
+    // 전체 그룹 불러와야 함
 
-    // 사용자 데이터 가져오기
-    // const getUserData = async () => {
-    //     const res = await axios
-    //         .get(`${process.env.REACT_APP_DB_HOST}/api/user`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log('user', res);
-    //         });
-    // };
+    // 5. 선택한 dDay id
+    const [dDayPin, setDdayPin] = useState<number | null>(0);
+    const handleCheckDday = (groupId: number): void => {
+        setDdayPin(groupId);
+    };
+    // console.log('dDayPin', dDayPin);
+
+    // 6. 선택한 그룹 id
+    const [donePin, setDonePin] = useState<number | null>(0);
+    const handleCheckDone = (groupId: number): void => {
+        setDonePin(groupId);
+    };
+    // console.log('donePin', donePin);
+
+    //  7. dDay 설정: y/ 설정하지 않았을 경우, 빈값(null)"
+    const [checkDday, setCheckDday] = useState<string | null>(null);
+    useEffect(() => {
+        dDayPin === 0 && donePin === 0 ? setCheckDday(null) : setCheckDday('y');
+        // console.log(checkDday);
+    }, [dDayPin, donePin]);
+
+    // 8. 명언 모드
+    // 8-1. 적은 명언 내용
+    const [phraseCtt, setPhraseCtt] = useState<string | number>(
+        '여름은 가을로부터 떨어진다'
+    );
+    // console.log('명언', phraseCtt);
+
+    // 8-2. 선택한 명언 모드
+    const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('');
+    const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
+        const phraseModeBtn: HTMLElement = e.target as HTMLElement;
+        setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
+    };
     // useEffect(() => {
-    //     getUserData();
-    // }, []);
+    //     console.log('phraseModeBtnVal', phraseModeBtnVal);
+    // }, [phraseModeBtnVal]);
+
+    // 9. 회원 탈퇴
 
     // 사용자 데이터 수정
     interface patchedUserDataItf {
@@ -75,18 +123,20 @@ export default function MyPage() {
         message: boolean;
     }
     const patchedUserData = {
-        uName: '중복 불가',
-        uDesc: '안녕하세요.',
+        //캐릭터값, 대표사진 필요
+        uName: input,
+        uDesc: content,
         uPhrase:
             '작성하지 않을 시(null), 랜덤 명언/ 작성할 경우 해당 문구 출력',
-        uCategory1: 'etc = 기타',
-        uCategory2: 'etc = 기타',
-        uCategory3: 'etc = 기타',
-        uSetDday: 'y/ 설정하지 않았을 경우, 빈값(null)',
-        uMainDday: '해당 모임의 seq(gSeq)',
-        uMainGroup: '해당 모임의 seq(gSeq)',
+        uCategory1: selectedArr[0],
+        uCategory2: selectedArr[1],
+        uCategory3: selectedArr[2],
+        uSetDday: checkDday,
+        uMainDday: dDayPin,
+        uMainGroup: donePin,
         result: 'false(닉네임이 중복되는 경우)',
-        message: 'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
+        message: isUsing,
+        //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
     };
 
     // const patchUserData = async () => {
@@ -119,6 +169,7 @@ export default function MyPage() {
                 </div>
                 <div className="myPage-div-one-two">
                     <Nickname input={input} setInput={setInput} />
+                    {msg}
                     <Introduce content={content} setContent={setContent} />
                 </div>
             </div>
@@ -145,13 +196,26 @@ export default function MyPage() {
                 </div>
                 <div className="myPage-div-three-two">
                     <h3 className="myPage-p">명언</h3>
-                    <Phrase />
+                    <Phrase
+                        phraseCtt={phraseCtt}
+                        setPhraseCtt={setPhraseCtt}
+                        phraseModeBtnVal={phraseModeBtnVal}
+                        setPhraseModeBtnVal={setPhraseModeBtnVal}
+                        phraseSelect={phraseSelect}
+                    />
                 </div>
             </div>
 
             <div className="myPage-div-four">
                 <h3 className="myPage-h3">메인화면 설정</h3>
-                <SetMainList />
+                <SetMainList
+                    setDdayPin={setDdayPin}
+                    dDayPin={dDayPin}
+                    handleCheckDday={handleCheckDday}
+                    setDonePin={setDonePin}
+                    donePin={donePin}
+                    handleCheckDone={handleCheckDone}
+                />
                 <PsnCoverImg />
             </div>
 

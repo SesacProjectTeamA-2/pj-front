@@ -72,7 +72,7 @@ export default function Join() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
+                console.log('회원가입 데이터', res.data);
             });
     };
 
