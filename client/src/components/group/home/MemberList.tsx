@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MemberList() {
+export default function MemberList({ gMax, isLeader, memberNickName }: any) {
     interface MemberType {
         id: number;
         name: string;
@@ -60,11 +60,12 @@ export default function MemberList() {
                 <div className="title5">
                     참석인원{' '}
                     <span className="member-count">
-                        {memberList.length + 1}
+                        {/* {memberList.length + 1} */}
+                        {memberNickName.length + 1}
                     </span>
-                    / 10{' '}
+                    / {gMax}
                     <span className="member-left">
-                        ({10 - 1 - memberList.length}자리 남음)
+                        ({gMax - 1 - memberNickName.length}자리 남음)
                     </span>
                 </div>
             </div>

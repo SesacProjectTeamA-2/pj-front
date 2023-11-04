@@ -10,7 +10,11 @@ import MissionAddModal from '../../common/modal/MissionAddModal';
 
 import useDdayCount from '../../../hooks/useDdayCount';
 
-export default function HomeMissionList({ missionList, setMissionList }: any) {
+export default function HomeMissionList({
+    missionList,
+    setMissionList,
+    gDday,
+}: any) {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
     const missionAddHandler = () => {
         setAddModalSwitch(true);
@@ -90,7 +94,8 @@ export default function HomeMissionList({ missionList, setMissionList }: any) {
                     ) : null}
                 </div>
                 <div className="title2">
-                    {useDdayCount(dummyGroupState.gDday)}
+                    {/* {useDdayCount(dummyGroupState.gDday)} */}
+                    {gDday > 0 ? 'D-' + gDday : 'D-DAY'}
                 </div>
             </div>
             <div className="main-content">

@@ -102,7 +102,7 @@ function App() {
 
                 {/* 그룹에만 그룹 메뉴 존재 */}
                 <Route
-                    path="/group/home/*"
+                    path="/group/home/:gSeq"
                     element={
                         <GroupLayout
                             children={<GroupHome />}
@@ -150,7 +150,7 @@ function App() {
                 {/* 게시물 Create */}
                 {/* [추후] 동적으로 수정하기 */}
                 <Route
-                    path="/group/board/post/1"
+                    path="/board/create"
                     // path="*/post"
                     element={
                         <GroupLayout
@@ -163,7 +163,7 @@ function App() {
                 {/* 게시물 Read */}
                 {/* [추후] 동적으로 수정하기 */}
                 <Route
-                    path="/group/noti/1/1"
+                    path="/board/:gSeq/*"
                     element={
                         <GroupLayout
                             children={<GroupPostDetail />}
@@ -174,7 +174,7 @@ function App() {
 
                 {/* 게시물 Edit */}
                 <Route
-                    path="/group/board/edit/1"
+                    path="/board/edit/:gbSeq"
                     element={
                         <GroupLayout
                             children={<BoardEdit />}
@@ -184,17 +184,6 @@ function App() {
                 />
 
                 {/* 모임 Edit */}
-                <Route
-                    path="/group/board/edit/:gSeq"
-                    element={
-                        <GroupLayout
-                            children={<GroupEdit />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-
-                {/* 모임 Update */}
                 <Route
                     path="/group/edit/:gSeq"
                     element={

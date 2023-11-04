@@ -63,7 +63,7 @@ export default function MissionAddModal({
     // const [missionList, setMissionList] = useState<Mission[]>([]);
 
     const [missionInput, setMissionInput] = useState({
-        id: missionList.length + 1,
+        id: 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
@@ -90,19 +90,25 @@ export default function MissionAddModal({
 
     console.log('list', missionList.length);
 
+    const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
+
+    // useEffect(() => {
+    //     setNextMissionId(missionList.length + 1);
+    // }, [nextMissionId])
+
+    console.log(nextMissionId);
+
     const oneMissionAddHandler = () => {
-        console.log(missionInput);
-        dispatch(addMission(missionInput));
+        // console.log(missionInput);
+        // dispatch(addMission(missionInput));
 
         const newMissions = [...missionList, missionInput];
-        // missionList.push(input);
-
         setMissionList(newMissions);
 
         // 입력 필드 초기화
         setMissionInput({
-            // id: Object.keys(missionState).length + 1,
-            id: missionList.length + 1,
+            // id: Object.keys(missionList).length + 1,
+            id: missionList.length + 2,
             mTitle: '',
             mContent: '',
             mLevel: 1,

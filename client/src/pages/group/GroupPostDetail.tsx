@@ -15,7 +15,6 @@ export default function GroupPostDetail() {
     const [warningModalSwitch, setWarningModalSwitch] = useState(false);
 
     const warningModalSwitchHandler = (menu: string) => {
-        console.log('??????????');
         setMenu(menu);
         setWarningModalSwitch(!warningModalSwitch);
     };
@@ -25,7 +24,7 @@ export default function GroupPostDetail() {
             <GroupHeader
                 // [ 추후 ] 넘버링 id 추가
                 // title={`미션 1. ${missionArr[0]}`}
-                title={'공지사항'}
+                title={'자유 / 질문'}
                 groupName={'코딩학당'}
             />
 
