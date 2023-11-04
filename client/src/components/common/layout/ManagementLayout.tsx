@@ -5,7 +5,6 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import Item from '@mui/material/ListItem';
 
 import SidebarManagement from '../../management/SidebarManagement';
-import { Center } from '@react-three/drei';
 
 // groupbar section chat
 export default function ManagementLayout({ children, showChat }: any) {

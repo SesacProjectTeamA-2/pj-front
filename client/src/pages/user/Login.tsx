@@ -26,9 +26,6 @@ export default function Login() {
     // });
     const googleLogin = (): void => {
         window.location.href = 'http://localhost:8888/api/user/login/google';
-        // nvg('/');
-
-        // window.location.reload();
     };
 
     const kakaoLogin = (): void => {
