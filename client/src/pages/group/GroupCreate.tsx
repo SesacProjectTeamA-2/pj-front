@@ -55,6 +55,16 @@ export default function GroupCreate() {
                 mContent: 'Node.js 강의 쳅터 1 듣고 오기',
                 mLevel: 5,
             },
+            {
+                mTitle: '알고리즘',
+                mContent: '코드 풀이 제출하기',
+                mLevel: 5,
+            },
+            {
+                mTitle: '블로깅',
+                mContent: '개발 블로그 포스팅 링크 올리기',
+                mLevel: 5,
+            },
         ],
     };
 
