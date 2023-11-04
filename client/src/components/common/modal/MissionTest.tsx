@@ -50,14 +50,9 @@ export default function MissionAddModal({
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-    const [leng, setLeng] = useState<number>(missionList.length);
-    // useEffect(() => {
-    //     setLeng(leng + 1);
-    //     console.log('leng ', leng);
-    // }, [missionState]);
 
     const [missionInput, setMissionInput] = useState({
-        id: missionList.length + 2,
+        id: missionList.length + 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
@@ -75,25 +70,19 @@ export default function MissionAddModal({
 
     console.log('list', missionList.length);
 
-    const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
-
-    // useEffect(() => {
-    //     setNextMissionId(missionList.length + 1);
-    // }, [nextMissionId])
-
-    console.log(nextMissionId);
-
     const oneMissionAddHandler = () => {
-        // console.log(missionInput);
-        // dispatch(addMission(missionInput));
+        console.log(missionInput);
+        dispatch(addMission(missionInput));
 
         const newMissions = [...missionList, missionInput];
+        // missionList.push(input);
+
         setMissionList(newMissions);
 
         // 입력 필드 초기화
         setMissionInput({
-            // id: Object.keys(missionList).length + 1,
-            id: missionList.length + 2,
+            // id: Object.keys(missionState).length + 1,
+            id: missionList.length + 1,
             mTitle: '',
             mContent: '',
             mLevel: 1,
@@ -178,7 +167,6 @@ export default function MissionAddModal({
                                     variant="standard"
                                     name="mTitle"
                                     onChange={onChange}
-                                    value={mTitle}
                                 />
                             </Box>
                         </div>
@@ -190,13 +178,12 @@ export default function MissionAddModal({
                                 난이도
                             </InputLabel>
                             <NativeSelect
-                                // defaultValue={1}
+                                defaultValue={1}
                                 inputProps={{
                                     name: 'nLevel',
                                     id: 'uncontrolled-native',
                                 }}
                                 onChange={onChange}
-                                value={mLevel}
                             >
                                 <option value={1}>⭐️</option>
                                 <option value={3}>⭐️⭐️</option>
@@ -220,7 +207,6 @@ export default function MissionAddModal({
                             maxRows={4}
                             variant="filled"
                             name="mContent"
-                            value={mContent}
                             onChange={onChange}
                         />
                     </Box>
@@ -302,43 +288,12 @@ export default function MissionAddModal({
                                     )
                                 ) : (
                                     <>
-                                        {/* 미션 옆에 숫자 */}
                                         {missionState.map((mission: any) => {
                                             return (
                                                 <div key={mission.id}>
                                                     <Divider component="li" />
 
-                                                    {/* 여기 */}
-                                                    <ListItem>
-                                                        <ListItemText
-                                                            primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
-                                                            secondary={`${mission.mContent}`}
-                                                        />
-                                                        <div>
-                                                            <button
-                                                                className="modal-mission-edit-btn btn-sm"
-                                                                onClick={() =>
-                                                                    editHandler(
-                                                                        mission.id
-                                                                    )
-                                                                }
-                                                            >
-                                                                수정
-                                                            </button>
-                                                        </div>
-                                                        <div>
-                                                            <button
-                                                                className="modal-mission-delete-btn btn-sm"
-                                                                onClick={() =>
-                                                                    editHandler(
-                                                                        mission.id
-                                                                    )
-                                                                }
-                                                            >
-                                                                삭제
-                                                            </button>
-                                                        </div>
-                                                    </ListItem>
+                                                    <ListItem></ListItem>
                                                 </div>
                                             );
                                         })}

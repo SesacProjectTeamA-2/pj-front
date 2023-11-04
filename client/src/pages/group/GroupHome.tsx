@@ -14,7 +14,7 @@ import CurRanking from '../../components/group/home/CurRanking';
 import AccRanking from '../../components/group/home/AccRanking';
 import MemberList from '../../components/group/home/MemberList';
 
-import { RootStateType } from '../../../src/types/types'; // Redux 스토어 전체 타입을 가져옵니다.
+import { GroupDetailType, RootStateType } from '../../../src/types/types'; // Redux 스토어 전체 타입을 가져옵니다.
 
 // import JSConfetti from 'js-confetti'; //_ 빵빠레
 
@@ -84,25 +84,37 @@ export default function GroupHome() {
 
     const { gSeq } = useParams();
 
-    console.log('gSeq:', gSeq);
+    const [groupDetail, setGroupDetail] = useState<GroupDetailType>({
+        grInformation: '',
+        groupCategory: '',
+        groupCoverImg: '',
+        groupDday: 0,
+        groupMaxMember: 0,
+        groupMission: [],
+        groupName: '',
+        isJoin: false,
+        isLeader: false,
+        memberImg: [],
+        memberNickname: [],
+        result: false,
+    });
 
     useEffect(() => {
         const getGroup = async () => {
             const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/group/${gSeq}`,
+                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
                     },
                 }
             );
-            console.log('llllllll', res);
 
-            // [백 이후]
+            setGroupDetail(res.data);
         };
 
         getGroup();
-    }, []); // 빈 의존성 배열 : 컴포넌트가 마운트될 때 한 번만 실행
+    }, []);
 
     interface Mission {
         id: number;
@@ -113,19 +125,23 @@ export default function GroupHome() {
     }
 
     // res.data에서 missionArray
-    const [missionList, setMissionList] = useState<Mission[]>([]);
+    const [missionList, setMissionList] = useState<Mission[]>(
+        groupDetail.groupMission
+    );
+
+    console.log(groupDetail);
 
     return (
         <div className="section group-home">
             <div className="cover-img">
                 <div className="title1 cover-title">
-                    {dummyGroupState.gName}
+                    {groupDetail.groupName}
                 </div>
             </div>
 
             <div className="wrapper">
                 <div className="title2 group-title-text">어떤 모임인가요 ?</div>
-                <div className="main-content">{dummyGroupState.gDesc}</div>
+                <div className="main-content">{groupDetail.grInformation}</div>
             </div>
 
             <HomeMissionList
@@ -136,7 +152,7 @@ export default function GroupHome() {
                 //         action={'미션생성'}
                 //         setInput={setInput}
                 //         input={input}
-                //         gDday={gDday}
+                gDday={groupDetail.groupDday}
             />
 
             <div className="ranking-container">
@@ -144,7 +160,11 @@ export default function GroupHome() {
                 <AccRanking />
             </div>
 
-            <MemberList />
+            <MemberList
+                gMax={groupDetail.groupMaxMember}
+                isLeader={groupDetail.isLeader}
+                memberNickName={groupDetail.memberNickname}
+            />
 
             <button className="btn-fixed" onClick={onClick}>
                 가입하기
