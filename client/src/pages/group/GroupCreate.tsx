@@ -27,7 +27,7 @@ export default function GroupCreate() {
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
-        missionArray: [],
+        missionArray: '',
     });
 
     const { gName, gDesc, gDday, gCategory, gCoverImg, gMaxMem, missionArray } =
@@ -59,11 +59,7 @@ export default function GroupCreate() {
         ],
     };
 
-    console.log('input', input);
-
     const groupCreateHandler = async () => {
-        console.log(`${process.env.REACT_APP_DB_HOST}`);
-
         const res = await axios.post(
             `${process.env.REACT_APP_DB_HOST}/group`,
             input,
@@ -99,10 +95,10 @@ export default function GroupCreate() {
 
     // 분야 타입 선택
     const interestTypeHandler = (id: string) => {
-        console.log(id);
         setSelectedInterestId(id);
     };
 
+    //=== 미션 ===
     interface Mission {
         id: number;
         mTitle: string;
@@ -113,57 +109,6 @@ export default function GroupCreate() {
     }
 
     const [missionList, setMissionList] = useState<Mission[]>([]);
-
-    //; /group
-    //] POST
-    //-- req
-    // {
-    //     "gName": "Node 스터디 (중복 안됩니다!)",
-    //     "gDesc": "Node.js 스터디 모임입니다!",
-    //     "gDday": "2023-10-28",
-    //     "gMaxMem": 10,
-    //     "gCategory": "st",
-    //     "gCoverImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU",
-    //     "mTitle": "Node.js 강의 듣기",
-    //     "mContent": "Node.js 강의 쳅터 1 듣고 오기",
-    //     "mLevel": 5
-    //   }
-
-    //-- res
-    // {
-    //     "isSuccess": true,
-    //     "msg": "성공"
-    //   }
-
-    //] PATCH
-    //-- req
-    //     {
-    //   "gSeq": 1,
-    //   "gName": "정보처리기사 실기 대비반 (중복 안됩니다!)",
-    //   "gDesc": "정보처리기사 실기 대비 오프라인 모임입니다!",
-    //   "gDday": "2023-10-31",
-    //   "gMaxMem": 20,
-    //   "gCategory": "cert",
-    //   "gCoverImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVnwfCZtvVrf0NdXWT4YQp_aVEFlZ5-kuUfw&usqp=CAU"
-    // }
-
-    //-- res
-    // {
-    //     "isSuccess": true,
-    //     "msg": "성공"
-    //   }
-
-    //] DELETE
-    //-- req
-    // {
-    //   "gSeq": 1
-    // }
-
-    //-- res
-    // {
-    //     "isSuccess": true,
-    //     "msg": "성공"
-    //   }
 
     return (
         <div className="section group-create-contianer title5">

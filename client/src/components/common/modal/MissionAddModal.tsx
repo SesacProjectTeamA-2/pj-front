@@ -38,8 +38,6 @@ export default function MissionAddModal({
     const missionState = useSelector((state: RootStateType) => state.mission);
     const dispatch = useDispatch();
 
-    console.log('state', missionState);
-
     // const [listLength, setMissionList] = useState(missionState.length);
 
     // const missionList: any[] = missionState;
@@ -141,26 +139,28 @@ export default function MissionAddModal({
         });
     };
 
-    console.log('??', missionState);
-    console.log('??', missionList);
+    console.log('missionState', missionState);
+    console.log('missionList', missionList);
+
+    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
 
     const editHandler = (targetId: number) => {
         console.log(targetId);
     };
 
     const missionAddDoneHandler = () => {
-        console.log(missionState);
         setAddModalSwitch(false);
 
-        const newMissionArray = [...input.missionArray, missionList];
+        const newMissionArray = [...input.missionArray, ...missionList];
+        setTargetDate(targetDate);
 
-        console.log('fdfd', newMissionArray);
-        console.log('fdfd', input.missionArray);
-        console.log('fdfd', missionList);
+        console.log('!!', input.missionArray);
+        console.log('##', missionList);
 
         setInput({
             ...input,
             missionArray: newMissionArray,
+            gDday: targetDate,
         });
     };
 
@@ -265,7 +265,10 @@ export default function MissionAddModal({
                             {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
                             <div className="group-create-content">
                                 <div className="dday-title">마감일</div>
-                                <Dday />
+                                <Dday
+                                    targetDate={targetDate}
+                                    setTargetDate={setTargetDate}
+                                />
                             </div>
                         </div>
 
