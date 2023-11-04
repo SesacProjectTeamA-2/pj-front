@@ -59,21 +59,63 @@ export default function GroupCreate() {
         gCategory: 'st',
         gCoverImg:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
-        mTitle: ['Node.js 강의 듣기'],
-        mContent: ['Node.js 강의 쳅터 1 듣고 오기'],
-        mLevel: 5,
+        missionArray: [
+            {
+                mTitle: 'Node.js 강의 듣기',
+                mContent: 'Node.js 강의 쳅터 1 듣고 오기',
+                mLevel: 5,
+            },
+        ],
     };
 
-    const groupCreateHandler = async (newGroup: any) => {
-        console.log(newGroup);
-        console.log(`${process.env.REACT_APP_DB_HOST}`);
-        const res = await axios.post(
-            `http://motimates.xyz/api/group`,
-            newGroup
-        );
-        console.log(res.data);
+    // // 쿠키 이름
+    // const cookieName = 'token';
 
-        console.log(input);
+    // // 쿠키 값 가져오기
+    // function getCookieValue(cookieName: any) {
+    //     const name = cookieName + '=';
+    //     const decodedCookies = decodeURIComponent(document.cookie);
+    //     const cookieArray = decodedCookies.split(';');
+
+    //     for (let i = 0; i < cookieArray.length; i++) {
+    //         let cookie = cookieArray[i];
+    //         while (cookie.charAt(0) === ' ') {
+    //             cookie = cookie.substring(1);
+    //         }
+    //         if (cookie.indexOf(name) === 0) {
+    //             return cookie.substring(name.length, cookie.length);
+    //         }
+    //     }
+    //     return null; // 쿠키가 없을 경우
+    // }
+
+    // // 쿠키 값 가져오기
+    // const token = getCookieValue(cookieName);
+
+    // // token 값 출력 또는 사용
+    // console.log('토큰 값:', token);
+
+    // console.log('@@@@@@@@', token);
+
+    const groupCreateHandler = async () => {
+        console.log(`${process.env.REACT_APP_DB_HOST}`);
+
+        // const res = await axios.post(
+        //     `http://localhost:8888/api/group`,
+        //     testGroup
+        //     // {
+        //     //     headers: {
+        //     //         Authorization:
+        //     //             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1Tm1hZSI6IuyEuO2ZlCIsInVFbWFpbCI6ImtzaGhoaDA2NDBAZ21haWwuY29tIiwidVNlcSI6MSwiaWF0IjoxNjk5MDYzMDkxfQ.lh9mF4YcM8mFtCyV1CHiYLF015Q2ydsHTxCnvZ2Q2kw',
+        //     //     },
+        //     // }
+        // );
+        // console.log(res.data);
+
+        // let jwtToken = res.headers.get('Authorization');
+        // console.log(jwtToken);
+
+        const headers = new Headers({ 'Content-Type': 'application/json' });
 
         // 입력 안했을 시, 로직
     };
@@ -221,10 +263,7 @@ export default function GroupCreate() {
             ) : null}
 
             {/* <Link to="/group/home/1"> */}
-            <button
-                className="btn-fixed"
-                onClick={() => groupCreateHandler(testGroup)}
-            >
+            <button className="btn-fixed" onClick={() => groupCreateHandler()}>
                 모임 시작하기 !
             </button>
             {/* </Link> */}

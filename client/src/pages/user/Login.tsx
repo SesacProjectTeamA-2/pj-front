@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import { getAllCookies } from 'react-cookie';
 
-import { getCookies, setCookie } from 'typescript-cookie';
+import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/pages/user/login.scss';
 
@@ -12,12 +11,13 @@ import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
 // import { GoogleLoginButton } from 'react-social-login-buttons';
 
-// const cookies = new Cookies();
-
 export default function Login() {
-    const cookies = getCookies();
-
     const nvg = useNavigate();
+
+    // 쿠키 유무 (확인용)
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
     // useEffect(() => {
     //     let isUser = new URL(window.location.href).searchParams.get(
     //         'alreadyUser'
@@ -29,6 +29,8 @@ export default function Login() {
     const googleLogin = (): void => {
         window.location.href = 'http://localhost:8888/api/user/login/google';
         // nvg('/');
+
+        // window.location.reload();
     };
 
     const kakaoLogin = (): void => {
@@ -42,11 +44,7 @@ export default function Login() {
     return (
         <div className="section">
             <div className="login-wrapper">
-                <div>
-                    {Object.keys(cookies).length === 0
-                        ? '쿠키 없음'
-                        : '쿠키 있음'}
-                </div>
+                <div>{uToken ? '쿠키 있음' : '쿠키 없음'}</div>
 
                 <h1 id="login-h1">안녕하세요!</h1>
 

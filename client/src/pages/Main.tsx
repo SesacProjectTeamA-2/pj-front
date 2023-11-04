@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 
 import MainImg from '../components/main/MainImg';
@@ -22,6 +22,10 @@ export default function Main() {
     }
 
     console.log('isUser', myCookie.get('isUser'));
+
+    // useEffect(() => {
+    //     window.location.reload();
+    // }, [uToken]);
 
     return (
         <div className="section">

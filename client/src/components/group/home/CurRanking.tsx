@@ -7,8 +7,12 @@ export default function CurRanking() {
             <div className="upper-content">
                 <div className="title2">현재 랭킹</div>
                 <div className="title6 group-home-duration">
-                    {/* [추후] 기간 데이터 연동 */}
-                    2023.10.20-2023.10.30
+                    {/* 동적 수정 */}
+                    <div className="group-home-mission-round-text">5회차</div>
+                    <div>
+                        {/* [추후] 기간 데이터 연동 */}
+                        2023.10.20-2023.10.30
+                    </div>
                 </div>
             </div>
             <div className="main-content">

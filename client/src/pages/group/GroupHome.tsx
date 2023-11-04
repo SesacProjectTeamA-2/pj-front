@@ -84,7 +84,7 @@ export default function GroupHome() {
             </div>
 
             <div className="wrapper">
-                <div className="title2">어떤 모임인가요 ?</div>
+                <div className="title2 group-title-text">어떤 모임인가요 ?</div>
                 <div className="main-content">{dummyGroupState.gDesc}</div>
             </div>
 
