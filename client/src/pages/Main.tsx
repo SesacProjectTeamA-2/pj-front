@@ -12,7 +12,6 @@ export default function Main() {
     const urlParams: any = new URLSearchParams(curPath);
 
     const uToken: string = urlParams.get('token');
-    console.log(uToken);
 
     // 2. 쿠키 굽기
     let myCookie = new Cookies();
