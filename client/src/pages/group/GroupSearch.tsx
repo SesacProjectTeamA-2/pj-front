@@ -15,7 +15,7 @@ export default function GroupSearch({ searchInput }: { searchInput: string }) {
     useEffect(() => {
         const getSearchGroupList = async () => {
             const res = await axios.get(
-                `http://localhost:8888/api/group?search=*&category=st`,
+                `http://localhost:8888/api/group?search=%&category=%`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -37,7 +37,7 @@ export default function GroupSearch({ searchInput }: { searchInput: string }) {
             <div className="title1">검색 결과 입니다.</div>
 
             <div>
-                {searchGroupList.map((searchGroup: GroupStateType) => (
+                {searchGroupList?.map((searchGroup: GroupStateType) => (
                     <div key={searchGroup.gSeq}>
                         <Link to={`/group/home/${searchGroup.gSeq}`}>
                             <button>{searchGroup.gName}</button>

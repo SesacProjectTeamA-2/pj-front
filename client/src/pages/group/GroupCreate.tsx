@@ -9,7 +9,6 @@ import TextField from '@mui/material/TextField';
 
 import '../../styles/scss/pages/group/groupCreate.scss';
 
-import InterestedList from '../../components/common/InterestedList';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 
 export default function GroupCreate() {
@@ -59,6 +58,7 @@ export default function GroupCreate() {
         ],
     };
 
+    // 그룹 생성 요청
     const groupCreateHandler = async () => {
         const res = await axios.post(
             `${process.env.REACT_APP_DB_HOST}/group`,
@@ -72,6 +72,8 @@ export default function GroupCreate() {
         console.log(res.data);
 
         // [추후] input 입력 안했을 시, 로직
+
+        // [추후] 생성한 모임 홈 화면으로 이동
     };
 
     //=== 관심 분야 ===

@@ -9,7 +9,15 @@ export default function WarningModal({
     action,
 }: any) {
     const doneHandler = () => {
-        alert(`[코딩학당] 모임을 ${action}하셨습니다 !`);
+        if (action === '회원 탈퇴') {
+            alert(`Motimate ${action}하셨습니다 !`);
+
+            // [추후 - 혜빈] 회원 탈퇴 요청 추가
+        } else {
+            alert(`[코딩학당] 모임을 ${action}하셨습니다 !`);
+
+            // [추후] 모임 탈퇴 요청 / 게시글 삭제 요청 로직  추가
+        }
         setWarningModalSwitch(false);
     };
 
@@ -40,11 +48,22 @@ export default function WarningModal({
                         <div className="title3">
                             {action === '삭제'
                                 ? `게시글을 ${action}하시겠습니까 ?`
-                                : `[코딩학당] 모임을 정말 ${action}하시겠습니까 ?`}
+                                : action === '탈퇴'
+                                ? `[코딩학당] 모임을 정말 ${action}하시겠습니까 ?`
+                                : `정말 ${action}하시겠습니까 ?`}
                         </div>
-                        <div className="title5 cancel-modal-description">
-                            모임의 활동 정보가 모두 사라지며 복구되지 않습니다.
-                        </div>
+
+                        {action === '회원 탈퇴' ? (
+                            <div className="title5 cancel-modal-description">
+                                Motimate 활동 정보가 모두 사라지며 복구되지
+                                않습니다.
+                            </div>
+                        ) : (
+                            <div className="title5 cancel-modal-description">
+                                모임의 활동 정보가 모두 사라지며 복구되지
+                                않습니다.
+                            </div>
+                        )}
                     </div>
 
                     <div className="mission-cancel-btn-container">
