@@ -14,6 +14,8 @@ export default function Groups() {
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
     const [search, setSearch] = useState(false);
 
+    const [searchInput, setSearchInput] = useState('');
+
     const searchHandler = () => {
         setSearch(!search);
     };
@@ -29,8 +31,6 @@ export default function Groups() {
         }
     };
 
-    // console.log(selectedArr);
-
     return (
         <div className="section">
             <div className="group-container">
@@ -40,6 +40,9 @@ export default function Groups() {
                         type="text"
                         placeholder="어떤 모임을 찾으시나요 ?"
                         onKeyDown={handleKeyDown}
+                        onChange={(e) => {
+                            setSearchInput(e.target.value);
+                        }}
                     />
 
                     <button className="btn-sm" onClick={searchHandler}>
@@ -57,7 +60,11 @@ export default function Groups() {
 
                 <Divider />
 
-                {search ? <GroupSearch /> : <GroupList />}
+                {search ? (
+                    <GroupSearch searchInput={searchInput} />
+                ) : (
+                    <GroupList />
+                )}
             </div>
         </div>
     );

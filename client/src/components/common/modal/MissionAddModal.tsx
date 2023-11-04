@@ -30,7 +30,11 @@ export default function MissionAddModal({
     addModalSwitch,
     setAddModalSwitch,
     action,
-}: MissionAddModalProps) {
+    missionList,
+    setMissionList,
+    setInput,
+    input,
+}: any) {
     const missionState = useSelector((state: RootStateType) => state.mission);
     const dispatch = useDispatch();
 
@@ -80,43 +84,65 @@ export default function MissionAddModal({
         setAddModalSwitch(false);
     };
 
-    const [input, setInput] = useState({
-        id: Object.keys(missionState).length + 1,
+    // interface Mission {
+    //     id: number;
+    //     mTitle: string;
+    //     mContent: string;
+    //     mLevel: number;
+    //     map: string;
+    //     completed: boolean;
+    // }
+
+    // const [missionList, setMissionList] = useState<Mission[]>([]);
+
+    const [missionInput, setMissionInput] = useState({
+        id: missionList.length + 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
-        map: '', // map 필드 추가
-        completed: false,
+        // completed: false,
     });
 
-    const { mTitle, mContent, mLevel } = input;
+    const [gDday, setGDday] = useState('');
+
+    // const [input, setInput] = useState({
+    //     id: Object.keys(missionState).length + 1,
+    //     mTitle: '',
+    //     mContent: '',
+    //     mLevel: 1,
+    //     map: '', // map 필드 추가
+    //     completed: false,
+    // });
+
+    const { mTitle, mContent, mLevel } = missionInput;
 
     const onChange = (e: any) => {
         const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
+        setMissionInput({ ...missionInput, [name]: value });
     };
 
     const oneMissionAddHandler = () => {
-        console.log(input);
-        dispatch(addMission(input));
+        console.log(missionInput);
+        dispatch(addMission(missionInput));
 
-        // const newMissions = [...missionList, input];
+        const newMissions = [...missionList, missionInput];
         // missionList.push(input);
 
-        // setMissionList(newMissions);
+        setMissionList(newMissions);
 
         // 입력 필드 초기화
-        setInput({
-            id: Object.keys(missionState).length + 1,
+        setMissionInput({
+            // id: Object.keys(missionState).length + 1,
+            id: missionList.length + 1,
             mTitle: '',
             mContent: '',
             mLevel: 1,
-            map: '', // map 필드 추가
-            completed: false,
+            // completed: false,
         });
     };
 
     console.log('??', missionState);
+    console.log('??', missionList);
 
     const editHandler = (targetId: number) => {
         console.log(targetId);
@@ -125,6 +151,17 @@ export default function MissionAddModal({
     const missionAddDoneHandler = () => {
         console.log(missionState);
         setAddModalSwitch(false);
+
+        const newMissionArray = [...input.missionArray, missionList];
+
+        console.log('fdfd', newMissionArray);
+        console.log('fdfd', input.missionArray);
+        console.log('fdfd', missionList);
+
+        setInput({
+            ...input,
+            missionArray: newMissionArray,
+        });
     };
 
     return (
@@ -243,7 +280,38 @@ export default function MissionAddModal({
                         >
                             <div className="modal-mission-list-text">
                                 {action === '미션생성' ? (
-                                    '현재 미션이 없습니다.'
+                                    !missionList.length ? (
+                                        '현재 미션이 없습니다.'
+                                    ) : (
+                                        <>
+                                            {missionList.map((mission: any) => {
+                                                return (
+                                                    <div key={mission.id}>
+                                                        <Divider component="li" />
+
+                                                        <ListItem>
+                                                            <ListItemText
+                                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                                secondary={`${mission.mContent}`}
+                                                            />
+                                                            <div>
+                                                                <button
+                                                                    className="modal-mission-edit-btn btn-sm"
+                                                                    onClick={() =>
+                                                                        editHandler(
+                                                                            mission.id
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    수정
+                                                                </button>
+                                                            </div>
+                                                        </ListItem>
+                                                    </div>
+                                                );
+                                            })}
+                                        </>
+                                    )
                                 ) : (
                                     <>
                                         {missionState.map((mission: any) => {

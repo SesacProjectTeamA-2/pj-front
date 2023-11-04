@@ -185,7 +185,7 @@ function App() {
 
                 {/* 모임 Edit */}
                 <Route
-                    path="/group/board/edit/1"
+                    path="/group/board/edit/:gSeq"
                     element={
                         <GroupLayout
                             children={<GroupEdit />}
@@ -196,7 +196,7 @@ function App() {
 
                 {/* 모임 Update */}
                 <Route
-                    path="/group/edit/1"
+                    path="/group/edit/:gSeq"
                     element={
                         <GroupLayout
                             children={<GroupEdit />}
