@@ -1,7 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeGroup } from '../../store/slices/groupSlice';
+import { Cookies } from 'react-cookie';
+import axios from 'axios';
 
 import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
@@ -21,6 +23,9 @@ export default function GroupHome() {
     // const jsConfetti = new JSConfetti();
 
     const dispatch = useDispatch();
+
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
 
     //++ redux test 용
     const test = {
@@ -69,11 +74,36 @@ export default function GroupHome() {
         (state: RootStateType) => state.dummyGroup
     );
 
-    console.log('????', dummyGroupState);
+    // console.log('????', dummyGroupState);
 
     const userState = useSelector((state: RootStateType) => state.user);
 
-    console.log('!!!!', userState);
+    // console.log('!!!!', userState);
+
+    //=== 모임 상세화면 읽어오기 ===
+
+    const { gSeq } = useParams();
+
+    console.log('gSeq:', gSeq);
+
+    useEffect(() => {
+        const getGroup = async () => {
+            const res = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/group/${gSeq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
+            // setTodoItems(res.data);
+            console.log('llllllll', res);
+
+            // [백 이후]
+        };
+
+        getGroup();
+    }, []); // 빈 의존성 배열 : 컴포넌트가 마운트될 때 한 번만 실행
 
     return (
         <div className="section group-home">

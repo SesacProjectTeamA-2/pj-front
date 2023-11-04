@@ -19,20 +19,20 @@ export default function MyPage() {
     const uToken = cookie.get('isUser'); // 토큰 값
 
     // 사용자 데이터 가져오기
-    // const getUserData = async () => {
-    //     const res = await axios
-    //         .get(`${process.env.REACT_APP_DB_HOST}/api/user`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log('user', res);
-    //         });
-    // };
-    // useEffect(() => {
-    //     getUserData();
-    // }, []);
+    const getUserData = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/api/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('user', res);
+            });
+    };
+    useEffect(() => {
+        getUserData();
+    }, []);
 
     /////////////////////////////////////
 
@@ -105,9 +105,7 @@ export default function MyPage() {
     //     console.log('phraseModeBtnVal', phraseModeBtnVal);
     // }, [phraseModeBtnVal]);
 
-    // 9. 회원 탈퇴
-
-    // 사용자 데이터 수정
+    // 1. 사용자 데이터 수정
     interface patchedUserDataItf {
         uName: string;
         uDesc: string;
@@ -122,22 +120,22 @@ export default function MyPage() {
         result: boolean;
         message: boolean;
     }
-    const patchedUserData = {
-        //캐릭터값, 대표사진 필요
-        uName: input,
-        uDesc: content,
-        uPhrase:
-            '작성하지 않을 시(null), 랜덤 명언/ 작성할 경우 해당 문구 출력',
-        uCategory1: selectedArr[0],
-        uCategory2: selectedArr[1],
-        uCategory3: selectedArr[2],
-        uSetDday: checkDday,
-        uMainDday: dDayPin,
-        uMainGroup: donePin,
-        result: 'false(닉네임이 중복되는 경우)',
-        message: isUsing,
-        //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
-    };
+    // const patchedUserData = {
+    //     //캐릭터값, 대표사진 필요
+    //     uName: input,
+    //     uDesc: content,
+    //     uPhrase:
+    //         '작성하지 않을 시(null), 랜덤 명언/ 작성할 경우 해당 문구 출력',
+    //     uCategory1: selectedArr[0],
+    //     uCategory2: selectedArr[1],
+    //     uCategory3: selectedArr[2],
+    //     uSetDday: checkDday,
+    //     uMainDday: dDayPin,
+    //     uMainGroup: donePin,
+    //     result: 'false(닉네임이 중복되는 경우)',
+    //     message: isUsing,
+    //     //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
+    // };
 
     // const patchUserData = async () => {
     //     const res = await axios
@@ -157,6 +155,9 @@ export default function MyPage() {
     // useEffect(() => {
     //     patchUserData();
     // }, []);
+
+    // 2. 회원 탈퇴
+    // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기
 
     return (
         <div className="section">

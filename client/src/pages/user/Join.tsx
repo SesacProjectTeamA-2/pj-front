@@ -33,8 +33,10 @@ export default function Join() {
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
+    // 2. 사용자 닉네임 설정
+    const [input, setInput] = useState<string | number>('');
 
-    // 2. 사용자 선택 캐릭터 이미지 값 설정
+    // 3. 사용자 선택 캐릭터 이미지 값 설정
     const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
         null
     );
@@ -51,10 +53,10 @@ export default function Join() {
     //   res.status(200).redirect(redirectUrl);
 
     const userInfo: userInfoItf = {
-        uEmail: uEmail,
-        uName: uName,
-        // uEmail: 'jo@com',
-        // uName: 'sss',
+        // uEmail: uEmail,
+        // uName: uName,
+        uEmail: 'jo@com',
+        uName: 'sss',
         uCharImg: selectedCharacter,
         // uCategory1: selectedArr[0],
         // uCategory2: selectedArr[1],
@@ -83,7 +85,7 @@ export default function Join() {
             {/* <form action="/api/user/register" method="post"> */}
             <div className="nickname-sub-div">
                 <h3 id="nickname-h3">닉네임</h3>
-                <Nickname uName={uName} />
+                <Nickname uName={uName} input={input} setInput={setInput} />
             </div>
 
             <div className="interested-div">

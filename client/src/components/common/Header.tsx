@@ -118,7 +118,7 @@ export default function Header(props: any) {
                                 </Link>
                             </ButtonGroup>
                         </ThemeProvider>
-                        {!isCookie ? '쿠키 없음' : '쿠키 있음'}
+                        {/* {!isCookie ? '쿠키 없음' : '쿠키 있음'} */}
 
                         <ul className="menu">
                             {!isCookie ? (
@@ -129,7 +129,6 @@ export default function Header(props: any) {
                                             <Button
                                                 aria-label="outlined button group"
                                                 variant="outlined"
-                                                color="secondary"
                                                 className="menu-button"
                                             >
                                                 Login
@@ -139,13 +138,12 @@ export default function Header(props: any) {
                                 </li>
                             ) : (
                                 <>
-                                    {/* 로그인 시 */}
-                                    <button
-                                        className="btn-sm"
+                                    <img
+                                        src="/asset/icons/logout.svg"
+                                        alt="logout"
                                         onClick={logoutHandler}
-                                    >
-                                        로그아웃
-                                    </button>
+                                        id="logout-btn"
+                                    />
                                     <li>
                                         <Link to="/mypage">
                                             <img
@@ -191,9 +189,9 @@ export default function Header(props: any) {
                 }}
             >
                 {' '}
-                <Dday />
                 <nav className="header-nav ">
                     <ul className="menu">
+                        <Dday />
                         <li>
                             <Link to="/main">
                                 <button className="menu-button">Main</button>
@@ -218,26 +216,39 @@ export default function Header(props: any) {
                                 </button>
                             </Link>
                         </li>
-                        <li>
-                            {/* 비로그인 시 */}
-                            <Link to="/login">
-                                <button className="menu-button">Login</button>
-                            </Link>
-                        </li>
-                        <li>
-                            {/* 로그인 시 */}
+                        {!isCookie ? (
+                            <li>
+                                {/* 비로그인 시 */}
+                                <Link to="/login">
+                                    <button className="menu-button">
+                                        Login
+                                    </button>
+                                </Link>
+                            </li>
+                        ) : (
+                            <>
+                                <li>
+                                    {/* 로그인 시 */}
 
-                            <Link to="/mypage">
-                                <img
-                                    src="/asset/images/user.svg"
-                                    style={{
-                                        width: '40px',
-                                        height: '40px',
-                                    }}
-                                    alt="userImg"
-                                ></img>
-                            </Link>
-                        </li>
+                                    <img
+                                        src="/asset/icons/logout.svg"
+                                        alt="logout"
+                                        onClick={logoutHandler}
+                                        id="logout-btn"
+                                    />
+                                    <Link to="/mypage">
+                                        <img
+                                            src="/asset/images/user.svg"
+                                            style={{
+                                                width: '40px',
+                                                height: '40px',
+                                            }}
+                                            alt="userImg"
+                                        ></img>
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                         <li id="chat-li">
                             <img
                                 src="/asset/icons/chat.svg"
