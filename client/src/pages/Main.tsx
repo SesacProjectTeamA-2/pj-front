@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { redirect, useNavigate } from 'react-router-dom';
+
 import { Cookies } from 'react-cookie';
 
 import MainImg from '../components/main/MainImg';
@@ -8,9 +10,6 @@ export default function Main() {
     // 1. 회원가입 url에서 user 정보 가져오기
     const curPath: string = window.location.href;
     const urlParams: any = new URLSearchParams(curPath);
-    // console.log('params', urlParams);
-    // const uEmail: string = urlParams.get('userEmail');
-    // const uName: string = urlParams.get('userName');
 
     const uToken: string = urlParams.get('token');
     console.log(uToken);
@@ -22,10 +21,16 @@ export default function Main() {
     }
 
     console.log('isUser', myCookie.get('isUser'));
+    const cookies = new Cookies();
 
-    // useEffect(() => {
-    //     window.location.reload();
-    // }, [uToken]);
+    // url 주소 재설정
+    const urlStr: string = document.location.href;
+    const newUrlStr: string = urlStr.split('?')[0];
+    console.log('newUrlStr', newUrlStr);
+
+    const nvg = useNavigate();
+    console.log(cookies.get('isUser'));
+    cookies.get('isUser') ? redirect(newUrlStr) : nvg(0);
 
     return (
         <div className="section">

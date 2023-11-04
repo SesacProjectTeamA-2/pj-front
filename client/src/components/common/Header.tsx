@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Cookies } from 'react-cookie';
 
@@ -43,28 +43,23 @@ export default function Header(props: any) {
     const [isCookie, setIsCookie] = useState(false);
 
     const cookie = new Cookies();
-    const uToken = cookie.get('isUser');
+    // const uToken = cookie.get('isUser');   //[질문]
 
-    console.log('@@@@@@@', uToken);
+    // console.log('@@@@@@@', uToken);
     // if (Object.keys(allCookies).length !== 0) {
     //     setIsCookie(true);
     // }
 
     useEffect(() => {
-        if (uToken) {
+        if (cookie.get('isUser')) {
             setIsCookie(true);
         } else setIsCookie(false);
-    }, [uToken]);
+    }, [cookie]);
 
-    // console.log('!!!', allCookies);
-    // console.log('isCookie', isCookie);
-
+    const nvg = useNavigate();
     const logoutHandler = () => {
         cookie.remove('isUser');
-
-        // console.log(getCookies());
-        // removeCookie('amp_6e403e'); // 수정해야할듯...
-        window.location.reload();
+        nvg('/');
     };
 
     return (
