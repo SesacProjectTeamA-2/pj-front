@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
 import Button from '@mui/material/Button';
@@ -12,6 +13,9 @@ import InterestedList from '../../components/common/InterestedList';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 
 export default function GroupCreate() {
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
     const [selectedArr, setSelectedArr] = useState<string[]>([]);
@@ -23,22 +27,11 @@ export default function GroupCreate() {
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
-        mTitle: [],
-        mContent: [],
-        mLevel: 1,
+        missionArray: '',
     });
 
-    const {
-        gName,
-        gDesc,
-        gDday,
-        gCategory,
-        gCoverImg,
-        gMaxMem,
-        mTitle,
-        mContent,
-        mLevel,
-    } = input;
+    const { gName, gDesc, gDday, gCategory, gCoverImg, gMaxMem, missionArray } =
+        input;
 
     const onChange = (e: any) => {
         const { name, value } = e.target;
@@ -48,8 +41,6 @@ export default function GroupCreate() {
     const missionAddHandler = () => {
         setAddModalSwitch(true);
     };
-
-    // console.log('!!!!!!!!', selectedSet);
 
     const testGroup = {
         gName: 'Node 스터디 (중복 안됩니다!)',
@@ -68,108 +59,56 @@ export default function GroupCreate() {
         ],
     };
 
-    // // 쿠키 이름
-    // const cookieName = 'token';
-
-    // // 쿠키 값 가져오기
-    // function getCookieValue(cookieName: any) {
-    //     const name = cookieName + '=';
-    //     const decodedCookies = decodeURIComponent(document.cookie);
-    //     const cookieArray = decodedCookies.split(';');
-
-    //     for (let i = 0; i < cookieArray.length; i++) {
-    //         let cookie = cookieArray[i];
-    //         while (cookie.charAt(0) === ' ') {
-    //             cookie = cookie.substring(1);
-    //         }
-    //         if (cookie.indexOf(name) === 0) {
-    //             return cookie.substring(name.length, cookie.length);
-    //         }
-    //     }
-    //     return null; // 쿠키가 없을 경우
-    // }
-
-    // // 쿠키 값 가져오기
-    // const token = getCookieValue(cookieName);
-
-    // // token 값 출력 또는 사용
-    // console.log('토큰 값:', token);
-
-    // console.log('@@@@@@@@', token);
-
     const groupCreateHandler = async () => {
-        console.log(`${process.env.REACT_APP_DB_HOST}`);
+        const res = await axios.post(
+            `${process.env.REACT_APP_DB_HOST}/group`,
+            input,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+        console.log(res.data);
 
-        // const res = await axios.post(
-        //     `http://localhost:8888/api/group`,
-        //     testGroup
-        //     // {
-        //     //     headers: {
-        //     //         Authorization:
-        //     //             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1Tm1hZSI6IuyEuO2ZlCIsInVFbWFpbCI6ImtzaGhoaDA2NDBAZ21haWwuY29tIiwidVNlcSI6MSwiaWF0IjoxNjk5MDYzMDkxfQ.lh9mF4YcM8mFtCyV1CHiYLF015Q2ydsHTxCnvZ2Q2kw',
-        //     //     },
-        //     // }
-        // );
-        // console.log(res.data);
-
-        // let jwtToken = res.headers.get('Authorization');
-        // console.log(jwtToken);
-
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-
-        // 입력 안했을 시, 로직
+        // [추후] input 입력 안했을 시, 로직
     };
 
-    //; /group
-    //] POST
-    //-- req
-    // {
-    //     "gName": "Node 스터디 (중복 안됩니다!)",
-    //     "gDesc": "Node.js 스터디 모임입니다!",
-    //     "gDday": "2023-10-28",
-    //     "gMaxMem": 10,
-    //     "gCategory": "st",
-    //     "gCoverImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU",
-    //     "mTitle": "Node.js 강의 듣기",
-    //     "mContent": "Node.js 강의 쳅터 1 듣고 오기",
-    //     "mLevel": 5
-    //   }
+    //=== 관심 분야 ===
+    interface Interested {
+        id: string;
+        category: string;
+        val: string;
+    }
+    const interestedArr: Interested[] = [
+        { id: 'tag-radio-ex', category: '운동', val: 'ex' },
+        { id: 'tag-radio-re', category: '독서', val: 're' },
+        { id: 'tag-radio-lan', category: '언어', val: 'lan' },
+        { id: 'tag-radio-cert', category: '자격증', val: 'cert' },
+        { id: 'tag-radio-st', category: '스터디', val: 'st' },
+        { id: 'tag-radio-eco', category: '경제', val: 'eco' },
+        { id: 'tag-radio-it', category: 'IT', val: 'it' },
+        { id: 'tag-radio-etc', category: '기타', val: 'etc' },
+    ];
 
-    //-- res
-    // {
-    //     "isSuccess": true,
-    //     "msg": "성공"
-    //   }
+    const [selectedInterestId, setSelectedInterestId] = useState('');
 
-    //] PATCH
-    //-- req
-    //     {
-    //   "gSeq": 1,
-    //   "gName": "정보처리기사 실기 대비반 (중복 안됩니다!)",
-    //   "gDesc": "정보처리기사 실기 대비 오프라인 모임입니다!",
-    //   "gDday": "2023-10-31",
-    //   "gMaxMem": 20,
-    //   "gCategory": "cert",
-    //   "gCoverImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVnwfCZtvVrf0NdXWT4YQp_aVEFlZ5-kuUfw&usqp=CAU"
-    // }
+    // 분야 타입 선택
+    const interestTypeHandler = (id: string) => {
+        setSelectedInterestId(id);
+    };
 
-    //-- res
-    // {
-    //     "isSuccess": true,
-    //     "msg": "성공"
-    //   }
+    //=== 미션 ===
+    interface Mission {
+        id: number;
+        mTitle: string;
+        mContent: string;
+        mLevel: number;
+        map: string;
+        completed: boolean;
+    }
 
-    //] DELETE
-    //-- req
-    // {
-    //   "gSeq": 1
-    // }
-
-    //-- res
-    // {
-    //     "isSuccess": true,
-    //     "msg": "성공"
-    //   }
+    const [missionList, setMissionList] = useState<Mission[]>([]);
 
     return (
         <div className="section group-create-contianer title5">
@@ -214,13 +153,45 @@ export default function GroupCreate() {
             </div>
             <div className="group-create-content">
                 <div>분야</div>
-                <InterestedList
+                {/* <InterestedList
                     selectedArr={selectedArr}
                     setSelectedArr={setSelectedArr}
                     num={1}
-                />
+                /> */}
+                {interestedArr.map((interest: Interested) => {
+                    return (
+                        <div key={interest.id}>
+                            <label
+                                onClick={() => interestTypeHandler(interest.id)}
+                                className="tag-btn"
+                                style={{
+                                    background:
+                                        selectedInterestId === interest.id
+                                            ? '#ED8D8D'
+                                            : 'white',
+                                    color:
+                                        selectedInterestId === interest.id
+                                            ? 'white'
+                                            : 'gray',
+                                    border:
+                                        selectedInterestId === interest.id
+                                            ? '1px solid #ED8D8D'
+                                            : ' #acacac',
+                                }}
+                            >
+                                <input
+                                    type="radio"
+                                    name="gCategory"
+                                    className="tag-radio"
+                                    value={interest.val}
+                                    onChange={onChange}
+                                />
+                                {interest.category}
+                            </label>
+                        </div>
+                    );
+                })}
             </div>
-
             <div className="group-create-content description-container">
                 <div>모임 설명</div>
                 <textarea
@@ -259,6 +230,11 @@ export default function GroupCreate() {
                     addModalSwitch={addModalSwitch}
                     setAddModalSwitch={setAddModalSwitch}
                     action={'미션생성'}
+                    missionList={missionList}
+                    setMissionList={setMissionList}
+                    setInput={setInput}
+                    input={input}
+                    gDday={gDday}
                 />
             ) : null}
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
 import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/pages/user/login.scss';
@@ -28,9 +26,6 @@ export default function Login() {
     // });
     const googleLogin = (): void => {
         window.location.href = 'http://localhost:8888/api/user/login/google';
-        // nvg('/');
-
-        // window.location.reload();
     };
 
     const kakaoLogin = (): void => {

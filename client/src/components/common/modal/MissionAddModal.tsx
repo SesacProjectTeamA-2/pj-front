@@ -30,11 +30,13 @@ export default function MissionAddModal({
     addModalSwitch,
     setAddModalSwitch,
     action,
-}: MissionAddModalProps) {
+    missionList,
+    setMissionList,
+    setInput,
+    input,
+}: any) {
     const missionState = useSelector((state: RootStateType) => state.mission);
     const dispatch = useDispatch();
-
-    console.log('state', missionState);
 
     // const [listLength, setMissionList] = useState(missionState.length);
 
@@ -80,51 +82,86 @@ export default function MissionAddModal({
         setAddModalSwitch(false);
     };
 
-    const [input, setInput] = useState({
-        id: Object.keys(missionState).length + 1,
+    // interface Mission {
+    //     id: number;
+    //     mTitle: string;
+    //     mContent: string;
+    //     mLevel: number;
+    //     map: string;
+    //     completed: boolean;
+    // }
+
+    // const [missionList, setMissionList] = useState<Mission[]>([]);
+
+    const [missionInput, setMissionInput] = useState({
+        id: missionList.length + 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
-        map: '', // map 필드 추가
-        completed: false,
+        // completed: false,
     });
 
-    const { mTitle, mContent, mLevel } = input;
+    const [gDday, setGDday] = useState('');
+
+    // const [input, setInput] = useState({
+    //     id: Object.keys(missionState).length + 1,
+    //     mTitle: '',
+    //     mContent: '',
+    //     mLevel: 1,
+    //     map: '', // map 필드 추가
+    //     completed: false,
+    // });
+
+    const { mTitle, mContent, mLevel } = missionInput;
 
     const onChange = (e: any) => {
         const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
+        setMissionInput({ ...missionInput, [name]: value });
     };
 
     const oneMissionAddHandler = () => {
-        console.log(input);
-        dispatch(addMission(input));
+        console.log(missionInput);
+        dispatch(addMission(missionInput));
 
-        // const newMissions = [...missionList, input];
+        const newMissions = [...missionList, missionInput];
         // missionList.push(input);
 
-        // setMissionList(newMissions);
+        setMissionList(newMissions);
 
         // 입력 필드 초기화
-        setInput({
-            id: Object.keys(missionState).length + 1,
+        setMissionInput({
+            // id: Object.keys(missionState).length + 1,
+            id: missionList.length + 1,
             mTitle: '',
             mContent: '',
             mLevel: 1,
-            map: '', // map 필드 추가
-            completed: false,
+            // completed: false,
         });
     };
 
-    console.log('??', missionState);
+    console.log('missionState', missionState);
+    console.log('missionList', missionList);
+
+    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
 
     const editHandler = (targetId: number) => {
         console.log(targetId);
     };
 
     const missionAddDoneHandler = () => {
-        console.log(missionState);
         setAddModalSwitch(false);
+
+        const newMissionArray = [...input.missionArray, ...missionList];
+        setTargetDate(targetDate);
+
+        console.log('!!', input.missionArray);
+        console.log('##', missionList);
+
+        setInput({
+            ...input,
+            missionArray: newMissionArray,
+            gDday: targetDate,
+        });
     };
 
     return (
@@ -228,7 +265,10 @@ export default function MissionAddModal({
                             {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
                             <div className="group-create-content">
                                 <div className="dday-title">마감일</div>
-                                <Dday />
+                                <Dday
+                                    targetDate={targetDate}
+                                    setTargetDate={setTargetDate}
+                                />
                             </div>
                         </div>
 
@@ -243,7 +283,38 @@ export default function MissionAddModal({
                         >
                             <div className="modal-mission-list-text">
                                 {action === '미션생성' ? (
-                                    '현재 미션이 없습니다.'
+                                    !missionList.length ? (
+                                        '현재 미션이 없습니다.'
+                                    ) : (
+                                        <>
+                                            {missionList.map((mission: any) => {
+                                                return (
+                                                    <div key={mission.id}>
+                                                        <Divider component="li" />
+
+                                                        <ListItem>
+                                                            <ListItemText
+                                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                                secondary={`${mission.mContent}`}
+                                                            />
+                                                            <div>
+                                                                <button
+                                                                    className="modal-mission-edit-btn btn-sm"
+                                                                    onClick={() =>
+                                                                        editHandler(
+                                                                            mission.id
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    수정
+                                                                </button>
+                                                            </div>
+                                                        </ListItem>
+                                                    </div>
+                                                );
+                                            })}
+                                        </>
+                                    )
                                 ) : (
                                     <>
                                         {missionState.map((mission: any) => {

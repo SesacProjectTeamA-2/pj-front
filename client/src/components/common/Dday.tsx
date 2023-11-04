@@ -5,8 +5,8 @@ import useDdayCount from '../../hooks/useDdayCount';
 
 // [추후] days => redux에 값 저장하기
 
-export default function Dday() {
-    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
+export default function Dday({ targetDate, setTargetDate }: any) {
+    // const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
 
     const dday = useDdayCount(targetDate);
 

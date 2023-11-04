@@ -33,10 +33,6 @@ import Report from './components/management/Report';
 import BoardEdit from './pages/group/BoardEdit';
 
 function App() {
-    // // 쿠키를 통한 회원/비회원 구분
-    // let cookie = new Cookies();
-    // console.log(cookie.get('token'));
-
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
     const [showChat, setShowChat] = useState<boolean>(false);
     const showChatting = (): void => {
@@ -189,7 +185,7 @@ function App() {
 
                 {/* 모임 Edit */}
                 <Route
-                    path="/group/board/edit/1"
+                    path="/group/board/edit/:gSeq"
                     element={
                         <GroupLayout
                             children={<GroupEdit />}
@@ -200,7 +196,7 @@ function App() {
 
                 {/* 모임 Update */}
                 <Route
-                    path="/group/edit/1"
+                    path="/group/edit/:gSeq"
                     element={
                         <GroupLayout
                             children={<GroupEdit />}
