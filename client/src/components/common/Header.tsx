@@ -249,6 +249,7 @@ export default function Header(props: any) {
                                 </li>
                             </>
                         )}
+                        {/* 채팅 컴포넌트 */}
                         <li id="chat-li">
                             <img
                                 src="/asset/icons/chat.svg"
