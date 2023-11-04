@@ -1,13 +1,8 @@
 import React, { useState, useRef } from 'react';
 
-export default function Phrase(): JSX.Element {
-    const [content, setContent] = useState<string | number>(
-        '여름은 가을로부터 떨어진다'
-    );
+export default function Phrase(props: any): JSX.Element {
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    //클릭 버튼 값
-    const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('');
 
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
@@ -15,26 +10,22 @@ export default function Phrase(): JSX.Element {
         // setReadOnlyVal(!readOnlyVal);
     };
 
-    const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
-        const phraseModeBtn: HTMLElement = e.target as HTMLElement;
-        setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
-        console.log(phraseModeBtnVal);
-    };
     return (
         <div>
             <label className="input-label">
                 <textarea
                     // readOnly={readOnlyVal}
-                    onChange={(e) => setContent(e.target.value)}
-                    value={content}
+                    onChange={(e) => props.setPhraseCtt(e.target.value)}
+                    value={props.phraseCtt}
                     ref={inputRef}
                     maxLength={50}
                     className="input-obj"
                     id="text-area2"
                     style={{
                         display:
-                            phraseModeBtnVal === 'recommend' ? 'block' : 'none',
-                        color: 'white',
+                            props.phraseModeBtnVal === 'recommend'
+                                ? 'block'
+                                : 'none',
                     }}
                 />
                 <button
@@ -43,7 +34,9 @@ export default function Phrase(): JSX.Element {
                     id="phrase-edit"
                     style={{
                         display:
-                            phraseModeBtnVal === 'recommend' ? 'block' : 'none',
+                            props.phraseModeBtnVal === 'recommend'
+                                ? 'block'
+                                : 'none',
                         color: 'white',
                     }}
                 >
@@ -61,7 +54,7 @@ export default function Phrase(): JSX.Element {
                     id="phraseMode-btn1"
                     style={{
                         background:
-                            phraseModeBtnVal === 'recommend'
+                            props.phraseModeBtnVal === 'recommend'
                                 ? ' #ed8d8d'
                                 : '#d9d9d9',
                         color: 'white',
@@ -72,7 +65,7 @@ export default function Phrase(): JSX.Element {
                         type="radio"
                         name="phraseMode"
                         value="recommend"
-                        onChange={(e) => phraseSelect(e)}
+                        onChange={(e) => props.phraseSelect(e)}
                     ></input>
                     추천해주세요
                 </label>
@@ -82,7 +75,7 @@ export default function Phrase(): JSX.Element {
                     id="phraseMode-btn2"
                     style={{
                         background:
-                            phraseModeBtnVal === 'self'
+                            props.phraseModeBtnVal === 'self'
                                 ? ' #ed8d8d'
                                 : '#d9d9d9',
                         color: 'white',
@@ -93,7 +86,7 @@ export default function Phrase(): JSX.Element {
                         type="radio"
                         name="phraseMode"
                         value="self"
-                        onChange={(e) => phraseSelect(e)}
+                        onChange={(e) => props.phraseSelect(e)}
                     ></input>
                     내가 적을래요
                 </label>

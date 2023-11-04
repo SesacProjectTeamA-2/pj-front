@@ -1,5 +1,32 @@
 //=== 공통되는 타입 ===
 
+// group 상세페이지 (GET)
+export interface GroupDetailType {
+    grInformation: string;
+    groupCategory: string;
+    groupCoverImg: string;
+    groupDday: number;
+    groupMaxMember: number;
+    groupMission: [];
+    groupName: string;
+    isJoin: boolean;
+    isLeader: boolean;
+    memberImg: string[];
+    memberNickname: string[];
+    result: boolean;
+}
+
+export interface GroupMissionsType {
+    createdAt: string;
+    gSeq: number;
+    isExpired: null;
+    mContent: string;
+    mLevel: number;
+    mSeq: number;
+    mTitle: string;
+    updatedAt: string;
+}
+
 // Redux 스토어의 전체 타입 정의
 export interface RootStateType {
     dummyGroup: GroupStateType;

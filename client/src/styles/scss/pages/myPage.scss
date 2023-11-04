@@ -3,6 +3,7 @@
 
 .myPage-p {
     font-size: 2em;
+    margin-bottom: 5%;
 }
 
 .myPage-div {
@@ -45,6 +46,11 @@
     align-items: start;
     margin-right: 5%;
     margin-left: 10%;
+}
+
+.myPage-div-three-one p {
+    margin-bottom: 5%;
+    margin-left: 3%;
 }
 .myPage-div-three-two {
     display: flex;
@@ -90,7 +96,8 @@
 
 // INPUT
 .input-obj {
-    border: 1px solid black;
+    // border: 1px solid black;
+    border: none;
     width: 35vw;
     border-radius: 10px;
     margin-right: 10px;
@@ -120,6 +127,7 @@
     font-size: large;
     width: 70%;
     height: 20vh;
+    color: black;
 }
 
 //  Profile START

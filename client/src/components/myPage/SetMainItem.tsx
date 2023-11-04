@@ -4,18 +4,6 @@ import SetMainDday from './SetMainDday';
 import SetMainDone from './SetMainDone';
 
 export default function SetMainItem(props: any) {
-    const [dDayPin, setDdayPin] = useState<string | number>(0);
-    const [donePin, setDonePin] = useState<string | number>(0);
-
-    const handleCheckDday = (groupId: number): void => {
-        setDdayPin(groupId);
-        console.log('id', dDayPin);
-    };
-    const handleCheckDone = (groupId: number): void => {
-        setDonePin(groupId);
-        console.log('id', donePin);
-    };
-
     return (
         <>
             {props.groupArr.map((group: any) => {
@@ -27,16 +15,16 @@ export default function SetMainItem(props: any) {
                         <td>
                             <SetMainDday
                                 groupId={group.groupId}
-                                handleCheckDday={handleCheckDday}
-                                dDayPin={dDayPin}
+                                handleCheckDday={props.handleCheckDday}
+                                dDayPin={props.dDayPin}
                             />
                         </td>
 
                         <td>
                             <SetMainDone
                                 groupId={group.groupId}
-                                handleCheckDone={handleCheckDone}
-                                donePin={donePin}
+                                handleCheckDone={props.handleCheckDone}
+                                donePin={props.donePin}
                             />
                         </td>
                     </tr>
