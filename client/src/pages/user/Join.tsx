@@ -48,9 +48,9 @@ export default function Join() {
         // uCategory3: selectedArr[2],
     };
 
-    const register = (): void => {
+    const register = async (): Promise<void> => {
         console.log('register!');
-        axios
+        await axios
             .post('http://localhost:8888/api/user/register', userInfo)
             .then((res) => {
                 console.log(res.data);
