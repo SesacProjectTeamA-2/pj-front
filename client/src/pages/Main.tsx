@@ -21,7 +21,8 @@ export default function Main() {
         myCookie.set('isUser', uToken);
     }
 
-    console.log(myCookie.get('isUser'));
+    console.log('isUser', myCookie.get('isUser'));
+
     return (
         <div className="section">
             <MainImg />
