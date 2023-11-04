@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getCookies } from 'typescript-cookie';
+import { getCookies, getCookie } from 'typescript-cookie';
+import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/layout/header.scss';
 import Dday from './Dday';
@@ -37,22 +38,24 @@ export default function Header(props: any) {
     }, [isVisibleMobile]);
 
     // 쿠키 확인
-    const cookies = getCookies();
-
+    const Tcookies = getCookie('token');
+    const Tcookies2 = getCookies();
+    // console.log('ts', Tcookies);
+    // console.log('tsAll', Tcookies2);
     const [isCookie, setIsCookie] = useState(false);
 
     // if (Object.keys(cookies).length !== 0) {
     //     setIsCookie(true);
     // }
 
-    useEffect(() => {
-        if (Object.keys(cookies).length !== 0) {
-            setIsCookie(true);
-        }
-    }, [cookies]);
+    // useEffect(() => {
+    //     if (Object.keys(cookies).length !== 0) {
+    //         setIsCookie(true);
+    //     }
+    // }, [cookies]);
 
-    console.log('!!!', cookies);
-    console.log('isCookie', isCookie);
+    // console.log('!!!', cookies);
+    // console.log('isCookie', isCookie);
 
     return (
         <>
