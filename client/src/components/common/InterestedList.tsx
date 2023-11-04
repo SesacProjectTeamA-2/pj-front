@@ -8,14 +8,14 @@ export default function InterestedList(props: any) {
         val: string;
     }
     const interestedArr: Interested[] = [
-        { id: 'tag-radio-ex', category: '운동', val: 'ex' },
-        { id: 'tag-radio-re', category: '독서', val: 're' },
-        { id: 'tag-radio-lan', category: '언어', val: 'lan' },
-        { id: 'tag-radio-cert', category: '자격증', val: 'cert' },
-        { id: 'tag-radio-st', category: '스터디', val: 'st' },
-        { id: 'tag-radio-eco', category: '경제', val: 'eco' },
-        { id: 'tag-radio-it', category: 'IT', val: 'it' },
-        { id: 'tag-radio-etc', category: '기타', val: 'etc' },
+        { id: 'ex', category: '운동', val: 'ex' },
+        { id: 're', category: '독서', val: 're' },
+        { id: 'lan', category: '언어', val: 'lan' },
+        { id: 'cert', category: '자격증', val: 'cert' },
+        { id: 'st', category: '스터디', val: 'st' },
+        { id: 'eco', category: '경제', val: 'eco' },
+        { id: 'it', category: 'IT', val: 'it' },
+        { id: 'etc', category: '기타', val: 'etc' },
     ];
 
     return (
