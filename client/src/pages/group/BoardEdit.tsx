@@ -1,5 +1,6 @@
 import React from 'react';
 import Editor from './Editor';
+
 import { Link } from 'react-router-dom';
 import GroupHeader from '../../components/group/content/GroupHeader';
 
@@ -28,7 +29,8 @@ export default function BoardEdit() {
                 </div>
                 <div>
                     {/* [추후] 에디터가 들어갈 부분입니다. */}
-                    <Editor />
+                    {/* <Editor /> */}
+
                     {/* <textarea
                         className="editor"
                         placeholder="내용을 작성해주세요"
