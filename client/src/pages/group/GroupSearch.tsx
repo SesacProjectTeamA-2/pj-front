@@ -12,7 +12,7 @@ export default function GroupSearch() {
     useEffect(() => {
         const getSearchGroupList = async () => {
             const res = await axios.get(
-                `http://localhost:8888/api/group?search=*&category=st`,
+                `${process.env.REACT_APP_DB_HOST}/group?search=*&category=st`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,

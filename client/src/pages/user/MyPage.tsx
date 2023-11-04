@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/pages/myPage.scss';
 
@@ -13,13 +15,98 @@ import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
 
 export default function MyPage() {
-    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
+
+    // 1. 닉네임
+    const [input, setInput] = useState<string | number>('');
+    // console.log('닉네임', input);
+
+    // 2. 자기소개
+    const [content, setContent] = useState<string | number>('');
+    // console.log('자기소개', content);
+
+    // 3. 선택한 캐릭터
     const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
         null
     );
     const selectCharacter = (characterSrc: string): void => {
         setSelectedCharacter(characterSrc);
     };
+    // console.log('캐릭터 src', selectedCharacter);
+
+    // 4. 관심사 배열
+    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+    // console.log(selectedArr[0]);
+    // console.log(selectedArr[1]);
+    // console.log(selectedArr[2]);
+
+    //  5. dDay 설정
+
+    // 사용자 데이터 가져오기
+    // const getUserData = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/api/user`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             console.log('user', res);
+    //         });
+    // };
+    // useEffect(() => {
+    //     getUserData();
+    // }, []);
+
+    // 사용자 데이터 수정
+    interface patchedUserDataItf {
+        uName: string;
+        uDesc: string;
+        uPhrase: string;
+        uCategory1: string;
+        uCategory2: string;
+        uCategory3: string;
+        //   설정 안 했을 경우 null
+        uSetDday: string | null;
+        uMainDday: number;
+        uMainGroup: number;
+        result: boolean;
+        message: boolean;
+    }
+    const patchedUserData = {
+        uName: '중복 불가',
+        uDesc: '안녕하세요.',
+        uPhrase:
+            '작성하지 않을 시(null), 랜덤 명언/ 작성할 경우 해당 문구 출력',
+        uCategory1: 'etc = 기타',
+        uCategory2: 'etc = 기타',
+        uCategory3: 'etc = 기타',
+        uSetDday: 'y/ 설정하지 않았을 경우, 빈값(null)',
+        uMainDday: '해당 모임의 seq(gSeq)',
+        uMainGroup: '해당 모임의 seq(gSeq)',
+        result: 'false(닉네임이 중복되는 경우)',
+        message: 'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
+    };
+
+    // const patchUserData = async () => {
+    //     const res = await axios
+    //         .patch(
+    //             `${process.env.REACT_APP_DB_HOST}/api/user`,
+    //             patchedUserData,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${uToken}`,
+    //                 },
+    //             }
+    //         )
+    //         .then((res) => {
+    //             console.log('user', res);
+    //         });
+    // };
+    // useEffect(() => {
+    //     patchUserData();
+    // }, []);
 
     return (
         <div className="section">
@@ -31,8 +118,8 @@ export default function MyPage() {
                     <ProfilePic />
                 </div>
                 <div className="myPage-div-one-two">
-                    <Nickname />
-                    <Introduce />
+                    <Nickname input={input} setInput={setInput} />
+                    <Introduce content={content} setContent={setContent} />
                 </div>
             </div>
 

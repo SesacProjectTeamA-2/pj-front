@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/pages/user/join.scss';
 
@@ -9,6 +10,9 @@ import CharacterList from '../../components/common/CharacterList';
 import InterestedList from '../../components/common/InterestedList';
 
 export default function Join() {
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
+
     // 전달할 사용자 가입 정보
     interface userInfoItf {
         uEmail: string;
@@ -38,26 +42,42 @@ export default function Join() {
         setSelectedCharacter(characterSrc);
     };
 
+    // 최초 로그인 하는 유저
+    // *************** 토큰 발급 없이 회원가입 창으로 렌더링 필요
+    //   let redirectUrl = `${serverUrl}:${frontPort}/join`;
+    //   redirectUrl += `?userImg=${userImg}`;
+    //   redirectUrl += `&userName=${userName}`;
+    //   redirectUrl += `&userEmail=${userEmail}`;
+    //   res.status(200).redirect(redirectUrl);
+
     const userInfo: userInfoItf = {
         uEmail: uEmail,
         uName: uName,
+        // uEmail: 'jo@com',
+        // uName: 'sss',
         uCharImg: selectedCharacter,
         // uCategory1: selectedArr[0],
         // uCategory2: selectedArr[1],
         // uCategory3: selectedArr[2],
     };
+    console.log(userInfo, '<<< userInfo');
 
     const register = async (): Promise<void> => {
         console.log('register!');
         await axios
-            .post('http://localhost:8888/api/user/register', userInfo)
+            // .post(`${process.env.REACT_APP_DB_HOST}/user/register`, userInfo, {
+            .post('http://localhost:8888/api/user/register', userInfo, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
             .then((res) => {
                 console.log(res.data);
             });
     };
 
     return (
-        <div className="section">
+        <div className="section join-container">
             <h1 className="join-title">회원 가입</h1>
 
             {/* <form action="/api/user/register" method="post"> */}
@@ -68,7 +88,7 @@ export default function Join() {
 
             <div className="interested-div">
                 <div className="interested-div-one">
-                    <h3>관심 분야</h3>
+                    <h3 id="interested-h3">관심 분야</h3>
                     <p>최대 3개</p>
                 </div>
                 <div className="interested-div-two">

@@ -70,7 +70,7 @@ export default function Header(props: any) {
                     <Link to="/">
                         <div className="logo-container">
                             <img
-                                src="/asset/lego2.svg"
+                                src="/asset/logo.svg"
                                 className="logo-img"
                                 alt="logo"
                             />
@@ -89,7 +89,7 @@ export default function Header(props: any) {
                             <ButtonGroup
                                 aria-label="outlined button group"
                                 variant="outlined"
-                                color="secondary"
+                                // color="secondary"
                                 sx={{ p: 1 }}
                             >
                                 <Link to="/main">
@@ -185,7 +185,7 @@ export default function Header(props: any) {
 
             {/* 모바일일 때 메뉴 바*/}
             <div
-                className="header-divTwo mobMode"
+                className="header-divTwo mobMode "
                 style={{
                     display: isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
                 }}

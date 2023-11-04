@@ -101,7 +101,7 @@ export default function GroupCreate() {
         console.log(`${process.env.REACT_APP_DB_HOST}`);
 
         // const res = await axios.post(
-        //     `http://localhost:8888/api/group`,
+        //     `${process.env.REACT_APP_DB_HOST}group`,
         //     testGroup
         //     // {
         //     //     headers: {

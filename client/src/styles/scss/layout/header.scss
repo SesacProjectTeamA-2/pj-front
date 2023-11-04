@@ -2,7 +2,7 @@
 @import '~include-media/dist/include-media';
 
 .header-container {
-    // background-color: $color-primary;
+    background-color: $color-primary;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,7 +10,7 @@
     flex-direction: row;
     position: fixed;
     z-index: 9999;
-    backdrop-filter: blur(3px);
+    // backdrop-filter: blur(3px);
 }
 .header-divOne {
     // display: flex;

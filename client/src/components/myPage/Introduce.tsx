@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 
-export default function Introduce(): JSX.Element {
+export default function Introduce(props: any): JSX.Element {
     console.log(process.env.REACT_APP_DB_HOST);
-    const [content, setContent] = useState<string | number>('');
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -17,8 +16,8 @@ export default function Introduce(): JSX.Element {
             <label className="input-label">
                 <textarea
                     // readOnly={readOnlyVal}
-                    onChange={(e) => setContent(e.target.value)}
-                    value={content}
+                    onChange={(e) => props.setContent(e.target.value)}
+                    value={props.content}
                     ref={inputRef}
                     className="input-obj"
                     id="text-area"
