@@ -212,7 +212,7 @@ export default function GroupEdit() {
                 <MissionAddModal
                     addModalSwitch={addModalSwitch}
                     setAddModalSwitch={setAddModalSwitch}
-                    action={'미션생성'}
+                    action={'미션수정'}
                     missionList={missionList}
                     setMissionList={setMissionList}
                     setInput={setInput}

@@ -4,18 +4,21 @@ import { Cookies } from 'react-cookie';
 import { GroupStateType } from 'src/types/types';
 import { Link } from 'react-router-dom';
 
-export default function GroupSearch({ searchInput }: { searchInput: string }) {
+export default function GroupSearch({ searchInput, selectedArr }: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
     const [searchGroupList, setSearchGroupList] = useState([]);
 
-    console.log(searchInput);
+    // [추후] 여러개 & 로직 구현
+    console.log(selectedArr);
 
     useEffect(() => {
         const getSearchGroupList = async () => {
             const res = await axios.get(
+                // 임시로 전체 검색
                 `http://localhost:8888/api/group?search=%&category=%`,
+                // `http://localhost:8888/api/group?search=${searchInput}&category=${}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,

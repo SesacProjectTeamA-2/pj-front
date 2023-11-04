@@ -1,6 +1,8 @@
 @import '../abstracts/variables.scss';
 @import '../abstracts/utils.scss';
 
+//=== 미션 추가 모달 ===
+
 .modal-mission-add-container {
     width: 62%;
     height: 50%;
@@ -43,6 +45,16 @@
     cursor: pointer;
     position: fixed;
     // padding: 1rem;
+}
+
+.modal-mission-delete-btn {
+    background-color: $color-gray4;
+    cursor: pointer;
+}
+
+.modal-mission-delete-btn:hover {
+    transition: 0.3s all;
+    background-color: $color-warning;
 }
 
 .modal-style {

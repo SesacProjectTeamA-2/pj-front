@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeGroup } from '../../store/slices/groupSlice';
@@ -96,7 +96,6 @@ export default function GroupHome() {
                     },
                 }
             );
-            // setTodoItems(res.data);
             console.log('llllllll', res);
 
             // [백 이후]
@@ -104,6 +103,17 @@ export default function GroupHome() {
 
         getGroup();
     }, []); // 빈 의존성 배열 : 컴포넌트가 마운트될 때 한 번만 실행
+
+    interface Mission {
+        id: number;
+        mTitle: string;
+        mContent: string;
+        mLevel: number;
+        map: string;
+    }
+
+    // res.data에서 missionArray
+    const [missionList, setMissionList] = useState<Mission[]>([]);
 
     return (
         <div className="section group-home">
@@ -118,7 +128,16 @@ export default function GroupHome() {
                 <div className="main-content">{dummyGroupState.gDesc}</div>
             </div>
 
-            <HomeMissionList />
+            <HomeMissionList
+                missionList={missionList}
+                setMissionList={setMissionList}
+                //    addModalSwitch={addModalSwitch}
+                //         setAddModalSwitch={setAddModalSwitch}
+                //         action={'미션생성'}
+                //         setInput={setInput}
+                //         input={input}
+                //         gDday={gDday}
+            />
 
             <div className="ranking-container">
                 <CurRanking />
