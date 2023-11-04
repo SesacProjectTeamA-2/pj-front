@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 import { GroupStateType } from 'src/types/types';
+import { Link } from 'react-router-dom';
 
-export default function GroupSearch() {
+export default function GroupSearch({ searchInput }: { searchInput: string }) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
     const [searchGroupList, setSearchGroupList] = useState([]);
+
+    console.log(searchInput);
 
     useEffect(() => {
         const getSearchGroupList = async () => {
@@ -36,8 +39,10 @@ export default function GroupSearch() {
             <div>
                 {searchGroupList.map((searchGroup: GroupStateType) => (
                     <div key={searchGroup.gSeq}>
-                        <div>{searchGroup.gName}</div>
-                        <div>{searchGroup.gDesc}</div>
+                        <Link to={`/group/home/${searchGroup.gSeq}`}>
+                            <button>{searchGroup.gName}</button>
+                            <div>{searchGroup.gDesc}</div>
+                        </Link>
                     </div>
                 ))}
             </div>

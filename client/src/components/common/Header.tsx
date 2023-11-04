@@ -40,10 +40,10 @@ export default function Header(props: any) {
     }, [isVisibleMobile]);
 
     //=== 쿠키 설정 ===
-    const [isCookie, setIsCookie] = useState(false);
+    const [isCookie, setIsCookie] = useState(false); // 쿠키 유무
 
     const cookie = new Cookies();
-    // const uToken = cookie.get('isUser');   //[질문]
+    const uToken = cookie.get('isUser'); // 토큰 값
 
     // console.log('@@@@@@@', uToken);
     // if (Object.keys(allCookies).length !== 0) {
