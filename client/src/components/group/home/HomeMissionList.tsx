@@ -10,7 +10,7 @@ import MissionAddModal from '../../common/modal/MissionAddModal';
 
 import useDdayCount from '../../../hooks/useDdayCount';
 
-export default function HomeMissionList() {
+export default function HomeMissionList({ missionList, setMissionList }: any) {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
     const missionAddHandler = () => {
         setAddModalSwitch(true);
@@ -21,9 +21,9 @@ export default function HomeMissionList() {
         (state: RootStateType) => state.dummyGroup
     );
 
-    const missionList = useSelector(
-        (state: RootStateType) => state.dummyGroup.missionArray
-    );
+    // const missionList = useSelector(
+    //     (state: RootStateType) => state.dummyGroup.missionArray
+    // );
 
     // interface MissionType {
     //     id: number;
@@ -84,6 +84,8 @@ export default function HomeMissionList() {
                             addModalSwitch={addModalSwitch}
                             setAddModalSwitch={setAddModalSwitch}
                             action={'미션수정'}
+                            missionList={missionList}
+                            setMissionList={setMissionList}
                         />
                     ) : null}
                 </div>
@@ -93,7 +95,7 @@ export default function HomeMissionList() {
             </div>
             <div className="main-content">
                 <ul>
-                    {missionList.map((mission: MissionType, idx) => {
+                    {missionList.map((mission: MissionType, idx: number) => {
                         return (
                             <li key={idx} className="mission-li">
                                 <div className="mission-element">
