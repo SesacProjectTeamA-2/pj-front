@@ -29,7 +29,6 @@ export default function Join() {
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
-    // console.log(uEmail, uName);
 
     // 2. 사용자 선택 캐릭터 이미지 값 설정
     const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
