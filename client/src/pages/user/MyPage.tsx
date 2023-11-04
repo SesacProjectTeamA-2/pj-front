@@ -35,7 +35,7 @@ export default function MyPage() {
     }, []);
 
     /////////////////////////////////////
-
+    // props 선언
     // 1. 닉네임
     const [input, setInput] = useState<string | number>('');
     // console.log('닉네임', input);
