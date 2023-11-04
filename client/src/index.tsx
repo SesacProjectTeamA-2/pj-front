@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 //=== Redux ===
 
 import { Provider } from 'react-redux';
-// import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider } from 'react-cookie';
 import store from './store';
 
 const root = ReactDOM.createRoot(
@@ -16,11 +16,11 @@ const root = ReactDOM.createRoot(
 root.render(
     // <React.StrictMode>
     <Provider store={store}>
-        {/* <CookiesProvider> */}
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-        {/* </CookiesProvider> */}
+        <CookiesProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </CookiesProvider>
     </Provider>
 
     // </React.StrictMode>,

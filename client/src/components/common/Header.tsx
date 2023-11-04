@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getCookies, getCookie } from 'typescript-cookie';
+
 import { Cookies } from 'react-cookie';
 
-import '../../styles/scss/layout/header.scss';
-import Dday from './Dday';
 import { grey } from '@mui/material/colors';
 import { Button, ButtonGroup } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import '../../styles/scss/layout/header.scss';
+
+import Dday from './Dday';
 
 export default function Header(props: any) {
     const theme = createTheme({
@@ -37,25 +39,33 @@ export default function Header(props: any) {
         console.log('isVisibleMobile', isVisibleMobile);
     }, [isVisibleMobile]);
 
-    // 쿠키 확인
-    const Tcookies = getCookie('token');
-    const Tcookies2 = getCookies();
-    // console.log('ts', Tcookies);
-    // console.log('tsAll', Tcookies2);
+    //=== 쿠키 설정 ===
     const [isCookie, setIsCookie] = useState(false);
 
-    // if (Object.keys(cookies).length !== 0) {
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
+    console.log('@@@@@@@', uToken);
+    // if (Object.keys(allCookies).length !== 0) {
     //     setIsCookie(true);
     // }
 
-    // useEffect(() => {
-    //     if (Object.keys(cookies).length !== 0) {
-    //         setIsCookie(true);
-    //     }
-    // }, [cookies]);
+    useEffect(() => {
+        if (uToken) {
+            setIsCookie(true);
+        } else setIsCookie(false);
+    }, [uToken]);
 
-    // console.log('!!!', cookies);
+    // console.log('!!!', allCookies);
     // console.log('isCookie', isCookie);
+
+    const logoutHandler = () => {
+        cookie.remove('isUser');
+
+        // console.log(getCookies());
+        // removeCookie('amp_6e403e'); // 수정해야할듯...
+        window.location.reload();
+    };
 
     return (
         <>
@@ -134,9 +144,14 @@ export default function Header(props: any) {
                                 </li>
                             ) : (
                                 <>
+                                    {/* 로그인 시 */}
+                                    <button
+                                        className="btn-sm"
+                                        onClick={logoutHandler}
+                                    >
+                                        로그아웃
+                                    </button>
                                     <li>
-                                        {/* 로그인 시 */}
-
                                         <Link to="/mypage">
                                             <img
                                                 src="/asset/images/user.svg"
