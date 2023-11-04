@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { Cookies } from 'react-cookie';
+
 import SetMainItem from './SetMainItem';
 
-export default function SetMain() {
+export default function SetMainList(props: any) {
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
     interface Group {
         groupId: number;
         groupName: string | number;
         dDay: string | number;
     }
+
+    // 그룹 정보 받아오기
 
     const groupArr: Group[] = [
         {
@@ -33,7 +39,15 @@ export default function SetMain() {
                     </tr>
                 </thead>
                 <tbody>
-                    <SetMainItem groupArr={groupArr} />
+                    <SetMainItem
+                        groupArr={groupArr}
+                        setDdayPin={props.setDdayPin}
+                        dDayPin={props.dDayPin}
+                        handleCheckDday={props.handleCheckDday}
+                        setDonePin={props.setDonePin}
+                        donePin={props.donePin}
+                        handleCheckDone={props.handleCheckDone}
+                    />
                 </tbody>
             </table>
         </div>
