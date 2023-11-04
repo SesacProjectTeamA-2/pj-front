@@ -62,7 +62,6 @@ export default function InterestedItem({
 
             // 마지막 선택된 id 제거
             selectedArr.filter((ele: string) => ele !== selectedBtn.id);
-            // console.log(selectedArr.length);
         }
     }
     return (

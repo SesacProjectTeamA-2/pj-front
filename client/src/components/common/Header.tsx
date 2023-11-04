@@ -26,7 +26,7 @@ export default function Header(props: any) {
     };
 
     // 헤더 메뉴 보여주기
-    const [isVisibleMobile, setIsVisibleMobile] = useState<boolean>(false);
+    const [isVisibleMobile, setIsVisibleMobile] = useState<boolean>(true);
     const toggleVal = (): void => {
         if (myWidth < 800) {
             setIsVisibleMobile((prev) => !prev);

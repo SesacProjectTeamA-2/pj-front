@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 import './styles/scss/base/reset.scss';
 
@@ -32,6 +33,10 @@ import Report from './components/management/Report';
 import BoardEdit from './pages/group/BoardEdit';
 
 function App() {
+    // // 쿠키를 통한 회원/비회원 구분
+    // let cookie = new Cookies();
+    // console.log(cookie.get('token'));
+
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
     const [showChat, setShowChat] = useState<boolean>(false);
     const showChatting = (): void => {

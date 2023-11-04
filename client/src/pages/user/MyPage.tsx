@@ -14,6 +14,12 @@ import Quit from '../../components/myPage/Quit';
 
 export default function MyPage() {
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+    const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
+        null
+    );
+    const selectCharacter = (characterSrc: string): void => {
+        setSelectedCharacter(characterSrc);
+    };
 
     return (
         <div className="section">
@@ -33,7 +39,11 @@ export default function MyPage() {
             <div className="myPage-div-two">
                 <br></br>
                 <h3 className="myPage-p">내 캐릭터</h3>
-                <CharacterList />
+                <CharacterList
+                    selectedCharacter={selectedCharacter}
+                    setSelectedCharacter={setSelectedCharacter}
+                    selectCharacter={selectCharacter}
+                />
             </div>
 
             <div className="myPage-div-three">
