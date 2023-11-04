@@ -61,7 +61,10 @@ export default function Groups() {
                 <Divider />
 
                 {search ? (
-                    <GroupSearch searchInput={searchInput} />
+                    <GroupSearch
+                        searchInput={searchInput}
+                        selectedArr={selectedArr}
+                    />
                 ) : (
                     <GroupList />
                 )}
