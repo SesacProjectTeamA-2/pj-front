@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import SwiperComponent from '../../components/group/SwiperComponent';
 
 export default function GroupList() {
+    // [추후] 내가 생성한 모임 확인하는 로직
+
     return (
         <div>
             <div className="groups join">
@@ -24,6 +26,7 @@ export default function GroupList() {
 
             <div className="groups created">
                 <div className="title1">내가 생성한 모임</div>
+
                 <div>생성한 모임이 없습니다. </div>
             </div>
 

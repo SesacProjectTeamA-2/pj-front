@@ -124,6 +124,7 @@ export default function MissionAddModal({
 
     const missionAddDoneHandler = () => {
         console.log(missionState);
+        setAddModalSwitch(false);
     };
 
     return (

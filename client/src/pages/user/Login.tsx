@@ -10,15 +10,25 @@ import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
 // import { GoogleLoginButton } from 'react-social-login-buttons';
 
 export default function Login() {
-    const cookies = new Cookies();
+    const nvg = useNavigate();
 
-    // const nvg = useNavigate();
-    // console.log(cookies.get('isUser'));
-    // cookies.get('isUser') ? nvg('/') : nvg('/myPage');
+    // 쿠키 유무 (확인용)
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
 
-    // 로그인 함수
+    // useEffect(() => {
+    //     let isUser = new URL(window.location.href).searchParams.get(
+    //         'alreadyUser'
+    //     );
+    //     console.log('href', window.location.href);
+    //     console.log('isUser', isUser);
+    //     // nvg('/');
+    // });
     const googleLogin = (): void => {
         window.location.href = 'http://localhost:8888/api/user/login/google';
+        // nvg('/');
+
+        // window.location.reload();
     };
 
     const kakaoLogin = (): void => {
@@ -32,11 +42,7 @@ export default function Login() {
     return (
         <div className="section">
             <div className="login-wrapper">
-                <div>
-                    {Object.keys(cookies).length === 0
-                        ? '쿠키 없음'
-                        : '쿠키 있음'}
-                </div>
+                <div>{uToken ? '쿠키 있음' : '쿠키 없음'}</div>
 
                 <h1 id="login-h1">안녕하세요!</h1>
 
