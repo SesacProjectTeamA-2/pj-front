@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getCookies, getCookie } from 'typescript-cookie';
 import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/layout/header.scss';
@@ -37,11 +36,6 @@ export default function Header(props: any) {
         console.log('isVisibleMobile', isVisibleMobile);
     }, [isVisibleMobile]);
 
-    // 쿠키 확인
-    const Tcookies = getCookie('token');
-    const Tcookies2 = getCookies();
-    // console.log('ts', Tcookies);
-    // console.log('tsAll', Tcookies2);
     const [isCookie, setIsCookie] = useState(false);
 
     // if (Object.keys(cookies).length !== 0) {

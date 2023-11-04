@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import { getAllCookies } from 'react-cookie';
-
-import { getCookies, setCookie } from 'typescript-cookie';
+import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/pages/user/login.scss';
 
@@ -12,23 +9,16 @@ import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
 // import { GoogleLoginButton } from 'react-social-login-buttons';
 
-// const cookies = new Cookies();
-
 export default function Login() {
-    const cookies = getCookies();
+    const cookies = new Cookies();
 
-    const nvg = useNavigate();
-    // useEffect(() => {
-    //     let isUser = new URL(window.location.href).searchParams.get(
-    //         'alreadyUser'
-    //     );
-    //     console.log('href', window.location.href);
-    //     console.log('isUser', isUser);
-    //     // nvg('/');
-    // });
+    // const nvg = useNavigate();
+    // console.log(cookies.get('isUser'));
+    // cookies.get('isUser') ? nvg('/') : nvg('/myPage');
+
+    // 로그인 함수
     const googleLogin = (): void => {
         window.location.href = 'http://localhost:8888/api/user/login/google';
-        // nvg('/');
     };
 
     const kakaoLogin = (): void => {
