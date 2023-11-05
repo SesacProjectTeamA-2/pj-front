@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+
+import TextField from '@mui/material/TextField';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
+import Divider from '@mui/material/Divider';
+
 import {
     MissionListType,
     MissionStateType,
     MissionType,
     RootStateType,
 } from '../../../types/types';
+
 import MissionAddModal from '../../common/modal/MissionAddModal';
 
 import useDdayCount from '../../../hooks/useDdayCount';
@@ -19,6 +27,8 @@ export default function HomeMissionList({
     const missionAddHandler = () => {
         setAddModalSwitch(true);
     };
+
+    console.log('mis', missionList);
 
     //=== redux 상태관리 ===
     const dummyGroupState = useSelector(
@@ -67,6 +77,65 @@ export default function HomeMissionList({
     //     }
     // }
 
+    // 변수 추가한 부분
+    const missionState = useSelector((state: RootStateType) => state.mission);
+    const [missionInput, setMissionInput] = useState({
+        id: missionList.length + 1,
+        mTitle: '',
+        mContent: '',
+        mLevel: 1,
+        // completed: false,
+    });
+
+    const [missionInputs, setMissionInputs] = useState(
+        missionList.map((mission: any) => ({
+            id: mission.id,
+            mTitle: mission.mTitle,
+            mContent: mission.mContent,
+            mLevel: mission.mLevel,
+        }))
+    );
+
+    // 함수 추가한 부분
+    const handleMissionContentChange = (missionId: any, newContent: any) => {
+        // missionId에 해당하는 미션의 내용을 newContent로 변경
+        const updatedMissionList = missionList.map((mission: any) => {
+            if (mission.id === missionId) {
+                return { ...mission, mContent: newContent };
+            } else {
+                return mission;
+            }
+        });
+        setMissionList(updatedMissionList);
+    };
+
+    const editHandler = (targetId: number) => {
+        const editedMissionIndex = missionInputs.findIndex(
+            (mission: any) => mission.id === targetId
+        );
+
+        if (editedMissionIndex !== -1) {
+            // 수정할 미션을 찾았을 때, 해당 미션 정보를 수정합니다.
+            const updatedMissionInputs = [...missionInputs];
+            updatedMissionInputs[editedMissionIndex] = {
+                ...updatedMissionInputs[editedMissionIndex],
+                mTitle: missionInput.mTitle,
+                mContent: missionInput.mContent,
+                mLevel: missionInput.mLevel,
+            };
+            setMissionInputs(updatedMissionInputs);
+        }
+    };
+
+    const deleteHandler = (targetId: number) => {
+        const filtered = missionList.filter(
+            (mission: any) => targetId !== mission.id
+        );
+        console.log('targetId, filtered', targetId, filtered);
+        setMissionList(filtered);
+    };
+    console.log('missionList', missionList);
+
     return (
         <div className="wrapper">
             <div className="upper-content">
@@ -103,7 +172,7 @@ export default function HomeMissionList({
                 </div>
             </div>
             <div className="main-content">
-                <ul>
+                {/* <ul>
                     {missionList.map((mission: MissionType, idx: number) => {
                         return (
                             <li key={idx} className="mission-li">
@@ -115,7 +184,105 @@ export default function HomeMissionList({
                             </li>
                         );
                     })}
-                </ul>
+                </ul> */}
+
+                {/*  추가한 부분 */}
+                <div className="modal-mission-list-text">
+                    <>
+                        {missionList.map((mission: any) => {
+                            return (
+                                <div key={mission.id}>
+                                    <Divider component="li" />
+
+                                    <ListItem
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        <TextField
+                                            label={`미션 ${
+                                                mission.id | mission.mSeq
+                                            }. ${mission.mTitle} ${
+                                                mission.mLevel
+                                            }`}
+                                            variant="standard"
+                                            // fullWidth
+                                            name={`mTitle-${mission.id}`}
+                                            value={mission.mContent}
+                                            onChange={(e) =>
+                                                handleMissionContentChange(
+                                                    mission.id,
+                                                    e.target.value
+                                                )
+                                            }
+                                            style={{ width: '70%' }}
+                                        />
+
+                                        <div>
+                                            <button
+                                                className="modal-mission-edit-btn btn-sm"
+                                                onClick={() =>
+                                                    editHandler(mission.id)
+                                                }
+                                            >
+                                                수정
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button
+                                                className="modal-mission-delete-btn btn-sm"
+                                                onClick={() =>
+                                                    deleteHandler(mission.id)
+                                                }
+                                            >
+                                                삭제
+                                            </button>
+                                        </div>
+                                    </ListItem>
+                                </div>
+                            );
+                        })}
+                    </>
+                    <>
+                        {/* 미션 옆에 숫자 */}
+                        {missionState.map((mission: any) => {
+                            return (
+                                <div key={mission.id}>
+                                    <Divider component="li" />
+
+                                    {/* 여기 */}
+                                    <ListItem>
+                                        <ListItemText
+                                            primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                            secondary={`${mission.mContent}`}
+                                        />
+                                        <div>
+                                            <button
+                                                className="modal-mission-edit-btn btn-sm"
+                                                onClick={() =>
+                                                    editHandler(mission.id)
+                                                }
+                                            >
+                                                수정
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button
+                                                className="modal-mission-delete-btn btn-sm"
+                                                onClick={() =>
+                                                    editHandler(mission.id)
+                                                }
+                                            >
+                                                삭제
+                                            </button>
+                                        </div>
+                                    </ListItem>
+                                </div>
+                            );
+                        })}
+                    </>
+                </div>
             </div>
         </div>
     );

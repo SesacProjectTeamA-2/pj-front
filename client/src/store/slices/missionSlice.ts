@@ -17,26 +17,33 @@ import { createSlice } from '@reduxjs/toolkit';
 // 초기 상태
 const initialState = [
     {
-        id: 1,
-        mTitle: '알고리즘',
-        mContent: '문제에 대한 코드를 제출합니다.',
-        mLevel: '⭐️⭐️⭐️',
+        id: 0,
+        mTitle: '',
+        mContent: '',
+        mLevel: '⭐️',
         completed: true, // 추후 수정
     },
-    {
-        id: 2,
-        mTitle: '블로깅',
-        mContent: '게시물 링크를 올립니다.',
-        mLevel: '⭐️⭐️',
-        completed: false,
-    },
-    {
-        id: 3,
-        mTitle: '모각코',
-        mContent: '게시물 링크를 올립니다.',
-        mLevel: '⭐️',
-        completed: false,
-    },
+    // {
+    //     id: 1,
+    //     mTitle: '알고리즘',
+    //     mContent: '문제에 대한 코드를 제출합니다.',
+    //     mLevel: '⭐️⭐️⭐️',
+    //     completed: true, // 추후 수정
+    // },
+    // {
+    //     id: 2,
+    //     mTitle: '블로깅',
+    //     mContent: '게시물 링크를 올립니다.',
+    //     mLevel: '⭐️⭐️',
+    //     completed: false,
+    // },
+    // {
+    //     id: 3,
+    //     mTitle: '모각코',
+    //     mContent: '게시물 링크를ff 올립니다.',
+    //     mLevel: '⭐️',
+    //     completed: false,
+    // },
 ];
 
 const missionSlice = createSlice({

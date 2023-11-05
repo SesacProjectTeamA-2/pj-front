@@ -86,9 +86,11 @@ export default function GroupContent({ action }: any) {
 
                         {freeList.map((free: any, idx: number) => {
                             return (
-                                <Link to={`/board/${gSeq}/free/${free.gbSeq}`}>
+                                <li key={idx}>
                                     {/* [ START ] */}
-                                    <li>
+                                    <Link
+                                        to={`/board/${gSeq}/free/${free.gbSeq}`}
+                                    >
                                         <div className="post-list-content">
                                             <div className="post-list-header">
                                                 <div className="post-list-title">
@@ -113,9 +115,9 @@ export default function GroupContent({ action }: any) {
 
                                             <GroupContentFooter />
                                         </div>
-                                    </li>
+                                    </Link>
                                     {/* [ END ] */}
-                                </Link>
+                                </li>
                             );
                         })}
                     </>
