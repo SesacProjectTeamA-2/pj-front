@@ -115,7 +115,7 @@ export default function HomeMissionList({
         );
 
         if (editedMissionIndex !== -1) {
-            // 수정할 미션을 찾았을 때, 해당 미션 정보를 수정합니다.
+            // 수정할 미션을 찾았을 때, 해당 미션 정보 수정
             const updatedMissionInputs = [...missionInputs];
             updatedMissionInputs[editedMissionIndex] = {
                 ...updatedMissionInputs[editedMissionIndex],
@@ -172,7 +172,7 @@ export default function HomeMissionList({
                 </div>
             </div>
             <div className="main-content">
-                {/* <ul>
+                <ul>
                     {missionList.map((mission: MissionType, idx: number) => {
                         return (
                             <li key={idx} className="mission-li">
@@ -184,10 +184,10 @@ export default function HomeMissionList({
                             </li>
                         );
                     })}
-                </ul> */}
+                </ul>
 
                 {/*  추가한 부분 */}
-                <div className="modal-mission-list-text">
+                {/* <div className="modal-mission-list-text">
                     <>
                         {missionList.map((mission: any) => {
                             return (
@@ -245,13 +245,11 @@ export default function HomeMissionList({
                         })}
                     </>
                     <>
-                        {/* 미션 옆에 숫자 */}
                         {missionState.map((mission: any) => {
                             return (
                                 <div key={mission.id}>
                                     <Divider component="li" />
 
-                                    {/* 여기 */}
                                     <ListItem>
                                         <ListItemText
                                             primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
@@ -282,7 +280,7 @@ export default function HomeMissionList({
                             );
                         })}
                     </>
-                </div>
+                </div> */}
             </div>
         </div>
     );

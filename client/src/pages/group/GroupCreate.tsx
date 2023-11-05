@@ -26,7 +26,7 @@ export default function GroupCreate() {
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
-        missionArray: '',
+        missionArray: [],
     });
 
     const { gName, gDesc, gDday, gCategory, gCoverImg, gMaxMem, missionArray } =
@@ -85,6 +85,7 @@ export default function GroupCreate() {
 
         // [추후] 생성한 모임 홈 화면으로 이동
     };
+    console.log('input >> ', input);
 
     //=== 관심 분야 ===
     interface Interested {
