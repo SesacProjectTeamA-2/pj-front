@@ -117,44 +117,44 @@ export default function MissionAddModal({
         [key: number]: string;
     }>({});
 
-    const editHandler = (targetId: number) => {
-        console.log(targetId);
+    // const editHandler = (targetId: number) => {
+    //     console.log(targetId);
 
-        // const editEventHandler = (e) => {
-        //     const { title, ...rest } = todoItem;
-        //     setTodoItem({
-        //         title: e.target.value,
-        //         ...rest,
-        //     });
-        // };
+    //     // const editEventHandler = (e) => {
+    //     //     const { title, ...rest } = todoItem;
+    //     //     setTodoItem({
+    //     //         title: e.target.value,
+    //     //         ...rest,
+    //     //     });
+    //     // };
 
-        // setEditMode(!editMode);
+    //     // setEditMode(!editMode);
 
-        console.log('ppppp', missionInput);
+    //     console.log('ppppp', missionInput);
 
-        // if(!editMode) {
-        // const updatedMissionList = missionList.map((mission: any) => {
-        //         if (mission.id === targetId) {
-        //             // targetId와 일치하는 미션을 찾아 업데이트
-        //             return {
-        //                 ...mission,
-        //                 [name]: value,
-        //             };
-        //         }
-        //         return mission; // 다른 미션은 변경하지 않음
-        //     });
+    //     // if(!editMode) {
+    //     // const updatedMissionList = missionList.map((mission: any) => {
+    //     //         if (mission.id === targetId) {
+    //     //             // targetId와 일치하는 미션을 찾아 업데이트
+    //     //             return {
+    //     //                 ...mission,
+    //     //                 [name]: value,
+    //     //             };
+    //     //         }
+    //     //         return mission; // 다른 미션은 변경하지 않음
+    //     //     });
 
-        //     // 업데이트된 미션 목록을 상태에 설정
-        //     setMissionList(updatedMissionList);
-        // }
+    //     //     // 업데이트된 미션 목록을 상태에 설정
+    //     //     setMissionList(updatedMissionList);
+    //     // }
 
-        setEditMode((prevEditMode: any) => ({
-            ...prevEditMode,
-            [targetId]: !prevEditMode[targetId],
-        }));
+    //     setEditMode((prevEditMode: any) => ({
+    //         ...prevEditMode,
+    //         [targetId]: !prevEditMode[targetId],
+    //     }));
 
-        console.log(editMode);
-    };
+    //     console.log(editMode);
+    // };
 
     const handleEditChange = (e: any, targetId: number) => {
         const { name, value } = e.target;
@@ -198,10 +198,8 @@ export default function MissionAddModal({
         const newMissionArray = [...input.missionArray, ...missionList];
         setTargetDate(targetDate);
 
-
         // console.log('!!', input.missionArray);
         // console.log('##', missionList);
-
 
         setInput({
             ...input,
