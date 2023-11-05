@@ -134,6 +134,7 @@ export default function HomeMissionList({
         console.log('targetId, filtered', targetId, filtered);
         setMissionList(filtered);
     };
+    console.log('missionList', missionList);
 
     return (
         <div className="wrapper">
@@ -200,7 +201,11 @@ export default function HomeMissionList({
                                         }}
                                     >
                                         <TextField
-                                            label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                            label={`미션 ${
+                                                mission.id | mission.mSeq
+                                            }. ${mission.mTitle} ${
+                                                mission.mLevel
+                                            }`}
                                             variant="standard"
                                             // fullWidth
                                             name={`mTitle-${mission.id}`}
