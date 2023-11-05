@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
@@ -17,95 +18,32 @@ import Quit from '../../components/myPage/Quit';
 export default function MyPage() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
+    // console.log(uToken);
 
-    // 사용자 데이터 가져오기
+    // console.log(process.env.REACT_APP_DB_HOST); // http://localhost:8888/api
+    // const uSeq: number = 0;
+    const { uSeq } = useParams();
+    console.log(uSeq);
+
+    // 1. 사용자 데이터 가져오기
     const getUserData = async () => {
-        const res = await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/api/user/mypage`, {
+        await axios
+            // .get('http://localhost:8888/api/user/mypage', {
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
             })
             .then((res) => {
                 console.log('user', res);
+                console.log('user', res.data);
             });
     };
     useEffect(() => {
         getUserData();
     }, []);
 
-    /////////////////////////////////////
-
-    // 1. 닉네임
-    const [input, setInput] = useState<string | number>('');
-    // console.log('닉네임', input);
-
-    // 1-2. 닉네임 중복검사 결과
-    const [isUsing, setIsUsing] = useState<boolean>(true);
-
-    // 1-3. 닉네임 중복검사 메시지
-    const [msg, setMsg] = useState<string>('');
-
-    // 2. 자기소개
-    const [content, setContent] = useState<string | number>('');
-    // console.log('자기소개', content);
-
-    // 3. 선택한 캐릭터
-    const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
-        null
-    );
-    const selectCharacter = (characterSrc: string): void => {
-        setSelectedCharacter(characterSrc);
-    };
-    // console.log('캐릭터 src', selectedCharacter);
-
-    // 4. 관심사 배열
-    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
-    // console.log(selectedArr[0]);
-    // console.log(selectedArr[1]);
-    // console.log(selectedArr[2]);
-
-    // 전체 그룹 불러와야 함
-
-    // 5. 선택한 dDay id
-    const [dDayPin, setDdayPin] = useState<number | null>(0);
-    const handleCheckDday = (groupId: number): void => {
-        setDdayPin(groupId);
-    };
-    // console.log('dDayPin', dDayPin);
-
-    // 6. 선택한 그룹 id
-    const [donePin, setDonePin] = useState<number | null>(0);
-    const handleCheckDone = (groupId: number): void => {
-        setDonePin(groupId);
-    };
-    // console.log('donePin', donePin);
-
-    //  7. dDay 설정: y/ 설정하지 않았을 경우, 빈값(null)"
-    const [checkDday, setCheckDday] = useState<string | null>(null);
-    useEffect(() => {
-        dDayPin === 0 && donePin === 0 ? setCheckDday(null) : setCheckDday('y');
-        // console.log(checkDday);
-    }, [dDayPin, donePin]);
-
-    // 8. 명언 모드
-    // 8-1. 적은 명언 내용
-    const [phraseCtt, setPhraseCtt] = useState<string | number>(
-        '여름은 가을로부터 떨어진다'
-    );
-    // console.log('명언', phraseCtt);
-
-    // 8-2. 선택한 명언 모드
-    const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('');
-    const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
-        const phraseModeBtn: HTMLElement = e.target as HTMLElement;
-        setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
-    };
-    // useEffect(() => {
-    //     console.log('phraseModeBtnVal', phraseModeBtnVal);
-    // }, [phraseModeBtnVal]);
-
-    // 1. 사용자 데이터 수정
+    // 2. 사용자 데이터 수정
     interface patchedUserDataItf {
         uName: string;
         uDesc: string;
@@ -156,8 +94,96 @@ export default function MyPage() {
     //     patchUserData();
     // }, []);
 
-    // 2. 회원 탈퇴
+    // 3. 회원 탈퇴
     // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기
+
+    /////////////////////////////////////
+    // props 선언
+    // 1. 닉네임
+    const [input, setInput] = useState<string | number>('');
+    // console.log('닉네임', input);
+
+    // 1-2. 닉네임 중복검사 결과
+    const [isUsing, setIsUsing] = useState<boolean>(true);
+
+    // 1-3. 닉네임 중복검사 메시지
+    const [msg, setMsg] = useState<string>('');
+
+    // 2. 자기소개
+    const [content, setContent] = useState<string | number>('');
+    // console.log('자기소개', content);
+
+    // 3. 선택한 캐릭터
+    const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
+        null
+    );
+    const selectCharacter = (characterSrc: string): void => {
+        setSelectedCharacter(characterSrc);
+    };
+    // console.log('캐릭터 src', selectedCharacter);
+
+    // 4. 관심사 배열
+    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+    // console.log(selectedArr[0]);
+    // console.log(selectedArr[1]);
+    // console.log(selectedArr[2]);
+
+    // 전체 그룹 불러와야 함
+    // const getGroupList = async () => {
+    //     const res = await axios
+    //         .get(
+    //             // 임시로 전체 검색
+    //             `http://localhost:8888/api/group?search=%&category=%`,
+    //             // `http://localhost:8888/api/group?search=${searchInput}&category=${}`,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${uToken}`,
+    //                 },
+    //             }
+    //         )
+    //         .then((res) => console.log(res.data.groupArray));
+    // };
+    // useEffect(() => {
+    //     getGroupList();
+    // }, []);
+
+    // 5. 선택한 dDay id
+    const [dDayPin, setDdayPin] = useState<number | null>(0);
+    const handleCheckDday = (groupId: number): void => {
+        setDdayPin(groupId);
+    };
+    // console.log('dDayPin', dDayPin);
+
+    // 6. 선택한 그룹 id
+    const [donePin, setDonePin] = useState<number | null>(0);
+    const handleCheckDone = (groupId: number): void => {
+        setDonePin(groupId);
+    };
+    // console.log('donePin', donePin);
+
+    //  7. dDay 설정: y/ 설정하지 않았을 경우, 빈값(null)"
+    const [checkDday, setCheckDday] = useState<string | null>(null);
+    useEffect(() => {
+        dDayPin === 0 && donePin === 0 ? setCheckDday(null) : setCheckDday('y');
+        // console.log(checkDday);
+    }, [dDayPin, donePin]);
+
+    // 8. 명언 모드
+    // 8-1. 적은 명언 내용
+    const [phraseCtt, setPhraseCtt] = useState<string | number>(
+        '여름은 가을로부터 떨어진다'
+    );
+    // console.log('명언', phraseCtt);
+
+    // 8-2. 선택한 명언 모드
+    const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('');
+    const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
+        const phraseModeBtn: HTMLElement = e.target as HTMLElement;
+        setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
+    };
+    // useEffect(() => {
+    //     console.log('phraseModeBtnVal', phraseModeBtnVal);
+    // }, [phraseModeBtnVal]);
 
     return (
         <div className="section">
