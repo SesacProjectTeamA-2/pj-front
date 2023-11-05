@@ -57,8 +57,8 @@ export default function Join() {
     const userInfo: userInfoItf = {
         uEmail: uEmail,
         uName: uName,
-        // uEmail: 'jo@com',
-        // uName: 'sss',
+        // uEmail: 'jwwwwwo@com',
+        // uName: 'sssssws',
         uCharImg: selectedCharacter,
         // uCategory1: selectedArr[0],
         // uCategory2: selectedArr[1],

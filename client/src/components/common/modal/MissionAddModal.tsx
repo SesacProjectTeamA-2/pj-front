@@ -38,6 +38,12 @@ export default function MissionAddModal({
     const missionState = useSelector((state: RootStateType) => state.mission);
     const dispatch = useDispatch();
 
+    //] 1. 그룹 생성
+    //-- action = 미션생성
+
+    //] 2. 그룹 홈
+    //-- action = 미션수정
+
     // const [listLength, setMissionList] = useState(missionState.length);
 
     // const missionList: any[] = missionState;
@@ -52,6 +58,7 @@ export default function MissionAddModal({
     console.log('missionList', missionList);
 
     const [missionInput, setMissionInput] = useState({
+        // 새로 추가하는 미션
         id: missionList.length + 1,
         mTitle: '',
         mContent: '',
@@ -70,14 +77,15 @@ export default function MissionAddModal({
 
     console.log('missionInput', missionInput);
 
-    const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
-    useEffect(() => {
-        setNextMissionId(missionList.length + 1);
-    }, [nextMissionId]);
+    // const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
+    // useEffect(() => {
+    //     setNextMissionId(missionList.length + 1);
+    // }, [nextMissionId]);
 
     // console.log('nextMissionId', nextMissionId);
 
     const oneMissionAddHandler = () => {
+        // 새로운 미션을 미션 리스트에 추가
         // console.log(missionInput);
         // dispatch(addMission(missionInput));
 
@@ -95,7 +103,6 @@ export default function MissionAddModal({
         });
     };
 
-    console.log('missionState', missionState);
     console.log('missionList', missionList);
 
     const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
@@ -116,15 +123,6 @@ export default function MissionAddModal({
 
     // const editHandler = (targetId: number) => {
     //     console.log(targetId);
-
-    //     // const editEventHandler = (e) => {
-    //     //     const { title, ...rest } = todoItem;
-    //     //     setTodoItem({
-    //     //         title: e.target.value,
-    //     //         ...rest,
-    //     //     });
-    //     // };
-
     //     // setEditMode(!editMode);
 
     //     console.log('ppppp', missionInput);
@@ -183,28 +181,37 @@ export default function MissionAddModal({
     console.log('editedContents', editedContents);
 
     const missionAddDoneHandler = () => {
+        // 최종으로 버튼 클릭 시
         setAddModalSwitch(false);
-
-        // input : 그룹 생성할 때의 input
-        const newMissionArray = [...input.missionArray, ...missionList];
         setTargetDate(targetDate);
 
+        // input : 그룹 생성할 때의 input
+        // const newMissionArray = [...input.missionArray, ...missionList];
+        // const newMissionArray = [...missionList];
+        // console.log(' newMissionArray', newMissionArray);
+
         // console.log('!!', input.missionArray);
-        // console.log('##', missionList);
+        console.log('##', missionList);
 
-        setInput({
-            ...input,
-            missionArray: newMissionArray,
-            gDday: targetDate,
-        });
+        if (action === '미션생성') {
+            setInput({
+                ...input,
+                missionArray: missionList,
+                gDday: targetDate,
+            });
 
-        console.log('<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>', input);
+            console.log(
+                '<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>',
+                input
+            );
+        }
     };
 
     //=== 수정 ===
 
     // const editHandler = (e: React.MouseEvent, targetId: number) => {
     const [missionInputs, setMissionInputs] = useState(
+        // 개별 input 관리 위한 함수
         missionList.map((mission: any) => ({
             id: mission.id,
             mTitle: mission.mTitle,
@@ -398,6 +405,7 @@ export default function MissionAddModal({
                                                                 variant="standard"
                                                                 fullWidth
                                                                 name={`mTitle-${mission.id}`}
+                                                                // name={`mContent-${mission.id}`}
                                                                 value={
                                                                     mission.mContent
                                                                 }
@@ -443,7 +451,7 @@ export default function MissionAddModal({
                                 ) : (
                                     <>
                                         {/* 미션 옆에 숫자 */}
-                                        {missionState.map((mission: any) => {
+                                        {missionList.map((mission: any) => {
                                             return (
                                                 <div key={mission.id}>
                                                     <Divider component="li" />
