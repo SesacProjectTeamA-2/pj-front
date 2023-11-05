@@ -86,7 +86,7 @@ export default function GroupContent({ action }: any) {
 
                         {freeList.map((free: any, idx: number) => {
                             return (
-                                <Link to={`/board/${gSeq}/free/${gSeq}`}>
+                                <Link to={`/board/${gSeq}/free/${free.gbSeq}`}>
                                     {/* [ START ] */}
                                     <li>
                                         <div className="post-list-content">
