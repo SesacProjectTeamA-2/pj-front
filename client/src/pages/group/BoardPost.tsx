@@ -9,7 +9,7 @@ import '../../styles/scss/pages/group/post.scss';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import Editor from './Editor';
-import { GroupDetailType } from 'src/types/types';
+import { GroupDetailType, MissionType } from 'src/types/types';
 
 export default function BoardPost() {
     const cookie = new Cookies();
@@ -18,7 +18,7 @@ export default function BoardPost() {
     const { gSeq } = useParams();
 
     interface Mission {
-        id: number;
+        // mSeq: number;
         mTitle: string;
         mContent: string;
         mLevel: number;
@@ -56,6 +56,7 @@ export default function BoardPost() {
     // 3) Link to
     // 2. select 변경 시 변경
     const [board, setBoard] = useState({
+        gSeq: Number(gSeq),
         gbTitle: '',
         gbContent: '',
         gbCategory: 'notice',
@@ -112,13 +113,14 @@ export default function BoardPost() {
                 },
             }
         );
-        console.log(res.data);
+        console.log(res);
 
         // [추후] input 입력 안했을 시, 로직
 
         // [추후] 수정한 모임 홈 화면으로 이동
     };
 
+    console.log(board);
     return (
         <div className="section section-group">
             {/* title 값 넘겨 받기 ! */}
@@ -132,9 +134,20 @@ export default function BoardPost() {
 
                         <option value="notice">공지사항</option>
                         <option value="free">자유/질문</option>
-                        <option value="mission1">미션1</option>
-                        <option value="mission2">미션2</option>
-                        <option value="mission3">미션3</option>
+
+                        {missionList?.map(
+                            (mission: MissionType, idx: number) => {
+                                return (
+                                    <>
+                                        <option value={`mission${idx}`}>
+                                            {mission.mTitle}
+                                        </option>
+                                        {/* <option value="mission2">미션2</option> */}
+                                        {/* <option value="mission3">미션3</option> */}
+                                    </>
+                                );
+                            }
+                        )}
                     </select>
                     <div className="post-title">
                         <div>제목</div>
