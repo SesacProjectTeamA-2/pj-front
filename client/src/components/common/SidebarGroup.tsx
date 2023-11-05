@@ -83,16 +83,21 @@ export default function SideBarGroup() {
                             <ul className="title6">
                                 {mSeqList.map((mSeq: number) => {
                                     return (
-                                        <Link
-                                            to={`/board/${gSeq}/mission/${mSeq}`}
-                                        >
-                                            <li
-                                                key={mSeq}
-                                                className="title6-hover-bigger"
+                                        <div key={mSeq}>
+                                            <Link
+                                                to={`/board/${gSeq}/mission/${mSeq}`}
                                             >
-                                                {groupMissions[mSeq - 1].mTitle}
-                                            </li>
-                                        </Link>
+                                                <li
+                                                    key={mSeq}
+                                                    className="title6-hover-bigger"
+                                                >
+                                                    {
+                                                        groupMissions[mSeq - 1]
+                                                            .mTitle
+                                                    }
+                                                </li>
+                                            </Link>
+                                        </div>
                                     );
                                 })}
                                 {/* <Link to={`/board/${gSeq}/mission/${mSeqList[i]}`}>

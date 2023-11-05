@@ -167,13 +167,15 @@ export default function Groupidti() {
                                                             key={column.id}
                                                             align={column.align}
                                                         >
-                                                            {column.format &&
-                                                            typeof value ===
-                                                                'number'
-                                                                ? column.format(
-                                                                      value
-                                                                  )
-                                                                : value}
+                                                            <Link to="/board/1/noti/1">
+                                                                {column.format &&
+                                                                typeof value ===
+                                                                    'number'
+                                                                    ? column.format(
+                                                                          value
+                                                                      )
+                                                                    : value}
+                                                            </Link>
                                                         </TableCell>
                                                     );
                                                 })}
