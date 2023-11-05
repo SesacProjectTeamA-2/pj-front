@@ -22,7 +22,7 @@ export default function Header(props: any) {
     });
 
     // 리사이즈 이벤트에 따라 너비값 측정
-    const [myWidth, setMyWidth] = useState<number>(0);
+    const [myWidth, setMyWidth] = useState<number>(window.innerWidth);
     window.onresize = () => {
         setMyWidth(window.innerWidth);
         // console.log(myWidth);

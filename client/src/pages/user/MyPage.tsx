@@ -20,7 +20,7 @@ export default function MyPage() {
 
     // 사용자 데이터 가져오기
     const getUserData = async () => {
-        const res = await axios
+        await axios
             .get(`${process.env.REACT_APP_DB_HOST}/api/user/mypage`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
