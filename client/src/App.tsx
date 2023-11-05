@@ -184,7 +184,7 @@ function App() {
 
                 {/* 게시물 Edit */}
                 <Route
-                    path="/board/edit/:gbSeq"
+                    path="/board/:gSeq/edit/:gbSeq"
                     element={
                         <GroupLayout
                             children={<BoardEdit />}
