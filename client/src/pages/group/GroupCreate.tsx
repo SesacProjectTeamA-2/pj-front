@@ -26,7 +26,7 @@ export default function GroupCreate() {
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
-        missionArray: '',
+        missionArray: [],
     });
 
     const { gName, gDesc, gDday, gCategory, gCoverImg, gMaxMem, missionArray } =
@@ -85,6 +85,7 @@ export default function GroupCreate() {
 
         // [추후] 생성한 모임 홈 화면으로 이동
     };
+    console.log('input >> ', input);
 
     //=== 관심 분야 ===
     interface Interested {
@@ -230,7 +231,7 @@ export default function GroupCreate() {
                 <div>Mission</div>
                 <div className="mission-container">
                     <div onClick={missionAddHandler}>
-                        <img src="/asset/icons/plus.svg" />
+                        <img src="/asset/icons/plus.svg" alt="plus mission" />
                     </div>
                     <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
                     {/* [추후] 미션 추가되면 리스트 형식으로 추가 */}
