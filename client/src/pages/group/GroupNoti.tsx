@@ -145,7 +145,8 @@ export default function Groupidti() {
 
     const reversedRows = noticeList.map((item: any, index) =>
         createData(
-            String(noticeList.length - index),
+            // String(noticeList.length - index),
+            String(index + 1),
             item.gbTitle,
             item.gbContent,
             item.createdAt
