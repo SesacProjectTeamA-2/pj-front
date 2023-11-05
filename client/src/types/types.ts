@@ -71,10 +71,12 @@ export interface GroupStateType {
 }
 
 export interface MissionType {
+    // mSeq: number;
     mTitle: string;
     mContent: string;
     mLevel: number;
 }
+
 export interface MissionStateType {
     id: number;
     mTitle: string;
