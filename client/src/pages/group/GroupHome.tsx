@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeGroup } from '../../store/slices/groupSlice';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { changeGroup } from '../../store/slices/groupSlice';
 
 import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
