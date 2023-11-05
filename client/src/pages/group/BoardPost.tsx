@@ -3,7 +3,7 @@ import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
 import 'react-quill/dist/quill.snow.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import '../../styles/scss/pages/group/post.scss';
 
@@ -13,19 +13,23 @@ import Editor from './Editor';
 export default function BoardPost() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
-    // console.log('왜 안되는가');
+
+    const { gSeq } = useParams();
+    // console.log(gSeq);
     // 1. 클릭한 곳 default 값
     // 1) Header - tilte
     // 2) select
     // 3) Link to
     // 2. select 변경 시 변경
     const [board, setBoard] = useState({
-        select: '',
-        title: '',
-        content: '',
+        gbTitle: '',
+        gbContent: '',
+        gbCategory: '초기값',
     });
+
     const [selected, setSelected] = useState<string>('');
 
+    //gbTitle state 관리
     const getValue = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
@@ -34,25 +38,39 @@ export default function BoardPost() {
             [name]: value,
         });
 
-        console.log(board);
+        // console.log(board);
         // console.log(name, value);
     };
 
+    //select 태그 state관리
     const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log('Selected:', e.target.innerText); // 수정: e.target.innerText를 사용하여 옵션 내용 가져오기
-        setSelected(e.target.value);
+        // console.log('setSelected 전',board);
+
+        const selectedValue = e.target.value;
+        setSelected(selectedValue);
+
+        setBoard({
+            ...board,
+            gbCategory: selectedValue,
+        });
+
+        // console.log('Selected:', e.target.value);
+        // console.log('setSelected 후', board);
     };
 
+    //gbContent관리
     const handleEditorChange = (value: string) => {
         setBoard({
             ...board,
-            content: value, // 에디터의 내용을 업데이트
+            gbContent: value, // 에디터의 내용을 업데이트
         });
-        console.log(value);
+        // console.log(board);
     };
 
+    // 정보 post
     const boardPostHandler = async () => {
-        const res = await axios.patch(
+        // console.log('boardPostHandler실행 확인')
+        const res = await axios.post(
             `${process.env.REACT_APP_DB_HOST}/board/create`,
             board,
             {
@@ -79,11 +97,11 @@ export default function BoardPost() {
                         {/* default : + 누른 페이지 */}
                         {/* select 값에 따라 Link to 달라아야 함 */}
 
-                        <option>공지사항</option>
-                        <option>자유/질문</option>
-                        <option>미션1</option>
-                        <option>미션2</option>
-                        <option>미션3</option>
+                        <option value="notice">공지사항</option>
+                        <option value="free">자유/질문</option>
+                        <option value="mission1">미션1</option>
+                        <option value="mission2">미션2</option>
+                        <option value="mission3">미션3</option>
                     </select>
                     <div className="post-title">
                         <div>제목</div>
@@ -91,7 +109,7 @@ export default function BoardPost() {
                             type="text"
                             placeholder="제목을 입력해주세요."
                             onChange={getValue}
-                            name="title"
+                            name="gbTitle"
                             required
                         />
                     </div>
@@ -99,7 +117,7 @@ export default function BoardPost() {
                 <div>
                     {/* [추후] 에디터가 들어갈 부분입니다. */}
                     <Editor
-                        value={board.content}
+                        value={board.gbContent}
                         onChange={handleEditorChange}
                     />
                     {/* <textarea
