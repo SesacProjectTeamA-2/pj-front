@@ -90,7 +90,7 @@ export default function GroupMission() {
             <GroupHeader
                 // [ 추후 ] 넘버링 id 추가
                 title={`미션 ${mSeq}. ${
-                    Object.keys(missionList).length
+                    Object.keys(missionList)?.length
                         ? missionList[Number(mSeq) - 1].mTitle
                         : ''
                 }`}
@@ -100,7 +100,7 @@ export default function GroupMission() {
                 <div className="noti-header proof-header">
                     <div className="title5">[ 인증방법 ]</div>
                     <div>
-                        {Object.keys(missionList).length
+                        {Object.keys(missionList)?.length
                             ? missionList[Number(mSeq) - 1].mContent
                             : ''}
                     </div>
