@@ -150,7 +150,7 @@ function App() {
                 {/* 게시물 Create */}
                 {/* [추후] 동적으로 수정하기 */}
                 <Route
-                    path="/board/create"
+                    path="/board/create/:gSeq"
                     // path="*/post"
                     element={
                         <GroupLayout
