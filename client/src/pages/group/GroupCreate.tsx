@@ -231,7 +231,7 @@ export default function GroupCreate() {
                 <div>Mission</div>
                 <div className="mission-container">
                     <div onClick={missionAddHandler}>
-                        <img src="/asset/icons/plus.svg" alt="plus" />
+                        <img src="/asset/icons/plus.svg" alt="plus mission" />
                     </div>
                     <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
                     {/* [추후] 미션 추가되면 리스트 형식으로 추가 */}
