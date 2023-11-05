@@ -121,6 +121,7 @@ export default function BoardPost() {
     };
 
     console.log(board);
+
     return (
         <div className="section section-group">
             {/* title 값 넘겨 받기 ! */}

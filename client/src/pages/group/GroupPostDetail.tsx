@@ -16,7 +16,8 @@ export default function GroupPostDetail() {
 
     console.log(gSeq, mSeq, gbSeq);
 
-    //] 1. 자유게시글 GET
+    //] 1. 자유게시글
+    //; 게시글 조회 (GET)
     const [freeList, setFreeList] = useState<any>([]);
 
     // [추후] 자유/질문 or 미션
@@ -43,6 +44,20 @@ export default function GroupPostDetail() {
     }, []);
 
     console.log('>>>>', freeList);
+
+    //; 게시글 삭제 (DELETE)
+    const boardDeleteHandler = async (gbSeq: number) => {
+        const res = await axios.delete(
+            `${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        console.log(res.data);
+    };
 
     //] 2. 미션게시글
     const [missionList, setMissionList] = useState<any>([]);
@@ -114,7 +129,7 @@ export default function GroupPostDetail() {
         });
     };
 
-    //; 댓글 등록
+    //; 댓글 등록 (POST)
     const postCommentHandler = async () => {
         const res = await axios.post(
             `${process.env.REACT_APP_DB_HOST}/comment/create/${gbSeq}`,
@@ -151,7 +166,7 @@ export default function GroupPostDetail() {
         gbcContent: '댓글 수정합니다 !!!',
     };
 
-    //; 댓글 수정
+    //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number) => {
         console.log(gbcSeq);
 
@@ -169,7 +184,7 @@ export default function GroupPostDetail() {
         console.log(res.data);
     };
 
-    //; 댓글 삭제
+    //; 댓글 삭제 (DELETE)
     const commentDeleteHandler = async (gbcSeq: number) => {
         console.log(gbcSeq);
 
@@ -212,12 +227,15 @@ export default function GroupPostDetail() {
                     </div>
                     <div className="writer-menu">
                         {/* gSeq, gbSeq */}
-                        <Link to="/board/edit/1">
+                        <Link to={`/board/${gSeq}/edit/${gbSeq}`}>
                             <div>수정</div>
                         </Link>
-                        <div onClick={() => warningModalSwitchHandler('삭제')}>
+                        {/* [추후] 게시글 삭제 경고 모달 추가 */}
+                        {/* <div onClick={() => warningModalSwitchHandler('삭제')}> */}
+                        <div onClick={() => boardDeleteHandler(Number(gbSeq))}>
                             삭제
                         </div>
+                        {/* </div> */}
                     </div>
                 </div>
 
