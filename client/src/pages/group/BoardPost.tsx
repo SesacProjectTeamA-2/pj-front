@@ -69,7 +69,7 @@ export default function BoardPost() {
 
     // 정보 post
     const boardPostHandler = async () => {
-        // console.log('boardPostHandler실행 확인')
+
         const res = await axios.post(
             `${process.env.REACT_APP_DB_HOST}/board/create`,
             board,

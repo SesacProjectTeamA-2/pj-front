@@ -106,7 +106,7 @@ export default function GroupMission() {
                     </div>
                 </div>
             </div>
-            <GroupContent />
+            <GroupContent action={'미션게시글'} />
             <Link to="/board/create">
                 <img src="/asset/icons/plus.svg" className="plus-fixed" />
             </Link>

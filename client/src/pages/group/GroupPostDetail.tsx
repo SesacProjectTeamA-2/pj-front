@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
+import axios from 'axios';
 import '../../styles/scss/pages/group/groupPostDetail.scss';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
-import { Link } from 'react-router-dom';
 import WarningModal from '../../components/common/modal/WarningModal';
 
 export default function GroupPostDetail() {
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
+    //=== 모임 상세화면 읽어오기 ===
+
+    const { gSeq, mSeq } = useParams();
+
     // 메뉴 선택
     const [menu, setMenu] = useState('');
 
@@ -42,7 +50,8 @@ export default function GroupPostDetail() {
                         <div className="date">2023-10-30 22:09</div>
                     </div>
                     <div className="writer-menu">
-                        <Link to="/group/board/edit/1">
+                        {/* gSeq, gbSeq */}
+                        <Link to="/board/edit/1">
                             <div>수정</div>
                         </Link>
                         <div onClick={() => warningModalSwitchHandler('삭제')}>
@@ -95,7 +104,24 @@ export default function GroupPostDetail() {
                                         />
                                         <div className="title5">달려라하니</div>
                                     </div>
-                                    <div className="date">2023-10-30 22:09</div>
+                                    <div>
+                                        <div className="date">
+                                            2023-10-30 22:09
+                                        </div>
+                                        <div>
+                                            {/* [추후] 댓글 수정에 대한 수정 추가 */}
+                                            <div>수정</div>
+                                            <div
+                                                onClick={() =>
+                                                    warningModalSwitchHandler(
+                                                        '댓글 삭제'
+                                                    )
+                                                }
+                                            >
+                                                삭제
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>댓글입니다 !!!!!!!!!!!!!!!</div>
                             </li>
