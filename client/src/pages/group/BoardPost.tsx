@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -9,13 +9,47 @@ import '../../styles/scss/pages/group/post.scss';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import Editor from './Editor';
+import { GroupDetailType } from 'src/types/types';
 
 export default function BoardPost() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
     const { gSeq } = useParams();
-    // console.log(gSeq);
+
+    interface Mission {
+        id: number;
+        mTitle: string;
+        mContent: string;
+        mLevel: number;
+        // map: string;
+    }
+
+    const [missionList, setMissionList] = useState<Mission[]>();
+
+    useEffect(() => {
+        const getGroup = async () => {
+            const res = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
+
+            setMissionList(res.data.groupMission);
+        };
+
+        getGroup();
+    }, []);
+
+    console.log('>>>>>>', missionList);
+
+    // useEffect(() => {
+    //     setMissionList(groupDetail.groupMission);
+    // }, [groupDetail.groupMission]);
+
     // 1. 클릭한 곳 default 값
     // 1) Header - tilte
     // 2) select
@@ -24,7 +58,7 @@ export default function BoardPost() {
     const [board, setBoard] = useState({
         gbTitle: '',
         gbContent: '',
-        gbCategory: '초기값',
+        gbCategory: 'notice',
     });
 
     const [selected, setSelected] = useState<string>('');
@@ -69,7 +103,6 @@ export default function BoardPost() {
 
     // 정보 post
     const boardPostHandler = async () => {
-
         const res = await axios.post(
             `${process.env.REACT_APP_DB_HOST}/board/create`,
             board,
@@ -115,15 +148,10 @@ export default function BoardPost() {
                     </div>
                 </div>
                 <div>
-                    {/* [추후] 에디터가 들어갈 부분입니다. */}
                     <Editor
                         value={board.gbContent}
                         onChange={handleEditorChange}
                     />
-                    {/* <textarea
-                        className="editor"
-                        placeholder="내용을 작성해주세요"
-                    ></textarea> */}
                 </div>
             </div>
             <div>

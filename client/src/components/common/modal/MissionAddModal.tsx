@@ -101,6 +101,88 @@ export default function MissionAddModal({
 
     const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
 
+    // const [editMode, setEditMode] = useState([]);
+
+    // const [editMode, setEditMode] = useState({});
+    // const [editedContent, setEditedContent] = useState({}); // 추가: 수정된 내용을 관리
+
+    interface EditMode {
+        [key: number]: boolean;
+    }
+
+    const [editMode, setEditMode] = useState<EditMode>({});
+    const [editedContents, setEditedContents] = useState<{
+        [key: number]: string;
+    }>({});
+
+    const editHandler = (targetId: number) => {
+        console.log(targetId);
+
+        // const editEventHandler = (e) => {
+        //     const { title, ...rest } = todoItem;
+        //     setTodoItem({
+        //         title: e.target.value,
+        //         ...rest,
+        //     });
+        // };
+
+        // setEditMode(!editMode);
+
+        console.log('ppppp', missionInput);
+
+        // if(!editMode) {
+        // const updatedMissionList = missionList.map((mission: any) => {
+        //         if (mission.id === targetId) {
+        //             // targetId와 일치하는 미션을 찾아 업데이트
+        //             return {
+        //                 ...mission,
+        //                 [name]: value,
+        //             };
+        //         }
+        //         return mission; // 다른 미션은 변경하지 않음
+        //     });
+
+        //     // 업데이트된 미션 목록을 상태에 설정
+        //     setMissionList(updatedMissionList);
+        // }
+
+        setEditMode((prevEditMode: any) => ({
+            ...prevEditMode,
+            [targetId]: !prevEditMode[targetId],
+        }));
+
+        console.log(editMode);
+    };
+
+    const handleEditChange = (e: any, targetId: number) => {
+        const { name, value } = e.target;
+
+        // setEditedContents((prevContents) => ({
+        //     ...prevContents,
+        //     [targetId]: value,
+        // }));
+
+        setMissionInput({ ...missionInput, [name]: value });
+
+        console.log('<<<<<<MissionInput>>>>>>>>>>>', missionInput);
+
+        // const updatedMissionList = missionList.map((mission: any) => {
+        //     if (mission.id === targetId) {
+        //         // targetId와 일치하는 미션을 찾아 업데이트
+        //         return {
+        //             ...mission,
+        //             [name]: value,
+        //         };
+        //     }
+        //     return mission; // 다른 미션은 변경하지 않음
+        // });
+
+        // // 업데이트된 미션 목록을 상태에 설정
+        // setMissionList(updatedMissionList);
+    };
+
+    console.log(editedContents);
+
     const missionAddDoneHandler = () => {
         setAddModalSwitch(false);
 
@@ -114,14 +196,18 @@ export default function MissionAddModal({
         const newMissionArray = [...input.missionArray, ...missionList];
         setTargetDate(targetDate);
 
+
         // console.log('!!', input.missionArray);
         // console.log('##', missionList);
+
 
         setInput({
             ...input,
             missionArray: newMissionArray,
             gDday: targetDate,
         });
+
+        console.log('<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>', input);
     };
 
     //=== 수정 ===
@@ -182,6 +268,7 @@ export default function MissionAddModal({
     };
 
     const deleteHandler = (targetId: number) => {};
+
     return (
         <div className="modal-mission-add-container">
             <Modal
