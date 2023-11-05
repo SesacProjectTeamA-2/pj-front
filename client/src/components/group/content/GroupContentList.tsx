@@ -1,14 +1,17 @@
 import React from 'react';
-import GroupContentFooter from './GroupContentFooter';
+import { Link, useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Link } from 'react-router-dom';
+
+import GroupContentFooter from './GroupContentFooter';
 
 export default function GroupContent() {
+    const { gSeq, gbSeq } = useParams();
+
     return (
         <div className="noti-container post-list-container">
             <ul>
                 {/* [ START ] */}
-                <Link to="/board/1/free">
+                <Link to={`/board/${gSeq}/free/${gSeq}`}>
                     <li>
                         <div className="post-list-content">
                             <div className="post-list-header">
