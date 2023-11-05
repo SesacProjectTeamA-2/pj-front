@@ -69,7 +69,7 @@ export default function MissionAddModal({
         setMissionInput({ ...missionInput, [name]: value });
     };
 
-    console.log('missionInput', missionInput);
+    // console.log('missionInput', missionInput);
 
     // const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
     // useEffect(() => {
@@ -184,7 +184,8 @@ export default function MissionAddModal({
         // const newMissionArray = [...missionList];
         // console.log(' newMissionArray', newMissionArray);
 
-        console.log('!!', input.missionArray);
+        console.log('input', input);
+        // console.log('missionArray - AddModal', input.missionArray);
         console.log('##', missionList);
 
         setInput({

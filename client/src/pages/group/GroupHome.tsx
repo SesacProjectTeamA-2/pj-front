@@ -128,12 +128,12 @@ export default function GroupHome() {
     const [missionList, setMissionList] = useState<Mission[]>(
         groupDetail.groupMission
     );
-
+    console.log('missionList GROUP', missionList);
     useEffect(() => {
         setMissionList(groupDetail.groupMission);
     }, [groupDetail.groupMission]);
 
-    console.log(groupDetail);
+    console.log('groupDetail HOME', groupDetail);
 
     return (
         <div className="section group-home">

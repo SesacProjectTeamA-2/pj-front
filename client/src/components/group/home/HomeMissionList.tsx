@@ -28,8 +28,6 @@ export default function HomeMissionList({
         setAddModalSwitch(true);
     };
 
-    console.log('mis', missionList);
-
     //=== redux 상태관리 ===
     const dummyGroupState = useSelector(
         (state: RootStateType) => state.dummyGroup
@@ -134,7 +132,7 @@ export default function HomeMissionList({
         console.log('targetId, filtered', targetId, filtered);
         setMissionList(filtered);
     };
-    console.log('missionList', missionList);
+    console.log('missionList HOME', missionList);
 
     return (
         <div className="wrapper">
@@ -168,7 +166,7 @@ export default function HomeMissionList({
                         ? 'D-' + gDday
                         : gDday === 0
                         ? 'D-DAY'
-                        : 'D+' + gDday}
+                        : 'D+' + String(gDday).substring(1)}
                 </div>
             </div>
             <div className="main-content">
