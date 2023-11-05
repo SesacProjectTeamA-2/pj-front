@@ -95,7 +95,11 @@ export default function HomeMissionList({
                 </div>
                 <div className="title2">
                     {/* {useDdayCount(dummyGroupState.gDday)} */}
-                    {gDday > 0 ? 'D-' + gDday : 'D-DAY'}
+                    {gDday > 0
+                        ? 'D-' + gDday
+                        : gDday === 0
+                        ? 'D-DAY'
+                        : 'D+' + gDday}
                 </div>
             </div>
             <div className="main-content">

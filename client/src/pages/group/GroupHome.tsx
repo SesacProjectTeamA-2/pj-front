@@ -121,13 +121,16 @@ export default function GroupHome() {
         mTitle: string;
         mContent: string;
         mLevel: number;
-        map: string;
+        // map: string;
     }
 
-    // res.data에서 missionArray
     const [missionList, setMissionList] = useState<Mission[]>(
         groupDetail.groupMission
     );
+
+    useEffect(() => {
+        setMissionList(groupDetail.groupMission);
+    }, [groupDetail.groupMission]);
 
     console.log(groupDetail);
 

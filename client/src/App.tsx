@@ -111,7 +111,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/group/noti/*"
+                    path="/board/:gSeq/notice/*"
                     element={
                         <GroupLayout
                             children={<GroupNoti />}
@@ -120,7 +120,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/group/board/*"
+                    path="/board/:gSeq/free"
                     element={
                         <GroupLayout
                             children={<GroupBoard />}
@@ -129,7 +129,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/group/mission/*"
+                    path="/board/:gSeq/mission/:mSeq"
                     element={
                         <GroupLayout
                             children={<GroupMission />}
@@ -138,7 +138,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/group/mission/done/*"
+                    path="/board/:gSeq/mission/done"
                     element={
                         <GroupLayout
                             children={<GroupMissionDone />}
@@ -160,10 +160,20 @@ function App() {
                     }
                 />
 
-                {/* 게시물 Read */}
+                {/* 게시물 세부사항 Read */}
                 {/* [추후] 동적으로 수정하기 */}
                 <Route
-                    path="/board/:gSeq/*"
+                    path="/board/:gSeq/free/:gbSeq"
+                    element={
+                        <GroupLayout
+                            children={<GroupPostDetail />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
+                <Route
+                    path="/board/:gSeq/noti/:gbSeq"
                     element={
                         <GroupLayout
                             children={<GroupPostDetail />}
