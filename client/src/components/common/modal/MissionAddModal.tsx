@@ -50,7 +50,8 @@ export default function MissionAddModal({
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-    console.log(missionList);
+    console.log('missionList', missionList);
+
     const [missionInput, setMissionInput] = useState({
         id: missionList.length + 2,
         mTitle: '',
@@ -69,14 +70,15 @@ export default function MissionAddModal({
     };
 
     console.log('list', missionList.length);
+    console.log('missionInput', missionInput);
 
     const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
 
-    // useEffect(() => {
-    //     setNextMissionId(missionList.length + 1);
-    // }, [nextMissionId])
+    useEffect(() => {
+        setNextMissionId(missionList.length + 1);
+    }, [nextMissionId]);
 
-    console.log(nextMissionId);
+    console.log('nextMissionId', nextMissionId);
 
     const oneMissionAddHandler = () => {
         // console.log(missionInput);
