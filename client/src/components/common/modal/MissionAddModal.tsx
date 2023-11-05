@@ -53,7 +53,7 @@ export default function MissionAddModal({
     console.log('missionList', missionList);
 
     const [missionInput, setMissionInput] = useState({
-        id: missionList.length + 2,
+        id: missionList.length + 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
@@ -69,16 +69,14 @@ export default function MissionAddModal({
         setMissionInput({ ...missionInput, [name]: value });
     };
 
-    console.log('list', missionList.length);
     console.log('missionInput', missionInput);
 
     const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
-
     useEffect(() => {
         setNextMissionId(missionList.length + 1);
     }, [nextMissionId]);
 
-    console.log('nextMissionId', nextMissionId);
+    // console.log('nextMissionId', nextMissionId);
 
     const oneMissionAddHandler = () => {
         // console.log(missionInput);
@@ -183,16 +181,10 @@ export default function MissionAddModal({
         // setMissionList(updatedMissionList);
     };
 
-    console.log(editedContents);
+    console.log('editedContents', editedContents);
 
     const missionAddDoneHandler = () => {
         setAddModalSwitch(false);
-
-        // 1. 모임 생성 - 미션 추가하기
-
-        // 2. 모임 상세 - 미션 수정하기
-        //     1) 새로운 미션 추가하기
-        //     2) 기존 미션 수정 / 삭제
 
         // input : 그룹 생성할 때의 input
         const newMissionArray = [...input.missionArray, ...missionList];
@@ -212,15 +204,6 @@ export default function MissionAddModal({
 
     //=== 수정 ===
 
-    // const editEventHandler = (e) => {
-    //     const { title, ...rest } = todoItem;
-    //     // console.log(rest);
-    //     setTodoItem({
-    //       ...rest,
-    //       title: e.target.value,
-    //     });
-    //   };
-
     // const editHandler = (e: React.MouseEvent, targetId: number) => {
     const [missionInputs, setMissionInputs] = useState(
         missionList.map((mission: any) => ({
@@ -230,7 +213,6 @@ export default function MissionAddModal({
             mLevel: mission.mLevel,
         }))
     );
-    console.log(missionInput, missionList);
     const editHandler = (targetId: number) => {
         const editedMissionIndex = missionInputs.findIndex(
             (mission: any) => mission.id === targetId
@@ -250,10 +232,10 @@ export default function MissionAddModal({
     };
 
     // 각 미션 내용 저장 상태 배열
-    const [missionContentList, setMissionContentList] = useState(
-        missionList.map((mission: any) => mission.mContent)
-    );
-    console.log(22, missionContentList);
+    // const [missionContentList, setMissionContentList] = useState(
+    //     missionList.map((mission: any) => mission.mContent)
+    // );
+    // console.log('missionContentList', missionContentList);
 
     const handleMissionContentChange = (missionId: any, newContent: any) => {
         // missionId에 해당하는 미션의 내용을 newContent로 변경
@@ -267,7 +249,14 @@ export default function MissionAddModal({
         setMissionList(updatedMissionList);
     };
 
-    const deleteHandler = (targetId: number) => {};
+    ////////////////////// 삭제////////////////////////
+    const deleteHandler = (targetId: number) => {
+        const filtered = missionList.filter(
+            (mission: any) => targetId !== mission.id
+        );
+        console.log('targetId, filtered', targetId, filtered);
+        setMissionList(filtered);
+    };
 
     return (
         <div className="modal-mission-add-container">
@@ -327,7 +316,7 @@ export default function MissionAddModal({
                             <NativeSelect
                                 // defaultValue={1}
                                 inputProps={{
-                                    name: 'nLevel',
+                                    name: 'mLevel',
                                     id: 'uncontrolled-native',
                                 }}
                                 onChange={onChange}
