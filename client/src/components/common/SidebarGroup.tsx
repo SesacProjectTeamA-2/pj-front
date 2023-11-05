@@ -15,6 +15,7 @@ export default function SideBarGroup() {
     const { gSeq } = useParams();
 
     const [groupMissions, setGroupMissions] = useState<GroupMissionsType[]>([]);
+    const [groupName, setGroupName] = useState<GroupMissionsType[]>([]);
 
     useEffect(() => {
         const getGroup = async () => {
@@ -28,6 +29,7 @@ export default function SideBarGroup() {
             );
 
             setGroupMissions(res.data.groupMission);
+            setGroupName(res.data.groupName);
         };
 
         getGroup();
@@ -109,7 +111,7 @@ export default function SideBarGroup() {
                                     </li>
                                 </Link> */}
                             </ul>
-                            <Link to="/group/mission/done/1">
+                            <Link to={`/board/${gSeq}/mission/done`}>
                                 <li className="title5-hover-bigger">완료</li>
                             </Link>
                         </ul>
