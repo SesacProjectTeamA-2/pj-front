@@ -203,7 +203,6 @@ export default function MissionAddModal({
     };
 
     console.log(editedContents);
-    console.log('MissionList>>>>>', missionList);
 
     const missionAddDoneHandler = () => {
         setAddModalSwitch(false);
@@ -211,15 +210,19 @@ export default function MissionAddModal({
         const newMissionArray = [...input.missionArray, ...missionList];
         setTargetDate(targetDate);
 
-        console.log('!!', input.missionArray);
-        console.log('##', missionList);
+        console.log('input.missionArray', input.missionArray);
+        console.log('missionList (새로 추가된 미션) >>>', missionList);
 
         setInput({
             ...input,
             missionArray: newMissionArray,
             gDday: targetDate,
         });
+
+        console.log('<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>', input);
     };
+
+    console.log('<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>', input);
 
     return (
         <div className="modal-mission-add-container">
