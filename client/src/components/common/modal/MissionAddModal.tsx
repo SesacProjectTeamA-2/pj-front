@@ -50,12 +50,7 @@ export default function MissionAddModal({
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-    const [leng, setLeng] = useState<number>(missionList.length);
-    // useEffect(() => {
-    //     setLeng(leng + 1);
-    //     console.log('leng ', leng);
-    // }, [missionState]);
-
+    console.log(missionList);
     const [missionInput, setMissionInput] = useState({
         id: missionList.length + 2,
         mTitle: '',
@@ -131,9 +126,62 @@ export default function MissionAddModal({
 
     //=== 수정 ===
 
-    const editHandler = (targetId: number) => {};
-    const deleteHandler = (targetId: number) => {};
+    // const editEventHandler = (e) => {
+    //     const { title, ...rest } = todoItem;
+    //     // console.log(rest);
+    //     setTodoItem({
+    //       ...rest,
+    //       title: e.target.value,
+    //     });
+    //   };
 
+    // const editHandler = (e: React.MouseEvent, targetId: number) => {
+    const [missionInputs, setMissionInputs] = useState(
+        missionList.map((mission: any) => ({
+            id: mission.id,
+            mTitle: mission.mTitle,
+            mContent: mission.mContent,
+            mLevel: mission.mLevel,
+        }))
+    );
+    console.log(missionInput, missionList);
+    const editHandler = (targetId: number) => {
+        const editedMissionIndex = missionInputs.findIndex(
+            (mission: any) => mission.id === targetId
+        );
+
+        if (editedMissionIndex !== -1) {
+            // 수정할 미션을 찾았을 때, 해당 미션 정보를 수정합니다.
+            const updatedMissionInputs = [...missionInputs];
+            updatedMissionInputs[editedMissionIndex] = {
+                ...updatedMissionInputs[editedMissionIndex],
+                mTitle: missionInput.mTitle,
+                mContent: missionInput.mContent,
+                mLevel: missionInput.mLevel,
+            };
+            setMissionInputs(updatedMissionInputs);
+        }
+    };
+
+    // 각 미션 내용 저장 상태 배열
+    const [missionContentList, setMissionContentList] = useState(
+        missionList.map((mission: any) => mission.mContent)
+    );
+    console.log(22, missionContentList);
+
+    const handleMissionContentChange = (missionId: any, newContent: any) => {
+        // missionId에 해당하는 미션의 내용을 newContent로 변경
+        const updatedMissionList = missionList.map((mission: any) => {
+            if (mission.id === missionId) {
+                return { ...mission, mContent: newContent };
+            } else {
+                return mission;
+            }
+        });
+        setMissionList(updatedMissionList);
+    };
+
+    const deleteHandler = (targetId: number) => {};
     return (
         <div className="modal-mission-add-container">
             <Modal
@@ -266,10 +314,27 @@ export default function MissionAddModal({
                                                         <Divider component="li" />
 
                                                         <ListItem>
-                                                            <ListItemText
+                                                            {/* <ListItemText
                                                                 primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
                                                                 secondary={`${mission.mContent}`}
+                                                            /> */}
+                                                            <TextField
+                                                                label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                                variant="standard"
+                                                                fullWidth
+                                                                name={`mTitle-${mission.id}`}
+                                                                value={
+                                                                    mission.mContent
+                                                                }
+                                                                onChange={(e) =>
+                                                                    handleMissionContentChange(
+                                                                        mission.id,
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
                                                             />
+
                                                             <div>
                                                                 <button
                                                                     className="modal-mission-edit-btn btn-sm"
