@@ -58,11 +58,19 @@ export default function WarningModal({
                                 Motimate 활동 정보가 모두 사라지며 복구되지
                                 않습니다.
                             </div>
-                        ) : (
+                        ) : action === '삭제' ? (
+                            <div className="title5 cancel-modal-description">
+                                게시글 내용이 모두 사라지며 복구되지 않습니다.{' '}
+                            </div>
+                        ) : action === '댓글 삭제' ? (
+                            ''
+                        ) : action === '회원 탈퇴' || '탈퇴' ? (
                             <div className="title5 cancel-modal-description">
                                 모임의 활동 정보가 모두 사라지며 복구되지
                                 않습니다.
                             </div>
+                        ) : (
+                            ''
                         )}
                     </div>
 

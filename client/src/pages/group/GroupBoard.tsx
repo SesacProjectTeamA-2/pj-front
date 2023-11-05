@@ -15,7 +15,7 @@ export default function GroupBoard() {
         <div className="section section-group">
             {/* [추후] 모임 제목 동적으로 수정 */}
             <GroupHeader title={'자유/질문'} groupName={'코딩학당'} />
-            <GroupContent />
+            <GroupContent action={'자유/질문'} />
             <div>
                 <Link to="/board/create">
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
