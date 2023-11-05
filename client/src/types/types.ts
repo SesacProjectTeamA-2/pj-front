@@ -27,6 +27,17 @@ export interface GroupMissionsType {
     updatedAt: string;
 }
 
+// 게시글
+export interface BoardType {
+    gbSeq: number;
+    gbTitle: string;
+    gbContent: string;
+    gbIsDone: null | string; // null: 공지, 자유   "y": 미션
+    gbCategory: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
 // Redux 스토어의 전체 타입 정의
 export interface RootStateType {
     dummyGroup: GroupStateType;
