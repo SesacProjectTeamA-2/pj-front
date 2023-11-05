@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
+import axios from 'axios';
 
 import '../../styles/scss/pages/group/groupNoti.scss';
 
@@ -15,7 +17,7 @@ import {
     TableRow,
 } from '@mui/material';
 
-// 테이블 정의
+//=== 테이블 정의
 interface Column {
     id: 'id' | 'title' | 'writer' | 'date';
     label: string;
@@ -67,19 +69,17 @@ function createData(
     return { id, title, writer, date };
 }
 
-//=== 데이터가 들어올 부분 ===
-const reversedRows = Array.from({ length: 50 }, (_, index) =>
-    createData(
-        String(50 - index),
-        `제목입니당ㄴ러ㅏㄴ러ㅣㅏㄹ어ㅣㅏ러니ㅏ어리ㅏㅓㄴ이ㅏ러ㅣㅏㄴ어리ㅏㅓ이ㅏㅓ리ㅏ너ㅣㅏㅓㅇ리ㅓㅣㅏ ${
-            50 - index
-        }`,
-        `작성자 ${50 - index}`,
-        '2023-11-10'
-    )
-);
+// //=== 데이터가 들어올 부분 ===
+// const reversedRows = Array.from({ length: 50 }, (_, index) =>
+//     createData(
+//         String(50 - index),
+//         `${noticeList.gbTitle} 50 - index}`,
+//         `작성자 ${50 - index}`,
+//         '2023-11-10'
+//     )
+// );
 
-const rows = reversedRows;
+// const rows = reversedRows;
 
 // const rows = [
 //     createData('India', 'IN', 1324171354, 3287263),
@@ -103,6 +103,56 @@ export default function Groupidti() {
     const { gSeq } = useParams();
 
     console.log(gSeq);
+
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
+    //=== 공지 조회
+    //] 1. 자유게시글
+    const [noticeList, setNoticeList] = useState([]);
+
+    // 자유 게시글 조회
+    useEffect(() => {
+        const getBoardFree = async () => {
+            const res = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
+
+            console.log(res.data);
+
+            setNoticeList(res.data.groupInfo);
+        };
+
+        getBoardFree();
+    }, []);
+
+    console.log(noticeList);
+
+    //=== 데이터가 들어올 부분 ===
+    // const reversedRows = Array.from({ length: 50 }, (_, index) =>
+    //     createData(
+    //         String(50 - index),
+    //         `${noticeList.gbTitle} 50 - index}`,
+    //         `작성자 ${50 - index}`,
+    //         '2023-11-10'
+    //     )
+    // );
+
+    const reversedRows = noticeList.map((item: any, index) =>
+        createData(
+            String(noticeList.length - index),
+            item.gbTitle,
+            item.gbContent,
+            item.createdAt
+        )
+    );
+
+    const rows = reversedRows;
 
     // 페이지 이동
     const navigate = useNavigate();
