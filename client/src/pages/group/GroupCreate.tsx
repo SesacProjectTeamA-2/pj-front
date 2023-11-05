@@ -85,7 +85,9 @@ export default function GroupCreate() {
 
         // [추후] 생성한 모임 홈 화면으로 이동
     };
-    console.log('input >> ', input);
+
+    console.log('input >> ', input); // 올바른 데이터 들어옴
+    console.log('input.missionArray >> ', input.missionArray);
 
     //=== 관심 분야 ===
     interface Interested {

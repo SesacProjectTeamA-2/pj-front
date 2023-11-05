@@ -38,6 +38,12 @@ export default function MissionAddModal({
     const missionState = useSelector((state: RootStateType) => state.mission);
     const dispatch = useDispatch();
 
+    //] 1. 그룹 생성
+    //-- action = 미션생성
+
+    //] 2. 그룹 홈
+    //-- action = 미션수정
+
     // const [listLength, setMissionList] = useState(missionState.length);
 
     // const missionList: any[] = missionState;
@@ -184,16 +190,21 @@ export default function MissionAddModal({
         // const newMissionArray = [...missionList];
         // console.log(' newMissionArray', newMissionArray);
 
-        console.log('!!', input.missionArray);
+        // console.log('!!', input.missionArray);
         console.log('##', missionList);
 
-        setInput({
-            ...input,
-            missionArray: missionList,
-            gDday: targetDate,
-        });
+        if (action === '미션생성') {
+            setInput({
+                ...input,
+                missionArray: missionList,
+                gDday: targetDate,
+            });
 
-        console.log('<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>', input);
+            console.log(
+                '<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>',
+                input
+            );
+        }
     };
 
     //=== 수정 ===
