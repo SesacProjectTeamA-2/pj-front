@@ -28,8 +28,6 @@ export default function HomeMissionList({
         setAddModalSwitch(true);
     };
 
-    console.log('mis', missionList);
-
     //=== redux 상태관리 ===
     const dummyGroupState = useSelector(
         (state: RootStateType) => state.dummyGroup
