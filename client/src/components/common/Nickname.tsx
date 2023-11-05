@@ -16,6 +16,7 @@ export default function Nickname(props: any): JSX.Element {
             setDisplayMode('flex');
         }
     }, [curPath]);
+    console.log(props.uName);
 
     return (
         <div className="nickname-div">

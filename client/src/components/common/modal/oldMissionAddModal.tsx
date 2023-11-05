@@ -50,9 +50,20 @@ export default function MissionAddModal({
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-    console.log(missionList);
+
+    // interface Mission {
+    //     id: number;
+    //     mTitle: string;
+    //     mContent: string;
+    //     mLevel: number;
+    //     map: string;
+    //     completed: boolean;
+    // }
+
+    // const [missionList, setMissionList] = useState<Mission[]>([]);
+
     const [missionInput, setMissionInput] = useState({
-        id: missionList.length + 2,
+        id: missionList.length + 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
@@ -60,6 +71,15 @@ export default function MissionAddModal({
     });
 
     const [gDday, setGDday] = useState('');
+
+    // const [input, setInput] = useState({
+    //     id: Object.keys(missionState).length + 1,
+    //     mTitle: '',
+    //     mContent: '',
+    //     mLevel: 1,
+    //     map: '', // map 필드 추가
+    //     completed: false,
+    // });
 
     const { mTitle, mContent, mLevel } = missionInput;
 
@@ -70,25 +90,19 @@ export default function MissionAddModal({
 
     console.log('list', missionList.length);
 
-    const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
-
-    // useEffect(() => {
-    //     setNextMissionId(missionList.length + 1);
-    // }, [nextMissionId])
-
-    console.log(nextMissionId);
-
     const oneMissionAddHandler = () => {
-        // console.log(missionInput);
-        // dispatch(addMission(missionInput));
+        console.log(missionInput);
+        dispatch(addMission(missionInput));
 
         const newMissions = [...missionList, missionInput];
+        // missionList.push(input);
+
         setMissionList(newMissions);
 
         // 입력 필드 초기화
         setMissionInput({
-            // id: Object.keys(missionList).length + 1,
-            id: missionList.length + 2,
+            // id: Object.keys(missionState).length + 1,
+            id: missionList.length + 1,
             mTitle: '',
             mContent: '',
             mLevel: 1,
@@ -99,8 +113,9 @@ export default function MissionAddModal({
     console.log('missionState', missionState);
     console.log('missionList', missionList);
 
-    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
+    //=== 수정 ===
 
+    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
     // const [editMode, setEditMode] = useState([]);
 
     // const [editMode, setEditMode] = useState({});
@@ -182,92 +197,23 @@ export default function MissionAddModal({
     };
 
     console.log(editedContents);
+    console.log('MissionList>>>>>', missionList);
 
     const missionAddDoneHandler = () => {
         setAddModalSwitch(false);
 
-        // 1. 모임 생성 - 미션 추가하기
-
-        // 2. 모임 상세 - 미션 수정하기
-        //     1) 새로운 미션 추가하기
-        //     2) 기존 미션 수정 / 삭제
-
-        // input : 그룹 생성할 때의 input
         const newMissionArray = [...input.missionArray, ...missionList];
         setTargetDate(targetDate);
 
-
-        // console.log('!!', input.missionArray);
-        // console.log('##', missionList);
-
+        console.log('!!', input.missionArray);
+        console.log('##', missionList);
 
         setInput({
             ...input,
             missionArray: newMissionArray,
             gDday: targetDate,
         });
-
-        console.log('<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>', input);
     };
-
-    //=== 수정 ===
-
-    // const editEventHandler = (e) => {
-    //     const { title, ...rest } = todoItem;
-    //     // console.log(rest);
-    //     setTodoItem({
-    //       ...rest,
-    //       title: e.target.value,
-    //     });
-    //   };
-
-    // const editHandler = (e: React.MouseEvent, targetId: number) => {
-    const [missionInputs, setMissionInputs] = useState(
-        missionList.map((mission: any) => ({
-            id: mission.id,
-            mTitle: mission.mTitle,
-            mContent: mission.mContent,
-            mLevel: mission.mLevel,
-        }))
-    );
-    console.log(missionInput, missionList);
-    const editHandler = (targetId: number) => {
-        const editedMissionIndex = missionInputs.findIndex(
-            (mission: any) => mission.id === targetId
-        );
-
-        if (editedMissionIndex !== -1) {
-            // 수정할 미션을 찾았을 때, 해당 미션 정보를 수정합니다.
-            const updatedMissionInputs = [...missionInputs];
-            updatedMissionInputs[editedMissionIndex] = {
-                ...updatedMissionInputs[editedMissionIndex],
-                mTitle: missionInput.mTitle,
-                mContent: missionInput.mContent,
-                mLevel: missionInput.mLevel,
-            };
-            setMissionInputs(updatedMissionInputs);
-        }
-    };
-
-    // 각 미션 내용 저장 상태 배열
-    const [missionContentList, setMissionContentList] = useState(
-        missionList.map((mission: any) => mission.mContent)
-    );
-    console.log(22, missionContentList);
-
-    const handleMissionContentChange = (missionId: any, newContent: any) => {
-        // missionId에 해당하는 미션의 내용을 newContent로 변경
-        const updatedMissionList = missionList.map((mission: any) => {
-            if (mission.id === missionId) {
-                return { ...mission, mContent: newContent };
-            } else {
-                return mission;
-            }
-        });
-        setMissionList(updatedMissionList);
-    };
-
-    const deleteHandler = (targetId: number) => {};
 
     return (
         <div className="modal-mission-add-container">
@@ -313,7 +259,6 @@ export default function MissionAddModal({
                                     variant="standard"
                                     name="mTitle"
                                     onChange={onChange}
-                                    value={mTitle}
                                 />
                             </Box>
                         </div>
@@ -325,13 +270,12 @@ export default function MissionAddModal({
                                 난이도
                             </InputLabel>
                             <NativeSelect
-                                // defaultValue={1}
+                                defaultValue={1}
                                 inputProps={{
                                     name: 'nLevel',
                                     id: 'uncontrolled-native',
                                 }}
                                 onChange={onChange}
-                                value={mLevel}
                             >
                                 <option value={1}>⭐️</option>
                                 <option value={3}>⭐️⭐️</option>
@@ -355,7 +299,6 @@ export default function MissionAddModal({
                             maxRows={4}
                             variant="filled"
                             name="mContent"
-                            value={mContent}
                             onChange={onChange}
                         />
                     </Box>
@@ -401,27 +344,10 @@ export default function MissionAddModal({
                                                         <Divider component="li" />
 
                                                         <ListItem>
-                                                            {/* <ListItemText
+                                                            <ListItemText
                                                                 primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
                                                                 secondary={`${mission.mContent}`}
-                                                            /> */}
-                                                            <TextField
-                                                                label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
-                                                                variant="standard"
-                                                                fullWidth
-                                                                name={`mTitle-${mission.id}`}
-                                                                value={
-                                                                    mission.mContent
-                                                                }
-                                                                onChange={(e) =>
-                                                                    handleMissionContentChange(
-                                                                        mission.id,
-                                                                        e.target
-                                                                            .value
-                                                                    )
-                                                                }
                                                             />
-
                                                             <div>
                                                                 <button
                                                                     className="modal-mission-edit-btn btn-sm"
@@ -438,7 +364,7 @@ export default function MissionAddModal({
                                                                 <button
                                                                     className="modal-mission-delete-btn btn-sm"
                                                                     onClick={() =>
-                                                                        deleteHandler(
+                                                                        editHandler(
                                                                             mission.id
                                                                         )
                                                                     }
@@ -454,18 +380,128 @@ export default function MissionAddModal({
                                     )
                                 ) : (
                                     <>
-                                        {/* 미션 옆에 숫자 */}
                                         {missionState.map((mission: any) => {
                                             return (
                                                 <div key={mission.id}>
                                                     <Divider component="li" />
 
-                                                    {/* 여기 */}
                                                     <ListItem>
-                                                        <ListItemText
-                                                            primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
-                                                            secondary={`${mission.mContent}`}
-                                                        />
+                                                        {editMode[
+                                                            mission.id
+                                                        ] ? (
+                                                            <>
+                                                                <input
+                                                                    style={{
+                                                                        width: '6rem',
+                                                                    }}
+                                                                    placeholder={`${mission.mTitle}`}
+                                                                    value={
+                                                                        editedContents[
+                                                                            mission
+                                                                                .id
+                                                                        ] ||
+                                                                        mission.mTitle
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
+                                                                        handleEditChange(
+                                                                            e,
+                                                                            mission.id
+                                                                        )
+                                                                    }
+                                                                    // onChange={(e) =>
+                                                                    //     handleEditChange(
+                                                                    //         mission.id,
+                                                                    //         e.target
+                                                                    //             .value
+                                                                    //     )
+                                                                    // }
+
+                                                                    name="mTitle"
+                                                                    id={
+                                                                        mission.id
+                                                                    }
+                                                                />
+
+                                                                <input
+                                                                    placeholder={`${mission.mTitle}`}
+                                                                    value={
+                                                                        editedContents[
+                                                                            mission
+                                                                                .id
+                                                                        ] ||
+                                                                        mission.mContent
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
+                                                                        handleEditChange(
+                                                                            e,
+                                                                            mission.id
+                                                                        )
+                                                                    }
+                                                                    // onChange={(e) =>
+                                                                    //     handleEditChange(
+                                                                    //         mission.id,
+                                                                    //         e.target
+                                                                    //             .value
+                                                                    //     )
+                                                                    // }
+
+                                                                    name={
+                                                                        'mContent'
+                                                                    }
+                                                                    id={
+                                                                        mission.id
+                                                                    }
+                                                                />
+                                                                <NativeSelect
+                                                                    defaultValue={
+                                                                        mission.mLevel
+                                                                    }
+                                                                    inputProps={{
+                                                                        name: 'mLevel',
+                                                                        id: 'uncontrolled-native',
+                                                                    }}
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
+                                                                        handleEditChange(
+                                                                            e,
+                                                                            mission.id
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <option
+                                                                        value={
+                                                                            1
+                                                                        }
+                                                                    >
+                                                                        ⭐️
+                                                                    </option>
+                                                                    <option
+                                                                        value={
+                                                                            3
+                                                                        }
+                                                                    >
+                                                                        ⭐️⭐️
+                                                                    </option>
+                                                                    <option
+                                                                        value={
+                                                                            5
+                                                                        }
+                                                                    >
+                                                                        ⭐️⭐️⭐️
+                                                                    </option>
+                                                                </NativeSelect>
+                                                            </>
+                                                        ) : (
+                                                            <ListItemText
+                                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                                secondary={`${mission.mContent}`}
+                                                            />
+                                                        )}
                                                         <div>
                                                             <button
                                                                 className="modal-mission-edit-btn btn-sm"
@@ -494,6 +530,33 @@ export default function MissionAddModal({
                                                 </div>
                                             );
                                         })}
+
+                                        {/* <ListItem>
+                                            <ListItemText
+                                                primary="미션 2. 블로깅 ⭐️⭐️"
+                                                secondary="게시물 링크를 올립니다."
+                                            />
+                                            <div>
+                                                <button
+                                                    className="modal-mission-edit-btn btn-sm"
+                                                    onClick={editHandler}
+                                                >
+                                                    수정
+                                                </button>
+                                            </div>
+                                        </ListItem>
+                                        <Divider component="li" />
+                                        <ListItem>
+                                            <ListItemText
+                                                primary="미션 3. 모각코 ⭐️"
+                                                secondary="문제에 대한 코드를 제출합니다."
+                                            />
+                                            <div>
+                                                <button className="modal-mission-edit-btn btn-sm">
+                                                    수정
+                                                </button>
+                                            </div>
+                                        </ListItem> */}
                                     </>
                                 )}
                             </div>

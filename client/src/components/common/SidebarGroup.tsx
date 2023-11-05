@@ -36,7 +36,7 @@ export default function SideBarGroup() {
     }, []);
 
     console.log('groupMissions', groupMissions);
-    console.log('groupMissions', groupMissions.length);
+    // console.log('groupMissions', groupMissions.length);
 
     let mSeqList = [];
 

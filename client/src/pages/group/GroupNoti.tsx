@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import '../../styles/scss/pages/group/groupNoti.scss';
 
@@ -100,6 +100,10 @@ const rows = reversedRows;
 // ];
 
 export default function Groupidti() {
+    const { gSeq } = useParams();
+
+    console.log(gSeq);
+
     // 페이지 이동
     const navigate = useNavigate();
 
@@ -167,7 +171,9 @@ export default function Groupidti() {
                                                             key={column.id}
                                                             align={column.align}
                                                         >
-                                                            <Link to="/board/1/noti/1">
+                                                            <Link
+                                                                to={`/board/${gSeq}/noti/${gSeq}`}
+                                                            >
                                                                 {column.format &&
                                                                 typeof value ===
                                                                     'number'
@@ -272,7 +278,7 @@ export default function Groupidti() {
                 {/* </div> */}
             </div>
             <div>
-                <Link to="/board/create">
+                <Link to={`/board/create/${gSeq}`}>
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
                 </Link>
             </div>

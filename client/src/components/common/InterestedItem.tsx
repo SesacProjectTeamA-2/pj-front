@@ -17,7 +17,7 @@ export default function InterestedItem({
 
     // useEffect로 비동기 useState 처리
     useEffect(() => {
-        console.log('>>>>', selectedArr);
+        console.log('관심사>>>>', selectedArr);
         setSelectedArr(selectedArr);
     }, [selectedArr]);
 

@@ -8,13 +8,13 @@ export default function SetMainItem(props: any) {
         <>
             {props.groupArr.map((group: any) => {
                 return (
-                    <tr key={group.groupId}>
-                        <td>{group.groupName}</td>
-                        <td>{group.dDay}</td>
+                    <tr key={group.gSeq}>
+                        <td>{group.gName}</td>
+                        <td>{group.gDday}</td>
 
                         <td>
                             <SetMainDday
-                                groupId={group.groupId}
+                                groupId={group.gSeq}
                                 handleCheckDday={props.handleCheckDday}
                                 dDayPin={props.dDayPin}
                             />
@@ -22,7 +22,7 @@ export default function SetMainItem(props: any) {
 
                         <td>
                             <SetMainDone
-                                groupId={group.groupId}
+                                groupId={group.gSeq}
                                 handleCheckDone={props.handleCheckDone}
                                 donePin={props.donePin}
                             />
