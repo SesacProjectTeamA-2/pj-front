@@ -52,7 +52,7 @@ export default function BoardPost() {
     };
 
     const boardPostHandler = async () => {
-        const res = await axios.patch(
+        const res = await axios.post(
             `${process.env.REACT_APP_DB_HOST}/board/create`,
             board,
             {
