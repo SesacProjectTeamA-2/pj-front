@@ -169,11 +169,11 @@ export default function BoardPost() {
             </div>
             <div>
                 {/* default : + 누른 페이지 */}
-                <Link to="/group/noti/1">
-                    <button className="btn-lg" onClick={boardPostHandler}>
-                        작성 완료
-                    </button>
-                </Link>
+                {/* <Link to="/group/noti/1"> */}
+                <button className="btn-lg" onClick={boardPostHandler}>
+                    작성 완료
+                </button>
+                {/* </Link> */}
             </div>
         </div>
     );
