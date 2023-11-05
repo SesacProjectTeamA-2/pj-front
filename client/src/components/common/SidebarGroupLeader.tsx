@@ -20,29 +20,29 @@ export default function SideBarGroupLeader({
     menu,
     setMenu,
 }: any) {
-    interface MissionType {
-        id: number;
-        name: string;
-        selected: boolean;
-    }
+    // interface MissionType {
+    //     id: number;
+    //     name: string;
+    //     selected: boolean;
+    // }
 
-    const missionList: MissionType[] = [
-        {
-            id: 1,
-            name: '알고리즘',
-            selected: true,
-        },
-        {
-            id: 2,
-            name: '블로깅',
-            selected: false,
-        },
-        {
-            id: 3,
-            name: '모각코',
-            selected: false,
-        },
-    ];
+    // const missionList: MissionType[] = [
+    //     {
+    //         id: 1,
+    //         name: '알고리즘',
+    //         selected: true,
+    //     },
+    //     {
+    //         id: 2,
+    //         name: '블로깅',
+    //         selected: false,
+    //     },
+    //     {
+    //         id: 3,
+    //         name: '모각코',
+    //         selected: false,
+    //     },
+    // ];
 
     const [missionCancelModalSwitch, setMissionCancelModalSwitch] =
         useState(false);

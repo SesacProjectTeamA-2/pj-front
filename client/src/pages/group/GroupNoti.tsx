@@ -270,7 +270,7 @@ export default function Groupidti() {
                 {/* </div> */}
             </div>
             <div>
-                <Link to="/group/board/post/1">
+                <Link to="/board/create">
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
                 </Link>
             </div>
