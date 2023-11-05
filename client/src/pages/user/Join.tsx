@@ -33,6 +33,8 @@ export default function Join() {
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
+    console.log(uName);
+
     // 2. 사용자 닉네임 설정
     const [input, setInput] = useState<string | number>('');
 
@@ -53,10 +55,10 @@ export default function Join() {
     //   res.status(200).redirect(redirectUrl);
 
     const userInfo: userInfoItf = {
-        // uEmail: uEmail,
-        // uName: uName,
-        uEmail: 'jo@com',
-        uName: 'sss',
+        uEmail: uEmail,
+        uName: uName,
+        // uEmail: 'jo@com',
+        // uName: 'sss',
         uCharImg: selectedCharacter,
         // uCategory1: selectedArr[0],
         // uCategory2: selectedArr[1],
