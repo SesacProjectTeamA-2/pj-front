@@ -50,8 +50,8 @@ export default function Editor({ value, onChange }: { value: string, onChange: (
         <ReactQuill
             ref={quillRef}
             theme="snow"
-            value={content|| ''}
-            onChange={handleText}
+            value={value|| ''}
+            onChange={onChange}
             modules={modules}
             formats={formats}
 
