@@ -127,28 +127,31 @@ export default function BoardPost() {
             <GroupHeader title={'공지사항'} groupName={'코딩학당'} />
             <div className="post-container">
                 <div className="noti-content post-header title5">
-                    <div>종류</div>
-                    <select onChange={handleSelect} value={selected}>
-                        {/* default : + 누른 페이지 */}
-                        {/* select 값에 따라 Link to 달라아야 함 */}
+                    <div className="select-box">
+                        <div>종류</div>
+                        <select onChange={handleSelect} value={selected}>
+                            {/* default : + 누른 페이지 */}
+                            {/* select 값에 따라 Link to 달라아야 함 */}
 
-                        <option value="notice">공지사항</option>
-                        <option value="free">자유/질문</option>
+                            <option value="notice">공지사항</option>
+                            <option value="free">자유/질문</option>
 
-                        {missionList?.map(
-                            (mission: MissionType, idx: number) => {
-                                return (
-                                    <>
-                                        <option value={`mission${idx}`}>
-                                            {mission.mTitle}
-                                        </option>
-                                        {/* <option value="mission2">미션2</option> */}
-                                        {/* <option value="mission3">미션3</option> */}
-                                    </>
-                                );
-                            }
-                        )}
-                    </select>
+                            {missionList?.map(
+                                (mission: MissionType, idx: number) => {
+                                    return (
+                                        <>
+                                            <option value={`mission${idx}`}>
+                                                {mission.mTitle}
+                                            </option>
+                                            {/* <option value="mission2">미션2</option> */}
+                                            {/* <option value="mission3">미션3</option> */}
+                                        </>
+                                    );
+                                }
+                            )}
+                        </select>
+                    </div>
+
                     <div className="post-title">
                         <div>제목</div>
                         <input
@@ -170,7 +173,7 @@ export default function BoardPost() {
             <div>
                 {/* default : + 누른 페이지 */}
                 {/* <Link to="/group/noti/1"> */}
-                <button className="btn-lg" onClick={boardPostHandler}>
+                <button className="editor-post-btn" onClick={boardPostHandler}>
                     작성 완료
                 </button>
                 {/* </Link> */}
