@@ -18,6 +18,7 @@ export default function GroupCreate() {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
     const [selectedArr, setSelectedArr] = useState<string[]>([]);
+    const [missionList, setMissionList] = useState<Mission[]>([]);
 
     const [input, setInput] = useState({
         gName: '',
@@ -28,13 +29,16 @@ export default function GroupCreate() {
         gMaxMem: 1,
         missionArray: [],
     });
+    console.log('missionList CREATE', missionList);
 
     const { gName, gDesc, gDday, gCategory, gCoverImg, gMaxMem, missionArray } =
         input;
 
     const onChange = (e: any) => {
         const { name, value } = e.target;
+        // for (let i = 0; i < missionList.length; i++) {
         setInput({ ...input, [name]: value });
+        // }
     };
 
     const missionAddHandler = () => {
@@ -85,7 +89,9 @@ export default function GroupCreate() {
 
         // [추후] 생성한 모임 홈 화면으로 이동
     };
-    // console.log('input >> ', input);
+
+    console.log('input >> ', input); // 올바른 데이터 들어옴
+    console.log('input.missionArray >> ', input.missionArray);
 
     //=== 관심 분야 ===
     interface Interested {
@@ -120,8 +126,6 @@ export default function GroupCreate() {
         map: string;
         completed: boolean;
     }
-
-    const [missionList, setMissionList] = useState<Mission[]>([]);
 
     return (
         <div className="section group-create-contianer title5">
