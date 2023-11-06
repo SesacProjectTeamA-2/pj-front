@@ -20,7 +20,7 @@ export default function SetMainList(props: any) {
         const res = await axios
             .get(
                 // 임시로 전체 검색
-                `${process.env.REACT_APP_DB_HOST}/api/group?search=%&category=%`,
+                `${process.env.REACT_APP_DB_HOST}/group?search=%&category=%`,
                 // `${process.env.REACT_APP_DB_HOST}api/group?search=${searchInput}&category=${}`,
                 {
                     headers: {
@@ -37,6 +37,7 @@ export default function SetMainList(props: any) {
         getGroupList();
     }, []);
 
+    // 임시 그룹
     // const groupArr: Group[] = [
     //     // {
     //     //     groupId: 1,
