@@ -1,10 +1,13 @@
 @import '../../abstracts/variables';
+@import '~include-media/dist/include-media';
+
 
 .group-create-contianer {
     align-items: flex-start;
-    width: 100%;
+    width: 90%;
     padding: 30px;
     gap: 3rem;
+    margin: 0 auto;
 }
 
 .group-create-content {
@@ -22,6 +25,23 @@
     label {
         height: 2rem;
     }
+}
+.group-category {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 1rem;
+    align-items: center;
+
+    width: 100%;
+    // @include media('<800px') {
+    //     grid-template-columns: repeat(2, 4fr);
+
+    // }
+    @include media('<800px') {
+        grid-template-columns: repeat(4, 2fr);
+    }
+   
 }
 
 .group-create-title {
