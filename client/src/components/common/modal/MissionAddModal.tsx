@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
+import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -16,9 +19,11 @@ import Divider from '@mui/material/Divider';
 import '../../../styles/scss/components/modal.scss';
 
 import Dday from '../Dday';
-import { useDispatch, useSelector } from 'react-redux';
-import { MissionStateType, RootStateType } from '../../../types/types';
-import { addMission } from '../../../store/slices/missionSlice';
+
+//-- Redux
+// import { useDispatch, useSelector } from 'react-redux';
+// import { MissionStateType, RootStateType } from '../../../types/types';
+// import { addMission } from '../../../store/slices/missionSlice';
 
 interface MissionAddModalProps {
     addModalSwitch: boolean;
@@ -34,28 +39,26 @@ export default function MissionAddModal({
     setMissionList,
     setInput,
     input,
+    gDday,
 }: any) {
-    const missionState = useSelector((state: RootStateType) => state.mission);
-    const dispatch = useDispatch();
-
     //] 1. 그룹 생성
     //-- action = 미션생성
 
     //] 2. 그룹 홈
     //-- action = 미션수정
 
-    // const [listLength, setMissionList] = useState(missionState.length);
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
 
-    // const missionList: any[] = missionState;
+    //--redux
+    // const missionState = useSelector((state: RootStateType) => state.mission);
+    // const dispatch = useDispatch();
 
-    // const [missionList, setMissionList] =
-    //     useState<MissionStateType[]>(missionState);
-    // const [missionList, setMissionList] = useState(missionState);
+    const { gSeq } = useParams();
 
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-
     console.log('missionList - ADD MODAL', missionList);
 
     const [missionInput, setMissionInput] = useState({
@@ -64,32 +67,45 @@ export default function MissionAddModal({
         mTitle: '',
         mContent: '',
         mLevel: 1,
+        mSeq: null,
+        gDday,
         // completed: false,
     });
 
-    const [gDday, setGDday] = useState('');
+    // const [gDday, setGDday] = useState('');
 
     const { mTitle, mContent, mLevel } = missionInput;
+    // const { mTitle, mContent, mLevel } = missionList;
 
+    // 난이도 계산
+    for (let mission of missionList) {
+        switch (mission.mLevel) {
+            case '5': {
+                mission.mLevel = '⭐️⭐️⭐️';
+                break;
+            }
+            case '3': {
+                mission.mLevel = '⭐️⭐️';
+                break;
+            }
+            case 1: {
+                mission.mLevel = '⭐️';
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    ///// 이벤트 ////////
     const onChange = (e: any) => {
         const { name, value } = e.target;
         setMissionInput({ ...missionInput, [name]: value });
     };
 
-    // console.log('missionInput', missionInput);
-
-    // const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
-    // useEffect(() => {
-    //     setNextMissionId(missionList.length + 1);
-    // }, [nextMissionId]);
-
-    // console.log('nextMissionId', nextMissionId);
+    /////////// 추가 //////////////
 
     const oneMissionAddHandler = () => {
-        // 새로운 미션을 미션 리스트에 추가
-        // console.log(missionInput);
-        // dispatch(addMission(missionInput));
-
         const newMissions = [...missionList, missionInput];
         setMissionList(newMissions);
 
@@ -100,18 +116,21 @@ export default function MissionAddModal({
             mTitle: '',
             mContent: '',
             mLevel: 1,
+            mSeq: null,
+            gDday,
             // completed: false,
         });
     };
 
-    console.log('missionList', missionList);
-
     const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
 
-    // const [editMode, setEditMode] = useState([]);
+    console.log('missionList', missionList);
 
-    // const [editMode, setEditMode] = useState({});
-    // const [editedContent, setEditedContent] = useState({}); // 추가: 수정된 내용을 관리
+    // useEffect(() => {
+    //     setTargetDate(`D-${gDday}`);
+    // }, []);
+
+    console.log('day', gDday);
 
     interface EditMode {
         [key: number]: boolean;
@@ -121,36 +140,6 @@ export default function MissionAddModal({
     const [editedContents, setEditedContents] = useState<{
         [key: number]: string;
     }>({});
-
-    // const editHandler = (targetId: number) => {
-    //     console.log(targetId);
-    //     // setEditMode(!editMode);
-
-    //     console.log('ppppp', missionInput);
-
-    //     // if(!editMode) {
-    //     // const updatedMissionList = missionList.map((mission: any) => {
-    //     //         if (mission.id === targetId) {
-    //     //             // targetId와 일치하는 미션을 찾아 업데이트
-    //     //             return {
-    //     //                 ...mission,
-    //     //                 [name]: value,
-    //     //             };
-    //     //         }
-    //     //         return mission; // 다른 미션은 변경하지 않음
-    //     //     });
-
-    //     //     // 업데이트된 미션 목록을 상태에 설정
-    //     //     setMissionList(updatedMissionList);
-    //     // }
-
-    //     setEditMode((prevEditMode: any) => ({
-    //         ...prevEditMode,
-    //         [targetId]: !prevEditMode[targetId],
-    //     }));
-
-    //     console.log(editMode);
-    // };
 
     const handleEditChange = (e: any, targetId: number) => {
         const { name, value } = e.target;
@@ -163,20 +152,6 @@ export default function MissionAddModal({
         setMissionInput({ ...missionInput, [name]: value });
 
         console.log('<<<<<<MissionInput>>>>>>>>>>>', missionInput);
-
-        // const updatedMissionList = missionList.map((mission: any) => {
-        //     if (mission.id === targetId) {
-        //         // targetId와 일치하는 미션을 찾아 업데이트
-        //         return {
-        //             ...mission,
-        //             [name]: value,
-        //         };
-        //     }
-        //     return mission; // 다른 미션은 변경하지 않음
-        // });
-
-        // // 업데이트된 미션 목록을 상태에 설정
-        // setMissionList(updatedMissionList);
     };
 
     console.log('editedContents', editedContents);
@@ -186,18 +161,10 @@ export default function MissionAddModal({
         }
     }
 
+    //] 최종으로 버튼 클릭 시
     const missionAddDoneHandler = () => {
-        // 최종으로 버튼 클릭 시
         setAddModalSwitch(false);
         setTargetDate(targetDate);
-
-        // input : 그룹 생성할 때의 input
-        // const newMissionArray = [...input.missionArray, ...missionList];
-        // const newMissionArray = [...missionList];
-        // console.log(' newMissionArray', newMissionArray);
-
-        // console.log('!!', input.missionArray);
-        console.log('##', missionList);
 
         if (action === '미션생성') {
             setInput({
@@ -211,11 +178,41 @@ export default function MissionAddModal({
                 input
             );
         }
+
+        // {
+        //     "mSeq": 3,
+        //     "gDday": "2023-12-24",
+        //     "mTitle": "운동하기",
+        //     "mContent": "일주일에 한번 헬스장",
+        //     "mLevel": 5
+        //   }
+
+        //; 미션 수정 (PATCH, POST, DELETE)
+        // missionList 최종 데이터만 보내기
+        if (action === '미션수정') {
+            const patchMissionListHandler = async () => {
+                try {
+                    await axios
+                        .patch(
+                            `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
+                            missionList, // 임시
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${uToken}`,
+                                },
+                            }
+                        )
+                        .then((res) => {
+                            patchMissionListHandler();
+                            console.log('patched', res.data);
+                        });
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+        }
     };
-
     //=== 수정 ===
-
-    // const editHandler = (e: React.MouseEvent, targetId: number) => {
     const [missionInputs, setMissionInputs] = useState(
         // 개별 input 관리 위한 함수
         missionList.map((mission: any) => ({
@@ -223,12 +220,13 @@ export default function MissionAddModal({
             mTitle: mission.mTitle,
             mContent: mission.mContent,
             mLevel: mission.mLevel,
+            mSeq: mission.mSeq,
+            gDday: mission.gDday,
         }))
     );
     console.log('missionInputs ADD MODAL', missionInputs);
 
     const editHandler = (targetId: number) => {
-        // console.log('targetId', targetId);
         const editedMissionIndex = missionInputs.findIndex(
             (mission: any) => mission.id === targetId
         );
@@ -255,8 +253,21 @@ export default function MissionAddModal({
     // );
     // console.log('missionContentList', missionContentList);
 
+    //  수정 시 onChange Event
+    const handleMissionTitleChange = (missionId: any, newContent: any) => {
+        // missionId에 해당하는 미션 제목 new Title로 변경
+        const updatedMissionList = missionList.map((mission: any) => {
+            if (mission.id === missionId) {
+                return { ...mission, mTitle: newContent };
+            } else {
+                return mission;
+            }
+        });
+        setMissionList(updatedMissionList);
+    };
+
     const handleMissionContentChange = (missionId: any, newContent: any) => {
-        // missionId에 해당하는 미션의 내용을 newContent로 변경
+        // missionId에 해당하는 미션 내용 newContent로 변경
         const updatedMissionList = missionList.map((mission: any) => {
             if (mission.id === missionId) {
                 return { ...mission, mContent: newContent };
@@ -380,9 +391,11 @@ export default function MissionAddModal({
                             {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
                             <div className="group-create-content">
                                 <div className="dday-title">마감일</div>
+
                                 <Dday
                                     targetDate={targetDate}
                                     setTargetDate={setTargetDate}
+                                    gDday={gDday}
                                 />
                             </div>
                         </div>
@@ -417,7 +430,6 @@ export default function MissionAddModal({
                                                                 variant="standard"
                                                                 fullWidth
                                                                 name={`mTitle-${mission.id}`}
-                                                                // name={`mContent-${mission.id}`}
                                                                 value={
                                                                     mission.mContent
                                                                 }
@@ -470,24 +482,94 @@ export default function MissionAddModal({
                                                     <Divider component="li" />
 
                                                     {/* 여기부터 미션 수정 모달 */}
-                                                    <ListItem>
-                                                        <TextField
-                                                            label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
-                                                            variant="standard"
-                                                            fullWidth
-                                                            name={`mTitle-${mission.id}`}
-                                                            value={
-                                                                mission.mContent
-                                                            }
-                                                            onChange={(e) =>
-                                                                handleMissionContentChange(
-                                                                    mission.id,
-                                                                    e.target
-                                                                        .value
-                                                                )
-                                                            }
-                                                        />
-                                                        <div>
+                                                    <ListItem
+                                                        style={{
+                                                            display: 'flex',
+                                                            flexDirection:
+                                                                'row',
+                                                        }}
+                                                    >
+                                                        {/* 제목, 내용 div */}
+                                                        <div
+                                                            style={{
+                                                                display: 'flex',
+                                                                flexBasis:
+                                                                    '70%',
+                                                                flexDirection:
+                                                                    'column',
+                                                                justifyContent:
+                                                                    'space-between',
+                                                                margin: '0.8rem',
+                                                            }}
+                                                        >
+                                                            <h3
+                                                                style={{
+                                                                    marginBottom:
+                                                                        '1rem',
+                                                                }}
+                                                            >
+                                                                미션
+                                                                {mission.id} |
+                                                                난이도{' '}
+                                                                {mission.mLevel}
+                                                            </h3>
+                                                            {/* 제목 */}
+                                                            <TextField
+                                                                label={`미션 ${mission.id} 제목`}
+                                                                variant="standard"
+                                                                name={`mTitle-${mission.id}`}
+                                                                fullWidth
+                                                                value={
+                                                                    mission.mTitle
+                                                                }
+                                                                onChange={(e) =>
+                                                                    handleMissionTitleChange(
+                                                                        mission.id,
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                                style={{
+                                                                    marginBottom:
+                                                                        '0.4rem',
+                                                                }}
+                                                            />
+
+                                                            {/* 내용 */}
+                                                            <TextField
+                                                                label={`미션 ${mission.id} 인증 방법 `}
+                                                                variant="standard"
+                                                                name={`mTitle-${mission.id}`}
+                                                                fullWidth
+                                                                value={
+                                                                    mission.mContent
+                                                                }
+                                                                onChange={(e) =>
+                                                                    handleMissionContentChange(
+                                                                        mission.id,
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                                style={{
+                                                                    marginBottom:
+                                                                        '0.4rem',
+                                                                }}
+                                                            />
+                                                        </div>
+
+                                                        {/* btn div */}
+                                                        <div
+                                                            style={{
+                                                                display: 'flex',
+                                                                flexDirection:
+                                                                    'row',
+                                                                justifyContent:
+                                                                    'center',
+                                                                flexBasis:
+                                                                    '30%',
+                                                            }}
+                                                        >
                                                             <button
                                                                 className="modal-mission-edit-btn btn-sm"
                                                                 onClick={() =>
@@ -498,8 +580,8 @@ export default function MissionAddModal({
                                                             >
                                                                 수정
                                                             </button>
-                                                        </div>
-                                                        <div>
+                                                            {/* </div>
+                                                        <div> */}
                                                             <button
                                                                 className="modal-mission-delete-btn btn-sm"
                                                                 onClick={() =>

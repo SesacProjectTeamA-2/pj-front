@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import '../../styles/scss/pages/group/groupCreate.scss';
 
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
+import { Divider, ListItem, ListItemText } from '@mui/material';
 
 export default function GroupCreate() {
     const cookie = new Cookies();
@@ -237,8 +238,26 @@ export default function GroupCreate() {
                     <div onClick={missionAddHandler}>
                         <img src="/asset/icons/plus.svg" alt="plus mission" />
                     </div>
-                    <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
-                    {/* [추후] 미션 추가되면 리스트 형식으로 추가 */}
+
+                    <div className="mission-list-container">
+                        {missionList.length > 0 ? (
+                            missionList.map((mission: any) => {
+                                return (
+                                    <div key={mission.id}>
+                                        <ListItem>
+                                            <ListItemText
+                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                secondary={`${mission.mContent}`}
+                                            />
+                                        </ListItem>
+                                        <Divider component="li" />
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
+                        )}
+                    </div>
                 </div>
             </div>
 

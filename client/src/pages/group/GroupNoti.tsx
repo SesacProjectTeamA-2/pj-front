@@ -147,8 +147,9 @@ export default function Groupidti() {
         createData(
             // String(noticeList.length - index),
             String(index + 1),
-            item.gbTitle,
-            item.gbContent,
+            // replace(/(<([^>]+)>)/gi, '') => html tag 처리
+            item.gbTitle.replace(/(<([^>]+)>)/gi, ''),
+            item.gbContent.replace(/(<([^>]+)>)/gi, ''),
             item.createdAt
         )
     );
@@ -180,6 +181,15 @@ export default function Groupidti() {
     return (
         <div className="section section-group">
             <GroupHeader title={'공지사항'} groupName={'코딩학당'} />
+            {/* html tag 처리 */}
+            {/* noticeList.map((notice:any)=>{
+                return(
+                    <div key={notice.gbSeq}>
+                        <div dangerouslySetInnerHTML={{__html:notice.gbContent}}/>
+                        
+                    </div>
+                )
+            }) */}
             <div className="noti-container">
                 <Paper sx={{ width: '100%' }}>
                     <TableContainer sx={{ maxHeight: 440 }}>
