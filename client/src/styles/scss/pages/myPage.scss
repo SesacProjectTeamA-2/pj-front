@@ -92,6 +92,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 // INPUT
@@ -110,6 +111,7 @@
     align-items: start;
     width: 40vw;
     justify-content: start;
+    margin: 5%;
 }
 // nickname
 #input-area {
@@ -231,6 +233,7 @@
     justify-content: center;
     width: 70%;
     text-align: center;
+    margin-left: 5%;
 }
 #phraseMode-btn1 {
     margin-right: 5%;
@@ -280,12 +283,13 @@ td {
     align-items: center;
     text-align: center;
     padding: 5px;
-    width: 10vw;
+    width: 15vw;
     height: 5vh;
     background-color: $color-primary;
     color: #fff;
     border-radius: 20px;
     border: none;
+    margin-top: 10%;
 }
 
 // Quit START

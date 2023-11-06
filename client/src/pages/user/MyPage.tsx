@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
+import toast, { Toaster } from 'react-hot-toast';
 
 import '../../styles/scss/pages/myPage.scss';
 
@@ -119,7 +120,8 @@ export default function MyPage() {
     // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
-    const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('');
+    const [phraseModeBtnVal, setPhraseModeBtnVal] =
+        useState<string>('recommend');
     const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
         setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
@@ -178,6 +180,7 @@ export default function MyPage() {
                 )
                 .then((res) => {
                     console.log('patched', res.data.message);
+                    toast.success(res.data.message);
                 });
         } catch (err) {
             console.log(err);
@@ -235,7 +238,8 @@ export default function MyPage() {
             </div>
 
             <div className="myPage-div-four">
-                <h3 className="myPage-h3">메인화면 설정</h3>
+                {/* dDay 있음 */}
+                {/* <h3 className="myPage-h3">메인화면 설정</h3>
                 <SetMainList
                     setDdayPin={setDdayPin}
                     dDayPin={dDayPin}
@@ -243,7 +247,7 @@ export default function MyPage() {
                     setDonePin={setDonePin}
                     donePin={donePin}
                     handleCheckDone={handleCheckDone}
-                />
+                /> */}
                 <PsnCoverImg />
             </div>
 
