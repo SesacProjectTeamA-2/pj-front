@@ -60,6 +60,7 @@ export default function BoardPost() {
         gbTitle: '',
         gbContent: '',
         gbCategory: 'notice',
+        mSeq: '',
     });
 
     const [selected, setSelected] = useState<string>('');

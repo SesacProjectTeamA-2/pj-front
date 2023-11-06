@@ -41,32 +41,32 @@ export default function GroupCreate() {
         setAddModalSwitch(true);
     };
 
-    const testGroup = {
-        gName: 'Node 스터디 (중복 안됩니다!)',
-        gDesc: 'Node.js 스터디 모임입니다!',
-        gDday: '2023-10-28',
-        gMaxMem: 10,
-        gCategory: 'st',
-        gCoverImg:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
-        missionArray: [
-            {
-                mTitle: 'Node.js 강의 듣기',
-                mContent: 'Node.js 강의 쳅터 1 듣고 오기',
-                mLevel: 5,
-            },
-            {
-                mTitle: '알고리즘',
-                mContent: '코드 풀이 제출하기',
-                mLevel: 5,
-            },
-            {
-                mTitle: '블로깅',
-                mContent: '개발 블로그 포스팅 링크 올리기',
-                mLevel: 5,
-            },
-        ],
-    };
+    // const testGroup = {
+    //     gName: 'Node 스터디 (중복 안됩니다!)',
+    //     gDesc: 'Node.js 스터디 모임입니다!',
+    //     gDday: '2023-10-28',
+    //     gMaxMem: 10,
+    //     gCategory: 'st',
+    //     gCoverImg:
+    //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
+    //     missionArray: [
+    //         {
+    //             mTitle: 'Node.js 강의 듣기',
+    //             mContent: 'Node.js 강의 쳅터 1 듣고 오기',
+    //             mLevel: 5,
+    //         },
+    //         {
+    //             mTitle: '알고리즘',
+    //             mContent: '코드 풀이 제출하기',
+    //             mLevel: 5,
+    //         },
+    //         {
+    //             mTitle: '블로깅',
+    //             mContent: '개발 블로그 포스팅 링크 올리기',
+    //             mLevel: 5,
+    //         },
+    //     ],
+    // };
 
     // 그룹 생성 요청
     const groupCreateHandler = async () => {
