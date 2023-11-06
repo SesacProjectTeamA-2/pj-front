@@ -54,6 +54,7 @@ export default function MissionAddModal({
 
     const [gDday, setGDday] = useState('');
 
+    // 구조분해 할당
     const { mTitle, mContent, mLevel } = missionInput;
     // const { mTitle, mContent, mLevel } = missionList;
 
