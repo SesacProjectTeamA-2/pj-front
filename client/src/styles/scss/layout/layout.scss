@@ -1,4 +1,5 @@
 @import '../abstracts/variables';
+@import '~include-media/dist/include-media';
 
 // 전체 레이아웃 컨테이너
 .layout-container {
@@ -24,6 +25,10 @@
     // background-color: rgb(180, 179, 179);
     background-color: $color-gray1;
     height: 100%;
+
+    @include media('<500px') {
+        width: 100%;
+    }
 }
 
 // 채팅 컴포넌트 들어갈 곳

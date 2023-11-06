@@ -25,15 +25,14 @@ export default function Login() {
     //     // nvg('/');
     // });
     const googleLogin = (): void => {
-        window.location.href = 'http://localhost:8888/api/user/login/google';
+        window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/google`;
     };
 
     const kakaoLogin = (): void => {
-        window.location.href =
-            'http://localhost:8888/api/user/login/kakao/authorize';
+        window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/kakao/authorize`;
     };
     const naverLogin = (): void => {
-        window.location.href = 'http://localhost:8888/api/user/login/naver';
+        window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/naver`;
     };
 
     return (
