@@ -1,11 +1,13 @@
 //=== 모임장 그룹 사이드바 ===
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 // import toast from 'react-hot-toast';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 import '../../styles/scss/layout/sidebarGroup.scss';
 
@@ -44,6 +46,11 @@ export default function SideBarGroupLeader({
     //     },
     // ];
 
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
+    const { gSeq } = useParams();
+
     const [missionCancelModalSwitch, setMissionCancelModalSwitch] =
         useState(false);
 
@@ -77,6 +84,21 @@ export default function SideBarGroupLeader({
         setInviteCode(roomId);
     };
 
+    //; 모임 삭제 (DELETE)
+    const deleteGroupHandler = async (gSeq: number) => {
+        const res = await axios.delete(
+            `${process.env.REACT_APP_DB_HOST}/group`,
+            {
+                data: { gSeq },
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        console.log(res.data);
+    };
+
     return (
         <div>
             <ul className="title4 leader-menu">
@@ -91,7 +113,7 @@ export default function SideBarGroupLeader({
                 <Toaster />
 
                 {/* [추후] id 추가 */}
-                <Link to="/group/edit/1">
+                <Link to={`/group/edit/${gSeq}`}>
                     <li className="leader-edit">모임 수정</li>
                 </Link>
                 <br />
@@ -120,7 +142,9 @@ export default function SideBarGroupLeader({
                 </li>
 
                 <li
-                    onClick={() => warningModalSwitchHandler('모임 삭제')}
+                    //[추후] 모달 모임탈퇴 기능 추가
+                    // onClick={() => warningModalSwitchHandler('모임 삭제')}
+                    onClick={() => deleteGroupHandler(Number(gSeq))}
                     className="title5 leader-warning"
                 >
                     모임 삭제

@@ -55,6 +55,7 @@ export default function MissionAddModal({
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
+
     console.log('missionList - ADD MODAL', missionList);
 
     const [missionInput, setMissionInput] = useState({
@@ -232,9 +233,12 @@ export default function MissionAddModal({
             (mission: any) => mission.id === targetId
         );
 
+        console.log(targetId, editedMissionIndex);
+
         if (editedMissionIndex !== -1) {
             // 수정할 미션을 찾았을 때, 해당 미션 정보를 수정합니다.
             const updatedMissionInputs = [...missionInputs];
+
             updatedMissionInputs[editedMissionIndex] = {
                 ...updatedMissionInputs[editedMissionIndex],
                 mTitle: missionInput.mTitle,
@@ -458,6 +462,7 @@ export default function MissionAddModal({
                                     )
                                 ) : (
                                     <>
+                                        {/* 미션수정 모달 */}
                                         {/* 미션 옆에 숫자 */}
                                         {missionList.map((mission: any) => {
                                             return (

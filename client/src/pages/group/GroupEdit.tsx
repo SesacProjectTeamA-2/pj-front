@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -12,18 +12,71 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 import InterestedList from '../../components/common/InterestedList';
 import Dday from '../../components/common/Dday';
+import { GroupDetailType } from 'src/types/types';
 
 export default function GroupEdit() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
+    const { gSeq } = useParams();
+
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
     const [selectedArr, setSelectedArr] = useState<string[]>([]);
 
+    const missionAddHandler = () => {
+        setAddModalSwitch(true);
+    };
+
+    //; 모임 세부정보 (GET)
+    const [groupDetail, setGroupDetail] = useState<any>({
+        // grInformation: '',
+        // groupCategory: '',
+        // groupCoverImg: '',
+        // groupDday: 0,
+        // groupMaxMember: 0,
+        // groupMission: [],
+        // groupName: '',
+        // isJoin: false,
+        // isLeader: false,
+        // memberImg: [],
+        // memberNickname: [],
+        // result: false,
+    });
+
+    useEffect(() => {
+        const getGroup = async () => {
+            const res = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
+            setGroupDetail(res.data);
+
+            console.log('요청결과', res.data);
+        };
+
+        getGroup();
+    }, []);
+
+    console.log('그룹 세부사항 GET', groupDetail);
+
+    const { groupName } = groupDetail;
+
+    const [originGroupName, setOriginGroupName] = useState(''); // 초기 값은 빈 문자열
+
+    console.log('groupName', groupName); // 이건 잘 찍힘
+    // 근데 default 값으로 안불러와짐..!
+
+    console.log('origingGroupName', originGroupName); //
+
     const [input, setInput] = useState({
         gSeq: 1, // 추후 수정
-        gName: '',
+        // gName: groupDetail.groupName,
+        gName: '', // default 값으로 들어가야 하는데...!
         gDesc: '',
         gDday: '',
         gCategory: '',
@@ -40,11 +93,15 @@ export default function GroupEdit() {
         setInput({ ...input, [name]: value });
     };
 
-    const missionAddHandler = () => {
-        setAddModalSwitch(true);
-    };
+    useEffect(() => {
+        setGroupDetail(groupDetail);
 
-    //] 그룹 수정 요청
+        setOriginGroupName(groupName);
+
+        setInput({ ...input, gName: groupName });
+    }, [groupDetail]);
+
+    //; 모임 수정 (PATCH)
     const groupEditHandler = async () => {
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/group`,
@@ -117,12 +174,11 @@ export default function GroupEdit() {
                             variant="filled"
                             onChange={onChange}
                             name="gName"
+                            // defaultValue={originGroupName}
+                            defaultValue={groupName}
+                            // value={groupName}
+                            // value={originGroupName}
                         />
-                        {/* <TextField
-                            id="standard-basic"
-                            label="모임명"
-                            variant="standard"
-                        /> */}
                     </Box>
                 </div>
                 <div className="group-create-img">
