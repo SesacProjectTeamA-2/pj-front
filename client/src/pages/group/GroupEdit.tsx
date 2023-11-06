@@ -13,6 +13,7 @@ import MissionAddModal from '../../components/common/modal/MissionAddModal';
 import InterestedList from '../../components/common/InterestedList';
 import Dday from '../../components/common/Dday';
 import { GroupDetailType } from 'src/types/types';
+import { Divider, ListItem, ListItemText } from '@mui/material';
 
 export default function GroupEdit() {
     const cookie = new Cookies();
@@ -44,75 +45,83 @@ export default function GroupEdit() {
         // result: false,
     });
 
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('요청결과', res.data);
+
+                setGroupDetail(res.data);
+
+                const {
+                    groupName,
+                    grInformation,
+                    groupDday,
+                    groupCategory,
+                    groupCoverImg,
+                    groupMaxMember,
+                    groupMission,
+                } = res.data;
+
+                setInput({
+                    gSeq, // 추후 수정
+                    gName: groupName,
+                    gDesc: grInformation,
+                    gDday: groupDday,
+                    gCategory: groupCategory,
+                    gCoverImg: groupCoverImg,
+                    gMaxMem: groupMaxMember,
+                    missionArray: groupMission,
+                });
+
+                setSelectedInterestId(groupCategory);
+            });
+        // setGroupName(groupName);
+    };
+
     useEffect(() => {
-        const getGroup = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-            setGroupDetail(res.data);
-
-            console.log('요청결과', res.data);
-        };
-
         getGroup();
     }, []);
 
     console.log('그룹 세부사항 GET', groupDetail);
 
-    const { groupName } = groupDetail;
-
-    const [originGroupName, setOriginGroupName] = useState(''); // 초기 값은 빈 문자열
-
-    console.log('groupName', groupName); // 이건 잘 찍힘
-    // 근데 default 값으로 안불러와짐..!
-
-    console.log('origingGroupName', originGroupName); //
+    // console.log('groupName', groupName); // 이건 잘 찍힘
 
     const [input, setInput] = useState({
-        gSeq: 1, // 추후 수정
-        // gName: groupDetail.groupName,
-        gName: '', // default 값으로 들어가야 하는데...!
+        gSeq,
+        gName: '',
         gDesc: '',
         gDday: '',
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
-        missionArray: '',
+        missionArray: [],
     });
 
-    const { gName, gDesc, gDday, gCategory, gCoverImg, gMaxMem, missionArray } =
-        input;
+    //~ [추후] 미션 수정 axios 추가 !!!!!!
 
     const onChange = (e: any) => {
         const { name, value } = e.target;
         setInput({ ...input, [name]: value });
     };
 
-    useEffect(() => {
-        setGroupDetail(groupDetail);
-
-        setOriginGroupName(groupName);
-
-        setInput({ ...input, gName: groupName });
-    }, [groupDetail]);
+    console.log('input', input);
 
     //; 모임 수정 (PATCH)
     const groupEditHandler = async () => {
-        const res = await axios.patch(
-            `${process.env.REACT_APP_DB_HOST}/group`,
-            input,
-            {
+        const res = await axios
+            .patch(`${process.env.REACT_APP_DB_HOST}/group`, input, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            }
-        );
-        console.log(res.data);
+            })
+            .then((res) => {
+                console.log(res.data);
+            });
 
         // [추후] input 입력 안했을 시, 로직
 
@@ -126,14 +135,14 @@ export default function GroupEdit() {
         val: string;
     }
     const interestedArr: Interested[] = [
-        { id: 'tag-radio-ex', category: '운동', val: 'ex' },
-        { id: 'tag-radio-re', category: '독서', val: 're' },
-        { id: 'tag-radio-lan', category: '언어', val: 'lan' },
-        { id: 'tag-radio-cert', category: '자격증', val: 'cert' },
-        { id: 'tag-radio-st', category: '스터디', val: 'st' },
-        { id: 'tag-radio-eco', category: '경제', val: 'eco' },
-        { id: 'tag-radio-it', category: 'IT', val: 'it' },
-        { id: 'tag-radio-etc', category: '기타', val: 'etc' },
+        { id: 'ex', category: '운동', val: 'ex' },
+        { id: 're', category: '독서', val: 're' },
+        { id: 'lan', category: '언어', val: 'lan' },
+        { id: 'cert', category: '자격증', val: 'cert' },
+        { id: 'st', category: '스터디', val: 'st' },
+        { id: 'eco', category: '경제', val: 'eco' },
+        { id: 'it', category: 'IT', val: 'it' },
+        { id: 'etc', category: '기타', val: 'etc' },
     ];
 
     const [selectedInterestId, setSelectedInterestId] = useState('');
@@ -174,10 +183,7 @@ export default function GroupEdit() {
                             variant="filled"
                             onChange={onChange}
                             name="gName"
-                            // defaultValue={originGroupName}
-                            defaultValue={groupName}
-                            // value={groupName}
-                            // value={originGroupName}
+                            value={input.gName}
                         />
                     </Box>
                 </div>
@@ -238,6 +244,7 @@ export default function GroupEdit() {
                     placeholder="500자 이내로 입력하세요."
                     onChange={onChange}
                     name="gDesc"
+                    value={input.gDesc}
                 ></textarea>
             </div>
 
@@ -249,18 +256,36 @@ export default function GroupEdit() {
                     type="number"
                     onChange={onChange}
                     name="gMaxMem"
+                    value={input.gMaxMem}
                 />
-                <div className="max-number">최대 00명</div>
             </div>
 
             <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
                 <div className="mission-container">
                     <div onClick={missionAddHandler}>
-                        <img src="/asset/icons/plus.svg" />
+                        <img src="/asset/icons/plus.svg" alt="plus mission" />
                     </div>
-                    <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
-                    {/* [추후] 미션 추가되면 리스트 형식으로 추가 */}
+
+                    <div className="mission-list-container">
+                        {missionList.length > 0 ? (
+                            missionList.map((mission: any) => {
+                                return (
+                                    <div key={mission.id}>
+                                        <ListItem>
+                                            <ListItemText
+                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                secondary={`${mission.mContent}`}
+                                            />
+                                        </ListItem>
+                                        <Divider component="li" />
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
+                        )}
+                    </div>
                 </div>
             </div>
 
@@ -273,7 +298,7 @@ export default function GroupEdit() {
                     setMissionList={setMissionList}
                     setInput={setInput}
                     input={input}
-                    gDday={gDday}
+                    gDday={input.gDday}
                 />
             ) : null}
 

@@ -62,9 +62,10 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    justify-content: flex-start;
 
     img {
-        width: 30px;
+        width: 3em;
         cursor: pointer;
     }
 

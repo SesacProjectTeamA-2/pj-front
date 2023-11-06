@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
+import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -16,9 +19,11 @@ import Divider from '@mui/material/Divider';
 import '../../../styles/scss/components/modal.scss';
 
 import Dday from '../Dday';
-import { useDispatch, useSelector } from 'react-redux';
-import { MissionStateType, RootStateType } from '../../../types/types';
-import { addMission } from '../../../store/slices/missionSlice';
+
+//-- Redux
+// import { useDispatch, useSelector } from 'react-redux';
+// import { MissionStateType, RootStateType } from '../../../types/types';
+// import { addMission } from '../../../store/slices/missionSlice';
 
 interface MissionAddModalProps {
     addModalSwitch: boolean;
@@ -34,23 +39,22 @@ export default function MissionAddModal({
     setMissionList,
     setInput,
     input,
+    gDday,
 }: any) {
-    const missionState = useSelector((state: RootStateType) => state.mission);
-    const dispatch = useDispatch();
-
     //] 1. 그룹 생성
     //-- action = 미션생성
 
     //] 2. 그룹 홈
     //-- action = 미션수정
 
-    // const [listLength, setMissionList] = useState(missionState.length);
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
 
-    // const missionList: any[] = missionState;
+    //--redux
+    // const missionState = useSelector((state: RootStateType) => state.mission);
+    // const dispatch = useDispatch();
 
-    // const [missionList, setMissionList] =
-    //     useState<MissionStateType[]>(missionState);
-    // const [missionList, setMissionList] = useState(missionState);
+    const { gSeq } = useParams();
 
     const closeModalHandler = () => {
         setAddModalSwitch(false);
@@ -64,10 +68,10 @@ export default function MissionAddModal({
         mTitle: '',
         mContent: '',
         mLevel: 1,
+        mSeq: null,
+        gDday,
         // completed: false,
     });
-
-    const [gDday, setGDday] = useState('');
 
     const { mTitle, mContent, mLevel } = missionInput;
 
@@ -76,20 +80,7 @@ export default function MissionAddModal({
         setMissionInput({ ...missionInput, [name]: value });
     };
 
-    // console.log('missionInput', missionInput);
-
-    // const [nextMissionId, setNextMissionId] = useState(missionList.length + 1);
-    // useEffect(() => {
-    //     setNextMissionId(missionList.length + 1);
-    // }, [nextMissionId]);
-
-    // console.log('nextMissionId', nextMissionId);
-
     const oneMissionAddHandler = () => {
-        // 새로운 미션을 미션 리스트에 추가
-        // console.log(missionInput);
-        // dispatch(addMission(missionInput));
-
         const newMissions = [...missionList, missionInput];
         setMissionList(newMissions);
 
@@ -100,18 +91,22 @@ export default function MissionAddModal({
             mTitle: '',
             mContent: '',
             mLevel: 1,
+            mSeq: null,
+            gDday,
             // completed: false,
         });
     };
 
     console.log('missionList', missionList);
 
-    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
+    //] 마감일 설정
+    const [targetDate, setTargetDate] = useState(''); // [추후] 오늘 날짜로 수정 ?
 
-    // const [editMode, setEditMode] = useState([]);
+    // useEffect(() => {
+    //     setTargetDate(`D-${gDday}`);
+    // }, []);
 
-    // const [editMode, setEditMode] = useState({});
-    // const [editedContent, setEditedContent] = useState({}); // 추가: 수정된 내용을 관리
+    console.log('day', gDday);
 
     interface EditMode {
         [key: number]: boolean;
@@ -121,36 +116,6 @@ export default function MissionAddModal({
     const [editedContents, setEditedContents] = useState<{
         [key: number]: string;
     }>({});
-
-    // const editHandler = (targetId: number) => {
-    //     console.log(targetId);
-    //     // setEditMode(!editMode);
-
-    //     console.log('ppppp', missionInput);
-
-    //     // if(!editMode) {
-    //     // const updatedMissionList = missionList.map((mission: any) => {
-    //     //         if (mission.id === targetId) {
-    //     //             // targetId와 일치하는 미션을 찾아 업데이트
-    //     //             return {
-    //     //                 ...mission,
-    //     //                 [name]: value,
-    //     //             };
-    //     //         }
-    //     //         return mission; // 다른 미션은 변경하지 않음
-    //     //     });
-
-    //     //     // 업데이트된 미션 목록을 상태에 설정
-    //     //     setMissionList(updatedMissionList);
-    //     // }
-
-    //     setEditMode((prevEditMode: any) => ({
-    //         ...prevEditMode,
-    //         [targetId]: !prevEditMode[targetId],
-    //     }));
-
-    //     console.log(editMode);
-    // };
 
     const handleEditChange = (e: any, targetId: number) => {
         const { name, value } = e.target;
@@ -186,18 +151,10 @@ export default function MissionAddModal({
         }
     }
 
+    //] 최종으로 버튼 클릭 시
     const missionAddDoneHandler = () => {
-        // 최종으로 버튼 클릭 시
         setAddModalSwitch(false);
         setTargetDate(targetDate);
-
-        // input : 그룹 생성할 때의 input
-        // const newMissionArray = [...input.missionArray, ...missionList];
-        // const newMissionArray = [...missionList];
-        // console.log(' newMissionArray', newMissionArray);
-
-        // console.log('!!', input.missionArray);
-        console.log('##', missionList);
 
         if (action === '미션생성') {
             setInput({
@@ -211,11 +168,42 @@ export default function MissionAddModal({
                 input
             );
         }
+
+        // {
+        //     "mSeq": 3,
+        //     "gDday": "2023-12-24",
+        //     "mTitle": "운동하기",
+        //     "mContent": "일주일에 한번 헬스장",
+        //     "mLevel": 5
+        //   }
+
+        //; 미션 수정 (PATCH, POST, DELETE)
+        // missionList 최종 데이터만 보내기
+        if (action === '미션수정') {
+            const patchMissionListHandler = async () => {
+                try {
+                    await axios
+                        .patch(
+                            `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
+                            missionList, // 임시
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${uToken}`,
+                                },
+                            }
+                        )
+                        .then((res) => {
+                            patchMissionListHandler();
+                            console.log('patched', res.data);
+                        });
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+        }
     };
 
     //=== 수정 ===
-
-    // const editHandler = (e: React.MouseEvent, targetId: number) => {
     const [missionInputs, setMissionInputs] = useState(
         // 개별 input 관리 위한 함수
         missionList.map((mission: any) => ({
@@ -223,12 +211,13 @@ export default function MissionAddModal({
             mTitle: mission.mTitle,
             mContent: mission.mContent,
             mLevel: mission.mLevel,
+            mSeq: mission.mSeq,
+            gDday: mission.gDday,
         }))
     );
     console.log('missionInputs ADD MODAL', missionInputs);
 
     const editHandler = (targetId: number) => {
-        // console.log('targetId', targetId);
         const editedMissionIndex = missionInputs.findIndex(
             (mission: any) => mission.id === targetId
         );
@@ -380,9 +369,11 @@ export default function MissionAddModal({
                             {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
                             <div className="group-create-content">
                                 <div className="dday-title">마감일</div>
+
                                 <Dday
                                     targetDate={targetDate}
                                     setTargetDate={setTargetDate}
+                                    gDday={gDday}
                                 />
                             </div>
                         </div>
