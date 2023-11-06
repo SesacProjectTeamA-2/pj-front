@@ -77,7 +77,7 @@ export default function GroupHome() {
 
     // console.log('????', dummyGroupState);
 
-    const userState = useSelector((state: RootStateType) => state.user);
+    // const userState = useSelector((state: RootStateType) => state.user);
 
     // console.log('!!!!', userState);
 
@@ -150,12 +150,12 @@ export default function GroupHome() {
             <HomeMissionList
                 missionList={missionList}
                 setMissionList={setMissionList}
+                gDday={groupDetail.groupDday}
                 //    addModalSwitch={addModalSwitch}
                 //         setAddModalSwitch={setAddModalSwitch}
                 //         action={'미션생성'}
                 //         setInput={setInput}
                 //         input={input}
-                gDday={groupDetail.groupDday}
             />
 
             <div className="ranking-container">
