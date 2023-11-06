@@ -56,19 +56,18 @@ export default function MyPage() {
                     setSelectedArr([category1, category2, category3]);
                 }
                 setSelectedCharacter(character);
+                // setPhraseModeBtnVal(); //이거 고쳐야 함
                 setPhraseCtt(phrase);
                 setDdayPin(mainDday);
                 setCheckDday(setDday);
                 setDonePin(setMainGroup);
-                console.log(selectedArr);
             });
     };
     useEffect(() => {
         getUserData();
     }, []);
 
-    /////////////////////////////////////
-    // props, 데이터 선언
+    ////////////props, 데이터 선언/////////////
     // 1. 닉네임
     const [input, setInput] = useState<string>('');
     // console.log('닉네임', input);
@@ -129,19 +128,8 @@ export default function MyPage() {
     //     console.log('phraseModeBtnVal', phraseModeBtnVal);
     // }, [phraseModeBtnVal]);
 
+    //////////////// 수정 | 탈퇴 //////////////////
     // 2. 사용자 데이터 수정
-
-    // "uName": "chungzo",
-    // "uDesc": "안녕하세요.",
-    // "uPhrase": "I am 신뢰에요",
-    // "uCategory1": "ex = 운동 / re = 독서 / st = 스터디 / eco = 경제 / lan = 언어 / cert = 자격증 / it = IT / etc = 기타",
-    // "uCategory2": "ex = 운동 / re = 독서 / st = 스터디 / eco = 경제 / lan = 언어 / cert = 자격증 / it = IT / etc = 기타",
-    // "uCategory3": "ex = 운동 / re = 독서 / st = 스터디 / eco = 경제 / lan = 언어 / cert = 자격증 / it = IT / etc = 기타",
-    // "uSetDday": null,
-    // "uMainDday": 2,
-    // "uMainGroup": 3,
-    // "result": "false(닉네임이 중복되는 경우)",
-    // "message": "false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)"
 
     interface patchedUserDataItf {
         uName: string;
@@ -190,15 +178,11 @@ export default function MyPage() {
                 )
                 .then((res) => {
                     console.log('patched', res.data.message);
-                    console.log('Edit!');
                 });
         } catch (err) {
             console.log(err);
         }
     };
-    // useEffect(() => {
-    //     patchUserData();
-    // }, []);
 
     // 3. 회원 탈퇴
     // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기
