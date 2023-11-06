@@ -100,21 +100,6 @@ export default function SideBarGroup() {
                                         </div>
                                     );
                                 })}
-                                {/* <Link to={`/board/${gSeq}/mission/${mSeqList[i]}`}>
-                                <li className="title6-hover-bigger">
-                                    알고리즘
-                                </li>
-                                </Link>
-                                <Link to="/group/mission/1/2">
-                                    <li className="title6-hover-bigger">
-                                        블로깅
-                                    </li>
-                                </Link>
-                                <Link to="/group/mission/1/3">
-                                    <li className="title6-hover-bigger">
-                                        모각코
-                                    </li>
-                                </Link> */}
                             </ul>
                             <Link to={`/board/${gSeq}/mission/done`}>
                                 <li className="title5-hover-bigger">완료</li>

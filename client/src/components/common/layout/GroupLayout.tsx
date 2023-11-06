@@ -31,8 +31,8 @@ export default function GroupLayout({ children, showChat }: any) {
 
                         <Grid
                             md={8}
-                            sm={10}
-                            xs={10}
+                            sm={12}
+                            xs={12}
                             className="section-wrapper"
                         >
                             {' '}

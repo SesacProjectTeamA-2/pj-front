@@ -114,7 +114,7 @@ export default function Join() {
             </div>
             {/* </form> */}
 
-            <Link to="/main">
+            <Link to="/login">
                 <button
                     id="join-btn"
                     className="btn-fixed"

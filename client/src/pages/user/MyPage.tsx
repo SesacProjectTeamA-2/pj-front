@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
@@ -22,8 +21,8 @@ export default function MyPage() {
 
     // console.log(process.env.REACT_APP_DB_HOST); // http://localhost:8888/api
     // const uSeq: number = 0;
-    const { uSeq } = useParams();
-    console.log(uSeq);
+    // const { uSeq } = useParams();
+    // console.log('uSeq',uSeq);
 
     // 1. 사용자 데이터 가져오기
     const getUserData = async () => {
@@ -35,82 +34,47 @@ export default function MyPage() {
                 },
             })
             .then((res) => {
-                console.log('user', res);
                 console.log('user', res.data);
+                const {
+                    nickname,
+                    coverLetter,
+                    character,
+                    category1,
+                    category2,
+                    category3,
+                    mainDday,
+                    phrase,
+                    setDday,
+                    setMainGroup,
+                } = res.data;
+
+                // 데이터 베이스 내 정보 화면에 띄우기
+                setInput(nickname);
+                setContent(coverLetter);
+                if (category1 && category2 && category3) {
+                    //선택 안 하면 null 값 들어있어서 값 있을 때만 값 넣엊ㅁ
+                    setSelectedArr([category1, category2, category3]);
+                }
+                setSelectedCharacter(character);
+                setPhraseCtt(phrase);
+                setDdayPin(mainDday);
+                setCheckDday(setDday);
+                setDonePin(setMainGroup);
+                console.log(selectedArr);
             });
     };
     useEffect(() => {
         getUserData();
     }, []);
 
-    // 2. 사용자 데이터 수정
-    interface patchedUserDataItf {
-        uName: string;
-        uDesc: string;
-        uPhrase: string;
-        uCategory1: string;
-        uCategory2: string;
-        uCategory3: string;
-        //   설정 안 했을 경우 null
-        uSetDday: string | null;
-        uMainDday: number;
-        uMainGroup: number;
-        result: boolean;
-        message: boolean;
-    }
-    // const patchedUserData = {
-    //     //캐릭터값, 대표사진 필요
-    //     uName: input,
-    //     uDesc: content,
-    //     uPhrase:
-    //         '작성하지 않을 시(null), 랜덤 명언/ 작성할 경우 해당 문구 출력',
-    //     uCategory1: selectedArr[0],
-    //     uCategory2: selectedArr[1],
-    //     uCategory3: selectedArr[2],
-    //     uSetDday: checkDday,
-    //     uMainDday: dDayPin,
-    //     uMainGroup: donePin,
-    //     result: 'false(닉네임이 중복되는 경우)',
-    //     message: isUsing,
-    //     //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
-    // };
-
-    // const patchUserData = async () => {
-    //     const res = await axios
-    //         .patch(
-    //             `${process.env.REACT_APP_DB_HOST}/api/user`,
-    //             patchedUserData,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         )
-    //         .then((res) => {
-    //             console.log('user', res);
-    //         });
-    // };
-    // useEffect(() => {
-    //     patchUserData();
-    // }, []);
-
-    // 3. 회원 탈퇴
-    // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기
-
     /////////////////////////////////////
-    // props 선언
+    // props, 데이터 선언
     // 1. 닉네임
-    const [input, setInput] = useState<string | number>('');
+    const [input, setInput] = useState<string>('');
     // console.log('닉네임', input);
 
-    // 1-2. 닉네임 중복검사 결과
-    const [isUsing, setIsUsing] = useState<boolean>(true);
-
-    // 1-3. 닉네임 중복검사 메시지
-    const [msg, setMsg] = useState<string>('');
-
     // 2. 자기소개
-    const [content, setContent] = useState<string | number>('');
+    const [content, setContent] = useState<string>('');
     // console.log('자기소개', content);
 
     // 3. 선택한 캐릭터
@@ -128,34 +92,15 @@ export default function MyPage() {
     // console.log(selectedArr[1]);
     // console.log(selectedArr[2]);
 
-    // 전체 그룹 불러와야 함
-    // const getGroupList = async () => {
-    //     const res = await axios
-    //         .get(
-    //             // 임시로 전체 검색
-    //             `http://localhost:8888/api/group?search=%&category=%`,
-    //             // `http://localhost:8888/api/group?search=${searchInput}&category=${}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         )
-    //         .then((res) => console.log(res.data.groupArray));
-    // };
-    // useEffect(() => {
-    //     getGroupList();
-    // }, []);
-
     // 5. 선택한 dDay id
-    const [dDayPin, setDdayPin] = useState<number | null>(0);
+    const [dDayPin, setDdayPin] = useState<number>(0);
     const handleCheckDday = (groupId: number): void => {
         setDdayPin(groupId);
     };
     // console.log('dDayPin', dDayPin);
 
     // 6. 선택한 그룹 id
-    const [donePin, setDonePin] = useState<number | null>(0);
+    const [donePin, setDonePin] = useState<number>(0);
     const handleCheckDone = (groupId: number): void => {
         setDonePin(groupId);
     };
@@ -165,14 +110,13 @@ export default function MyPage() {
     const [checkDday, setCheckDday] = useState<string | null>(null);
     useEffect(() => {
         dDayPin === 0 && donePin === 0 ? setCheckDday(null) : setCheckDday('y');
-        // console.log(checkDday);
+        // console.log('checkDday', checkDday);
     }, [dDayPin, donePin]);
 
     // 8. 명언 모드
     // 8-1. 적은 명언 내용
-    const [phraseCtt, setPhraseCtt] = useState<string | number>(
-        '여름은 가을로부터 떨어진다'
-    );
+    const [phraseCtt, setPhraseCtt] =
+        useState<string>('여름은 가을로부터 떨어진다');
     // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
@@ -185,6 +129,80 @@ export default function MyPage() {
     //     console.log('phraseModeBtnVal', phraseModeBtnVal);
     // }, [phraseModeBtnVal]);
 
+    // 2. 사용자 데이터 수정
+
+    // "uName": "chungzo",
+    // "uDesc": "안녕하세요.",
+    // "uPhrase": "I am 신뢰에요",
+    // "uCategory1": "ex = 운동 / re = 독서 / st = 스터디 / eco = 경제 / lan = 언어 / cert = 자격증 / it = IT / etc = 기타",
+    // "uCategory2": "ex = 운동 / re = 독서 / st = 스터디 / eco = 경제 / lan = 언어 / cert = 자격증 / it = IT / etc = 기타",
+    // "uCategory3": "ex = 운동 / re = 독서 / st = 스터디 / eco = 경제 / lan = 언어 / cert = 자격증 / it = IT / etc = 기타",
+    // "uSetDday": null,
+    // "uMainDday": 2,
+    // "uMainGroup": 3,
+    // "result": "false(닉네임이 중복되는 경우)",
+    // "message": "false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)"
+
+    interface patchedUserDataItf {
+        uName: string;
+        uDesc: string;
+        uPhrase: string;
+        uCategory1: string;
+        uCategory2: string;
+        uCategory3: string;
+        //   설정 안 했을 경우 null
+        uSetDday: string | null;
+        uMainDday: number;
+        uMainGroup: number;
+        // result: boolean;
+        // message: boolean;
+    }
+    const patchedUserData: patchedUserDataItf = {
+        //캐릭터값, 대표사진 필요
+        uName: input,
+        uDesc: content,
+        uPhrase: phraseCtt,
+        uCategory1: selectedArr[0],
+        uCategory2: selectedArr[1],
+        uCategory3: selectedArr[2],
+        uSetDday: checkDday,
+        uMainDday: dDayPin,
+        uMainGroup: donePin,
+        // result: true,
+        // message: true,
+        //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
+    };
+    useEffect(() => {
+        console.log('patchedUserData >>>>', patchedUserData);
+    });
+    const patchUserData = async () => {
+        try {
+            await axios
+                .patch(
+                    // `${process.env.REACT_APP_DB_HOST}/user/mypage`,
+                    'http://localhost:8888/api/user/mypage',
+                    patchedUserData,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log('patched', res.data.message);
+                    console.log('Edit!');
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    // useEffect(() => {
+    //     patchUserData();
+    // }, []);
+
+    // 3. 회원 탈퇴
+    // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기
+
     return (
         <div className="section">
             {/* 로그인 안 했을 때: 로그인 버튼 보임 + 채팅 버튼 안 보임 <br></br>
@@ -196,7 +214,6 @@ export default function MyPage() {
                 </div>
                 <div className="myPage-div-one-two">
                     <Nickname input={input} setInput={setInput} />
-                    {msg}
                     <Introduce content={content} setContent={setContent} />
                 </div>
             </div>
@@ -259,7 +276,8 @@ export default function MyPage() {
                 <button
                     className="btn-fixed"
                     id="myPage-edit-btn"
-                    type="submit"
+                    // type="submit"
+                    onClick={() => patchUserData()}
                 >
                     수정 완료
                 </button>
