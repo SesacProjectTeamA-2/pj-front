@@ -55,8 +55,8 @@ export default function BasicLayout({ children, showChat }: any) {
                         {/* 컨텐츠 컴포넌트 들어갈 곳 */}
                         <Grid
                             md={8}
-                            sm={10}
-                            xs={10}
+                            sm={12}
+                            xs={12}
                             className="section-wrapper"
                         >
                             <Item
