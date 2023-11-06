@@ -16,7 +16,6 @@ export default function Nickname(props: any): JSX.Element {
             setDisplayMode('flex');
         }
     }, [curPath]);
-    console.log(props.uName);
 
     return (
         <div className="nickname-div">
@@ -24,7 +23,7 @@ export default function Nickname(props: any): JSX.Element {
                 <input
                     // readOnly={readOnlyVal}
                     onChange={(e) => props.setInput(e.target.value)}
-                    value={props.uName}
+                    value={props.input}
                     ref={inputRef}
                     id="input-area"
                     className="input-obj"

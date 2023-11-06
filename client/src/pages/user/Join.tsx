@@ -70,7 +70,7 @@ export default function Join() {
         console.log('register!');
         await axios
             // .post(`${process.env.REACT_APP_DB_HOST}/user/register`, userInfo, {
-            .post('http://localhost:8888/api/user/register', userInfo, {
+            .post(`${process.env.REACT_APP_DB_HOST}/user/register`, userInfo, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
@@ -114,7 +114,7 @@ export default function Join() {
             </div>
             {/* </form> */}
 
-            <Link to="/main">
+            <Link to="/login">
                 <button
                     id="join-btn"
                     className="btn-fixed"

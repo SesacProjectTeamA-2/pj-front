@@ -176,7 +176,7 @@ export default function Header(props: any) {
                 {/* 메뉴 탭 버튼 */}
                 <div className="tab-menu-div">
                     <button id="tab-menu-btn" onClick={() => toggleVal()}>
-                        <img src="/asset/icons/menu.svg" alt="tabMenu" />
+                        <img src="/asset/icons/Menu.svg" alt="tabMenu" />
                     </button>
                 </div>
             </div>

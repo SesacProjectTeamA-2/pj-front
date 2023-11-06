@@ -40,6 +40,7 @@ export default function Mission() {
                 <div className="list-face">
                     <MissionList />
                     <Face />
+
                 </div>
             </div>
         </div>
