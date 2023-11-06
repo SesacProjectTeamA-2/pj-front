@@ -29,10 +29,10 @@ export default function Login() {
     };
 
     const kakaoLogin = (): void => {
-        window.location.href = `${process.env.REACT_APP_DB_HOST}/api/user/login/kakao/authorize`;
+        window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/kakao/authorize`;
     };
     const naverLogin = (): void => {
-        window.location.href = `${process.env.REACT_APP_DB_HOST}/api/user/login/naver`;
+        window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/naver`;
     };
 
     return (
