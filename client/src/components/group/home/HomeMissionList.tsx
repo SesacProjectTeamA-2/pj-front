@@ -157,6 +157,7 @@ export default function HomeMissionList({
                             action={'미션수정'}
                             missionList={missionList}
                             setMissionList={setMissionList}
+                            gDday={gDday}
                         />
                     ) : null}
                 </div>
