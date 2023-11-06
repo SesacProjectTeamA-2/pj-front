@@ -257,9 +257,10 @@ export default function GroupPostDetail() {
                 /> */}
 
                 <div className="post-detail-content-container">
-                    <div className="post-detail-content">
-                        {freeList.gbContent}
-                    </div>
+                    <div
+                        className="post-detail-content"
+                        dangerouslySetInnerHTML={{ __html: freeList.gbContent }}
+                    />
 
                     {/* 댓글 수, 반응 수 */}
                     <GroupContentFooter />

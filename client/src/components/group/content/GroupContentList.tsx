@@ -101,17 +101,23 @@ export default function GroupContent({ action }: any) {
                                                         alt="profile"
                                                     />
 
-                                                    <div className="title4 cursor">
-                                                        {free.gbTitle}
-                                                    </div>
+                                                    <div
+                                                        className="title4 cursor"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: free.gbTitle,
+                                                        }}
+                                                    />
                                                 </div>
                                                 <div className="post-list-date">
                                                     {free.createdAt}
                                                 </div>
                                             </div>
-                                            <div className="post-list-main cursor">
-                                                {free.gbContent}
-                                            </div>
+                                            <div
+                                                className="post-list-main cursor"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: free.gbContent,
+                                                }}
+                                            />
 
                                             <GroupContentFooter />
                                         </div>
@@ -145,17 +151,24 @@ export default function GroupContent({ action }: any) {
                                                     {/* [추후] 작성자도 넣을지 말지 ? */}
                                                     {/* <div>달려라하니</div> */}
 
-                                                    <div className="title4 cursor">
-                                                        {mission.gbTitle}
-                                                    </div>
+                                                    <div
+                                                        className="title4 cursor"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: mission.gbTitle,
+                                                        }}
+                                                    />
                                                 </div>
                                                 <div className="post-list-date">
                                                     {mission.createdAt}
                                                 </div>
                                             </div>
-                                            <div className="post-list-main cursor">
-                                                {mission.gbContent}
-                                            </div>
+
+                                            <div
+                                                className="post-list-main cursor"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: mission.gbContent,
+                                                }}
+                                            />
 
                                             <GroupContentFooter />
                                         </div>
