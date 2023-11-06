@@ -52,7 +52,7 @@ export default function MyPage() {
                 setInput(nickname);
                 setContent(coverLetter);
                 if (category1 && category2 && category3) {
-                    //선택 안 하면 null 값 들어있어서 값 있을 때만 값 넣엊ㅁ
+                    //선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
                     setSelectedArr([category1, category2, category3]);
                 }
                 setSelectedCharacter(character);

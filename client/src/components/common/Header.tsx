@@ -9,7 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import '../../styles/scss/layout/header.scss';
 
-import Dday from './Dday';
+// import Dday from './Dday';
 
 export default function Header(props: any) {
     const theme = createTheme({
@@ -80,7 +80,7 @@ export default function Header(props: any) {
 
                 {/* 디데이, 메뉴  */}
                 <div className="header-divTwo pcMode">
-                    <Dday />
+                    {/* <Dday /> */}
                     {/* [추후] 대표 디데이 설정  
                     redux에서 date 값 꺼내와서 디데이 커스텀훅 => 디데이 값만 보이게 */}
 
@@ -89,7 +89,6 @@ export default function Header(props: any) {
                             <ButtonGroup
                                 aria-label="outlined button group"
                                 variant="outlined"
-                                // color="secondary"
                                 sx={{ p: 1 }}
                             >
                                 <Link to="/main">
@@ -191,7 +190,7 @@ export default function Header(props: any) {
                 {' '}
                 <nav className="header-nav ">
                     <ul className="menu">
-                        <Dday />
+                        {/* <Dday /> */}
                         <li>
                             <Link to="/main">
                                 <button className="menu-button">Main</button>
