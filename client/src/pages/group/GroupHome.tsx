@@ -110,7 +110,6 @@ export default function GroupHome() {
                     },
                 }
             );
-
             setGroupDetail(res.data);
         };
 

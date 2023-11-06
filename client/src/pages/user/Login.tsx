@@ -39,8 +39,6 @@ export default function Login() {
     return (
         <div className="section">
             <div className="login-wrapper">
-                <div>{uToken ? '쿠키 있음' : '쿠키 없음'}</div>
-
                 <h1 id="login-h1">안녕하세요!</h1>
 
                 <GoogleLoginBtn
