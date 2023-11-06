@@ -55,7 +55,7 @@ export default function MissionAddModal({
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-    console.log('missionList', missionList);
+    console.log('missionList - ADD MODAL', missionList);
 
     const [missionInput, setMissionInput] = useState({
         // 새로 추가하는 미션
@@ -179,6 +179,11 @@ export default function MissionAddModal({
     };
 
     console.log('editedContents', editedContents);
+    if (action === '미션수정') {
+        for (let i = 0; i < missionList.length; i++) {
+            missionList[i].id = i + 1;
+        }
+    }
 
     const missionAddDoneHandler = () => {
         // 최종으로 버튼 클릭 시
@@ -219,7 +224,10 @@ export default function MissionAddModal({
             mLevel: mission.mLevel,
         }))
     );
+    console.log('missionInputs ADD MODAL', missionInputs);
+
     const editHandler = (targetId: number) => {
+        // console.log('targetId', targetId);
         const editedMissionIndex = missionInputs.findIndex(
             (mission: any) => mission.id === targetId
         );
@@ -456,11 +464,23 @@ export default function MissionAddModal({
                                                 <div key={mission.id}>
                                                     <Divider component="li" />
 
-                                                    {/* 여기 */}
+                                                    {/* 여기부터 미션 수정 모달 */}
                                                     <ListItem>
-                                                        <ListItemText
-                                                            primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
-                                                            secondary={`${mission.mContent}`}
+                                                        <TextField
+                                                            label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                            variant="standard"
+                                                            fullWidth
+                                                            name={`mTitle-${mission.id}`}
+                                                            value={
+                                                                mission.mContent
+                                                            }
+                                                            onChange={(e) =>
+                                                                handleMissionContentChange(
+                                                                    mission.id,
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            }
                                                         />
                                                         <div>
                                                             <button
@@ -478,7 +498,7 @@ export default function MissionAddModal({
                                                             <button
                                                                 className="modal-mission-delete-btn btn-sm"
                                                                 onClick={() =>
-                                                                    editHandler(
+                                                                    deleteHandler(
                                                                         mission.id
                                                                     )
                                                                 }
