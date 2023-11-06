@@ -17,7 +17,7 @@ export default function GroupSearch({ searchInput, selectedArr }: any) {
         const getSearchGroupList = async () => {
             const res = await axios.get(
                 // 임시로 전체 검색
-                `http://localhost:8888/api/group?search=%&category=%`,
+                `${process.env.REACT_APP_DB_HOST}/api/group?search=%&category=%`,
                 // `http://localhost:8888/api/group?search=${searchInput}&category=${}`,
                 {
                     headers: {
