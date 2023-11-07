@@ -130,41 +130,38 @@ export default function GroupCreate() {
 
     // 대표사진 업로드
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // if (e.target.files && e.target.files[0]) {
-        //     setUserImg(e.target.files[0]);
-        // }
-
-        const formData = new FormData();
-
+        // const formData = new FormData();
         if (e.target.files && e.target.files[0]) {
-            formData.append('image', e.target.files[0]);
-            sendImg(formData);
-            console.log(111111, formData.values());
+            // formData.append('image', e.target.files[0]);
+            // // sendImg(formData);
+            // console.log(111111, formData.values());
+            setInput({ ...input, [e.target.name]: e.target.files[0] });
+            console.log('input.gCoverImg', input.gCoverImg);
         }
     };
 
-    const sendImg = (formData: any): void => {
-        const cookie = new Cookies();
-        const uToken = cookie.get('isUser'); // 토큰 값
-        try {
-            axios
-                .post(
-                    `${process.env.REACT_APP_DB_HOST}/user/mypage/userImg`,
-                    formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            Authorization: `Bearer ${uToken}`,
-                        },
-                    }
-                )
-                .then((res) => {
-                    console.log('post', res.data);
-                });
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    // const sendImg = (formData: any): void => {
+    //     const cookie = new Cookies();
+    //     const uToken = cookie.get('isUser'); // 토큰 값
+    //     // try {
+    //     //     axios
+    //     //         .patch(
+    //     //             `${process.env.REACT_APP_DB_HOST}/group/groupCoverImg`,
+    //     //             formData,
+    //     //             {
+    //     //                 headers: {
+    //     //                     'Content-Type': 'multipart/form-data',
+    //     //                     Authorization: `Bearer ${uToken}`,
+    //     //                 },
+    //     //             }
+    //     //         )
+    //     //         .then((res) => {
+    //     //             console.log('post', res.data);
+    //     //         });
+    //     // } catch (err) {
+    //     //     console.log(err);
+    //     // }
+    // };
 
     return (
         <div className="section group-create-contianer title5">
@@ -208,7 +205,7 @@ export default function GroupCreate() {
                     >
                         <input
                             type="file"
-                            name="image"
+                            name="gCoverImg"
                             style={{ display: 'none' }}
                             onChange={handlerChange}
                         />
