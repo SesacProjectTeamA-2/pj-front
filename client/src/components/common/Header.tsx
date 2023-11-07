@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import '../../styles/scss/layout/header.scss';
 
+// dDay 제거
 // import Dday from './Dday';
 
 export default function Header(props: any) {
@@ -110,11 +111,11 @@ export default function Header(props: any) {
                                 </Link>
                                 {/* </li> */}
                                 {/* 관리자만 보이는 버튼 */}
-                                <Link to="/management/users">
+                                {/* <Link to="/management/users">
                                     <Button className="menu-button">
                                         Management
                                     </Button>
-                                </Link>
+                                </Link> */}
                             </ButtonGroup>
                         </ThemeProvider>
                         {/* {!isCookie ? '쿠키 없음' : '쿠키 있음'} */}

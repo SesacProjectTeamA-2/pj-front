@@ -23,15 +23,18 @@ export default function GroupMission() {
         groupCoverImg: '',
         groupDday: 0,
         groupMaxMember: 0,
+        groupMember: [],
         groupMission: [],
+        // groupRanking: [], // nowRanking: [], totalRanking: []
         groupName: '',
         isJoin: false,
         isLeader: false,
-        memberImg: [],
-        memberNickname: [],
+        // memberImg: [],
+        // memberNickname: [],
         result: false,
+        nowScoreUserInfo: [],
+        totalScoreUserInfo: [],
     });
-
     useEffect(() => {
         const getGroup = async () => {
             const res = await axios.get(

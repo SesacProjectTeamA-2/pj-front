@@ -79,6 +79,7 @@ export default function GroupEdit() {
                 });
 
                 setSelectedInterestId(groupCategory);
+                setMissionList(groupMission);
             });
         // setGroupName(groupName);
     };
@@ -164,6 +165,7 @@ export default function GroupEdit() {
 
     const [missionList, setMissionList] = useState<Mission[]>([]);
 
+    console.log(missionList);
     return (
         <div className="section group-create-contianer title5">
             <div className="title2">모임 수정하기</div>
@@ -273,12 +275,14 @@ export default function GroupEdit() {
 
                     <div className="mission-list-container">
                         {missionList.length > 0 ? (
-                            missionList.map((mission: any) => {
+                            missionList.map((mission: any, idx) => {
                                 return (
-                                    <div key={mission.id}>
+                                    <div key={idx}>
                                         <ListItem>
                                             <ListItemText
-                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                primary={`미션 ${idx + 1}. ${
+                                                    mission.mTitle
+                                                } ${mission.mLevel}`}
                                                 secondary={`${mission.mContent}`}
                                             />
                                         </ListItem>

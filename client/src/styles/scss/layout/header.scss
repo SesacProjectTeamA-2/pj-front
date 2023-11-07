@@ -54,11 +54,10 @@
     display: none;
 }
 #chat-li {
+    cursor: pointer;
+
     @include media('<800px') {
         display: flex;
-        // justify-content: center;
-        // align-items: center;
-        // text-align: start;
         margin-left: 0.5rem;
     }
 }

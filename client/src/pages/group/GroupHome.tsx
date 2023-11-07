@@ -75,11 +75,7 @@ export default function GroupHome() {
         (state: RootStateType) => state.dummyGroup
     );
 
-    // console.log('????', dummyGroupState);
-
     // const userState = useSelector((state: RootStateType) => state.user);
-
-    // console.log('!!!!', userState);
 
     //=== 모임 상세화면 읽어오기 ===
 
@@ -91,30 +87,82 @@ export default function GroupHome() {
         groupCoverImg: '',
         groupDday: 0,
         groupMaxMember: 0,
+        groupMember: [],
         groupMission: [],
         groupName: '',
         isJoin: false,
         isLeader: false,
-        memberImg: [],
-        memberNickname: [],
+        // memberImg: [],
+        // memberNickname: [],
+        nowScoreUserInfo: [],
+        totalScoreUserInfo: [],
         result: false,
     });
 
-    useEffect(() => {
-        const getGroup = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-            setGroupDetail(res.data);
-        };
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                setGroupDetail(res.data);
 
+                setNowRanking(res.data.nowScoreUserInfo);
+                setNowScoreRanking(res.data.doneRates);
+
+                setTotalRanking(res.data.totalScoreUserInfo);
+                setTotalScoreRanking(res.data.totalRanking);
+
+                // const { guNowScore, uName, uSeq } = nowRanking[0];
+
+                // const uSeqList = [];
+                // for (let nowRank in nowRanking) {
+                //     nowRank = nowRank.uSeq;
+                // }
+
+                // for (let index = 0; index < nowRanking.length; index++) {
+                //     setUSeqList([...uSeqList, nowRanking[index].uSeq]);
+                //     setUNameList([...uNameList, nowRanking[index].uName]);
+                //     setUImgList([...uImgList, nowRanking[index].uImg]);
+
+                //     // uSeqList.push(nowRanking[index].uSeq);
+                //     //     nowRanking[index] = nowRanking[index].uName;
+                //     //     nowRanking[index] = nowRanking[index].guNowScore;
+                // }
+
+                // 현재 랭킹
+                // setNowUserRanking(uSeq);
+                // setNowNameRanking(uName);
+                // setNowScoreRanking(guNowScore);
+                // setNowImgRanking(uImg);  // [추후] 추가예정
+
+                // 누적 랭킹
+                // setTotalRanking(totalScoreUserInfo);
+            });
+    };
+
+    useEffect(() => {
         getGroup();
     }, []);
+
+    // 현재 점수 리스트
+    const [nowScoreRanking, setNowScoreRanking] = useState([]);
+
+    // 현재 랭킹 유저 정보
+    const [nowScoreUserInfo, setNowScoreUserInfo] = useState([]);
+
+    // 유저별 점수
+    const [nowRanking, setNowRanking] = useState([]);
+
+    const [uSeqList, setUSeqList] = useState<any>([]);
+    const [uNameList, setUNameList] = useState<any>([]);
+    const [uImgList, setUImgList] = useState<any>([]);
+
+    // 누적 랭킹
+    const [totalRanking, setTotalRanking] = useState([]);
+    const [totalScoreRanking, setTotalScoreRanking] = useState([]);
 
     interface Mission {
         id: number;
@@ -159,14 +207,23 @@ export default function GroupHome() {
             />
 
             <div className="ranking-container">
-                <CurRanking />
-                <AccRanking />
+                <CurRanking
+                    nowScoreUserInfo={nowScoreUserInfo}
+                    nowRanking={nowRanking}
+                    groupMember={groupDetail.groupMember}
+                    nowScoreRanking={nowScoreRanking}
+                />
+                <AccRanking
+                    totalRanking={totalRanking}
+                    totalScoreRanking={totalScoreRanking}
+                />
             </div>
 
             <MemberList
                 gMax={groupDetail.groupMaxMember}
                 isLeader={groupDetail.isLeader}
-                memberNickName={groupDetail.memberNickname}
+                groupMember={groupDetail.groupMember}
+                // memberNickName={groupDetail.memberNickname}
             />
 
             <button className="btn-fixed" onClick={onClick}>
