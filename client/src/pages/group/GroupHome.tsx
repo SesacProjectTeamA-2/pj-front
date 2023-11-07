@@ -92,11 +92,16 @@ export default function GroupHome() {
         groupName: '',
         isJoin: false,
         isLeader: false,
-        // memberImg: [],
-        // memberNickname: [],
         nowScoreUserInfo: [],
         totalScoreUserInfo: [],
         result: false,
+        leaderInfo: {
+            uSeq: 0,
+            uName: '',
+            uImg: '',
+            uCharImg: '',
+        },
+        memberArray: [],
     });
 
     const getGroup = async () => {
@@ -115,32 +120,6 @@ export default function GroupHome() {
 
                 setTotalRanking(res.data.totalScoreUserInfo);
                 setTotalScoreRanking(res.data.totalRanking);
-
-                // const { guNowScore, uName, uSeq } = nowRanking[0];
-
-                // const uSeqList = [];
-                // for (let nowRank in nowRanking) {
-                //     nowRank = nowRank.uSeq;
-                // }
-
-                // for (let index = 0; index < nowRanking.length; index++) {
-                //     setUSeqList([...uSeqList, nowRanking[index].uSeq]);
-                //     setUNameList([...uNameList, nowRanking[index].uName]);
-                //     setUImgList([...uImgList, nowRanking[index].uImg]);
-
-                //     // uSeqList.push(nowRanking[index].uSeq);
-                //     //     nowRanking[index] = nowRanking[index].uName;
-                //     //     nowRanking[index] = nowRanking[index].guNowScore;
-                // }
-
-                // 현재 랭킹
-                // setNowUserRanking(uSeq);
-                // setNowNameRanking(uName);
-                // setNowScoreRanking(guNowScore);
-                // setNowImgRanking(uImg);  // [추후] 추가예정
-
-                // 누적 랭킹
-                // setTotalRanking(totalScoreUserInfo);
             });
     };
 
@@ -234,7 +213,8 @@ export default function GroupHome() {
                 gMax={groupDetail.groupMaxMember}
                 isLeader={groupDetail.isLeader}
                 groupMember={groupDetail.groupMember}
-                // memberNickName={groupDetail.memberNickname}
+                leaderInfo={groupDetail.leaderInfo}
+                memberArray={groupDetail.memberArray}
             />
 
             <button className="btn-fixed" onClick={onClick}>

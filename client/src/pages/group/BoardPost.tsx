@@ -57,7 +57,7 @@ export default function BoardPost() {
         // getGroupMission();
     }, []);
 
-    console.log('>>>>>>', missionList);
+    console.log('missionList', missionList);
 
     // useEffect(() => {
     //     setMissionList(groupDetail.groupMission);
@@ -72,7 +72,7 @@ export default function BoardPost() {
         gSeq: Number(gSeq),
         gbTitle: '',
         gbContent: '',
-        gbCategory: 'notice',
+        gbCategory: gCategory,
         mSeq: null,
     });
 
@@ -91,7 +91,7 @@ export default function BoardPost() {
         // console.log(name, value);
     };
 
-    //select 태그 state관리
+    //] select 태그 state관리
     const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = e.target.value;
         setSelected(selectedValue);
@@ -161,6 +161,12 @@ export default function BoardPost() {
 
     const [postMenu, setPostMenu] = useState(gCategory);
 
+    console.log('!!!!!!!!!!!', postMenu);
+
+    useEffect(() => {
+        setPostMenu(gCategory);
+    }, []);
+
     if (postMenu === 'notice') {
         setPostMenu('공지사항');
     } else if (postMenu === 'free') {
@@ -178,7 +184,12 @@ export default function BoardPost() {
                 <div className="noti-content post-header title5">
                     <div className="select-box">
                         <div>종류</div>
-                        <select onChange={handleSelect} value={selected}>
+                        <select
+                            onChange={handleSelect}
+                            value={selected}
+                            // value={postMenu}
+                            // defaultChecked={gCategory}
+                        >
                             {/* default : + 누른 페이지 */}
                             {/* select 값에 따라 Link to 달라아야 함 */}
 
