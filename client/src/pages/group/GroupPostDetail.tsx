@@ -27,7 +27,7 @@ export default function GroupPostDetail() {
     useEffect(() => {
         const getBoardFree = async () => {
             const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free/${gbSeq}`,
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice/${gbSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -142,6 +142,8 @@ export default function GroupPostDetail() {
         );
 
         console.log(res.data);
+        window.location.reload();
+
 
         // setFreeList(res.data.groupInfo);
     };
@@ -168,7 +170,7 @@ export default function GroupPostDetail() {
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number) => {
-        console.log(gbcSeq);
+        // console.log(gbcSeq);
 
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
@@ -181,7 +183,8 @@ export default function GroupPostDetail() {
             }
         );
 
-        console.log(res.data);
+        // console.log(res.data);
+        window.location.reload();
     };
 
     //; 댓글 삭제 (DELETE)
@@ -200,6 +203,7 @@ export default function GroupPostDetail() {
         );
 
         console.log(res.data);
+        
     };
 
     return (
@@ -227,7 +231,7 @@ export default function GroupPostDetail() {
                     </div>
                     <div className="writer-menu">
                         {/* gSeq, gbSeq */}
-                        <Link to={`/board/${gSeq}/edit/${gbSeq}`}>
+                        <Link to={`/board/${gSeq}/edit/${gSeq}`}>
                             <div>수정</div>
                         </Link>
                         {/* [추후] 게시글 삭제 경고 모달 추가 */}
