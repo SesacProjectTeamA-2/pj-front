@@ -113,6 +113,8 @@ export default function GroupHome() {
                 const nowScoreUserInfo = res.data.nowScoreUserInfo;
                 setNowRanking(nowScoreUserInfo);
 
+                setDoneRates(res.data.doneRates);
+
                 // const { guNowScore, uName, uSeq } = nowRanking[0];
 
                 // const uSeqList = [];
@@ -144,6 +146,9 @@ export default function GroupHome() {
     useEffect(() => {
         getGroup();
     }, []);
+
+    // 현재 점수 리스트
+    const [doneRates, setDoneRates] = useState([]);
 
     // 현재 랭킹 유저 정보
     const [nowScoreUserInfo, setNowScoreUserInfo] = useState([]);

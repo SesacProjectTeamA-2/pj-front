@@ -155,7 +155,11 @@ export default function GroupCreate() {
                         /> */}
                     </Box>
                 </div>
-                <form encType="multipart/form-data" method="post">
+                <form
+                    encType="multipart/form-data"
+                    method="post"
+                    action=" http://localhost:8888/api/group"
+                >
                     <div className="group-create-img">
                         <div className="group-img-title">대표 이미지</div>
                         <label
@@ -256,7 +260,7 @@ export default function GroupCreate() {
                                     <div key={mission.id}>
                                         <ListItem>
                                             <ListItemText
-                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mStar}`}
                                                 secondary={`${mission.mContent}`}
                                             />
                                         </ListItem>

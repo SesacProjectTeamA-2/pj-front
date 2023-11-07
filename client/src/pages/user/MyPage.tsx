@@ -70,6 +70,13 @@ export default function MyPage() {
     }, []);
 
     ////////////props, 데이터 선언/////////////
+    // 0. 사용자 이미지
+    // const [userImg, setUserImg] = useState<any>();
+    // const formData = new FormData();
+    // formData.append('image', userImg);
+    // console.log('userImg', userImg);
+    // console.log('formData', formData);
+
     // 1. 닉네임
     const [input, setInput] = useState<string>('');
     console.log('닉네임', input);
@@ -146,6 +153,7 @@ export default function MyPage() {
         uSetDday: string | null;
         uMainDday: number;
         uMainGroup: number;
+        // userImg: any;
         // result: boolean;
         // message: boolean;
     }
@@ -161,6 +169,7 @@ export default function MyPage() {
         uSetDday: checkDday,
         uMainDday: dDayPin,
         uMainGroup: donePin,
+        // userImg: formData,
         // result: true,
         // message: true,
         //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
@@ -168,6 +177,7 @@ export default function MyPage() {
     useEffect(() => {
         console.log('patchedUserData >>>>', patchedUserData);
     });
+
     const patchUserData = async () => {
         try {
             await axios
@@ -178,6 +188,7 @@ export default function MyPage() {
                     {
                         headers: {
                             Authorization: `Bearer ${uToken}`,
+                            'Content-Type': 'multipart/form-data',
                         },
                     }
                 )
