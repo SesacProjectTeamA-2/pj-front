@@ -46,6 +46,7 @@ export default function GroupList() {
 
     useEffect(() => {
         getJoinedGroup();
+        console.log('madeGroup', madeGroup);
     }, []);
 
     return (

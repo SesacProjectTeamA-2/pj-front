@@ -185,7 +185,7 @@ export default function Header(props: any) {
             <div
                 className="header-divTwo mobMode "
                 style={{
-                    display: isVisibleMobile && myWidth < 800 ? 'none' : 'flex',
+                    display: isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
                 }}
             >
                 {' '}

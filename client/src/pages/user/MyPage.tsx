@@ -37,6 +37,7 @@ export default function MyPage() {
             .then((res) => {
                 console.log('user', res.data);
                 const {
+                    // uImg,
                     nickname,
                     coverLetter,
                     character,
@@ -50,6 +51,7 @@ export default function MyPage() {
                 } = res.data;
 
                 // 데이터 베이스 내 정보 화면에 띄우기
+                // setUserImgSrc(uImg);
                 setInput(nickname);
                 setContent(coverLetter);
                 if (category1 && category2 && category3) {
@@ -71,15 +73,51 @@ export default function MyPage() {
 
     ////////////props, 데이터 선언/////////////
     // 0. 사용자 이미지
-    // const [userImg, setUserImg] = useState<any>();
-    // const formData = new FormData();
-    // formData.append('image', userImg);
-    // console.log('userImg', userImg);
-    // console.log('formData', formData);
+    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg');
+    console.log('바꾸기 전 userImgSrc', userImgSrc);
+
+    const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setUserImgSrc(e.target.files[0]);
+            console.log('바꾼 후 UserImgSrc >> ', userImgSrc);
+        }
+
+        const formData = new FormData();
+        console.log('e.target.files ', e.target.files);
+
+        if (e.target.files && e.target.files[0]) {
+            formData.append('image', e.target.files[0]);
+            console.log('formData ', formData);
+            sendImg(formData);
+        }
+    };
+
+    const sendImg = (formData: any): void => {
+        const cookie = new Cookies();
+        const uToken = cookie.get('isUser'); // 토큰 값
+        try {
+            axios
+                .post(
+                    `${process.env.REACT_APP_DB_HOST}/user/mypage/userImgSrc`,
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log('post', res.data);
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     // 1. 닉네임
     const [input, setInput] = useState<string>('');
-    console.log('닉네임', input);
+    // console.log('닉네임', input);
 
     // 2. 자기소개
     const [content, setContent] = useState<string>('');
@@ -92,7 +130,7 @@ export default function MyPage() {
     const selectCharacter = (characterSrc: string): void => {
         setSelectedCharacter(characterSrc);
     };
-    console.log('캐릭터 src MY_PAGE', selectedCharacter);
+    // console.log('캐릭터 src MY_PAGE', selectedCharacter);
 
     // 4. 관심사 배열
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
@@ -142,6 +180,7 @@ export default function MyPage() {
     // 2. 사용자 데이터 수정
 
     interface patchedUserDataItf {
+        // uImg:any
         uName: string;
         uDesc: string;
         uPhrase: string | null;
@@ -159,7 +198,7 @@ export default function MyPage() {
         // message: boolean;
     }
     const patchedUserData: patchedUserDataItf = {
-        //캐릭터값, 대표사진 필요
+        // uImg:userImgSrc,
         uName: input,
         uDesc: content,
         uPhrase: phraseCtt,
@@ -218,7 +257,12 @@ export default function MyPage() {
                 <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}
             <div className="myPage-div-one">
                 <div className="myPage-div-one-one">
-                    <ProfilePic />
+                    <ProfilePic
+                        userImgSrc={userImgSrc}
+                        setUserImgSrc={setUserImgSrc}
+                        handlerChange={handlerChange}
+                        sendImg={sendImg}
+                    />
                 </div>
                 <div className="myPage-div-one-two">
                     <Nickname input={input} setInput={setInput} />
