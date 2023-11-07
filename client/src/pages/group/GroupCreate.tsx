@@ -128,6 +128,58 @@ export default function GroupCreate() {
         completed: boolean;
     }
 
+    const formData = new FormData();
+    formData.append('apple', 'apple');
+
+    // 대표사진 업로드
+    const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('타겟', e.target.files);
+        let image: any = null;
+
+        if (e.target.files) {
+            image = e.target.files[0];
+            console.log(image);
+            // formData.append('image', e.target.files['0']);
+            // sendImg(formData);
+            console.log(111111, input, formData);
+            setInput({ ...input, [e.target.name]: e.target.files['0'] });
+            console.log('input.gCoverImg!!!!!', input.gCoverImg);
+        }
+
+        addForm(image);
+        // formData.append('image', image);
+        // console.log('@@@@@@', formData);
+    };
+
+    const addForm = (image: any) => {
+        formData.append('image', image);
+        console.log(image);
+        console.log('@@@@@@', formData);
+    };
+
+    // const sendImg = (formData: any): void => {
+    //     const cookie = new Cookies();
+    //     const uToken = cookie.get('isUser'); // 토큰 값
+    //     // try {
+    //     //     axios
+    //     //         .patch(
+    //     //             `${process.env.REACT_APP_DB_HOST}/group/groupCoverImg`,
+    //     //             formData,
+    //     //             {
+    //     //                 headers: {
+    //     //                     'Content-Type': 'multipart/form-data',
+    //     //                     Authorization: `Bearer ${uToken}`,
+    //     //                 },
+    //     //             }
+    //     //         )
+    //     //         .then((res) => {
+    //     //             console.log('post', res.data);
+    //     //         });
+    //     // } catch (err) {
+    //     //     console.log(err);
+    //     // }
+    // };
+
     return (
         <div className="section group-create-contianer title5">
             <div className="title2">어떤 모임을 생성하고 싶나요 ?</div>
@@ -155,29 +207,13 @@ export default function GroupCreate() {
                         /> */}
                     </Box>
                 </div>
-                <form encType="multipart/form-data" method="post">
-                    <div className="group-create-img">
-                        <div className="group-img-title">대표 이미지</div>
-                        <label
-                            style={{
-                                backgroundColor: '#ed8d8d',
-                                fontSize: '1rem',
-                            }}
-                        >
-                            <input
-                                type="file"
-                                name="image"
-                                style={{ display: 'none' }}
-                            />
-                            {/* <Button
-                                
-                                variant="contained"
-                            >
-                            </Button> */}
-                            추가
-                        </label>
-                    </div>
-                </form>
+                {/* <form
+                    encType="multipart/form-data"
+                    method="post"
+                    action=" http://localhost:8888/api/group"
+                > */}
+
+                {/* </form> */}
             </div>
             <div className="group-create-content">
                 <div>분야</div>
