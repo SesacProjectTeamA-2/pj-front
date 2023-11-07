@@ -53,7 +53,7 @@ export default function GroupList() {
             <div className="groups created">
                 <div className="title1">내가 생성한 모임</div>
                 <div>
-                    {joinGroup.length > 0 ? (
+                    {madeGroup.length > 0 ? (
                         <SwiperComponent
                             madeGroup={madeGroup}
                             setMadeGroup={setMadeGroup}
@@ -67,12 +67,19 @@ export default function GroupList() {
             <div className="groups join">
                 <div className="title1">참여한 모임</div>
 
-                {/* ! 태그 컴포넌트 추가 ! */}
+                {joinGroup.length > 0 ? (
+                    <SwiperComponent
+                        joinGroup={joinGroup}
+                        setJoinGroup={setJoinGroup}
+                    />
+                ) : (
+                    '가입한 모임이 없습니다. '
+                )}
 
                 {/* map 돌리기 - /:id 추가 */}
-                <Link to="/group/home/1">
+                {/* <Link to="/group/home/1">
                     <button>코딩학당</button>
-                </Link>
+                </Link> */}
             </div>
 
             <div className="groups recommend">

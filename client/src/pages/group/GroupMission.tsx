@@ -15,7 +15,9 @@ export default function GroupMission() {
 
     //=== 모임 상세화면 읽어오기 ===
 
-    const { gSeq, mSeq } = useParams();
+    const { gSeq, mSeq, gCategory } = useParams();
+
+    console.log(gCategory);
 
     const [groupDetail, setGroupDetail] = useState<GroupDetailType>({
         grInformation: '',
@@ -111,7 +113,7 @@ export default function GroupMission() {
                 </div>
             </div>
             <GroupContent action={'미션게시글'} />
-            <Link to="/board/create">
+            <Link to={`/board/create/${gSeq}/${gCategory}/${mSeq}`}>
                 <img src="/asset/icons/plus.svg" className="plus-fixed" />
             </Link>
         </div>

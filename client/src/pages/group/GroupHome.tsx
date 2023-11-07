@@ -107,8 +107,8 @@ export default function GroupHome() {
                 },
             })
             .then((res) => {
+                console.log(res.data);
                 setGroupDetail(res.data);
-
 
                 setNowRanking(res.data.nowScoreUserInfo);
                 setNowScoreRanking(res.data.doneRates);
@@ -150,7 +150,6 @@ export default function GroupHome() {
 
     // 현재 점수 리스트
 
-
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
 
     // 현재 랭킹 유저 정보
@@ -166,7 +165,6 @@ export default function GroupHome() {
     // 누적 랭킹
     const [totalRanking, setTotalRanking] = useState([]);
     const [totalScoreRanking, setTotalScoreRanking] = useState([]);
-
 
     interface Mission {
         id: number;
@@ -188,11 +186,20 @@ export default function GroupHome() {
 
     return (
         <div className="section group-home">
-            <div className="cover-img">
-                <div className="title1 cover-title">
+            {/* [추후] 모임생성 시, 이미지 파일 없으므로 삼항연산자로 처리 */}
+
+            {groupDetail.groupCoverImg ? (
+                // [추후] 커버이미지 추가
+                <div className="cover-img">
+                    <div className="title1 cover-title">
+                        {groupDetail.groupName}
+                    </div>
+                </div>
+            ) : (
+                <div className="title1" style={{ padding: '2rem' }}>
                     {groupDetail.groupName}
                 </div>
-            </div>
+            )}
 
             <div className="wrapper">
                 <div className="title2 group-title-text">어떤 모임인가요 ?</div>
@@ -215,7 +222,6 @@ export default function GroupHome() {
                     nowScoreUserInfo={nowScoreUserInfo}
                     nowRanking={nowRanking}
                     groupMember={groupDetail.groupMember}
-
                     nowScoreRanking={nowScoreRanking}
                 />
                 <AccRanking
