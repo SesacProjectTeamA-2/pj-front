@@ -46,22 +46,25 @@ export default function ProfilePic(props: any) {
     return (
         <div>
             <label id="profilePic-label">
-                <img
+                {/* <img
                     src="/asset/images/user.svg"
                     alt="profilePic"
                     id="profilePic-user"
-                />
+                /> */}
                 <input
                     type="file"
                     id="profilePic-input"
                     name="image"
                     onChange={handlerChange}
                 />
-                <img
-                    src="/asset/icons/edit.svg"
-                    alt="profilePicEdit"
-                    id="profilePic-edit"
-                />
+                <button className="btn-sm" style={{ width: '3rem' }}>
+                    추가하기
+                    <img
+                        src="/asset/icons/edit.svg"
+                        alt="profilePicEdit"
+                        id="profilePic-edit"
+                    />
+                </button>
             </label>
         </div>
     );

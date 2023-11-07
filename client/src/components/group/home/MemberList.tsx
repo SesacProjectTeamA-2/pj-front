@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function MemberList({ gMax, isLeader, groupMember }: any) {
+export default function MemberList({
+    gMax,
+    leaderInfo,
+    memberArray,
+    groupMember,
+}: any) {
     // interface MemberType {
     //     id: number;
     //     name: string;
@@ -61,11 +66,11 @@ export default function MemberList({ gMax, isLeader, groupMember }: any) {
                     참석인원{' '}
                     <span className="member-count">
                         {/* {memberList.length + 1} */}
-                        {groupMember?.length + 1}
+                        {memberArray?.length + 1}
                     </span>
                     / {gMax}
                     <span className="member-left">
-                        ({gMax - 1 - groupMember?.length}자리 남음)
+                        ({gMax - 1 - memberArray?.length}자리 남음)
                     </span>
                 </div>
             </div>
@@ -74,11 +79,11 @@ export default function MemberList({ gMax, isLeader, groupMember }: any) {
                     {/* 모임장 */}
                     <li>
                         <div className="ranking-list">
-                            <img src="/asset/images/sqr1.svg" />
+                            <img src={leaderInfo.uCharImg} />
 
                             <div className="cur-ranking-content">
-                                <div className="title4">모임장</div>
-                                <div>모임장 주인장입니다.</div>
+                                <div className="title4">{leaderInfo.uName}</div>
+                                {/* <div>{leaderInfo.}</div> */}
                             </div>
                         </div>
                     </li>

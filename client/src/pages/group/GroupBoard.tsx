@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
@@ -11,6 +11,10 @@ import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContent from '../../components/group/content/GroupContentList';
 
 export default function GroupBoard() {
+    const { gSeq, gCategory } = useParams();
+
+    console.log(gCategory);
+
     //  //] 2. 자유 게시글 조회
     //  const getBoardFree = async () => {
     //     const res = await axios.get(
@@ -37,7 +41,7 @@ export default function GroupBoard() {
             <GroupHeader title={'자유/질문'} groupName={'코딩학당'} />
             <GroupContent action={'자유/질문'} />
             <div>
-                <Link to="/board/create">
+                <Link to={`/board/create/${gSeq}/free`}>
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
                 </Link>
             </div>

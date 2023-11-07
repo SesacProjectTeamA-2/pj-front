@@ -70,6 +70,7 @@ function App() {
                     }
                 />
 
+                {/* 미션 헤더 제거 */}
                 {/* <Route
                     path="/mission"
                     element={
@@ -109,8 +110,9 @@ function App() {
                         />
                     }
                 />
+
                 <Route
-                    path="/board/:gSeq/notice/*"
+                    path="/board/:gSeq/:gCategory"
                     element={
                         <GroupLayout
                             children={<GroupNoti />}
@@ -118,6 +120,7 @@ function App() {
                         />
                     }
                 />
+
                 <Route
                     path="/board/:gSeq/free"
                     element={
@@ -127,8 +130,9 @@ function App() {
                         />
                     }
                 />
+
                 <Route
-                    path="/board/:gSeq/mission/:mSeq"
+                    path="/board/:gSeq/:gCategory/:mSeq"
                     element={
                         <GroupLayout
                             children={<GroupMission />}
@@ -148,7 +152,19 @@ function App() {
 
                 {/* 게시물 Create */}
                 <Route
-                    path="/board/create/:gSeq"
+                    path="/board/create/:gSeq/:gCategory"
+                    // path="*/post"
+                    element={
+                        <GroupLayout
+                            children={<BoardPost />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
+                {/* 게시물 Create */}
+                <Route
+                    path="/board/create/:gSeq/:gCategory/:mSeq"
                     // path="*/post"
                     element={
                         <GroupLayout

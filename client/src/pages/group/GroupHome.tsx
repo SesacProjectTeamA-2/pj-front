@@ -92,11 +92,16 @@ export default function GroupHome() {
         groupName: '',
         isJoin: false,
         isLeader: false,
-        // memberImg: [],
-        // memberNickname: [],
         nowScoreUserInfo: [],
         totalScoreUserInfo: [],
         result: false,
+        leaderInfo: {
+            uSeq: 0,
+            uName: '',
+            uImg: '',
+            uCharImg: '',
+        },
+        memberArray: [],
     });
 
     const getGroup = async () => {
@@ -107,40 +112,14 @@ export default function GroupHome() {
                 },
             })
             .then((res) => {
+                console.log(res.data);
                 setGroupDetail(res.data);
-
 
                 setNowRanking(res.data.nowScoreUserInfo);
                 setNowScoreRanking(res.data.doneRates);
 
                 setTotalRanking(res.data.totalScoreUserInfo);
                 setTotalScoreRanking(res.data.totalRanking);
-
-                // const { guNowScore, uName, uSeq } = nowRanking[0];
-
-                // const uSeqList = [];
-                // for (let nowRank in nowRanking) {
-                //     nowRank = nowRank.uSeq;
-                // }
-
-                // for (let index = 0; index < nowRanking.length; index++) {
-                //     setUSeqList([...uSeqList, nowRanking[index].uSeq]);
-                //     setUNameList([...uNameList, nowRanking[index].uName]);
-                //     setUImgList([...uImgList, nowRanking[index].uImg]);
-
-                //     // uSeqList.push(nowRanking[index].uSeq);
-                //     //     nowRanking[index] = nowRanking[index].uName;
-                //     //     nowRanking[index] = nowRanking[index].guNowScore;
-                // }
-
-                // 현재 랭킹
-                // setNowUserRanking(uSeq);
-                // setNowNameRanking(uName);
-                // setNowScoreRanking(guNowScore);
-                // setNowImgRanking(uImg);  // [추후] 추가예정
-
-                // 누적 랭킹
-                // setTotalRanking(totalScoreUserInfo);
             });
     };
 
@@ -149,7 +128,6 @@ export default function GroupHome() {
     }, []);
 
     // 현재 점수 리스트
-
 
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
 
@@ -166,7 +144,6 @@ export default function GroupHome() {
     // 누적 랭킹
     const [totalRanking, setTotalRanking] = useState([]);
     const [totalScoreRanking, setTotalScoreRanking] = useState([]);
-
 
     interface Mission {
         id: number;
@@ -188,11 +165,20 @@ export default function GroupHome() {
 
     return (
         <div className="section group-home">
-            <div className="cover-img">
-                <div className="title1 cover-title">
+            {/* [추후] 모임생성 시, 이미지 파일 없으므로 삼항연산자로 처리 */}
+
+            {groupDetail.groupCoverImg ? (
+                // [추후] 커버이미지 추가
+                <div className="cover-img">
+                    <div className="title1 cover-title">
+                        {groupDetail.groupName}
+                    </div>
+                </div>
+            ) : (
+                <div className="title1" style={{ padding: '2rem' }}>
                     {groupDetail.groupName}
                 </div>
-            </div>
+            )}
 
             <div className="wrapper">
                 <div className="title2 group-title-text">어떤 모임인가요 ?</div>
@@ -215,7 +201,6 @@ export default function GroupHome() {
                     nowScoreUserInfo={nowScoreUserInfo}
                     nowRanking={nowRanking}
                     groupMember={groupDetail.groupMember}
-
                     nowScoreRanking={nowScoreRanking}
                 />
                 <AccRanking
@@ -228,7 +213,8 @@ export default function GroupHome() {
                 gMax={groupDetail.groupMaxMember}
                 isLeader={groupDetail.isLeader}
                 groupMember={groupDetail.groupMember}
-                // memberNickName={groupDetail.memberNickname}
+                leaderInfo={groupDetail.leaderInfo}
+                memberArray={groupDetail.memberArray}
             />
 
             <button className="btn-fixed" onClick={onClick}>
