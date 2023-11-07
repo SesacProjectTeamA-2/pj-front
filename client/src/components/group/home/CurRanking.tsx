@@ -9,15 +9,8 @@ export default function CurRanking({
     nowScoreRanking,
 }: any) {
     console.log('현재랭킹', nowRanking);
-    // console.log('현재랭킹유저', nowRanking.tb_user);
-    // console.log('ㅡㅡㅡㅡㅡㅡㅡ', groupMember);
 
-    console.log('현재랭킹유저', nowUserRanking);
-    // console.log('-------', nowNameRanking);
-
-    // useEffect(() => {
-    //     console.log('-------', nowRanking[0].uSeq);
-    // }, []);
+    console.log('현재랭킹유저', nowNameRanking);
 
     return (
         <div className="wrapper">
@@ -35,21 +28,36 @@ export default function CurRanking({
             <div className="main-content">
                 <ul className="list-unstyled">
                     {/* 현재 랭킹 리스트 */}
-                    {/* {nowRanking.map((now: any, idx: number) => {
-                        return ( */}
-                    {/* <li>
-                        <div className="ranking-list">
-                            <div>{nowUserRanking}</div>
-                            <img src="/asset/images/sqr1.svg" />
+                    {/* {uSeqList.map((now: any, idx: number) => {
+                        return (
+                            <li>
+                                <div className="ranking-list">
+                                    <div>{nowUserRanking}</div>
+                                    <img src="/asset/images/sqr1.svg" />
 
-                            <div className="cur-ranking-content">
-                                <div>{nowNameRanking}</div>
-                                <Progressbar />
-                            </div>
-                        </div>
-                    </li> */}
-                    {/* ); */}
-                    {/* })} */}
+                                    <div className="cur-ranking-content">
+                                        <div>{nowNameRanking}</div>
+                                        <Progressbar />
+                                    </div>
+                                </div>
+                            </li>
+                        );
+                    })} */}
+                    {nowRanking.map((now: any, idx: number) => {
+                        return (
+                            <li>
+                                <div className="ranking-list">
+                                    <div>{idx + 1}</div>
+                                    <img src="/asset/images/sqr1.svg" />
+
+                                    <div className="cur-ranking-content">
+                                        <div>{now.uName}</div>
+                                        {/* <Progressbar score={score} /> */}
+                                    </div>
+                                </div>
+                            </li>
+                        );
+                    })}
                     {/* <li>
                         <div className="ranking-list">
                             <div>1</div>

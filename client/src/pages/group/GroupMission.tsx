@@ -25,13 +25,15 @@ export default function GroupMission() {
         groupMaxMember: 0,
         groupMember: [],
         groupMission: [],
-        groupRanking: [], // nowRanking: [], totalRanking: []
+        // groupRanking: [], // nowRanking: [], totalRanking: []
         groupName: '',
         isJoin: false,
         isLeader: false,
         // memberImg: [],
         // memberNickname: [],
         result: false,
+        nowScoreUserInfo: [],
+        totalScoreUserInfo: [],
     });
     useEffect(() => {
         const getGroup = async () => {
