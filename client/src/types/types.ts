@@ -9,13 +9,15 @@ export interface GroupDetailType {
     groupMaxMember: number;
     groupMember: [];
     groupMission: [];
-    groupRanking: []; // nowRanking: [], totalRanking: []
+    // groupRanking: []; // nowRanking: [], totalRanking: []
     groupName: string;
     isJoin: boolean;
     isLeader: boolean;
     // memberImg: string[];
     // memberNickname: string[];
     result: boolean;
+    nowScoreUserInfo: [];
+    totalScoreUserInfo: [];
 }
 
 export interface GroupMissionsType {
