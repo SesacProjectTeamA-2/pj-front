@@ -212,11 +212,11 @@ export default function GroupMissionDone() {
                 </div>
             </div>
 
-            <div>
+            {/* <div>
                 <Link to="/board/create">
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
                 </Link>
-            </div>
+            </div> */}
         </div>
     );
 }

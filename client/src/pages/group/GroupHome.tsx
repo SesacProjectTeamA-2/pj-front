@@ -128,7 +128,6 @@ export default function GroupHome() {
     }, []);
 
     // 현재 점수 리스트
-
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
 
     // 현재 랭킹 유저 정보

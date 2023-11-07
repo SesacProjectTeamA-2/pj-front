@@ -15,7 +15,7 @@ export default function BoardPost() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    const { gSeq, gCategory } = useParams();
+    const { gSeq, gCategory, mSeq } = useParams();
 
     interface Mission {
         // mSeq: number;
@@ -38,6 +38,10 @@ export default function BoardPost() {
         );
 
         setMissionList(res.data.groupMission);
+
+        setMissionSelected(
+            String(res.data.groupMission[Number(mSeq) - 1].mSeq)
+        );
     };
 
     // const getGroupMission = async () => {
@@ -76,7 +80,18 @@ export default function BoardPost() {
         mSeq: null,
     });
 
-    const [selected, setSelected] = useState<string>('');
+    const [missionSelected, setMissionSelected] = useState<string>('');
+    const [selected, setSelected] = useState<string>(
+        gCategory || missionSelected
+    );
+
+    useEffect(() => {
+        if (gCategory === 'mission') {
+            setSelected(missionSelected);
+        }
+    });
+
+    console.log("''''''", missionSelected);
 
     //gbTitle state 관리
     const getValue = (e: ChangeEvent<HTMLInputElement>) => {
