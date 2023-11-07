@@ -46,12 +46,9 @@ export default function CurRanking({
                                 <div className="ranking-list">
                                     <div>{idx + 1}</div>
                                     <img src="/asset/images/sqr1.svg" />
-<<<<<<< HEAD
-=======
 
                                     <div className="cur-ranking-content">
                                         <div>{now.uName}</div>
->>>>>>> 94dd11a96165df6f9b74add283f7b9d1367fa77a
 
                                         <Progressbar
                                             score={nowScoreRanking[idx]}
