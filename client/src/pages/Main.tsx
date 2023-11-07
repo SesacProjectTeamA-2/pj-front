@@ -33,7 +33,7 @@ export default function Main() {
 
     return (
         <div className="section">
-            <MainImg />
+            {/* <MainImg /> */}
             <Content />
         </div>
     );

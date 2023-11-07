@@ -107,31 +107,25 @@ export default function Groupidti() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    //=== 공지 조회
-    //] 1. 자유게시글
-    const [noticeList, setNoticeList] = useState([]);
+    //] 1. 공지 조회
+    const getBoardNoti = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setNoticeList(res.data.groupInfo);
+            });
+    };
 
-    // 자유 게시글 조회
     useEffect(() => {
-        const getBoardFree = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-
-            console.log(res.data);
-
-            setNoticeList(res.data.groupInfo);
-        };
-
-        getBoardFree();
+        getBoardNoti();
     }, []);
 
-    console.log(noticeList);
+    const [noticeList, setNoticeList] = useState([]);
 
     //=== 데이터가 들어올 부분 ===
     // const reversedRows = Array.from({ length: 50 }, (_, index) =>

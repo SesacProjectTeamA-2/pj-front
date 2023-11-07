@@ -4,13 +4,9 @@ import Progressbar from '../../common/Progressbar';
 export default function CurRanking({
     nowRanking,
     groupMember,
-    nowUserRanking,
-    nowNameRanking,
     nowScoreRanking,
 }: any) {
     console.log('현재랭킹', nowRanking);
-
-    console.log('현재랭킹유저', nowNameRanking);
 
     return (
         <div className="wrapper">
@@ -52,56 +48,15 @@ export default function CurRanking({
 
                                     <div className="cur-ranking-content">
                                         <div>{now.uName}</div>
-                                        {/* <Progressbar score={score} /> */}
+
+                                        <Progressbar
+                                            score={nowScoreRanking[idx]}
+                                        />
                                     </div>
                                 </div>
                             </li>
                         );
                     })}
-                    {/* <li>
-                        <div className="ranking-list">
-                            <div>1</div>
-                            <img src="/asset/images/sqr1.svg" />
-
-                            <div className="cur-ranking-content">
-                                <div>닉네임</div>
-                                <Progressbar />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="ranking-list">
-                            <div>1</div>
-                            <img src="/asset/images/sqr1.svg" />
-
-                            <div className="cur-ranking-content">
-                                <div>닉네임</div>
-                                <Progressbar />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="ranking-list">
-                            <div>1</div>
-                            <img src="/asset/images/sqr1.svg" />
-
-                            <div className="cur-ranking-content">
-                                <div>닉네임</div>
-                                <Progressbar />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="ranking-list">
-                            <div>1</div>
-                            <img src="/asset/images/sqr1.svg" />
-
-                            <div className="cur-ranking-content">
-                                <div>닉네임</div>
-                                <Progressbar />
-                            </div>
-                        </div>
-                    </li> */}
                 </ul>
             </div>
         </div>

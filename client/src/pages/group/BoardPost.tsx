@@ -27,21 +27,34 @@ export default function BoardPost() {
 
     const [missionList, setMissionList] = useState<Mission[]>();
 
+    const getGroup = async () => {
+        const res = await axios.get(
+            `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        setMissionList(res.data.groupMission);
+    };
+
+    // const getGroupMission = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/mission/group/${gSeq}`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             setMissionList(res.data.groupMission);
+    //         });
+    // };
+
     useEffect(() => {
-        const getGroup = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-
-            setMissionList(res.data.groupMission);
-        };
-
         getGroup();
+        // getGroupMission();
     }, []);
 
     console.log('>>>>>>', missionList);
@@ -60,7 +73,7 @@ export default function BoardPost() {
         gbTitle: '',
         gbContent: '',
         gbCategory: 'notice',
-        mSeq: '',
+        mSeq: null,
     });
 
     const [selected, setSelected] = useState<string>('');
@@ -80,7 +93,7 @@ export default function BoardPost() {
 
     //select 태그 state관리
     const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-        // console.log('setSelected 전',board);
+        console.log('setSelected 전', board);
 
         const selectedValue = e.target.value;
         setSelected(selectedValue);
@@ -88,9 +101,18 @@ export default function BoardPost() {
         setBoard({
             ...board,
             gbCategory: selectedValue,
+            // mSeq: null,
         });
 
-        // console.log('Selected:', e.target.value);
+        if (selectedValue !== '') {
+            setBoard({
+                ...board,
+                gbCategory: 'mission',
+                // mSeq: Number(selectedValue),
+            });
+        }
+
+        console.log('Selected:', e.target.value);
         // console.log('setSelected 후', board);
     };
 
@@ -123,6 +145,8 @@ export default function BoardPost() {
 
     console.log(board);
 
+    // console.log('oooooo', missionList);
+
     return (
         <div className="section section-group">
             {/* title 값 넘겨 받기 ! */}
@@ -138,19 +162,13 @@ export default function BoardPost() {
                             <option value="notice">공지사항</option>
                             <option value="free">자유/질문</option>
 
-                            {missionList?.map(
-                                (mission: MissionType, idx: number) => {
-                                    return (
-                                        <>
-                                            <option value={`mission${idx}`}>
-                                                {mission.mTitle}
-                                            </option>
-                                            {/* <option value="mission2">미션2</option> */}
-                                            {/* <option value="mission3">미션3</option> */}
-                                        </>
-                                    );
-                                }
-                            )}
+                            {missionList?.map((mission: any, idx: number) => {
+                                return (
+                                    <option value={mission.mSeq} key={idx}>
+                                        {mission.mTitle}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
 

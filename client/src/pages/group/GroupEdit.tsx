@@ -14,6 +14,7 @@ import InterestedList from '../../components/common/InterestedList';
 import Dday from '../../components/common/Dday';
 import { GroupDetailType } from 'src/types/types';
 import { Divider, ListItem, ListItemText } from '@mui/material';
+import ImgTest from './ImgTest';
 
 export default function GroupEdit() {
     const cookie = new Cookies();
@@ -79,6 +80,7 @@ export default function GroupEdit() {
                 });
 
                 setSelectedInterestId(groupCategory);
+                setMissionList(groupMission);
             });
         // setGroupName(groupName);
     };
@@ -164,6 +166,7 @@ export default function GroupEdit() {
 
     const [missionList, setMissionList] = useState<Mission[]>([]);
 
+    console.log(missionList);
     return (
         <div className="section group-create-contianer title5">
             <div className="title2">모임 수정하기</div>
@@ -189,7 +192,7 @@ export default function GroupEdit() {
                 </div>
                 <div className="group-create-img">
                     <div className="group-img-title">대표 이미지</div>
-                    <Button
+                    {/* <Button
                         style={{
                             backgroundColor: '#ed8d8d',
                             fontSize: '1rem',
@@ -197,7 +200,8 @@ export default function GroupEdit() {
                         variant="contained"
                     >
                         추가
-                    </Button>
+                    </Button> */}
+                    <ImgTest gSeq={gSeq} />
                     {/* [추후] gCoverImg 이미지 파일 추가 */}
                 </div>
             </div>
@@ -273,12 +277,14 @@ export default function GroupEdit() {
 
                     <div className="mission-list-container">
                         {missionList.length > 0 ? (
-                            missionList.map((mission: any) => {
+                            missionList.map((mission: any, idx) => {
                                 return (
-                                    <div key={mission.id}>
+                                    <div key={idx}>
                                         <ListItem>
                                             <ListItemText
-                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                primary={`미션 ${idx + 1}. ${
+                                                    mission.mTitle
+                                                } ${mission.mLevel}`}
                                                 secondary={`${mission.mContent}`}
                                             />
                                         </ListItem>

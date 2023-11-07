@@ -7,7 +7,6 @@ import './styles/scss/base/reset.scss';
 import Header from './components/common/Header';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
-import Mission from './pages/Mission';
 import MyPage from './pages/user/MyPage';
 import NotFound from './pages/NotFound';
 import Management from './pages/Management';
@@ -71,7 +70,7 @@ function App() {
                     }
                 />
 
-                <Route
+                {/* <Route
                     path="/mission"
                     element={
                         <BasicLayout
@@ -79,7 +78,7 @@ function App() {
                             showChat={showChat}
                         />
                     }
-                />
+                /> */}
 
                 <Route
                     path="/group"
@@ -148,7 +147,6 @@ function App() {
                 />
 
                 {/* 게시물 Create */}
-                {/* [추후] 동적으로 수정하기 */}
                 <Route
                     path="/board/create/:gSeq"
                     // path="*/post"
@@ -161,7 +159,6 @@ function App() {
                 />
 
                 {/* 게시물 세부사항 Read */}
-                {/* [추후] 동적으로 수정하기 */}
                 <Route
                     path="/board/:gSeq/free/:gbSeq"
                     element={
