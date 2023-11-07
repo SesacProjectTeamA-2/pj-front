@@ -110,8 +110,8 @@ export default function GroupHome() {
 
                 const { nowRanking, totalRanking } = res.data.groupRanking;
 
-                const { guNowScore, uName, uSeq } = nowRanking[0];
-
+                // const { guNowScore, uName, uSeq } = nowRanking[0];
+                console.log('GroupHome>>', res.data);
                 // for (let nowRank in nowRanking) {
                 //     nowRank = nowRank.uSeq;
                 // }
@@ -122,9 +122,9 @@ export default function GroupHome() {
 
                 // 현재 랭킹
                 setNowRanking(nowRanking);
-                setNowUserRanking(uSeq);
-                setNowNameRanking(uName);
-                setNowScoreRanking(guNowScore);
+                // setNowUserRanking(uSeq);
+                // setNowNameRanking(uName);
+                // setNowScoreRanking(guNowScore);
                 // setNowImgRanking(uImg);  // [추후] 추가예정
 
                 // 누적 랭킹

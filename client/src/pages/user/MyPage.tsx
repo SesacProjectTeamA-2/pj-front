@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import '../../styles/scss/pages/myPage.scss';
 
@@ -57,8 +57,9 @@ export default function MyPage() {
                     setSelectedArr([category1, category2, category3]);
                 }
                 setSelectedCharacter(character);
-                // setPhraseModeBtnVal(); //이거 고쳐야 함
-                setPhraseCtt(phrase);
+                // // 명언 없으면 '추천' 모드
+                // if (phrase === '') setPhraseModeBtnVal('recommend');
+                // setPhraseCtt(phrase);
                 setDdayPin(mainDday);
                 setCheckDday(setDday);
                 setDonePin(setMainGroup);
@@ -115,8 +116,7 @@ export default function MyPage() {
 
     // 8. 명언 모드
     // 8-1. 적은 명언 내용
-    const [phraseCtt, setPhraseCtt] =
-        useState<string>('여름은 가을로부터 떨어진다');
+    const [phraseCtt, setPhraseCtt] = useState<string>('');
     // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
@@ -126,6 +126,7 @@ export default function MyPage() {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
         setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
     };
+
     // useEffect(() => {
     //     console.log('phraseModeBtnVal', phraseModeBtnVal);
     // }, [phraseModeBtnVal]);
@@ -141,6 +142,7 @@ export default function MyPage() {
         uCategory2: string;
         uCategory3: string;
         //   설정 안 했을 경우 null
+        uCharImg: string | null;
         uSetDday: string | null;
         uMainDday: number;
         uMainGroup: number;
@@ -155,6 +157,7 @@ export default function MyPage() {
         uCategory1: selectedArr[0],
         uCategory2: selectedArr[1],
         uCategory3: selectedArr[2],
+        uCharImg: selectedCharacter,
         uSetDday: checkDday,
         uMainDday: dDayPin,
         uMainGroup: donePin,
@@ -169,8 +172,8 @@ export default function MyPage() {
         try {
             await axios
                 .patch(
-                    // `${process.env.REACT_APP_DB_HOST}/user/mypage`,
-                    'http://localhost:8888/api/user/mypage',
+                    `${process.env.REACT_APP_DB_HOST}/user/mypage`,
+                    // 'http://localhost:8888/api/user/mypage',
                     patchedUserData,
                     {
                         headers: {
@@ -264,7 +267,6 @@ export default function MyPage() {
                 <button
                     className="btn-fixed"
                     id="myPage-edit-btn"
-                    // type="submit"
                     onClick={() => patchUserData()}
                 >
                     수정 완료

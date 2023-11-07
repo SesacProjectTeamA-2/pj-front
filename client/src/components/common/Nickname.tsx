@@ -5,7 +5,12 @@ export default function Nickname(props: any): JSX.Element {
     const inputRef = useRef<HTMLInputElement>(null);
     // // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
-        inputRef.current?.focus();
+        // 회원가입에서는 커서 비활성화
+        if (curPath.includes('join')) {
+            return;
+        } else {
+            inputRef.current?.focus();
+        }
     };
 
     // 마이페이지에서만 수정 버튼 보여주기
@@ -23,7 +28,7 @@ export default function Nickname(props: any): JSX.Element {
                 <input
                     // readOnly={readOnlyVal}
                     onChange={(e) => props.setInput(e.target.value)}
-                    value={props.input}
+                    value={props.uName}
                     ref={inputRef}
                     id="input-area"
                     className="input-obj"

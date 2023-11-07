@@ -24,8 +24,8 @@ export default function Phrase(props: any): JSX.Element {
                     style={{
                         display:
                             props.phraseModeBtnVal === 'recommend'
-                                ? 'block'
-                                : 'none',
+                                ? 'none'
+                                : 'block',
                     }}
                 />
                 <button
@@ -35,8 +35,8 @@ export default function Phrase(props: any): JSX.Element {
                     style={{
                         display:
                             props.phraseModeBtnVal === 'recommend'
-                                ? 'flex'
-                                : 'none',
+                                ? 'none'
+                                : 'flex',
                         color: 'white',
                     }}
                     onClick={(e: React.MouseEvent) =>
