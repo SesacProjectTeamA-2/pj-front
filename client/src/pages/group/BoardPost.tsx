@@ -15,7 +15,7 @@ export default function BoardPost() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    const { gSeq } = useParams();
+    const { gSeq, gCategory } = useParams();
 
     interface Mission {
         // mSeq: number;
@@ -68,7 +68,7 @@ export default function BoardPost() {
     // 2) select
     // 3) Link to
     // 2. select 변경 시 변경
-    const [board, setBoard] = useState({
+    const [board, setBoard] = useState<any>({
         gSeq: Number(gSeq),
         gbTitle: '',
         gbContent: '',
@@ -93,25 +93,37 @@ export default function BoardPost() {
 
     //select 태그 state관리
     const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log('setSelected 전', board);
-
         const selectedValue = e.target.value;
         setSelected(selectedValue);
 
-        setBoard({
-            ...board,
-            gbCategory: selectedValue,
-            // mSeq: null,
-        });
+        console.log('**********');
 
-        if (selectedValue !== '') {
+        // setBoard((prevBoard: any) => ({
+        //     ...prevBoard,
+        //     gbCategory: selectedValue,
+        //     mSeq: null,
+        // }));
+        // console.log('setSelected 전', selectedValue);
+
+        if (selectedValue === 'notice') {
+            setBoard((prevBoard: any) => ({
+                ...prevBoard,
+                gbCategory: selectedValue,
+                mSeq: null,
+            }));
+        } else if (selectedValue === 'free') {
+            setBoard({
+                ...board,
+                gbCategory: 'free',
+                mSeq: null,
+            });
+        } else {
             setBoard({
                 ...board,
                 gbCategory: 'mission',
-                // mSeq: Number(selectedValue),
+                mSeq: Number(selectedValue),
             });
         }
-
         console.log('Selected:', e.target.value);
         // console.log('setSelected 후', board);
     };
@@ -147,10 +159,21 @@ export default function BoardPost() {
 
     // console.log('oooooo', missionList);
 
+    const [postMenu, setPostMenu] = useState(gCategory);
+
+    if (postMenu === 'notice') {
+        setPostMenu('공지사항');
+    } else if (postMenu === 'free') {
+        setPostMenu('자유/질문');
+    } else if (postMenu === 'mission') {
+        setPostMenu('미션');
+    }
+
     return (
         <div className="section section-group">
-            {/* title 값 넘겨 받기 ! */}
-            <GroupHeader title={'공지사항'} groupName={'코딩학당'} />
+            {/* <GroupHeader title={postMenu || ''} groupName={'코딩학당'} /> */}
+            {/* <GroupHeader title={'작성하기'} groupName={''} /> */}
+            {/* <GroupHeader title={''} groupName={''} /> */}
             <div className="post-container">
                 <div className="noti-content post-header title5">
                     <div className="select-box">
