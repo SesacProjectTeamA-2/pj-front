@@ -212,30 +212,7 @@ export default function GroupCreate() {
                     method="post"
                     action=" http://localhost:8888/api/group"
                 > */}
-                <div className="group-create-img">
-                    <div className="group-img-title">대표 이미지</div>
-                    <label
-                        style={{
-                            backgroundColor: '#ed8d8d',
-                            fontSize: '1rem',
-                        }}
-                    >
-                        <input
-                            type="file"
-                            name="gCoverImg"
-                            style={{ display: 'none' }}
-                            onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>
-                            ) => handlerChange(e)}
-                        />
-                        {/* <Button
-                                
-                                variant="contained"
-                            >
-                            </Button> */}
-                        추가
-                    </label>
-                </div>
+
                 {/* </form> */}
             </div>
             <div className="group-create-content">
