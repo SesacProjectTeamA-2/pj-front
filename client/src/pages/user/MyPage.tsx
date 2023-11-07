@@ -251,9 +251,9 @@ export default function MyPage() {
                 </div>
             </div>
 
-            <div className="myPage-div-four">
-                {/* dDay 있음 */}
-                {/* <h3 className="myPage-h3">메인화면 설정</h3>
+            {/* dDay / 커버 이미지 뺌 */}
+            {/* <div className="myPage-div-four"> */}
+            {/* <h3 className="myPage-h3">메인화면 설정</h3>
                 <SetMainList
                     setDdayPin={setDdayPin}
                     dDayPin={dDayPin}
@@ -262,8 +262,8 @@ export default function MyPage() {
                     donePin={donePin}
                     handleCheckDone={handleCheckDone}
                 /> */}
-                <PsnCoverImg />
-            </div>
+            {/* <PsnCoverImg /> */}
+            {/* </div> */}
 
             <div className="myPage-div-five">
                 <div className="myPage-div-five-one">
