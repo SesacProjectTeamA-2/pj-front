@@ -23,7 +23,6 @@ export default function ProfilePic(props: any) {
     const sendImg = (formData: any): void => {
         const cookie = new Cookies();
         const uToken = cookie.get('isUser'); // 토큰 값
-
         try {
             axios
                 .post(
@@ -51,7 +50,6 @@ export default function ProfilePic(props: any) {
                     alt="profilePic"
                     id="profilePic-user"
                 />
-
                 <input
                     type="file"
                     id="profilePic-input"
