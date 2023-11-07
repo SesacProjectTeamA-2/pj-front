@@ -61,7 +61,7 @@ export default function MyPage() {
                 setInput(nickname);
                 setContent(coverLetter);
                 if (category1 && category2 && category3) {
-                    //선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
+                    // 선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
                     setSelectedArr([category1, category2, category3]);
                 }
                 setSelectedCharacter(character);
@@ -147,6 +147,9 @@ export default function MyPage() {
     // console.log(selectedArr[0]);
     // console.log(selectedArr[1]);
     // console.log(selectedArr[2]);
+    useEffect(() => {
+        console.log(selectedArr);
+    }, [selectedArr]);
 
     // 5. 선택한 dDay id
     const [dDayPin, setDdayPin] = useState<number>(0);
@@ -251,6 +254,7 @@ export default function MyPage() {
                 .then((res) => {
                     console.log('patched', res.data.message);
                     toast.success(res.data.message);
+                    console.log('patchedData2', patchedUserData);
                 });
         } catch (err) {
             console.log(err);
