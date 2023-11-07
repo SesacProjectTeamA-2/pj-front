@@ -27,15 +27,19 @@ export default function GroupMission() {
         groupMaxMember: 0,
         groupMember: [],
         groupMission: [],
-        // groupRanking: [], // nowRanking: [], totalRanking: []
         groupName: '',
         isJoin: false,
         isLeader: false,
-        // memberImg: [],
-        // memberNickname: [],
-        result: false,
         nowScoreUserInfo: [],
         totalScoreUserInfo: [],
+        result: false,
+        leaderInfo: {
+            uSeq: 0,
+            uName: '',
+            uImg: '',
+            uCharImg: '',
+        },
+        memberArray: [],
     });
 
     const getGroup = async () => {

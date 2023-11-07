@@ -1,5 +1,12 @@
 //=== 공통되는 타입 ===
 
+export interface LeaderInfoType {
+    uSeq: number;
+    uName: string;
+    uImg: string;
+    uCharImg: string;
+}
+
 // group 상세페이지 (GET)
 export interface GroupDetailType {
     grInformation: string;
@@ -9,15 +16,14 @@ export interface GroupDetailType {
     groupMaxMember: number;
     groupMember: [];
     groupMission: [];
-    // groupRanking: []; // nowRanking: [], totalRanking: []
     groupName: string;
     isJoin: boolean;
     isLeader: boolean;
-    // memberImg: string[];
-    // memberNickname: string[];
     result: boolean;
     nowScoreUserInfo: [];
     totalScoreUserInfo: [];
+    leaderInfo: LeaderInfoType;
+    memberArray: [];
 }
 
 export interface GroupMissionsType {
