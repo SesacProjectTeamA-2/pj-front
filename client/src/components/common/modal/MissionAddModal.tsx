@@ -81,15 +81,15 @@ export default function MissionAddModal({
     for (let mission of missionList) {
         switch (mission.mLevel) {
             case '5': {
-                mission.mLevel = '⭐️⭐️⭐️';
+                mission.mStar = '⭐️⭐️⭐️';
                 break;
             }
             case '3': {
-                mission.mLevel = '⭐️⭐️';
+                mission.mStar = '⭐️⭐️';
                 break;
             }
             case 1: {
-                mission.mLevel = '⭐️';
+                mission.mStar = '⭐️';
                 break;
             }
             default:
@@ -426,7 +426,7 @@ export default function MissionAddModal({
                                                                 secondary={`${mission.mContent}`}
                                                             /> */}
                                                             <TextField
-                                                                label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                                label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mStar}`}
                                                                 variant="standard"
                                                                 fullWidth
                                                                 name={`mTitle-${mission.id}`}
