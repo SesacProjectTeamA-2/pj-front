@@ -94,7 +94,7 @@ export default function Header(props: any) {
                             >
                                 <Link to="/main">
                                     <Button className="menu-button">
-                                        Main
+                                        MAIN
                                     </Button>
                                 </Link>
 
@@ -106,7 +106,7 @@ export default function Header(props: any) {
                                 {/* <li> */}
                                 <Link to="/group">
                                     <Button className="menu-button">
-                                        Group
+                                        GROUP
                                     </Button>
                                 </Link>
                                 {/* </li> */}
@@ -185,7 +185,7 @@ export default function Header(props: any) {
             <div
                 className="header-divTwo mobMode "
                 style={{
-                    display: isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
+                    display: isVisibleMobile && myWidth < 800 ? 'none' : 'flex',
                 }}
             >
                 {' '}
@@ -194,28 +194,30 @@ export default function Header(props: any) {
                         {/* <Dday /> */}
                         <li>
                             <Link to="/main">
-                                <button className="menu-button">Main</button>
+                                <button className="menu-button">MAIN</button>
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link to="/mission">
                                 <button className="menu-button">Mission</button>
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/group">
-                                <button className="menu-button">Group</button>
+                                <button className="menu-button">GROUP</button>
                             </Link>
                         </li>
 
-                        <li>
-                            {/* 관리자만 보이는 버튼 */}
+                        {/* 관리자만 보이는 버튼 */}
+                        {/* <li>
                             <Link to="/management/users">
                                 <button className="menu-button">
                                     Management
                                 </button>
                             </Link>
-                        </li>
+                        </li> */}
+
+                        {/* 로그인/비로그인 구분 */}
                         {!isCookie ? (
                             <li>
                                 {/* 비로그인 시 */}
@@ -243,6 +245,7 @@ export default function Header(props: any) {
                                                 width: '40px',
                                                 height: '40px',
                                             }}
+                                            id="myPage-btn"
                                             alt="userImg"
                                         ></img>
                                     </Link>
@@ -256,6 +259,7 @@ export default function Header(props: any) {
                                 style={{ width: '40px', height: '40px' }}
                                 alt="chatImg"
                                 onClick={() => props.showChatting()}
+                                id="chat-btn"
                             />
                         </li>
                     </ul>

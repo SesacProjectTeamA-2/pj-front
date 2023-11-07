@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 export default function CharacterItem(props: any) {
-    // useEffect(() => {
-    //     console.log('Selected Character:', props.selectedCharacter);
-    // }, [props.selectedCharacter]);
+    useEffect(() => {
+        console.log('Selected Character:', props.selectedCharacter);
+    }, [props.selectedCharacter]);
 
     return (
         <div className="character-item-div ">
@@ -16,9 +16,9 @@ export default function CharacterItem(props: any) {
                         style={{
                             border:
                                 props.selectedCharacter === character.imgSrc
-                                    ? '5px solid #ed8d8d'
+                                    ? '5px double #ed8d8d'
                                     : 'none',
-                            borderRadius: '15px',
+                            borderRadius: '25px',
                         }}
                     >
                         <input

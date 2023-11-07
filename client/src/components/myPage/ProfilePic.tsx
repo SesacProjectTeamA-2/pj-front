@@ -3,20 +3,22 @@ import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
 export default function ProfilePic(props: any) {
-    const [userImg, setUserImg] = useState<any>();
-    console.log('userImg', userImg);
+    const [userImg, setUserImg] = useState<any>('/asset/images/user.svg');
+    console.log('바꾸기 전 userImg', userImg);
 
     const handlerChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setUserImg(e.target.files[0]);
+            console.log('바꾼 후 UserImg >> ', userImg);
         }
 
         const formData = new FormData();
+        console.log('e.target.files ', e.target.files);
 
         if (e.target.files && e.target.files[0]) {
             formData.append('image', e.target.files[0]);
+            console.log(formData);
             sendImg(formData);
-            console.log(111111, formData.values());
         }
     };
 
@@ -45,11 +47,7 @@ export default function ProfilePic(props: any) {
     return (
         <div>
             <label id="profilePic-label">
-                <img
-                    src="/asset/images/user.svg"
-                    alt="profilePic"
-                    id="profilePic-user"
-                />
+                <img src={userImg} alt="profilePic" id="profilePic-user" />
                 <input
                     type="file"
                     id="profilePic-input"

@@ -59,7 +59,7 @@ export default function MyPage() {
                 setSelectedCharacter(character);
                 // // 명언 없으면 '추천' 모드
                 // if (phrase === '') setPhraseModeBtnVal('recommend');
-                // setPhraseCtt(phrase);
+                setPhraseCtt(phrase);
                 setDdayPin(mainDday);
                 setCheckDday(setDday);
                 setDonePin(setMainGroup);
@@ -92,7 +92,7 @@ export default function MyPage() {
     const selectCharacter = (characterSrc: string): void => {
         setSelectedCharacter(characterSrc);
     };
-    // console.log('캐릭터 src', selectedCharacter);
+    console.log('캐릭터 src MY_PAGE', selectedCharacter);
 
     // 4. 관심사 배열
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
@@ -127,8 +127,8 @@ export default function MyPage() {
     // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
-    const [phraseModeBtnVal, setPhraseModeBtnVal] =
-        useState<string>('recommend');
+    // 기본값: 내가 적을래요
+    const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('self');
     const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
         setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
@@ -144,12 +144,13 @@ export default function MyPage() {
     interface patchedUserDataItf {
         uName: string;
         uDesc: string;
-        uPhrase: string;
+        uPhrase: string | null;
         uCategory1: string;
         uCategory2: string;
         uCategory3: string;
-        //   설정 안 했을 경우 null
         uCharImg: string | null;
+
+        // 제거한 컴포넌트
         uSetDday: string | null;
         uMainDday: number;
         uMainGroup: number;
@@ -166,9 +167,14 @@ export default function MyPage() {
         uCategory2: selectedArr[1],
         uCategory3: selectedArr[2],
         uCharImg: selectedCharacter,
+
+        // 제거 컴포넌트
         uSetDday: checkDday,
-        uMainDday: dDayPin,
-        uMainGroup: donePin,
+        uMainDday: 1,
+        uMainGroup: 1,
+        // uMainDday: dDayPin,
+        // uMainGroup: donePin,
+
         // userImg: formData,
         // result: true,
         // message: true,
@@ -184,11 +190,12 @@ export default function MyPage() {
                 .patch(
                     `${process.env.REACT_APP_DB_HOST}/user/mypage`,
                     // 'http://localhost:8888/api/user/mypage',
+
                     patchedUserData,
                     {
                         headers: {
                             Authorization: `Bearer ${uToken}`,
-                            'Content-Type': 'multipart/form-data',
+                            // 'Content-Type': 'multipart/form-data',
                         },
                     }
                 )
