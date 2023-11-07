@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Nickname(props: any): JSX.Element {
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
@@ -17,6 +18,19 @@ export default function Nickname(props: any): JSX.Element {
         }
     }, [curPath]);
 
+    if (props.input.length > 10) {
+        toast.error('10자 이내로 입력해주세요.');
+
+ 
+            const al =props.input.slice(0, 10);
+            props.setInput(al);
+  
+
+        // props.setInput(al);
+    } else {
+        props.setInput(props.input);
+    }
+
     return (
         <div className="nickname-div">
             <label className="input-label">
@@ -27,7 +41,7 @@ export default function Nickname(props: any): JSX.Element {
                     ref={inputRef}
                     id="input-area"
                     className="input-obj"
-                    maxLength={10}
+                    maxLength={11}
                 />
 
                 <button
@@ -36,6 +50,7 @@ export default function Nickname(props: any): JSX.Element {
                     id="nickname-edit"
                     style={{ display: displayMode }}
                 >
+                  
                     <img
                         src="/asset/icons/edit.svg"
                         className="edit-img"
