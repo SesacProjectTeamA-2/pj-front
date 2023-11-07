@@ -11,6 +11,26 @@ import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContent from '../../components/group/content/GroupContentList';
 
 export default function GroupBoard() {
+    //  //] 2. 자유 게시글 조회
+    //  const getBoardFree = async () => {
+    //     const res = await axios.get(
+    //         `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free`,
+    //         {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         }
+    //     );
+
+    //     console.log(res.data);
+
+    //     setNoticeList(res.data.groupInfo);
+    // };
+
+    // useEffect(() => {
+    //     getBoardFree();
+    // }, []);
+
     return (
         <div className="section section-group">
             {/* [추후] 모임 제목 동적으로 수정 */}

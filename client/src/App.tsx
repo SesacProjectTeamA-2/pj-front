@@ -148,7 +148,6 @@ function App() {
                 />
 
                 {/* 게시물 Create */}
-                {/* [추후] 동적으로 수정하기 */}
                 <Route
                     path="/board/create/:gSeq"
                     // path="*/post"
@@ -161,7 +160,6 @@ function App() {
                 />
 
                 {/* 게시물 세부사항 Read */}
-                {/* [추후] 동적으로 수정하기 */}
                 <Route
                     path="/board/:gSeq/free/:gbSeq"
                     element={

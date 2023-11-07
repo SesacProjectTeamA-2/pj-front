@@ -190,12 +190,14 @@ export default function MissionAddModal({
         //; 미션 수정 (PATCH, POST, DELETE)
         // missionList 최종 데이터만 보내기
         if (action === '미션수정') {
+            // console.log('------------');
+
             const patchMissionListHandler = async () => {
                 try {
                     await axios
                         .patch(
                             `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
-                            missionList, // 임시
+                            missionList,
                             {
                                 headers: {
                                     Authorization: `Bearer ${uToken}`,
@@ -203,15 +205,18 @@ export default function MissionAddModal({
                             }
                         )
                         .then((res) => {
-                            patchMissionListHandler();
                             console.log('patched', res.data);
                         });
                 } catch (err) {
                     console.log(err);
                 }
             };
+
+            patchMissionListHandler();
+            console.log('?????????????????????');
         }
     };
+
     //=== 수정 ===
     const [missionInputs, setMissionInputs] = useState(
         // 개별 input 관리 위한 함수
