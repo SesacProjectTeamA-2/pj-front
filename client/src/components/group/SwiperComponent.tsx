@@ -6,7 +6,9 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/scss';
 import '../../styles/scss/components/swiper.scss';
 
-export default function SwiperComponent() {
+export default function SwiperComponent({ madeGroup, setMadeGroup }: any) {
+    console.log('made', madeGroup);
+
     return (
         <div>
             <div className="swiper-button-container">
@@ -70,12 +72,24 @@ export default function SwiperComponent() {
                     //         slidesPerGroup: 3,
                     //     },
                 >
-                    <SwiperSlide>
-                        <Link to="/group/home/1">
-                            <img src="asset/images/cat1.svg" />
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
+                    {madeGroup.map((mGroup: any) => {
+                        return (
+                            <>
+                                <SwiperSlide>
+                                    <Link to={`/group/home/${mGroup.gSeq}`}>
+                                        {/* <img src="asset/images/cat1.svg" /> */}
+                                        {/* <div>{mGroup.gCoverImg}</div> */}
+                                        <div>{mGroup.gName}</div>
+                                        <div>목표 날짜 : {mGroup.gDday}</div>
+                                        {/* <div>남은 일수 : {mGroup.gDday}</div> */}
+                                        <div>현재멤버수 / {mGroup.gMaxMem}</div>
+                                    </Link>
+                                </SwiperSlide>
+                                ;
+                            </>
+                        );
+                    })}
+                    {/* <SwiperSlide>
                         <Link to="/group/home/1">
                             <img src="asset/images/cat2.svg" />
                         </Link>
@@ -90,7 +104,7 @@ export default function SwiperComponent() {
                         <Link to="/group/home/1">
                             <img src="asset/images/rabbit2.svg" />
                         </Link>
-                    </SwiperSlide>
+                    </SwiperSlide> */}
                 </Swiper>
                 <div className="swiper-button-next">
                     <img src="/asset/icons/right.svg" />
