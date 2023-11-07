@@ -50,14 +50,20 @@ export default function Content() {
 
     return (
         <div className="content-grid">
+            <Quotes />
+            {/* 1. 명언 : 가로로 길게 */}
+            {/* 2. 달성률 : my, team */}
             <div className="content-grid-box">
                 <div className="percentage-div">
                     <div className="title4">My 달성률 </div>
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
                             <div>
-                                <div className="title5">코딩학당</div>
+                                {/* [추후] tb_name 수정 */}
+                                {/* <div className="title5">{groupInfo}</div> */}
                             </div>
+
+                            {/* [추후] score 받아와서 반영 */}
                             <div className="progress-bar-flex">
                                 <div>
                                     <div className="progress-div">
@@ -93,6 +99,7 @@ export default function Content() {
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
                             <div className="profile-img-div-flex">
+                                {/* 멤버 리스트 동적 수정 */}
                                 <img
                                     src="/asset/images/user.svg"
                                     alt="프로필 이미지"
@@ -145,7 +152,6 @@ export default function Content() {
                 </div>
             </div>
             <MainMission />
-            <Quotes />
         </div>
     );
 }

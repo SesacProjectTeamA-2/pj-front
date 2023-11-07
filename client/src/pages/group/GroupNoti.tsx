@@ -107,6 +107,26 @@ export default function Groupidti() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+
+                setGName(res.data.groupName);
+            });
+    };
+
+    useEffect(() => {
+        getGroup();
+    }, []);
+
+    const [gName, setGName] = useState('');
+
     //] 1. 공지 조회
     const getBoardNoti = async () => {
         const res = await axios
@@ -174,7 +194,7 @@ export default function Groupidti() {
 
     return (
         <div className="section section-group">
-            <GroupHeader title={'공지사항'} groupName={'코딩학당'} />
+            <GroupHeader title={'공지사항'} groupName={gName} />
             {/* html tag 처리 */}
             {/* noticeList.map((notice:any)=>{
                 return(

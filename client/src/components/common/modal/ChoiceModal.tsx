@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+import { Cookies } from 'react-cookie';
+import axios from 'axios';
+
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -12,8 +17,33 @@ export default function ChoiceModal({
     choiceModalSwitchHandler,
     action,
 }: any) {
+    const { gSeq } = useParams();
+
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+
+                setGName(res.data.groupName);
+            });
+    };
+
+    useEffect(() => {
+        getGroup();
+    }, []);
+
+    const [gName, setGName] = useState('');
+
     const doneHandler = () => {
-        alert(`[코딩학당] 모임을 ${action}하셨습니다 !`);
+        alert(`${gName}을 ${action}하셨습니다 !`);
 
         // [추후] 강제퇴장 멘트 작성
 
@@ -57,8 +87,12 @@ export default function ChoiceModal({
                     <div>
                         <div className="modal-line"></div>
                     </div>
-                    <ModalMemberList action={action} />
-                    <div className="modal-form">
+                    <ModalMemberList
+                        action={action}
+                        setChoiceModalSwitch={setChoiceModalSwitch}
+                        closeModalHandler={closeModalHandler}
+                    />
+                    {/* <div className="modal-form">
                         <Box
                             component="form"
                             sx={{
@@ -68,7 +102,6 @@ export default function ChoiceModal({
                             }}
                             noValidate
                             autoComplete="off"
-                            // [추후 ] css 수정
                         >
                             <TextField
                                 id="filled-multiline-flexible"
@@ -78,8 +111,8 @@ export default function ChoiceModal({
                                 variant="filled"
                             />
                         </Box>
-                    </div>
-                    <div className="mission-cancel-btn-container">
+                    </div> */}
+                    {/* <div className="mission-cancel-btn-container">
                         <button
                             onClick={doneHandler}
                             className="btn-md mission-cancel-done-btn"
@@ -92,7 +125,7 @@ export default function ChoiceModal({
                         >
                             돌아가기
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </Modal>
         </div>

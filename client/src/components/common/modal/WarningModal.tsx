@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { Link, useParams, useNavigate } from 'react-router-dom';
+
 import Modal from 'react-modal';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
 
 import '../../../styles/scss/components/modal.scss';
+import { GroupMissionsType } from 'src/types/types';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function WarningModal({
     warningModalSwitch,
@@ -13,6 +17,26 @@ export default function WarningModal({
 }: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
+
+    const { gSeq } = useParams();
+
+    const [groupName, setGroupName] = useState<GroupMissionsType[]>([]);
+
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                setGroupName(res.data.groupName);
+            });
+    };
+
+    useEffect(() => {
+        getGroup();
+    }, []);
 
     const nvg = useNavigate();
     const logoutHandler = () => {
@@ -34,11 +58,26 @@ export default function WarningModal({
                     console.log(res.data);
                     logoutHandler();
                 });
-        } else {
-            alert(`[코딩학당] 모임을 ${action}하셨습니다.`);
-
-            // [추후] 모임 탈퇴 요청 / 게시글 삭제 요청 로직  추가
+        } else if (action === '모임 삭제') {
+            const deleteGroupHandler = async () => {
+                const res = await axios
+                    .delete(`${process.env.REACT_APP_DB_HOST}/group`, {
+                        data: { gSeq },
+                        headers: {
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    })
+                    .then((res) => {
+                        console.log(res.data);
+                        toast.success(
+                            `${groupName} 모임을 ${action}하셨습니다.`
+                        );
+                        nvg('/group');
+                    });
+            };
+            deleteGroupHandler();
         }
+        // [추후] 모임 탈퇴 요청 / 게시글 삭제 요청 로직  추가
         setWarningModalSwitch(false);
     };
 
@@ -70,7 +109,7 @@ export default function WarningModal({
                             {action === '삭제'
                                 ? `게시글을 ${action}하시겠습니까 ?`
                                 : action === '탈퇴'
-                                ? `[코딩학당] 모임을 정말 ${action}하시겠습니까 ?`
+                                ? `${groupName}  모임을 정말 ${action}하시겠습니까 ?`
                                 : `정말 ${action}하시겠습니까 ?`}
                         </div>
 
@@ -110,6 +149,7 @@ export default function WarningModal({
                         </button>
                     </div>
                 </div>
+                <Toaster />
             </Modal>
         </div>
     );

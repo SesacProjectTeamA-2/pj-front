@@ -45,7 +45,7 @@ export default function CurRanking({
                             <li>
                                 <div className="ranking-list">
                                     <div>{idx + 1}</div>
-                                    <img src="/asset/images/sqr1.svg" />
+                                    <img src={`${now.uImg}`} />
 
                                     <div className="cur-ranking-content">
                                         <div>{now.uName}</div>
