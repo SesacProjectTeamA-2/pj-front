@@ -71,6 +71,7 @@ export default function MemberList({ gMax, isLeader, groupMember }: any) {
             </div>
             <div className="main-content">
                 <ul className="list-unstyled">
+                    {/* 모임장 */}
                     <li>
                         <div className="ranking-list">
                             <img src="/asset/images/sqr1.svg" />
