@@ -7,12 +7,14 @@ export interface GroupDetailType {
     groupCoverImg: string;
     groupDday: number;
     groupMaxMember: number;
+    groupMember: [];
     groupMission: [];
+    groupRanking: []; // nowRanking: [], totalRanking: []
     groupName: string;
     isJoin: boolean;
     isLeader: boolean;
-    memberImg: string[];
-    memberNickname: string[];
+    // memberImg: string[];
+    // memberNickname: string[];
     result: boolean;
 }
 

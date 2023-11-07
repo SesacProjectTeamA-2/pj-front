@@ -1,57 +1,57 @@
 import React from 'react';
 
-export default function MemberList({ gMax, isLeader, memberNickName }: any) {
-    interface MemberType {
-        id: number;
-        name: string;
-        img: string;
-        description: string;
-    }
+export default function MemberList({ gMax, isLeader, groupMember }: any) {
+    // interface MemberType {
+    //     id: number;
+    //     name: string;
+    //     img: string;
+    //     description: string;
+    // }
 
-    const memberList: MemberType[] = [
-        {
-            id: 1,
-            img: '/asset/images/sqr1.svg',
-            name: '멤버1',
-            description: '멤버 1 입니다.',
-        },
-        {
-            id: 2,
-            img: '/asset/images/sqr1.svg',
-            name: '멤버2',
-            description: '멤버 2 입니다.',
-        },
-        {
-            id: 3,
-            img: '/asset/images/sqr1.svg',
-            name: '멤버3',
-            description: '멤버 3 입니다.',
-        },
-        {
-            id: 4,
-            img: '/asset/images/sqr1.svg',
-            name: '멤버4',
-            description: '멤버 4 입니다.',
-        },
-        {
-            id: 5,
-            img: '/asset/images/sqr1.svg',
-            name: '멤버5',
-            description: '멤버 5 입니다.',
-        },
-        {
-            id: 6,
-            img: '/asset/images/sqr1.svg',
-            name: '멤버6',
-            description: '멤버 6 입니다.',
-        },
-        {
-            id: 7,
-            img: '/asset/images/sqr1.svg',
-            name: '멤버7',
-            description: '멤버 7 입니다.',
-        },
-    ];
+    // const memberList: MemberType[] = [
+    //     {
+    //         id: 1,
+    //         img: '/asset/images/sqr1.svg',
+    //         name: '멤버1',
+    //         description: '멤버 1 입니다.',
+    //     },
+    //     {
+    //         id: 2,
+    //         img: '/asset/images/sqr1.svg',
+    //         name: '멤버2',
+    //         description: '멤버 2 입니다.',
+    //     },
+    //     {
+    //         id: 3,
+    //         img: '/asset/images/sqr1.svg',
+    //         name: '멤버3',
+    //         description: '멤버 3 입니다.',
+    //     },
+    //     {
+    //         id: 4,
+    //         img: '/asset/images/sqr1.svg',
+    //         name: '멤버4',
+    //         description: '멤버 4 입니다.',
+    //     },
+    //     {
+    //         id: 5,
+    //         img: '/asset/images/sqr1.svg',
+    //         name: '멤버5',
+    //         description: '멤버 5 입니다.',
+    //     },
+    //     {
+    //         id: 6,
+    //         img: '/asset/images/sqr1.svg',
+    //         name: '멤버6',
+    //         description: '멤버 6 입니다.',
+    //     },
+    //     {
+    //         id: 7,
+    //         img: '/asset/images/sqr1.svg',
+    //         name: '멤버7',
+    //         description: '멤버 7 입니다.',
+    //     },
+    // ];
 
     return (
         <div className="wrapper">
@@ -61,11 +61,11 @@ export default function MemberList({ gMax, isLeader, memberNickName }: any) {
                     참석인원{' '}
                     <span className="member-count">
                         {/* {memberList.length + 1} */}
-                        {memberNickName?.length + 1}
+                        {groupMember?.length + 1}
                     </span>
                     / {gMax}
                     <span className="member-left">
-                        ({gMax - 1 - memberNickName?.length}자리 남음)
+                        ({gMax - 1 - groupMember?.length}자리 남음)
                     </span>
                 </div>
             </div>
@@ -82,7 +82,7 @@ export default function MemberList({ gMax, isLeader, memberNickName }: any) {
                         </div>
                     </li>
 
-                    {memberList.map((member) => {
+                    {/* {groupMember.map((member: any) => {
                         return (
                             <li key={member.id}>
                                 <div className="ranking-list">
@@ -99,7 +99,7 @@ export default function MemberList({ gMax, isLeader, memberNickName }: any) {
                                 </div>
                             </li>
                         );
-                    })}
+                    })} */}
                 </ul>
             </div>
         </div>
