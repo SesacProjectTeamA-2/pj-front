@@ -128,16 +128,33 @@ export default function GroupCreate() {
         completed: boolean;
     }
 
+    const formData = new FormData();
+    formData.append('apple', 'apple');
+
     // 대표사진 업로드
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // const formData = new FormData();
-        if (e.target.files && e.target.files[0]) {
-            // formData.append('image', e.target.files[0]);
-            // // sendImg(formData);
-            // console.log(111111, formData.values());
-            setInput({ ...input, [e.target.name]: e.target.files[0] });
-            console.log('input.gCoverImg', input.gCoverImg);
+        console.log('타겟', e.target.files);
+        let image: any = null;
+
+        if (e.target.files) {
+            image = e.target.files[0];
+            console.log(image);
+            // formData.append('image', e.target.files['0']);
+            // sendImg(formData);
+            console.log(111111, input, formData);
+            setInput({ ...input, [e.target.name]: e.target.files['0'] });
+            console.log('input.gCoverImg!!!!!', input.gCoverImg);
         }
+
+        addForm(image);
+        // formData.append('image', image);
+        // console.log('@@@@@@', formData);
+    };
+
+    const addForm = (image: any) => {
+        formData.append('image', image);
+        console.log(image);
+        console.log('@@@@@@', formData);
     };
 
     // const sendImg = (formData: any): void => {
@@ -207,7 +224,9 @@ export default function GroupCreate() {
                             type="file"
                             name="gCoverImg"
                             style={{ display: 'none' }}
-                            onChange={handlerChange}
+                            onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                            ) => handlerChange(e)}
                         />
                         {/* <Button
                                 
