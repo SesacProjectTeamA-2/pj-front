@@ -5,7 +5,7 @@ export default function Progressbar() {
     return (
         <div className="progress-div">
             <div className="my-progress">
-                <div className="my-bar"></div>
+                {/* <div className="my-bar" style={{ width: }}></div> */}
             </div>
         </div>
     );

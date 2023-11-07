@@ -72,7 +72,7 @@ export default function MyPage() {
     ////////////props, 데이터 선언/////////////
     // 1. 닉네임
     const [input, setInput] = useState<string>('');
-    // console.log('닉네임', input);
+    console.log('닉네임', input);
 
     // 2. 자기소개
     const [content, setContent] = useState<string>('');

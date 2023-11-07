@@ -89,12 +89,14 @@ export default function GroupHome() {
         groupMaxMember: 0,
         groupMember: [],
         groupMission: [],
-        groupRanking: [], // nowRanking: [], totalRanking: []
+        // groupRanking: [], // nowRanking: [], totalRanking: []
         groupName: '',
         isJoin: false,
         isLeader: false,
         // memberImg: [],
         // memberNickname: [],
+        nowScoreUserInfo: [],
+        totalScoreUserInfo: [],
         result: false,
     });
 
@@ -108,27 +110,34 @@ export default function GroupHome() {
             .then((res) => {
                 setGroupDetail(res.data);
 
-                const { nowRanking, totalRanking } = res.data.groupRanking;
+                const nowScoreUserInfo = res.data.nowScoreUserInfo;
+                setNowRanking(nowScoreUserInfo);
 
                 // const { guNowScore, uName, uSeq } = nowRanking[0];
-                console.log('GroupHome>>', res.data);
+
+                // const uSeqList = [];
                 // for (let nowRank in nowRanking) {
                 //     nowRank = nowRank.uSeq;
                 // }
 
-                for (let index = 0; index < nowRanking.length; index++) {
-                    nowRanking[index] = nowRanking[index].uSeq;
-                }
+                // for (let index = 0; index < nowRanking.length; index++) {
+                //     setUSeqList([...uSeqList, nowRanking[index].uSeq]);
+                //     setUNameList([...uNameList, nowRanking[index].uName]);
+                //     setUImgList([...uImgList, nowRanking[index].uImg]);
+
+                //     // uSeqList.push(nowRanking[index].uSeq);
+                //     //     nowRanking[index] = nowRanking[index].uName;
+                //     //     nowRanking[index] = nowRanking[index].guNowScore;
+                // }
 
                 // 현재 랭킹
-                setNowRanking(nowRanking);
                 // setNowUserRanking(uSeq);
                 // setNowNameRanking(uName);
                 // setNowScoreRanking(guNowScore);
                 // setNowImgRanking(uImg);  // [추후] 추가예정
 
                 // 누적 랭킹
-                setTotalRanking(totalRanking);
+                // setTotalRanking(totalScoreUserInfo);
             });
     };
 
@@ -136,17 +145,18 @@ export default function GroupHome() {
         getGroup();
     }, []);
 
-    // 현재 랭킹
+    // 현재 랭킹 유저 정보
+    const [nowScoreUserInfo, setNowScoreUserInfo] = useState([]);
+
+    // 유저별 점수
     const [nowRanking, setNowRanking] = useState([]);
-    const [nowNameRanking, setNowNameRanking] = useState();
-    const [nowUserRanking, setNowUserRanking] = useState();
-    const [nowScoreRanking, setNowScoreRanking] = useState();
+
+    const [uSeqList, setUSeqList] = useState<any>([]);
+    const [uNameList, setUNameList] = useState<any>([]);
+    const [uImgList, setUImgList] = useState<any>([]);
 
     // 누적 랭킹
     const [totalRanking, setTotalRanking] = useState();
-
-    console.log('????????', nowRanking);
-    console.log('????????', nowUserRanking);
 
     interface Mission {
         id: number;
@@ -192,11 +202,12 @@ export default function GroupHome() {
 
             <div className="ranking-container">
                 <CurRanking
+                    nowScoreUserInfo={nowScoreUserInfo}
                     nowRanking={nowRanking}
                     groupMember={groupDetail.groupMember}
-                    nowUserRanking={nowUserRanking}
-                    nowNameRanking={nowNameRanking}
-                    nowScoreRanking={nowScoreRanking}
+                    // nowUserRanking={nowUserRanking}
+                    // nowNameRanking={nowNameRanking}
+                    // nowScoreRanking={nowScoreRanking}
                 />
                 <AccRanking totalRanking={totalRanking} />
             </div>

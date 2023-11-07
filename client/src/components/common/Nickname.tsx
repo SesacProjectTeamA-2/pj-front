@@ -5,12 +5,7 @@ export default function Nickname(props: any): JSX.Element {
     const inputRef = useRef<HTMLInputElement>(null);
     // // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
-        // 회원가입에서는 커서 비활성화
-        if (curPath.includes('join')) {
-            return;
-        } else {
-            inputRef.current?.focus();
-        }
+        inputRef.current?.focus();
     };
 
     // 마이페이지에서만 수정 버튼 보여주기
@@ -20,21 +15,40 @@ export default function Nickname(props: any): JSX.Element {
         if (curPath.includes('mypage')) {
             setDisplayMode('flex');
         }
+        // else if (curPath.includes('join')) {
+        //     inputRef.current?.setAttribute('readOnly', 'true');
+        // }
     }, [curPath]);
 
     return (
         <div className="nickname-div">
             <label className="input-label">
-                <input
-                    // readOnly={readOnlyVal}
-                    onChange={(e) => props.setInput(e.target.value)}
-                    value={props.uName}
-                    ref={inputRef}
-                    id="input-area"
-                    className="input-obj"
-                    maxLength={10}
-                />
-
+                {curPath.includes('join') ? (
+                    // 회원가입 시 소셜 로그인 정보 표시 + 수정 불가
+                    <>
+                        <input
+                            readOnly={true}
+                            onChange={(e) => props.setInput(e.target.value)}
+                            value={props.uName}
+                            ref={inputRef}
+                            id="input-area"
+                            className="input-obj"
+                            maxLength={10}
+                        />
+                    </>
+                ) : (
+                    // 마이페이지 가입 정보 표시 + 수정 가능
+                    <>
+                        <input
+                            onChange={(e) => props.setInput(e.target.value)}
+                            value={props.input}
+                            ref={inputRef}
+                            id="input-area"
+                            className="input-obj"
+                            maxLength={10}
+                        />
+                    </>
+                )}
                 <button
                     onClick={(e) => changeReadOnly()}
                     className="edit-btn"

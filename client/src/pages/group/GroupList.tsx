@@ -22,7 +22,7 @@ export default function GroupList() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
+                console.log('>>>>>>>>>>>>>>>>>>>>', res.data);
                 setMadeGroup(res.data.groupInfo);
             });
     };
@@ -30,6 +30,8 @@ export default function GroupList() {
     useEffect(() => {
         getMadeGroup();
     }, []);
+
+    console.log(madeGroup);
 
     //] 참여한 모임
     const getJoinedGroup = async () => {
@@ -51,14 +53,13 @@ export default function GroupList() {
             <div className="groups created">
                 <div className="title1">내가 생성한 모임</div>
                 <div>
-                    {joinGroup ? (
-                        <SwiperComponent
-                            madeGroup={madeGroup}
-                            setMadeGroup={setMadeGroup}
-                        />
-                    ) : (
-                        '생성한 모임이 없습니다. '
-                    )}
+                    {joinGroup
+                        ? // <SwiperComponent
+                          //     madeGroup={madeGroup}
+                          //     setMadeGroup={setMadeGroup}
+                          // />
+                          ''
+                        : '생성한 모임이 없습니다. '}
                 </div>
             </div>
 

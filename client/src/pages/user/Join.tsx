@@ -46,30 +46,19 @@ export default function Join() {
         setSelectedCharacter(characterSrc);
     };
 
-    // 최초 로그인 하는 유저
-    // *************** 토큰 발급 없이 회원가입 창으로 렌더링 필요
-    //   let redirectUrl = `${serverUrl}:${frontPort}/join`;
-    //   redirectUrl += `?userImg=${userImg}`;
-    //   redirectUrl += `&userName=${userName}`;
-    //   redirectUrl += `&userEmail=${userEmail}`;
-    //   res.status(200).redirect(redirectUrl);
-
     const userInfo: userInfoItf = {
         uEmail: uEmail,
         uName: uName,
-        // uEmail: 'jwwwwwo@com',
-        // uName: 'sssssws',
         uCharImg: selectedCharacter,
         // uCategory1: selectedArr[0],
         // uCategory2: selectedArr[1],
         // uCategory3: selectedArr[2],
     };
-    console.log(userInfo, '<<< userInfo');
+    console.log('userInfo', userInfo);
 
     const register = async (): Promise<void> => {
         console.log('register!');
         await axios
-            // .post(`${process.env.REACT_APP_DB_HOST}/user/register`, userInfo, {
             .post(`${process.env.REACT_APP_DB_HOST}/user/register`, userInfo, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
