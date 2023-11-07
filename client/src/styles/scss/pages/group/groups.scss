@@ -23,7 +23,9 @@
 
 .group-container {
     width: 80%;
-    height: fit-content;
+
+    min-height: 80vh;
+
 }
 
 .groups {

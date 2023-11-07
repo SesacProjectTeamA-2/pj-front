@@ -256,7 +256,7 @@ export default function GroupCreate() {
                                     <div key={mission.id}>
                                         <ListItem>
                                             <ListItemText
-                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
+                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mStar}`}
                                                 secondary={`${mission.mContent}`}
                                             />
                                         </ListItem>

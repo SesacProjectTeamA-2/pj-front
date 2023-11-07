@@ -89,7 +89,6 @@ export default function GroupHome() {
         groupMaxMember: 0,
         groupMember: [],
         groupMission: [],
-        // groupRanking: [], // nowRanking: [], totalRanking: []
         groupName: '',
         isJoin: false,
         isLeader: false,
@@ -110,8 +109,11 @@ export default function GroupHome() {
             .then((res) => {
                 setGroupDetail(res.data);
 
-                const nowScoreUserInfo = res.data.nowScoreUserInfo;
-                setNowRanking(nowScoreUserInfo);
+                setNowRanking(res.data.nowScoreUserInfo);
+                setNowScoreRanking(res.data.doneRates);
+
+                setTotalRanking(res.data.totalScoreUserInfo);
+                setTotalScoreRanking(res.data.totalRanking);
 
                 // const { guNowScore, uName, uSeq } = nowRanking[0];
 
@@ -145,6 +147,9 @@ export default function GroupHome() {
         getGroup();
     }, []);
 
+    // 현재 점수 리스트
+    const [nowScoreRanking, setNowScoreRanking] = useState([]);
+
     // 현재 랭킹 유저 정보
     const [nowScoreUserInfo, setNowScoreUserInfo] = useState([]);
 
@@ -156,7 +161,8 @@ export default function GroupHome() {
     const [uImgList, setUImgList] = useState<any>([]);
 
     // 누적 랭킹
-    const [totalRanking, setTotalRanking] = useState();
+    const [totalRanking, setTotalRanking] = useState([]);
+    const [totalScoreRanking, setTotalScoreRanking] = useState([]);
 
     interface Mission {
         id: number;
@@ -205,11 +211,12 @@ export default function GroupHome() {
                     nowScoreUserInfo={nowScoreUserInfo}
                     nowRanking={nowRanking}
                     groupMember={groupDetail.groupMember}
-                    // nowUserRanking={nowUserRanking}
-                    // nowNameRanking={nowNameRanking}
-                    // nowScoreRanking={nowScoreRanking}
+                    nowScoreRanking={nowScoreRanking}
                 />
-                <AccRanking totalRanking={totalRanking} />
+                <AccRanking
+                    totalRanking={totalRanking}
+                    totalScoreRanking={totalScoreRanking}
+                />
             </div>
 
             <MemberList
