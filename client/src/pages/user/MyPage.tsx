@@ -37,7 +37,7 @@ export default function MyPage() {
             .then((res) => {
                 console.log('user', res.data);
                 const {
-                    // uImg,
+                    userImg,
                     nickname,
                     coverLetter,
                     character,
@@ -51,7 +51,13 @@ export default function MyPage() {
                 } = res.data;
 
                 // 데이터 베이스 내 정보 화면에 띄우기
-                // setUserImgSrc(uImg);
+                if (userImg !== '0') {
+                    // 사진 값 있으면 그 값으로
+                    setUserImgSrc(userImg);
+                } else {
+                    // 없으면 디폴트 사진으로 (hoisting)
+                    setUserImgSrc(userImgSrc);
+                }
                 setInput(nickname);
                 setContent(coverLetter);
                 if (category1 && category2 && category3) {
@@ -59,8 +65,7 @@ export default function MyPage() {
                     setSelectedArr([category1, category2, category3]);
                 }
                 setSelectedCharacter(character);
-                // // 명언 없으면 '추천' 모드
-                // if (phrase === '') setPhraseModeBtnVal('recommend');
+
                 setPhraseCtt(phrase);
                 setDdayPin(mainDday);
                 setCheckDday(setDday);
@@ -71,23 +76,26 @@ export default function MyPage() {
         getUserData();
     }, []);
 
-    ////////////props, 데이터 선언/////////////
+    //////////// props, 데이터 선언 /////////////
     // 0. 사용자 이미지
-    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg');
+    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
     console.log('바꾸기 전 userImgSrc', userImgSrc);
 
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setUserImgSrc(e.target.files[0]);
-            console.log('바꾼 후 UserImgSrc >> ', userImgSrc);
-        }
+        // if (e.target.files && e.target.files[0]) {
+        //     // setUserImgSrc(e.target.files[0]); // 바꾼 이미지 값으로
+        //     console.log('바꾼 후 UserImgSrc >> ', userImgSrc);
+        // }
 
-        const formData = new FormData();
-        console.log('e.target.files ', e.target.files);
+        const formData = new FormData(); // 사진 담을 formData 객체 생성
+        // console.log('e.target.files ', e.target.files);
 
         if (e.target.files && e.target.files[0]) {
             formData.append('image', e.target.files[0]);
-            console.log('formData ', formData);
+            for (let val of formData.values()) {
+                // => tsConfig ver : es6 변경
+                console.log('formData ', val);
+            }
             sendImg(formData);
         }
     };
@@ -95,10 +103,11 @@ export default function MyPage() {
     const sendImg = (formData: any): void => {
         const cookie = new Cookies();
         const uToken = cookie.get('isUser'); // 토큰 값
+
         try {
             axios
                 .post(
-                    `${process.env.REACT_APP_DB_HOST}/user/mypage/userImgSrc`,
+                    `${process.env.REACT_APP_DB_HOST}/user/mypage/userImg`,
                     formData,
                     {
                         headers: {
@@ -109,6 +118,7 @@ export default function MyPage() {
                 )
                 .then((res) => {
                     console.log('post', res.data);
+                    getUserData(); // 이거 해야 바로 수정된 프로필 사진으로 동기화 : 하지만 저장되지 않은 다른 값들은 초기화 돼서 옴 ㅜ
                 });
         } catch (err) {
             console.log(err);

@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 export default function Phrase(props: any): JSX.Element {
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    console.log(props.phraseModeBtnVal);
+    // console.log(props.phraseModeBtnVal);
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
         inputRef.current?.focus();
