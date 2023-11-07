@@ -128,6 +128,41 @@ export default function GroupCreate() {
         completed: boolean;
     }
 
+    // 대표사진 업로드
+    const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // const formData = new FormData();
+        if (e.target.files && e.target.files[0]) {
+            // formData.append('image', e.target.files[0]);
+            // // sendImg(formData);
+            // console.log(111111, formData.values());
+            setInput({ ...input, [e.target.name]: e.target.files[0] });
+            console.log('input.gCoverImg', input.gCoverImg);
+        }
+    };
+
+    // const sendImg = (formData: any): void => {
+    //     const cookie = new Cookies();
+    //     const uToken = cookie.get('isUser'); // 토큰 값
+    //     // try {
+    //     //     axios
+    //     //         .patch(
+    //     //             `${process.env.REACT_APP_DB_HOST}/group/groupCoverImg`,
+    //     //             formData,
+    //     //             {
+    //     //                 headers: {
+    //     //                     'Content-Type': 'multipart/form-data',
+    //     //                     Authorization: `Bearer ${uToken}`,
+    //     //                 },
+    //     //             }
+    //     //         )
+    //     //         .then((res) => {
+    //     //             console.log('post', res.data);
+    //     //         });
+    //     // } catch (err) {
+    //     //     console.log(err);
+    //     // }
+    // };
+
     return (
         <div className="section group-create-contianer title5">
             <div className="title2">어떤 모임을 생성하고 싶나요 ?</div>
@@ -155,33 +190,34 @@ export default function GroupCreate() {
                         /> */}
                     </Box>
                 </div>
-                <form
+                {/* <form
                     encType="multipart/form-data"
                     method="post"
                     action=" http://localhost:8888/api/group"
-                >
-                    <div className="group-create-img">
-                        <div className="group-img-title">대표 이미지</div>
-                        <label
-                            style={{
-                                backgroundColor: '#ed8d8d',
-                                fontSize: '1rem',
-                            }}
-                        >
-                            <input
-                                type="file"
-                                name="image"
-                                style={{ display: 'none' }}
-                            />
-                            {/* <Button
+                > */}
+                <div className="group-create-img">
+                    <div className="group-img-title">대표 이미지</div>
+                    <label
+                        style={{
+                            backgroundColor: '#ed8d8d',
+                            fontSize: '1rem',
+                        }}
+                    >
+                        <input
+                            type="file"
+                            name="gCoverImg"
+                            style={{ display: 'none' }}
+                            onChange={handlerChange}
+                        />
+                        {/* <Button
                                 
                                 variant="contained"
                             >
                             </Button> */}
-                            추가
-                        </label>
-                    </div>
-                </form>
+                        추가
+                    </label>
+                </div>
+                {/* </form> */}
             </div>
             <div className="group-create-content">
                 <div>분야</div>
