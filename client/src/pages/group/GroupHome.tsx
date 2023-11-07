@@ -109,6 +109,7 @@ export default function GroupHome() {
             .then((res) => {
                 setGroupDetail(res.data);
 
+
                 setNowRanking(res.data.nowScoreUserInfo);
                 setNowScoreRanking(res.data.doneRates);
 
@@ -148,6 +149,8 @@ export default function GroupHome() {
     }, []);
 
     // 현재 점수 리스트
+
+
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
 
     // 현재 랭킹 유저 정보
@@ -163,6 +166,7 @@ export default function GroupHome() {
     // 누적 랭킹
     const [totalRanking, setTotalRanking] = useState([]);
     const [totalScoreRanking, setTotalScoreRanking] = useState([]);
+
 
     interface Mission {
         id: number;
@@ -211,6 +215,7 @@ export default function GroupHome() {
                     nowScoreUserInfo={nowScoreUserInfo}
                     nowRanking={nowRanking}
                     groupMember={groupDetail.groupMember}
+
                     nowScoreRanking={nowScoreRanking}
                 />
                 <AccRanking

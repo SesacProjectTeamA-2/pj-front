@@ -155,19 +155,33 @@ export default function GroupCreate() {
                         /> */}
                     </Box>
                 </div>
-                <div className="group-create-img">
-                    <div className="group-img-title">대표 이미지</div>
-                    <Button
-                        style={{
-                            backgroundColor: '#ed8d8d',
-                            fontSize: '1rem',
-                        }}
-                        variant="contained"
-                    >
-                        추가
-                    </Button>
-                    {/* [추후] gCoverImg 이미지 파일 추가 */}
-                </div>
+                <form
+                    encType="multipart/form-data"
+                    method="post"
+                    action=" http://localhost:8888/api/group"
+                >
+                    <div className="group-create-img">
+                        <div className="group-img-title">대표 이미지</div>
+                        <label
+                            style={{
+                                backgroundColor: '#ed8d8d',
+                                fontSize: '1rem',
+                            }}
+                        >
+                            <input
+                                type="file"
+                                name="image"
+                                style={{ display: 'none' }}
+                            />
+                            {/* <Button
+                                
+                                variant="contained"
+                            >
+                            </Button> */}
+                            추가
+                        </label>
+                    </div>
+                </form>
             </div>
             <div className="group-create-content">
                 <div>분야</div>

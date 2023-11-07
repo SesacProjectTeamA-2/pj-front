@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import '../../styles/scss/pages/myPage.scss';
 
@@ -57,8 +57,9 @@ export default function MyPage() {
                     setSelectedArr([category1, category2, category3]);
                 }
                 setSelectedCharacter(character);
-                // setPhraseModeBtnVal(); //이거 고쳐야 함
-                setPhraseCtt(phrase);
+                // // 명언 없으면 '추천' 모드
+                // if (phrase === '') setPhraseModeBtnVal('recommend');
+                // setPhraseCtt(phrase);
                 setDdayPin(mainDday);
                 setCheckDday(setDday);
                 setDonePin(setMainGroup);
@@ -69,9 +70,16 @@ export default function MyPage() {
     }, []);
 
     ////////////props, 데이터 선언/////////////
+    // 0. 사용자 이미지
+    // const [userImg, setUserImg] = useState<any>();
+    // const formData = new FormData();
+    // formData.append('image', userImg);
+    // console.log('userImg', userImg);
+    // console.log('formData', formData);
+
     // 1. 닉네임
     const [input, setInput] = useState<string>('');
-    // console.log('닉네임', input);
+    console.log('닉네임', input);
 
     // 2. 자기소개
     const [content, setContent] = useState<string>('');
@@ -115,8 +123,7 @@ export default function MyPage() {
 
     // 8. 명언 모드
     // 8-1. 적은 명언 내용
-    const [phraseCtt, setPhraseCtt] =
-        useState<string>('여름은 가을로부터 떨어진다');
+    const [phraseCtt, setPhraseCtt] = useState<string>('');
     // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
@@ -126,6 +133,7 @@ export default function MyPage() {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
         setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
     };
+
     // useEffect(() => {
     //     console.log('phraseModeBtnVal', phraseModeBtnVal);
     // }, [phraseModeBtnVal]);
@@ -141,9 +149,11 @@ export default function MyPage() {
         uCategory2: string;
         uCategory3: string;
         //   설정 안 했을 경우 null
+        uCharImg: string | null;
         uSetDday: string | null;
         uMainDday: number;
         uMainGroup: number;
+        // userImg: any;
         // result: boolean;
         // message: boolean;
     }
@@ -155,9 +165,11 @@ export default function MyPage() {
         uCategory1: selectedArr[0],
         uCategory2: selectedArr[1],
         uCategory3: selectedArr[2],
+        uCharImg: selectedCharacter,
         uSetDday: checkDday,
         uMainDday: dDayPin,
         uMainGroup: donePin,
+        // userImg: formData,
         // result: true,
         // message: true,
         //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
@@ -165,16 +177,18 @@ export default function MyPage() {
     useEffect(() => {
         console.log('patchedUserData >>>>', patchedUserData);
     });
+
     const patchUserData = async () => {
         try {
             await axios
                 .patch(
-                    // `${process.env.REACT_APP_DB_HOST}/user/mypage`,
-                    'http://localhost:8888/api/user/mypage',
+                    `${process.env.REACT_APP_DB_HOST}/user/mypage`,
+                    // 'http://localhost:8888/api/user/mypage',
                     patchedUserData,
                     {
                         headers: {
                             Authorization: `Bearer ${uToken}`,
+                            'Content-Type': 'multipart/form-data',
                         },
                     }
                 )
@@ -264,7 +278,6 @@ export default function MyPage() {
                 <button
                     className="btn-fixed"
                     id="myPage-edit-btn"
-                    // type="submit"
                     onClick={() => patchUserData()}
                 >
                     수정 완료

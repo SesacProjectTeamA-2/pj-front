@@ -50,9 +50,6 @@ export default function InterestedItem({
             });
         }
 
-        // console.log('selectedArr >> ', selectedArr);
-        // console.log('selectedArr.length >> ', selectedArr.length);
-
         // 동적 개수 제한
         if (selectedArr.length > num - 1) {
             //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ? : 개수 잘 안 맞고 두번 클릭해야 선택됏음

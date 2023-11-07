@@ -1,5 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
+import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 import '../../../styles/scss/components/modal.scss';
 
@@ -8,13 +11,31 @@ export default function WarningModal({
     setWarningModalSwitch,
     action,
 }: any) {
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
+
+    const nvg = useNavigate();
+    const logoutHandler = () => {
+        cookie.remove('isUser');
+        nvg('/');
+    };
+
     const doneHandler = () => {
         if (action === '회원 탈퇴') {
             alert(`Motimate ${action}하셨습니다 !`);
-
-            // [추후 - 혜빈] 회원 탈퇴 요청 추가
+            // 회원 탈퇴
+            axios
+                .delete(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    logoutHandler();
+                });
         } else {
-            alert(`[코딩학당] 모임을 ${action}하셨습니다 !`);
+            alert(`[코딩학당] 모임을 ${action}하셨습니다.`);
 
             // [추후] 모임 탈퇴 요청 / 게시글 삭제 요청 로직  추가
         }
