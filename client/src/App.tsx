@@ -7,7 +7,6 @@ import './styles/scss/base/reset.scss';
 import Header from './components/common/Header';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
-import Mission from './pages/Mission';
 import MyPage from './pages/user/MyPage';
 import NotFound from './pages/NotFound';
 import Management from './pages/Management';
@@ -71,7 +70,7 @@ function App() {
                     }
                 />
 
-                <Route
+                {/* <Route
                     path="/mission"
                     element={
                         <BasicLayout
@@ -79,7 +78,7 @@ function App() {
                             showChat={showChat}
                         />
                     }
-                />
+                /> */}
 
                 <Route
                     path="/group"

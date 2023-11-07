@@ -15,6 +15,7 @@ export default function ProfilePic(props: any) {
 
         if (e.target.files && e.target.files[0]) {
             formData.append('image', e.target.files[0]);
+            formData.append('gSeq', props.gSeq);
             sendImg(formData);
             console.log(111111, formData.values());
         }
@@ -25,8 +26,8 @@ export default function ProfilePic(props: any) {
         const uToken = cookie.get('isUser'); // 토큰 값
         try {
             axios
-                .post(
-                    `${process.env.REACT_APP_DB_HOST}/user/mypage/userImg`,
+                .patch(
+                    `${process.env.REACT_APP_DB_HOST}/group/groupCoverImg`,
                     formData,
                     {
                         headers: {
@@ -36,7 +37,7 @@ export default function ProfilePic(props: any) {
                     }
                 )
                 .then((res) => {
-                    console.log('post', res.data);
+                    console.log('patch', res.data);
                 });
         } catch (err) {
             console.log(err);

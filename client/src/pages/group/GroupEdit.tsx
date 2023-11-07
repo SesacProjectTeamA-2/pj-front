@@ -14,6 +14,7 @@ import InterestedList from '../../components/common/InterestedList';
 import Dday from '../../components/common/Dday';
 import { GroupDetailType } from 'src/types/types';
 import { Divider, ListItem, ListItemText } from '@mui/material';
+import ImgTest from './ImgTest';
 
 export default function GroupEdit() {
     const cookie = new Cookies();
@@ -191,7 +192,7 @@ export default function GroupEdit() {
                 </div>
                 <div className="group-create-img">
                     <div className="group-img-title">대표 이미지</div>
-                    <Button
+                    {/* <Button
                         style={{
                             backgroundColor: '#ed8d8d',
                             fontSize: '1rem',
@@ -199,7 +200,8 @@ export default function GroupEdit() {
                         variant="contained"
                     >
                         추가
-                    </Button>
+                    </Button> */}
+                    <ImgTest gSeq={gSeq} />
                     {/* [추후] gCoverImg 이미지 파일 추가 */}
                 </div>
             </div>

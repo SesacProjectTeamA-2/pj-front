@@ -109,18 +109,16 @@ export default function Groupidti() {
 
     //] 1. 공지 조회
     const getBoardNoti = async () => {
-        const res = await axios.get(
-            `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice`,
-            {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            }
-        );
-
-        console.log(res.data);
-
-        setNoticeList(res.data.groupInfo);
+            })
+            .then((res) => {
+                console.log(res.data);
+                setNoticeList(res.data.groupInfo);
+            });
     };
 
     useEffect(() => {

@@ -16,17 +16,20 @@ export default function Nickname(props: any): JSX.Element {
         if (curPath.includes('mypage')) {
             setDisplayMode('flex');
         }
+        // else if (curPath.includes('join')) {
+        //     inputRef.current?.setAttribute('readOnly', 'true');
+        // }
     }, [curPath]);
 
     if (props.input.length > 10) {
         toast.error('10자 이내로 입력해주세요.');
 
  
-            const al =props.input.slice(0, 10);
-            props.setInput(al);
+            const slicedInput =props.input.slice(0, 10);
+            props.setInput(slicedInput);
   
 
-        // props.setInput(al);
+     
     } else {
         props.setInput(props.input);
     }
@@ -34,15 +37,33 @@ export default function Nickname(props: any): JSX.Element {
     return (
         <div className="nickname-div">
             <label className="input-label">
-                <input
-                    // readOnly={readOnlyVal}
-                    onChange={(e) => props.setInput(e.target.value)}
-                    value={props.input}
-                    ref={inputRef}
-                    id="input-area"
-                    className="input-obj"
-                    maxLength={11}
-                />
+
+                {curPath.includes('join') ? (
+                    // 회원가입 시 소셜 로그인 정보 표시 + 수정 불가
+                    <>
+                        <input
+                            readOnly={true}
+                            onChange={(e) => props.setInput(e.target.value)}
+                            value={props.uName}
+                            ref={inputRef}
+                            id="input-area"
+                            className="input-obj"
+                            maxLength={10}
+                        />
+                    </>
+                ) : (
+                    // 마이페이지 가입 정보 표시 + 수정 가능
+                    <>
+                        <input
+                            onChange={(e) => props.setInput(e.target.value)}
+                            value={props.input}
+                            ref={inputRef}
+                            id="input-area"
+                            className="input-obj"
+                            maxLength={10}
+                        />
+                    </>
+                )}
 
                 <button
                     onClick={(e) => changeReadOnly()}

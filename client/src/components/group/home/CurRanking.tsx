@@ -48,6 +48,7 @@ export default function CurRanking({
 
                                     <div className="cur-ranking-content">
                                         <div>{now.uName}</div>
+
                                         <Progressbar
                                             score={nowScoreRanking[idx]}
                                         />

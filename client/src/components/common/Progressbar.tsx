@@ -8,6 +8,7 @@ export default function Progressbar({ score }: { score: number }) {
     return (
         <div className="progress-div">
             <div className="my-progress">
+
                 <div
                     className="my-bar"
                     style={{ width: scorePercentage }}
