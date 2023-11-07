@@ -8,9 +8,6 @@ export default function CurRanking({
 }: any) {
     console.log('현재랭킹', nowRanking);
 
-    console.log('현재랭킹유저', nowNameRanking);
-
-
     return (
         <div className="wrapper">
             <div className="upper-content">
@@ -60,7 +57,6 @@ export default function CurRanking({
                             </li>
                         );
                     })}
-
                 </ul>
             </div>
         </div>

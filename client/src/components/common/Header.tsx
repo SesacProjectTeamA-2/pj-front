@@ -98,11 +98,11 @@ export default function Header(props: any) {
                                     </Button>
                                 </Link>
 
-                                <Link to="/mission">
+                                {/* <Link to="/mission">
                                     <Button className="menu-button">
                                         Mission
                                     </Button>
-                                </Link>
+                                </Link> */}
                                 {/* <li> */}
                                 <Link to="/group">
                                     <Button className="menu-button">

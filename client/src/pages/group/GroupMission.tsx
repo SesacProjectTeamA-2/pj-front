@@ -35,20 +35,21 @@ export default function GroupMission() {
         nowScoreUserInfo: [],
         totalScoreUserInfo: [],
     });
+
+    const getGroup = async () => {
+        const res = await axios.get(
+            `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        setGroupDetail(res.data);
+    };
+
     useEffect(() => {
-        const getGroup = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-
-            setGroupDetail(res.data);
-        };
-
         getGroup();
     }, []);
     // gSeq, uToken

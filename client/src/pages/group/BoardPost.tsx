@@ -73,7 +73,7 @@ export default function BoardPost() {
         gbTitle: '',
         gbContent: '',
         gbCategory: 'notice',
-        mSeq: 1,
+        mSeq: null,
     });
 
     const [selected, setSelected] = useState<string>('');
@@ -93,7 +93,7 @@ export default function BoardPost() {
 
     //select 태그 state관리
     const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-        // console.log('setSelected 전',board);
+        console.log('setSelected 전', board);
 
         const selectedValue = e.target.value;
         setSelected(selectedValue);
@@ -101,13 +101,14 @@ export default function BoardPost() {
         setBoard({
             ...board,
             gbCategory: selectedValue,
+            // mSeq: null,
         });
 
         if (selectedValue !== '') {
             setBoard({
                 ...board,
                 gbCategory: 'mission',
-                mSeq: Number(selectedValue),
+                // mSeq: Number(selectedValue),
             });
         }
 

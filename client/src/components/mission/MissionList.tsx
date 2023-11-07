@@ -16,7 +16,7 @@ export default function MissionList() {
         level: number;
         completed: boolean;
     }[];
-    const [groups, setGroups] = useState<any>([])
+    const [groups, setGroups] = useState<any>([]);
     const [missions, setMissions] = useState<MissionType>([
         {
             id: 1,
@@ -35,9 +35,9 @@ export default function MissionList() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    useEffect(() => {
-        const getSearchGroupList = async () => {
-            const res = await axios.get(
+    const getSearchGroupList = async () => {
+        const res = await axios
+            .get(
                 // 유저 미션 조회
                 `http://localhost:8888/api/mission/user`,
                 {
@@ -45,25 +45,26 @@ export default function MissionList() {
                         Authorization: `Bearer ${uToken}`,
                     },
                 }
-            );
+            )
+            .then((res) => {
+                // const { groupInfo } = res.data;
+                // setGroups(groupInfo[0]);
+                console.log('검색결과', res.data);
+                // console.log(groups.tb_group.gName);
+            });
 
-            console.log('검색결과', res.data);
-            const {groupInfo, missionArray} = res.data;
-            setGroups(groupInfo[0]);
-            console.log(groups.tb_group.gName)
-            
-            // setMissions(res.data);
-        };
-        
+        // setMissions(res.data);
+    };
+
+    useEffect(() => {
         getSearchGroupList();
     }, []); // 빈 의존성 배열 : 컴포넌트가 마운트될 때 한 번만 실행
-    
+
     // console.log(missions);
 
     // // redux
     // const missions = useSelector((state: RootStateType) => state.mission);
     // const group = useSelector((state: RootStateType) => state.dummyGroup);
-
 
     return (
         <div className="list">
@@ -77,11 +78,11 @@ export default function MissionList() {
                     {/* <div className="title5">{useDdayCount(group.gDday)}</div> */}
                 </div>
                 {/* missions.map((mission: MissionStateType) => ( */}
-                    {/* <MissionItem */}
-                        {/* // key={mission.id}
+                {/* <MissionItem */}
+                {/* // key={mission.id}
                         // mission={mission}
                         // toggleComplete={toggleComplete} */}
-                    {/* /> */}
+                {/* /> */}
                 {/* )) */}
             </ul>
 

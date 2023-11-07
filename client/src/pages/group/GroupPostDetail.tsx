@@ -16,11 +16,10 @@ export default function GroupPostDetail() {
 
     console.log(gSeq, mSeq, gbSeq);
 
-    //] 1. 자유게시글
     //; 게시글 조회 (GET)
     const [freeList, setFreeList] = useState<any>([]);
 
-    // [추후] 자유/질문 or 미션
+    // [추후] 공지 or 자유/질문 or 미션
     const [boardType, setBoardType] = useState('');
 
     // 자유 게시글 상세 조회
@@ -63,22 +62,22 @@ export default function GroupPostDetail() {
     const [missionList, setMissionList] = useState<any>([]);
 
     // 미션 게시글 조회
+    const getBoardMission = async () => {
+        const res = await axios.get(
+            `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        console.log(res.data);
+
+        setMissionList(res.data.groupInfo);
+    };
+
     useEffect(() => {
-        const getBoardMission = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-
-            console.log(res.data);
-
-            setMissionList(res.data.groupInfo);
-        };
-
         getBoardMission();
     }, []);
 
@@ -144,7 +143,6 @@ export default function GroupPostDetail() {
         console.log(res.data);
         window.location.reload();
 
-
         // setFreeList(res.data.groupInfo);
     };
 
@@ -203,7 +201,6 @@ export default function GroupPostDetail() {
         );
 
         console.log(res.data);
-        
     };
 
     return (

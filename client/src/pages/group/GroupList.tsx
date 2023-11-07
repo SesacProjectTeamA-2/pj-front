@@ -53,13 +53,14 @@ export default function GroupList() {
             <div className="groups created">
                 <div className="title1">내가 생성한 모임</div>
                 <div>
-                    {joinGroup
-                        ? // <SwiperComponent
-                          //     madeGroup={madeGroup}
-                          //     setMadeGroup={setMadeGroup}
-                          // />
-                          ''
-                        : '생성한 모임이 없습니다. '}
+                    {joinGroup.length > 0 ? (
+                        <SwiperComponent
+                            madeGroup={madeGroup}
+                            setMadeGroup={setMadeGroup}
+                        />
+                    ) : (
+                        '생성한 모임이 없습니다. '
+                    )}
                 </div>
             </div>
 
