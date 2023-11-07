@@ -1,33 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Cookies } from 'react-cookie';
+
 import SwiperComponent from '../../components/group/SwiperComponent';
 
 export default function GroupList() {
-    // [추후] 내가 생성한 모임 확인하는 로직
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
+    const [madeGroup, setMadeGroup] = useState([]);
+    const [joinGroup, setJoinGroup] = useState([]);
+
+    //] 생성한 모임
+    const getMadeGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/made`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setMadeGroup(res.data.groupInfo);
+            });
+    };
+
+    useEffect(() => {
+        getMadeGroup();
+    }, []);
+
+    //] 참여한 모임
+    const getJoinedGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/joined`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => console.log(res.data));
+    };
+
+    useEffect(() => {
+        getJoinedGroup();
+    }, []);
 
     return (
         <div>
+            <div className="groups created">
+                <div className="title1">내가 생성한 모임</div>
+                <div>
+                    {joinGroup ? (
+                        <SwiperComponent
+                            madeGroup={madeGroup}
+                            setMadeGroup={setMadeGroup}
+                        />
+                    ) : (
+                        '생성한 모임이 없습니다. '
+                    )}
+                </div>
+            </div>
+
             <div className="groups join">
                 <div className="title1">참여한 모임</div>
 
                 {/* ! 태그 컴포넌트 추가 ! */}
 
-                <SwiperComponent />
-
                 {/* map 돌리기 - /:id 추가 */}
                 <Link to="/group/home/1">
                     <button>코딩학당</button>
                 </Link>
-
-                {/* <Link to="/group/home/2">
-                        <button>근손실방지</button>
-                    </Link> */}
-            </div>
-
-            <div className="groups created">
-                <div className="title1">내가 생성한 모임</div>
-
-                <div>생성한 모임이 없습니다. </div>
             </div>
 
             <div className="groups recommend">

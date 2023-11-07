@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+
 import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
 import '../../styles/scss/components/inputs.scss';
@@ -11,6 +13,7 @@ import { Divider } from '@mui/material';
 import GroupSearch from './GroupSearch';
 
 export default function Groups() {
+    //] 검색
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
     const [search, setSearch] = useState(false);
 
@@ -20,7 +23,7 @@ export default function Groups() {
         setSearch(!search);
     };
 
-    //] key down event 입력 시
+    // key down event 입력 시
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.nativeEvent.isComposing) {
             return;

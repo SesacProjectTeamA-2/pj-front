@@ -31,7 +31,7 @@ export default function GroupSearch({ searchInput, selectedArr }: any) {
         };
 
         getSearchGroupList();
-    }, []); // 빈 의존성 배열 : 컴포넌트가 마운트될 때 한 번만 실행
+    }, []);
 
     console.log(searchGroupList);
 

@@ -75,11 +75,7 @@ export default function GroupHome() {
         (state: RootStateType) => state.dummyGroup
     );
 
-    // console.log('????', dummyGroupState);
-
     // const userState = useSelector((state: RootStateType) => state.user);
-
-    // console.log('!!!!', userState);
 
     //=== 모임 상세화면 읽어오기 ===
 
@@ -91,30 +87,66 @@ export default function GroupHome() {
         groupCoverImg: '',
         groupDday: 0,
         groupMaxMember: 0,
+        groupMember: [],
         groupMission: [],
+        groupRanking: [], // nowRanking: [], totalRanking: []
         groupName: '',
         isJoin: false,
         isLeader: false,
-        memberImg: [],
-        memberNickname: [],
+        // memberImg: [],
+        // memberNickname: [],
         result: false,
     });
 
-    useEffect(() => {
-        const getGroup = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-            setGroupDetail(res.data);
-        };
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                setGroupDetail(res.data);
 
+                const { nowRanking, totalRanking } = res.data.groupRanking;
+
+                const { guNowScore, uName, uSeq } = nowRanking[0];
+
+                // for (let nowRank in nowRanking) {
+                //     nowRank = nowRank.uSeq;
+                // }
+
+                for (let index = 0; index < nowRanking.length; index++) {
+                    nowRanking[index] = nowRanking[index].uSeq;
+                }
+
+                // 현재 랭킹
+                setNowRanking(nowRanking);
+                setNowUserRanking(uSeq);
+                setNowNameRanking(uName);
+                setNowScoreRanking(guNowScore);
+                // setNowImgRanking(uImg);  // [추후] 추가예정
+
+                // 누적 랭킹
+                setTotalRanking(totalRanking);
+            });
+    };
+
+    useEffect(() => {
         getGroup();
     }, []);
+
+    // 현재 랭킹
+    const [nowRanking, setNowRanking] = useState([]);
+    const [nowNameRanking, setNowNameRanking] = useState();
+    const [nowUserRanking, setNowUserRanking] = useState();
+    const [nowScoreRanking, setNowScoreRanking] = useState();
+
+    // 누적 랭킹
+    const [totalRanking, setTotalRanking] = useState();
+
+    console.log('????????', nowRanking);
+    console.log('????????', nowUserRanking);
 
     interface Mission {
         id: number;
@@ -159,14 +191,21 @@ export default function GroupHome() {
             />
 
             <div className="ranking-container">
-                <CurRanking />
-                <AccRanking />
+                <CurRanking
+                    nowRanking={nowRanking}
+                    groupMember={groupDetail.groupMember}
+                    nowUserRanking={nowUserRanking}
+                    nowNameRanking={nowNameRanking}
+                    nowScoreRanking={nowScoreRanking}
+                />
+                <AccRanking totalRanking={totalRanking} />
             </div>
 
             <MemberList
                 gMax={groupDetail.groupMaxMember}
                 isLeader={groupDetail.isLeader}
-                memberNickName={groupDetail.memberNickname}
+                groupMember={groupDetail.groupMember}
+                // memberNickName={groupDetail.memberNickname}
             />
 
             <button className="btn-fixed" onClick={onClick}>

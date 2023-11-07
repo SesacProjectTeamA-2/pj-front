@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function AccRanking() {
+export default function AccRanking({ totalRanking }: any) {
     return (
         <div className="wrapper">
             <div className="upper-content">
