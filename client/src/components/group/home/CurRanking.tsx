@@ -7,6 +7,7 @@ export default function CurRanking({
     nowScoreRanking,
 }: any) {
     console.log('현재랭킹', nowRanking);
+    console.log('----킹', nowScoreRanking);
 
     return (
         <div className="wrapper">

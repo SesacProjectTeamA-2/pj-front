@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Nickname(props: any): JSX.Element {
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
@@ -20,9 +21,23 @@ export default function Nickname(props: any): JSX.Element {
         // }
     }, [curPath]);
 
+    if (props.input.length > 10) {
+        toast.error('10자 이내로 입력해주세요.');
+
+ 
+            const slicedInput =props.input.slice(0, 10);
+            props.setInput(slicedInput);
+  
+
+     
+    } else {
+        props.setInput(props.input);
+    }
+
     return (
         <div className="nickname-div">
             <label className="input-label">
+
                 {curPath.includes('join') ? (
                     // 회원가입 시 소셜 로그인 정보 표시 + 수정 불가
                     <>
@@ -49,12 +64,14 @@ export default function Nickname(props: any): JSX.Element {
                         />
                     </>
                 )}
+
                 <button
                     onClick={(e) => changeReadOnly()}
                     className="edit-btn"
                     id="nickname-edit"
                     style={{ display: displayMode }}
                 >
+                  
                     <img
                         src="/asset/icons/edit.svg"
                         className="edit-img"

@@ -100,9 +100,9 @@ function createData(
 // ];
 
 export default function Groupidti() {
-    const { gSeq } = useParams();
+    const { gSeq, gCategory } = useParams();
 
-    console.log(gSeq);
+    console.log(gSeq, gCategory);
 
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
@@ -333,7 +333,7 @@ export default function Groupidti() {
                 {/* </div> */}
             </div>
             <div>
-                <Link to={`/board/create/${gSeq}`}>
+                <Link to={`/board/create/${gSeq}/${gCategory}`}>
                     <img src="/asset/icons/plus.svg" className="plus-fixed" />
                 </Link>
             </div>
