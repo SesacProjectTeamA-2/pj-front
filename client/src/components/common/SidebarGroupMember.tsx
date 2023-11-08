@@ -15,8 +15,9 @@ export default function SideBarGroupMember({
         <div>
             <ul className="title5 member-menu">
                 <li
-                    className="member-leave "
-                    onClick={() => warningModalSwitchHandler('탈퇴')}
+                    className="member-leave"
+                    onClick={() => warningModalSwitchHandler('모임 탈퇴')}
+
                 >
                     모임 탈퇴
                 </li>
