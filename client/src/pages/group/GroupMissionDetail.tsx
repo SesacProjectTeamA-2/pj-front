@@ -8,7 +8,7 @@ import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
 import WarningModal from '../../components/common/modal/WarningModal';
 
-export default function GroupPostDetail() {
+export default function GroupMissionDetail() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
@@ -16,65 +16,11 @@ export default function GroupPostDetail() {
 
     console.log(gSeq, mSeq, gbSeq, gCategory);
 
-    //; 게시글 조회 (GET)
-    const [notiList, setNotiList] = useState<any>([]);
-    const [freeList, setFreeList] = useState<any>([]);
+    // //; 게시글 조회 (GET)
+    // const [notiList, setNotiList] = useState<any>([]);
+    // const [missionList, setFreeList] = useState<any>([]);
 
-    // [추후] 공지 or 자유/질문 or 미션
-    const [boardType, setBoardType] = useState('');
-
-    console.log('+++++++++++');
-
-    //] 0. 공지 게시글 상세 조회
-
-    const getBoardNoti = async () => {
-        const res = await axios
-            .get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/${gCategory}/${gbSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log('getBoardNoti=======', res.data);
-
-                setFreeList(res.data.groupInfo);
-                // setCommentCount(res.data.commentCount);
-            });
-    };
-
-    useEffect(() => {
-        getBoardNoti();
-    }, []);
-
-    //] 1. 자유 게시글 상세 조회
-    // const getBoardFree = async () => {
-    //     const res = await axios
-    //         .get(
-    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free/${gbSeq}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         )
-    //         .then((res) => {
-    //             console.log('getBoardFree', res.data);
-
-    //             setFreeList(res.data.groupInfo);
-    //             // setCommentCount(res.data.commentCount);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getBoardFree();
-    // }, []);
-
-    // console.log('>>>>', freeList);
-
-    //; 게시글 삭제 (DELETE)
+    // //; 게시글 삭제 (DELETE)
     const boardDeleteHandler = async (gbSeq: number) => {
         const res = await axios.delete(
             `${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`,
@@ -91,27 +37,26 @@ export default function GroupPostDetail() {
     //] 2. 미션게시글
     const [missionList, setMissionList] = useState<any>([]);
 
-    if (mSeq) {
-        // 미션 게시글 조회
-        const getBoardMission = async () => {
-            const res = await axios.get(
+    // 미션 게시글 조회
+    const getBoardMission = async () => {
+        const res = await axios
+            .get(
                 `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
                     },
                 }
-            );
+            )
+            .then((res) => {
+                console.log(res.data);
+                setMissionList(res.data.groupInfo);
+            });
+    };
 
-            console.log(res.data);
-
-            setMissionList(res.data.groupInfo);
-        };
+    useEffect(() => {
         getBoardMission();
-    }
-
-    // useEffect(() => {
-    // }, []);
+    }, []);
 
     // 메뉴 선택
     const [menu, setMenu] = useState('');
@@ -126,10 +71,10 @@ export default function GroupPostDetail() {
 
     //] 댓글
     // 댓글 리스트 : 자유게시글에 포함
-    // const commentList = freeList.tb_groupBoardComments;
+    // const commentList = missionList.tb_groupBoardComments;
 
     // const [comments, setComments] = useState<any>(
-    //     freeList.tb_groupBoardComments
+    //     missionList.tb_groupBoardComments
     // );
 
     // const [commentCount, setCommentCount] = useState(0);
@@ -138,8 +83,8 @@ export default function GroupPostDetail() {
     const [commentList, setCommentList] = useState<any>([]);
 
     // useEffect(() => {
-    //     setComments(freeList.tb_groupBoardComments);
-    // }, [freeList.tb_groupBoardComments]);
+    //     setComments(missionList.tb_groupBoardComments);
+    // }, [missionList.tb_groupBoardComments]);
 
     //   {
     //     createdAt: "2023-11-05 22:42:51",
@@ -256,9 +201,9 @@ export default function GroupPostDetail() {
                                 alt="profile"
                             />
                             {/* uSeq 사용자 닉네임 가져오기 */}
-                            <div className="title4">{freeList?.uSeq}</div>
+                            <div className="title4">{missionList?.uSeq}</div>
                         </div>
-                        <div className="date">{freeList?.createdAt}</div>
+                        <div className="date">{missionList?.createdAt}</div>
                     </div>
                     <div className="writer-menu">
                         {/* gSeq, gbSeq */}
@@ -295,7 +240,7 @@ export default function GroupPostDetail() {
                     <div
                         className="post-detail-content"
                         dangerouslySetInnerHTML={{
-                            __html: freeList?.gbContent,
+                            __html: missionList?.gbContent,
                         }}
                     />
 
