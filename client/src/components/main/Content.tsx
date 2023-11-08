@@ -10,15 +10,25 @@ import TeamPercentage from './TeamPercentage';
 import '../../styles/scss/pages/main/percentage.scss';
 import Progressbar from '../common/Progressbar';
 
-export default function Content() {
+export default function Content(props: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    // 프로필 사진 가져오기
+    // 프로필 사진 , 명언 가져오기
+    // -1) 프로필 사진
     const [userImgSrc, setUserImgSrc] = useState<string>(
         '/asset/images/user.svg'
     );
-    const getUserProfile = async () => {
+
+    // -2) 명언
+    const [phraseCtt, setPhraseCtt] = useState<string | null>(null);
+
+    // -3) 명언 지정 논리연산자
+    //  데이터 가져와서 phrase null이 아니면 true로(자기 작성 모드) : Quotes 컨텐츠 가림
+    //  null 이라면 false로 (명언 모드) : Quotes 컨텐츠 보임
+    const [phraseModeSelf, setPhraseModeSelf] = useState<boolean>(false);
+
+    const getUserData = async () => {
         await axios
             .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
                 headers: {
@@ -26,13 +36,26 @@ export default function Content() {
                 },
             })
             .then((res) => {
-                const { userImg } = res.data;
-                setUserImgSrc(userImg);
-                console.log('userImgSrc ', userImgSrc);
+                const { userImg, phrase } = res.data;
+                console.log('CONTENT 이미지 / 지정 명언', userImg, phrase);
+                if (userImg !== '0') {
+                    // 업로드한 이미지 있으면
+                    setUserImgSrc(userImg);
+                }
+                if (phrase) {
+                    setPhraseModeSelf(true);
+                    setPhraseCtt(phrase);
+                    console.log('마이페이지 작성 => 가져온 명언', phraseCtt);
+                    console.log('내가 쓴 명언인가 ? ', phraseModeSelf);
+                }
+                // console.log('userImgSrc 비로그인 시 기본 이미지 ', userImgSrc);
             });
     };
     useEffect(() => {
-        getUserProfile();
+        if (cookie.get('isUser')) {
+            getUserData();
+            // console.log('CONTENT 비로그인');
+        }
     }, []);
 
     //] 1. 유저 미션 조회
@@ -44,7 +67,7 @@ export default function Content() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
+                console.log('유저 미션 조회 >> ', res.data);
 
                 const {
                     missionArray,
@@ -75,7 +98,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getMissionMain();
+        if (cookie.get('isUser')) {
+            getMissionMain();
+        }
     }, []);
 
     const [uName, setUName] = useState('');
@@ -111,7 +136,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getJoinedGroup();
+        if (cookie.get('isUser')) {
+            getJoinedGroup();
+        }
     }, []);
 
     // [추후] joinGroupInfo 정보 맞는지 재확인
@@ -136,7 +163,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getMadeGroup();
+        if (cookie.get('isUser')) {
+            getMadeGroup();
+        }
     }, []);
 
     const [madeGroupInfo, setMadeGroupInfo] = useState<any>([]);
@@ -164,7 +193,12 @@ export default function Content() {
 
     return (
         <div className="content-grid">
-            <Quotes />
+            <Quotes
+                phraseCtt={phraseCtt}
+                // setPhraseCtt={setPhraseCtt}
+                // setPhraseModeSelf={setPhraseModeSelf}
+                phraseModeSelf={phraseModeSelf}
+            />
             {/* 1. 명언 : 가로로 길게 */}
 
             <br />
