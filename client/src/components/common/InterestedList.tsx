@@ -18,6 +18,7 @@ export default function InterestedList(props: any) {
         { id: 'etc', category: '기타', val: 'etc' },
     ];
 
+
     return (
         <div>
             <InterestedItem
