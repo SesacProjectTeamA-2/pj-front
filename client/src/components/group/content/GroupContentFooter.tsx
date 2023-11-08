@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function GroupContentFooter() {
+export default function GroupContentFooter({
+    commentCount,
+}: {
+    commentCount: number;
+}) {
     return (
         <div className="post-list-header">
             <div className="post-list-footer">
@@ -10,15 +14,15 @@ export default function GroupContentFooter() {
                     alt="comment"
                 />
                 {/* [추후] 댓글 수 데이터 추가 */}
-                <div>댓글 수 3</div>
+                <div>댓글 수 {commentCount}</div>
             </div>
             <div className="post-list-footer">
                 {/* [추후] 반응 수 데이터 추가 : map 돌리기 */}
                 {/* [추후] hover 시, 누가 반응했는지 추가 ? */}
                 {/* [추후] toggle 시, 반응 적용 / 취소 */}
-                <button className="btn-emoji">
+                {/* <button className="btn-emoji">
                     <div>👍🏻 2</div>
-                </button>
+                </button> */}
                 {/* [추후] 반응추가 말풍선 ? */}
                 <img
                     className="img-emoji"

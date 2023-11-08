@@ -85,13 +85,13 @@ export default function BoardPost() {
         gCategory || missionSelected
     );
 
-    useEffect(() => {
-        if (gCategory === 'mission') {
-            setSelected(missionSelected);
-        }
-    });
+    // useEffect(() => {
+    //     if (gCategory === 'mission') {
+    //         setSelected(missionSelected);
+    //     }
+    // });
 
-    console.log("''''''", missionSelected);
+    console.log('missionSelected', missionSelected);
 
     //gbTitle state 관리
     const getValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -192,9 +192,6 @@ export default function BoardPost() {
 
     return (
         <div className="section section-group">
-            {/* <GroupHeader title={postMenu || ''} groupName={'코딩학당'} /> */}
-            {/* <GroupHeader title={'작성하기'} groupName={''} /> */}
-            {/* <GroupHeader title={''} groupName={''} /> */}
             <div className="post-container">
                 <div className="noti-content post-header title5">
                     <div className="select-box">
