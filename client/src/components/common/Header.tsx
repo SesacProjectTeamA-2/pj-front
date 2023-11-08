@@ -144,6 +144,7 @@ export default function Header(props: any) {
                                 type="text"
                                 id="grpSearch-input"
                                 value={grpInput}
+                                placeholder="초대 링크를 넣어보세요"
                                 onChange={(
                                     e: React.ChangeEvent<HTMLInputElement>
                                 ) => setGrpInput(e.target.value)}

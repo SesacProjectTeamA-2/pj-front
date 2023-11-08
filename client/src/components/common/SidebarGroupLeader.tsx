@@ -80,8 +80,6 @@ export default function SideBarGroupLeader({
                 // API로부터 gLink를 받아서 inviteCode에 설정
                 setInviteCode(response.data.gLink);
                 console.log('inviteCode:', inviteCode); // 이 줄을 추가
-                // 복사 성공 메시지 출력
-                // toast.success('초대코드가 복사되었습니다!');
             } else {
                 // 에러 메시지 처리
                 toast.error('초대코드를 가져오는 데 실패했습니다.');
