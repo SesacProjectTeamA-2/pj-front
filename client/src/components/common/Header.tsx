@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
+import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 
 import { grey } from '@mui/material/colors';
@@ -93,6 +94,28 @@ export default function Header(props: any) {
         }
     }, [window.location.pathname]);
 
+    // 초대장 링크 입력 후 버튼 클릭 시 그 그룹으로 이동
+    const [grpInput, setGrpInput] = useState<string>('');
+    const grpInputObj = {
+        gLink: grpInput,
+    };
+    const goInvited = (): void => {
+        axios
+            .post(
+                `${process.env.REACT_APP_DB_HOST}/group/joinByLink`,
+                grpInputObj,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                const { success, msg } = res.data;
+                success ? toast.success(msg) : toast.error(msg);
+            });
+    };
+
     return (
         <>
             <div className="header-container">
@@ -117,6 +140,21 @@ export default function Header(props: any) {
 
                     <nav className="header-nav ">
                         <ThemeProvider theme={theme}>
+                            <input
+                                type="text"
+                                id="grpSearch-input"
+                                value={grpInput}
+                                placeholder="초대 링크를 넣어보세요"
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) => setGrpInput(e.target.value)}
+                            />
+                            <img
+                                src="/asset/icons/search.svg"
+                                id="grpSearch-btn"
+                                onClick={(e: React.MouseEvent) => goInvited()}
+                                alt="search"
+                            ></img>
                             <ButtonGroup
                                 aria-label="outlined button group"
                                 variant="outlined"
