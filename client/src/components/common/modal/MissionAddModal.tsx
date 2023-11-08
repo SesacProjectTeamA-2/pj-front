@@ -61,7 +61,10 @@ export default function MissionAddModal({
         setAddModalSwitch(false);
     };
     console.log('missionList - ADD MODAL', missionList);
-
+    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
+    const today = new Date();
+    today.setDate(today.getDate() + 7); // 오늘 날짜로부터 7일 후
+    const defaultDday = today.toISOString().split('T')[0];
     const [missionInput, setMissionInput] = useState({
         // 새로 추가하는 미션
         id: missionList.length + 1,
@@ -69,7 +72,7 @@ export default function MissionAddModal({
         mContent: '',
         mLevel: 1,
         mSeq: null,
-        gDday,
+        gDday: defaultDday,
         // completed: false,
     });
 
@@ -123,7 +126,13 @@ export default function MissionAddModal({
         });
     };
 
-    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
+    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
+
+    // today.setDate(today.getDate()); // 오늘 날짜
+    // const todayTargetDate = today.toISOString().split('T')[0];
+
+    // const [targetDate, setTargetDate] = useState('todayTargetDate'); // 오늘 날짜로 수정이 안 되는데?
+    const [targetDate, setTargetDate] = useState('defaultDday'); // 오늘 날짜로 수정
 
     console.log('missionList', missionList);
 
