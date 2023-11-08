@@ -21,24 +21,26 @@ export default function GroupContent({ action }: any) {
 
     //] 1. 자유게시글
     const [freeList, setFreeList] = useState([]);
+    const [commentCount, setCommentCount] = useState(0);
 
     // 자유 게시글 조회
+    const getBoardFree = async () => {
+        const res = await axios.get(
+            `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free`,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        console.log('---', res.data.groupInfo);
+
+        setFreeList(res.data.groupInfo);
+        setCommentCount(res.data.commentCount);
+    };
+
     useEffect(() => {
-        const getBoardFree = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-
-            console.log(res.data);
-
-            setFreeList(res.data.groupInfo);
-        };
-
         getBoardFree();
     }, []);
 
@@ -58,22 +60,22 @@ export default function GroupContent({ action }: any) {
     const [missionList, setMissionList] = useState([]);
 
     // 미션 게시글 조회
+    const getBoardMission = async () => {
+        const res = await axios.get(
+            `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        console.log(res.data);
+
+        setMissionList(res.data.groupInfo);
+    };
+
     useEffect(() => {
-        const getBoardMission = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-
-            console.log(res.data);
-
-            setMissionList(res.data.groupInfo);
-        };
-
         getBoardMission();
     }, []);
 
@@ -95,6 +97,7 @@ export default function GroupContent({ action }: any) {
                                             <div className="post-list-header">
                                                 <div className="post-list-title">
                                                     {/* 프로필 이미지 */}
+                                                    {/* [추후] 동적으로 수정 */}
                                                     <img
                                                         className="profile-img"
                                                         src="/asset/images/sqr1.svg"
@@ -119,7 +122,9 @@ export default function GroupContent({ action }: any) {
                                                 }}
                                             />
 
-                                            <GroupContentFooter />
+                                            <GroupContentFooter
+                                                commentCount={commentCount}
+                                            />
                                         </div>
                                     </Link>
                                     {/* [ END ] */}
@@ -170,7 +175,9 @@ export default function GroupContent({ action }: any) {
                                                 }}
                                             />
 
-                                            <GroupContentFooter />
+                                            <GroupContentFooter
+                                                commentCount={commentCount}
+                                            />
                                         </div>
                                     </li>
                                     {/* [ END ] */}

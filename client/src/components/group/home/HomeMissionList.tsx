@@ -77,6 +77,7 @@ export default function HomeMissionList({
 
     // 변수 추가한 부분
     const missionState = useSelector((state: RootStateType) => state.mission);
+
     const [missionInput, setMissionInput] = useState({
         id: missionList.length + 1,
         mTitle: '',

@@ -12,6 +12,7 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 import { Divider, ListItem, ListItemText } from '@mui/material';
+import SuccessModal from 'src/components/common/modal/SucessModal';
 
 export default function GroupCreate() {
     const cookie = new Cookies();
@@ -76,9 +77,16 @@ export default function GroupCreate() {
     //     ],
     // };
 
-    // 그룹 생성 요청
+    //] 그룹 생성 완료 모달창
+    const [successModalSwitch, setSuccessModalSwitch] = useState(false);
+
+    const successHandler = () => {
+        setSuccessModalSwitch(true);
+    };
+
+    //] 그룹 생성 요청
     const groupCreateHandler = async () => {
-        // [추후] input 입력 안했을 시, 로직
+        //! [추후] input 입력 안했을 시, 로직
 
         const res = await axios
             .post(`${process.env.REACT_APP_DB_HOST}/group`, input, {
@@ -93,7 +101,11 @@ export default function GroupCreate() {
                 toast.success(`${input.gName} 모임을 생성하였습니다 !`);
                 <Toaster />;
 
-                nvg('/group');
+                // 모달창
+                //! [추후] input 입력 안했을 시, 로직
+                if (input.gName) {
+                    successHandler();
+                }
             })
             .catch((res) => {
                 // if (!input.gName) {
@@ -300,19 +312,29 @@ export default function GroupCreate() {
                     gDday={gDday}
                 />
             ) : null}
-            <button
+
+            {/* {successModalSwitch ? ( */}
+            <SuccessModal
+                successModalSwitch={successModalSwitch}
+                setSuccessModalSwitch={setSuccessModalSwitch}
+                action={'모임을 생성'}
+                groupName={input.gName}
+            />
+            {/* ) : null} */}
+            {/* <button
                 onClick={() => {
                     toast('성공 !!!');
                     console.log('???');
                 }}
             >
-                <Toaster />; success
-            </button>
+                <Toaster />success
+            </button> */}
             {/* <Link to="/group/home/1"> */}
+
             <button className="btn-fixed" onClick={() => groupCreateHandler()}>
                 모임 시작하기 !
             </button>
-            <Toaster />;{/* </Link> */}
+            {/* <Toaster />;</Link> */}
         </div>
     );
 }
