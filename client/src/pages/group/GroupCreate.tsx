@@ -46,12 +46,7 @@ export default function GroupCreate() {
         // // }
 
         // 유효성 검사: 모임명
-
-        if (name === 'gName' && value.length > 15) {
-            alert('모임명을 입력해주세요!');
-            e.target.focus();
-            return;
-        } else if (name === 'gName' && value.length > 15) {
+         if (name === 'gName' && value.length > 15) {
             alert('15자 이내의 모임명을 입력해주세요!');
 
             const slicedInput = value.slice(0, 15);
@@ -80,6 +75,14 @@ export default function GroupCreate() {
             if (isNaN(intValue) || intValue < 1) {
                 // 숫자가 아니거나 1 미만인 경우
                 alert('모임 인원은 1명 이상부터 가능합니다!');
+                setInput({ ...input, [name]: 1 });
+
+                e.target.value = '1';
+                e.target.focus();
+                return;
+            } else if (isNaN(intValue) || intValue > 100) {
+                // 숫자가 아니거나 1 미만인 경우
+                alert('모임 인원은 100명 미만으로 가능합니다!');
                 setInput({ ...input, [name]: 1 }); // 기본값으로 설정
                 // 해당 input에 포커스를 이동
                 e.target.value = '1'; // 입력값을 1로 설정
@@ -130,26 +133,42 @@ export default function GroupCreate() {
     //] 그룹 생성 요청
     const groupCreateHandler = async () => {
         //! [추후] input 입력 안했을 시, 로직
-        // 그룹 카테고리 미설정시 유효성 검사
+        // 유효성 검사: 그룹 카테고리 미설정 방지
         if (!input.gCategory) {
             // 만약 gCategory가 비어있으면 알림을 표시
             alert('그룹의 카테고리를 선택해주세요!');
             return; // 함수 실행 중지
         }
-
+        //유효성 검사: 모임명 미입력 방지
         if (!input.gName) {
             // 만약 gName이 비어있으면 알림을 표시
             alert('모임명을 입력해주세요!');
-            
+
             // 입력 필드에 포커스를 맞춥니다.
-            const gNameInput = document.querySelector('input[name="gName"]') as HTMLInputElement | null;
+            const gNameInput = document.querySelector(
+                'input[name="gName"]'
+            ) as HTMLInputElement | null;
             if (gNameInput) {
                 gNameInput.focus();
             }
-        
+
             return; // 함수 실행 중지
         }
-        
+        //유효성 검사: 모임설명 미입력 방지
+        if (!input.gDesc) {
+            // 만약 gName이 비어있으면 알림을 표시
+            alert('모임 설명을 입력해주세요!');
+
+            // 입력 필드에 포커스를 맞춥니다.
+            const gDescInput = document.querySelector(
+                'input[name="gDesc"]'
+            ) as HTMLInputElement | null;
+            if (gDescInput) {
+                gDescInput.focus();
+            }
+
+            return; // 함수 실행 중지
+        }
 
         const res = await axios
             .post(`${process.env.REACT_APP_DB_HOST}/group`, input, {
