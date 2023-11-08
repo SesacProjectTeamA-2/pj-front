@@ -35,12 +35,17 @@ export default function GroupContent({ action }: any) {
                     //user가 업로드한 값 없으면 기본 이미지
                     setUserImgSrc(userImg);
                     console.log('userImgSrc 있음', userImgSrc);
-                } else if (userImg) {
+                } else {
+                    // user가 업로드한 값이 없거나 undefined일 때
                     setUserImgSrc('/asset/images/user.svg');
                     console.log('userImgSrc 없음', userImgSrc);
-                } else {
-                    console.log('암것도 아님', userImgSrc);
                 }
+                // else if (userImg) {
+                //     setUserImgSrc('/asset/images/user.svg');
+                //     console.log('userImgSrc 없음', userImgSrc);
+                // } else {
+                //     console.log('암것도 아님', userImgSrc);
+                // }
             })
             .catch((err) => {
                 console.log('error 발생: ', err);

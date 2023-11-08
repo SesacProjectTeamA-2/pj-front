@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function AccRanking({ totalRanking, totalScoreRanking }: any) {
+export default function AccRanking({
+    totalRanking,
+    totalScoreRanking,
+    userImgSrc,
+}: any) {
     console.log('전체 랭킹', totalRanking);
     console.log('totalScoreRanking', totalScoreRanking);
 
@@ -20,7 +24,13 @@ export default function AccRanking({ totalRanking, totalScoreRanking }: any) {
                             <li>
                                 <div className="ranking-list">
                                     <div>{idx + 1}</div>
-                                    <img src={`${total.uImg}`} />
+                                    <img
+                                        src={
+                                            total.uImg ||
+                                            userImgSrc ||
+                                            '/asset/images/user.svg'
+                                        }
+                                    />
                                     <div className="name">{total.uName}</div>
                                     <div className="cur-ranking-content">
                                         <div className="score">
