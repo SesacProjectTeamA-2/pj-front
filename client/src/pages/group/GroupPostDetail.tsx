@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 import '../../styles/scss/pages/group/groupPostDetail.scss';
+import { TextField } from '@mui/material';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
@@ -188,7 +189,8 @@ export default function GroupPostDetail() {
         );
 
         console.log(res.data);
-        window.location.reload();
+        // window.location.reload();
+        getBoardNoti();
 
         // setFreeList(res.data.groupInfo);
     };
@@ -236,18 +238,26 @@ export default function GroupPostDetail() {
     const commentDeleteHandler = async (gbcSeq: number) => {
         console.log(gbcSeq);
 
-        const res = await axios.delete(
-            `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-            // commentEditTestInput, // [임시 test용]
-            // [추후] commentEditInput으로 변경
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
-
-        console.log(res.data);
+        const res = await axios
+            .delete(
+                `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
+                // commentEditTestInput, // [임시 test용]
+                // [추후] commentEditInput으로 변경
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
+                setCommentList((prevComments: any) =>
+                    prevComments.filter(
+                        (comment: any) => comment.gbcSeq !== gbcSeq
+                    )
+                );
+                getBoardNoti();
+            });
     };
 
     return (
@@ -366,8 +376,22 @@ export default function GroupPostDetail() {
                                                                   comment.createdAt
                                                               }
                                                           </div>
-                                                          <div>
-                                                              <div
+
+                                                          {/* 댓글 div */}
+                                                          <div
+                                                              style={{
+                                                                  display:
+                                                                      'flex',
+                                                                  flexDirection:
+                                                                      'row',
+                                                                  justifyContent:
+                                                                      'center',
+                                                                  flexBasis:
+                                                                      '30%',
+                                                              }}
+                                                          >
+                                                              <button
+                                                                  className="btn-sm"
                                                                   onClick={() =>
                                                                       commentEditHandler(
                                                                           comment.gbcSeq
@@ -375,14 +399,9 @@ export default function GroupPostDetail() {
                                                                   }
                                                               >
                                                                   수정
-                                                              </div>
-                                                              <div
-                                                                  //[추후] 모달로 수정
-                                                                  // onClick={() =>
-                                                                  //     warningModalSwitchHandler(
-                                                                  //         '댓글 삭제'
-                                                                  //     )
-                                                                  // }
+                                                              </button>
+                                                              <button
+                                                                  className="btn-sm"
                                                                   onClick={() =>
                                                                       commentDeleteHandler(
                                                                           comment.gbcSeq
@@ -390,15 +409,24 @@ export default function GroupPostDetail() {
                                                                   }
                                                               >
                                                                   삭제
-                                                              </div>
+                                                              </button>
                                                           </div>
                                                       </div>
                                                   </div>
-                                                  <div>
-                                                      {comment.gbcContent}
-                                                  </div>
-                                                  {/* END */}
+
+                                                  {/* 댓글 내용 */}
+                                                  <TextField
+                                                      value={comment.gbcContent}
+                                                      onChange={(
+                                                          e: React.ChangeEvent<HTMLInputElement>
+                                                      ) => {
+                                                          setBoardComments(
+                                                              e.target.value
+                                                          );
+                                                      }}
+                                                  />
                                               </li>
+                                              //  END
                                           );
                                       }
                                   )}
