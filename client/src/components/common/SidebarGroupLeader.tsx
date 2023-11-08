@@ -108,7 +108,7 @@ export default function SideBarGroupLeader({
             <ul className="title4 leader-menu">
                 <CopyToClipboard
                     text={inviteCode}
-                    onCopy={() => toast.success(' 초대링크가 복사되었습니다 !')}
+                    onCopy={() => toast.success(' 초대코드가 복사되었습니다 !')}
                 >
                     <li className="leader-edit" onClick={onClickInviteButton}>
                         초대하기

@@ -19,7 +19,7 @@ import {
 
 //=== 테이블 정의
 interface Column {
-    id: 'id' | 'title' | 'writer' | 'date';
+    id: 'id' | 'title' | 'content' | 'writer' | 'date';
     label: string;
     minWidth?: number;
     align?: 'center';
@@ -29,6 +29,7 @@ interface Column {
 const columns: Column[] = [
     { id: 'id', label: 'No.', minWidth: 50 },
     { id: 'title', label: '제목', minWidth: 150, align: 'center' },
+    { id: 'content', label: '내용', minWidth: 200, align: 'center' },
     {
         id: 'writer',
         label: '작성자',
@@ -55,6 +56,7 @@ const columns: Column[] = [
 interface Data {
     id: string;
     title: string;
+    content: string;
     writer: string;
     date: string;
 }
@@ -62,11 +64,12 @@ interface Data {
 function createData(
     id: string,
     title: string,
+    content: string,
     writer: string,
     date: string
 ): Data {
     // const density = writer / date;
-    return { id, title, writer, date };
+    return { id, title, content, writer, date };
 }
 
 // //=== 데이터가 들어올 부분 ===
@@ -138,6 +141,16 @@ export default function Groupidti() {
             .then((res) => {
                 console.log(res.data);
                 setNoticeList(res.data.groupInfo);
+
+                // setCommentList(res.data.groupInfo.tb_groupBoardCommnets);
+
+                const newNoticeList = res.data.groupInfo;
+                setNoticeList(newNoticeList);
+
+                const newGbSeqList = newNoticeList.map(
+                    (item: any) => item.gbSeq
+                );
+                setGbSeqList(newGbSeqList);
             });
     };
 
@@ -145,7 +158,14 @@ export default function Groupidti() {
         getBoardNoti();
     }, []);
 
-    const [noticeList, setNoticeList] = useState([]);
+    const [noticeList, setNoticeList] = useState<any>([]);
+
+    console.log('noticeList', noticeList);
+    // console.log('>>>>', noticeList[0].gbSeq);
+
+    const [gbSeqList, setGbSeqList] = useState<any>([]);
+
+    console.log('gbSeqList', gbSeqList);
 
     //=== 데이터가 들어올 부분 ===
     // const reversedRows = Array.from({ length: 50 }, (_, index) =>
@@ -157,13 +177,14 @@ export default function Groupidti() {
     //     )
     // );
 
-    const reversedRows = noticeList.map((item: any, index) =>
+    const reversedRows = noticeList.map((item: any, index: number) =>
         createData(
             // String(noticeList.length - index),
             String(index + 1),
             // replace(/(<([^>]+)>)/gi, '') => html tag 처리
             item.gbTitle.replace(/(<([^>]+)>)/gi, ''),
             item.gbContent.replace(/(<([^>]+)>)/gi, ''),
+            item.gbContent.replace(/(<([^>]+)>)/gi, ''), // [추후] 작성자 닉네임 추가
             item.createdAt
         )
     );
@@ -173,9 +194,9 @@ export default function Groupidti() {
     // 페이지 이동
     const navigate = useNavigate();
 
-    const handleRowClick = (rowId: number) => {
-        navigate('/group/idti/1/' + rowId);
-    };
+    // const handleRowClick = (rowId: number) => {
+    //     navigate('/group/idti/1/' + rowId);
+    // };
 
     // 테이블
     const [page, setPage] = React.useState(0);
@@ -230,7 +251,7 @@ export default function Groupidti() {
                                         page * rowsPerPage,
                                         page * rowsPerPage + rowsPerPage
                                     )
-                                    .map((row) => {
+                                    .map((row: any, idx: number) => {
                                         return (
                                             <TableRow
                                                 hover
@@ -247,7 +268,8 @@ export default function Groupidti() {
                                                             align={column.align}
                                                         >
                                                             <Link
-                                                                to={`/board/${gSeq}/noti/${gSeq}`}
+                                                                // to={`/board/${gSeq}/notice/${gbSeq}`}
+                                                                to={`/board/${gSeq}/notice/${gbSeqList[idx]}`}
                                                             >
                                                                 {column.format &&
                                                                 typeof value ===

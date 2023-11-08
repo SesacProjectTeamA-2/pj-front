@@ -12,9 +12,9 @@ export default function GroupPostDetail() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    const { gSeq, mSeq, gbSeq } = useParams();
+    const { gSeq, mSeq, gbSeq, gCategory } = useParams();
 
-    console.log(gSeq, mSeq, gbSeq);
+    console.log(gSeq, mSeq, gbSeq, gCategory);
 
     //; 게시글 조회 (GET)
     const [freeList, setFreeList] = useState<any>([]);
@@ -23,22 +23,25 @@ export default function GroupPostDetail() {
     const [boardType, setBoardType] = useState('');
 
     // 자유 게시글 상세 조회
-    useEffect(() => {
-        const getBoardFree = async () => {
-            const res = await axios.get(
+    const getBoardFree = async () => {
+        const res = await axios
+            .get(
                 `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice/${gbSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
                     },
                 }
-            );
+            )
+            .then((res) => {
+                console.log(res.data);
 
-            console.log(res.data);
+                setFreeList(res.data.groupInfo);
+                setCommentCount(res.data.commentCount);
+            });
+    };
 
-            setFreeList(res.data.groupInfo);
-        };
-
+    useEffect(() => {
         getBoardFree();
     }, []);
 
@@ -61,25 +64,27 @@ export default function GroupPostDetail() {
     //] 2. 미션게시글
     const [missionList, setMissionList] = useState<any>([]);
 
-    // 미션 게시글 조회
-    const getBoardMission = async () => {
-        const res = await axios.get(
-            `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
+    if (mSeq) {
+        // 미션 게시글 조회
+        const getBoardMission = async () => {
+            const res = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
 
-        console.log(res.data);
+            console.log(res.data);
 
-        setMissionList(res.data.groupInfo);
-    };
-
-    useEffect(() => {
+            setMissionList(res.data.groupInfo);
+        };
         getBoardMission();
-    }, []);
+    }
+
+    // useEffect(() => {
+    // }, []);
 
     // 메뉴 선택
     const [menu, setMenu] = useState('');
@@ -100,12 +105,16 @@ export default function GroupPostDetail() {
         freeList.tb_groupBoardComments
     );
 
+    const [commentCount, setCommentCount] = useState(0);
+
+    // const [commentList, setCommentList] = useState<any>([]);
+
     useEffect(() => {
         setComments(freeList.tb_groupBoardComments);
     }, [freeList.tb_groupBoardComments]);
 
-    console.log('******', commentList);
-    console.log('******', comments);
+    console.log('commentList', commentList);
+    console.log('comments', comments);
 
     //   {
     //     createdAt: "2023-11-05 22:42:51",
@@ -208,8 +217,8 @@ export default function GroupPostDetail() {
             <GroupHeader
                 // [ 추후 ] 넘버링 id 추가
                 // title={`미션 1. ${missionArr[0]}`}
-                title={'자유/질문'}
-                groupName={'코딩학당'}
+                title={`${gCategory}`}
+                groupName={''}
             />
 
             <div className="post-detail-container">
@@ -264,9 +273,8 @@ export default function GroupPostDetail() {
                     />
 
                     {/* 댓글 수, 반응 수 */}
-                    <GroupContentFooter />
+                    <GroupContentFooter commentCount={commentCount} />
 
-                    {/* [질문, 추후] 이거 왜 안먹을까요...! ㅠㅠ  */}
                     <div className="comment-create">
                         <textarea
                             className="comment-textarea"
