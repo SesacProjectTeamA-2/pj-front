@@ -17,15 +17,15 @@ export default function GroupMissionList({
     action,
     missionList,
     groupDetail,
-    missionBoard,
-}: any) {
+}: // missionBoard,
+any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
     const { gSeq, mSeq, gCategory } = useParams();
 
     //] 2. 미션게시글
-    // const [missionList, setMissionList] = useState([]);
+    const [missionBoard, setMissionBoard] = useState([]);
 
     // 미션 게시글 조회
     const getBoardMission = async () => {
@@ -38,18 +38,18 @@ export default function GroupMissionList({
             }
         );
 
-        console.log(res.data);
+        console.log('--------', res.data);
 
-        // setMissionList(res.data.groupInfo);
+        setMissionBoard(res.data.groupInfo);
     };
 
-    console.log(']]]]]]]]]]]', missionList);
-    console.log('+++++++', groupDetail);
-    console.log('>>>>>>>>', missionBoard);
+    console.log('missionList', missionList);
+    console.log('groupDetail', groupDetail);
+    console.log('missionBoard', missionBoard);
 
     useEffect(() => {
         getBoardMission();
-    }, []);
+    }, [mSeq]);
 
     return (
         <div className="noti-container post-list-container">
@@ -69,11 +69,10 @@ export default function GroupMissionList({
                                                   {/* 프로필 이미지 */}
                                                   <img
                                                       className="profile-img"
-                                                      src="/asset/images/sqr1.svg"
+                                                      src={''}
                                                       alt="profile"
                                                   />
 
-                                                  {/* [추후] 작성자도 넣을지 말지 ? */}
                                                   {/* <div>달려라하니</div> */}
 
                                                   <div

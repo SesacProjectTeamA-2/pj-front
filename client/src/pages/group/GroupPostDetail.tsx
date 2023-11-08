@@ -19,13 +19,14 @@ export default function GroupPostDetail() {
     //; 게시글 조회 (GET)
     const [notiList, setNotiList] = useState<any>([]);
     const [freeList, setFreeList] = useState<any>([]);
+    const [boardComments, setBoardComments] = useState<any>([]);
 
     // [추후] 공지 or 자유/질문 or 미션
     const [boardType, setBoardType] = useState('');
 
-    console.log('+++++++++++');
-
     //] 0. 공지 게시글 상세 조회
+
+    const [userInfo, SetUserInfo] = useState<any>([]);
 
     const getBoardNoti = async () => {
         const res = await axios
@@ -39,8 +40,18 @@ export default function GroupPostDetail() {
             )
             .then((res) => {
                 console.log('getBoardNoti=======', res.data);
+                // console.log(
+                //     'userInfo',
+                //     res.data.groupInfo.tb_groupUser.tb_user
+                // );
 
                 setFreeList(res.data.groupInfo);
+
+                const userInfo = res.data.groupInfo.tb_groupUser.tb_user;
+                SetUserInfo(userInfo);
+
+                const boardComments = res.data.groupInfo.tb_groupBoardComments;
+                setBoardComments(boardComments);
                 // setCommentCount(res.data.commentCount);
             });
     };
@@ -48,6 +59,8 @@ export default function GroupPostDetail() {
     useEffect(() => {
         getBoardNoti();
     }, []);
+
+    console.log('boardComments', boardComments);
 
     //] 1. 자유 게시글 상세 조회
     // const getBoardFree = async () => {
@@ -252,11 +265,11 @@ export default function GroupPostDetail() {
                         <div className="post-detail-profile">
                             <img
                                 className="profile-img"
-                                src="/asset/images/sqr2.svg"
+                                src={`${userInfo?.uImg}`}
                                 alt="profile"
                             />
                             {/* uSeq 사용자 닉네임 가져오기 */}
-                            <div className="title4">{freeList?.uSeq}</div>
+                            <div className="title4">{userInfo?.uName}</div>
                         </div>
                         <div className="date">{freeList?.createdAt}</div>
                     </div>
@@ -300,7 +313,11 @@ export default function GroupPostDetail() {
                     />
 
                     {/* 댓글 수, 반응 수 */}
-                    <GroupContentFooter commentCount={''} />
+                    <GroupContentFooter
+                        commentCount={
+                            boardComments.length <= 0 ? 0 : boardComments.length
+                        }
+                    />
 
                     <div className="comment-create">
                         <textarea
@@ -318,59 +335,73 @@ export default function GroupPostDetail() {
                     <div className="comment-list">
                         <ul>
                             {/* commentList, comments 둘다 되네요..^^ */}
-                            {commentList?.map((comment: any, idx: number) => {
-                                return (
-                                    <li key={idx}>
-                                        {/* START */}
-                                        <div className="comment-header">
-                                            <div className="comment-profile">
-                                                <img
-                                                    className="comment-img"
-                                                    src="/asset/images/sqr2.svg"
-                                                    alt="profile"
-                                                />
-                                                <div className="title5">
-                                                    {/* {comment.uSeq} */}
-                                                    {/* [추후] 유저 닉네임 가져오기 */}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="date">
-                                                    {comment.createdAt}
-                                                </div>
-                                                <div>
-                                                    <div
-                                                        onClick={() =>
-                                                            commentEditHandler(
-                                                                comment.gbcSeq
-                                                            )
-                                                        }
-                                                    >
-                                                        수정
-                                                    </div>
-                                                    <div
-                                                        //[추후] 모달로 수정
-                                                        // onClick={() =>
-                                                        //     warningModalSwitchHandler(
-                                                        //         '댓글 삭제'
-                                                        //     )
-                                                        // }
-                                                        onClick={() =>
-                                                            commentDeleteHandler(
-                                                                comment.gbcSeq
-                                                            )
-                                                        }
-                                                    >
-                                                        삭제
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>{comment.gbcContent}</div>
-                                        {/* END */}
-                                    </li>
-                                );
-                            })}
+                            {boardComments.length <= 0
+                                ? ''
+                                : boardComments?.map(
+                                      (comment: any, idx: number) => {
+                                          return (
+                                              <li key={idx}>
+                                                  {/* START */}
+                                                  <div className="comment-header">
+                                                      <div className="comment-profile">
+                                                          <img
+                                                              className="comment-img"
+                                                              src={`${comment.tb_groupBoard.tb_groupUser.tb_user.uImg}`}
+                                                              alt="profile"
+                                                          />
+                                                          <div className="title5">
+                                                              {
+                                                                  comment
+                                                                      .tb_groupBoard
+                                                                      .tb_groupUser
+                                                                      .tb_user
+                                                                      .uName
+                                                              }
+                                                              {/* [추후] 유저 닉네임 가져오기 */}
+                                                          </div>
+                                                      </div>
+                                                      <div>
+                                                          <div className="date">
+                                                              {
+                                                                  comment.createdAt
+                                                              }
+                                                          </div>
+                                                          <div>
+                                                              <div
+                                                                  onClick={() =>
+                                                                      commentEditHandler(
+                                                                          comment.gbcSeq
+                                                                      )
+                                                                  }
+                                                              >
+                                                                  수정
+                                                              </div>
+                                                              <div
+                                                                  //[추후] 모달로 수정
+                                                                  // onClick={() =>
+                                                                  //     warningModalSwitchHandler(
+                                                                  //         '댓글 삭제'
+                                                                  //     )
+                                                                  // }
+                                                                  onClick={() =>
+                                                                      commentDeleteHandler(
+                                                                          comment.gbcSeq
+                                                                      )
+                                                                  }
+                                                              >
+                                                                  삭제
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div>
+                                                      {comment.gbcContent}
+                                                  </div>
+                                                  {/* END */}
+                                              </li>
+                                          );
+                                      }
+                                  )}
                         </ul>
                     </div>
                 </div>

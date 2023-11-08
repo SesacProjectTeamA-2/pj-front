@@ -104,7 +104,7 @@ export default function SideBarGroupLeader({
     };
 
     return (
-        <div className='leader-content'>
+        <div className="leader-content">
             <ul className="leader-menu">
                 <CopyToClipboard
                     text={inviteCode}
@@ -120,14 +120,13 @@ export default function SideBarGroupLeader({
                 <Link to={`/group/edit/${gSeq}`}>
                     <li className="leader-edit leader-title">모임 수정</li>
                 </Link>
-   
 
-                <li
+                {/* <li
                     onClick={missionCancelModalHandler}
                     className="title5 leader-warning"
                 >
                     미션완료 취소
-                </li>
+                </li> */}
 
                 <li
                     onClick={() =>

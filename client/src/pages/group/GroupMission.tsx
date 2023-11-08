@@ -55,6 +55,14 @@ export default function GroupMission() {
 
         setGroupDetail(res.data);
         setMissionList(res.data.groupMission);
+
+        console.log('+++++++', res.data.groupMission);
+
+        // for (let mission of missionList) {
+        //     if (mission.mSeq === Number(mSeq)) {
+        //         setMissionTitle(mission.mTitle);
+        //     }
+        // }
     };
 
     useEffect(() => {
@@ -71,15 +79,49 @@ export default function GroupMission() {
         // map: string;
     }
 
-    const [missionList, setMissionList] = useState<Mission[]>([]);
+    const [missionList, setMissionList] = useState<any>([]);
 
     // const [missionIdList, setMissionIdList] = useState<any>([]);
 
+    // const [missionTitle, setMissionTitle] = useState<any>('1234');
+
+    let missionTitle = '';
+
+    // useEffect(() => {
+    //     for (let mission of missionList) {
+    //         if (mission.mSeq === Number(mSeq)) {
+    //             setMissionTitle(mission.mTitle);
+    //         }
+    //     }
+    // }, []);
+
+    // useEffect(() => {
+    //     console.log('^^^^^^^^^');
+
+    for (let mission of missionList) {
+        if (mission.mSeq === Number(mSeq)) {
+            missionTitle = mission.mTitle;
+        }
+    }
+    // }, [mSeq]);
+
+    console.log('jjjjjjjjjj', missionTitle);
+
+    // console.log('>>>>>mm', mSeq);
+    // useEffect(() => {
+    //     for (let i = 0; i < missionList.length; i++) {
+    //         // missionIdList.push(missionList[i].mSeq);
+    //         // setMissionTitle([ ...missionList, mSeq: i ]);
+    //     }
+    // }, []);
+
     let missionIdList = [];
 
-    for (let i = 1; i <= missionList.length; i++) {
-        missionIdList.push(i);
+    for (let i = 0; i < missionList.length; i++) {
+        missionIdList.push(missionList[i].mSeq);
     }
+
+    // console.log('*********', missionIdList);
 
     console.log('missionList=========', missionList);
 
@@ -100,7 +142,7 @@ export default function GroupMission() {
 
     useEffect(() => {
         getMissionBoard();
-    }, []);
+    }, [mSeq]);
 
     const [missionBoard, setMissionBoard] = useState();
 
@@ -110,12 +152,8 @@ export default function GroupMission() {
         <div className="section section-group">
             <GroupHeader
                 // [ 추후 ] 넘버링 id 추가
-                title={`미션 : ${
-                    Object.keys(missionList)?.length
-                        ? missionList[Number(mSeq) - 1]?.mTitle
-                        : // missionList[Number(mSeq) - 1]?.mTitle
-                          ''
-                }`}
+                // title={`미션 : ${missionList[Number(mSeq) - 1]?.mTitle}`}
+                title={`미션 : ${missionTitle}`}
                 groupName={groupDetail.groupName}
             />
             <div className="noti-container proof-container">
