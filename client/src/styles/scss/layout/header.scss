@@ -94,14 +94,14 @@
 .menu li a {
     padding: 0.5rem;
 }
-#grpSeadrch-input {
-    width: 20%;
+#grpSearch-input {
+    width: 50%;
 }
 #grpSearch-btn {
     @include box(40px);
-    margin-right: 3%;
-    margin-left: 1%;
+    margin-left: 2%;
 }
+
 .menu-button {
     background-color: $color-primary;
     color: white;

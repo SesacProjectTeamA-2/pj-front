@@ -1,5 +1,6 @@
 @import '../../abstracts/variables';
 @import '../../abstracts/utils';
+@import '~include-media/dist/include-media';
 
 .group-home {
     width: 100%;
@@ -97,6 +98,9 @@
     display: flex;
     width: 100%;
     font-weight: bold;
+    @include media('<800px') {
+        flex-direction: column;
+    }
 }
 
 .ranking-list {
