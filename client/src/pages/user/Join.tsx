@@ -17,7 +17,7 @@ export default function Join() {
     interface userInfoItf {
         uEmail: string;
         uName: string;
-        uImg: string;
+        uImg: string | null;
         uCharImg: string | null;
         // uCategory1: string | null;
         // uCategory2: string | null;
@@ -29,14 +29,18 @@ export default function Join() {
 
     // 1. 회원가입 url에서 user 정보 가져오기
     const curPath: string = window.location.href;
-    const urlParams: any = new URLSearchParams(curPath);
-    // console.log('params', urlParams);
+    const url: any = new URL(curPath);
+    console.log('url', url.search);
+    const urlParams: any = new URLSearchParams(url.search);
+    console.log('params', urlParams);
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
-    const uImg: string = urlParams.get('userImg');
-    console.log(uName);
+    const uImg: string = urlParams.get('uImg');
 
+    for (const [key, value] of urlParams.entries()) {
+        console.log(`${key}: ${value}`);
+    }
     // 2. 사용자 닉네임 설정
     const [input, setInput] = useState<string | number>('');
 
