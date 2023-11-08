@@ -31,6 +31,7 @@ import AllGroup from './components/management/AllGroup';
 import Report from './components/management/Report';
 import BoardEdit from './pages/group/BoardEdit';
 import GroupMissionDetail from './pages/group/GroupMissionDetail';
+import MissionPost from './pages/group/MissionPost';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -165,11 +166,11 @@ function App() {
 
                 {/* 게시물 Create - 미션 */}
                 <Route
-                    path="/board/create/:gSeq/:gCategory/:mSeq"
+                    path="/board/create/:gSeq/mission/:mSeq"
                     // path="*/post"
                     element={
                         <GroupLayout
-                            children={<BoardPost />}
+                            children={<MissionPost />}
                             showChat={showChat}
                         />
                     }

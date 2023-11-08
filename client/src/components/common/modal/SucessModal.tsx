@@ -16,6 +16,7 @@ export default function SuccessModal({
     action,
     groupName,
     gSeq,
+    mSeq,
 }: // choiceModalSwitchHandler,
 any) {
     //=== 성공 모달창 ===
@@ -70,6 +71,14 @@ any) {
 
         if (action === '공지사항을 작성') {
             nvg(`/board/${gSeq}/notice`);
+        }
+
+        if (action === '자유/질문을 작성') {
+            nvg(`/board/${gSeq}/free`);
+        }
+
+        if (action === '미션 인증글을 작성') {
+            nvg(`/board/${gSeq}/mission/${mSeq}`);
         }
     };
 
