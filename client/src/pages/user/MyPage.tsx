@@ -86,12 +86,12 @@ export default function MyPage() {
 
         if (e.target.files && e.target.files[0]) {
             formData.append('image', e.target.files[0]);
-            formData.append('apple', 'apple');
+            // formData.append('apple', 'apple');
 
-            for (let val of formData.values()) {
-                // => tsConfig ver : es6 변경
-                console.log('formData ', val);
-            }
+            // for (let val of formData.values()) {
+            //     // => tsConfig ver : es6 변경
+            //     console.log('formData ', val);
+            // }
             sendImg(formData);
         }
     };

@@ -73,9 +73,12 @@ export default function Header(props: any) {
                 setUserImgSrc(userImg);
             });
     };
+    console.log(window.location.pathname);
+
     useEffect(() => {
         getUserProfile();
-    }, []);
+        console.log('changed!', userImgSrc);
+    }, [window.location.pathname]);
     return (
         <>
             <div className="header-container">
