@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 import '../../styles/scss/pages/group/groupPostDetail.scss';
@@ -89,17 +89,19 @@ export default function GroupPostDetail() {
     // console.log('>>>>', freeList);
 
     //; 게시글 삭제 (DELETE)
+    const nvg = useNavigate();
+
     const boardDeleteHandler = async (gbSeq: number) => {
-        const res = await axios.delete(
-            `${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`,
-            {
+        const res = await axios
+            .delete(`${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            }
-        );
-
-        console.log(res.data);
+            })
+            .then((res) => {
+                nvg(-1);
+                console.log(res.data);
+            });
     };
 
     //] 2. 미션게시글
