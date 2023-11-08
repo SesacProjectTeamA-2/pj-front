@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+
 import '../../styles/scss/pages/group/groupPostDetail.scss';
+import { TextField } from '@mui/material';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
 import WarningModal from '../../components/common/modal/WarningModal';
-import { TextField } from '@mui/material';
 
 export default function GroupMissionDetail() {
     const cookie = new Cookies();
@@ -104,14 +105,16 @@ export default function GroupMissionDetail() {
         );
 
         console.log(res.data);
-        window.location.reload();
+        // window.location.reload();
+        getBoardMission();
 
         // setFreeList(res.data.groupInfo);
     };
 
     // [추후] 수정 input 추가
+    let gbcSeq = Number(useParams());
     const [commentEditInput, setCommentEditInput] = useState({
-        gbcSeq: commentList.length + 1,
+        gbcSeq,
         gbcContent: '',
     });
 
@@ -135,8 +138,8 @@ export default function GroupMissionDetail() {
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
 
-            commentEditInput,
-            // { gbcContent: commentEditInput.gbcContent },
+            // commentEditInput,
+            { gbcContent: commentEditInput.gbcContent },
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
@@ -151,14 +154,9 @@ export default function GroupMissionDetail() {
                         : comment
                 )
             );
+            setCommentEditInput({ gbcSeq: 0, gbcContent: '' });
         }
-        setCommentEditInput({ gbcSeq: 0, gbcContent: '' });
     };
-
-    // console.log(res.data);
-    // window.location.reload();
-    //     getBoardMission();
-    // };
 
     //; 댓글 삭제 (DELETE)
     const commentDeleteHandler = async (gbcSeq: number) => {
@@ -177,7 +175,9 @@ export default function GroupMissionDetail() {
             )
             .then((res) => {
                 console.log(res.data);
-                commentList.filter((cmt: any) => cmt.gbcSeq !== gbcSeq);
+                setCommentList(
+                    commentList.filter((cmt: any) => cmt.gbcSeq !== gbcSeq)
+                );
                 getBoardMission();
             });
     };
@@ -320,8 +320,7 @@ export default function GroupMissionDetail() {
                                                         >
                                                             수정
                                                         </button>
-                                                        {/* </div>
-                                                    <div */}
+
                                                         <button
                                                             onClick={() =>
                                                                 commentDeleteHandler(
@@ -338,7 +337,7 @@ export default function GroupMissionDetail() {
                                         </div>
                                         {/* 댓글 내용 */}
                                         <TextField
-                                            // value={commentEditInput.gbcContent}
+                                            // value={comment.gbcContent}
                                             value={
                                                 comment.gbcSeq ===
                                                 commentEditInput.gbcSeq
@@ -349,11 +348,11 @@ export default function GroupMissionDetail() {
                                             onChange={(
                                                 e: React.ChangeEvent<HTMLInputElement>
                                             ) => {
-                                                commentEditOnChange(e);
-                                                console.log(
-                                                    'editInput',
-                                                    commentEditInput
-                                                );
+                                                // commentEditOnChange(e);
+                                                setCommentEditInput({
+                                                    ...commentEditInput,
+                                                    gbcContent: e.target.value,
+                                                });
                                             }}
                                         ></TextField>
 
