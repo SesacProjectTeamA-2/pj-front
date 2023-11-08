@@ -99,7 +99,7 @@
 .input-obj {
     // border: 1px solid black;
     border: none;
-    width: 35vw;
+    width: 30vw;
     border-radius: 10px;
     margin-right: 10px;
 }
@@ -144,6 +144,7 @@
 #profilePic-user {
     @include box(20vh);
     cursor: pointer;
+    border-radius: 50%;
 }
 #profilePic-edit {
     width: 100%;
@@ -165,7 +166,7 @@
     background-color: white;
     width: 80%;
     height: 100%;
-    border: 7px solid $color-primary;
+    border: 5px solid $color-primary;
     border-radius: 10px;
 }
 .character-item-div {

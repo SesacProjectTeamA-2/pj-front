@@ -8,7 +8,7 @@
 }
 // 그룹 메뉴 바 컴포넌트 들어갈 곳
 .groupMenu-div {
-    background-color: $color-gray2;
+    background-color: $color-primary;
 }
 .manageMenu-div {
     background-color: $color-primary;
@@ -33,6 +33,5 @@
 
 // 채팅 컴포넌트 들어갈 곳
 .chatting-div {
-    // width: 100vw;
-    background-color: rgb(255, 215, 139);
+    background-color: white;
 }
