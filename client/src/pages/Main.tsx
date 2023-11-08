@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { redirect, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
-import MainImg from '../components/main/MainImg';
 import Content from '../components/main/Content';
 
 export default function Main() {

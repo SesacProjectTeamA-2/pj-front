@@ -174,7 +174,6 @@ export default function MyPage() {
     // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
-    // 기본값: 내가 적을래요
     const [phraseModeBtnVal, setPhraseModeBtnVal] =
         useState<string>('recommend');
     const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
