@@ -15,16 +15,21 @@ export default function GroupList() {
 
     //] 생성한 모임
     const getMadeGroup = async () => {
-        const res = await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/group/made`, {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            })
-            .then((res) => {
-                console.log('>>>>>>>>>>>>>>>>>>>>', res.data);
-                setMadeGroup(res.data.groupInfo);
-            });
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/group/made`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
+            const data = response.data; // 데이터에 접근
+            console.log('mmmmmmmmmmmmmmmmmmmm', data.groupInfo);
+            setMadeGroup(data.groupInfo); // 받은 데이터를 joinGroup 상태로 설정
+        } catch (error) {
+            console.error('Error while fetching data:', error);
+        }
     };
 
     useEffect(() => {
@@ -35,13 +40,21 @@ export default function GroupList() {
 
     //] 참여한 모임
     const getJoinedGroup = async () => {
-        const res = await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/group/joined`, {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            })
-            .then((res) => console.log(res.data));
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/group/joined`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
+            const data = response.data; // 데이터에 접근
+            console.log('dddddddddddddddddddddd', data.groupInfo);
+            setJoinGroup(data.groupInfo); // 받은 데이터를 joinGroup 상태로 설정
+        } catch (error) {
+            console.error('Error while fetching data:', error);
+        }
     };
 
     useEffect(() => {
@@ -56,8 +69,8 @@ export default function GroupList() {
                 <div>
                     {madeGroup?.length > 0 ? (
                         <SwiperComponent
-                            madeGroup={madeGroup}
-                            setMadeGroup={setMadeGroup}
+                            groupArray={madeGroup}
+                            setGroupArray={setMadeGroup}
                         />
                     ) : (
                         '생성한 모임이 없습니다. '
@@ -70,8 +83,8 @@ export default function GroupList() {
 
                 {joinGroup?.length > 0 ? (
                     <SwiperComponent
-                        joinGroup={joinGroup}
-                        setJoinGroup={setJoinGroup}
+                        groupArray={joinGroup}
+                        setGroupArray={setJoinGroup}
                     />
                 ) : (
                     '가입한 모임이 없습니다. '
