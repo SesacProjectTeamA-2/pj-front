@@ -18,32 +18,32 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = [
     {
         id: 0,
-        mTitle: '',
-        mContent: '',
+        mTitle: '알고리즘: 스택, 큐',
+        mContent: '스택, 큐 알고리즘 문제 풀이 발표 준비 자료 제출하기',
         mLevel: '⭐️',
         completed: true, // 추후 수정
     },
-    // {
-    //     id: 1,
-    //     mTitle: '알고리즘',
-    //     mContent: '문제에 대한 코드를 제출합니다.',
-    //     mLevel: '⭐️⭐️⭐️',
-    //     completed: true, // 추후 수정
-    // },
-    // {
-    //     id: 2,
-    //     mTitle: '블로깅',
-    //     mContent: '게시물 링크를 올립니다.',
-    //     mLevel: '⭐️⭐️',
-    //     completed: false,
-    // },
-    // {
-    //     id: 3,
-    //     mTitle: '모각코',
-    //     mContent: '게시물 링크를ff 올립니다.',
-    //     mLevel: '⭐️',
-    //     completed: false,
-    // },
+    {
+        id: 1,
+        mTitle: '알고리즘: 그리디',
+        mContent: '문제에 대한 코드를 제출하기',
+        mLevel: '⭐️⭐️⭐️',
+        completed: true, // 추후 수정
+    },
+    {
+        id: 2,
+        mTitle: '알고리즘: BFS/DFS',
+        mContent: '관련 강의 수강 후 정리한 기록 올리기',
+        mLevel: '⭐️⭐️',
+        completed: false,
+    },
+    {
+        id: 3,
+        mTitle: '이분탐색, 트리',
+        mContent: '프로그래머스 문제 풀이 제출 인증샷',
+        mLevel: '⭐️',
+        completed: false,
+    },
 ];
 
 const missionSlice = createSlice({

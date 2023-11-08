@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -15,6 +16,8 @@ import { Divider, ListItem, ListItemText } from '@mui/material';
 export default function GroupCreate() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
+
+    const nvg = useNavigate();
 
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
@@ -75,20 +78,29 @@ export default function GroupCreate() {
 
     // 그룹 생성 요청
     const groupCreateHandler = async () => {
-        const res = await axios.post(
-            `${process.env.REACT_APP_DB_HOST}/group`,
-            input,
-            {
+        // [추후] input 입력 안했을 시, 로직
+
+        const res = await axios
+            .post(`${process.env.REACT_APP_DB_HOST}/group`, input, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            }
-        );
-        console.log(res.data);
+            })
+            .then((res) => {
+                console.log(res.data);
 
-        // [추후] input 입력 안했을 시, 로직
+                // [추후] 실행이 안됨.,..
+                toast.success(`${input.gName} 모임을 생성하였습니다 !`);
+                <Toaster />;
 
-        // [추후] 생성한 모임 홈 화면으로 이동
+                nvg('/group');
+            })
+            .catch((res) => {
+                // if (!input.gName) {
+                // toast.error(`${res.data.msg}`);
+                toast.error('모임이 생성되지 않았습니다 !');
+                // }
+            });
     };
 
     console.log('input >> ', input); // 올바른 데이터 들어옴
@@ -128,56 +140,33 @@ export default function GroupCreate() {
         completed: boolean;
     }
 
-    const formData = new FormData();
-    formData.append('apple', 'apple');
+    // const formData = new FormData();
+    // formData.append('apple', 'apple');
 
     // 대표사진 업로드
-    const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('타겟', e.target.files);
-        let image: any = null;
+    // const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     console.log('타겟', e.target.files);
+    //     let image: any = null;
 
-        if (e.target.files) {
-            image = e.target.files[0];
-            console.log(image);
-            // formData.append('image', e.target.files['0']);
-            // sendImg(formData);
-            console.log(111111, input, formData);
-            setInput({ ...input, [e.target.name]: e.target.files['0'] });
-            console.log('input.gCoverImg!!!!!', input.gCoverImg);
-        }
+    //     if (e.target.files) {
+    //         image = e.target.files[0];
+    //         console.log(image);
+    //         // formData.append('image', e.target.files['0']);
+    //         // sendImg(formData);
+    //         console.log(111111, input, formData);
+    //         setInput({ ...input, [e.target.name]: e.target.files['0'] });
+    //         console.log('input.gCoverImg!!!!!', input.gCoverImg);
+    //     }
 
-        addForm(image);
-        // formData.append('image', image);
-        // console.log('@@@@@@', formData);
-    };
+    //     addForm(image);
+    //     // formData.append('image', image);
+    //     // console.log('@@@@@@', formData);
+    // };
 
-    const addForm = (image: any) => {
-        formData.append('image', image);
-        console.log(image);
-        console.log('@@@@@@', formData);
-    };
-
-    // const sendImg = (formData: any): void => {
-    //     const cookie = new Cookies();
-    //     const uToken = cookie.get('isUser'); // 토큰 값
-    //     // try {
-    //     //     axios
-    //     //         .patch(
-    //     //             `${process.env.REACT_APP_DB_HOST}/group/groupCoverImg`,
-    //     //             formData,
-    //     //             {
-    //     //                 headers: {
-    //     //                     'Content-Type': 'multipart/form-data',
-    //     //                     Authorization: `Bearer ${uToken}`,
-    //     //                 },
-    //     //             }
-    //     //         )
-    //     //         .then((res) => {
-    //     //             console.log('post', res.data);
-    //     //         });
-    //     // } catch (err) {
-    //     //     console.log(err);
-    //     // }
+    // const addForm = (image: any) => {
+    //     formData.append('image', image);
+    //     console.log(image);
+    //     console.log('@@@@@@', formData);
     // };
 
     return (
@@ -217,11 +206,7 @@ export default function GroupCreate() {
             </div>
             <div className="group-create-content">
                 <div>분야</div>
-                {/* <InterestedList
-                    selectedArr={selectedArr}
-                    setSelectedArr={setSelectedArr}
-                    num={1}
-                /> */}
+
                 {interestedArr.map((interest: Interested) => {
                     return (
                         <div key={interest.id}>
@@ -265,7 +250,6 @@ export default function GroupCreate() {
                     name="gDesc"
                 ></textarea>
             </div>
-
             <div className="group-create-content">
                 <div>제한 인원</div>
                 <input
@@ -275,9 +259,7 @@ export default function GroupCreate() {
                     onChange={onChange}
                     name="gMaxMem"
                 />
-                <div className="max-number">최대 00명</div>
             </div>
-
             <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
                 <div className="mission-container">
@@ -306,7 +288,6 @@ export default function GroupCreate() {
                     </div>
                 </div>
             </div>
-
             {addModalSwitch ? (
                 <MissionAddModal
                     addModalSwitch={addModalSwitch}
@@ -319,12 +300,19 @@ export default function GroupCreate() {
                     gDday={gDday}
                 />
             ) : null}
-
+            <button
+                onClick={() => {
+                    toast('성공 !!!');
+                    console.log('???');
+                }}
+            >
+                <Toaster />; success
+            </button>
             {/* <Link to="/group/home/1"> */}
             <button className="btn-fixed" onClick={() => groupCreateHandler()}>
                 모임 시작하기 !
             </button>
-            {/* </Link> */}
+            <Toaster />;{/* </Link> */}
         </div>
     );
 }

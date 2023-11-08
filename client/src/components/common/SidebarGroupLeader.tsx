@@ -85,18 +85,22 @@ export default function SideBarGroupLeader({
     };
 
     //; 모임 삭제 (DELETE)
-    const deleteGroupHandler = async (gSeq: number) => {
-        const res = await axios.delete(
-            `${process.env.REACT_APP_DB_HOST}/group`,
-            {
-                data: { gSeq },
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
 
-        console.log(res.data);
+    const tryDeleteGroupHandler = (gSeq: number) => {
+        warningModalSwitchHandler('모임 삭제');
+
+        // const deleteGroupHandler = async (gSeq: number) => {
+        //     const res = await axios
+        //         .delete(`${process.env.REACT_APP_DB_HOST}/group`, {
+        //             data: { gSeq },
+        //             headers: {
+        //                 Authorization: `Bearer ${uToken}`,
+        //             },
+        //         })
+        //         .then((res) => {
+        //             console.log(res.data);
+        //         });
+        // };
     };
 
     return (
@@ -143,8 +147,8 @@ export default function SideBarGroupLeader({
 
                 <li
                     //[추후] 모달 모임탈퇴 기능 추가
-                    // onClick={() => warningModalSwitchHandler('모임 삭제')}
-                    onClick={() => deleteGroupHandler(Number(gSeq))}
+                    // onClick={() =>
+                    onClick={() => tryDeleteGroupHandler(Number(gSeq))}
                     className="title5 leader-warning"
                 >
                     모임 삭제

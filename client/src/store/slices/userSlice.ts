@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 // 초기 상태
 const initialState = {
     uSeq: 0,
-    uEmail: 'abc@example.com',
-    uName: 'testUser',
+    uEmail: 'user@motimates.com',
+    uName: '김테스트',
     uImg: '/asset/images/sqr1.svg',
     uCharImg: '/asset/images/sqr1.svg',
-    uDesc: '자기소개입니다.',
+    uDesc: '안녕하세요 이번에 취업 전선에 뛰어 들어가고 있는 경영학과를 졸업한 취준생입니다!! 막상 취업은 해야겠지만 어디로 갈지 못 정하고 있는데 기초가 부족한 만큼 노력하겠습니다. ',
     uCategory1: 'it',
     uCategory2: 'ex',
     uCategory3: 're',
