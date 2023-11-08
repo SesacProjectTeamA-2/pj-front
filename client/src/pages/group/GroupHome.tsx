@@ -151,7 +151,7 @@ export default function GroupHome() {
                 console.log(res.data);
                 const { success, msg } = res.data;
                 if (!success) {
-                    alert('실패');
+                    alert(msg);
                 } else {
                     window.location.href = `http://localhost:3000/group/home/${gSeq}`;
                 }

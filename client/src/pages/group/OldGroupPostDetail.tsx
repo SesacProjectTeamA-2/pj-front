@@ -12,51 +12,9 @@ import WarningModal from '../../components/common/modal/WarningModal';
 export default function GroupPostDetail() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
-    // 0. 프로필 사진 가져오기
-    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
-
-    const getUserData = async () => {
-        await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            })
-            .then((res) => {
-                console.log('getUserData 로그인 후 ', res.data);
-                const { userImg } = res.data; //null
-
-                if (userImg !== null || userImg !== undefined) {
-                    //user가 업로드한 값 없으면 기본 이미지
-                    setUserImgSrc(userImg);
-                    console.log('userImgSrc 있음', userImgSrc);
-                } else {
-                    // user가 업로드한 값이 없거나 undefined일 때
-                    setUserImgSrc('/asset/images/user.svg');
-                    console.log('userImgSrc 없음', userImgSrc);
-                }
-                // else if (userImg) {
-                //     setUserImgSrc('/asset/images/user.svg');
-                //     console.log('userImgSrc 없음', userImgSrc);
-                // } else {
-                //     console.log('암것도 아님', userImgSrc);
-                // }
-            })
-            .catch((err) => {
-                console.log('error 발생: ', err);
-            });
-    };
-    // console.log(window.location.pathname);
-
-    useEffect(() => {
-        if (cookie.get('isUser')) {
-            getUserData();
-        } else {
-            return;
-        }
-    }, []);
 
     const { gSeq, mSeq, gbSeq, gCategory } = useParams();
+
     console.log(gSeq, mSeq, gbSeq, gCategory);
 
     //; 게시글 조회 (GET)
@@ -239,36 +197,6 @@ export default function GroupPostDetail() {
         // setFreeList(res.data.groupInfo);
     };
 
-    // 수정
-    const [editComment, setEditComment] = useState({
-        gbcSeq: -1,
-        gbcContent: '',
-    });
-    const editCommentHandler = (gbcSeq: any, gbcContent: any) => {
-        setEditComment({ gbcSeq, gbcContent });
-    };
-    const updateCommentHandler = async () => {
-        const res = await axios.patch(
-            `${process.env.REACT_APP_DB_HOST}/comment/edit/${editComment.gbcSeq}`,
-            { gbcContent: editComment.gbcContent },
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
-
-        // 서버에서 수정된 댓글 정보를 가져와서 업데이트
-        const updatedComment = res.data;
-        const updatedComments = boardComments.map((comment: any) =>
-            comment.gbcSeq === updatedComment.gbcSeq ? updatedComment : comment
-        );
-        setBoardComments(updatedComments);
-
-        // 수정 모드 종료
-        setEditComment({ gbcSeq: -1, gbcContent: '' });
-    };
-
     // [추후] 수정 input 추가
     const [commentEditInput, setCommentEditInput] = useState({
         gbcSeq: 1,
@@ -277,11 +205,10 @@ export default function GroupPostDetail() {
 
     // [추후] 수정 input 추가
     const commentEditOnChange = (e: any) => {
-        // setCommentEditInput({
-        //     ...commentEditInput,
-        //     gbcContent: e.target.value,
-        // });
-        setEditComment({ ...editComment, gbcContent: e.target.value });
+        setCommentEditInput({
+            ...commentEditInput,
+            gbcContent: e.target.value,
+        });
     };
 
     // [임시] test용
@@ -296,29 +223,17 @@ export default function GroupPostDetail() {
 
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-            // commentEditTestInput, // [임시 test용]
+            commentEditTestInput, // [임시 test용]
             // [추후] commentEditInput으로 변경
-            // commentEditInput,
-            // editComment,
-            { gbcContent: editComment.gbcContent },
-
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
             }
         );
-        const updatedComment = res.data;
-        const updatedComments = boardComments.map((comment: any) =>
-            comment.gbcSeq === updatedComment.gbcSeq ? updatedComment : comment
-        );
-        setBoardComments(updatedComments);
 
-        // 수정 모드 종료
-        setEditComment({ gbcSeq: -1, gbcContent: '' });
         // console.log(res.data);
-        // window.location.reload();
-        getBoardNoti();
+        window.location.reload();
     };
 
     //; 댓글 삭제 (DELETE)
@@ -362,11 +277,7 @@ export default function GroupPostDetail() {
                         <div className="post-detail-profile">
                             <img
                                 className="profile-img"
-                                src={
-                                    userInfo?.uImg ||
-                                    userImgSrc ||
-                                    '/asset/images/user.svg'
-                                }
+                                src={`${userInfo?.uImg}`}
                                 alt="profile"
                             />
                             {/* uSeq 사용자 닉네임 가져오기 */}
@@ -447,15 +358,7 @@ export default function GroupPostDetail() {
                                                       <div className="comment-profile">
                                                           <img
                                                               className="comment-img"
-                                                              src={
-                                                                  comment
-                                                                      .tb_groupBoard
-                                                                      .tb_groupUser
-                                                                      .tb_user
-                                                                      .uImg ||
-                                                                  userImgSrc ||
-                                                                  '/asset/images/user.svg'
-                                                              }
+                                                              src={`${comment.tb_groupBoard.tb_groupUser.tb_user.uImg}`}
                                                               alt="profile"
                                                           />
                                                           <div className="title5">
@@ -491,11 +394,9 @@ export default function GroupPostDetail() {
                                                           >
                                                               <button
                                                                   className="btn-sm"
-                                                                  onClick=//   } //       ) //           comment.gbcSeq //       commentEditHandler( //   {() =>
-                                                                  {() =>
-                                                                      editCommentHandler(
-                                                                          comment.gbcSeq,
-                                                                          comment.gbcContent
+                                                                  onClick={() =>
+                                                                      commentEditHandler(
+                                                                          comment.gbcSeq
                                                                       )
                                                                   }
                                                               >
@@ -516,35 +417,16 @@ export default function GroupPostDetail() {
                                                   </div>
 
                                                   {/* 댓글 내용 */}
-                                                  {
-                                                      editComment.gbcSeq ===
-                                                      comment.gbcSeq ? (
-                                                          <TextField
-                                                              //   value={comment.gbcContent}
-                                                              value={
-                                                                  editComment.gbcContent
-                                                              }
-                                                              onChange={(
-                                                                  e: React.ChangeEvent<HTMLInputElement>
-                                                              ) =>
-                                                                  commentEditOnChange(
-                                                                      e
-                                                                  )
-                                                              }
-                                                          />
-                                                      ) : (
-                                                          <div>
-                                                              {
-                                                                  comment.gbcContent
-                                                              }
-                                                          </div>
-                                                      )
-                                                      //   setBoardComments(
-                                                      //       e.target.value
-                                                      //   );
-                                                      //   }
-                                                  }
-                                                  {/* /> */}
+                                                  <TextField
+                                                      value={comment.gbcContent}
+                                                      onChange={(
+                                                          e: React.ChangeEvent<HTMLInputElement>
+                                                      ) => {
+                                                          setBoardComments(
+                                                              e.target.value
+                                                          );
+                                                      }}
+                                                  />
                                               </li>
                                               //  END
                                           );

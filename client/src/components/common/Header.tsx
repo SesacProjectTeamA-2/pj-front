@@ -55,12 +55,14 @@ export default function Header(props: any) {
     const nvg = useNavigate();
     const logoutHandler = () => {
         cookie.remove('isUser');
+        cookie.remove('token');
         nvg('/');
+        // alert('로그아웃!');
+        window.location.reload();
     };
 
     // 프로필 사진 가져오기
     const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
-    console.log(111, userImgSrc); //null : 프로필 사진 등록 안 했을 때
 
     const getUserData = async () => {
         await axios
