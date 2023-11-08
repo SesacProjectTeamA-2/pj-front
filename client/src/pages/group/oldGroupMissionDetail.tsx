@@ -7,7 +7,6 @@ import '../../styles/scss/pages/group/groupPostDetail.scss';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
 import WarningModal from '../../components/common/modal/WarningModal';
-import { TextField } from '@mui/material';
 
 export default function GroupMissionDetail() {
     const cookie = new Cookies();
@@ -74,10 +73,32 @@ export default function GroupMissionDetail() {
     };
 
     //] 댓글
+    // 댓글 리스트 : 자유게시글에 포함
+    // const commentList = missionList.tb_groupBoardComments;
 
+    // const [comments, setComments] = useState<any>(
+    //     missionList.tb_groupBoardComments
+    // );
+
+    // const [commentCount, setCommentCount] = useState(0);
+
+    // console.log('>>>>>>>>>', commentCount);
     const [commentList, setCommentList] = useState<any>([]);
 
-    console.log('commentList', commentList);
+    console.log('>>>>>>>', commentList);
+
+    // useEffect(() => {
+    //     setComments(missionList.tb_groupBoardComments);
+    // }, [missionList.tb_groupBoardComments]);
+
+    //   {
+    //     createdAt: "2023-11-05 22:42:51",
+    //     gbSeq: 3,
+    //     gbcContent: "댓글 과연...!!!!",
+    //     gbcSeq: 1,
+    //     uSeq: 1,
+    //     updatedAt: "2023-11-05 22:42:51"
+    //   }
 
     const [commentInput, setCommentInput] = useState({
         gbSeq,
@@ -111,10 +132,11 @@ export default function GroupMissionDetail() {
 
     // [추후] 수정 input 추가
     const [commentEditInput, setCommentEditInput] = useState({
-        gbcSeq: commentList.length + 1,
+        gbcSeq: 1,
         gbcContent: '',
     });
 
+    // [추후] 수정 input 추가
     const commentEditOnChange = (e: any) => {
         setCommentEditInput({
             ...commentEditInput,
@@ -123,10 +145,10 @@ export default function GroupMissionDetail() {
     };
 
     // [임시] test용
-    // const commentEditTestInput = {
-    //     gbcSeq: 1,
-    //     gbcContent: '댓글 수정합니다 !!!',
-    // };
+    const commentEditTestInput = {
+        gbcSeq: 1,
+        gbcContent: '댓글 수정합니다 !!!',
+    };
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number) => {
@@ -134,52 +156,35 @@ export default function GroupMissionDetail() {
 
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-
-            commentEditInput,
-            // { gbcContent: commentEditInput.gbcContent },
+            commentEditTestInput, // [임시 test용]
+            // [추후] commentEditInput으로 변경
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
             }
         );
-        if (res.data) {
-            setCommentList((prevComments: any) =>
-                prevComments.map((comment: any) =>
-                    comment.gbcSeq === gbcSeq
-                        ? { ...comment, gbcContent: commentInput.gbcContent }
-                        : comment
-                )
-            );
-        }
-        setCommentEditInput({ gbcSeq: 0, gbcContent: '' });
-    };
 
-    // console.log(res.data);
-    // window.location.reload();
-    //     getBoardMission();
-    // };
+        // console.log(res.data);
+        window.location.reload();
+    };
 
     //; 댓글 삭제 (DELETE)
     const commentDeleteHandler = async (gbcSeq: number) => {
         console.log(gbcSeq);
 
-        const res = await axios
-            .delete(
-                `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-                // commentEditTestInput, // [임시 test용]
-                // [추후] commentEditInput으로 변경
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res.data);
-                commentList.filter((cmt: any) => cmt.gbcSeq !== gbcSeq);
-                getBoardMission();
-            });
+        const res = await axios.delete(
+            `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
+            // commentEditTestInput, // [임시 test용]
+            // [추후] commentEditInput으로 변경
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+
+        console.log(res.data);
     };
 
     return (
@@ -299,64 +304,34 @@ export default function GroupMissionDetail() {
                                                     {comment.createdAt}
                                                 </div>
                                                 <div>
-                                                    {/* 수정 삭제 버튼 div */}
                                                     <div
-                                                        style={{
-                                                            display: 'flex',
-                                                            flexDirection:
-                                                                'row',
-                                                            justifyContent:
-                                                                'center',
-                                                            flexBasis: '30%',
-                                                        }}
+                                                        onClick={() =>
+                                                            commentEditHandler(
+                                                                comment.gbcSeq
+                                                            )
+                                                        }
                                                     >
-                                                        <button
-                                                            onClick={() =>
-                                                                commentEditHandler(
-                                                                    comment.gbcSeq
-                                                                )
-                                                            }
-                                                            className="btn-sm"
-                                                        >
-                                                            수정
-                                                        </button>
-                                                        {/* </div>
-                                                    <div */}
-                                                        <button
-                                                            onClick={() =>
-                                                                commentDeleteHandler(
-                                                                    comment.gbcSeq
-                                                                )
-                                                            }
-                                                            className="btn-sm"
-                                                        >
-                                                            삭제
-                                                        </button>
+                                                        수정
+                                                    </div>
+                                                    <div
+                                                        //[추후] 모달로 수정
+                                                        // onClick={() =>
+                                                        //     warningModalSwitchHandler(
+                                                        //         '댓글 삭제'
+                                                        //     )
+                                                        // }
+                                                        onClick={() =>
+                                                            commentDeleteHandler(
+                                                                comment.gbcSeq
+                                                            )
+                                                        }
+                                                    >
+                                                        삭제
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* 댓글 내용 */}
-                                        <TextField
-                                            // value={commentEditInput.gbcContent}
-                                            value={
-                                                comment.gbcSeq ===
-                                                commentEditInput.gbcSeq
-                                                    ? commentEditInput.gbcContent
-                                                    : comment.gbcContent
-                                            }
-                                            name="gbcContent"
-                                            onChange={(
-                                                e: React.ChangeEvent<HTMLInputElement>
-                                            ) => {
-                                                commentEditOnChange(e);
-                                                console.log(
-                                                    'editInput',
-                                                    commentEditInput
-                                                );
-                                            }}
-                                        ></TextField>
-
+                                        <div>{comment.gbcContent}</div>
                                         {/* END */}
                                     </li>
                                 );

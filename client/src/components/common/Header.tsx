@@ -89,15 +89,15 @@ export default function Header(props: any) {
     };
     // console.log(window.location.pathname);
 
-    // useEffect(() => {
-    //     if (cookie.get('isUser')) {
-    //         getUserData();
-    //         console.log('HEADER 로그인');
-    //     } else {
-    //         console.log('HEADER 비로그인');
-    //         return;
-    //     }
-    // }, [window.location.pathname]);
+    useEffect(() => {
+        if (cookie.get('isUser')) {
+            getUserData();
+            console.log('HEADER 로그인');
+        } else {
+            console.log('HEADER 비로그인');
+            return;
+        }
+    }, [window.location.pathname]);
 
     // 초대장 링크 입력 후 버튼 클릭 시 그 그룹으로 이동
     const [grpInput, setGrpInput] = useState<string>('');

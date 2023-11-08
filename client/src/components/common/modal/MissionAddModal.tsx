@@ -437,28 +437,6 @@ export default function MissionAddModal({
                                                                     'row',
                                                             }}
                                                         >
-                                                            {/* <ListItemText
-                                                                primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
-                                                                secondary={`${mission.mContent}`}
-                                                            /> */}
-                                                            {/* <TextField
-                                                                label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mStar}`}
-                                                                variant="standard"
-                                                                fullWidth
-                                                                name={`mTitle-${mission.id}`}
-                                                                value={
-                                                                    mission.mContent
-                                                                }
-                                                                onChange={(e) =>
-                                                                    handleMissionContentChange(
-                                                                        mission.id,
-                                                                        e.target
-                                                                            .value
-                                                                    )
-                                                                }
-                                                            />
-                                                             */}
-
                                                             {/* 제목, 내용 div */}
                                                             <div
                                                                 style={{
