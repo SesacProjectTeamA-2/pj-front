@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../styles/scss/components/progressbar.scss';
-
 export default function Progressbar({
     score,
     bg,
@@ -10,7 +9,6 @@ export default function Progressbar({
 }) {
     const scorePercentage = `${score}%`;
     // console.log(scorePercentage);
-
     // export default function Progressbar() {
     return (
         <div className="progress-div">
