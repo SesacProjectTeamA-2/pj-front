@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
@@ -55,6 +55,7 @@ export default function MissionAddModal({
     // const dispatch = useDispatch();
 
     const { gSeq } = useParams();
+    const nvg = useNavigate();
 
     const closeModalHandler = () => {
         setAddModalSwitch(false);
@@ -206,6 +207,8 @@ export default function MissionAddModal({
                         )
                         .then((res) => {
                             console.log('patched', res.data);
+                            // nvg(`/group/home/${gSeq}`);
+                            window.location.reload();
                         });
                 } catch (err) {
                     console.log(err);

@@ -17,7 +17,7 @@ export default function GroupMission() {
 
     const { gSeq, mSeq, gCategory } = useParams();
 
-    console.log(gCategory);
+    console.log('????', mSeq);
 
     const [groupDetail, setGroupDetail] = useState<GroupDetailType>({
         grInformation: '',

@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
+import axios from 'axios';
+
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -7,6 +11,7 @@ import '../../../styles/scss/components/modal.scss';
 import ModalMemberList from './ModalMemberList';
 import { useSelector } from 'react-redux';
 import {
+    GroupMissionsType,
     MissionListType,
     MissionStateType,
     RootStateType,
@@ -21,31 +26,32 @@ export default function MissionCancelModal({
     missionCancelModalSwitch,
     setMissionCancelModalSwitch,
 }: any) {
-    // interface MissionType {
-    //     id: number;
-    //     name: string;
-    //     selected: boolean;
-    // }
+    // const missionList = useSelector((state: RootStateType) => state.mission);
 
-    // const missionList: MissionType[] = [
-    //     {
-    //         id: 1,
-    //         name: '알고리즘',
-    //         selected: true,
-    //     },
-    //     {
-    //         id: 2,
-    //         name: '블로깅',
-    //         selected: false,
-    //     },
-    //     {
-    //         id: 3,
-    //         name: '모각코',
-    //         selected: false,
-    //     },
-    // ];
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
 
-    const missionList = useSelector((state: RootStateType) => state.mission);
+    const { gSeq } = useParams();
+
+    const [groupMissions, setGroupMissions] = useState<GroupMissionsType[]>([]);
+    const [groupName, setGroupName] = useState<GroupMissionsType[]>([]);
+
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                setGroupMissions(res.data.groupMission);
+                // setGrsoupName(res.data.groupName);
+            });
+    };
+
+    useEffect(() => {
+        getGroup();
+    }, []);
 
     const [selectedMissionId, setSelectedMissionId] = useState(1);
 
@@ -62,6 +68,10 @@ export default function MissionCancelModal({
 
     // 미션 인증완료 취소 완료
     const missionCancelDone = () => {
+        //! [추후] 미션 취소 axios
+        // 동적으로 수정
+        // input 2개 받아오기 (미션, 멤버 이름, 이유)
+
         alert('[000]님의 [미션 1. 알고리즘] 완료 인증이 취소되었습니다 !');
         setMissionCancelModalSwitch(false);
     };
@@ -96,7 +106,7 @@ export default function MissionCancelModal({
                     </div>
                     <div>
                         <div className="mission-cancel-modal-mission-list">
-                            {missionList.map((mission: MissionStateType) => {
+                            {groupMissions.map((mission: any) => {
                                 return (
                                     <div key={mission.id}>
                                         <label
@@ -124,41 +134,11 @@ export default function MissionCancelModal({
                                 );
                             })}
                         </div>
-                        <ModalMemberList action="미션인증 취소" />
-                    </div>
-                    <div>
-                        <Box
-                            component="form"
-                            sx={{
-                                '& .MuiTextField-root': {
-                                    width: '67ch',
-                                },
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <TextField
-                                id="filled-multiline-flexible"
-                                label="어떤 이유로 미션완료 인증이 안되나요 ?"
-                                multiline
-                                maxRows={4}
-                                variant="filled"
-                            />
-                        </Box>
-                    </div>
-                    <div className="mission-cancel-btn-container">
-                        <button
-                            onClick={missionCancelDone}
-                            className="btn-md mission-cancel-done-btn"
-                        >
-                            미션완료 취소
-                        </button>
-                        <button
-                            onClick={closeModalHandler}
-                            className="btn-md mission-cancel-back-btn"
-                        >
-                            돌아가기
-                        </button>
+                        <ModalMemberList
+                            action="미션인증 취소"
+                            missionCancelDone={missionCancelDone}
+                            closeModalHandler={closeModalHandler}
+                        />
                     </div>
                 </div>
             </Modal>

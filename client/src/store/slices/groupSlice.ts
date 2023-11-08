@@ -3,28 +3,28 @@ import { createSlice } from '@reduxjs/toolkit';
 // 초기 상태
 const initialState = {
     gSeq: 0,
-    gName: 'Node 스터디 (중복 안됩니다!)',
-    gDesc: 'Node.js 스터디 모임입니다!',
-    gDday: '2023-11-10',
-    gMaxMem: 10,
+    gName: '모던 자바스크립트 딥다이브 책 스터디',
+    gDesc: ' 모던 자바스크립트 딥다이브책에 대해 서로 발표하고 시험을 치는 스터디입니다! 6주 동안 화이팅 있게 자바스크립트를 훑으면서 프론트엔드 면접을 대비하고 싶습니다..! 1주일에 2번 정도 오프라인으로 할 생각입니다.',
+    gDday: '2023-11-31',
+    gMaxMem: 5,
     gCategory: 'st',
     gCoverImg:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
+        'https://velog.velcdn.com/images/tamagoyakii/post/978c4103-71ea-4c0a-91c9-e2c4a34914b0/image.png',
     missionArray: [
         {
-            mTitle: 'Node.js 강의 듣기',
-            mContent: 'Node.js 강의 쳅터 1 듣고 오기',
-            mLevel: 5,
+            mTitle: '1주차',
+            mContent: '1~5장, 6~9장',
+            mLevel: 1,
         },
         {
-            mTitle: '알고리즘',
-            mContent: '코드 문제 풀기',
+            mTitle: '2주차',
+            mContent: '10~13장, 14~17장',
             mLevel: 3,
         },
         {
-            mTitle: '모각코',
-            mContent: '소감 남기기',
-            mLevel: 1,
+            mTitle: '3주차',
+            mContent: '17장~20장, 21장~24장',
+            mLevel: 5,
         },
     ],
 };

@@ -3,6 +3,7 @@ import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
 import '../../styles/scss/pages/main/mainmission.scss';
+import { Link } from 'react-router-dom';
 
 export default function MainMission() {
     const cookie = new Cookies();
@@ -28,7 +29,7 @@ export default function MainMission() {
                 } = res.data;
 
                 setMissionArray(missionArray);
-                setMissionArray(groupInfo);
+                setGroupInfo(groupInfo);
                 setUName(uName);
                 setCharImg(uCharImg);
             });
@@ -41,7 +42,9 @@ export default function MainMission() {
     const [uName, setUName] = useState('');
     const [uCharImg, setCharImg] = useState('');
     const [missionArray, setMissionArray] = useState([]);
-    const [groupInfo, setGroupInfo] = useState([]);
+    const [groupInfo, setGroupInfo] = useState<any>([]);
+
+    console.log(missionArray);
 
     return (
         <div className="content-grid-box">
@@ -50,9 +53,27 @@ export default function MainMission() {
                 {
                     <div>
                         <div className="title5">모임명</div>
-                        <button className="btn-sm button mission-btn-to-group">
-                            미션1
-                        </button>
+                        {/* {groupInfo.map((info: any, idx: number) => {
+                            return <div>{info.tb_group[0].gName}</div>;
+                        })} */}
+
+                        {groupInfo?.map((info: any, idx: number) => {
+                            // return <div>{info[0].gName}</div>;
+                        })}
+                        {missionArray?.map((mission: any, idx: number) => {
+                            return (
+                                <div>
+                                    {/* [추후] 동적 수정... - 맞게 갈 수가 있나 ㅠ */}
+                                    <Link
+                                        to={`/board/${mission.gSeq}/mission/1`}
+                                    >
+                                        <button className="btn-sm button mission-btn-to-group">
+                                            {mission?.mTitle}
+                                        </button>
+                                    </Link>
+                                </div>
+                            );
+                        })}
                     </div>
                 }
             </div>
