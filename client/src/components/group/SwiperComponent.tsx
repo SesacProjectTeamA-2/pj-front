@@ -17,6 +17,7 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                 </div>
 
                 <Swiper
+                    style={{ cursor: 'pointer' }}
                     className="swiper"
                     effect={'coverflow'}
                     grabCursor={true}

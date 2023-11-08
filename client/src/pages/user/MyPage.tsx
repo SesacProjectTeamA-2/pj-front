@@ -161,7 +161,7 @@ export default function MyPage() {
     };
     // console.log('donePin', donePin);
 
-    //  7. dDay 설정: y/ 설정하지 않았을 경우, 빈값(null)"
+    //  7. dDay 설정: y | 설정하지 않았을 경우: 빈값(null)
     const [checkDday, setCheckDday] = useState<string | null>(null);
     useEffect(() => {
         dDayPin === 0 && donePin === 0 ? setCheckDday(null) : setCheckDday('y');

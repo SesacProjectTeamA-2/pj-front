@@ -99,11 +99,15 @@ export default function ModalMemberList({
     const patchLeader = async () => {
         const input = { newLeaderUSeq: selectedMemberId };
         const res = await axios
-            .patch(`${process.env.REACT_APP_DB_HOST}/group/leader/${gSeq}`, input, {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            })
+            .patch(
+                `${process.env.REACT_APP_DB_HOST}/group/leader/${gSeq}`,
+                input,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
             .then((res) => {
                 console.log(res.data);
                 const { success, msg } = res.data;

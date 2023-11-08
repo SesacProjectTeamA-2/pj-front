@@ -5,6 +5,7 @@ export default function CurRanking({
     nowRanking,
     groupMember,
     nowScoreRanking,
+    userImgSrc,
 }: any) {
     console.log('현재랭킹', nowRanking);
     console.log('----킹', nowScoreRanking);
@@ -29,7 +30,14 @@ export default function CurRanking({
                             <li>
                                 <div className="ranking-list">
                                     <div>{idx + 1}</div>
-                                    <img src={`${now.uImg}`} />
+                                    <img
+                                        src={
+                                            now.uImg ||
+                                            userImgSrc ||
+                                            '/asset/images/user.svg'
+                                        }
+                                        alt="userImg"
+                                    />
 
                                     <div className="cur-ranking-content">
                                         <div>{now.uName}</div>

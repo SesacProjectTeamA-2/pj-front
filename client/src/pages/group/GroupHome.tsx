@@ -50,6 +50,44 @@ export default function GroupHome() {
 
     // const userState = useSelector((state: RootStateType) => state.user);
 
+    // == 프로필 사진 가져오기 ==
+    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
+    console.log('userImgSrc', userImgSrc); //null : 프로필 사진 등록 안 했을 때
+
+    const getUserData = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('getUserData 로그인 후 ', res.data);
+                const { userImg } = res.data; //null
+
+                if (userImg !== null && userImg !== undefined) {
+                    // user가 업로드한 값이 있을 때
+                    setUserImgSrc(userImg);
+                    console.log('userImgSrc 있음', userImgSrc);
+                } else {
+                    // user가 업로드한 값이 없거나 undefined일 때
+                    setUserImgSrc('/asset/images/user.svg');
+                    console.log('userImgSrc 없음', userImgSrc);
+                }
+            })
+            .catch((err) => {
+                console.log('error 발생: ', err);
+            });
+    };
+
+    useEffect(() => {
+        if (cookie.get('isUser')) {
+            getUserData();
+        } else {
+            return;
+        }
+    }, []);
+
     //=== 모임 상세화면 읽어오기 ===
 
     const { gSeq } = useParams();
@@ -194,10 +232,12 @@ export default function GroupHome() {
                     nowRanking={nowRanking}
                     groupMember={groupDetail.groupMember}
                     nowScoreRanking={nowScoreRanking}
+                    userImgSrc={userImgSrc}
                 />
                 <AccRanking
                     totalRanking={totalRanking}
                     totalScoreRanking={totalScoreRanking}
+                    userImgSrc={userImgSrc}
                 />
             </div>
 

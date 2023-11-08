@@ -28,6 +28,10 @@ export default function Content(props: any) {
     //  null 이라면 false로 (명언 모드) : Quotes 컨텐츠 보임
     const [phraseModeSelf, setPhraseModeSelf] = useState<boolean>(false);
 
+    // -4) 캐릭터 가져오기
+    const [selectedCharacter, setSelectedCharacter] = useState<
+        string | undefined
+    >('/asset/images/sqr1.svg');
     const getUserData = async () => {
         await axios
             .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
@@ -36,8 +40,13 @@ export default function Content(props: any) {
                 },
             })
             .then((res) => {
-                const { userImg, phrase } = res.data;
-                console.log('CONTENT 이미지 / 지정 명언', userImg, phrase);
+                const { userImg, phrase, character } = res.data;
+                console.log(
+                    'CONTENT 이미지 / 지정 명언 / 캐릭터',
+                    userImg,
+                    phrase,
+                    character
+                );
                 if (
                     userImg !== '0' ||
                     userImg !== null ||
@@ -45,20 +54,31 @@ export default function Content(props: any) {
                 ) {
                     // 업로드한 이미지 있으면
                     setUserImgSrc(userImg);
+                } else {
+                    // user가 업로드한 값이 없거나 undefined일 때
+                    setUserImgSrc('/asset/images/user.svg');
+                    console.log('userImgSrc 없음', userImgSrc);
                 }
+
                 if (phrase) {
                     setPhraseModeSelf(true);
                     setPhraseCtt(phrase);
                     console.log('마이페이지 작성 => 가져온 명언', phraseCtt);
                     console.log('내가 쓴 명언인가 ? ', phraseModeSelf);
                 }
-                // console.log('userImgSrc 비로그인 시 기본 이미지 ', userImgSrc);
+
+                if (character !== null && character !== undefined) {
+                    setSelectedCharacter(character);
+                    console.log('character 있음', character);
+                } else {
+                    setSelectedCharacter('/asset/images/sqr1.svg');
+                    console.log('character 없음', character);
+                }
             });
     };
     useEffect(() => {
         if (cookie.get('isUser')) {
             getUserData();
-            // console.log('CONTENT 비로그인');
         }
     }, []);
 
@@ -244,7 +264,7 @@ export default function Content(props: any) {
                         </div>
                         <div>
                             <img
-                                src={`${uCharImg}`}
+                                src={selectedCharacter}
                                 alt="동물 이미지"
                                 className="my-progress-img"
                             />
@@ -300,7 +320,7 @@ export default function Content(props: any) {
                             <div className="profile-img-div-flex">
                                 {/* 멤버 리스트 동적 수정 */}
                                 <img
-                                    src={userImgSrc}
+                                    src={userImgSrc || '/asset/images/user.svg'}
                                     alt="프로필 이미지"
                                     className="profile-img"
                                 />

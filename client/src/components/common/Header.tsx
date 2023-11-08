@@ -60,6 +60,7 @@ export default function Header(props: any) {
 
     // 프로필 사진 가져오기
     const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
+    console.log(111, userImgSrc); //null : 프로필 사진 등록 안 했을 때
 
     const getUserData = async () => {
         await axios
@@ -72,15 +73,14 @@ export default function Header(props: any) {
                 console.log('getUserData 로그인 후 ', res.data);
                 const { userImg } = res.data; //null
 
-                if (userImg !== null || userImg !== undefined) {
-                    //user가 업로드한 값 없으면 기본 이미지
+                if (userImg !== null && userImg !== undefined) {
+                    // user가 업로드한 값이 있을 때
                     setUserImgSrc(userImg);
                     console.log('userImgSrc 있음', userImgSrc);
-                } else if (userImg) {
+                } else {
+                    // user가 업로드한 값이 없거나 undefined일 때
                     setUserImgSrc('/asset/images/user.svg');
                     console.log('userImgSrc 없음', userImgSrc);
-                } else {
-                    console.log('암것도 아님', userImgSrc);
                 }
             })
             .catch((err) => {
@@ -92,9 +92,9 @@ export default function Header(props: any) {
     useEffect(() => {
         if (cookie.get('isUser')) {
             getUserData();
-            console.log('HEADER 로그인');
+            console.log('HEADER 로그인 상태');
         } else {
-            console.log('HEADER 비로그인');
+            console.log('HEADER 비로그인 상태');
             return;
         }
     }, [window.location.pathname]);
