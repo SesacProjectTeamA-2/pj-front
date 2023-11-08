@@ -79,7 +79,7 @@ export default function HomeMissionList({
     const missionState = useSelector((state: RootStateType) => state.mission);
 
     const [missionInput, setMissionInput] = useState({
-        id: missionList.length + 1,
+        id: missionList?.length + 1,
         mTitle: '',
         mContent: '',
         mLevel: 1,
@@ -87,7 +87,7 @@ export default function HomeMissionList({
     });
 
     const [missionInputs, setMissionInputs] = useState(
-        missionList.map((mission: any) => ({
+        missionList?.map((mission: any) => ({
             id: mission.id,
             mTitle: mission.mTitle,
             mContent: mission.mContent,
@@ -173,7 +173,7 @@ export default function HomeMissionList({
             </div>
             <div className="main-content">
                 <ul>
-                    {missionList.map((mission: MissionType, idx: number) => {
+                    {missionList?.map((mission: MissionType, idx: number) => {
                         return (
                             <li key={idx} className="mission-li">
                                 <div className="mission-element">

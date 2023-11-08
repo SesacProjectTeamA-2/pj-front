@@ -30,6 +30,7 @@ import AllUser from './components/management/AllUser';
 import AllGroup from './components/management/AllGroup';
 import Report from './components/management/Report';
 import BoardEdit from './pages/group/BoardEdit';
+import GroupMissionDetail from './pages/group/GroupMissionDetail';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -132,7 +133,7 @@ function App() {
                 />
 
                 <Route
-                    path="/board/:gSeq/:gCategory/:mSeq"
+                    path="/board/:gSeq/mission/:mSeq"
                     element={
                         <GroupLayout
                             children={<GroupMission />}
@@ -188,7 +189,7 @@ function App() {
                 />
 
                 <Route
-                    path="/board/:gSeq/free/:gbSeq"
+                    path="/board/:gSeq/:gCategory/:gbSeq"
                     element={
                         <GroupLayout
                             children={<GroupPostDetail />}
@@ -198,10 +199,10 @@ function App() {
                 />
 
                 <Route
-                    path="/board/:gSeq/notice/:gbSeq"
+                    path="/board/:gSeq/mission/:mSeq/:gbSeq"
                     element={
                         <GroupLayout
-                            children={<GroupPostDetail />}
+                            children={<GroupMissionDetail />}
                             showChat={showChat}
                         />
                     }
