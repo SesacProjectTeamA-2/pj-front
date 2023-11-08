@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { Cookies } from 'react-cookie';
+import axios from 'axios';
 
 import { grey } from '@mui/material/colors';
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, Divider } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import '../../styles/scss/layout/header.scss';
 
 // dDay 제거
@@ -46,11 +45,6 @@ export default function Header(props: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
 
-    // console.log('@@@@@@@', uToken);
-    // if (Object.keys(allCookies).length !== 0) {
-    //     setIsCookie(true);
-    // }
-
     useEffect(() => {
         if (cookie.get('isUser')) {
             setIsCookie(true);
@@ -63,6 +57,25 @@ export default function Header(props: any) {
         nvg('/');
     };
 
+    // 프로필 사진 가져오기
+    const [userImgSrc, setUserImgSrc] = useState<string>(
+        '/asset/images/user.svg'
+    );
+    const getUserProfile = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                const { userImg } = res.data;
+                setUserImgSrc(userImg);
+            });
+    };
+    useEffect(() => {
+        getUserProfile();
+    }, []);
     return (
         <>
             <div className="header-container">
@@ -94,7 +107,7 @@ export default function Header(props: any) {
                             >
                                 <Link to="/main">
                                     <Button className="menu-button">
-                                        Main
+                                        MAIN
                                     </Button>
                                 </Link>
 
@@ -106,7 +119,7 @@ export default function Header(props: any) {
                                 {/* <li> */}
                                 <Link to="/group">
                                     <Button className="menu-button">
-                                        Group
+                                        GROUP
                                     </Button>
                                 </Link>
                                 {/* </li> */}
@@ -147,16 +160,17 @@ export default function Header(props: any) {
                                     <li>
                                         <Link to="/mypage">
                                             <img
-                                                src="/asset/images/user.svg"
+                                                src={userImgSrc}
                                                 style={{
                                                     width: '40px',
                                                     height: '40px',
                                                 }}
                                                 alt="userImg"
+                                                className="myPage-btn"
                                             ></img>
                                         </Link>
                                     </li>
-                                    <li id="chat-li">
+                                    {/* <li id="chat-li">
                                         <img
                                             src="/asset/icons/chat.svg"
                                             style={{
@@ -166,13 +180,12 @@ export default function Header(props: any) {
                                             alt="chatImg"
                                             onClick={() => props.showChatting()}
                                         />
-                                    </li>
+                                    </li> */}
                                 </>
                             )}
                         </ul>
                     </nav>
                 </div>
-
                 {/* 메뉴 탭 버튼 */}
                 <div className="tab-menu-div">
                     <button id="tab-menu-btn" onClick={() => toggleVal()}>
@@ -194,28 +207,30 @@ export default function Header(props: any) {
                         {/* <Dday /> */}
                         <li>
                             <Link to="/main">
-                                <button className="menu-button">Main</button>
+                                <button className="menu-button">MAIN</button>
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link to="/mission">
                                 <button className="menu-button">Mission</button>
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/group">
-                                <button className="menu-button">Group</button>
+                                <button className="menu-button">GROUP</button>
                             </Link>
                         </li>
 
-                        <li>
-                            {/* 관리자만 보이는 버튼 */}
+                        {/* 관리자만 보이는 버튼 */}
+                        {/* <li>
                             <Link to="/management/users">
                                 <button className="menu-button">
                                     Management
                                 </button>
                             </Link>
-                        </li>
+                        </li> */}
+
+                        {/* 로그인/비로그인 구분 */}
                         {!isCookie ? (
                             <li>
                                 {/* 비로그인 시 */}
@@ -238,11 +253,12 @@ export default function Header(props: any) {
                                     />
                                     <Link to="/mypage">
                                         <img
-                                            src="/asset/images/user.svg"
+                                            src={userImgSrc}
                                             style={{
                                                 width: '40px',
                                                 height: '40px',
                                             }}
+                                            className="myPage-btn"
                                             alt="userImg"
                                         ></img>
                                     </Link>
@@ -250,14 +266,15 @@ export default function Header(props: any) {
                             </>
                         )}
                         {/* 채팅 컴포넌트 */}
-                        <li id="chat-li">
+                        {/* <li id="chat-li">
                             <img
                                 src="/asset/icons/chat.svg"
                                 style={{ width: '40px', height: '40px' }}
                                 alt="chatImg"
                                 onClick={() => props.showChatting()}
+                                id="chat-btn"
                             />
-                        </li>
+                        </li> */}
                     </ul>
                 </nav>
             </div>

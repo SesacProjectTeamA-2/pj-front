@@ -423,17 +423,25 @@ export default function MissionAddModal({
                                         '현재 미션이 없습니다.'
                                     ) : (
                                         <>
+                                            {/* 미션생성 모달 */}
+
                                             {missionList.map((mission: any) => {
                                                 return (
                                                     <div key={mission.id}>
                                                         <Divider component="li" />
 
-                                                        <ListItem>
+                                                        <ListItem
+                                                            style={{
+                                                                display: 'flex',
+                                                                flexDirection:
+                                                                    'row',
+                                                            }}
+                                                        >
                                                             {/* <ListItemText
                                                                 primary={`미션 ${mission.id}. ${mission.mTitle} ${mission.mLevel}`}
                                                                 secondary={`${mission.mContent}`}
                                                             /> */}
-                                                            <TextField
+                                                            {/* <TextField
                                                                 label={`미션 ${mission.id}. ${mission.mTitle} ${mission.mStar}`}
                                                                 variant="standard"
                                                                 fullWidth
@@ -449,8 +457,101 @@ export default function MissionAddModal({
                                                                     )
                                                                 }
                                                             />
+                                                             */}
 
-                                                            <div>
+                                                            {/* 제목, 내용 div */}
+                                                            <div
+                                                                style={{
+                                                                    display:
+                                                                        'flex',
+                                                                    flexBasis:
+                                                                        '70%',
+                                                                    flexDirection:
+                                                                        'column',
+                                                                    justifyContent:
+                                                                        'space-between',
+                                                                    margin: '0.8rem',
+                                                                }}
+                                                            >
+                                                                <h3
+                                                                    style={{
+                                                                        marginBottom:
+                                                                            '1rem',
+                                                                    }}
+                                                                >
+                                                                    미션
+                                                                    {
+                                                                        mission.id
+                                                                    }{' '}
+                                                                    | 난이도{' '}
+                                                                    {
+                                                                        mission.mLevel
+                                                                    }
+                                                                </h3>
+                                                                {/* 제목 */}
+                                                                <TextField
+                                                                    label={`미션 ${mission.id} 제목`}
+                                                                    variant="standard"
+                                                                    name={`mTitle-${mission.id}`}
+                                                                    fullWidth
+                                                                    value={
+                                                                        mission.mTitle
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
+                                                                        handleMissionTitleChange(
+                                                                            mission.id,
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        )
+                                                                    }
+                                                                    style={{
+                                                                        marginBottom:
+                                                                            '0.4rem',
+                                                                    }}
+                                                                />
+
+                                                                {/* 내용 */}
+                                                                <TextField
+                                                                    label={`미션 ${mission.id} 인증 방법 `}
+                                                                    variant="standard"
+                                                                    name={`mTitle-${mission.id}`}
+                                                                    fullWidth
+                                                                    value={
+                                                                        mission.mContent
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
+                                                                        handleMissionContentChange(
+                                                                            mission.id,
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        )
+                                                                    }
+                                                                    style={{
+                                                                        marginBottom:
+                                                                            '0.4rem',
+                                                                    }}
+                                                                />
+                                                            </div>
+
+                                                            {/* 버튼 */}
+                                                            <div
+                                                                style={{
+                                                                    display:
+                                                                        'flex',
+                                                                    flexDirection:
+                                                                        'row',
+                                                                    justifyContent:
+                                                                        'center',
+                                                                    flexBasis:
+                                                                        '30%',
+                                                                }}
+                                                            >
                                                                 <button
                                                                     className="modal-mission-edit-btn btn-sm"
                                                                     onClick={() =>
@@ -461,8 +562,8 @@ export default function MissionAddModal({
                                                                 >
                                                                     수정
                                                                 </button>
-                                                            </div>
-                                                            <div>
+                                                                {/* </div>
+                                                            <div> */}
                                                                 <button
                                                                     className="modal-mission-delete-btn btn-sm"
                                                                     onClick={() =>
@@ -489,7 +590,6 @@ export default function MissionAddModal({
                                                 <div key={mission.id}>
                                                     <Divider component="li" />
 
-                                                    {/* 여기부터 미션 수정 모달 */}
                                                     <ListItem
                                                         style={{
                                                             display: 'flex',
@@ -588,8 +688,7 @@ export default function MissionAddModal({
                                                             >
                                                                 수정
                                                             </button>
-                                                            {/* </div>
-                                                        <div> */}
+
                                                             <button
                                                                 className="modal-mission-delete-btn btn-sm"
                                                                 onClick={() =>
