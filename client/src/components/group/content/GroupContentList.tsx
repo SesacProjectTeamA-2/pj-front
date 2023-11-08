@@ -17,6 +17,47 @@ export default function GroupContent({ action }: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
+    // 0. 프로필 사진 가져오기
+    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
+
+    const getUserData = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('getUserData 로그인 후 ', res.data);
+                const { userImg } = res.data; //null
+
+                if (userImg !== null || userImg !== undefined) {
+                    //user가 업로드한 값 없으면 기본 이미지
+                    setUserImgSrc(userImg);
+                    console.log('userImgSrc 있음', userImgSrc);
+                } else if (userImg) {
+                    setUserImgSrc('/asset/images/user.svg');
+                    console.log('userImgSrc 없음', userImgSrc);
+                } else {
+                    console.log('암것도 아님', userImgSrc);
+                }
+            })
+            .catch((err) => {
+                console.log('error 발생: ', err);
+            });
+    };
+    // console.log(window.location.pathname);
+
+    useEffect(() => {
+        if (cookie.get('isUser')) {
+            getUserData();
+            console.log('HEADER 로그인');
+        } else {
+            console.log('HEADER 비로그인');
+            return;
+        }
+    }, []);
+
     const { gSeq, mSeq, gCategory } = useParams();
 
     console.log(' gSeq, mSeq, gCategory', gSeq, mSeq, gCategory);
@@ -101,11 +142,9 @@ export default function GroupContent({ action }: any) {
                                           <div className="post-list-content">
                                               <div className="post-list-header">
                                                   <div className="post-list-title">
-                                                      {/* 프로필 이미지 */}
-                                                      {/* [추후] 동적으로 수정 */}
                                                       <img
                                                           className="profile-img"
-                                                          src="/asset/images/sqr1.svg"
+                                                          src={userImgSrc}
                                                           alt="profile"
                                                       />
 
