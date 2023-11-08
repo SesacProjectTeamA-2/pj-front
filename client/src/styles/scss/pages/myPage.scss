@@ -1,9 +1,13 @@
 @import '../abstracts/variables';
 @import '../abstracts/utils';
+@import '~include-media/dist/include-media';
 
 .myPage-p {
     font-size: 2em;
     margin-bottom: 5%;
+    @include media('<900px') {
+        font-size: 1em;
+    }
 }
 
 .myPage-div {
@@ -14,16 +18,22 @@
 // ProfilePic START
 .myPage-div-one {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     position: relative;
     margin-bottom: 10%;
+    width: 100%;
+    @include media('<740px') {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 .myPage-div-one-one {
-    margin-right: 10%;
+    // margin-right: 10%;
 }
 .myPage-div-one-two {
-    width: 100%;
+    // width: 100%;
 }
+
 .myPage-div-two {
     display: flex;
     width: 100%;
@@ -36,16 +46,20 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     margin-bottom: 10%;
 }
 .myPage-div-three-one {
     display: flex;
     flex-direction: column;
-    align-items: start;
-    margin-right: 5%;
-    margin-left: 10%;
+    align-items: center;
+    // margin-right: 5%;
+    // margin-left: 10%;
+    @include media('<900px') {
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
 
 .myPage-div-three-one p {
@@ -55,8 +69,22 @@
 .myPage-div-three-two {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
+    margin-top: 10%;
 }
+
+.phrase-all-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .input-label {
+        min-width: 200px;
+        width: 60vw;
+        margin: 10px;
+    }
+}
+
 .myPage-div-four {
     display: flex;
     align-items: center;
@@ -67,7 +95,8 @@
 }
 .myPage-div-five {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     justify-content: center;
     margin-bottom: 3%;
@@ -75,7 +104,7 @@
 .myPage-div-five-two {
     display: flex;
     flex-direction: column;
-    margin-left: 10%;
+    // margin-left: 10%;
 }
 .myPage-div-six {
     display: flex;
@@ -147,8 +176,8 @@
     border-radius: 50%;
 }
 #profilePic-edit {
-    width: 100%;
-    height: 100%;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
 }
 
@@ -190,10 +219,6 @@
 // Character END
 
 // Interested START
-.interested-div {
-    display: flex;
-    flex-wrap: wrap;
-}
 
 .tag-radio {
     display: none;
@@ -239,15 +264,20 @@
     justify-content: center;
     width: 70%;
     text-align: center;
-    margin-left: 5%;
+    // margin-left: 5%;
+    flex-direction: row;
+    @include media('<800px') {
+        font-size: 12px;
+    }
 }
-#phraseMode-btn1 {
-    margin-right: 5%;
-    text-align: center;
-}
+#phraseMode-btn1,
 #phraseMode-btn2 {
+    margin: 5%;
     text-align: center;
+    padding: 0 10px;
+    // min-width: 100px;
 }
+
 // Phrase END
 
 // setMain START
@@ -300,6 +330,14 @@ td {
 }
 
 // Quit START
+
+.quit-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #quit-btn {
     background-color: white;
     color: #acacac;
