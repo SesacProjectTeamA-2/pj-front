@@ -32,20 +32,16 @@
         }
         @include media('<500px') {
             width: 4rem;
-                
-            }
+        }
     }
 
     input {
         width: 25vw;
         // gap: 1rem;
         @include media('<800px') {
-        width: 50vw;
-            
+            width: 50vw;
         }
     }
-
-   
 }
 .editor-post-btn {
     background-color: $color-primary;
@@ -57,14 +53,11 @@
     // width: 30rem;
     width: 52vw;
     @include media('<800px') {
-    // width: 25rem;
-    width: 65vw;
-
-        
+        // width: 25rem;
+        width: 65vw;
     }
     @include media('<500px') {
-    width: 17rem;
-        
+        width: 17rem;
     }
 }
 
@@ -79,4 +72,10 @@
 
 .ql-container {
     height: 15rem;
+}
+
+.mission-type {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }

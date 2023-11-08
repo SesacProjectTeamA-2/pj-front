@@ -12,7 +12,7 @@ export default function SideBarGroup() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    const { gSeq } = useParams();
+    const { gSeq, mSeq } = useParams();
 
     const [groupMissions, setGroupMissions] = useState<GroupMissionsType[]>([]);
     const [groupName, setGroupName] = useState<GroupMissionsType[]>([]);
@@ -81,36 +81,39 @@ export default function SideBarGroup() {
                         </div>
                         <div className="theme-flex">
                             <div className="theme-title">미션</div>
-                            <div >
-                                <div  className='mission-flex' >
-                                    <div className='mission-title'>진행 중</div>
+                            <div>
+                                <div className="mission-flex">
+                                    <div className="mission-title">진행 중</div>
                                     <div>
-                                        <ul  className="progress-mission">
-                                            {mSeqList.map((mSeq: number) => {
-                                                return (
-                                                    <li key={mSeq} className='sidebar-theme'>
-                                                        <Link
-                                                            to={`/board/${gSeq}/mission/${mSeq}`}
+                                        <ul className="progress-mission">
+                                            {groupMissions.map(
+                                                (mission: any, idx: number) => {
+                                                    return (
+                                                        <li
+                                                            key={idx}
+                                                            className="sidebar-theme"
                                                         >
-                                                            <div
-                                                                key={mSeq}
-                                                                className=""
+                                                            <Link
+                                                                to={`/board/${gSeq}/mission/${mission.mSeq}`}
                                                             >
-                                                                {
-                                                                    groupMissions[
-                                                                        mSeq - 1
-                                                                    ].mTitle
-                                                                }
-                                                            </div>
-                                                        </Link>
-                                                    </li>
-                                                );
-                                            })}
+                                                                <div
+                                                                    key={idx}
+                                                                    className=""
+                                                                >
+                                                                    {
+                                                                        mission.mTitle
+                                                                    }
+                                                                </div>
+                                                            </Link>
+                                                        </li>
+                                                    );
+                                                }
+                                            )}
                                         </ul>
                                     </div>
                                 </div>
                                 <Link to={`/board/${gSeq}/mission/done`}>
-                                    <div className='mission-title'>완료</div>
+                                    <div className="mission-title">완료</div>
                                 </Link>
                             </div>
                         </div>

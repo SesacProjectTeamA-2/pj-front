@@ -12,7 +12,7 @@ import Editor from './Editor';
 import { GroupDetailType, MissionType } from 'src/types/types';
 import SuccessModal from 'src/components/common/modal/SucessModal';
 
-export default function BoardPost() {
+export default function MissionPost() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
@@ -77,12 +77,12 @@ export default function BoardPost() {
         gSeq: Number(gSeq),
         gbTitle: '',
         gbContent: '',
-        gbCategory: gCategory,
-        mSeq: null,
+        gbCategory: 'mission',
+        mSeq: Number(mSeq),
     });
 
     const [missionSelected, setMissionSelected] = useState('');
-    const [selected, setSelected] = useState<any>(gCategory);
+    const [selected, setSelected] = useState<any>(mSeq);
 
     console.log('===========', selected);
 
@@ -120,34 +120,25 @@ export default function BoardPost() {
         const selectedValue = e.target.value;
         setSelected(selectedValue);
 
-        console.log('**********');
-
-        // setBoard((prevBoard: any) => ({
-        //     ...prevBoard,
-        //     gbCategory: selectedValue,
-        //     mSeq: null,
-        // }));
-        // console.log('setSelected 전', selectedValue);
-
-        if (selectedValue === 'notice') {
-            setBoard((prevBoard: any) => ({
-                ...prevBoard,
-                gbCategory: 'notice',
-                mSeq: null,
-            }));
-        } else if (selectedValue === 'free') {
-            setBoard({
-                ...board,
-                gbCategory: 'free',
-                mSeq: null,
-            });
-        } else {
-            setBoard({
-                ...board,
-                gbCategory: 'mission',
-                mSeq: Number(selectedValue),
-            });
-        }
+        // if (selectedValue === 'notice') {
+        //     setBoard((prevBoard: any) => ({
+        //         ...prevBoard,
+        //         gbCategory: 'notice',
+        //         mSeq: null,
+        //     }));
+        // } else if (selectedValue === 'free') {
+        //     setBoard({
+        //         ...board,
+        //         gbCategory: 'free',
+        //         mSeq: null,
+        //     });
+        // } else {
+        setBoard({
+            ...board,
+            gbCategory: 'mission',
+            mSeq: Number(selectedValue),
+        });
+        // }
         console.log('Selected:', e.target.value);
         // console.log('setSelected 후', board);
     };
@@ -194,10 +185,8 @@ export default function BoardPost() {
         setPostMenu(gCategory);
     }, []);
 
-    if (postMenu === 'notice') {
-        setPostMenu('공지사항');
-    } else if (postMenu === 'free') {
-        setPostMenu('자유/질문');
+    if (postMenu === 'mission') {
+        setPostMenu('미션');
     }
 
     return (
@@ -205,28 +194,37 @@ export default function BoardPost() {
             {/* <GroupHeader title={postMenu} groupName={''} /> */}
             <div className="post-container">
                 <div className="noti-content post-header title5">
-                    <div className="select-box">
-                        <div>종류</div>
-                        <select
-                            onChange={handleSelect}
-                            value={selected}
-                            // value={postMenu}
-                            // defaultChecked={gCategory}
-                        >
-                            {/* default : + 누른 페이지 */}
-                            {/* select 값에 따라 Link to 달라아야 함 */}
-
+                    <div className="mission-type">
+                        <div style={{ width: '7rem' }}>어떤 미션인가요 ?</div>
+                        <div className="select-box">
+                            <div>
+                                <select
+                                    onChange={handleSelect}
+                                    value={selected}
+                                    // value={postMenu}
+                                    // defaultChecked={gCategory}
+                                >
+                                    {/* default : + 누른 페이지 */}
+                                    {/* select 값에 따라 Link to 달라아야 함 */}
+                                    {/* 
                             <option value="notice">공지사항</option>
-                            <option value="free">자유/질문</option>
+                            <option value="free">자유/질문</option> */}
 
-                            {/* {missionList?.map((mission: any, idx: number) => {
-                                return (
-                                    <option value={mission.mSeq} key={idx}>
-                                        {mission.mTitle}
-                                    </option>
-                                );
-                            })} */}
-                        </select>
+                                    {missionList?.map(
+                                        (mission: any, idx: number) => {
+                                            return (
+                                                <option
+                                                    value={mission.mSeq}
+                                                    key={idx}
+                                                >
+                                                    {mission.mTitle}
+                                                </option>
+                                            );
+                                        }
+                                    )}
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="post-title">
@@ -258,8 +256,9 @@ export default function BoardPost() {
                 <SuccessModal
                     successModalSwitch={successModalSwitch}
                     setSuccessModalSwitch={setSuccessModalSwitch}
-                    action={`${postMenu}을 작성`}
+                    action={'미션 인증글을 작성'}
                     gSeq={gSeq}
+                    mSeq={mSeq}
                 />
             </div>
         </div>

@@ -41,7 +41,7 @@ export default function GroupMissionDetail() {
     const getBoardMission = async () => {
         const res = await axios
             .get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}/${gbSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -49,14 +49,17 @@ export default function GroupMissionDetail() {
                 }
             )
             .then((res) => {
-                console.log(res.data);
+                console.log('========', res.data);
                 setMissionList(res.data.groupInfo);
+                setCommentList(res.data.groupInfo.tb_groupBoardComments);
             });
     };
 
     useEffect(() => {
         getBoardMission();
     }, []);
+
+    console.log('MMMMM', missionList);
 
     // 메뉴 선택
     const [menu, setMenu] = useState('');
@@ -81,6 +84,8 @@ export default function GroupMissionDetail() {
 
     // console.log('>>>>>>>>>', commentCount);
     const [commentList, setCommentList] = useState<any>([]);
+
+    console.log('>>>>>>>', commentList);
 
     // useEffect(() => {
     //     setComments(missionList.tb_groupBoardComments);
@@ -200,8 +205,14 @@ export default function GroupMissionDetail() {
                                 src="/asset/images/sqr2.svg"
                                 alt="profile"
                             />
-                            {/* uSeq 사용자 닉네임 가져오기 */}
-                            <div className="title4">{missionList?.uSeq}</div>
+                            <div>
+                                <div className="title4">
+                                    {missionList?.gbTitle}
+                                </div>
+                                <div>
+                                    {missionList?.tb_groupUser?.tb_user.uName}
+                                </div>
+                            </div>
                         </div>
                         <div className="date">{missionList?.createdAt}</div>
                     </div>
@@ -245,7 +256,13 @@ export default function GroupMissionDetail() {
                     />
 
                     {/* 댓글 수, 반응 수 */}
-                    <GroupContentFooter commentCount={''} />
+                    <GroupContentFooter
+                        commentCount={
+                            missionList?.tb_groupBoardComments?.length <= 0
+                                ? 0
+                                : missionList?.tb_groupBoardComments?.length
+                        }
+                    />
 
                     <div className="comment-create">
                         <textarea
@@ -271,12 +288,15 @@ export default function GroupMissionDetail() {
                                             <div className="comment-profile">
                                                 <img
                                                     className="comment-img"
-                                                    src="/asset/images/sqr2.svg"
+                                                    src={`${comment.tb_groupBoard.tb_groupUser.tb_user.uImg}`}
                                                     alt="profile"
                                                 />
                                                 <div className="title5">
-                                                    {/* {comment.uSeq} */}
-                                                    {/* [추후] 유저 닉네임 가져오기 */}
+                                                    {
+                                                        comment.tb_groupBoard
+                                                            .tb_groupUser
+                                                            .tb_user.uName
+                                                    }
                                                 </div>
                                             </div>
                                             <div>
