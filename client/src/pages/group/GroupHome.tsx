@@ -43,33 +43,6 @@ export default function GroupHome() {
         mLevel: 5,
     };
 
-    //_ 빵빠레 커스터마이징
-    const onClick = () => {
-        // jsConfetti.addConfetti({
-        //     confettiColors: [
-        //         '#ff0a54',
-        //         '#ff477e',
-        //         '#ff7096',
-        //         '#ff85a1',
-        //         '#fbb1bd',
-        //         '#f9bec7',
-        //     ],
-        //     confettiRadius: 5,
-        //     confettiNumber: 500,
-        // });
-        // jsConfetti.addConfetti({
-        //     emojis: ['🎉', '👍🏻', '🥳'],
-        //     // emojis: ['🎉'],
-        //     emojiSize: 100,
-        //     confettiNumber: 30,
-        // });
-
-        //++ redux test 용
-        dispatch(changeGroup(test));
-
-        console.log(dummyGroupState);
-    };
-
     //=== redux 상태관리 ===
     const dummyGroupState = useSelector(
         (state: RootStateType) => state.dummyGroup
@@ -106,7 +79,7 @@ export default function GroupHome() {
 
     const getGroup = async () => {
         const res = await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
@@ -126,6 +99,26 @@ export default function GroupHome() {
     useEffect(() => {
         getGroup();
     }, []);
+
+    // 모임 가입하기
+    const postGroupJoin = async () => {
+        const input = { gSeq };
+        const res = await axios
+            .post(`${process.env.REACT_APP_DB_HOST}/group/join/`, input, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                const { success, msg } = res.data;
+                if (!success) {
+                    alert('실패');
+                } else {
+                    window.location.href = `http://localhost:3000/group/home/${gSeq}`;
+                }
+            });
+    };
 
     // 현재 점수 리스트
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
@@ -216,7 +209,7 @@ export default function GroupHome() {
                 memberArray={groupDetail.memberArray}
             />
 
-            <button className="btn-fixed" onClick={onClick}>
+            <button className="btn-fixed" onClick={postGroupJoin}>
                 가입하기
             </button>
         </div>
