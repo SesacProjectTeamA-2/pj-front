@@ -24,22 +24,6 @@ export default function CurRanking({
             </div>
             <div className="main-content">
                 <ul className="list-unstyled">
-                    {/* 현재 랭킹 리스트 */}
-                    {/* {uSeqList.map((now: any, idx: number) => {
-                        return (
-                            <li>
-                                <div className="ranking-list">
-                                    <div>{nowUserRanking}</div>
-                                    <img src="/asset/images/sqr1.svg" />
-
-                                    <div className="cur-ranking-content">
-                                        <div>{nowNameRanking}</div>
-                                        <Progressbar />
-                                    </div>
-                                </div>
-                            </li>
-                        );
-                    })} */}
                     {nowRanking.map((now: any, idx: number) => {
                         return (
                             <li>
@@ -52,6 +36,7 @@ export default function CurRanking({
 
                                         <Progressbar
                                             score={nowScoreRanking[idx]}
+                                            bg={'white'}
                                         />
                                     </div>
                                 </div>

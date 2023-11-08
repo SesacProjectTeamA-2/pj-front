@@ -8,6 +8,7 @@ import MyPercentage from './MyPercentage';
 import TeamPercentage from './TeamPercentage';
 
 import '../../styles/scss/pages/main/percentage.scss';
+import Progressbar from '../common/Progressbar';
 
 export default function Content() {
     const cookie = new Cookies();
@@ -27,9 +28,14 @@ export default function Content() {
             .then((res) => {
                 const { userImg } = res.data;
                 setUserImgSrc(userImg);
+                console.log('userImgSrc ', userImgSrc);
             });
     };
+    useEffect(() => {
+        getUserProfile();
+    }, []);
 
+    //] 1. 유저 미션 조회
     const getMissionMain = async () => {
         const res = await axios
             .get(`${process.env.REACT_APP_DB_HOST}/mission/user`, {
@@ -50,9 +56,11 @@ export default function Content() {
                 } = res.data;
 
                 setMissionArray(missionArray);
-                setMissionArray(groupInfo);
+                setGroupInfo(groupInfo);
                 setUName(uName);
                 setCharImg(uCharImg);
+                setIsDone(isDone);
+                setDoneRates(doneRates);
             });
     };
 
@@ -63,40 +71,120 @@ export default function Content() {
     const [uName, setUName] = useState('');
     const [uCharImg, setCharImg] = useState('');
     const [missionArray, setMissionArray] = useState([]);
-    const [groupInfo, setGroupInfo] = useState([]);
+    const [groupInfo, setGroupInfo] = useState<any>([]);
+    const [isDone, setIsDone] = useState([]);
+    const [doneRates, setDoneRates] = useState([]);
+
+    //] 2. 유저 가입 모임
+    const getJoinedGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/joined`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('joined----', res.data);
+
+                const { groupInfo } = res.data;
+
+                setJoinGroupInfo(groupInfo);
+            });
+    };
+
+    useEffect(() => {
+        getJoinedGroup();
+    }, []);
+
+    // [추후] joinGroupInfo 정보 맞는지 재확인
+
+    const [madeJoinInfo, setJoinGroupInfo] = useState<any>([]);
+
+    //] 3. 유저 생성 모임
+    const getMadeGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/made`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('made----', res.data);
+
+                const { groupInfo } = res.data;
+
+                setMadeGroupInfo(groupInfo);
+            });
+    };
+
+    useEffect(() => {
+        getMadeGroup();
+    }, []);
+
+    const [madeGroupInfo, setMadeGroupInfo] = useState<any>([]);
+
+    // //] 4. 모임 상세정보 조회
+    // const getGroupDeatil = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/group/made`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             console.log('detail----', res.data);
+
+    //             const { groupInfo } = res.data;
+
+    //             setMadeGroupInfo(groupInfo);
+    //         });
+    // };
+
+    // useEffect(() => {
+    //     getGroupDeatil();
+    // }, []);
 
     return (
         <div className="content-grid">
             <Quotes />
             {/* 1. 명언 : 가로로 길게 */}
+
+            <br />
+
             {/* 2. 달성률 : my, team */}
             <div className="content-grid-box">
                 <div className="percentage-div">
                     <div className="title4">My 달성률 </div>
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
-                            <div>
-                                {/* [추후] tb_name 수정 */}
-                                {/* <div className="title5">{groupInfo}</div> */}
-                            </div>
-
-                            {/* [추후] score 받아와서 반영 */}
-                            <div className="progress-bar-flex">
-                                <div>
-                                    <div className="progress-div">
-                                        <div className="my-progress">
-                                            <div className="my-bar-one"></div>
+                            {groupInfo.map((group: any, idx: number) => {
+                                return (
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        <div>
+                                            {/* [추후] tb_name 수정 */}
+                                            {/* <div className="title5">{groupInfo}</div> */}
+                                            {group.gSeq}
+                                        </div>
+                                        <div
+                                            className="bar-container"
+                                            style={{
+                                                display: 'flex',
+                                                width: '100%',
+                                            }}
+                                        >
+                                            <Progressbar
+                                                score={doneRates[idx]}
+                                                bg={'#f3f3f3'}
+                                            />
                                         </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <div className="progress-div">
-                                        <div className="my-progress">
-                                            <div className="my-bar-two"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
                         <div>
                             <img
@@ -109,10 +197,14 @@ export default function Content() {
                 </div>
             </div>
 
-            {/* 팀 달성률 */}
+            <br />
+
+            {/* Team 달성률 */}
+            {/* [첨언] 시간 없으면 빼겠습니다. */}
             <div className="content-grid-box">
                 <div className="percentage-div">
                     <div className="title4">Team 달성률</div>
+
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
                             <div className="profile-img-div-flex">
@@ -133,6 +225,7 @@ export default function Content() {
                                     className="profile-img"
                                 />
                             </div>
+
                             <div className="progress-bar-flex">
                                 <div>
                                     <div className="progress-div">
@@ -168,6 +261,9 @@ export default function Content() {
                     </div>
                 </div>
             </div>
+
+            <br />
+
             <MainMission />
         </div>
     );

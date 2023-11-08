@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { Cookies } from 'react-cookie';
+import axios from 'axios';
 
 import { grey } from '@mui/material/colors';
 import { Button, ButtonGroup, Divider } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import '../../styles/scss/layout/header.scss';
-import axios from 'axios';
 
 // dDay 제거
 // import Dday from './Dday';
@@ -75,7 +73,9 @@ export default function Header(props: any) {
                 setUserImgSrc(userImg);
             });
     };
-
+    useEffect(() => {
+        getUserProfile();
+    }, []);
     return (
         <>
             <div className="header-container">
@@ -166,6 +166,7 @@ export default function Header(props: any) {
                                                     height: '40px',
                                                 }}
                                                 alt="userImg"
+                                                className="myPage-btn"
                                             ></img>
                                         </Link>
                                     </li>
@@ -257,7 +258,7 @@ export default function Header(props: any) {
                                                 width: '40px',
                                                 height: '40px',
                                             }}
-                                            id="myPage-btn"
+                                            className="myPage-btn"
                                             alt="userImg"
                                         ></img>
                                     </Link>

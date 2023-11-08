@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import WarningModal from '../common/modal/WarningModal';
+import QuitModal from '../common/modal/QuitModal';
 
 export default function Quit() {
     const [warningModalSwitch, setWarningModalSwitch] = useState(false);
@@ -19,12 +20,18 @@ export default function Quit() {
                 탈퇴 시 활동 정보가 모두 삭제되며 복구되지 않습니다.{' '}
             </p>
 
-            <WarningModal
+            <QuitModal
                 warningModalSwitch={warningModalSwitch}
                 setWarningModalSwitch={setWarningModalSwitch}
                 warningModalSwitchHandler={warningModalSwitchHandler}
                 action={'회원 탈퇴'}
             />
+            {/* <WarningModal
+                warningModalSwitch={warningModalSwitch}
+                setWarningModalSwitch={setWarningModalSwitch}
+                warningModalSwitchHandler={warningModalSwitchHandler}
+                action={'회원 탈퇴'}
+            /> */}
         </div>
     );
 }

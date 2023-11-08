@@ -10,7 +10,7 @@ import Introduce from '../../components/myPage/Introduce';
 import CharacterList from '../../components/common/CharacterList';
 import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
-// import SetMainList from '../../components/myPage/SetMainList';
+import SetMainList from '../../components/myPage/SetMainList';
 import ProfilePic from '../../components/myPage/ProfilePic';
 import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
@@ -108,7 +108,7 @@ export default function MyPage() {
 
         try {
             axios
-                .post(
+                .patch(
                     `${process.env.REACT_APP_DB_HOST}/user/mypage/userImg`,
                     formData,
                     {

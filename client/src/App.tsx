@@ -150,7 +150,7 @@ function App() {
                     }
                 />
 
-                {/* 게시물 Create */}
+                {/* 게시물 Create - 공지, 자유 */}
                 <Route
                     path="/board/create/:gSeq/:gCategory"
                     // path="*/post"
@@ -162,7 +162,7 @@ function App() {
                     }
                 />
 
-                {/* 게시물 Create */}
+                {/* 게시물 Create - 미션 */}
                 <Route
                     path="/board/create/:gSeq/:gCategory/:mSeq"
                     // path="*/post"
@@ -175,6 +175,18 @@ function App() {
                 />
 
                 {/* 게시물 세부사항 Read */}
+
+                <Route
+                    path="/board/:gSeq/:gCategory"
+                    // path="*/post"
+                    element={
+                        <GroupLayout
+                            children={<BoardPost />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
                 <Route
                     path="/board/:gSeq/free/:gbSeq"
                     element={
@@ -186,7 +198,7 @@ function App() {
                 />
 
                 <Route
-                    path="/board/:gSeq/noti/:gbSeq"
+                    path="/board/:gSeq/notice/:gbSeq"
                     element={
                         <GroupLayout
                             children={<GroupPostDetail />}

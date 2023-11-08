@@ -144,6 +144,7 @@
 #profilePic-user {
     @include box(20vh);
     cursor: pointer;
+    border-radius: 50%;
 }
 #profilePic-edit {
     width: 100%;

@@ -42,7 +42,7 @@ export default function BasicLayout({ children, showChat }: any) {
             <div className="layout-container ">
                 <Grid container>
                     <>
-                        <Grid md={2} sm={2} xs={2} className="empty-div">
+                        <Grid md={2} sm={0} xs={0} className="empty-div">
                             <Item
                                 style={{
                                     paddingLeft: 0,
