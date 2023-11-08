@@ -10,6 +10,7 @@ import '../../styles/scss/pages/group/post.scss';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import Editor from './Editor';
 import { GroupDetailType, MissionType } from 'src/types/types';
+import SuccessModal from 'src/components/common/modal/SucessModal';
 
 export default function BoardPost() {
     const cookie = new Cookies();
@@ -40,7 +41,7 @@ export default function BoardPost() {
         setMissionList(res.data.groupMission);
 
         setMissionSelected(
-            String(res.data.groupMission[Number(mSeq) - 1].mSeq)
+            String(res.data.groupMission[Number(mSeq) - 1]?.mSeq)
         );
     };
 
@@ -152,18 +153,25 @@ export default function BoardPost() {
         // console.log(board);
     };
 
+    //] 게시물 작성 완료 모달창
+    const [successModalSwitch, setSuccessModalSwitch] = useState(false);
+
+    const successHandler = () => {
+        setSuccessModalSwitch(true);
+    };
+
     // 정보 post
     const boardPostHandler = async () => {
-        const res = await axios.post(
-            `${process.env.REACT_APP_DB_HOST}/board/create`,
-            board,
-            {
+        const res = await axios
+            .post(`${process.env.REACT_APP_DB_HOST}/board/create`, board, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            }
-        );
-        console.log(res);
+            })
+            .then((res) => {
+                console.log(res);
+                successHandler();
+            });
 
         // [추후] input 입력 안했을 시, 로직
 
@@ -171,8 +179,6 @@ export default function BoardPost() {
     };
 
     console.log(board);
-
-    // console.log('oooooo', missionList);
 
     const [postMenu, setPostMenu] = useState(gCategory);
 
@@ -243,6 +249,13 @@ export default function BoardPost() {
                     작성 완료
                 </button>
                 {/* </Link> */}
+
+                <SuccessModal
+                    successModalSwitch={successModalSwitch}
+                    setSuccessModalSwitch={setSuccessModalSwitch}
+                    action={`${postMenu}을 작성`}
+                    gSeq={gSeq}
+                />
             </div>
         </div>
     );

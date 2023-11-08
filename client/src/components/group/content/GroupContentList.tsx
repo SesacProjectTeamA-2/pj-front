@@ -20,7 +20,7 @@ export default function GroupContent({ action }: any) {
     const { gSeq, mSeq } = useParams();
 
     //] 1. 자유게시글
-    const [freeList, setFreeList] = useState([]);
+    const [freeList, setFreeList] = useState<any>([]);
     const [commentCount, setCommentCount] = useState(0);
 
     // 자유 게시글 조회
@@ -37,14 +37,15 @@ export default function GroupContent({ action }: any) {
         console.log('---', res.data.groupInfo);
 
         setFreeList(res.data.groupInfo);
-        setCommentCount(res.data.commentCount);
+        // setCommentCount(res.data.groupInfo);
     };
 
     useEffect(() => {
         getBoardFree();
     }, []);
 
-    console.log(freeList);
+    console.log('---------', freeList);
+    console.log('>>>>>>>>>>', commentCount);
 
     //     {
     //   "gbSeq": 1,
@@ -86,51 +87,55 @@ export default function GroupContent({ action }: any) {
                     <>
                         {/* 1. 자유게시글 */}
 
-                        {freeList.map((free: any, idx: number) => {
-                            return (
-                                <li key={idx}>
-                                    {/* [ START ] */}
-                                    <Link
-                                        to={`/board/${gSeq}/free/${free.gbSeq}`}
-                                    >
-                                        <div className="post-list-content">
-                                            <div className="post-list-header">
-                                                <div className="post-list-title">
-                                                    {/* 프로필 이미지 */}
-                                                    {/* [추후] 동적으로 수정 */}
-                                                    <img
-                                                        className="profile-img"
-                                                        src="/asset/images/sqr1.svg"
-                                                        alt="profile"
-                                                    />
+                        {freeList.length <= 0
+                            ? '작성된 게시물이 없습니다.'
+                            : freeList.map((free: any, idx: number) => {
+                                  return (
+                                      <li key={idx}>
+                                          {/* [ START ] */}
+                                          <Link
+                                              to={`/board/${gSeq}/free/${free.gbSeq}`}
+                                          >
+                                              <div className="post-list-content">
+                                                  <div className="post-list-header">
+                                                      <div className="post-list-title">
+                                                          {/* 프로필 이미지 */}
+                                                          {/* [추후] 동적으로 수정 */}
+                                                          <img
+                                                              className="profile-img"
+                                                              src="/asset/images/sqr1.svg"
+                                                              alt="profile"
+                                                          />
 
-                                                    <div
-                                                        className="title4 cursor"
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: free.gbTitle,
-                                                        }}
-                                                    />
-                                                </div>
-                                                <div className="post-list-date">
-                                                    {free.createdAt}
-                                                </div>
-                                            </div>
-                                            <div
-                                                className="post-list-main cursor"
-                                                dangerouslySetInnerHTML={{
-                                                    __html: free.gbContent,
-                                                }}
-                                            />
+                                                          <div
+                                                              className="title4 cursor"
+                                                              dangerouslySetInnerHTML={{
+                                                                  __html: free.gbTitle,
+                                                              }}
+                                                          />
+                                                      </div>
+                                                      <div className="post-list-date">
+                                                          {free.createdAt}
+                                                      </div>
+                                                  </div>
+                                                  <div
+                                                      className="post-list-main cursor"
+                                                      dangerouslySetInnerHTML={{
+                                                          __html: free.gbContent,
+                                                      }}
+                                                  />
 
-                                            <GroupContentFooter
-                                                commentCount={commentCount}
-                                            />
-                                        </div>
-                                    </Link>
-                                    {/* [ END ] */}
-                                </li>
-                            );
-                        })}
+                                                  <GroupContentFooter
+                                                      commentCount={
+                                                          free.commentCount
+                                                      }
+                                                  />
+                                              </div>
+                                          </Link>
+                                          {/* [ END ] */}
+                                      </li>
+                                  );
+                              })}
                     </>
                 ) : (
                     <>

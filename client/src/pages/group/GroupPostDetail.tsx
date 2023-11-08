@@ -17,16 +17,20 @@ export default function GroupPostDetail() {
     console.log(gSeq, mSeq, gbSeq, gCategory);
 
     //; 게시글 조회 (GET)
+    const [notiList, setNotiList] = useState<any>([]);
     const [freeList, setFreeList] = useState<any>([]);
 
     // [추후] 공지 or 자유/질문 or 미션
     const [boardType, setBoardType] = useState('');
 
-    // 자유 게시글 상세 조회
-    const getBoardFree = async () => {
+    console.log('+++++++++++');
+
+    //] 0. 공지 게시글 상세 조회
+
+    const getBoardNoti = async () => {
         const res = await axios
             .get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/notice/${gbSeq}`,
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/${gCategory}/${gbSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -34,18 +38,41 @@ export default function GroupPostDetail() {
                 }
             )
             .then((res) => {
-                console.log(res.data);
+                console.log('getBoardNoti', res.data);
 
                 setFreeList(res.data.groupInfo);
-                setCommentCount(res.data.commentCount);
+                // setCommentCount(res.data.commentCount);
             });
     };
 
     useEffect(() => {
-        getBoardFree();
+        getBoardNoti();
     }, []);
 
-    console.log('>>>>', freeList);
+    //] 1. 자유 게시글 상세 조회
+    // const getBoardFree = async () => {
+    //     const res = await axios
+    //         .get(
+    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free/${gbSeq}`,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${uToken}`,
+    //                 },
+    //             }
+    //         )
+    //         .then((res) => {
+    //             console.log('getBoardFree', res.data);
+
+    //             setFreeList(res.data.groupInfo);
+    //             // setCommentCount(res.data.commentCount);
+    //         });
+    // };
+
+    // useEffect(() => {
+    //     getBoardFree();
+    // }, []);
+
+    // console.log('>>>>', freeList);
 
     //; 게시글 삭제 (DELETE)
     const boardDeleteHandler = async (gbSeq: number) => {
@@ -99,22 +126,20 @@ export default function GroupPostDetail() {
 
     //] 댓글
     // 댓글 리스트 : 자유게시글에 포함
-    const commentList = freeList.tb_groupBoardComments;
+    // const commentList = freeList.tb_groupBoardComments;
 
-    const [comments, setComments] = useState<any>(
-        freeList.tb_groupBoardComments
-    );
+    // const [comments, setComments] = useState<any>(
+    //     freeList.tb_groupBoardComments
+    // );
 
-    const [commentCount, setCommentCount] = useState(0);
+    // const [commentCount, setCommentCount] = useState(0);
 
-    // const [commentList, setCommentList] = useState<any>([]);
+    // console.log('>>>>>>>>>', commentCount);
+    const [commentList, setCommentList] = useState<any>([]);
 
-    useEffect(() => {
-        setComments(freeList.tb_groupBoardComments);
-    }, [freeList.tb_groupBoardComments]);
-
-    console.log('commentList', commentList);
-    console.log('comments', comments);
+    // useEffect(() => {
+    //     setComments(freeList.tb_groupBoardComments);
+    // }, [freeList.tb_groupBoardComments]);
 
     //   {
     //     createdAt: "2023-11-05 22:42:51",
@@ -214,12 +239,12 @@ export default function GroupPostDetail() {
 
     return (
         <div className="section section-group">
-            <GroupHeader
+            {/* <GroupHeader
                 // [ 추후 ] 넘버링 id 추가
                 // title={`미션 1. ${missionArr[0]}`}
                 title={`${gCategory}`}
                 groupName={''}
-            />
+            /> */}
 
             <div className="post-detail-container">
                 <div className="post-detail-header-container">
@@ -231,9 +256,9 @@ export default function GroupPostDetail() {
                                 alt="profile"
                             />
                             {/* uSeq 사용자 닉네임 가져오기 */}
-                            <div className="title4">{freeList.uSeq}</div>
+                            <div className="title4">{freeList?.uSeq}</div>
                         </div>
-                        <div className="date">{freeList.createdAt}</div>
+                        <div className="date">{freeList?.createdAt}</div>
                     </div>
                     <div className="writer-menu">
                         {/* gSeq, gbSeq */}
@@ -273,7 +298,7 @@ export default function GroupPostDetail() {
                     />
 
                     {/* 댓글 수, 반응 수 */}
-                    <GroupContentFooter commentCount={commentCount} />
+                    <GroupContentFooter commentCount={''} />
 
                     <div className="comment-create">
                         <textarea
@@ -303,7 +328,7 @@ export default function GroupPostDetail() {
                                                     alt="profile"
                                                 />
                                                 <div className="title5">
-                                                    {comment.uSeq}
+                                                    {/* {comment.uSeq} */}
                                                     {/* [추후] 유저 닉네임 가져오기 */}
                                                 </div>
                                             </div>
