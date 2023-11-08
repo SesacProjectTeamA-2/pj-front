@@ -26,7 +26,7 @@ export default function BoardPost() {
         // map: string;
     }
 
-    const [missionList, setMissionList] = useState<Mission[]>();
+    const [missionList, setMissionList] = useState<any>();
 
     const getGroup = async () => {
         const res = await axios.get(
@@ -81,10 +81,18 @@ export default function BoardPost() {
         mSeq: null,
     });
 
-    const [missionSelected, setMissionSelected] = useState<string>('');
-    const [selected, setSelected] = useState<string>(
-        gCategory || missionSelected
-    );
+    const [missionSelected, setMissionSelected] = useState('');
+    const [selected, setSelected] = useState<any>(gCategory);
+
+    console.log('===========', selected);
+
+    // useEffect(() => {
+    //     if (selected === 'mission') {
+    //         setSelected(missionList[0]?.mSeq);
+    //     }
+    // }, []);
+
+    // console.log('=====+++++++', selected);
 
     // useEffect(() => {
     //     if (gCategory === 'mission') {
@@ -182,8 +190,6 @@ export default function BoardPost() {
 
     const [postMenu, setPostMenu] = useState(gCategory);
 
-    console.log('!!!!!!!!!!!', postMenu);
-
     useEffect(() => {
         setPostMenu(gCategory);
     }, []);
@@ -198,6 +204,7 @@ export default function BoardPost() {
 
     return (
         <div className="section section-group">
+            <GroupHeader title={'미션 인증'} groupName={''} />
             <div className="post-container">
                 <div className="noti-content post-header title5">
                     <div className="select-box">
@@ -210,9 +217,9 @@ export default function BoardPost() {
                         >
                             {/* default : + 누른 페이지 */}
                             {/* select 값에 따라 Link to 달라아야 함 */}
-
+                            {/* 
                             <option value="notice">공지사항</option>
-                            <option value="free">자유/질문</option>
+                            <option value="free">자유/질문</option> */}
 
                             {missionList?.map((mission: any, idx: number) => {
                                 return (
