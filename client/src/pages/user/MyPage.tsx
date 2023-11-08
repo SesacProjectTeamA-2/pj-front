@@ -10,20 +10,14 @@ import Introduce from '../../components/myPage/Introduce';
 import CharacterList from '../../components/common/CharacterList';
 import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
-import SetMainList from '../../components/myPage/SetMainList';
 import ProfilePic from '../../components/myPage/ProfilePic';
-import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
+import SetMainList from '../../components/myPage/SetMainList';
+import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 
 export default function MyPage() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
-    // console.log(uToken);
-
-    // console.log(process.env.REACT_APP_DB_HOST); // http://localhost:8888/api
-    // const uSeq: number = 0;
-    // const { uSeq } = useParams();
-    // console.log('uSeq',uSeq);
 
     // 1. 사용자 데이터 가져오기
     const getUserData = async () => {
