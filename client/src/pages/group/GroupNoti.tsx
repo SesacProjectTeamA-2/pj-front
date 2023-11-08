@@ -245,7 +245,7 @@ export default function Groupidti() {
                                 </TableRow>
                             </TableHead>
 
-                            <TableBody>
+                            <TableBody style={{ cursor: 'pointer' }}>
                                 {rows
                                     .slice(
                                         page * rowsPerPage,
