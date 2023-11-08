@@ -70,18 +70,27 @@ export default function SideBarGroupLeader({
     };
 
     // 초대하기 링크
-    const onClickInviteButton = () => {
-        // "해당 모임의 홈 화면 링크" 복사하기
+    const onClickInviteButton = async () => {
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/group/getJoinLink/${gSeq}`
+            );
 
-        const roomId = '123';
+            if (response.data.success) {
+                // API로부터 gLink를 받아서 inviteCode에 설정
+                setInviteCode(response.data.gLink);
+                console.log('inviteCode:', inviteCode); // 이 줄을 추가
 
-        // [lamda] : 암호화
-        // axios.get((API.INVITE as string) + roomId).then((res) => {
-        //     setIsInvited(true);
-        //     setInviteCode(`${process.env.REACT_APP_LAMBDA_INVITE}/${res.data}`);
-        // });
-        // setIsInvited(true);
-        setInviteCode(roomId);
+                // 복사 성공 메시지 출력
+                toast.success('초대코드가 복사되었습니다!');
+            } else {
+                // 에러 메시지 처리
+                toast.error('초대코드를 가져오는 데 실패했습니다.');
+            }
+        } catch (error) {
+            // API 호출 중 오류 처리
+            console.error('Error while fetching invite link:', error);
+        }
     };
 
     //; 모임 삭제 (DELETE)
