@@ -18,7 +18,7 @@ export default function SideBarGroupMember({
                     className="member-leave"
                     onClick={() => warningModalSwitchHandler('탈퇴')}
                 >
-                    모임 탈퇴하기
+                    모임 탈퇴
                 </li>
                 <WarningModal
                     warningModalSwitch={warningModalSwitch}
