@@ -6,6 +6,7 @@ export default function InterestedItem({
     selectedArr,
     setSelectedArr,
     num,
+    updateCategoryQuery,
 }: any) {
     // 체크박스 상태 관리
     const [selected, setSelected] = useState<boolean>(false);
