@@ -10,7 +10,7 @@ import TeamPercentage from './TeamPercentage';
 import '../../styles/scss/pages/main/percentage.scss';
 import Progressbar from '../common/Progressbar';
 
-export default function Content() {
+export default function Content(props: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
@@ -18,7 +18,7 @@ export default function Content() {
     const [userImgSrc, setUserImgSrc] = useState<string>(
         '/asset/images/user.svg'
     );
-    const getUserProfile = async () => {
+    const getUserData = async () => {
         await axios
             .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
                 headers: {
@@ -27,12 +27,17 @@ export default function Content() {
             })
             .then((res) => {
                 const { userImg } = res.data;
-                setUserImgSrc(userImg);
+                if (userImg !== '0') {
+                    setUserImgSrc(userImg);
+                }
                 console.log('userImgSrc ', userImgSrc);
             });
     };
     useEffect(() => {
-        getUserProfile();
+        if (cookie.get('isUser')) {
+            getUserData();
+            console.log('CONTENT 비로그인');
+        }
     }, []);
 
     //] 1. 유저 미션 조회
@@ -65,7 +70,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getMissionMain();
+        if (cookie.get('isUser')) {
+            getMissionMain();
+        }
     }, []);
 
     const [uName, setUName] = useState('');
@@ -93,7 +100,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getJoinedGroup();
+        if (cookie.get('isUser')) {
+            getJoinedGroup();
+        }
     }, []);
 
     // [추후] joinGroupInfo 정보 맞는지 재확인
@@ -118,7 +127,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getMadeGroup();
+        if (cookie.get('isUser')) {
+            getMadeGroup();
+        }
     }, []);
 
     const [madeGroupInfo, setMadeGroupInfo] = useState<any>([]);

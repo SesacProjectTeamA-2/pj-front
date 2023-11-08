@@ -170,20 +170,25 @@ export default function MyPage() {
 
     // 8. 명언 모드
     // 8-1. 적은 명언 내용
-    const [phraseCtt, setPhraseCtt] = useState<string>('');
+    const [phraseCtt, setPhraseCtt] = useState<string | null>('');
     // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
     // 기본값: 내가 적을래요
-    const [phraseModeBtnVal, setPhraseModeBtnVal] = useState<string>('self');
+    const [phraseModeBtnVal, setPhraseModeBtnVal] =
+        useState<string>('recommend');
     const phraseSelect = (e: React.ChangeEvent<HTMLElement>): void => {
         const phraseModeBtn: HTMLElement = e.target as HTMLElement;
         setPhraseModeBtnVal(phraseModeBtn.getAttribute('value') || '');
     };
 
-    // useEffect(() => {
-    //     console.log('phraseModeBtnVal', phraseModeBtnVal);
-    // }, [phraseModeBtnVal]);
+    useEffect(() => {
+        console.log('phraseModeBtnVal', phraseModeBtnVal, phraseCtt);
+        if (phraseModeBtnVal === 'recommend') {
+            // 추천 모드일 때 빈 값을 보냄
+            setPhraseCtt(null);
+        }
+    }, [phraseModeBtnVal]);
 
     //////////////// 수정 | 탈퇴 //////////////////
     // 2. 사용자 데이터 수정

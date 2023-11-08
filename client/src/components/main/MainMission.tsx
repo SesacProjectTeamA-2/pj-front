@@ -36,7 +36,9 @@ export default function MainMission() {
     };
 
     useEffect(() => {
-        getMissionMain();
+        if (cookie.get('isUser')) {
+            getMissionMain();
+        }
     }, []);
 
     const [uName, setUName] = useState('');
