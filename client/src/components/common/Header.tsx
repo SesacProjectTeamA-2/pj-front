@@ -4,10 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 
 import { grey } from '@mui/material/colors';
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, Divider } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import '../../styles/scss/layout/header.scss';
+import axios from 'axios';
 
 // dDay 제거
 // import Dday from './Dday';
@@ -46,11 +47,6 @@ export default function Header(props: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
 
-    // console.log('@@@@@@@', uToken);
-    // if (Object.keys(allCookies).length !== 0) {
-    //     setIsCookie(true);
-    // }
-
     useEffect(() => {
         if (cookie.get('isUser')) {
             setIsCookie(true);
@@ -61,6 +57,23 @@ export default function Header(props: any) {
     const logoutHandler = () => {
         cookie.remove('isUser');
         nvg('/');
+    };
+
+    // 프로필 사진 가져오기
+    const [userImgSrc, setUserImgSrc] = useState<string>(
+        '/asset/images/user.svg'
+    );
+    const getUserProfile = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                const { userImg } = res.data;
+                setUserImgSrc(userImg);
+            });
     };
 
     return (
@@ -147,7 +160,7 @@ export default function Header(props: any) {
                                     <li>
                                         <Link to="/mypage">
                                             <img
-                                                src="/asset/images/user.svg"
+                                                src={userImgSrc}
                                                 style={{
                                                     width: '40px',
                                                     height: '40px',
@@ -156,7 +169,7 @@ export default function Header(props: any) {
                                             ></img>
                                         </Link>
                                     </li>
-                                    <li id="chat-li">
+                                    {/* <li id="chat-li">
                                         <img
                                             src="/asset/icons/chat.svg"
                                             style={{
@@ -166,13 +179,12 @@ export default function Header(props: any) {
                                             alt="chatImg"
                                             onClick={() => props.showChatting()}
                                         />
-                                    </li>
+                                    </li> */}
                                 </>
                             )}
                         </ul>
                     </nav>
                 </div>
-
                 {/* 메뉴 탭 버튼 */}
                 <div className="tab-menu-div">
                     <button id="tab-menu-btn" onClick={() => toggleVal()}>
@@ -240,7 +252,7 @@ export default function Header(props: any) {
                                     />
                                     <Link to="/mypage">
                                         <img
-                                            src="/asset/images/user.svg"
+                                            src={userImgSrc}
                                             style={{
                                                 width: '40px',
                                                 height: '40px',
@@ -253,7 +265,7 @@ export default function Header(props: any) {
                             </>
                         )}
                         {/* 채팅 컴포넌트 */}
-                        <li id="chat-li">
+                        {/* <li id="chat-li">
                             <img
                                 src="/asset/icons/chat.svg"
                                 style={{ width: '40px', height: '40px' }}
@@ -261,7 +273,7 @@ export default function Header(props: any) {
                                 onClick={() => props.showChatting()}
                                 id="chat-btn"
                             />
-                        </li>
+                        </li> */}
                     </ul>
                 </nav>
             </div>

@@ -10,7 +10,7 @@ import Introduce from '../../components/myPage/Introduce';
 import CharacterList from '../../components/common/CharacterList';
 import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
-import SetMainList from '../../components/myPage/SetMainList';
+// import SetMainList from '../../components/myPage/SetMainList';
 import ProfilePic from '../../components/myPage/ProfilePic';
 import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 import Quit from '../../components/myPage/Quit';
@@ -79,7 +79,7 @@ export default function MyPage() {
     //////////// props, 데이터 선언 /////////////
     // 0. 사용자 이미지
     const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
-    console.log('바꾸기 전 userImgSrc', userImgSrc);
+    // console.log('바꾸기 전 userImgSrc', userImgSrc);
 
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // if (e.target.files && e.target.files[0]) {
@@ -92,6 +92,8 @@ export default function MyPage() {
 
         if (e.target.files && e.target.files[0]) {
             formData.append('image', e.target.files[0]);
+            formData.append('apple', 'apple');
+
             for (let val of formData.values()) {
                 // => tsConfig ver : es6 변경
                 console.log('formData ', val);

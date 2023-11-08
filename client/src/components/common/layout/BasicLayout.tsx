@@ -73,7 +73,7 @@ export default function BasicLayout({ children, showChat }: any) {
                         </Grid>
 
                         {/* 채팅 컴포넌트 들어갈 곳 */}
-                        <Grid md={2} sm={12} xs={12} className="chatting-div">
+                        <Grid md={2} sm={0} xs={0} className="chatting-div">
                             <Item
                                 style={{
                                     paddingLeft: 0,
@@ -82,7 +82,7 @@ export default function BasicLayout({ children, showChat }: any) {
                                 }}
                             >
                                 {' '}
-                                {showChat ? <SidebarChat /> : null}
+                                {/* {showChat ? <SidebarChat /> : null} */}
                             </Item>
                         </Grid>
                         <Footer />
