@@ -26,14 +26,24 @@ export default function InterestedItem({
         const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼(label)
         setSelected((prevSelected) => !prevSelected); //선택 여부 관리 (직전 상태 기반)
 
+        // 동적 개수 제한
+        if (selectedArr.length > num - 1) {
+            //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ?
+            toast.error(`최대 ${num}개까지만 선택해주세요!`);
+
+            // 마지막 선택된 id 제거
+            setSelectedArr(
+                selectedArr.filter((ele: string) => ele !== selectedBtn.id)
+            );
+        }
+
         // 토글 기능
         if (selectedArr.includes(selectedBtn.id)) {
             // (1) 배열에 있으면 : 배열에서 제거
-            setSelectedArr(
-                selectedArr.filter(
-                    (ele: string) => ele !== selectedBtn.id //마지막으로 선택된 버튼 id 제거
-                )
+            const nextSelectedArr: Array<string> = selectedArr.filter(
+                (ele: string) => ele !== selectedBtn.id //마지막으로 선택된 버튼 id 제거
             );
+            setSelectedArr(nextSelectedArr);
         } else if (
             // (2) 배열에 없음 + 동적 제한 수 미만 : 배열에 추가
             !selectedArr.includes(selectedBtn.id) &&
@@ -41,22 +51,8 @@ export default function InterestedItem({
         ) {
             setSelectedArr((prevSelectedArr: any) => {
                 const newSelectedArr = [...prevSelectedArr, selectedBtn.id];
-                // if (
-                //     !newSelectedArr.has(selectedBtn.id) &&
-                //     newSelectedArr.size < 3
-                // ) {
-                // }
                 return newSelectedArr;
             });
-        }
-
-        // 동적 개수 제한
-        if (selectedArr.length > num - 1) {
-            //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ? : 개수 잘 안 맞고 두번 클릭해야 선택됏음
-            toast.error(`최대 ${num}개까지만 선택해주세요!`);
-
-            // 마지막 선택된 id 제거
-            selectedArr.filter((ele: string) => ele !== selectedBtn.id);
         }
     }
     return (

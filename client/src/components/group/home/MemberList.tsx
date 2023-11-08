@@ -79,10 +79,10 @@ export default function MemberList({
                     {/* 모임장 */}
                     <li>
                         <div className="ranking-list">
-                            <img src={leaderInfo.uImg} />
+                            {/* <img src={leaderInfo.uImg} /> */}
 
                             <div className="cur-ranking-content">
-                                <div className="title4">{leaderInfo.uName}</div>
+                                {/* <div className="title4">{leaderInfo.uName}</div> */}
                                 {/* <div>{leaderInfo.}</div> */}
                             </div>
                         </div>

@@ -58,69 +58,93 @@ export default function SideBarGroup() {
     return (
         <div className="sidebar-container">
             <div className="sidebar-content">
-                <ul className="title4 list-unstyled">
-                    <Link to={`/group/home/${gSeq}`}>
-                        <li className="title4-hover-bigger">홈</li>
-                    </Link>
+                <div className="sidebar-list">
+                    <div className="sidebar-theme-list">
+                        <div className="theme-flex">
+                            <div className="theme-title">
+                                <Link to={`/group/home/${gSeq}`}>홈</Link>
+                            </div>
+                        </div>
 
-                    <Link to={`/board/${gSeq}/notice`}>
-                        <li className="title5-hover-bigger">공지사항</li>
-                    </Link>
-                    <Link to={`/board/${gSeq}/free`}>
-                        <li className="title5-hover-bigger">자유</li>
-                    </Link>
+                        <div className="theme-flex">
+                            <div className="theme-title">게시판</div>
+                            <div className="board-content">
+                                <Link to={`/board/${gSeq}/notice`}>
+                                    <div className="sidebar-theme">
+                                        공지사항
+                                    </div>
+                                </Link>
+                                <Link to={`/board/${gSeq}/free`}>
+                                    <div className="sidebar-theme">자유</div>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="theme-flex">
+                            <div className="theme-title">미션</div>
+                            <div >
+                                <div  className='mission-flex' >
+                                    <div className='mission-title'>진행 중</div>
+                                    <div>
+                                        <ul  className="progress-mission">
+                                            {mSeqList.map((mSeq: number) => {
+                                                return (
+                                                    <li key={mSeq} className='sidebar-theme'>
+                                                        <Link
+                                                            to={`/board/${gSeq}/mission/${mSeq}`}
+                                                        >
+                                                            <div
+                                                                key={mSeq}
+                                                                className=""
+                                                            >
+                                                                {
+                                                                    groupMissions[
+                                                                        mSeq - 1
+                                                                    ].mTitle
+                                                                }
+                                                            </div>
+                                                        </Link>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <Link to={`/board/${gSeq}/mission/done`}>
+                                    <div className='mission-title'>완료</div>
+                                </Link>
+                            </div>
+                        </div>
 
-                    <li className="dropdown">
-                        <button className="dropbtn">미션</button>
+                        <div className="theme-flex">
+                            {/* 모임장 */}
+                            <div className="theme-title">모임장</div>
+                            <SideBarGroupLeader
+                                warningModalSwitch={warningModalSwitch}
+                                setWarningModalSwitch={setWarningModalSwitch}
+                                warningModalSwitchHandler={
+                                    warningModalSwitchHandler
+                                }
+                                menu={menu}
+                                setMenu={setMenu}
+                            />
+                        </div>
+                        <div className="theme-flex">
+                            {/* 멤버 */}
+                            <div className="theme-title">멤버</div>
 
-                        <ul className="title5 dropdown-content">
-                            <li>진행 중</li>
-                            <ul className="title6">
-                                {mSeqList.map((mSeq: number) => {
-                                    return (
-                                        <div key={mSeq}>
-                                            <Link
-                                                to={`/board/${gSeq}/mission/${mSeq}`}
-                                            >
-                                                <li
-                                                    key={mSeq}
-                                                    className="title6-hover-bigger"
-                                                >
-                                                    {
-                                                        groupMissions[mSeq - 1]
-                                                            .mTitle
-                                                    }
-                                                </li>
-                                            </Link>
-                                        </div>
-                                    );
-                                })}
-                            </ul>
-                            <Link to={`/board/${gSeq}/mission/done`}>
-                                <li className="title5-hover-bigger">완료</li>
-                            </Link>
-                        </ul>
-                    </li>
-                </ul>
+                            <SideBarGroupMember
+                                warningModalSwitch={warningModalSwitch}
+                                setWarningModalSwitch={setWarningModalSwitch}
+                                warningModalSwitchHandler={
+                                    warningModalSwitchHandler
+                                }
+                                menu={menu}
+                                setMenu={setMenu}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            {/* 모임장 */}
-            <SideBarGroupLeader
-                warningModalSwitch={warningModalSwitch}
-                setWarningModalSwitch={setWarningModalSwitch}
-                warningModalSwitchHandler={warningModalSwitchHandler}
-                menu={menu}
-                setMenu={setMenu}
-            />
-
-            {/* 멤버 */}
-            <SideBarGroupMember
-                warningModalSwitch={warningModalSwitch}
-                setWarningModalSwitch={setWarningModalSwitch}
-                warningModalSwitchHandler={warningModalSwitchHandler}
-                menu={menu}
-                setMenu={setMenu}
-            />
         </div>
     );
 }

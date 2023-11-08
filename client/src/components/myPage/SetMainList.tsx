@@ -14,28 +14,28 @@ export default function SetMainList(props: any) {
     // }
 
     // 그룹 정보 받아오기
-    const [groupArr, setGroupArr] = useState([]);
+    // const [groupArr, setGroupArr] = useState([]);
 
-    const getGroupList = async () => {
-        const res = await axios
-            .get(
-                // 임시로 전체 검색
-                `${process.env.REACT_APP_DB_HOST}/group?search=%&category=%`,
-                // `${process.env.REACT_APP_DB_HOST}api/group?search=${searchInput}&category=${}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                // console.log(res.data.groupArray);
-                setGroupArr(res.data.groupArray);
-            });
-    };
-    useEffect(() => {
-        getGroupList();
-    }, []);
+    // const getGroupList = async () => {
+    //     const res = await axios
+    //         .get(
+    //             // 임시로 전체 검색
+    //             `${process.env.REACT_APP_DB_HOST}/group?search=%&category=%`,
+    //             // `${process.env.REACT_APP_DB_HOST}api/group?search=${searchInput}&category=${}`,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${uToken}`,
+    //                 },
+    //             }
+    //         )
+    //         .then((res) => {
+    //             // console.log(res.data.groupArray);
+    //             setGroupArr(res.data.groupArray);
+    //         });
+    // };
+    // useEffect(() => {
+    //     getGroupList();
+    // }, []);
 
     // 임시 그룹
     // const groupArr: Group[] = [
@@ -64,7 +64,7 @@ export default function SetMainList(props: any) {
                 </thead>
                 <tbody>
                     <SetMainItem
-                        groupArr={groupArr}
+                        // groupArr={groupArr}
                         setDdayPin={props.setDdayPin}
                         dDayPin={props.dDayPin}
                         handleCheckDday={props.handleCheckDday}

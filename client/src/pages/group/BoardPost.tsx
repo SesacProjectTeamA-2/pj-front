@@ -10,6 +10,7 @@ import '../../styles/scss/pages/group/post.scss';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import Editor from './Editor';
 import { GroupDetailType, MissionType } from 'src/types/types';
+import SuccessModal from 'src/components/common/modal/SucessModal';
 
 export default function BoardPost() {
     const cookie = new Cookies();
@@ -25,7 +26,7 @@ export default function BoardPost() {
         // map: string;
     }
 
-    const [missionList, setMissionList] = useState<Mission[]>();
+    const [missionList, setMissionList] = useState<any>();
 
     const getGroup = async () => {
         const res = await axios.get(
@@ -40,7 +41,7 @@ export default function BoardPost() {
         setMissionList(res.data.groupMission);
 
         setMissionSelected(
-            String(res.data.groupMission[Number(mSeq) - 1].mSeq)
+            String(res.data.groupMission[Number(mSeq) - 1]?.mSeq)
         );
     };
 
@@ -80,10 +81,18 @@ export default function BoardPost() {
         mSeq: null,
     });
 
-    const [missionSelected, setMissionSelected] = useState<string>('');
-    const [selected, setSelected] = useState<string>(
-        gCategory || missionSelected
-    );
+    const [missionSelected, setMissionSelected] = useState('');
+    const [selected, setSelected] = useState<any>(gCategory);
+
+    console.log('===========', selected);
+
+    // useEffect(() => {
+    //     if (selected === 'mission') {
+    //         setSelected(missionList[0]?.mSeq);
+    //     }
+    // }, []);
+
+    // console.log('=====+++++++', selected);
 
     // useEffect(() => {
     //     if (gCategory === 'mission') {
@@ -152,18 +161,25 @@ export default function BoardPost() {
         // console.log(board);
     };
 
+    //] 게시물 작성 완료 모달창
+    const [successModalSwitch, setSuccessModalSwitch] = useState(false);
+
+    const successHandler = () => {
+        setSuccessModalSwitch(true);
+    };
+
     // 정보 post
     const boardPostHandler = async () => {
-        const res = await axios.post(
-            `${process.env.REACT_APP_DB_HOST}/board/create`,
-            board,
-            {
+        const res = await axios
+            .post(`${process.env.REACT_APP_DB_HOST}/board/create`, board, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            }
-        );
-        console.log(res);
+            })
+            .then((res) => {
+                console.log(res);
+                successHandler();
+            });
 
         // [추후] input 입력 안했을 시, 로직
 
@@ -172,11 +188,7 @@ export default function BoardPost() {
 
     console.log(board);
 
-    // console.log('oooooo', missionList);
-
     const [postMenu, setPostMenu] = useState(gCategory);
-
-    console.log('!!!!!!!!!!!', postMenu);
 
     useEffect(() => {
         setPostMenu(gCategory);
@@ -192,6 +204,7 @@ export default function BoardPost() {
 
     return (
         <div className="section section-group">
+            <GroupHeader title={'미션 인증'} groupName={''} />
             <div className="post-container">
                 <div className="noti-content post-header title5">
                     <div className="select-box">
@@ -204,9 +217,9 @@ export default function BoardPost() {
                         >
                             {/* default : + 누른 페이지 */}
                             {/* select 값에 따라 Link to 달라아야 함 */}
-
+                            {/* 
                             <option value="notice">공지사항</option>
-                            <option value="free">자유/질문</option>
+                            <option value="free">자유/질문</option> */}
 
                             {missionList?.map((mission: any, idx: number) => {
                                 return (
@@ -243,6 +256,13 @@ export default function BoardPost() {
                     작성 완료
                 </button>
                 {/* </Link> */}
+
+                <SuccessModal
+                    successModalSwitch={successModalSwitch}
+                    setSuccessModalSwitch={setSuccessModalSwitch}
+                    action={`${postMenu}을 작성`}
+                    gSeq={gSeq}
+                />
             </div>
         </div>
     );

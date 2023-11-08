@@ -15,6 +15,7 @@ export default function SuccessModal({
     setSuccessModalSwitch,
     action,
     groupName,
+    gSeq,
 }: // choiceModalSwitchHandler,
 any) {
     //=== 성공 모달창 ===
@@ -26,7 +27,6 @@ any) {
 
     //] 4. 게시글 작성 완료
 
-    const { gSeq } = useParams();
     const nvg = useNavigate();
 
     const cookie = new Cookies();
@@ -67,6 +67,10 @@ any) {
         if (action === '모임을 생성') {
             nvg('/group');
         }
+
+        if (action === '공지사항을 작성') {
+            nvg(`/board/${gSeq}/notice`);
+        }
     };
 
     return (
@@ -88,7 +92,13 @@ any) {
                 {/* <div className="modal-mission-cancel-content"> */}
                 <div className="modal-mission-cancel-content leave-modal-content">
                     <div className="modal-cancel-title-container leave-modal-container">
-                        <div className="title1">{`${groupName} ${action}했습니다 !`}</div>
+                        <div className="title1">
+                            {action === '모임 생성'
+                                ? `${groupName} ${action}했습니다 !`
+                                : action === '자유/질문을 작성'
+                                ? `자유/질문 게시글을 작성했습니다 !`
+                                : `${action}했습니다 !`}
+                        </div>
                     </div>
 
                     <div className="mission-cancel-btn-container">

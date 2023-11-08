@@ -8,6 +8,7 @@ import '../../styles/scss/pages/group/groupMissionList.scss';
 import GroupContent from '../../components/group/content/GroupContentList';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import { GroupDetailType } from 'src/types/types';
+import GroupMissionList from 'src/components/group/content/GroupMissionList';
 
 export default function GroupMission() {
     const cookie = new Cookies();
@@ -53,12 +54,12 @@ export default function GroupMission() {
         );
 
         setGroupDetail(res.data);
+        setMissionList(res.data.groupMission);
     };
 
     useEffect(() => {
         getGroup();
     }, []);
-    // gSeq, uToken
 
     console.log(groupDetail);
 
@@ -70,39 +71,50 @@ export default function GroupMission() {
         // map: string;
     }
 
-    const [missionList, setMissionList] = useState<Mission[]>(
-        groupDetail.groupMission
-    );
+    const [missionList, setMissionList] = useState<Mission[]>([]);
 
-    // type MissionList = {
-    //     mSeq: number;
-    //     mTitle: string;
-    //     mContent: string;
-    //     mLevel: number;
-    //     createdAt: string;
-    //     updatedAt: string;
-    //     gSeq: number;
-    //     isExpired: null | boolean;
-    // };
+    // const [missionIdList, setMissionIdList] = useState<any>([]);
 
-    // const [missionList, setMissionList] = useState<MissionList>(
-    //     groupDetail.groupMission[Number(mSeq) - 1]
-    // );
+    let missionIdList = [];
+
+    for (let i = 1; i <= missionList.length; i++) {
+        missionIdList.push(i);
+    }
+
+    console.log('missionList=========', missionList);
+
+    const getMissionBoard = async () => {
+        const res = await axios
+            .get(
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                setMissionBoard(res.data.groupInfo);
+            });
+    };
 
     useEffect(() => {
-        setMissionList(groupDetail.groupMission);
-    }, [groupDetail.groupMission]);
+        getMissionBoard();
+    }, []);
 
-    console.log(missionList);
+    const [missionBoard, setMissionBoard] = useState();
+
+    console.log('ooooooo', missionBoard);
 
     return (
         <div className="section section-group">
             <GroupHeader
                 // [ 추후 ] 넘버링 id 추가
-                title={`미션 ${mSeq}. ${
+                title={`미션 : ${
                     Object.keys(missionList)?.length
-                        ? missionList[Number(mSeq) - 1].mTitle
-                        : ''
+                        ? missionList[Number(mSeq) - 1]?.mTitle
+                        : // missionList[Number(mSeq) - 1]?.mTitle
+                          ''
                 }`}
                 groupName={groupDetail.groupName}
             />
@@ -111,13 +123,17 @@ export default function GroupMission() {
                     <div className="title5">[ 인증방법 ]</div>
                     <div>
                         {Object.keys(missionList)?.length
-                            ? missionList[Number(mSeq) - 1].mContent
+                            ? missionList[Number(mSeq) - 1]?.mContent
                             : ''}
                     </div>
                 </div>
             </div>
-            <GroupContent action={'미션게시글'} />
-            <Link to={`/board/create/${gSeq}/${gCategory}/${mSeq}`}>
+            <GroupMissionList
+                missionList={missionList}
+                groupDetail={groupDetail}
+                missionBoard={missionBoard}
+            />
+            <Link to={`/board/create/${gSeq}/mission/${mSeq}`}>
                 <img src="/asset/icons/plus.svg" className="plus-fixed" />
             </Link>
         </div>

@@ -39,8 +39,8 @@ export default function Join() {
     const [input, setInput] = useState<string | number>('');
 
     // 3. 사용자 선택 캐릭터 이미지 값 설정
-    const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
-        null
+    const [selectedCharacter, setSelectedCharacter] = useState<string>(
+        '/asset/images/sqr2.svg'
     );
     const selectCharacter = (characterSrc: string): void => {
         setSelectedCharacter(characterSrc);
@@ -54,7 +54,7 @@ export default function Join() {
         // uCategory2: selectedArr[1],
         // uCategory3: selectedArr[2],
     };
-    console.log('userInfo', userInfo);
+    console.log('userInfo JOIN', userInfo);
 
     const register = async (): Promise<void> => {
         console.log('register!');

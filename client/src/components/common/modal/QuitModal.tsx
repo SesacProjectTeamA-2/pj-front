@@ -10,33 +10,13 @@ import '../../../styles/scss/components/modal.scss';
 import { GroupMissionsType } from 'src/types/types';
 import toast, { Toaster } from 'react-hot-toast';
 
-export default function WarningModal({
+export default function QuitModal({
     warningModalSwitch,
     setWarningModalSwitch,
     action,
 }: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
-
-    const { gSeq } = useParams();
-
-    const [groupName, setGroupName] = useState<GroupMissionsType[]>([]);
-
-    const getGroup = async () => {
-        const res = await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            })
-            .then((res) => {
-                setGroupName(res.data.groupName);
-            });
-    };
-
-    useEffect(() => {
-        getGroup();
-    }, []);
 
     const nvg = useNavigate();
     const logoutHandler = () => {
@@ -58,46 +38,9 @@ export default function WarningModal({
                     console.log(res.data);
                     logoutHandler();
                 });
-        } else if (action === '모임 삭제') {
-            const deleteGroupHandler = async () => {
-                const res = await axios
-                    .delete(`${process.env.REACT_APP_DB_HOST}/group`, {
-                        data: { gSeq },
-                        headers: {
-                            Authorization: `Bearer ${uToken}`,
-                        },
-                    })
-                    .then((res) => {
-                        console.log(res.data);
-                        toast.success(
-                            `${groupName} 모임을 ${action}하셨습니다.`
-                        );
-                        nvg('/group');
-                    });
-            };
-            deleteGroupHandler();
-        } else if (action === '모임 탈퇴') {
-            const quitGroupHandler = async () => {
-                const res = await axios
-                    .delete(
-                        `${process.env.REACT_APP_DB_HOST}/group/quit/${gSeq}`,
-                        {
-                            headers: {
-                                Authorization: `Bearer ${uToken}`,
-                            },
-                        }
-                    )
-                    .then((res) => {
-                        console.log(res.data);
-                        toast.success(
-                            `${groupName} 모임을 ${action}하셨습니다.`
-                        );
-                        nvg('/group');
-                    });
-            };
-            quitGroupHandler();
         }
-        // [추후] 게시글 삭제 요청 로직  추가
+        // [추후] 모임 탈퇴 요청 / 게시글 삭제 요청 로직  추가
+        setWarningModalSwitch(false);
     };
 
     // 모달창 닫기
@@ -124,13 +67,13 @@ export default function WarningModal({
                 <div className="modal-mission-cancel-content leave-modal-content">
                     <div className="modal-cancel-title-container leave-modal-container">
                         <div className="title1">🚨</div>
-                        <div className="title3">
+                        {/* <div className="title3">
                             {action === '삭제'
                                 ? `게시글을 ${action}하시겠습니까 ?`
                                 : action === '탈퇴'
                                 ? `${groupName}  모임을 정말 ${action}하시겠습니까 ?`
                                 : `정말 ${action}하시겠습니까 ?`}
-                        </div>
+                        </div> */}
 
                         {action === '회원 탈퇴' ? (
                             <div className="title5 cancel-modal-description">
