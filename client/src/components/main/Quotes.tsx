@@ -1,10 +1,11 @@
 import React from 'react';
 import { kadvice } from 'kadvice';
 
-export default function Quotes() {
+export default function Quotes(props: any) {
     const advice = kadvice.getOne();
 
-    // console.log(advice);
+    console.log(props.phraseModeSelf);
+    console.log(props.phraseCtt);
     return (
         // <div className="content-grid-box quotes-div-flex">
         //     <div className="quotes ">
@@ -30,11 +31,21 @@ export default function Quotes() {
         // </div>
         <div className="content-grid-box sample2">
             <blockquote>
-                <br />
-
-                <p>{advice.message}</p>
-                <cite>{advice.author}</cite>
-                <br />
+                {props.phraseModeSelf ? (
+                    <>
+                        <br />
+                        <p>{props.phraseCtt}</p>
+                        {/* <cite>{advice.author}</cite> */}
+                        <br />
+                    </>
+                ) : (
+                    <>
+                        <br />
+                        <p>{advice.message}</p>
+                        <cite>{advice.author}</cite>
+                        <br />
+                    </>
+                )}
             </blockquote>
         </div>
     );

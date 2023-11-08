@@ -60,10 +60,10 @@ export default function Main() {
         <div className="section">
             {/* <MainImg /> */}
             <Content
-                phraseCtt={phraseCtt}
-                setPhraseCtt={setPhraseCtt}
-                phraseModeSelf={phraseModeSelf}
-                setPhraseModeSelf={setPhraseModeSelf}
+            // phraseCtt={phraseCtt}
+            // setPhraseCtt={setPhraseCtt}
+            // phraseModeSelf={phraseModeSelf}
+            // setPhraseModeSelf={setPhraseModeSelf}
             />
         </div>
     );
