@@ -17,7 +17,6 @@ export default function Progressbar({
                     className="my-bar"
                     style={{ width: scorePercentage }}
                 ></div>
->>>>>>> 94dd11a96165df6f9b74add283f7b9d1367fa77a
             </div>
         </div>
     );

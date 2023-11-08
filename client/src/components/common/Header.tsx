@@ -93,6 +93,25 @@ export default function Header(props: any) {
         }
     }, [window.location.pathname]);
 
+    // 초대장 링크 입력 시 그 그룹으로 이동
+    const [grpInput, setGrpInput] = useState<string>('');
+    const goInvited = (): void => {
+        axios
+            .post(
+                `${process.env.REACT_APP_DB_HOST}/group/joinByLink`,
+                grpInput,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
+            });
+    };
+
     return (
         <>
             <div className="header-container">
@@ -117,6 +136,20 @@ export default function Header(props: any) {
 
                     <nav className="header-nav ">
                         <ThemeProvider theme={theme}>
+                            <input
+                                type="text"
+                                id="grpSearch-input"
+                                value={grpInput}
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) => setGrpInput(e.target.value)}
+                            />
+                            <img
+                                src="/asset/icons/search.svg"
+                                id="grpSearch-btn"
+                                onClick={(e: React.MouseEvent) => goInvited()}
+                                alt="search"
+                            ></img>
                             <ButtonGroup
                                 aria-label="outlined button group"
                                 variant="outlined"

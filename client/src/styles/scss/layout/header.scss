@@ -1,4 +1,5 @@
 @import '../abstracts/variables';
+@import '../abstracts/utils';
 @import '~include-media/dist/include-media';
 
 .header-container {
@@ -93,6 +94,14 @@
 .menu li a {
     padding: 0.5rem;
 }
+#grpSeadrch-input {
+    width: 20%;
+}
+#grpSearch-btn {
+    @include box(40px);
+    margin-right: 3%;
+    margin-left: 1%;
+}
 .menu-button {
     background-color: $color-primary;
     color: white;
@@ -110,7 +119,6 @@
         box-shadow: none;
     }
 }
-
 .menu-button:focus {
     background-color: white;
     color: $color-gray4;
