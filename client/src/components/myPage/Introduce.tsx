@@ -12,7 +12,7 @@ export default function Introduce(props: any): JSX.Element {
     };
 
     return (
-        <div>
+        <div className='introduce-div'>
             <label className="input-label">
                 <textarea
                     // readOnly={readOnlyVal}

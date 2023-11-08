@@ -11,7 +11,7 @@ export default function Phrase(props: any): JSX.Element {
     };
 
     return (
-        <div>
+        <div className='phrase-all-div'>
             <label className="input-label">
                 <textarea
                     // readOnly={readOnlyVal}
