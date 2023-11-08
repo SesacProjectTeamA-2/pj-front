@@ -76,9 +76,28 @@ export default function WarningModal({
                     });
             };
             deleteGroupHandler();
+        } else if (action === '모임 탈퇴') {
+            const quitGroupHandler = async () => {
+                const res = await axios
+                    .delete(
+                        `${process.env.REACT_APP_DB_HOST}/group/quit/${gSeq}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${uToken}`,
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        console.log(res.data);
+                        toast.success(
+                            `${groupName} 모임을 ${action}하셨습니다.`
+                        );
+                        nvg('/group');
+                    });
+            };
+            quitGroupHandler();
         }
-        // [추후] 모임 탈퇴 요청 / 게시글 삭제 요청 로직  추가
-        setWarningModalSwitch(false);
+        // [추후] 게시글 삭제 요청 로직  추가
     };
 
     // 모달창 닫기
