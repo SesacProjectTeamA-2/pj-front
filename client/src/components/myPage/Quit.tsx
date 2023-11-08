@@ -10,7 +10,7 @@ export default function Quit() {
     };
 
     return (
-        <div>
+        <div className='quit-div'>
             {/* 모달 추가 */}
             <button id="quit-btn" onClick={warningModalSwitchHandler}>
                 회원탈퇴
