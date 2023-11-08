@@ -178,6 +178,7 @@ export default function BoardPost() {
             })
             .then((res) => {
                 console.log(res);
+                console.log('boardPostHandler');
                 successHandler();
             });
 

@@ -59,9 +59,7 @@ export default function Header(props: any) {
     };
 
     // 프로필 사진 가져오기
-    const [userImgSrc, setUserImgSrc] = useState<string>(
-        '/asset/images/user.svg'
-    );
+    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
 
     const getUserData = async () => {
         await axios
@@ -71,11 +69,18 @@ export default function Header(props: any) {
                 },
             })
             .then((res) => {
-                console.log('getUserData 로그인 후 ');
-                const { userImg } = res.data;
-                if (userImg !== '0') {
+                console.log('getUserData 로그인 후 ', res.data);
+                const { userImg } = res.data; //null
+
+                if (userImg !== null || userImg !== undefined) {
                     //user가 업로드한 값 없으면 기본 이미지
                     setUserImgSrc(userImg);
+                    console.log('userImgSrc 있음', userImgSrc);
+                } else if (userImg) {
+                    setUserImgSrc('/asset/images/user.svg');
+                    console.log('userImgSrc 없음', userImgSrc);
+                } else {
+                    console.log('암것도 아님', userImgSrc);
                 }
             })
             .catch((err) => {
