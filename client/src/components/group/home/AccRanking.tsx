@@ -15,7 +15,7 @@ export default function AccRanking({ totalRanking, totalScoreRanking }: any) {
             </div>
             <div className="main-content">
                 <ul className="list-unstyled">
-                    {totalRanking.map((total: any, idx: number) => {
+                    {totalRanking?.map((total: any, idx: number) => {
                         return (
                             <li>
                                 <div className="ranking-list">

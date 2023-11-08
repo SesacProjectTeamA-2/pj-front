@@ -10,15 +10,25 @@ import TeamPercentage from './TeamPercentage';
 import '../../styles/scss/pages/main/percentage.scss';
 import Progressbar from '../common/Progressbar';
 
-export default function Content() {
+export default function Content(props: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    // 프로필 사진 가져오기
+    // 프로필 사진 , 명언 가져오기
+    // -1) 프로필 사진
     const [userImgSrc, setUserImgSrc] = useState<string>(
         '/asset/images/user.svg'
     );
-    const getUserProfile = async () => {
+
+    // -2) 명언
+    const [phraseCtt, setPhraseCtt] = useState<string | null>(null);
+
+    // -3) 명언 지정 논리연산자
+    //  데이터 가져와서 phrase null이 아니면 true로(자기 작성 모드) : Quotes 컨텐츠 가림
+    //  null 이라면 false로 (명언 모드) : Quotes 컨텐츠 보임
+    const [phraseModeSelf, setPhraseModeSelf] = useState<boolean>(false);
+
+    const getUserData = async () => {
         await axios
             .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
                 headers: {
@@ -26,13 +36,26 @@ export default function Content() {
                 },
             })
             .then((res) => {
-                const { userImg } = res.data;
-                setUserImgSrc(userImg);
-                console.log('userImgSrc ', userImgSrc);
+                const { userImg, phrase } = res.data;
+                console.log('CONTENT 이미지 / 지정 명언', userImg, phrase);
+                if (userImg !== '0') {
+                    // 업로드한 이미지 있으면
+                    setUserImgSrc(userImg);
+                }
+                if (phrase) {
+                    setPhraseModeSelf(true);
+                    setPhraseCtt(phrase);
+                    console.log('마이페이지 작성 => 가져온 명언', phraseCtt);
+                    console.log('내가 쓴 명언인가 ? ', phraseModeSelf);
+                }
+                // console.log('userImgSrc 비로그인 시 기본 이미지 ', userImgSrc);
             });
     };
     useEffect(() => {
-        getUserProfile();
+        if (cookie.get('isUser')) {
+            getUserData();
+            // console.log('CONTENT 비로그인');
+        }
     }, []);
 
     //] 1. 유저 미션 조회
@@ -44,13 +67,18 @@ export default function Content() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
+                console.log('유저 미션 조회 >> ', res.data);
 
                 const {
                     missionArray,
+                    mainGroup,
                     groupInfo,
                     isDone,
+                    groupArray,
                     doneRates,
+                    nowScoreUserInfo,
+                    nowRanking,
+                    GroupRates,
                     uName,
                     uCharImg,
                 } = res.data;
@@ -61,21 +89,36 @@ export default function Content() {
                 setCharImg(uCharImg);
                 setIsDone(isDone);
                 setDoneRates(doneRates);
+                setGroupArray(groupArray);
+                setNowScoreUserInfo(nowScoreUserInfo);
+                setNowRanking(nowRanking);
+                setGroupRates(GroupRates);
+                setMainGroup(mainGroup);
             });
     };
 
     useEffect(() => {
-        getMissionMain();
+        if (cookie.get('isUser')) {
+            getMissionMain();
+        }
     }, []);
 
     const [uName, setUName] = useState('');
+    const [mainGroup, setMainGroup] = useState('');
     const [uCharImg, setCharImg] = useState('');
     const [missionArray, setMissionArray] = useState([]);
     const [groupInfo, setGroupInfo] = useState<any>([]);
+    const [groupArray, setGroupArray] = useState<any>([]);
     const [isDone, setIsDone] = useState([]);
+    const [nowScoreUserInfo, setNowScoreUserInfo] = useState([]);
+    const [nowRanking, setNowRanking] = useState([]);
+    const [GroupRates, setGroupRates] = useState([]);
     const [doneRates, setDoneRates] = useState([]);
-
-    //] 2. 유저 가입 모임
+    console.log('nowScoreUserInfo', nowScoreUserInfo);
+    console.log('nowRanking', nowRanking);
+    console.log('GroupRates', GroupRates);
+    console.log('doneRates', doneRates);
+    // ] 2. 유저 가입 모임
     const getJoinedGroup = async () => {
         const res = await axios
             .get(`${process.env.REACT_APP_DB_HOST}/group/joined`, {
@@ -93,7 +136,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getJoinedGroup();
+        if (cookie.get('isUser')) {
+            getJoinedGroup();
+        }
     }, []);
 
     // [추후] joinGroupInfo 정보 맞는지 재확인
@@ -118,7 +163,9 @@ export default function Content() {
     };
 
     useEffect(() => {
-        getMadeGroup();
+        if (cookie.get('isUser')) {
+            getMadeGroup();
+        }
     }, []);
 
     const [madeGroupInfo, setMadeGroupInfo] = useState<any>([]);
@@ -146,7 +193,12 @@ export default function Content() {
 
     return (
         <div className="content-grid">
-            <Quotes />
+            <Quotes
+                phraseCtt={phraseCtt}
+                // setPhraseCtt={setPhraseCtt}
+                // setPhraseModeSelf={setPhraseModeSelf}
+                phraseModeSelf={phraseModeSelf}
+            />
             {/* 1. 명언 : 가로로 길게 */}
 
             <br />
@@ -157,7 +209,7 @@ export default function Content() {
                     <div className="title4">My 달성률 </div>
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
-                            {groupInfo.map((group: any, idx: number) => {
+                            {groupArray.map((group: any, idx: number) => {
                                 return (
                                     <div
                                         style={{
@@ -168,7 +220,7 @@ export default function Content() {
                                         <div>
                                             {/* [추후] tb_name 수정 */}
                                             {/* <div className="title5">{groupInfo}</div> */}
-                                            {group.gSeq}
+                                            {group.gName}
                                         </div>
                                         <div
                                             className="bar-container"
@@ -204,21 +256,45 @@ export default function Content() {
             <div className="content-grid-box">
                 <div className="percentage-div">
                     <div className="title4">Team 달성률</div>
-
+                    {mainGroup ? (
+                        <div>
+                            {nowScoreUserInfo?.map((info: any, idx: number) => {
+                                return (
+                                    <>
+                                        <div className="profile-img-div-flex">
+                                            {info.uName}
+                                        </div>
+                                    </>
+                                );
+                            })}
+                            {GroupRates?.map((mission: any, idx: number) => {
+                                return (
+                                    <div className="progress-bar-div">
+                                        <Progressbar
+                                            score={mission}
+                                            bg={'#f3f3f3'}
+                                        />
+                                    </div>
+                                );
+                            })}
+                            <div className="team-progress-img-div-flex">
+                                <img
+                                    src={userImgSrc}
+                                    alt="프로필 이미지"
+                                    className="profile-img"
+                                />
+                                <div className="title5">
+                                    {groupArray[0].gName}
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="title4">대표 모임을 설정해주세요</div>
+                    )}
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
                             <div className="profile-img-div-flex">
                                 {/* 멤버 리스트 동적 수정 */}
-                                <img
-                                    src={userImgSrc}
-                                    alt="프로필 이미지"
-                                    className="profile-img"
-                                />
-                                <img
-                                    src={userImgSrc}
-                                    alt="프로필 이미지"
-                                    className="profile-img"
-                                />
                                 <img
                                     src={userImgSrc}
                                     alt="프로필 이미지"
@@ -234,29 +310,7 @@ export default function Content() {
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div className="progress-div">
-                                        <div className="my-progress">
-                                            <div className="my-bar-two"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="progress-div">
-                                        <div className="my-progress">
-                                            <div className="my-bar-two"></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <div className="team-progress-img-div-flex">
-                            <img
-                                src="/asset/images/rabbit1.svg"
-                                alt="동물 이미지"
-                                className="my-progress-img"
-                            />
-                            <div className="title5">근손실방지</div>
                         </div>
                     </div>
                 </div>

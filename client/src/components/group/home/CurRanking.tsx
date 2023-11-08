@@ -24,7 +24,7 @@ export default function CurRanking({
             </div>
             <div className="main-content">
                 <ul className="list-unstyled">
-                    {nowRanking.map((now: any, idx: number) => {
+                    {nowRanking?.map((now: any, idx: number) => {
                         return (
                             <li>
                                 <div className="ranking-list">
