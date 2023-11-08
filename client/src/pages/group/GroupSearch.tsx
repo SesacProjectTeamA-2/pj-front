@@ -4,7 +4,11 @@ import { Cookies } from 'react-cookie';
 import { GroupStateType } from 'src/types/types';
 import { Link } from 'react-router-dom';
 
-export default function GroupSearch({ searchInput, selectedArr }: any) {
+export default function GroupSearch({
+    searchInput,
+    selectedArr,
+    categoryQuery,
+}: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
@@ -17,21 +21,17 @@ export default function GroupSearch({ searchInput, selectedArr }: any) {
         const getSearchGroupList = async () => {
             const res = await axios.get(
                 // 임시로 전체 검색
-                `${process.env.REACT_APP_DB_HOST}/group?search=%&category=%`,
+                `${process.env.REACT_APP_DB_HOST}/group?search=${searchInput}&category=${selectedArr}`
                 // `http://localhost:8888/api/group?search=${searchInput}&category=${}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
             );
 
             console.log('검색결과', res.data.groupArray);
+            console.log(res);
             setSearchGroupList(res.data.groupArray);
         };
 
         getSearchGroupList();
-    }, []);
+    }, [searchInput, selectedArr]);
 
     console.log(searchGroupList);
 
