@@ -289,7 +289,7 @@ export default function Content(props: any) {
                             </div>
                         </div>
                     ) : (
-                        <div className="title4">대표 모임을 설정해주세요</div>
+                        <div className="title5">대표 모임을 설정해주세요</div>
                     )}
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
