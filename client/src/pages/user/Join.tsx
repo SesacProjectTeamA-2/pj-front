@@ -17,6 +17,7 @@ export default function Join() {
     interface userInfoItf {
         uEmail: string;
         uName: string;
+        uImg: string;
         uCharImg: string | null;
         // uCategory1: string | null;
         // uCategory2: string | null;
@@ -33,6 +34,7 @@ export default function Join() {
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
+    const uImg: string = urlParams.get('userImg');
     console.log(uName);
 
     // 2. 사용자 닉네임 설정
@@ -49,6 +51,7 @@ export default function Join() {
     const userInfo: userInfoItf = {
         uEmail: uEmail,
         uName: uName,
+        uImg: uImg,
         uCharImg: selectedCharacter,
         // uCategory1: selectedArr[0],
         // uCategory2: selectedArr[1],

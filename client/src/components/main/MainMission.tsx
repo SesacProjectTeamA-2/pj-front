@@ -20,7 +20,7 @@ export default function MainMission() {
                 console.log(res.data);
 
                 const { missionArray, groupArray, uName, uCharImg } = res.data;
-
+                console.log('미션어레이>>>>>>>', missionArray);
                 setMissionArray(missionArray);
                 setGroupInfo(groupArray);
                 setUName(uName);
@@ -45,13 +45,8 @@ export default function MainMission() {
         <div className="content-grid-box">
             <div className="main-mission-div">
                 <div className="title4">미션 달성하러 가볼까요?</div>
-                {
+                {missionArray.length > 0 ? (
                     <div>
-                        <div className="title5">모임명</div>
-                        {/* {groupInfo.map((info: any, idx: number) => {
-                            return <div>{info.tb_group[0].gName}</div>;
-                        })} */}
-
                         {groupArray?.map((info: any, idx: number) => {
                             return <div>{info.gName}</div>;
                         })}
@@ -69,7 +64,9 @@ export default function MainMission() {
                             );
                         })}
                     </div>
-                }
+                ) : (
+                    <div className="title5">해야할 미션이 없어요</div>
+                )}
             </div>
         </div>
     );
