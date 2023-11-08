@@ -19,7 +19,7 @@ export default function GroupContent({ action }: any) {
 
     const { gSeq, mSeq, gCategory } = useParams();
 
-    console.log('8888888', gCategory);
+    console.log(' gSeq, mSeq, gCategory', gSeq, mSeq, gCategory);
 
     //] 1. 자유게시글
     const [freeList, setFreeList] = useState<any>([]);
@@ -27,18 +27,19 @@ export default function GroupContent({ action }: any) {
 
     // 자유 게시글 조회
     const getBoardFree = async () => {
-        const res = await axios.get(
-            `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free`,
-            {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            }
-        );
+            })
+            .then((res) => {
+                console.log('자유게시글');
+                console.log('---', res.data.groupInfo);
 
-        console.log('---', res.data.groupInfo);
+                setFreeList(res.data.groupInfo);
+            });
 
-        setFreeList(res.data.groupInfo);
         // setCommentCount(res.data.groupInfo);
     };
 
@@ -60,27 +61,27 @@ export default function GroupContent({ action }: any) {
     // }
 
     // //] 2. 미션게시글
-    // const [missionList, setMissionList] = useState([]);
+    const [missionList, setMissionList] = useState([]);
 
-    // // 미션 게시글 조회
-    // if (mSeq) {
-    //     const getBoardMission = async () => {
-    //         const res = await axios.get(
-    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         );
+    // 미션 게시글 조회
+    if (mSeq) {
+        const getBoardMission = async () => {
+            const res = await axios.get(
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            );
 
-    //         console.log(res.data);
+            console.log(res.data);
 
-    //         setMissionList(res.data.groupInfo);
-    //     };
-    //     getBoardMission();
-    // }
-    // useEffect(() => {}, []);
+            setMissionList(res.data.groupInfo);
+        };
+        getBoardMission();
+    }
+    useEffect(() => {}, []);
 
     return (
         <div className="noti-container post-list-container">

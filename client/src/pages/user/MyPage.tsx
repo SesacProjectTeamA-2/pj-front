@@ -45,12 +45,12 @@ export default function MyPage() {
                 } = res.data;
 
                 // 데이터 베이스 내 정보 화면에 띄우기
-                if (userImg !== '0') {
+                if (userImg !== null) {
                     // 사진 값 있으면 그 값으로
                     setUserImgSrc(userImg);
                 } else {
                     // 없으면 디폴트 사진으로 (hoisting)
-                    setUserImgSrc(userImgSrc);
+                    setUserImgSrc('/asset/images/user.svg');
                 }
                 setInput(nickname);
                 setContent(coverLetter);

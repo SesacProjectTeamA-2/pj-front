@@ -38,7 +38,11 @@ export default function Content(props: any) {
             .then((res) => {
                 const { userImg, phrase } = res.data;
                 console.log('CONTENT 이미지 / 지정 명언', userImg, phrase);
-                if (userImg !== '0') {
+                if (
+                    userImg !== '0' ||
+                    userImg !== null ||
+                    userImg !== undefined
+                ) {
                     // 업로드한 이미지 있으면
                     setUserImgSrc(userImg);
                 }
