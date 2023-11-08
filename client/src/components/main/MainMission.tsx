@@ -19,17 +19,10 @@ export default function MainMission() {
             .then((res) => {
                 console.log(res.data);
 
-                const {
-                    missionArray,
-                    groupInfo,
-                    isDone,
-                    doneRates,
-                    uName,
-                    uCharImg,
-                } = res.data;
+                const { missionArray, groupArray, uName, uCharImg } = res.data;
 
                 setMissionArray(missionArray);
-                setGroupInfo(groupInfo);
+                setGroupInfo(groupArray);
                 setUName(uName);
                 setCharImg(uCharImg);
             });
@@ -42,7 +35,7 @@ export default function MainMission() {
     const [uName, setUName] = useState('');
     const [uCharImg, setCharImg] = useState('');
     const [missionArray, setMissionArray] = useState([]);
-    const [groupInfo, setGroupInfo] = useState<any>([]);
+    const [groupArray, setGroupInfo] = useState<any>([]);
 
     console.log(missionArray);
 
@@ -57,15 +50,14 @@ export default function MainMission() {
                             return <div>{info.tb_group[0].gName}</div>;
                         })} */}
 
-                        {groupInfo?.map((info: any, idx: number) => {
-                            // return <div>{info[0].gName}</div>;
+                        {groupArray?.map((info: any, idx: number) => {
+                            return <div>{info.gName}</div>;
                         })}
                         {missionArray?.map((mission: any, idx: number) => {
                             return (
                                 <div>
-                                    {/* [추후] 동적 수정... - 맞게 갈 수가 있나 ㅠ */}
                                     <Link
-                                        to={`/board/${mission.gSeq}/mission/1`}
+                                        to={`/board/${mission.gSeq}/mission/${mission.mSeq}`}
                                     >
                                         <button className="btn-sm button mission-btn-to-group">
                                             {mission?.mTitle}
