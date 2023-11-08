@@ -41,9 +41,47 @@ export default function GroupCreate() {
 
     const onChange = (e: any) => {
         const { name, value } = e.target;
-        // for (let i = 0; i < missionList.length; i++) {
-        setInput({ ...input, [name]: value });
-        // }
+        // // for (let i = 0; i < missionList.length; i++) {
+        // setInput({ ...input, [name]: value });
+        // // }
+
+        // 유효성 검사: 모임명
+        if (name === 'gName' && value.length > 15) {
+            alert('15자 이내의 모임명을 입력해주세요!');
+
+            const slicedInput = value.slice(0, 15);
+            setInput({ ...input, [name]: slicedInput });
+            e.target.focus();
+            return;
+        } else {
+            setInput({ ...input, [name]: value });
+        }
+
+        // 유효성 검사: 모임 설명
+        if (name === 'gDesc' && value.length > 500) {
+            alert('500자 이내의 모임 설명을 입력해주세요!');
+            const slicedInput = value.slice(0, 500);
+            setInput({ ...input, [name]: slicedInput });
+            e.target.focus();
+            return;
+        } else {
+            setInput({ ...input, [name]: value });
+        }
+
+        // 유효성 검사: 모임 인원
+        if (name === 'gMaxMem') {
+            const intValue = parseInt(value, 10); // 입력값을 정수로 변환
+
+            if (isNaN(intValue) || intValue < 1) {
+                // 숫자가 아니거나 1 미만인 경우
+                alert('모임 인원은 1명 이상부터 가능합니다!');
+                setInput({ ...input, [name]: 1 }); // 기본값으로 설정
+                // 해당 input에 포커스를 이동
+                e.target.value = '1'; // 입력값을 1로 설정
+                e.target.focus();
+                return;
+            }
+        }
     };
 
     const missionAddHandler = () => {
@@ -87,6 +125,12 @@ export default function GroupCreate() {
     //] 그룹 생성 요청
     const groupCreateHandler = async () => {
         //! [추후] input 입력 안했을 시, 로직
+        // 그룹 카테고리 미설정시 유효성 검사
+        if (!input.gCategory) {
+            // 만약 gCategory가 비어있으면 알림을 표시
+            alert('그룹의 카테고리를 선택해주세요!');
+            return; // 함수 실행 중지
+        }
 
         const res = await axios
             .post(`${process.env.REACT_APP_DB_HOST}/group`, input, {
@@ -200,6 +244,8 @@ export default function GroupCreate() {
                             variant="filled"
                             onChange={onChange}
                             name="gName"
+                            value={input.gName}
+                            inputProps={{ maxLength: 16 }} //최대 글자 수 16으로 제한
                         />
                         {/* <TextField
                             id="standard-basic"
@@ -260,6 +306,7 @@ export default function GroupCreate() {
                     placeholder="500자 이내로 입력하세요."
                     onChange={onChange}
                     name="gDesc"
+                    value={input.gDesc}
                 ></textarea>
             </div>
             <div className="group-create-content">
