@@ -104,8 +104,8 @@ export default function SideBarGroupLeader({
     };
 
     return (
-        <div>
-            <ul className="title4 leader-menu">
+        <div className='leader-content'>
+            <ul className="leader-menu">
                 <CopyToClipboard
                     text={inviteCode}
                     onCopy={() => toast.success(' 초대코드가 복사되었습니다 !')}
@@ -118,9 +118,9 @@ export default function SideBarGroupLeader({
 
                 {/* [추후] id 추가 */}
                 <Link to={`/group/edit/${gSeq}`}>
-                    <li className="leader-edit">모임 수정</li>
+                    <li className="leader-edit leader-title">모임 수정</li>
                 </Link>
-                <br />
+   
 
                 <li
                     onClick={missionCancelModalHandler}

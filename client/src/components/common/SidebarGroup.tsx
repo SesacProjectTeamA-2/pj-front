@@ -81,14 +81,14 @@ export default function SideBarGroup() {
                         </div>
                         <div className="theme-flex">
                             <div className="theme-title">미션</div>
-                            <div className='mission-flex'>
-                                <div>
-                                    <div>진행 중</div>
+                            <div >
+                                <div  className='mission-flex' >
+                                    <div className='mission-title'>진행 중</div>
                                     <div>
                                         <ul  className="progress-mission">
                                             {mSeqList.map((mSeq: number) => {
                                                 return (
-                                                    <li key={mSeq}>
+                                                    <li key={mSeq} className='sidebar-theme'>
                                                         <Link
                                                             to={`/board/${gSeq}/mission/${mSeq}`}
                                                         >
@@ -110,7 +110,7 @@ export default function SideBarGroup() {
                                     </div>
                                 </div>
                                 <Link to={`/board/${gSeq}/mission/done`}>
-                                    <div className="">완료</div>
+                                    <div className='mission-title'>완료</div>
                                 </Link>
                             </div>
                         </div>
