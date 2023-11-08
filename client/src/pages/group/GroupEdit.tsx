@@ -90,19 +90,27 @@ export default function GroupEdit() {
     }, []);
 
     console.log('그룹 세부사항 GET', groupDetail);
+    console.log('날짜 디폴트 설정 전 날짜', groupDetail.gDday);
 
     // console.log('groupName', groupName); // 이건 잘 찍힘
+
+    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
+    const today = new Date();
+    today.setDate(today.getDate() + 7); // 오늘 날짜로부터 7일 후
+    const defaultDday = today.toISOString().split('T')[0];
 
     const [input, setInput] = useState({
         gSeq,
         gName: '',
         gDesc: '',
-        gDday: '',
+        gDday: defaultDday,
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
         missionArray: [],
     });
+
+    console.log('날짜 디폴트 설정 후 날짜', input.gDday);
 
     //~ [추후] 미션 수정 axios 추가 !!!!!!
 
@@ -162,6 +170,8 @@ export default function GroupEdit() {
     //; 모임 수정 (PATCH)
     const groupEditHandler = async () => {
         // 유효성 검사: 그룹 카테고리 미설정 방지
+        console.log('제출 전 날짜 ', input.gDday);
+
         if (!input.gCategory) {
             alert('그룹의 카테고리를 선택해주세요!');
             return;
