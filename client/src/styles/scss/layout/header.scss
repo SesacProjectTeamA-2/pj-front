@@ -53,14 +53,17 @@
 .mobMode {
     display: none;
 }
-#chat-li {
-    cursor: pointer;
 
-    @include media('<800px') {
-        display: flex;
-        margin-left: 0.5rem;
-    }
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.logo-img {
+    width: 8rem;
+    height: 4rem;
+}
+
 .tab-menu-div {
     // display: none;
     display: none;
@@ -97,9 +100,10 @@
     // border-radius: 10px;
     padding: 5px;
     margin: 0;
+    width: 5rem;
     @include media('<768px') {
         border: none;
-        margin: 0.4rem 0.4rem;
+        margin: 0rem 0.4rem;
         text-decoration: underline;
         // background-color: $color-primary;
         color: white;
@@ -114,22 +118,26 @@
 #logout-btn {
     width: 2rem;
     cursor: pointer;
-    margin-left: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: 1.2rem;
+}
+.myPage-btn {
+    // margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
 }
 
-.logo-text {
-    color: $color-logo;
-    margin: 1rem 2rem;
-    font-size: 3rem;
-    font-weight: 900;
-}
+#chat-li {
+    cursor: pointer;
+    margin-left: 0.4rem;
 
-.logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include media('<800px') {
+        display: flex;
+        margin-left: 1rem;
+    }
 }
-.logo-img {
-    width: 8rem;
-    height: 4rem;
+#chat-btn {
+    margin-bottom: 1rem;
 }

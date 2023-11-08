@@ -14,6 +14,27 @@ export default function Content() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
+    // 프로필 사진 가져오기
+    const [userImgSrc, setUserImgSrc] = useState<string>(
+        '/asset/images/user.svg'
+    );
+    const getUserProfile = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                const { userImg } = res.data;
+                setUserImgSrc(userImg);
+                console.log('userImgSrc ', userImgSrc);
+            });
+    };
+    useEffect(() => {
+        getUserProfile();
+    }, []);
+
     //] 1. 유저 미션 조회
     const getMissionMain = async () => {
         const res = await axios
@@ -189,17 +210,17 @@ export default function Content() {
                             <div className="profile-img-div-flex">
                                 {/* 멤버 리스트 동적 수정 */}
                                 <img
-                                    src="/asset/images/user.svg"
+                                    src={userImgSrc}
                                     alt="프로필 이미지"
                                     className="profile-img"
                                 />
                                 <img
-                                    src="/asset/images/user.svg"
+                                    src={userImgSrc}
                                     alt="프로필 이미지"
                                     className="profile-img"
                                 />
                                 <img
-                                    src="/asset/images/user.svg"
+                                    src={userImgSrc}
                                     alt="프로필 이미지"
                                     className="profile-img"
                                 />

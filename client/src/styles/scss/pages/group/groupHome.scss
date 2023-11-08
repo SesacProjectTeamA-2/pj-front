@@ -1,4 +1,5 @@
 @import '../../abstracts/variables';
+@import '../../abstracts/utils';
 
 .group-home {
     width: 100%;
@@ -104,8 +105,8 @@
     gap: 10px;
 
     img {
-        width: 60px;
-        height: 60px;
+        @include box(40px);
+        border-radius: 50%;
     }
 }
 

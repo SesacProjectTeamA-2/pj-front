@@ -6,7 +6,7 @@ import SetMainDone from './SetMainDone';
 export default function SetMainItem(props: any) {
     return (
         <>
-            {props.groupArr.map((group: any) => {
+            {/* {props.groupArr.map((group: any) => {
                 return (
                     <tr key={group.gSeq}>
                         <td>{group.gName}</td>
@@ -29,7 +29,7 @@ export default function SetMainItem(props: any) {
                         </td>
                     </tr>
                 );
-            })}
+            })} */}
         </>
     );
 }
