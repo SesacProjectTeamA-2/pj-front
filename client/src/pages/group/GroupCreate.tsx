@@ -46,7 +46,12 @@ export default function GroupCreate() {
         // // }
 
         // 유효성 검사: 모임명
+
         if (name === 'gName' && value.length > 15) {
+            alert('모임명을 입력해주세요!');
+            e.target.focus();
+            return;
+        } else if (name === 'gName' && value.length > 15) {
             alert('15자 이내의 모임명을 입력해주세요!');
 
             const slicedInput = value.slice(0, 15);
@@ -131,6 +136,20 @@ export default function GroupCreate() {
             alert('그룹의 카테고리를 선택해주세요!');
             return; // 함수 실행 중지
         }
+
+        if (!input.gName) {
+            // 만약 gName이 비어있으면 알림을 표시
+            alert('모임명을 입력해주세요!');
+            
+            // 입력 필드에 포커스를 맞춥니다.
+            const gNameInput = document.querySelector('input[name="gName"]') as HTMLInputElement | null;
+            if (gNameInput) {
+                gNameInput.focus();
+            }
+        
+            return; // 함수 실행 중지
+        }
+        
 
         const res = await axios
             .post(`${process.env.REACT_APP_DB_HOST}/group`, input, {
@@ -246,6 +265,7 @@ export default function GroupCreate() {
                             name="gName"
                             value={input.gName}
                             inputProps={{ maxLength: 16 }} //최대 글자 수 16으로 제한
+                            required
                         />
                         {/* <TextField
                             id="standard-basic"
@@ -292,6 +312,7 @@ export default function GroupCreate() {
                                     className="tag-radio"
                                     value={interest.val}
                                     onChange={onChange}
+                                    required
                                 />
                                 {interest.category}
                             </label>
@@ -307,6 +328,7 @@ export default function GroupCreate() {
                     onChange={onChange}
                     name="gDesc"
                     value={input.gDesc}
+                    required
                 ></textarea>
             </div>
             <div className="group-create-content">
