@@ -66,7 +66,7 @@ export default function ModalMemberList({
             })
             .then((res) => {
                 console.log(res.data);
-                setMissionArray(res.data.missionArray);
+                setMemberArray(res.data.memberArray);
             });
     };
 
@@ -74,16 +74,16 @@ export default function ModalMemberList({
         getGroup();
     }, []);
 
-    const [missionArray, setMissionArray] = useState<any>([]);
+    const [memberArray, setMemberArray] = useState<any>([]);
     // id 추가
-    for (let i = 0; i < missionArray?.length; i++) {
-        missionArray.id = i;
+    for (let i = 0; i < memberArray?.length; i++) {
+        memberArray.id = i;
     }
 
     const [selectedMemberId, setSelectedMemberId] = useState(0);
 
-    const listClickHandler = (id: number) => {
-        setSelectedMemberId(id);
+    const listClickHandler = (uSeq: number) => {
+        setSelectedMemberId(uSeq);
     };
 
     const doneHandler = () => {
@@ -95,6 +95,26 @@ export default function ModalMemberList({
         setChoiceModalSwitch(false);
     };
 
+    // 모임장 위임
+    const patchLeader = async () => {
+        const input = { newLeaderUSeq: selectedMemberId };
+        const res = await axios
+            .patch(`${process.env.REACT_APP_DB_HOST}/group/leader/${gSeq}`, input, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                const { success, msg } = res.data;
+                if (!success) {
+                    alert('실패');
+                } else {
+                    window.location.href = `http://localhost:3000/group/home/${gSeq}`;
+                }
+            });
+    };
+
     // // 모달창 닫기
     // const closeModalHandler = () => {
     //     setChoiceModalSwitch(false);
@@ -103,14 +123,16 @@ export default function ModalMemberList({
     return (
         <div className="modal-member-list-container">
             {/* 모임장 제외 멤버 리스트 */}
-            {missionArray?.length > 0 ? (
-                missionArray.map((member: any, idx: number) => {
+            {memberArray?.length > 0 ? (
+                memberArray.map((member: any) => {
                     return (
                         <div>
                             <ul className="list-unstyled modal-member-list-ul">
                                 <label
-                                    key={idx}
-                                    onClick={() => listClickHandler(idx)}
+                                    key={member.uSeq}
+                                    onClick={() =>
+                                        listClickHandler(member.uSeq)
+                                    }
                                     className="modal-member-list-label"
                                     style={{
                                         backgroundColor:
@@ -143,7 +165,7 @@ export default function ModalMemberList({
                                         <img src={member.uImg} />
                                         <div className="cur-ranking-content">
                                             <div className="title4">
-                                                {member.uImg}
+                                                {member.uName}
                                             </div>
                                         </div>
                                     </div>
@@ -180,7 +202,7 @@ export default function ModalMemberList({
                                     </button>
                                 ) : action === '모임장 권한 넘기기' ? (
                                     <button
-                                        onClick={missionCancelDone}
+                                        onClick={patchLeader}
                                         className="btn-md mission-cancel-done-btn"
                                     >
                                         {action}
