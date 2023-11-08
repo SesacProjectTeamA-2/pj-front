@@ -61,6 +61,7 @@ export default function Header(props: any) {
     const [userImgSrc, setUserImgSrc] = useState<string>(
         '/asset/images/user.svg'
     );
+
     const getUserProfile = async () => {
         await axios
             .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
@@ -70,15 +71,19 @@ export default function Header(props: any) {
             })
             .then((res) => {
                 const { userImg } = res.data;
-                setUserImgSrc(userImg);
+                if (userImg !== '0') {
+                    //user가 업로드한 값 없으면 기본 이미지
+                    setUserImgSrc(userImg);
+                }
             });
     };
-    console.log(window.location.pathname);
+    // console.log(window.location.pathname);
 
     useEffect(() => {
         getUserProfile();
         console.log('changed!', userImgSrc);
     }, [window.location.pathname]);
+
     return (
         <>
             <div className="header-container">
