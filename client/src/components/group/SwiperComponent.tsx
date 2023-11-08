@@ -6,8 +6,8 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/scss';
 import '../../styles/scss/components/swiper.scss';
 
-export default function SwiperComponent({ madeGroup, setMadeGroup }: any) {
-    console.log('made', madeGroup);
+export default function SwiperComponent({ groupArray, setGroupArray }: any) {
+    console.log('GroupArray : ', groupArray);
 
     return (
         <div>
@@ -72,17 +72,19 @@ export default function SwiperComponent({ madeGroup, setMadeGroup }: any) {
                     //         slidesPerGroup: 3,
                     //     },
                 >
-                    {madeGroup.map((mGroup: any) => {
+                    {groupArray?.map((groupInfo: any) => {
                         return (
                             <>
                                 <SwiperSlide>
-                                    <Link to={`/group/home/${mGroup.gSeq}`}>
+                                    <Link to={`/group/home/${groupInfo.gSeq}`}>
                                         {/* <img src="asset/images/cat1.svg" /> */}
-                                        {/* <div>{mGroup.gCoverImg}</div> */}
-                                        <div>{mGroup.gName}</div>
-                                        <div>목표 날짜 : {mGroup.gDday}</div>
-                                        {/* <div>남은 일수 : {mGroup.gDday}</div> */}
-                                        <div>현재멤버수 / {mGroup.gMaxMem}</div>
+                                        {/* <div>{groupInfo.gCoverImg}</div> */}
+                                        <div>{groupInfo.gName}</div>
+                                        <div>목표 날짜 : {groupInfo.gDday}</div>
+                                        {/* <div>남은 일수 : {groupInfo.gDday}</div> */}
+                                        <div>
+                                            현재멤버수 / {groupInfo.gMaxMem}
+                                        </div>
                                     </Link>
                                 </SwiperSlide>
                                 ;
