@@ -79,7 +79,7 @@ export default function GroupHome() {
 
     const getGroup = async () => {
         const res = await axios
-            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/`, {
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
