@@ -6,7 +6,7 @@ import '../../styles/scss/pages/group/groupMissionDone.scss';
 
 import GroupContent from '../../components/group/content/GroupContentList';
 import GroupHeader from '../../components/group/content/GroupHeader';
-import { GroupDetailType, MissionType } from 'src/types/types';
+import { GroupMission, MissionType } from 'src/types/types';
 
 export default function GroupMissionDone() {
     const cookie = new Cookies();
@@ -18,32 +18,20 @@ export default function GroupMissionDone() {
 
     console.log(gSeq);
 
-    const [groupDetail, setGroupDetail] = useState<GroupDetailType>({
-        grInformation: '',
-        groupCategory: '',
-        groupCoverImg: '',
-        groupDday: 0,
-        groupMaxMember: 0,
-        groupMember: [],
-        groupMission: [],
-        groupName: '',
-        isJoin: false,
-        isLeader: false,
-        nowScoreUserInfo: [],
-        totalScoreUserInfo: [],
-        result: false,
-        leaderInfo: {
-            uSeq: 0,
-            uName: '',
-            uImg: '',
-            uCharImg: '',
-        },
-        memberArray: [],
+    const [groupMission, setGroupMission] = useState<GroupMission>({
+        uEmail: '',
+        uName: '',
+        gName: '',
+        Dday: 0,
+        uSeq: 0,
+        missionList: [],
+        expiredMissionList: [],
     });
+
     useEffect(() => {
         const getGroup = async () => {
             const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`,
+                `${process.env.REACT_APP_DB_HOST}/mission/group/${gSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -51,23 +39,23 @@ export default function GroupMissionDone() {
                 }
             );
 
-            setGroupDetail(res.data);
+            setGroupMission(res.data);
         };
 
         getGroup();
     }, []);
 
-    console.log(groupDetail);
-
     // 미션
-    interface Mission {
-        id: number;
-        mTitle: string;
-        mContent: string;
-        mLevel: number;
-        // map: string;
-        isExpired: boolean | null;
-    }
+    // interface Mission {
+    //     id: number;
+    //     mTitle: string;
+    //     createdAt: number;
+    //     updatedAt: number;
+    //     mContent: string;
+    //     mLevel: number;
+    //     // map: string;
+    //     isExpired: boolean | null;
+    // }
 
     // type MissionList = {
     //     mSeq: number;
@@ -80,26 +68,19 @@ export default function GroupMissionDone() {
     //     isExpired: null | boolean;
     // };
 
-    const [missionList, setMissionList] = useState<Mission[]>(
-        groupDetail.groupMission
+    const [missionList, setMissionList] = useState<any>(
+        groupMission.expiredMissionList
     );
 
     useEffect(() => {
-        const doneMissions = missionList.filter(
-            (mission) => !mission.isExpired
-        );
-
-        setMissionList(doneMissions);
-    }, [groupDetail.groupMission]);
+        setMissionList(groupMission.expiredMissionList);
+    }, []);
 
     console.log(missionList);
 
     return (
         <div className="section section-group">
-            <GroupHeader
-                title={'완료된 미션'}
-                groupName={groupDetail.groupName}
-            />
+            <GroupHeader title={'완료된 미션'} groupName={groupMission.gName} />
             <div className="noti-container">
                 <div className="noti-header mission-done-header">
                     <table>
@@ -114,24 +95,7 @@ export default function GroupMissionDone() {
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2023.10.20</td>
-                                <td>2023.10.29</td>
-                                <td>10일</td>
-
-                                <td className="mission-done-list">
-                                    {missionList.map((mission: MissionType) => {
-                                        return (
-                                            <>
-                                                <button>알고리즘</button>
-                                                <button>블로깅</button>
-                                                <button>모각코</button>
-                                            </>
-                                        );
-                                    })}
-                                </td>
-                            </tr>
+                            <tr></tr>
                         </tbody>
                     </table>
                 </div>
@@ -174,39 +138,30 @@ export default function GroupMissionDone() {
                         {/* END */}
 
                         <li>
-                            <div>1</div>
-                            <div>2023.10.20</div>
-                            <div>2023.10.29</div>
-                            <div>10일</div>
-                            <div className="mission-done-list">
-                                <button>알고리즘</button>
-                                <button>블로깅</button>
-                                <button>모각코</button>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div>1</div>
-                            <div>2023.10.20</div>
-                            <div>2023.10.29</div>
-                            <div>10일</div>
-                            <div className="mission-done-list">
-                                <button>알고리즘</button>
-                                <button>블로깅</button>
-                                <button>모각코</button>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div>1</div>
-                            <div>2023.10.20</div>
-                            <div>2023.10.29</div>
-                            <div>10일</div>
-                            <div className="mission-done-list">
-                                <button>알고리즘</button>
-                                <button>블로깅</button>
-                                <button>모각코</button>
-                            </div>
+                            {/* {missionList.length > 0 ? ( */}
+                            <td className="mission-done-list">
+                                {missionList.map(
+                                    (mission: any, idx: number) => {
+                                        return (
+                                            <>
+                                                <div>{idx + 1}</div>
+                                                <div>{mission.createdAt}</div>
+                                                <div>{mission.updatedAt}</div>
+                                                <div className="mission-done-list">
+                                                    <button>
+                                                        {mission.mTitle}
+                                                    </button>
+                                                </div>
+                                            </>
+                                        );
+                                    }
+                                )}
+                            </td>
+                            {/* // ) : (
+                            //     <div className="title3">
+                            //         완료된 미션이 없어요
+                            //     </div>
+                            // )} */}
                         </li>
                     </ul>
                 </div>
