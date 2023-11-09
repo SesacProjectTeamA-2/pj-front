@@ -43,24 +43,27 @@ export default function Intro() {
                     </div>
                     <div className="intro-story">
                         <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
-                            <div className="title3">
-                                MOTIMATE <br />
+                            <div className="title4">
+                                MOTIMATE
+                                <br />
                                 이야기
                             </div>
                             <br />
                             <div className="intro-content-sub-title">
                                 자세히 보기
-                                <img
+                                {/* <img
                                     className="intro-right-double-icon"
                                     src="/asset/icons/right_double.svg"
                                     alt="right-double"
-                                />
+                                /> */}
+                                <br />
+                                <br />
                             </div>
                         </Link>
                     </div>
                 </div>
                 <div className="intro-content">
-                    <div className="title3">
+                    <div className="title4">
                         여러분의 동료, <br />
                         MOTIMATE를 소개합니다 !
                     </div>
@@ -73,23 +76,42 @@ export default function Intro() {
                 <div className="intro-img-wrapper-right">
                     <div className="intro-story">
                         <div
-                            className="title3"
                             style={{
-                                textAlign: 'justify',
+                                padding: '20px',
                             }}
                         >
-                            랭킹 시스템을 통한 동기부여
-                        </div>
-                        <br />
-                        <div className="intro-content-sub-title">
-                            혼자하면서 금방 지치지 않으셨나요 ?
+                            <div
+                                className="title4"
+                                style={{
+                                    textAlign: 'justify',
+                                }}
+                            >
+                                랭킹 시스템을 통한 동기부여
+                            </div>
+
                             <br />
-                            잠자고 있던 여러분의 승부욕을 불태울 시간입니다.🔥
                             <br />
-                            여러분의 현실게임 캐릭터인 모티메이트 랭킹을
-                            올립시다.
+                            <div
+                                className="intro-content-sub-title"
+                                style={{
+                                    textAlign: 'justify',
+                                    // fontSize: '14px',
+                                }}
+                            >
+                                혼자하면서 금방 지치지 않으셨나요 ?
+                                <br />
+                                <br />
+                                잠자고 있던 여러분의 승부욕을 불태울
+                                시간입니다.🔥
+                                <br />
+                                <br />
+                                여러분의 현실게임 캐릭터인 모티메이트 랭킹을
+                                올립시다.
+                            </div>
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div className="intro-img">
                         <img src="/asset/images/rank.jpg" alt="사진" />
                     </div>
@@ -125,17 +147,28 @@ export default function Intro() {
                     </div>
                     <div className="intro-story">
                         <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
-                            <div className="title3">마감기한 설정</div>
+                            <div
+                                className="title4"
+                                style={{
+                                    textAlign: 'justify',
+                                }}
+                            >
+                                마감기한 설정
+                            </div>
                             <br />
                             <div
                                 className="intro-content-sub-title"
                                 style={{
                                     textAlign: 'justify',
+                                    // fontSize: '14px',
                                 }}
                             >
                                 데드라인이 있어야, 달릴 맛이 나죠 !
                                 <br /> 모임별 디데이를 향해 다같이 나아가요 🏃🏻‍♂️
                             </div>
+
+                            <br />
+                            <br />
                         </Link>
                     </div>
                 </div>
