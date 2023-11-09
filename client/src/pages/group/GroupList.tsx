@@ -91,10 +91,10 @@ export default function GroupList() {
                 )}
             </div>
 
-            <div className="groups recommend">
+            {/* <div className="groups recommend">
                 <div className="title1">이런 모임 어떠세요 ?</div>
                 <button>추천모임1</button>
-            </div>
+            </div> */}
 
             <div className="btn-fixed-wrapper">
                 <Link to="/group/create">

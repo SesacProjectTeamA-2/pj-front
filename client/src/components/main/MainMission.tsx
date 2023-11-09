@@ -41,6 +41,31 @@ export default function MainMission() {
 
     console.log(missionArray);
 
+    // const getGrouopMain = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/group/joined`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             console.log('::::', res.data);
+
+    //             const { missionArray, groupArray, uName, uCharImg } = res.data;
+    //             console.log('미션어레이>>>>>>>', missionArray);
+    //             // setMissionArray(missionArray);
+    //             // setGroupInfo(groupArray);
+    //             // setUName(uName);
+    //             // setCharImg(uCharImg);
+    //         });
+    // };
+
+    // useEffect(() => {
+    //     if (cookie.get('isUser')) {
+    //         getGrouopMain();
+    //     }
+    // }, []);
+
     return (
         <div className="content-grid-box">
             <div className="main-mission-div">
@@ -48,7 +73,11 @@ export default function MainMission() {
                 {missionArray.length > 0 ? (
                     <div>
                         {groupArray?.map((info: any, idx: number) => {
-                            return <div>{info.gName}</div>;
+                            return (
+                                <div>
+                                    <div>{info.gName}</div>
+                                </div>
+                            );
                         })}
                         {missionArray?.map((mission: any, idx: number) => {
                             return (

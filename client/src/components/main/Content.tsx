@@ -142,6 +142,7 @@ export default function Content(props: any) {
     console.log('nowRanking', nowRanking);
     console.log('GroupRates', GroupRates);
     console.log('doneRates', doneRates);
+
     // ] 2. 유저 가입 모임
     const getJoinedGroup = async () => {
         const res = await axios
@@ -214,6 +215,48 @@ export default function Content(props: any) {
     // useEffect(() => {
     //     getGroupDeatil();
     // }, []);
+
+    console.log('????', uCharImg.slice(-5)); // 2.svg
+    console.log('????', uCharImg.slice(-4)); // .svg
+
+    console.log('????', uCharImg.slice(0, 14)); // /asset/images/
+    console.log('????', uCharImg.slice(14, 17)); // dog
+
+    let charNum = uCharImg.slice(-5, -4); // 2
+
+    // console.log('....', uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+
+    console.log('????', doneRates);
+
+    let totalRates = 0;
+    let totalPercent = 0;
+
+    for (let i = 0; i < doneRates.length; i++) {
+        totalRates += doneRates[i];
+        totalPercent = totalRates / doneRates.length; // 평균
+    }
+
+    // if (totalPercent > 70) {
+    //     uCharImg.replace(charNum, '3');
+    // } else if (totalPercent > 30) {
+    //     uCharImg.replace(charNum, '2');
+    // } else if (totalPercent <= 30) {
+    //     uCharImg.replace(charNum, '1');
+
+    //     console.log('kkk', uCharImg);
+
+    //     console.log('kkk', charNum);
+    // }
+
+    useEffect(() => {
+        if (totalPercent > 70) {
+            setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+            console.log(setCharImg);
+        }
+        setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+    });
+    console.log('totalRates', totalRates);
+    console.log('totalRates', totalPercent);
 
     return (
         <div className="content-grid">
