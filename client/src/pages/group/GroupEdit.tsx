@@ -16,7 +16,7 @@ import Dday from '../../components/common/Dday';
 import { GroupDetailType } from 'src/types/types';
 import { Divider, ListItem, ListItemText } from '@mui/material';
 import ImgGroupEdit from './ImgGroupEdit';
-import SuccessModal from 'src/components/common/modal/SucessModal';
+import SuccessModal from 'src/components/common/modal/SuccessModal';
 
 export default function GroupEdit() {
     const cookie = new Cookies();

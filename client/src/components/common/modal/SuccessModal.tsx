@@ -35,26 +35,6 @@ any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    // const getGroup = async () => {
-    //     const res = await axios
-    //         .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log(res.data);
-
-    //             setGName(res.data.groupName);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getGroup();
-    // }, []);
-
-    // const [gName, setGName] = useState('');
-
     const doneHandler = () => {
         alert(`${action}했습니다 !`);
 
@@ -108,7 +88,6 @@ any) {
                         alt="close-icon"
                     />
                 </div>
-                {/* <div className="modal-mission-cancel-content"> */}
                 <div className="modal-mission-cancel-content leave-modal-content">
                     <div className="modal-cancel-title-container leave-modal-container">
                         <div className="title1">
