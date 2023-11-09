@@ -43,7 +43,9 @@ export default function WarningModal({
     const nvg = useNavigate();
     const logoutHandler = () => {
         cookie.remove('isUser');
+        cookie.remove('token');
         nvg('/');
+        window.location.reload();
     };
 
     const doneHandler = () => {
