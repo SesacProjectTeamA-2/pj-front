@@ -55,7 +55,7 @@ export default function Main() {
     const cookies = new Cookies();
 
     return (
-        <div className="section">
+        <div className="section-main">
             {/* <MainImg /> */}
             <Content
             // phraseCtt={phraseCtt}

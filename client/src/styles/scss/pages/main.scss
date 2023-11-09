@@ -83,7 +83,7 @@
 }
 
 .sample2 blockquote {
-    background-color: aqua;
+    // background-color: aqua;
     position: relative;
     border: 1px solid $color-white;
     border-radius: 10px;
@@ -116,4 +116,17 @@
     text-align: right;
     color: $color-white;
     padding-right: 20px;
+}
+
+.section-main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    // 임의 컬러
+    background-color: $color-gray1;
+    height: 70vh;
+    width: 100%;
+    padding: 6rem 0 3rem 0;
 }
