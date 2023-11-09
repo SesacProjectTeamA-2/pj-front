@@ -195,8 +195,8 @@ function App() {
                     path="/board/:gSeq/:gCategory/:gbSeq"
                     element={
                         <GroupLayout
+                            children={<GroupPostDetail />}
                             // children={<GroupPostDetail />}
-                            children={<OldGroupPostDetail />}
                             showChat={showChat}
                         />
                     }

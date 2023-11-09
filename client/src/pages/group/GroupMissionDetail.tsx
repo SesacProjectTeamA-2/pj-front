@@ -162,51 +162,40 @@ export default function GroupMissionDetail() {
         // setFreeList(res.data.groupInfo);
     };
 
-    // [추후] 수정 input 추가
-    let gbcSeq = Number(useParams());
     const [commentEditInput, setCommentEditInput] = useState({
-        gbcSeq,
+        gbcSeq: 1,
         gbcContent: '',
     });
 
-    const commentEditOnChange = (e: any) => {
-        setCommentEditInput({
-            ...commentEditInput,
-            gbcContent: e.target.value,
-        });
+    // 개별 관리
+    const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
+    const commentEditOnChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        idx: number
+    ) => {
+        const updatedInputs = [...commentEditInputs];
+        updatedInputs[idx] = e.target.value;
+        setCommentEditInputs(updatedInputs);
     };
 
-    // [임시] test용
-    // const commentEditTestInput = {
-    //     gbcSeq: 1,
-    //     gbcContent: '댓글 수정합니다 !!!',
-    // };
-
     //; 댓글 수정 (PATCH)
-    const commentEditHandler = async (gbcSeq: number) => {
-        // console.log(gbcSeq);
-
+    const commentEditHandler = async (gbcSeq: number, idx: number) => {
+        console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
+            // commentEditTestInput, // [임시 test용]
+            // [추후] commentEditInput으로 변경
+            { gbcSeq, gbcContent: commentEditInputs[idx] },
 
             // commentEditInput,
-            { gbcContent: commentEditInput.gbcContent },
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
             }
         );
-        if (res.data) {
-            setCommentList((prevComments: any) =>
-                prevComments.map((comment: any) =>
-                    comment.gbcSeq === gbcSeq
-                        ? { ...comment, gbcContent: commentInput.gbcContent }
-                        : comment
-                )
-            );
-            setCommentEditInput({ gbcSeq: 0, gbcContent: '' });
-        }
+
+        getBoardMission();
     };
 
     //; 댓글 삭제 (DELETE)
@@ -216,8 +205,6 @@ export default function GroupMissionDetail() {
         const res = await axios
             .delete(
                 `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-                // commentEditTestInput, // [임시 test용]
-                // [추후] commentEditInput으로 변경
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -226,13 +213,14 @@ export default function GroupMissionDetail() {
             )
             .then((res) => {
                 console.log(res.data);
-                setCommentList(
-                    commentList.filter((cmt: any) => cmt.gbcSeq !== gbcSeq)
+                setCommentList((prevComments: any) =>
+                    prevComments.filter(
+                        (comment: any) => comment.gbcSeq !== gbcSeq
+                    )
                 );
                 getBoardMission();
             });
     };
-
     return (
         <div className="section section-group">
             {/* <GroupHeader
@@ -371,7 +359,8 @@ export default function GroupMissionDetail() {
                                                         <button
                                                             onClick={() =>
                                                                 commentEditHandler(
-                                                                    comment.gbcSeq
+                                                                    comment.gbcSeq,
+                                                                    idx
                                                                 )
                                                             }
                                                             className="btn-sm"
@@ -397,21 +386,13 @@ export default function GroupMissionDetail() {
                                         <TextField
                                             // value={comment.gbcContent}
                                             value={
-                                                comment.gbcSeq ===
-                                                commentEditInput.gbcSeq
-                                                    ? commentEditInput.gbcContent
-                                                    : comment.gbcContent
+                                                commentEditInputs[idx] ||
+                                                comment.gbcContent
                                             }
                                             name="gbcContent"
                                             onChange={(
                                                 e: React.ChangeEvent<HTMLInputElement>
-                                            ) => {
-                                                // commentEditOnChange(e);
-                                                setCommentEditInput({
-                                                    ...commentEditInput,
-                                                    gbcContent: e.target.value,
-                                                });
-                                            }}
+                                            ) => commentEditOnChange(e, idx)}
                                         ></TextField>
 
                                         {/* END */}
