@@ -68,6 +68,20 @@ export default function QuitModal({
                 <div className="modal-mission-cancel-content leave-modal-content">
                     <div className="modal-cancel-title-container leave-modal-container">
                         <div className="title1">🚨</div>
+                        <div className="title3">
+                            {action === '회원 탈퇴' ? (
+                                <div className="title3 cancel-modal-description">
+                                    정말 {action}하시겠습니까 ?
+                                </div>
+                            ) : action === '회원 탈퇴' || '탈퇴' ? (
+                                <div className="title5 cancel-modal-description">
+                                    모임의 활동 정보가 모두 사라지며 복구되지
+                                    않습니다.
+                                </div>
+                            ) : (
+                                ''
+                            )}
+                        </div>
 
                         {action === '회원 탈퇴' ? (
                             <div className="title5 cancel-modal-description">

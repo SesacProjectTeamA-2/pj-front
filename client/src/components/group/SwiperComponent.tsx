@@ -5,9 +5,29 @@ import { Navigation, Autoplay } from 'swiper/modules';
 
 import 'swiper/scss';
 import '../../styles/scss/components/swiper.scss';
+import { red } from '@mui/material/colors';
 
 export default function SwiperComponent({ groupArray, setGroupArray }: any) {
     console.log('GroupArray : ', groupArray);
+
+    // 랜덤 색상을 선택하는 함수
+    const getRandomColor = () => {
+        const colors = [
+            '#ff6d59',
+            '#ffcc77',
+            '#83cb77',
+            '#ff7373',
+            '#7fbeeb',
+            '#f399ca',
+            '#b78be3',
+            '#c4c4c4',
+        ];
+
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        return colors[randomIndex];
+    };
+
+    console.log(groupArray);
 
     return (
         <div>
@@ -76,38 +96,67 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                     {groupArray?.map((groupInfo: any) => {
                         return (
                             <>
-                                <SwiperSlide>
-                                    <Link to={`/group/home/${groupInfo.gSeq}`}>
+                                <Link to={`/group/home/${groupInfo.gSeq}`}>
+                                    <SwiperSlide
+                                        style={{
+                                            backgroundColor: getRandomColor(),
+                                            // padding: '10px',
+                                            fontWeight: 'bold',
+                                            color: 'white',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            flexDirection: 'column',
+                                            alignContent: 'space-between',
+                                            justifyItems: 'center',
+                                            height: '100%',
+                                        }}
+                                    >
                                         {/* <img src="asset/images/cat1.svg" /> */}
                                         {/* <div>{groupInfo.gCoverImg}</div> */}
-                                        <div>{groupInfo.gName}</div>
-                                        <div>목표 날짜 : {groupInfo.gDday}</div>
-                                        {/* <div>남은 일수 : {groupInfo.gDday}</div> */}
-                                        <div>
-                                            현재멤버수 / {groupInfo.gMaxMem}
+                                        <div
+                                            style={{
+                                                margin: '0 30px',
+                                                fontSize: '15px',
+                                                fontWeight: 'bold',
+                                            }}
+                                        >
+                                            {groupInfo.gName}
                                         </div>
-                                    </Link>
-                                </SwiperSlide>
+                                        <div
+                                            style={{
+                                                margin: '30px 6px',
+                                                fontSize: '12px',
+                                                fontWeight: 'bold',
+                                                opacity: '0.8',
+                                            }}
+                                        >
+                                            <span
+                                                style={{
+                                                    margin: '0px 5px',
+                                                    color: '#8D6262',
+                                                    fontWeight: 'bold',
+                                                }}
+                                            >
+                                                D-day
+                                            </span>
+                                            {groupInfo.gDday}
+                                            <div
+                                                style={{
+                                                    margin: '2px 17px',
+                                                    fontSize: '11px',
+                                                }}
+                                            >
+                                                참석인원 수 /{' '}
+                                                {groupInfo.gMaxMem}
+                                            </div>
+                                        </div>
+                                        {/* <div>남은 일수 : {groupInfo.gDday}</div> */}
+                                    </SwiperSlide>
+                                </Link>
                                 ;
                             </>
                         );
                     })}
-                    {/* <SwiperSlide>
-                        <Link to="/group/home/1">
-                            <img src="asset/images/cat2.svg" />
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <Link to="/group/home/1">
-                            <img src="asset/images/rabbit1.svg" />
-                        </Link>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <Link to="/group/home/1">
-                            <img src="asset/images/rabbit2.svg" />
-                        </Link>
-                    </SwiperSlide> */}
                 </Swiper>
                 <div className="swiper-button-next">
                     <img src="/asset/icons/right.svg" />

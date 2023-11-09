@@ -50,7 +50,7 @@ export default function TeamPercentage() {
                     </div>
                     <div className="team-progress-img-div-flex">
                         <img
-                            src="/asset/images/rabbit1.svg"
+                            src="/asset/images/rab1.svg"
                             alt="동물 이미지"
                             className="my-progress-img"
                         />

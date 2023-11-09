@@ -53,15 +53,15 @@ export default function Groups() {
                     </button>
                 </div>
 
-                <div className="groups-interested">
+                {/* <div className="groups-interested">
                     <InterestedList
                         selectedArr={selectedArr}
                         setSelectedArr={setSelectedArr}
                         num={8}
                     />
-                </div>
+                </div> */}
 
-                <Divider />
+                {/* <Divider /> */}
 
                 {search ? (
                     <GroupSearch

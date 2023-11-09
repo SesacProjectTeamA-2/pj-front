@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -15,12 +15,14 @@ import Dday from '../../components/common/Dday';
 import { GroupDetailType } from 'src/types/types';
 import { Divider, ListItem, ListItemText } from '@mui/material';
 import ImgGroupEdit from './ImgGroupEdit';
+import SuccessModal from 'src/components/common/modal/SucessModal';
 
 export default function GroupEdit() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
     const { gSeq } = useParams();
+    const nvg = useNavigate();
 
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
@@ -28,6 +30,13 @@ export default function GroupEdit() {
 
     const missionAddHandler = () => {
         setAddModalSwitch(true);
+    };
+
+    //] 그룹 생성 완료 모달창
+    const [successModalSwitch, setSuccessModalSwitch] = useState(false);
+
+    const successHandler = () => {
+        setSuccessModalSwitch(true);
     };
 
     //; 모임 세부정보 (GET)
@@ -90,19 +99,27 @@ export default function GroupEdit() {
     }, []);
 
     console.log('그룹 세부사항 GET', groupDetail);
+    console.log('날짜 디폴트 설정 전 날짜', groupDetail.gDday);
 
     // console.log('groupName', groupName); // 이건 잘 찍힘
+
+    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
+    const today = new Date();
+    today.setDate(today.getDate() + 7); // 오늘 날짜로부터 7일 후
+    const defaultDday = today.toISOString().split('T')[0];
 
     const [input, setInput] = useState({
         gSeq,
         gName: '',
         gDesc: '',
-        gDday: '',
+        gDday: defaultDday,
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
         missionArray: [],
     });
+
+    console.log('날짜 디폴트 설정 후 날짜', input.gDday);
 
     //~ [추후] 미션 수정 axios 추가 !!!!!!
 
@@ -162,6 +179,8 @@ export default function GroupEdit() {
     //; 모임 수정 (PATCH)
     const groupEditHandler = async () => {
         // 유효성 검사: 그룹 카테고리 미설정 방지
+        console.log('제출 전 날짜 ', input.gDday);
+
         if (!input.gCategory) {
             alert('그룹의 카테고리를 선택해주세요!');
             return;
@@ -201,11 +220,11 @@ export default function GroupEdit() {
             })
             .then((res) => {
                 console.log(res.data);
+
+                successHandler();
             });
 
-        // [추후] input 입력 안했을 시, 로직
-
-        // [추후] 수정한 모임 홈 화면으로 이동
+        //! [추후] input 입력 안했을 시, 로직
     };
 
     //=== 관심 분야 ===
@@ -348,7 +367,7 @@ export default function GroupEdit() {
                 />
             </div>
 
-            <div className="group-create-content mission-wrapper">
+            {/* <div className="group-create-content mission-wrapper">
                 <div>Mission</div>
                 <div className="mission-container">
                     <div onClick={missionAddHandler}>
@@ -377,7 +396,7 @@ export default function GroupEdit() {
                         )}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {addModalSwitch ? (
                 <MissionAddModal
@@ -391,6 +410,13 @@ export default function GroupEdit() {
                     gDday={input.gDday}
                 />
             ) : null}
+
+            <SuccessModal
+                successModalSwitch={successModalSwitch}
+                setSuccessModalSwitch={setSuccessModalSwitch}
+                action={'모임을 수정'}
+                gSeq={gSeq}
+            />
 
             {/* <Link to="/group/home/1"> */}
             <button className="btn-fixed" onClick={groupEditHandler}>

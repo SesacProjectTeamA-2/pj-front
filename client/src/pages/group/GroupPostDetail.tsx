@@ -63,8 +63,8 @@ export default function GroupPostDetail() {
     const [freeList, setFreeList] = useState<any>([]);
     const [boardComments, setBoardComments] = useState<any>([]);
 
-    // [추후] 공지 or 자유/질문 or 미션
-    const [boardType, setBoardType] = useState('');
+    // // [추후] 공지 or 자유/질문 or 미션
+    // const [boardType, setBoardType] = useState('');
 
     //] 0. 공지 게시글 상세 조회
 
@@ -130,20 +130,22 @@ export default function GroupPostDetail() {
     // console.log('>>>>', freeList);
 
     //; 게시글 삭제 (DELETE)
-    const nvg = useNavigate();
-
-    const boardDeleteHandler = async (gbSeq: number) => {
-        const res = await axios
-            .delete(`${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`, {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            })
-            .then((res) => {
-                nvg(-1);
-                console.log(res.data);
-            });
+    const boardDeleteHandler = () => {
+        warningModalSwitchHandler();
     };
+
+    // const boardDeleteHandler = async (gbSeq: number) => {
+    //     const res = await axios
+    //         .delete(`${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             nvg(-1);
+    //             console.log(res.data);
+    //         });
+    // };
 
     //] 2. 미션게시글
     const [missionList, setMissionList] = useState<any>([]);
@@ -176,8 +178,7 @@ export default function GroupPostDetail() {
     // 경고 공통 모달
     const [warningModalSwitch, setWarningModalSwitch] = useState(false);
 
-    const warningModalSwitchHandler = (menu: string) => {
-        setMenu(menu);
+    const warningModalSwitchHandler = () => {
         setWarningModalSwitch(!warningModalSwitch);
     };
 
@@ -338,40 +339,42 @@ export default function GroupPostDetail() {
                                 alt="profile"
                             />
                             {/* uSeq 사용자 닉네임 가져오기 */}
-                            <div className="title4">{userInfo?.uName}</div>
+                            <div>
+                                <div className="title4">
+                                    {freeList.gbTitle}{' '}
+                                </div>
+                                <div>{userInfo?.uName}</div>
+                            </div>
                         </div>
                         <div className="date">{freeList?.createdAt}</div>
                     </div>
                     <div className="writer-menu">
                         {/* gSeq, gbSeq */}
-                        <Link to={`/board/${gSeq}/edit/${gSeq}`}>
+                        <Link to={`/board/${gSeq}/edit/${gCategory}/${gbSeq}`}>
                             <div>수정</div>
                         </Link>
-                        {/* [추후] 게시글 삭제 경고 모달 추가 */}
-                        {/* <div onClick={() => warningModalSwitchHandler('삭제')}> */}
-                        <div onClick={() => boardDeleteHandler(Number(gbSeq))}>
-                            삭제
-                        </div>
-                        {/* </div> */}
+                        <div onClick={boardDeleteHandler}>삭제</div>
                     </div>
                 </div>
 
-                {warningModalSwitch ? (
+                {/* {warningModalSwitch ? (
                     <WarningModal
                         warningModalSwitch={warningModalSwitch}
                         setWarningModalSwitch={setWarningModalSwitch}
                         warningModalSwitchHandler={warningModalSwitchHandler}
                         action={menu}
                     />
-                ) : null}
+                ) : null} */}
 
                 {/* 경고 공통 모달 */}
-                {/* <WarningModal
+                <WarningModal
                     warningModalSwitch={warningModalSwitch}
                     setWarningModalSwitch={setWarningModalSwitch}
                     warningModalSwitchHandler={warningModalSwitchHandler}
-                    action={menu}
-                /> */}
+                    action={'게시글을 삭제'}
+                    gbSeq={gbSeq}
+                    mSeq={mSeq}
+                />
 
                 <div className="post-detail-content-container">
                     <div

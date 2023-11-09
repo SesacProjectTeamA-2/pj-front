@@ -14,6 +14,8 @@ export default function WarningModal({
     warningModalSwitch,
     setWarningModalSwitch,
     action,
+    gbSeq,
+    mSeq,
 }: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
@@ -98,8 +100,27 @@ export default function WarningModal({
                     });
             };
             quitGroupHandler();
+        } else if (action === '게시글을 삭제') {
+            // nvg(-1);
+
+            const boardDeleteHandler = async (gbSeq: number) => {
+                const res = await axios
+                    .delete(
+                        `${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${uToken}`,
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        console.log(res.data);
+                        toast.success(`${action}하셨습니다.`);
+                        nvg(-1);
+                    });
+            };
+            boardDeleteHandler(gbSeq);
         }
-        // [추후] 게시글 삭제 요청 로직  추가
     };
 
     // 모달창 닫기
@@ -131,6 +152,8 @@ export default function WarningModal({
                                 ? `게시글을 ${action}하시겠습니까 ?`
                                 : action === '탈퇴'
                                 ? `${groupName}  모임을 정말 ${action}하시겠습니까 ?`
+                                : action === '회원 탈퇴'
+                                ? `정말 ${action}하시겠습니까 ?`
                                 : `정말 ${action}하시겠습니까 ?`}
                         </div>
 
@@ -139,7 +162,7 @@ export default function WarningModal({
                                 Motimate 활동 정보가 모두 사라지며 복구되지
                                 않습니다.
                             </div>
-                        ) : action === '삭제' ? (
+                        ) : action === '게시글을 삭제' ? (
                             <div className="title5 cancel-modal-description">
                                 게시글 내용이 모두 사라지며 복구되지 않습니다.{' '}
                             </div>
@@ -160,7 +183,7 @@ export default function WarningModal({
                             onClick={doneHandler}
                             className="btn-md mission-cancel-done-btn"
                         >
-                            {action}
+                            {action === '게시글을 삭제' ? '삭제' : action}
                         </button>
                         <button
                             onClick={closeModalHandler}

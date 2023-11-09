@@ -55,6 +55,7 @@ export default function ModalMemberList({
         }
     }, []);
 
+
     const getGroup = async () => {
         const res = await axios
             .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
@@ -110,7 +111,7 @@ export default function ModalMemberList({
                 console.log(res.data);
                 const { success, msg } = res.data;
                 if (!success) {
-                    alert('실패');
+                    alert('모임장 위임에 실패하였습니다.');
                 } else {
                     window.location.href = `http://localhost:3000/group/home/${gSeq}`;
                 }
