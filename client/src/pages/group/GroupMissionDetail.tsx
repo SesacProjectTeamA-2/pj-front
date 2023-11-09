@@ -53,16 +53,15 @@ export default function GroupMissionDetail() {
     useEffect(() => {
         if (cookie.get('isUser')) {
             getUserData();
-            console.log('HEADER 로그인');
         } else {
-            console.log('HEADER 비로그인');
             return;
         }
     }, []);
 
-    const { gSeq, mSeq, gbSeq, gCategory } = useParams();
+    const { gSeq, mSeq, gbSeq } = useParams();
+    console.log(gSeq, mSeq, gbSeq); // 1 1 4
 
-    console.log(gSeq, mSeq, gbSeq, gCategory);
+    const [userInfo, SetUserInfo] = useState<any>([]);
 
     // //; 게시글 조회 (GET)
     // const [notiList, setNotiList] = useState<any>([]);
@@ -103,8 +102,11 @@ export default function GroupMissionDetail() {
                 }
             )
             .then((res) => {
-                console.log('========', res.data);
+                console.log('GroupMissionDetail========', res.data);
                 setMissionList(res.data.groupInfo);
+                const userInfo = res.data.groupInfo.tb_groupUser.tb_user;
+                SetUserInfo(userInfo);
+
                 setCommentList(res.data.groupInfo.tb_groupBoardComments);
             });
     };
@@ -236,7 +238,7 @@ export default function GroupMissionDetail() {
                         <div className="post-detail-profile">
                             <img
                                 className="profile-img"
-                                src={userImgSrc || '/asset/images/user.svg'}
+                                src={userInfo?.uImg || '/asset/images/user.svg'}
                                 alt="profile"
                             />
                             <div>
@@ -326,7 +328,7 @@ export default function GroupMissionDetail() {
                                                     src={
                                                         comment.tb_groupUser
                                                             .tb_user.uImg ||
-                                                        userImgSrc ||
+                                                        // userImgSrc ||
                                                         '/asset/images/user.svg'
                                                     }
                                                     alt="profile"

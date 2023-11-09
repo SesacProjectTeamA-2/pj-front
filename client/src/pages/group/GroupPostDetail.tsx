@@ -101,72 +101,11 @@ export default function GroupPostDetail() {
     console.log('boardComments', boardComments);
 
     //] 1. 자유 게시글 상세 조회
-    // const getBoardFree = async () => {
-    //     const res = await axios
-    //         .get(
-    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free/${gbSeq}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         )
-    //         .then((res) => {
-    //             console.log('getBoardFree', res.data);
-
-    //             setFreeList(res.data.groupInfo);
-    //             // setCommentCount(res.data.commentCount);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getBoardFree();
-    // }, []);
-
-    // console.log('>>>>', freeList);
 
     //; 게시글 삭제 (DELETE)
     const boardDeleteHandler = () => {
         warningModalSwitchHandler();
     };
-
-    // const boardDeleteHandler = async (gbSeq: number) => {
-    //     const res = await axios
-    //         .delete(`${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             nvg(-1);
-    //             console.log(res.data);
-    //         });
-    // };
-
-    //] 2. 미션게시글
-    // const [missionList, setMissionList] = useState<any>([]);
-
-    // if (mSeq) {
-    //     // 미션 게시글 조회
-    //     const getBoardMission = async () => {
-    //         const res = await axios.get(
-    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         );
-
-    //         console.log(res.data);
-
-    //         setMissionList(res.data.groupInfo);
-    //     };
-    //     getBoardMission();
-    // }
-
-    // useEffect(() => {
-    // }, []);
 
     // 메뉴 선택
     const [menu, setMenu] = useState('');
@@ -287,7 +226,7 @@ export default function GroupPostDetail() {
                                 className="profile-img"
                                 src={
                                     userInfo?.uImg ||
-                                    userImgSrc ||
+                                    // userImgSrc ||
                                     '/asset/images/user.svg'
                                 }
                                 alt="profile"
@@ -376,7 +315,7 @@ export default function GroupPostDetail() {
                                                                       .tb_groupUser
                                                                       .tb_user
                                                                       .uImg ||
-                                                                  userImgSrc ||
+                                                                  //   userImgSrc ||
                                                                   '/asset/images/user.svg'
                                                               }
                                                               alt="profile"
