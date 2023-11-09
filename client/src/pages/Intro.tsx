@@ -16,7 +16,7 @@ export default function Intro() {
                     </video>
                 </div>
 
-                <div className="intro-title title1">
+                <div className="intro-title title5">
                     <div>We</div>
                     <div>Grow</div>
                     <div>Together</div>
@@ -25,56 +25,77 @@ export default function Intro() {
                     </div>
                 </div>
             </div>
-            <div className="intro-content">
-                <div className="title3">손쉽게 모임을 시작해보세요.</div>
-                <div className="intro-content-sub-title">
-                    나와 관심사가 비슷한 사람들과 함께 즐겁게 성장하세요 !
-                </div>
-            </div>
-            <div className="intro-img-wrapper-left">
-                <div className="intro-img"></div>
-                <div className="intro-story">
-                    <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
-                        <div className="title3">MOTIMATE 이야기</div>
-                        <div className="intro-content-sub-title">
-                            자세히 보기
-                            <img
-                                className="intro-right-double-icon"
-                                src="/asset/icons/right_double.svg"
-                                alt="right-double"
-                            />
-                        </div>
-                    </Link>
-                </div>
-            </div>
-            <div className="intro-content">
-                <div className="title3">
-                    여러분의 동료, <br />
-                    MOTIMATE를 소개합니다 !
-                </div>
-                <div className="intro-content-sub-title">
-                    동료들과 으쌰으쌰하며, 다같이 목표를 이뤄나가요 !
-                </div>
-            </div>
 
-            <div className="intro-img-wrapper-right">
-                <div className="intro-story">
-                    <div className="title3">
-                        랭킹 시스템을 통한 <br />
-                        동기부여
-                    </div>
+            <div className="wrapper">
+                <div className="intro-content">
+                    <div className="title3">손쉽게 모임을 시작해보세요.</div>
+                    <br />
                     <div className="intro-content-sub-title">
-                        혼자하면서 금방 지치지 않으셨나요 ?
-                        <br />
-                        잠자고 있던 여러분의 승부욕을 불태울 시간입니다.🔥
-                        <br />
-                        여러분의 현실게임 캐릭터인 모티메이트 랭킹을 올립시다.
+                        나와 관심사가 비슷한 사람들과 함께 즐겁게 성장하세요 !
                     </div>
                 </div>
-                <div className="intro-img"></div>
-            </div>
+                <div className="intro-img-wrapper-left">
+                    <div className="intro-img">
+                        <img
+                            src="/asset/images/motimate-story.jpg"
+                            alt="사진"
+                        />
+                    </div>
+                    <div className="intro-story">
+                        <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
+                            <div className="title3">
+                                MOTIMATE <br />
+                                이야기
+                            </div>
+                            <br />
+                            <div className="intro-content-sub-title">
+                                자세히 보기
+                                <img
+                                    className="intro-right-double-icon"
+                                    src="/asset/icons/right_double.svg"
+                                    alt="right-double"
+                                />
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+                <div className="intro-content">
+                    <div className="title3">
+                        여러분의 동료, <br />
+                        MOTIMATE를 소개합니다 !
+                    </div>
+                    <br />
+                    <div className="intro-content-sub-title">
+                        동료들과 으쌰으쌰하며, 다같이 목표를 이뤄나가요!
+                    </div>
+                </div>
 
-            <div className="intro-img-wrapper-left">
+                <div className="intro-img-wrapper-right">
+                    <div className="intro-story">
+                        <div
+                            className="title3"
+                            style={{
+                                textAlign: 'justify',
+                            }}
+                        >
+                            랭킹 시스템을 통한 동기부여
+                        </div>
+                        <br />
+                        <div className="intro-content-sub-title">
+                            혼자하면서 금방 지치지 않으셨나요 ?
+                            <br />
+                            잠자고 있던 여러분의 승부욕을 불태울 시간입니다.🔥
+                            <br />
+                            여러분의 현실게임 캐릭터인 모티메이트 랭킹을
+                            올립시다.
+                        </div>
+                    </div>
+                    <div className="intro-img">
+                        <img src="/asset/images/rank.jpg" alt="사진" />
+                    </div>
+                </div>
+
+                {/* <div className="intro-img-wrapper-left">
                 <div className="intro-img"></div>
                 <div className="intro-story">
                     <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
@@ -84,9 +105,9 @@ export default function Intro() {
                         </div>
                     </Link>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="intro-img-wrapper-right">
+                {/* <div className="intro-img-wrapper-right">
                 <div className="intro-story">
                     <div className="title3">열띤 토론을 즐겨요</div>
                     <div className="intro-content-sub-title">
@@ -96,19 +117,27 @@ export default function Intro() {
                     </div>
                 </div>
                 <div className="intro-img"></div>
-            </div>
+            </div> */}
 
-            <div className="intro-img-wrapper-left">
-                <div className="intro-img"></div>
-                <div className="intro-story">
-                    <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
-                        <div className="title3">마감기한 설정</div>
-                        <div className="intro-content-sub-title">
-                            데드라인이 있어야, 달릴 맛이 나죠 !
+                <div className="intro-img-wrapper-left">
+                    <div className="intro-img">
+                        <img src="/asset/images/dDay.jpg" alt="사진" />
+                    </div>
+                    <div className="intro-story">
+                        <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
+                            <div className="title3">마감기한 설정</div>
                             <br />
-                            모임별 디데이를 향해 다같이 나아가요 🏃🏻‍♂️
-                        </div>
-                    </Link>
+                            <div
+                                className="intro-content-sub-title"
+                                style={{
+                                    textAlign: 'justify',
+                                }}
+                            >
+                                데드라인이 있어야, 달릴 맛이 나죠 !
+                                <br /> 모임별 디데이를 향해 다같이 나아가요 🏃🏻‍♂️
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
