@@ -16,8 +16,6 @@ export default function GroupMissionDone() {
 
     const { gSeq } = useParams();
 
-    console.log(gSeq);
-
     const [groupMission, setGroupMission] = useState<GroupMission>({
         uEmail: '',
         uName: '',
@@ -28,20 +26,21 @@ export default function GroupMissionDone() {
         expiredMissionList: [],
     });
 
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/mission/group/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                setGroupMission(res.data);
+                setMissionList(groupMission.expiredMissionList);
+            });
+    };
+
+    const [missionList, setMissionList] = useState<any>([]);
     useEffect(() => {
-        const getGroup = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/mission/group/${gSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
-
-            setGroupMission(res.data);
-        };
-
         getGroup();
     }, []);
 
@@ -68,16 +67,6 @@ export default function GroupMissionDone() {
     //     isExpired: null | boolean;
     // };
 
-    const [missionList, setMissionList] = useState<any>(
-        groupMission.expiredMissionList
-    );
-
-    useEffect(() => {
-        setMissionList(groupMission.expiredMissionList);
-    }, []);
-
-    console.log(missionList);
-
     return (
         <div className="section section-group">
             <GroupHeader title={'완료된 미션'} groupName={groupMission.gName} />
@@ -102,38 +91,6 @@ export default function GroupMissionDone() {
                 <div className="noti-content mission-done-content">
                     <ul>
                         {/* START */}
-                        {missionList.map((mission: MissionType) => {
-                            return (
-                                <>
-                                    {/* <li>
-                                        <div>1</div>
-                                        <div>2023.10.20</div>
-                                        <div>2023.10.29</div>
-                                        <div>10일</div>
-                                        <div className="mission-done-list">
-                                            {missionList.map(
-                                                (mission: MissionType) => {
-                                                    return (
-                                                        <>
-                                                            <button>
-                                                                알고리즘
-                                                            </button>
-                                                            <button>
-                                                                블로깅
-                                                            </button>
-                                                            <button>
-                                                                모각코
-                                                            </button>
-                                                        </>
-                                                    );
-                                                }
-                                            )}
-                                            )
-                                        </div>
-                                    </li> */}
-                                </>
-                            );
-                        })}
 
                         {/* END */}
 
