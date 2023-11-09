@@ -305,7 +305,7 @@ export default function GroupMissionDetail() {
                             onChange={commentOnChange}
                         ></textarea>
                         <button
-                            className="btn-md"
+                            className="btn-md done-btn"
                             onClick={() => postCommentHandler()}
                         >
                             등록

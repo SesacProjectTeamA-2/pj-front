@@ -11,7 +11,7 @@ export default function Phrase(props: any): JSX.Element {
     };
 
     return (
-        <div className='phrase-all-div'>
+        <div className="phrase-all-div">
             <label className="input-label">
                 <textarea
                     // readOnly={readOnlyVal}
@@ -28,7 +28,7 @@ export default function Phrase(props: any): JSX.Element {
                                 : 'block',
                     }}
                 />
-                <button
+                {/* <button
                     // onClick={(e) => changeReadOnly()}
                     className="edit-btn"
                     id="phrase-edit"
@@ -48,7 +48,7 @@ export default function Phrase(props: any): JSX.Element {
                         className="edit-img"
                         alt="editImg"
                     ></img>
-                </button>
+                </button> */}
             </label>
 
             <div className="phraseMode-btn-div">
