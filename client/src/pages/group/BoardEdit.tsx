@@ -11,7 +11,7 @@ import Editor from './Editor';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import { MissionType } from 'src/types/types';
 import { Input } from '@mui/material';
-import SuccessModal from 'src/components/common/modal/SucessModal';
+import SuccessModal from 'src/components/common/modal/SuccessModal';
 import WarningModal from 'src/components/common/modal/WarningModal';
 
 export default function BoardEdit() {

@@ -12,8 +12,9 @@ import WarningModal from '../../components/common/modal/WarningModal';
 export default function GroupPostDetail() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
-    // 0. 프로필 사진 가져오기
+    // 0. 프로필 사진, 닉네임 가져오기
     const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
+    const [userNickname, setUserNickname] = useState<any>('');
 
     const getUserData = async () => {
         await axios
@@ -24,7 +25,7 @@ export default function GroupPostDetail() {
             })
             .then((res) => {
                 console.log('getUserData 로그인 후 ', res.data);
-                const { userImg } = res.data; //null
+                const { userImg, nickname } = res.data; //null
 
                 if (userImg !== null || userImg !== undefined) {
                     //user가 업로드한 값 없으면 기본 이미지
@@ -35,6 +36,7 @@ export default function GroupPostDetail() {
                     setUserImgSrc('/asset/images/user.svg');
                     console.log('userImgSrc 없음', userImgSrc);
                 }
+                setUserNickname(nickname);
             })
             .catch((err) => {
                 console.log('error 발생: ', err);
@@ -101,72 +103,12 @@ export default function GroupPostDetail() {
     console.log('boardComments', boardComments);
 
     //] 1. 자유 게시글 상세 조회
-    // const getBoardFree = async () => {
-    //     const res = await axios
-    //         .get(
-    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/free/${gbSeq}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         )
-    //         .then((res) => {
-    //             console.log('getBoardFree', res.data);
-
-    //             setFreeList(res.data.groupInfo);
-    //             // setCommentCount(res.data.commentCount);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getBoardFree();
-    // }, []);
-
-    // console.log('>>>>', freeList);
 
     //; 게시글 삭제 (DELETE)
     const boardDeleteHandler = () => {
         warningModalSwitchHandler();
     };
 
-    // const boardDeleteHandler = async (gbSeq: number) => {
-    //     const res = await axios
-    //         .delete(`${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             nvg(-1);
-    //             console.log(res.data);
-    //         });
-    // };
-
-    //] 2. 미션게시글
-    // const [missionList, setMissionList] = useState<any>([]);
-
-    // if (mSeq) {
-    //     // 미션 게시글 조회
-    //     const getBoardMission = async () => {
-    //         const res = await axios.get(
-    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${uToken}`,
-    //                 },
-    //             }
-    //         );
-
-    //         console.log(res.data);
-
-    //         setMissionList(res.data.groupInfo);
-    //     };
-    //     getBoardMission();
-    // }
-
-    // useEffect(() => {
-    // }, []);
 
     // 메뉴 선택
     const [menu, setMenu] = useState('');
@@ -214,7 +156,7 @@ export default function GroupPostDetail() {
         // setFreeList(res.data.groupInfo);
     };
 
-    // 수정
+    // ========== 수정 ===========
 
     const [commentEditInput, setCommentEditInput] = useState({
         gbcSeq: 1,
@@ -224,7 +166,6 @@ export default function GroupPostDetail() {
     // 개별 관리
     const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
 
-    // [추후] 수정 input 추가
     const commentEditOnChange = (
         e: React.ChangeEvent<HTMLInputElement>,
         idx: number
@@ -237,6 +178,7 @@ export default function GroupPostDetail() {
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
         console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
+
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
 
@@ -287,7 +229,7 @@ export default function GroupPostDetail() {
                                 className="profile-img"
                                 src={
                                     userInfo?.uImg ||
-                                    userImgSrc ||
+                                    // userImgSrc ||
                                     '/asset/images/user.svg'
                                 }
                                 alt="profile"
@@ -364,6 +306,11 @@ export default function GroupPostDetail() {
                                 ? ''
                                 : boardComments?.map(
                                       (comment: any, idx: number) => {
+                                          const isWriter =
+                                              comment.tb_groupUser.tb_user
+                                                  .uName === userNickname;
+                                          //   console.log('isWriter', isWriter);
+
                                           return (
                                               <li key={idx}>
                                                   {/* START */}
@@ -376,7 +323,7 @@ export default function GroupPostDetail() {
                                                                       .tb_groupUser
                                                                       .tb_user
                                                                       .uImg ||
-                                                                  userImgSrc ||
+                                                                  //   userImgSrc ||
                                                                   '/asset/images/user.svg'
                                                               }
                                                               alt="profile"
@@ -410,27 +357,34 @@ export default function GroupPostDetail() {
                                                                       '30%',
                                                               }}
                                                           >
-                                                              <button
-                                                                  className="btn-sm"
-                                                                  onClick={() =>
-                                                                      commentEditHandler(
-                                                                          comment.gbcSeq,
-                                                                          idx
-                                                                      )
-                                                                  }
-                                                              >
-                                                                  수정
-                                                              </button>
-                                                              <button
-                                                                  className="btn-sm"
-                                                                  onClick={() =>
-                                                                      commentDeleteHandler(
-                                                                          comment.gbcSeq
-                                                                      )
-                                                                  }
-                                                              >
-                                                                  삭제
-                                                              </button>
+                                                              {isWriter ? (
+                                                                  // 사용자 === 작성자
+                                                                  <>
+                                                                      <button
+                                                                          onClick={() =>
+                                                                              commentEditHandler(
+                                                                                  comment.gbcSeq,
+                                                                                  idx
+                                                                              )
+                                                                          }
+                                                                          className="btn-sm"
+                                                                      >
+                                                                          수정
+                                                                      </button>
+
+                                                                      <button
+                                                                          onClick={() =>
+                                                                              commentDeleteHandler(
+                                                                                  comment.gbcSeq
+                                                                              )
+                                                                          }
+                                                                          className="btn-sm"
+                                                                      >
+                                                                          삭제
+                                                                      </button>
+                                                                  </>
+                                                              ) : // 사용자 !== 작성자
+                                                              null}
                                                           </div>
                                                       </div>
                                                   </div>

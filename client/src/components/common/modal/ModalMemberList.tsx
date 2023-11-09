@@ -176,7 +176,7 @@ export default function ModalMemberList({
                                             alt="userImg"
                                         />
                                         <div className="cur-ranking-content">
-                                            <div className="title4">
+                                            <div className="title4 name">
                                                 {member.uName}
                                             </div>
                                         </div>
@@ -194,13 +194,13 @@ export default function ModalMemberList({
                                     noValidate
                                     autoComplete="off"
                                 >
-                                    <TextField
+                                    {/* <TextField
                                         id="filled-multiline-flexible"
                                         label="이유가 무엇인가요 ?"
                                         multiline
                                         maxRows={4}
                                         variant="filled"
-                                    />
+                                    /> */}
                                 </Box>
                             </div>
 
@@ -233,7 +233,7 @@ export default function ModalMemberList({
                                     onClick={closeModalHandler}
                                     className="btn-md mission-cancel-back-btn"
                                 >
-                                    돌아가기
+                                    취소
                                 </button>
                             </div>
                         </div>

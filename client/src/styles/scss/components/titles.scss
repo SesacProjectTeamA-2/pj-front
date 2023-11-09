@@ -25,11 +25,15 @@
     @include media('<800px') {
         font-size: 21px;
     }
+    @include media('<500px') {
+        font-size: 15px;
+    }
 }
 
 .title4 {
     font-size: 24px;
     font-weight: bold;
+    white-space: nowrap;
     @include media('<800px') {
         font-size: 18px;
     }
@@ -40,6 +44,9 @@
     font-weight: bold;
     @include media('<800px') {
         font-size: 13px;
+    }
+    @include media('<500px') {
+        font-size: 10px;
     }
 }
 

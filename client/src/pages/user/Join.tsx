@@ -110,13 +110,15 @@ export default function Join() {
             {/* </form> */}
 
             <Link to="/login">
-                <button
-                    id="join-btn"
-                    className="btn-fixed"
-                    onClick={() => register()}
-                >
-                    시작하기
-                </button>
+                <div className="btn-fixed-wrapper">
+                    <button
+                        id="join-btn"
+                        className="btn-fixed"
+                        onClick={() => register()}
+                    >
+                        시작하기
+                    </button>
+                </div>
             </Link>
         </div>
     );

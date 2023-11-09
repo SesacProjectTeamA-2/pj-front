@@ -246,6 +246,9 @@
     justify-content: center;
     font-size: small;
     cursor: pointer;
+    @include media('<500px') {
+        width: 10vw;
+    }
 }
 // Interested END
 

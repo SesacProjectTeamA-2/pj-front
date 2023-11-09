@@ -12,7 +12,7 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 import { Divider, ListItem, ListItemText } from '@mui/material';
-import SuccessModal from 'src/components/common/modal/SucessModal';
+import SuccessModal from 'src/components/common/modal/SuccessModal';
 
 export default function GroupCreate() {
     const cookie = new Cookies();

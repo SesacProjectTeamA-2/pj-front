@@ -132,7 +132,9 @@ export default function MemberList({
                             />
 
                             <div className="cur-ranking-content">
-                                <div className="title4">{leaderInfo.uName}</div>
+                                <div className="title4 name">
+                                    {leaderInfo.uName}
+                                </div>
 
                                 {/* <div>{leaderInfo.}</div> */}
                             </div>
@@ -153,7 +155,7 @@ export default function MemberList({
                                     />
 
                                     <div className="cur-ranking-content">
-                                        <div className="title4">
+                                        <div className="title4 name">
                                             {member.uName}
                                         </div>
                                         {/* <div className="">
