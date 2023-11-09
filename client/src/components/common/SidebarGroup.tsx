@@ -30,10 +30,15 @@ export default function SideBarGroup() {
 
             setGroupMissions(res.data.groupMission);
             setGroupName(res.data.groupName);
+
+            setIsLeader(res.data.isLeader);
         };
 
         getGroup();
     }, []);
+
+    // 모임장 / 멤버
+    const [isLeader, setIsLeader] = useState('');
 
     console.log('groupMissions', groupMissions);
     // console.log('groupMissions', groupMissions.length);
@@ -62,7 +67,9 @@ export default function SideBarGroup() {
                     <div className="sidebar-theme-list">
                         <div className="theme-flex">
                             <div className="theme-title">
-                                <Link to={`/group/home/${gSeq}`}>홈</Link>
+                                <Link to={`/group/home/${gSeq}`}>
+                                    홈으로 가기
+                                </Link>
                             </div>
                         </div>
 
@@ -118,33 +125,40 @@ export default function SideBarGroup() {
                             </div>
                         </div>
 
-                        <div className="theme-flex">
-                            {/* 모임장 */}
-                            <div className="theme-title">모임장</div>
-                            <SideBarGroupLeader
-                                warningModalSwitch={warningModalSwitch}
-                                setWarningModalSwitch={setWarningModalSwitch}
-                                warningModalSwitchHandler={
-                                    warningModalSwitchHandler
-                                }
-                                menu={menu}
-                                setMenu={setMenu}
-                            />
-                        </div>
-                        <div className="theme-flex">
-                            {/* 멤버 */}
-                            <div className="theme-title">멤버</div>
+                        {isLeader ? (
+                            <div className="theme-flex">
+                                {/* 모임장 */}
+                                <div className="theme-title">모임장</div>
+                                <SideBarGroupLeader
+                                    warningModalSwitch={warningModalSwitch}
+                                    setWarningModalSwitch={
+                                        setWarningModalSwitch
+                                    }
+                                    warningModalSwitchHandler={
+                                        warningModalSwitchHandler
+                                    }
+                                    menu={menu}
+                                    setMenu={setMenu}
+                                />
+                            </div>
+                        ) : (
+                            <div className="theme-flex">
+                                {/* 멤버 */}
+                                <div className="theme-title">멤버</div>
 
-                            <SideBarGroupMember
-                                warningModalSwitch={warningModalSwitch}
-                                setWarningModalSwitch={setWarningModalSwitch}
-                                warningModalSwitchHandler={
-                                    warningModalSwitchHandler
-                                }
-                                menu={menu}
-                                setMenu={setMenu}
-                            />
-                        </div>
+                                <SideBarGroupMember
+                                    warningModalSwitch={warningModalSwitch}
+                                    setWarningModalSwitch={
+                                        setWarningModalSwitch
+                                    }
+                                    warningModalSwitchHandler={
+                                        warningModalSwitchHandler
+                                    }
+                                    menu={menu}
+                                    setMenu={setMenu}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

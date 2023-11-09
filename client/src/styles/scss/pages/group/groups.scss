@@ -25,7 +25,6 @@
     width: 80%;
 
     min-height: 80vh;
-
 }
 
 .groups {
@@ -46,4 +45,14 @@
     }
 
     margin-bottom: 1.6rem;
+}
+
+.search-group-container {
+    width: 8rem;
+    height: 8rem;
+    background-color: $color-primary;
+    border-radius: 1rem;
+    color: white;
+    padding: 2rem;
+    margin: 2rem;
 }

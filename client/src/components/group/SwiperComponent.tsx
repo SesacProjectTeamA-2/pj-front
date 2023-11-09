@@ -7,7 +7,11 @@ import 'swiper/scss';
 import '../../styles/scss/components/swiper.scss';
 import { red } from '@mui/material/colors';
 
-export default function SwiperComponent({ groupArray, setGroupArray }: any) {
+export default function SwiperComponent({
+    groupArray,
+    setGroupArray,
+    madeNumGroup,
+}: any) {
     console.log('GroupArray : ', groupArray);
 
     // 랜덤 색상을 선택하는 함수
@@ -27,7 +31,7 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
         return colors[randomIndex];
     };
 
-    console.log(groupArray);
+    console.log('?????????', groupArray);
 
     return (
         <div>
@@ -116,7 +120,7 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                                         <div
                                             style={{
                                                 margin: '0 30px',
-                                                fontSize: '15px',
+                                                fontSize: '2rem',
                                                 fontWeight: 'bold',
                                             }}
                                         >
@@ -124,8 +128,8 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                                         </div>
                                         <div
                                             style={{
-                                                margin: '30px 6px',
-                                                fontSize: '12px',
+                                                margin: '1rem',
+                                                fontSize: '1rem',
                                                 fontWeight: 'bold',
                                                 opacity: '0.8',
                                             }}
@@ -135,22 +139,24 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                                                     margin: '0px 5px',
                                                     color: '#8D6262',
                                                     fontWeight: 'bold',
+                                                    fontSize: '1.2rem',
                                                 }}
                                             >
                                                 D-day
                                             </span>
+                                            <br />
                                             {groupInfo.gDday}
                                             <div
                                                 style={{
-                                                    margin: '2px 17px',
-                                                    fontSize: '11px',
+                                                    margin: '0.4rem',
+                                                    fontSize: '1.2rem',
                                                 }}
                                             >
-                                                참석인원 수 /{' '}
-                                                {groupInfo.gMaxMem}
+                                                {/* 참석인원 수 {madeNumGroup.count}
+                                                /{groupInfo.gMaxMem} */}
+                                                {/* <div>남은 일수 : {groupInfo.gDday}</div> */}
                                             </div>
                                         </div>
-                                        {/* <div>남은 일수 : {groupInfo.gDday}</div> */}
                                     </SwiperSlide>
                                 </Link>
                                 ;

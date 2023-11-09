@@ -224,7 +224,8 @@ export default function GroupPostDetail() {
 
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-            commentEditTestInput, // [임시 test용]
+            // commentEditTestInput, // [임시 test용]
+            commentEditInput,
             // [추후] commentEditInput으로 변경
             {
                 headers: {
@@ -349,7 +350,6 @@ export default function GroupPostDetail() {
 
                     <div className="comment-list">
                         <ul>
-                            {/* commentList, comments 둘다 되네요..^^ */}
                             {boardComments.length <= 0
                                 ? ''
                                 : boardComments?.map(

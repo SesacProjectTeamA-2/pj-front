@@ -22,6 +22,7 @@ export default function HomeMissionList({
     missionList,
     setMissionList,
     gDday,
+    isLeader,
 }: any) {
     const [addModalSwitch, setAddModalSwitch] = useState(false);
     const missionAddHandler = () => {
@@ -29,9 +30,9 @@ export default function HomeMissionList({
     };
 
     //=== redux 상태관리 ===
-    const dummyGroupState = useSelector(
-        (state: RootStateType) => state.dummyGroup
-    );
+    // const dummyGroupState = useSelector(
+    //     (state: RootStateType) => state.dummyGroup
+    // );
 
     // const missionList = useSelector(
     //     (state: RootStateType) => state.dummyGroup.missionArray
@@ -141,27 +142,30 @@ export default function HomeMissionList({
                 <div className="upper-content-wrapper">
                     <div className="title2">진행 중인 미션</div>
 
-                    {/* 모임장만 보임 */}
-                    <div onClick={missionAddHandler}>
-                        <div className="title5 mission-edit">
-                            <img
-                                src="/asset/icons/edit.svg"
-                                alt="edit-img"
-                                className="edit-img"
-                            ></img>
+                    {isLeader ? (
+                        <div onClick={missionAddHandler}>
+                            <div className="title5 mission-edit">
+                                <img
+                                    src="/asset/icons/edit.svg"
+                                    alt="edit-img"
+                                    className="edit-img"
+                                ></img>
+                            </div>
                         </div>
-                    </div>
-                    {addModalSwitch ? (
-                        <MissionAddModal
-                            addModalSwitch={addModalSwitch}
-                            setAddModalSwitch={setAddModalSwitch}
-                            action={'미션수정'}
-                            missionList={missionList}
-                            setMissionList={setMissionList}
-                            gDday={gDday}
-                        />
-                    ) : null}
+                    ) : (
+                        ''
+                    )}
                 </div>
+                {addModalSwitch ? (
+                    <MissionAddModal
+                        addModalSwitch={addModalSwitch}
+                        setAddModalSwitch={setAddModalSwitch}
+                        action={'미션수정'}
+                        missionList={missionList}
+                        setMissionList={setMissionList}
+                        gDday={gDday}
+                    />
+                ) : null}
                 <div className="title2">
                     {/* {useDdayCount(dummyGroupState.gDday)} */}
                     {gDday > 0

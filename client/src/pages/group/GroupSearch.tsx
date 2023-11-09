@@ -14,7 +14,6 @@ export default function GroupSearch({
 
     const [searchGroupList, setSearchGroupList] = useState([]);
 
-    // [추후] 여러개 & 로직 구현
     console.log(selectedArr);
 
     useEffect(() => {
@@ -37,14 +36,19 @@ export default function GroupSearch({
 
     return (
         <div>
-            <div className="title1">검색 결과 입니다.</div>
+            <div className="title1" style={{ margin: '2rem' }}>
+                검색 결과 입니다.
+            </div>
 
             <div>
                 {searchGroupList?.map((searchGroup: GroupStateType) => (
-                    <div key={searchGroup.gSeq}>
+                    <div
+                        key={searchGroup.gSeq}
+                        className="search-group-container"
+                    >
                         <Link to={`/group/home/${searchGroup.gSeq}`}>
-                            <button>{searchGroup.gName}</button>
-                            <div>{searchGroup.gDesc}</div>
+                            <div className="title2">{searchGroup.gName}</div>
+                            <div className="title5">{searchGroup.gDesc}</div>
                         </Link>
                     </div>
                 ))}

@@ -11,6 +11,7 @@ export default function GroupList() {
     const uToken = cookie.get('isUser');
 
     const [madeGroup, setMadeGroup] = useState([]);
+    const [madeNumGroup, setMadeNumGroup] = useState([]);
     const [joinGroup, setJoinGroup] = useState([]);
 
     //] 생성한 모임
@@ -25,8 +26,10 @@ export default function GroupList() {
                 }
             );
             const data = response.data; // 데이터에 접근
-            console.log('mmmmmmmmmmmmmmmmmmmm', data.groupInfo);
+            console.log('생성한 모임', data.groupInfo);
+            console.log('생성한 모임>>>>>>>', data);
             setMadeGroup(data.groupInfo); // 받은 데이터를 joinGroup 상태로 설정
+            setMadeNumGroup(data.groupUserCount); // 받은 데이터를 joinGroup 상태로 설정
         } catch (error) {
             console.error('Error while fetching data:', error);
         }
@@ -50,7 +53,7 @@ export default function GroupList() {
                 }
             );
             const data = response.data; // 데이터에 접근
-            console.log('dddddddddddddddddddddd', data.groupInfo);
+            console.log('참여한 모임', data.groupInfo);
             setJoinGroup(data.groupInfo); // 받은 데이터를 joinGroup 상태로 설정
         } catch (error) {
             console.error('Error while fetching data:', error);
@@ -85,6 +88,7 @@ export default function GroupList() {
                     <SwiperComponent
                         groupArray={joinGroup}
                         setGroupArray={setJoinGroup}
+                        madeNumGroup={madeNumGroup}
                     />
                 ) : (
                     '가입한 모임이 없습니다. '
