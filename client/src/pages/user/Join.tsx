@@ -61,8 +61,6 @@ export default function Join() {
         uCategory2: selectedArr[1],
         uCategory3: selectedArr[2],
     };
-    // console.log('userInfo JOIN', selectedArr);
-    // console.log('userInfo JOIN', userInfo);
 
     const register = async (): Promise<void> => {
         console.log('register!');

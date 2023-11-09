@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 import '../../styles/scss/pages/group/groupPostDetail.scss';
-import { ListItem, ListItemText, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
@@ -212,33 +212,7 @@ export default function GroupPostDetail() {
         // setFreeList(res.data.groupInfo);
     };
 
-    // =================== 수정 ==================
-    const [isEditing, setIsEditing] = useState(
-        Array(boardComments.length).fill(false)
-    );
-
-    const toggleWrite = (idx: number): void => {
-        const updatedIsEditing = [...isEditing];
-        updatedIsEditing[idx] = !updatedIsEditing[idx];
-        setIsEditing(updatedIsEditing);
-        console.log('isEditing ', isEditing);
-
-        if (isEditing[idx]) {
-            // 쓰기모드면 : 텍스트 필드 + commitEditHandler + 버튼 '완료'
-            // commentEditHandler(boardComments[idx].gbcSeq, idx);
-            setCommentEditInput({
-                gbcSeq: boardComments[idx].gbcSeq,
-                gbcContent: boardComments[idx].gbcContent,
-            });
-        } else {
-            // 읽기모드면 : 리스트 아이템 + readOnly + 버튼 '수정'
-            setCommentEditInputs((prevInputs) => {
-                const updatedInputs = [...prevInputs];
-                updatedInputs[idx] = boardComments[idx].gbcContent;
-                return updatedInputs;
-            });
-        }
-    };
+    // 수정
 
     const [commentEditInput, setCommentEditInput] = useState({
         gbcSeq: 1,
@@ -260,10 +234,7 @@ export default function GroupPostDetail() {
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
-        console.log('HEY! ', {
-            gbcSeq,
-            gbcContent: commentEditInput.gbcContent,
-        });
+        console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
 
@@ -440,8 +411,7 @@ export default function GroupPostDetail() {
                                                                       '30%',
                                                               }}
                                                           >
-                                                              {/* 원래 수정 버튼 */}
-                                                              {/* <button
+                                                              <button
                                                                   className="btn-sm"
                                                                   onClick={() =>
                                                                       commentEditHandler(
@@ -451,40 +421,7 @@ export default function GroupPostDetail() {
                                                                   }
                                                               >
                                                                   수정
-                                                              </button> */}
-
-                                                              {isEditing[
-                                                                  idx
-                                                              ] ? (
-                                                                  // 쓰기모드
-                                                                  <button
-                                                                      className="btn-sm"
-                                                                      onClick={() =>
-                                                                          //   commentEditHandler(
-                                                                          //       comment.gbcSeq,
-                                                                          //       idx
-                                                                          //   )
-                                                                          toggleWrite(
-                                                                              idx
-                                                                          )
-                                                                      }
-                                                                  >
-                                                                      완료
-                                                                  </button>
-                                                              ) : (
-                                                                  // 읽기모드
-                                                                  <button
-                                                                      className="btn-sm"
-                                                                      onClick={() =>
-                                                                          toggleWrite(
-                                                                              idx
-                                                                          )
-                                                                      }
-                                                                  >
-                                                                      수정
-                                                                  </button>
-                                                              )}
-
+                                                              </button>
                                                               <button
                                                                   className="btn-sm"
                                                                   onClick={() =>
@@ -500,7 +437,7 @@ export default function GroupPostDetail() {
                                                   </div>
 
                                                   {/* 댓글 내용 */}
-                                                  {isEditing[idx] ? (
+                                                  {
                                                       <TextField
                                                           value={
                                                               commentEditInputs[
@@ -517,16 +454,7 @@ export default function GroupPostDetail() {
                                                               )
                                                           }
                                                       />
-                                                  ) : (
-                                                      <ListItemText
-                                                          primary={
-                                                              commentEditInputs[
-                                                                  idx
-                                                              ] ||
-                                                              comment.gbcContent
-                                                          }
-                                                      />
-                                                  )}
+                                                  }
                                               </li>
                                               //  END
                                           );
