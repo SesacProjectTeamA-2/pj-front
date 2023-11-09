@@ -76,12 +76,14 @@
 //     }
 // }
 
+// 명언 부분 CSS
 .sample2 {
     width: 480px;
     margin: 50px auto;
 }
 
 .sample2 blockquote {
+    background-color: aqua;
     position: relative;
     border: 1px solid $color-white;
     border-radius: 10px;

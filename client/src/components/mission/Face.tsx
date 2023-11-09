@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
+import '../../styles/scss/pages/mission.scss';
+
 export default function Face() {
     const [uCharImg, setuCharImg] = useState<string>('');
     const cookie = new Cookies();
@@ -9,11 +11,11 @@ export default function Face() {
 
     useEffect(() => {
         const getUCharImg = async () => {
-        // console.log('face.tsx use effect')
+            // console.log('face.tsx use effect')
 
             const res = await axios.get(
                 // 유저 미션 조회
-                
+
                 `http://localhost:8888/api/mission/user`,
                 {
                     headers: {
