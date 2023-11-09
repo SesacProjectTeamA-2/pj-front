@@ -35,12 +35,6 @@ export default function GroupPostDetail() {
                     setUserImgSrc('/asset/images/user.svg');
                     console.log('userImgSrc 없음', userImgSrc);
                 }
-                // else if (userImg) {
-                //     setUserImgSrc('/asset/images/user.svg');
-                //     console.log('userImgSrc 없음', userImgSrc);
-                // } else {
-                //     console.log('암것도 아님', userImgSrc);
-                // }
             })
             .catch((err) => {
                 console.log('error 발생: ', err);
@@ -184,29 +178,8 @@ export default function GroupPostDetail() {
 
     //] 댓글
     // 댓글 리스트 : 자유게시글에 포함
-    // const commentList = freeList.tb_groupBoardComments;
 
-    // const [comments, setComments] = useState<any>(
-    //     freeList.tb_groupBoardComments
-    // );
-
-    // const [commentCount, setCommentCount] = useState(0);
-
-    // console.log('>>>>>>>>>', commentCount);
     const [commentList, setCommentList] = useState<any>([]);
-
-    // useEffect(() => {
-    //     setComments(freeList.tb_groupBoardComments);
-    // }, [freeList.tb_groupBoardComments]);
-
-    //   {
-    //     createdAt: "2023-11-05 22:42:51",
-    //     gbSeq: 3,
-    //     gbcContent: "댓글 과연...!!!!",
-    //     gbcSeq: 1,
-    //     uSeq: 1,
-    //     updatedAt: "2023-11-05 22:42:51"
-    //   }
 
     const [commentInput, setCommentInput] = useState({
         gbSeq,
@@ -241,42 +214,32 @@ export default function GroupPostDetail() {
 
     // 수정
 
-    // [추후] 수정 input 추가
     const [commentEditInput, setCommentEditInput] = useState({
         gbcSeq: 1,
         gbcContent: '',
     });
 
-    // [추후] 수정 input 추가
-    const commentEditOnChange = (e: any) => {
-        setCommentEditInput({
-            ...commentEditInput,
-            gbcContent: e.target.value,
-        });
-        // setEditComment({ ...editComment, gbcContent: e.target.value });
-    };
+    // 개별 관리
+    const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
 
-    // [임시] test용
-    const commentEditTestInput = {
-        gbcSeq: 1,
-        gbcContent: '댓글 수정합니다 !!!',
+    // [추후] 수정 input 추가
+    const commentEditOnChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        idx: number
+    ) => {
+        const updatedInputs = [...commentEditInputs];
+        updatedInputs[idx] = e.target.value;
+        setCommentEditInputs(updatedInputs);
     };
 
     //; 댓글 수정 (PATCH)
-    // const editBtnEvt=(e:React.MouseEvent):void=>{
-
-    //     commentEditHandler(gbcSeq)
-    // }
-    const commentEditHandler = async (gbcSeq: number) => {
-        // console.log(gbcSeq);
-
+    const commentEditHandler = async (gbcSeq: number, idx: number) => {
+        console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-            // commentEditTestInput, // [임시 test용]
-            commentEditInput,
-            // [추후] commentEditInput으로 변경
-            // commentEditInput,
-            // { gbcContent: commentEditInput.gbcContent },
+
+            { gbcSeq, gbcContent: commentEditInputs[idx] },
+
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
@@ -284,10 +247,6 @@ export default function GroupPostDetail() {
             }
         );
 
-        // 수정 모드 종료
-        // setEditComment({ gbcSeq: -1, gbcContent: '' });
-        // console.log(res.data);
-        // window.location.reload();
         getBoardNoti();
     };
 
@@ -298,8 +257,7 @@ export default function GroupPostDetail() {
         const res = await axios
             .delete(
                 `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-                // commentEditTestInput, // [임시 test용]
-                // [추후] commentEditInput으로 변경
+
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -319,13 +277,6 @@ export default function GroupPostDetail() {
 
     return (
         <div className="section section-group">
-            {/* <GroupHeader
-                // [ 추후 ] 넘버링 id 추가
-                // title={`미션 1. ${missionArr[0]}`}
-                title={`${gCategory}`}
-                groupName={''}
-            /> */}
-
             <div className="post-detail-container">
                 <div className="post-detail-header-container">
                     <div className="post-detail-header">
@@ -463,8 +414,9 @@ export default function GroupPostDetail() {
                                                               <button
                                                                   className="btn-sm"
                                                                   onClick={() =>
-                                                                      commentEditOnChange(
-                                                                          comment.gbcSeq
+                                                                      commentEditHandler(
+                                                                          comment.gbcSeq,
+                                                                          idx
                                                                       )
                                                                   }
                                                               >
@@ -488,13 +440,17 @@ export default function GroupPostDetail() {
                                                   {
                                                       <TextField
                                                           value={
+                                                              commentEditInputs[
+                                                                  idx
+                                                              ] ||
                                                               comment.gbcContent
                                                           }
                                                           onChange={(
                                                               e: React.ChangeEvent<HTMLInputElement>
                                                           ) =>
                                                               commentEditOnChange(
-                                                                  e
+                                                                  e,
+                                                                  idx
                                                               )
                                                           }
                                                       />
