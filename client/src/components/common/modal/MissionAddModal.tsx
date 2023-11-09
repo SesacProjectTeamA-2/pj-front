@@ -41,6 +41,7 @@ export default function MissionAddModal({
     setInput,
     input,
     gDday,
+    groupDetail,
 }: any) {
     //] 1. 그룹 생성
     //-- action = 미션생성
@@ -61,9 +62,11 @@ export default function MissionAddModal({
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
+    console.log('groupDetail>>>>>>>>>>', groupDetail);
 
     console.log('missionList - ADD MODAL', missionList);
     // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
+
     const today = new Date();
     today.setDate(today.getDate());
     const defaultDday = today.toISOString().split('T')[0];
@@ -74,8 +77,19 @@ export default function MissionAddModal({
         mContent: '',
         mLevel: 1,
         mSeq: null,
-        gDday: useDdayCount(defaultDday),
+        gDday: defaultDday,
         // completed: false,
+    });
+
+    const [groupEditDday, setGroupEditDday] = useState({
+        gSeq,
+        gName: '',
+        gDesc: '',
+        gDday: defaultDday,
+        gCategory: '',
+        gCoverImg: '',
+        gMaxMem: 1,
+        missionArray: [],
     });
 
     // const [gDday, setGDday] = useState('');
@@ -202,7 +216,18 @@ export default function MissionAddModal({
         //; 미션 수정 (PATCH, POST, DELETE)
         // missionList 최종 데이터만 보내기
         if (action === '미션수정') {
-            console.log('!!!!!!!', Number(dday.slice(2)));
+            setMissionInputs({
+                ...input,
+                missionArray: missionList,
+                gDday: targetDate,
+            });
+
+            // console.log(
+            //     '<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>',
+            //     input
+            // );
+
+            // console.log('!!!!!!!', Number(dday.slice(2)));
 
             // missionInputs 배열을 복사하고 gDday 업데이트
             // const updatedMissionInputs = missionInputs.map((mission: any) => {
@@ -216,8 +241,34 @@ export default function MissionAddModal({
 
             // console.log('+++++++++++', missionInputs);
 
+            const patchDdayHandler = async () => {
+                try {
+                    console.log('!!!!!!!!!', groupEditDday);
+
+                    await axios
+                        .patch(
+                            `${process.env.REACT_APP_DB_HOST}/group`,
+                            groupEditDday,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${uToken}`,
+                                },
+                            }
+                        )
+                        .then((res) => {
+                            console.log('patched', res.data);
+                        });
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+
+            patchDdayHandler();
+
             const patchMissionListHandler = async () => {
                 try {
+                    console.log('@@@@@@@@', missionList);
+
                     await axios
                         .patch(
                             `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
@@ -272,7 +323,7 @@ export default function MissionAddModal({
                 mTitle: missionInput.mTitle,
                 mContent: missionInput.mContent,
                 mLevel: missionInput.mLevel,
-                gDday: Number(newDay.slice(2)),
+                gDday: missionInput.gDday,
             };
             setMissionInputs(updatedMissionInputs);
         }
@@ -285,6 +336,8 @@ export default function MissionAddModal({
         setTargetDate(newDay); // 날짜 입력값 업데이트
 
         console.log('jjjjj', newDay);
+        const updatedGroupEditDday = { ...groupEditDday, gDday: newDay };
+        setGroupEditDday(updatedGroupEditDday);
     };
     const dday = useDdayCount(targetDate);
 
@@ -293,7 +346,7 @@ export default function MissionAddModal({
         const updatedMissionInputs = missionInputs.map((mission: any) => {
             return {
                 ...mission,
-                gDday: Number(dday.slice(2)),
+                gDday: targetDate,
             };
         });
 

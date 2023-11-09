@@ -73,9 +73,9 @@ export default function WarningModal({
                     })
                     .then((res) => {
                         console.log(res.data);
-                        toast.success(
-                            `${groupName} 모임을 ${action}하셨습니다.`
-                        );
+                        // toast.success(
+                        //     `${groupName} 모임을 ${action}하셨습니다.`
+                        // );
                         nvg('/group');
                     });
             };
@@ -93,9 +93,9 @@ export default function WarningModal({
                     )
                     .then((res) => {
                         console.log(res.data);
-                        toast.success(
-                            `${groupName} 모임을 ${action}하셨습니다.`
-                        );
+                        // toast.success(
+                        //     `${groupName} 모임을 ${action}하셨습니다.`
+                        // );
                         nvg('/group');
                     });
             };

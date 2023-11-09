@@ -122,8 +122,6 @@ export default function GroupEdit() {
 
     console.log('날짜 디폴트 설정 후 날짜', input.gDday);
 
-    //~ [추후] 미션 수정 axios 추가 !!!!!!
-
     const onChange = (e: any) => {
         const { name, value } = e.target;
         // setInput({ ...input, [name]: value });
@@ -224,8 +222,6 @@ export default function GroupEdit() {
 
                 successHandler();
             });
-
-        //! [추후] input 입력 안했을 시, 로직
     };
 
     //=== 관심 분야 ===

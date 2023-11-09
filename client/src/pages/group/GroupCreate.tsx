@@ -192,9 +192,6 @@ export default function GroupCreate() {
             .then((res) => {
                 console.log(res.data);
 
-                toast.success(`${input.gName} 모임을 생성하였습니다 !`);
-                <Toaster />;
-
                 // 모달창
                 //! [추후] input 입력 안했을 시, 로직
                 if (input.gName) {
@@ -420,20 +417,9 @@ export default function GroupCreate() {
                 action={'모임을 생성'}
                 groupName={input.gName}
             />
-            {/* ) : null} */}
-            {/* <button
-                onClick={() => {
-                    toast('성공 !!!');
-                    console.log('???');
-                }}
-            >
-                <Toaster />success
-            </button> */}
-            {/* <Link to="/group/home/1"> */}
             <button className="btn-fixed" onClick={() => groupCreateHandler()}>
                 모임 시작하기 !
             </button>
-            {/* <Toaster />;</Link> */}
         </div>
     );
 }

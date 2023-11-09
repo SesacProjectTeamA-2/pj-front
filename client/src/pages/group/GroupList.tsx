@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
 import SwiperComponent from '../../components/group/SwiperComponent';
 
 export default function GroupList() {
+    const nvg = useNavigate();
+
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
@@ -65,9 +68,18 @@ export default function GroupList() {
         console.log('madeGroup', madeGroup);
     }, []);
 
+    const createHandler = () => {
+        if (!uToken) {
+            // toast.error('로그인이 필요합니다 !');
+            alert('로그인이 필요합니다 !');
+            return;
+        } else nvg('/group/create');
+    };
+
     return (
         <div>
             <div className="groups created">
+                {/* <Toaster /> */}
                 <div className="title1">내가 생성한 모임</div>
                 <div>
                     {madeGroup?.length > 0 ? (
@@ -101,9 +113,11 @@ export default function GroupList() {
             </div> */}
 
             <div className="btn-fixed-wrapper">
-                <Link to="/group/create">
-                    <button className="btn-fixed">내가 모임 만들기 !</button>
-                </Link>
+                {/* <Link to="/group/create"> */}
+                <button className="btn-fixed" onClick={createHandler}>
+                    내가 모임 만들기 !
+                </button>
+                {/* </Link> */}
             </div>
         </div>
     );

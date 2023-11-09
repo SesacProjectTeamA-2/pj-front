@@ -183,15 +183,15 @@ export default function GroupHome() {
     const [totalRanking, setTotalRanking] = useState([]);
     const [totalScoreRanking, setTotalScoreRanking] = useState([]);
 
-    interface Mission {
-        id: number;
-        mTitle: string;
-        mContent: string;
-        mLevel: number;
-        // map: string;
-    }
+    // interface Mission {
+    //     id: number;
+    //     mTitle: string;
+    //     mContent: string;
+    //     mLevel: number;
+    //     // map: string;
+    // }
 
-    const [missionList, setMissionList] = useState<Mission[]>(
+    const [missionList, setMissionList] = useState<any>(
         groupDetail.groupMission
     );
     console.log('missionList GROUP', missionList);
@@ -233,6 +233,7 @@ export default function GroupHome() {
                 //         setInput={setInput}
                 //         input={input}
                 isLeader={isLeader}
+                groupDetail={groupDetail}
             />
 
             <div className="ranking-container">
