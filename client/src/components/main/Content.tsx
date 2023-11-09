@@ -261,13 +261,16 @@ export default function Content(props: any) {
     console.log('totalRates', totalPercent);
 
     return (
-        <div>
+        <div
+            style={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+        >
             <div className="content-grid">
                 <Quotes
                     phraseCtt={phraseCtt}
                     // setPhraseCtt={setPhraseCtt}
                     // setPhraseModeSelf={setPhraseModeSelf}
                     phraseModeSelf={phraseModeSelf}
+                    uName={uName}
                 />
                 {/* 1. 명언 : 가로로 길게 */}
 
@@ -283,6 +286,7 @@ export default function Content(props: any) {
                         >
                             My 달성률{' '}
                         </div>
+
                         <div className="progress-img-flex">
                             <div className="progress-bar-div">
                                 {groupArray.map((group: any, idx: number) => {
