@@ -346,7 +346,7 @@ export default function GroupMissionDetail() {
                                                                             idx
                                                                         )
                                                                     }
-                                                                    className="btn-sm"
+                                                                    className="btn-sm cmt-edit-btn"
                                                                 >
                                                                     수정
                                                                 </button>
@@ -357,7 +357,7 @@ export default function GroupMissionDetail() {
                                                                             comment.gbcSeq
                                                                         )
                                                                     }
-                                                                    className="btn-sm"
+                                                                    className="btn-sm cmt-del-btn"
                                                                 >
                                                                     삭제
                                                                 </button>
