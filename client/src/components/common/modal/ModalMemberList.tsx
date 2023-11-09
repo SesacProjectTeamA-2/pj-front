@@ -176,7 +176,7 @@ export default function ModalMemberList({
                                             alt="userImg"
                                         />
                                         <div className="cur-ranking-content">
-                                            <div className="title4">
+                                            <div className="title4 name">
                                                 {member.uName}
                                             </div>
                                         </div>
