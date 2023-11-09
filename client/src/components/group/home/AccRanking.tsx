@@ -27,7 +27,7 @@ export default function AccRanking({
                                     <img
                                         src={
                                             total.uImg ||
-                                            userImgSrc ||
+                                            // userImgSrc ||
                                             '/asset/images/user.svg'
                                         }
                                         alt="uerImg"
