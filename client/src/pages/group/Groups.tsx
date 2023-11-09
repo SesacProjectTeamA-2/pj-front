@@ -19,7 +19,31 @@ export default function Groups() {
 
     const [searchInput, setSearchInput] = useState('');
 
+    const [searchGroupList, setSearchGroupList] = useState([]);
+
+    const getSearchGroupList = async () => {
+        const res = await axios
+            .get(
+                // `${process.env.REACT_APP_DB_HOST}/group?search=${searchInput}&category=${selectedArr}`
+                `${process.env.REACT_APP_DB_HOST}/group?search=${searchInput}`
+            )
+            .then((res) => {
+                console.log('??????', searchInput);
+
+                console.log('검색결과', res.data.groupArray);
+
+                console.log('#######', res.data);
+                setSearchGroupList(res.data.groupArray);
+            });
+    };
+
+    // useEffect(() => {
+    //     getSearchGroupList();
+    // }, [searchInput, selectedArr]);
+
     const searchHandler = () => {
+        getSearchGroupList();
+
         setSearch(!search);
     };
 
@@ -53,13 +77,13 @@ export default function Groups() {
                     </button>
                 </div>
 
-                {/* <div className="groups-interested">
+                <div className="groups-interested">
                     <InterestedList
                         selectedArr={selectedArr}
                         setSelectedArr={setSelectedArr}
                         num={8}
                     />
-                </div> */}
+                </div>
 
                 {/* <Divider /> */}
 

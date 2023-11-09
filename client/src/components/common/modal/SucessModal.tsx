@@ -88,7 +88,7 @@ any) {
         }
 
         if (action === '게시글을 수정') {
-            nvg(`/board/${gSeq}/${gCategory}/${gbSeq}`);
+            nvg(-1);
         }
     };
 

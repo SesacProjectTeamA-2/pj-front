@@ -4,6 +4,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Editor from './Editor';
 
@@ -95,8 +96,22 @@ export default function BoardEdit() {
         // console.log(board);
     };
 
+    let replaced_str = board.gbContent.replace('<p>', '');
+    let newContent = replaced_str.replace('</p>', '');
+
     // 게시물 edit
     const boardEditHandler = async () => {
+        if (!board.gbTitle) {
+            // 만약 gCategory가 비어있으면 알림을 표시
+            toast.error('제목을 입력하세요');
+            return; // 함수 실행 중지
+        }
+
+        if (newContent === '<br>') {
+            toast.error('내용을 입력하세요');
+            return;
+        }
+
         const res = await axios
             .patch(
                 `${process.env.REACT_APP_DB_HOST}/board/edit/${gbSeq}`,
@@ -111,10 +126,6 @@ export default function BoardEdit() {
                 console.log(res);
                 successHandler();
             });
-
-        // [추후] input 입력 안했을 시, 로직
-
-        // [추후] 수정한 모임 홈 화면으로 이동
     };
 
     console.log(board);
@@ -169,12 +180,9 @@ export default function BoardEdit() {
             />
 
             <div>
-                {/* default : + 누른 페이지 */}
-                {/* <Link to="/group/noti/1"> */}
                 <button className="editor-post-btn" onClick={boardEditHandler}>
                     작성 완료
                 </button>
-                {/* </Link> */}
             </div>
         </div>
     );
