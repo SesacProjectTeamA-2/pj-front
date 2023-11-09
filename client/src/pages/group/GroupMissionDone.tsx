@@ -1,12 +1,77 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import {
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TablePagination,
+    TableRow,
+} from '@mui/material';
+
 import '../../styles/scss/pages/group/groupMissionDone.scss';
 
 import GroupContent from '../../components/group/content/GroupContentList';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import { GroupMission, MissionType } from 'src/types/types';
+import useDateChange from 'src/hooks/useDateChange';
+
+//=== 테이블 정의
+interface Column {
+    id: 'id' | 'title' | 'startDate' | 'doneDate';
+    label: string;
+    minWidth?: number;
+    align?: 'center';
+    format?: (value: number) => string;
+}
+
+const columns: Column[] = [
+    { id: 'id', label: 'No.', minWidth: 50 },
+    { id: 'title', label: '미션명', minWidth: 150, align: 'center' },
+    { id: 'startDate', label: '시작 날짜', minWidth: 80, align: 'center' },
+    {
+        id: 'doneDate',
+        label: '완료 날짜',
+        minWidth: 80,
+        align: 'center',
+        format: (value: number) => value.toLocaleString('en-US'),
+    },
+    // {
+    //     id: 'startDate',
+    //     label: '작성날짜',
+    //     minWidth: 80,
+    //     align: 'center',
+    //     format: (value: number) => value.toLocaleString('en-US'),
+    // },
+    // {
+    //     id: 'density',
+    //     label: 'Density',
+    //     minWidth: 170,
+    //     align: 'right',
+    //     format: (value: number) => value.toFixed(2),
+    // },
+];
+
+interface Data {
+    id: string;
+    title: string;
+    startDate: string;
+    doneDate: string;
+}
+
+function createData(
+    id: string,
+    title: string,
+    startDate: string,
+    doneDate: string
+): Data {
+    // const density = doneDate / startDate;
+    return { id, title, startDate, doneDate };
+}
 
 export default function GroupMissionDone() {
     const cookie = new Cookies();
@@ -35,100 +100,143 @@ export default function GroupMissionDone() {
             })
             .then((res) => {
                 setGroupMission(res.data);
-                setMissionList(groupMission.expiredMissionList);
             });
     };
 
-    const [missionList, setMissionList] = useState<any>([]);
     useEffect(() => {
         getGroup();
     }, []);
 
-    // 미션
-    // interface Mission {
-    //     id: number;
-    //     mTitle: string;
-    //     createdAt: number;
-    //     updatedAt: number;
-    //     mContent: string;
-    //     mLevel: number;
-    //     // map: string;
-    //     isExpired: boolean | null;
-    // }
+    //=== 데이터가 들어올 부분 ===
+    const reversedRows = groupMission.expiredMissionList.map(
+        (item: any, index: number) =>
+            createData(
+                // String(noticeList.length - index),
+                String(index + 1),
+                // replace(/(<([^>]+)>)/gi, '') => html tag 처리
+                item.mTitle.replace(/(<([^>]+)>)/gi, ''),
+                item.createdAt.replace(/(<([^>]+)>)/gi, ''),
+                item.updatedAt.replace(/(<([^>]+)>)/gi, '')
+                // item.createdAt
+            )
+    );
 
-    // type MissionList = {
-    //     mSeq: number;
-    //     mTitle: string;
-    //     mContent: string;
-    //     mLevel: number;
-    //     createdAt: string;
-    //     updatedAt: string;
-    //     gSeq: number;
-    //     isExpired: null | boolean;
+    const rows = reversedRows;
+
+    // 페이지 이동
+    const navigate = useNavigate();
+
+    // const handleRowClick = (rowId: number) => {
+    //     navigate('/group/idti/1/' + rowId);
     // };
+
+    // 테이블
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const handleChangePage = (event: any, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+    // console.log('>>>>>>>>>>>', groupMission.expiredMissionList);
 
     return (
         <div className="section section-group">
             <GroupHeader title={'완료된 미션'} groupName={groupMission.gName} />
             <div className="noti-container">
                 <div className="noti-header mission-done-header">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>시작</th>
-                                <th>종료</th>
-                                <th>기간</th>
-                                <th>완료된 미션</th>
-                            </tr>
-                        </thead>
+                    <div className="noti-container">
+                        <Paper sx={{ width: '100%' }}>
+                            <TableContainer sx={{ maxHeight: 440 }}>
+                                <Table stickyHeader aria-label="sticky table">
+                                    <TableHead>
+                                        <TableRow>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                    key={column.id}
+                                                    align={column.align}
+                                                    style={{
+                                                        minWidth:
+                                                            column.minWidth,
+                                                    }}
+                                                >
+                                                    {column.label}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    </TableHead>
 
-                        <tbody>
-                            <tr></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className="noti-content mission-done-content">
-                    <ul>
-                        {/* START */}
-
-                        {/* END */}
-
-                        <li>
-                            {/* {missionList.length > 0 ? ( */}
-                            <td className="mission-done-list">
-                                {missionList.map(
-                                    (mission: any, idx: number) => {
-                                        return (
-                                            <>
-                                                <div>{idx + 1}</div>
-                                                <div>{mission.createdAt}</div>
-                                                <div>{mission.updatedAt}</div>
-                                                <div className="mission-done-list">
-                                                    <button>
-                                                        {mission.mTitle}
-                                                    </button>
-                                                </div>
-                                            </>
-                                        );
-                                    }
-                                )}
-                            </td>
-                            {/* // ) : (
-                            //     <div className="title3">
-                            //         완료된 미션이 없어요
-                            //     </div>
-                            // )} */}
-                        </li>
-                    </ul>
+                                    <TableBody style={{ cursor: 'pointer' }}>
+                                        {rows
+                                            .slice(
+                                                page * rowsPerPage,
+                                                page * rowsPerPage + rowsPerPage
+                                            )
+                                            .map((row: any, idx: number) => {
+                                                return (
+                                                    <TableRow
+                                                        hover
+                                                        role="checkbox"
+                                                        tabIndex={-1}
+                                                        key={row.title}
+                                                    >
+                                                        {columns.map(
+                                                            (column) => {
+                                                                const value =
+                                                                    row[
+                                                                        column
+                                                                            .id
+                                                                    ];
+                                                                return (
+                                                                    <TableCell
+                                                                        key={
+                                                                            column.id
+                                                                        }
+                                                                        align={
+                                                                            column.align
+                                                                        }
+                                                                    >
+                                                                        {/* <Link
+                                                                            to={`/board/${gSeq}/notice/${gbSeqList[idx]}`}
+                                                                        > */}
+                                                                        {column.format &&
+                                                                        typeof value ===
+                                                                            'number'
+                                                                            ? column.format(
+                                                                                  value
+                                                                              )
+                                                                            : value}
+                                                                        {/* </Link> */}
+                                                                    </TableCell>
+                                                                );
+                                                            }
+                                                        )}
+                                                    </TableRow>
+                                                );
+                                            })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <TablePagination
+                                rowsPerPageOptions={[10, 25, 100]}
+                                component="div"
+                                count={rows.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                        </Paper>
+                    </div>
                 </div>
             </div>
-
-            {/* <div>
-                <Link to="/board/create">
-                    <img src="/asset/icons/plus.svg" className="plus-fixed" />
-                </Link>
-            </div> */}
         </div>
     );
 }
