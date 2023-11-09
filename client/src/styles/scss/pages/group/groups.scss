@@ -23,7 +23,7 @@
 
 .group-container {
     width: 80%;
-
+    height: 100vh;
     min-height: 80vh;
 }
 
@@ -34,10 +34,10 @@
     gap: 2rem;
 }
 
-.btn-fixed-wrapper {
-    display: flex;
-    justify-content: center;
-}
+// .btn-fixed-wrapper {
+//     display: flex;
+//     justify-content: center;
+// }
 
 .groups-interested {
     label {

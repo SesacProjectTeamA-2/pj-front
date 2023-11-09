@@ -111,14 +111,15 @@ export default function GroupList() {
                 <div className="title1">이런 모임 어떠세요 ?</div>
                 <button>추천모임1</button>
             </div> */}
-
+            {/* <div className="btn-fixed-wrapper"> */}
+            {/* <Link to="/group/create"> */}
             <div className="btn-fixed-wrapper">
-                {/* <Link to="/group/create"> */}
                 <button className="btn-fixed" onClick={createHandler}>
                     내가 모임 만들기 !
                 </button>
-                {/* </Link> */}
             </div>
+            {/* </Link> */}
+            {/* </div> */}
         </div>
     );
 }

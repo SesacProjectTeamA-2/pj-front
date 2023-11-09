@@ -37,10 +37,12 @@
 
 .post-list-date {
     color: $color-gray4;
+    width: fit-content;
+    text-align: right;
 }
 
 .post-list-main {
-    padding: 1rem 0.5rem;
+    padding: 1rem 1rem;
 }
 
 .post-list-footer {

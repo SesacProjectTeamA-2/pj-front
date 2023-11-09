@@ -3,13 +3,16 @@
 
 .group-create-contianer {
     align-items: flex-start;
-    width: 90%;
+    width: 100vw;
     padding: 30px;
     gap: 3rem;
     margin: 0 auto;
     position: relative;
-    height: 100vh;
-    width: 100vh;
+
+    height: fit-content;
+    // width: 100vh;
+
+
 }
 
 .group-create-content {
@@ -127,4 +130,10 @@ input {
 .max-number {
     color: $color-gray4;
     font-weight: normal;
+}
+
+.btn-fixed-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
