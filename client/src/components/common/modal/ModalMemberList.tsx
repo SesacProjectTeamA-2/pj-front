@@ -55,7 +55,6 @@ export default function ModalMemberList({
         }
     }, []);
 
-
     const getGroup = async () => {
         const res = await axios
             .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
@@ -168,7 +167,7 @@ export default function ModalMemberList({
                                         <img
                                             src={
                                                 member.uImg ||
-                                                userImgSrc ||
+                                                // userImgSrc ||
                                                 '/asset/images/user.svg'
                                             }
                                             alt="userImg"

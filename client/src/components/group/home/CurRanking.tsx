@@ -33,7 +33,7 @@ export default function CurRanking({
                                     <img
                                         src={
                                             now.uImg ||
-                                            userImgSrc ||
+                                            // userImgSrc ||
                                             '/asset/images/user.svg'
                                         }
                                         alt="userImg"
