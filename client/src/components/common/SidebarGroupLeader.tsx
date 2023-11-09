@@ -116,7 +116,11 @@ export default function SideBarGroupLeader({
                     text={inviteCode}
                     onCopy={() => toast.success(' 초대코드가 복사되었습니다 !')}
                 >
-                    <li className="leader-edit" onClick={onClickInviteButton}>
+                    <li
+                        className="leader-edit"
+                        onClick={onClickInviteButton}
+                        style={{ cursor: 'pointer' }}
+                    >
                         초대하기
                     </li>
                 </CopyToClipboard>
@@ -139,6 +143,7 @@ export default function SideBarGroupLeader({
                         choiceModalSwitchHandler('모임장 권한 넘기기')
                     }
                     className="title5 leader-warning"
+                    style={{ cursor: 'pointer' }}
                 >
                     모임장 권한 넘기기
                 </li>
@@ -146,15 +151,15 @@ export default function SideBarGroupLeader({
                 <li
                     onClick={() => choiceModalSwitchHandler('강제 퇴장')}
                     className="title5 leader-warning"
+                    style={{ cursor: 'pointer' }}
                 >
                     강제 퇴장시키기
                 </li>
 
                 <li
-                    //[추후] 모달 모임탈퇴 기능 추가
-                    // onClick={() =>
                     onClick={() => tryDeleteGroupHandler(Number(gSeq))}
                     className="title5 leader-warning"
+                    style={{ cursor: 'pointer' }}
                 >
                     모임 삭제
                 </li>

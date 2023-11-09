@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { changeGroup } from '../../store/slices/groupSlice';
@@ -131,6 +132,8 @@ export default function GroupHome() {
 
                 setTotalRanking(res.data.totalScoreUserInfo);
                 setTotalScoreRanking(res.data.totalRanking);
+
+                setIsLeader(res.data.isLeader);
             });
     };
 
@@ -151,12 +154,17 @@ export default function GroupHome() {
                 console.log(res.data);
                 const { success, msg } = res.data;
                 if (!success) {
-                    alert(msg);
+                    toast.error(msg);
                 } else {
                     window.location.href = `http://localhost:3000/group/home/${gSeq}`;
                 }
             });
     };
+
+    // 모임장 / 멤버
+    const [isLeader, setIsLeader] = useState('');
+
+    console.log('@@@@@@', isLeader);
 
     // 현재 점수 리스트
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
@@ -224,6 +232,7 @@ export default function GroupHome() {
                 //         action={'미션생성'}
                 //         setInput={setInput}
                 //         input={input}
+                isLeader={isLeader}
             />
 
             <div className="ranking-container">

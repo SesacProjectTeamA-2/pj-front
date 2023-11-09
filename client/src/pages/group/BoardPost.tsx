@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 import 'react-quill/dist/quill.snow.css';
 import { Link, useParams } from 'react-router-dom';
@@ -168,8 +169,21 @@ export default function BoardPost() {
         setSuccessModalSwitch(true);
     };
 
+    let replaced_str = board.gbContent.replace('<p>', '');
+    let newContent = replaced_str.replace('</p>', '');
+
     // 정보 post
     const boardPostHandler = async () => {
+        if (!board.gbTitle) {
+            toast.error('제목을 입력하세요');
+            return;
+        }
+
+        if (newContent === '<br>') {
+            toast.error('내용을 입력하세요');
+            return;
+        }
+
         const res = await axios
             .post(`${process.env.REACT_APP_DB_HOST}/board/create`, board, {
                 headers: {
@@ -179,12 +193,9 @@ export default function BoardPost() {
             .then((res) => {
                 console.log(res);
                 console.log('boardPostHandler');
+
                 successHandler();
             });
-
-        // [추후] input 입력 안했을 시, 로직
-
-        // [추후] 수정한 모임 홈 화면으로 이동
     };
 
     console.log(board);
@@ -214,9 +225,6 @@ export default function BoardPost() {
                             // value={postMenu}
                             // defaultChecked={gCategory}
                         >
-                            {/* default : + 누른 페이지 */}
-                            {/* select 값에 따라 Link to 달라아야 함 */}
-
                             <option value="notice">공지사항</option>
                             <option value="free">자유/질문</option>
 

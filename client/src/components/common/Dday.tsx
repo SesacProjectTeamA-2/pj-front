@@ -15,7 +15,10 @@ export default function Dday({ targetDate, setTargetDate, gDday }: any) {
     // };
 
     return (
-        <div className="dday-container">
+        <div
+            className="dday-container"
+            style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}
+        >
             <input
                 type="date"
                 id="date-input"

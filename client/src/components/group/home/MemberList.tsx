@@ -58,6 +58,8 @@ export default function MemberList({
     //     },
     // ];
 
+    console.log('groupMember', groupMember);
+    console.log('leaderInfo', leaderInfo);
     return (
         <div className="wrapper">
             <div className="members-upper-content">
@@ -89,7 +91,7 @@ export default function MemberList({
                         </div>
                     </li>
 
-                    {/* {groupMember.map((member: any) => {
+                    {groupMember?.map((member: any) => {
                         return (
                             <li key={member.id}>
                                 <div className="ranking-list">
@@ -106,7 +108,7 @@ export default function MemberList({
                                 </div>
                             </li>
                         );
-                    })} */}
+                    })}
                 </ul>
             </div>
         </div>

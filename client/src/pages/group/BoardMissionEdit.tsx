@@ -2,11 +2,13 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Editor from './Editor';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import { MissionType } from 'src/types/types';
+import SuccessModal from 'src/components/common/modal/SucessModal';
 
 export default function BoardMissionEdit() {
     const cookie = new Cookies();
@@ -25,6 +27,14 @@ export default function BoardMissionEdit() {
     }
 
     const [missionList, setMissionList] = useState<any>([]);
+
+    //] 게시글 수정 완료 모달창
+    const [successModalSwitch, setSuccessModalSwitch] = useState(false);
+
+    const successHandler = () => {
+        console.log('Success!!!!!!!!!!');
+        setSuccessModalSwitch(true);
+    };
 
     const getGroup = async () => {
         const res = await axios
@@ -111,8 +121,22 @@ export default function BoardMissionEdit() {
         // console.log(board);
     };
 
+    let replaced_str = board.gbContent.replace('<p>', '');
+    let newContent = replaced_str.replace('</p>', '');
+
     // 게시물 edit
     const boardEditHandler = async () => {
+        if (!board.gbTitle) {
+            // 만약 gCategory가 비어있으면 알림을 표시
+            toast.error('제목을 입력하세요');
+            return; // 함수 실행 중지
+        }
+
+        if (newContent === '<br>') {
+            toast.error('내용을 입력하세요');
+            return;
+        }
+
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/board/edit/${gbSeq}`,
             board,
@@ -123,6 +147,8 @@ export default function BoardMissionEdit() {
             }
         );
         console.log(res);
+
+        successHandler();
 
         // [추후] input 입력 안했을 시, 로직
 
@@ -157,13 +183,19 @@ export default function BoardMissionEdit() {
                     />
                 </div>
             </div>
+
+            <SuccessModal
+                successModalSwitch={successModalSwitch}
+                setSuccessModalSwitch={setSuccessModalSwitch}
+                action={'게시글을 수정'}
+                gSeq={gSeq}
+                // gCategory={gCategory}
+                gbSeq={gbSeq}
+            />
             <div>
-                {/* default : + 누른 페이지 */}
-                {/* <Link to="/group/noti/1"> */}
                 <button className="editor-post-btn" onClick={boardEditHandler}>
-                    작성 완료
+                    수정 완료
                 </button>
-                {/* </Link> */}
             </div>
         </div>
     );

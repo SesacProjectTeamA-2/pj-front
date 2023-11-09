@@ -149,7 +149,10 @@ export default function GroupContent({ action }: any) {
                                                   <div className="post-list-title">
                                                       <img
                                                           className="profile-img"
-                                                          src={userImgSrc}
+                                                          src={
+                                                              userImgSrc ||
+                                                              '/asset/images/user.svg'
+                                                          }
                                                           alt="profile"
                                                       />
 

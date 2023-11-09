@@ -115,7 +115,10 @@ any) {
                                                   {/* 프로필 이미지 */}
                                                   <img
                                                       className="profile-img"
-                                                      src={userImgSrc}
+                                                      src={
+                                                          userImgSrc ||
+                                                          '/asset/images/user.svg'
+                                                      }
                                                       alt="profile"
                                                   />
 

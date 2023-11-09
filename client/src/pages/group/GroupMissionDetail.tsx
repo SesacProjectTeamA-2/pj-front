@@ -248,7 +248,7 @@ export default function GroupMissionDetail() {
                         <div className="post-detail-profile">
                             <img
                                 className="profile-img"
-                                src={userImgSrc}
+                                src={userImgSrc || '/asset/images/user.svg'}
                                 alt="profile"
                             />
                             <div>
@@ -335,7 +335,13 @@ export default function GroupMissionDetail() {
                                             <div className="comment-profile">
                                                 <img
                                                     className="comment-img"
-                                                    src={`${comment.tb_groupBoard.tb_groupUser.tb_user.uImg}`}
+                                                    src={
+                                                        comment.tb_groupBoard
+                                                            .tb_groupUser
+                                                            .tb_user.uImg ||
+                                                        userImgSrc ||
+                                                        '/asset/images/user.svg'
+                                                    }
                                                     alt="profile"
                                                 />
                                                 <div className="title5">

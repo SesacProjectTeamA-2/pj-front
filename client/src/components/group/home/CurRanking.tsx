@@ -7,8 +7,8 @@ export default function CurRanking({
     nowScoreRanking,
     userImgSrc,
 }: any) {
-    console.log('현재랭킹', nowRanking);
-    console.log('----킹', nowScoreRanking);
+    // console.log('현재랭킹', nowRanking);
+    // console.log('----킹', nowScoreRanking);
 
     return (
         <div className="wrapper">

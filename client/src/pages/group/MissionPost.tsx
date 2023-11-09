@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 import 'react-quill/dist/quill.snow.css';
 import { Link, useParams } from 'react-router-dom';
@@ -159,8 +160,22 @@ export default function MissionPost() {
         setSuccessModalSwitch(true);
     };
 
+    let replaced_str = board.gbContent.replace('<p>', '');
+    let newContent = replaced_str.replace('</p>', '');
+
     // 정보 post
     const boardPostHandler = async () => {
+        if (!board.gbTitle) {
+            // 만약 gCategory가 비어있으면 알림을 표시
+            toast.error('제목을 입력하세요');
+            return; // 함수 실행 중지
+        }
+
+        if (!board.gbContent) {
+            toast.error('내용을 입력하세요');
+            return;
+        }
+
         const res = await axios
             .post(`${process.env.REACT_APP_DB_HOST}/board/create`, board, {
                 headers: {
@@ -246,12 +261,9 @@ export default function MissionPost() {
                 </div>
             </div>
             <div>
-                {/* default : + 누른 페이지 */}
-                {/* <Link to="/group/noti/1"> */}
                 <button className="editor-post-btn" onClick={boardPostHandler}>
                     작성 완료
                 </button>
-                {/* </Link> */}
 
                 <SuccessModal
                     successModalSwitch={successModalSwitch}

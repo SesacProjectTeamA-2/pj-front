@@ -5,8 +5,8 @@ export default function AccRanking({
     totalScoreRanking,
     userImgSrc,
 }: any) {
-    console.log('전체 랭킹', totalRanking);
-    console.log('totalScoreRanking', totalScoreRanking);
+    // console.log('전체 랭킹', totalRanking);
+    // console.log('totalScoreRanking', totalScoreRanking);
 
     return (
         <div className="wrapper">
@@ -30,6 +30,7 @@ export default function AccRanking({
                                             userImgSrc ||
                                             '/asset/images/user.svg'
                                         }
+                                        alt="uerImg"
                                     />
                                     <div className="name">{total.uName}</div>
                                     <div className="cur-ranking-content">
