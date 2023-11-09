@@ -250,11 +250,11 @@ export default function GroupPostDetail() {
         );
 
         // console.log(res.data);
-        window.location.reload();
+        window.location.reload(); // 새로고침?
         // getBoardNoti();
     };
 
-    //; 댓글 삭제 (DELETE)
+    // 댓글 삭제 (DELETE)
     const commentDeleteHandler = async (gbcSeq: number) => {
         console.log(gbcSeq);
 
