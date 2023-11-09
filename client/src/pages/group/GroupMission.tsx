@@ -89,6 +89,14 @@ export default function GroupMission() {
         }
     }
 
+    let missionProof = '';
+
+    for (let mission of missionList) {
+        if (mission.mSeq === Number(mSeq)) {
+            missionProof = mission.mContent;
+        }
+    }
+
     // console.log('>>>>>mm', mSeq);
     // useEffect(() => {
     //     for (let i = 0; i < missionList.length; i++) {
@@ -142,9 +150,10 @@ export default function GroupMission() {
                 <div className="noti-header proof-header">
                     <div className="title5">[ 인증방법 ]</div>
                     <div>
-                        {Object.keys(missionList)?.length
+                        {missionProof}
+                        {/* {Object.keys(missionList)?.length
                             ? missionList[Number(mSeq) - 1]?.mContent
-                            : ''}
+                            : ''} */}
                     </div>
                 </div>
             </div>

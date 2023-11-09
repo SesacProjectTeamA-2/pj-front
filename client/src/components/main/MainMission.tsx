@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
+import { Paper } from '@mui/material';
+
 import '../../styles/scss/pages/main/mainmission.scss';
 import { Link } from 'react-router-dom';
 
@@ -67,7 +69,7 @@ export default function MainMission() {
     // }, []);
 
     return (
-        <div className="content-grid-box">
+        <Paper elevation={3} className="content-grid-box">
             <div className="main-mission-div">
                 <div className="title4" style={{ marginBottom: '15px' }}>
                     미션 달성하러 가볼까요?
@@ -117,6 +119,6 @@ export default function MainMission() {
                     )}
                 </div>
             </div>
-        </div>
+        </Paper>
     );
 }
