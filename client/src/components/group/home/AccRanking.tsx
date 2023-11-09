@@ -30,6 +30,7 @@ export default function AccRanking({
                                             userImgSrc ||
                                             '/asset/images/user.svg'
                                         }
+                                        alt="uerImg"
                                     />
                                     <div className="name">{total.uName}</div>
                                     <div className="cur-ranking-content">

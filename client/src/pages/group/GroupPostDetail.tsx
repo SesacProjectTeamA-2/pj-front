@@ -46,7 +46,6 @@ export default function GroupPostDetail() {
                 console.log('error 발생: ', err);
             });
     };
-    // console.log(window.location.pathname);
 
     useEffect(() => {
         if (cookie.get('isUser')) {
@@ -240,34 +239,6 @@ export default function GroupPostDetail() {
     };
 
     // 수정
-    const [editComment, setEditComment] = useState({
-        gbcSeq: -1,
-        gbcContent: '',
-    });
-    const editCommentHandler = (gbcSeq: any, gbcContent: any) => {
-        setEditComment({ gbcSeq, gbcContent });
-    };
-    const updateCommentHandler = async () => {
-        const res = await axios.patch(
-            `${process.env.REACT_APP_DB_HOST}/comment/edit/${editComment.gbcSeq}`,
-            { gbcContent: editComment.gbcContent },
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
-
-        // 서버에서 수정된 댓글 정보를 가져와서 업데이트
-        const updatedComment = res.data;
-        const updatedComments = boardComments.map((comment: any) =>
-            comment.gbcSeq === updatedComment.gbcSeq ? updatedComment : comment
-        );
-        setBoardComments(updatedComments);
-
-        // 수정 모드 종료
-        setEditComment({ gbcSeq: -1, gbcContent: '' });
-    };
 
     // [추후] 수정 input 추가
     const [commentEditInput, setCommentEditInput] = useState({
@@ -277,11 +248,11 @@ export default function GroupPostDetail() {
 
     // [추후] 수정 input 추가
     const commentEditOnChange = (e: any) => {
-        // setCommentEditInput({
-        //     ...commentEditInput,
-        //     gbcContent: e.target.value,
-        // });
-        setEditComment({ ...editComment, gbcContent: e.target.value });
+        setCommentEditInput({
+            ...commentEditInput,
+            gbcContent: e.target.value,
+        });
+        // setEditComment({ ...editComment, gbcContent: e.target.value });
     };
 
     // [임시] test용
@@ -291,31 +262,28 @@ export default function GroupPostDetail() {
     };
 
     //; 댓글 수정 (PATCH)
+    // const editBtnEvt=(e:React.MouseEvent):void=>{
+
+    //     commentEditHandler(gbcSeq)
+    // }
     const commentEditHandler = async (gbcSeq: number) => {
         // console.log(gbcSeq);
 
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-            // commentEditTestInput, // [임시 test용]
+            commentEditTestInput, // [임시 test용]
             // [추후] commentEditInput으로 변경
             // commentEditInput,
-            // editComment,
-            { gbcContent: editComment.gbcContent },
-
+            // { gbcContent: commentEditInput.gbcContent },
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
             }
         );
-        const updatedComment = res.data;
-        const updatedComments = boardComments.map((comment: any) =>
-            comment.gbcSeq === updatedComment.gbcSeq ? updatedComment : comment
-        );
-        setBoardComments(updatedComments);
 
         // 수정 모드 종료
-        setEditComment({ gbcSeq: -1, gbcContent: '' });
+        // setEditComment({ gbcSeq: -1, gbcContent: '' });
         // console.log(res.data);
         // window.location.reload();
         getBoardNoti();
@@ -491,11 +459,9 @@ export default function GroupPostDetail() {
                                                           >
                                                               <button
                                                                   className="btn-sm"
-                                                                  onClick=//   } //       ) //           comment.gbcSeq //       commentEditHandler( //   {() =>
-                                                                  {() =>
-                                                                      editCommentHandler(
-                                                                          comment.gbcSeq,
-                                                                          comment.gbcContent
+                                                                  onClick={() =>
+                                                                      commentEditOnChange(
+                                                                          comment.gbcSeq
                                                                       )
                                                                   }
                                                               >
@@ -517,34 +483,19 @@ export default function GroupPostDetail() {
 
                                                   {/* 댓글 내용 */}
                                                   {
-                                                      editComment.gbcSeq ===
-                                                      comment.gbcSeq ? (
-                                                          <TextField
-                                                              //   value={comment.gbcContent}
-                                                              value={
-                                                                  editComment.gbcContent
-                                                              }
-                                                              onChange={(
-                                                                  e: React.ChangeEvent<HTMLInputElement>
-                                                              ) =>
-                                                                  commentEditOnChange(
-                                                                      e
-                                                                  )
-                                                              }
-                                                          />
-                                                      ) : (
-                                                          <div>
-                                                              {
-                                                                  comment.gbcContent
-                                                              }
-                                                          </div>
-                                                      )
-                                                      //   setBoardComments(
-                                                      //       e.target.value
-                                                      //   );
-                                                      //   }
+                                                      <TextField
+                                                          value={
+                                                              comment.gbcContent
+                                                          }
+                                                          onChange={(
+                                                              e: React.ChangeEvent<HTMLInputElement>
+                                                          ) =>
+                                                              commentEditOnChange(
+                                                                  e
+                                                              )
+                                                          }
+                                                      />
                                                   }
-                                                  {/* /> */}
                                               </li>
                                               //  END
                                           );

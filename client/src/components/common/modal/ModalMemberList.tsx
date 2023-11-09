@@ -14,48 +14,46 @@ export default function ModalMemberList({
     closeModalHandler,
     setChoiceModalSwitch,
 }: any) {
-    const { gSeq } = useParams();
-
-    // interface MemberType {
-    //     id: number;
-    //     name: string;
-    //     img: string;
-    // }
-
-    // const memberList: MemberType[] = [
-    //     {
-    //         id: 1,
-    //         name: '멤버1',
-    //         img: '/asset/images/sqr1.svg',
-    //     },
-    //     {
-    //         id: 2,
-    //         name: '멤버2',
-    //         img: '/asset/images/sqr1.svg',
-    //     },
-    //     {
-    //         id: 3,
-    //         name: '멤버3',
-    //         img: '/asset/images/sqr1.svg',
-    //     },
-    //     {
-    //         id: 4,
-    //         name: '멤버4',
-    //         img: '/asset/images/sqr1.svg',
-    //     },
-    //     {
-    //         id: 5,
-    //         name: '멤버5',
-    //         img: '/asset/images/sqr1.svg',
-    //     },
-    //     {
-    //         id: 6,
-    //         name: '멤버6',
-    //         img: '/asset/images/sqr1.svg',
-    //     },
-    // ];
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
+    const { gSeq } = useParams();
+
+    // 0. 프로필 사진 가져오기
+    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
+
+    const getUserData = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('getUserData 로그인 후 ', res.data);
+                const { userImg } = res.data; //null
+
+                if (userImg !== null || userImg !== undefined) {
+                    //user가 업로드한 값 없으면 기본 이미지
+                    setUserImgSrc(userImg);
+                    console.log('userImgSrc 있음', userImgSrc);
+                } else {
+                    // user가 업로드한 값이 없거나 undefined일 때
+                    setUserImgSrc('/asset/images/user.svg');
+                    console.log('userImgSrc 없음', userImgSrc);
+                }
+            })
+            .catch((err) => {
+                console.log('error 발생: ', err);
+            });
+    };
+
+    useEffect(() => {
+        if (cookie.get('isUser')) {
+            getUserData();
+        } else {
+            return;
+        }
+    }, []);
 
     const getGroup = async () => {
         const res = await axios
@@ -166,7 +164,14 @@ export default function ModalMemberList({
                                         name="missionType"
                                     />
                                     <div className="ranking-list">
-                                        <img src={member.uImg} />
+                                        <img
+                                            src={
+                                                member.uImg ||
+                                                userImgSrc ||
+                                                '/asset/images/user.svg'
+                                            }
+                                            alt="userImg"
+                                        />
                                         <div className="cur-ranking-content">
                                             <div className="title4">
                                                 {member.uName}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+
 import '../../styles/scss/pages/group/groupPostDetail.scss';
 import { TextField } from '@mui/material';
 
@@ -12,6 +13,46 @@ import WarningModal from '../../components/common/modal/WarningModal';
 export default function GroupPostDetail() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
+
+    // 0. 프로필 사진 가져오기
+    const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
+
+    const getUserData = async () => {
+        await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                console.log('getUserData 로그인 후 ', res.data);
+                const { userImg } = res.data; //null
+
+                if (userImg !== null || userImg !== undefined) {
+                    //user가 업로드한 값 없으면 기본 이미지
+                    setUserImgSrc(userImg);
+                    console.log('userImgSrc 있음', userImgSrc);
+                } else {
+                    // user가 업로드한 값이 없거나 undefined일 때
+                    setUserImgSrc('/asset/images/user.svg');
+                    console.log('userImgSrc 없음', userImgSrc);
+                }
+            })
+            .catch((err) => {
+                console.log('error 발생: ', err);
+            });
+    };
+    // console.log(window.location.pathname);
+
+    useEffect(() => {
+        if (cookie.get('isUser')) {
+            getUserData();
+            console.log('HEADER 로그인');
+        } else {
+            console.log('HEADER 비로그인');
+            return;
+        }
+    }, []);
 
     const { gSeq, mSeq, gbSeq, gCategory } = useParams();
 
@@ -89,19 +130,17 @@ export default function GroupPostDetail() {
     // console.log('>>>>', freeList);
 
     //; 게시글 삭제 (DELETE)
-    const nvg = useNavigate();
-
     const boardDeleteHandler = async (gbSeq: number) => {
-        const res = await axios
-            .delete(`${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`, {
+        const res = await axios.delete(
+            `${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`,
+            {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
-            })
-            .then((res) => {
-                nvg(-1);
-                console.log(res.data);
-            });
+            }
+        );
+
+        console.log(res.data);
     };
 
     //] 2. 미션게시글
@@ -142,29 +181,8 @@ export default function GroupPostDetail() {
 
     //] 댓글
     // 댓글 리스트 : 자유게시글에 포함
-    // const commentList = freeList.tb_groupBoardComments;
 
-    // const [comments, setComments] = useState<any>(
-    //     freeList.tb_groupBoardComments
-    // );
-
-    // const [commentCount, setCommentCount] = useState(0);
-
-    // console.log('>>>>>>>>>', commentCount);
     const [commentList, setCommentList] = useState<any>([]);
-
-    // useEffect(() => {
-    //     setComments(freeList.tb_groupBoardComments);
-    // }, [freeList.tb_groupBoardComments]);
-
-    //   {
-    //     createdAt: "2023-11-05 22:42:51",
-    //     gbSeq: 3,
-    //     gbcContent: "댓글 과연...!!!!",
-    //     gbcSeq: 1,
-    //     uSeq: 1,
-    //     updatedAt: "2023-11-05 22:42:51"
-    //   }
 
     const [commentInput, setCommentInput] = useState({
         gbSeq,
@@ -191,8 +209,7 @@ export default function GroupPostDetail() {
         );
 
         console.log(res.data);
-        // window.location.reload();
-        getBoardNoti();
+        window.location.reload();
 
         // setFreeList(res.data.groupInfo);
     };
@@ -234,6 +251,7 @@ export default function GroupPostDetail() {
 
         // console.log(res.data);
         window.location.reload();
+        // getBoardNoti();
     };
 
     //; 댓글 삭제 (DELETE)
@@ -243,8 +261,7 @@ export default function GroupPostDetail() {
         const res = await axios
             .delete(
                 `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-                // commentEditTestInput, // [임시 test용]
-                // [추후] commentEditInput으로 변경
+
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -277,7 +294,11 @@ export default function GroupPostDetail() {
                         <div className="post-detail-profile">
                             <img
                                 className="profile-img"
-                                src={`${userInfo?.uImg}`}
+                                src={
+                                    userInfo?.uImg ||
+                                    userImgSrc ||
+                                    '/asset/images/user.svg'
+                                }
                                 alt="profile"
                             />
                             {/* uSeq 사용자 닉네임 가져오기 */}
@@ -358,7 +379,15 @@ export default function GroupPostDetail() {
                                                       <div className="comment-profile">
                                                           <img
                                                               className="comment-img"
-                                                              src={`${comment.tb_groupBoard.tb_groupUser.tb_user.uImg}`}
+                                                              src={
+                                                                  comment
+                                                                      .tb_groupBoard
+                                                                      .tb_groupUser
+                                                                      .tb_user
+                                                                      .uImg ||
+                                                                  userImgSrc ||
+                                                                  '/asset/images/user.svg'
+                                                              }
                                                               alt="profile"
                                                           />
                                                           <div className="title5">
@@ -378,8 +407,6 @@ export default function GroupPostDetail() {
                                                                   comment.createdAt
                                                               }
                                                           </div>
-
-                                                          {/* 댓글 div */}
                                                           <div
                                                               style={{
                                                                   display:
@@ -417,18 +444,22 @@ export default function GroupPostDetail() {
                                                   </div>
 
                                                   {/* 댓글 내용 */}
-                                                  <TextField
-                                                      value={comment.gbcContent}
-                                                      onChange={(
-                                                          e: React.ChangeEvent<HTMLInputElement>
-                                                      ) => {
-                                                          setBoardComments(
-                                                              e.target.value
-                                                          );
-                                                      }}
-                                                  />
+                                                  {
+                                                      <TextField
+                                                          value={
+                                                              comment.gbcContent
+                                                          }
+                                                          onChange={(
+                                                              e: React.ChangeEvent<HTMLInputElement>
+                                                          ) =>
+                                                              commentEditOnChange(
+                                                                  e
+                                                              )
+                                                          }
+                                                      />
+                                                  }
+                                                  {/* END */}
                                               </li>
-                                              //  END
                                           );
                                       }
                                   )}
