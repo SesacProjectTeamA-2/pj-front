@@ -1,6 +1,8 @@
 import React from 'react';
 import { kadvice } from 'kadvice';
 
+import '../../styles/scss/pages/main.scss';
+
 export default function Quotes(props: any) {
     const advice = kadvice.getOne();
 
@@ -29,7 +31,7 @@ export default function Quotes(props: any) {
         //         </div> */}
         //     </div>
         // </div>
-        <div className="content-grid-box sample2">
+        <div className="content-grid-box sample2 ">
             <blockquote>
                 {props.phraseModeSelf ? (
                     <>
@@ -42,7 +44,9 @@ export default function Quotes(props: any) {
                     <>
                         <br />
                         <p>{advice.message}</p>
-                        <cite>{advice.author}</cite>
+                        <cite>
+                            <div>- {advice.author}</div>
+                        </cite>
                         <br />
                     </>
                 )}
