@@ -76,19 +76,21 @@ export default function MainMission() {
                             return (
                                 <div>
                                     <div>{info.gName}</div>
-                                </div>
-                            );
-                        })}
-                        {missionArray?.map((mission: any, idx: number) => {
-                            return (
-                                <div>
-                                    <Link
-                                        to={`/board/${mission.gSeq}/mission/${mission.mSeq}`}
-                                    >
-                                        <button className="btn-sm button mission-btn-to-group">
-                                            {mission?.mTitle}
-                                        </button>
-                                    </Link>
+                                    {missionArray?.map(
+                                        (mission: any, idx: number) => {
+                                            return (
+                                                <div>
+                                                    <Link
+                                                        to={`/board/${mission.gSeq}/mission/${mission.mSeq}`}
+                                                    >
+                                                        <button className="btn-sm button mission-btn-to-group">
+                                                            {mission?.mTitle}
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                            );
+                                        }
+                                    )}
                                 </div>
                             );
                         })}

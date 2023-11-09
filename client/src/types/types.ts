@@ -26,6 +26,15 @@ export interface GroupDetailType {
     memberArray: [];
 }
 
+export interface GroupMission {
+    missionList: [];
+    expiredMissionList: [];
+    Dday: number;
+    uSeq: number;
+    gName: string;
+    uEmail: string;
+    uName: string;
+}
 export interface GroupMissionsType {
     createdAt: string;
     gSeq: number;
