@@ -9,14 +9,15 @@
     grid-gap: 30px;
     // margin: 0 auto;
     min-width: 200px;
-    margin: 0 30px;
-    width: 80%;
+    // margin: 0 30px;
+    // width: 80%;
     .content-grid-box {
         width: 100%;
         height: fit-content;
         margin: 0 auto;
+        padding: 5px;
         @include media('<800px') {
-            margin: 20px;
+            // margin: 20px;
         }
     }
     @include media('<800px') {
@@ -36,17 +37,14 @@
     .progress-img-flex {
         display: flex;
         justify-content: space-between;
-        @include media('<800px') {
-            flex-direction: column-reverse;
-            align-items: center;
-        }
+
+        flex-direction: column-reverse;
+        align-items: center;
 
         .my-progress-img {
-            width: 15vw;
             max-width: 165px;
-            @include media('<800px') {
-                width: 30vw;
-            }
+
+            width: 30vw;
         }
     }
 
