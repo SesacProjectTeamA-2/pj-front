@@ -14,8 +14,9 @@ export default function GroupMissionDetail() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    // 0. 프로필 사진 가져오기
+    // 0. 프로필 사진, 닉네임 가져오기
     const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
+    const [userNickname, setUserNickname] = useState<any>('');
 
     const getUserData = async () => {
         await axios
@@ -26,7 +27,7 @@ export default function GroupMissionDetail() {
             })
             .then((res) => {
                 console.log('getUserData 로그인 후 ', res.data);
-                const { userImg } = res.data; //null
+                const { userImg, nickname } = res.data; //null
 
                 if (userImg !== null || userImg !== undefined) {
                     //user가 업로드한 값 없으면 기본 이미지
@@ -37,12 +38,8 @@ export default function GroupMissionDetail() {
                     setUserImgSrc('/asset/images/user.svg');
                     console.log('userImgSrc 없음', userImgSrc);
                 }
-                // else if (userImg) {
-                //     setUserImgSrc('/asset/images/user.svg');
-                //     console.log('userImgSrc 없음', userImgSrc);
-                // } else {
-                //     console.log('암것도 아님', userImgSrc);
-                // }
+
+                setUserNickname(nickname);
             })
             .catch((err) => {
                 console.log('error 발생: ', err);
@@ -63,7 +60,7 @@ export default function GroupMissionDetail() {
 
     const [userInfo, SetUserInfo] = useState<any>([]);
 
-    // //; 게시글 조회 (GET)
+    // ======== 게시글 조회 (GET) ========
     // const [notiList, setNotiList] = useState<any>([]);
     // const [missionList, setFreeList] = useState<any>([]);
 
@@ -130,7 +127,6 @@ export default function GroupMissionDetail() {
     //] 댓글
 
     const [commentList, setCommentList] = useState<any>([]);
-
     console.log('commentList', commentList);
 
     const [commentInput, setCommentInput] = useState({
@@ -318,6 +314,12 @@ export default function GroupMissionDetail() {
                         <ul>
                             {/* commentList, comments 둘다 되네요..^^ */}
                             {commentList?.map((comment: any, idx: number) => {
+                                // 사용자 == 작성자 여부 구분
+                                const isWriter =
+                                    comment.tb_groupUser.tb_user.uName ===
+                                    userNickname;
+                                // console.log('isWriter', isWriter);
+
                                 return (
                                     <li key={idx}>
                                         {/* START */}
@@ -346,6 +348,7 @@ export default function GroupMissionDetail() {
                                                 </div>
                                                 <div>
                                                     {/* 수정 삭제 버튼 div */}
+
                                                     <div
                                                         style={{
                                                             display: 'flex',
@@ -356,28 +359,34 @@ export default function GroupMissionDetail() {
                                                             flexBasis: '30%',
                                                         }}
                                                     >
-                                                        <button
-                                                            onClick={() =>
-                                                                commentEditHandler(
-                                                                    comment.gbcSeq,
-                                                                    idx
-                                                                )
-                                                            }
-                                                            className="btn-sm"
-                                                        >
-                                                            수정
-                                                        </button>
+                                                        {isWriter ? (
+                                                            // 사용자 === 작성자
+                                                            <>
+                                                                <button
+                                                                    onClick={() =>
+                                                                        commentEditHandler(
+                                                                            comment.gbcSeq,
+                                                                            idx
+                                                                        )
+                                                                    }
+                                                                    className="btn-sm"
+                                                                >
+                                                                    수정
+                                                                </button>
 
-                                                        <button
-                                                            onClick={() =>
-                                                                commentDeleteHandler(
-                                                                    comment.gbcSeq
-                                                                )
-                                                            }
-                                                            className="btn-sm"
-                                                        >
-                                                            삭제
-                                                        </button>
+                                                                <button
+                                                                    onClick={() =>
+                                                                        commentDeleteHandler(
+                                                                            comment.gbcSeq
+                                                                        )
+                                                                    }
+                                                                    className="btn-sm"
+                                                                >
+                                                                    삭제
+                                                                </button>
+                                                            </>
+                                                        ) : // 사용자 !== 작성자
+                                                        null}
                                                     </div>
                                                 </div>
                                             </div>
