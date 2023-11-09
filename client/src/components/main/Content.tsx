@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
+import { Paper } from '@mui/material';
+
 import Quotes from './Quotes';
 import MainMission from './MainMission';
 import MyPercentage from './MyPercentage';
@@ -272,7 +274,7 @@ export default function Content(props: any) {
                 <br />
 
                 {/* 2. 달성률 : my, team */}
-                <div className="content-grid-box">
+                <Paper elevation={3} className="content-grid-box">
                     <div className="percentage-div">
                         <div
                             className="title4"
@@ -328,7 +330,7 @@ export default function Content(props: any) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Paper>
 
                 <br />
 
