@@ -6,6 +6,9 @@
     @include media('<800px') {
         font-size: 29px;
     }
+    @include media('<500px') {
+        font-size: 1.2rem;
+    }
 }
 
 .title2 {
@@ -37,6 +40,9 @@
     @include media('<800px') {
         font-size: 18px;
     }
+    @include media('<500px') {
+        font-size: 13px;
+    }
 }
 
 .title5 {
@@ -55,5 +61,8 @@
     font-weight: bold;
     @include media('<800px') {
         font-size: 10px;
+    }
+    @include media('<500px') {
+        font-size: 6px;
     }
 }
