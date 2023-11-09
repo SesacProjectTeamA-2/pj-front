@@ -89,6 +89,8 @@ export default function GroupPostDetail() {
                 const boardComments = res.data.groupInfo.tb_groupBoardComments;
                 setBoardComments(boardComments);
                 // setCommentCount(res.data.commentCount);
+
+                // const userComment = res.data.groupInfo.tb_groupBoardComments;
             });
     };
 
@@ -142,26 +144,26 @@ export default function GroupPostDetail() {
     // };
 
     //] 2. 미션게시글
-    const [missionList, setMissionList] = useState<any>([]);
+    // const [missionList, setMissionList] = useState<any>([]);
 
-    if (mSeq) {
-        // 미션 게시글 조회
-        const getBoardMission = async () => {
-            const res = await axios.get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            );
+    // if (mSeq) {
+    //     // 미션 게시글 조회
+    //     const getBoardMission = async () => {
+    //         const res = await axios.get(
+    //             `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${uToken}`,
+    //                 },
+    //             }
+    //         );
 
-            console.log(res.data);
+    //         console.log(res.data);
 
-            setMissionList(res.data.groupInfo);
-        };
-        getBoardMission();
-    }
+    //         setMissionList(res.data.groupInfo);
+    //     };
+    //     getBoardMission();
+    // }
 
     // useEffect(() => {
     // }, []);
@@ -349,7 +351,7 @@ export default function GroupPostDetail() {
                             onChange={commentOnChange}
                         ></textarea>
                         <button
-                            className="btn-md"
+                            className="btn-md done-btn"
                             onClick={() => postCommentHandler()}
                         >
                             등록
@@ -371,7 +373,6 @@ export default function GroupPostDetail() {
                                                               className="comment-img"
                                                               src={
                                                                   comment
-                                                                      .tb_groupBoard
                                                                       .tb_groupUser
                                                                       .tb_user
                                                                       .uImg ||
@@ -383,12 +384,10 @@ export default function GroupPostDetail() {
                                                           <div className="title5">
                                                               {
                                                                   comment
-                                                                      .tb_groupBoard
                                                                       .tb_groupUser
                                                                       .tb_user
                                                                       .uName
                                                               }
-                                                              {/* [추후] 유저 닉네임 가져오기 */}
                                                           </div>
                                                       </div>
                                                       <div>

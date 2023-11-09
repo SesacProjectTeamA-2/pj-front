@@ -1,6 +1,5 @@
 @import '~include-media/dist/include-media';
 
-
 .title1 {
     font-size: 38px;
     font-weight: bold;
@@ -13,7 +12,10 @@
     font-size: 32px;
     font-weight: bold;
     @include media('<800px') {
-        font-size: 23px;
+        font-size: 1.5rem;
+    }
+    @include media('<500px') {
+        font-size: 1rem;
     }
 }
 
@@ -23,7 +25,6 @@
     @include media('<800px') {
         font-size: 21px;
     }
-
 }
 
 .title4 {
@@ -41,7 +42,6 @@
         font-size: 13px;
     }
 }
-
 
 .title6 {
     font-size: 14px;

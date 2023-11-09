@@ -417,9 +417,14 @@ export default function GroupCreate() {
                 action={'모임을 생성'}
                 groupName={input.gName}
             />
-            <button className="btn-fixed" onClick={() => groupCreateHandler()}>
-                모임 시작하기 !
-            </button>
+            <div className="btn-fixed-wrapper">
+                <button
+                    className="btn-fixed"
+                    onClick={() => groupCreateHandler()}
+                >
+                    모임 시작하기 !
+                </button>
+            </div>
         </div>
     );
 }

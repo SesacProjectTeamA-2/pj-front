@@ -305,7 +305,7 @@ export default function GroupMissionDetail() {
                             onChange={commentOnChange}
                         ></textarea>
                         <button
-                            className="btn-md"
+                            className="btn-md done-btn"
                             onClick={() => postCommentHandler()}
                         >
                             등록
@@ -324,8 +324,7 @@ export default function GroupMissionDetail() {
                                                 <img
                                                     className="comment-img"
                                                     src={
-                                                        comment.tb_groupBoard
-                                                            .tb_groupUser
+                                                        comment.tb_groupUser
                                                             .tb_user.uImg ||
                                                         userImgSrc ||
                                                         '/asset/images/user.svg'
@@ -334,8 +333,7 @@ export default function GroupMissionDetail() {
                                                 />
                                                 <div className="title5">
                                                     {
-                                                        comment.tb_groupBoard
-                                                            .tb_groupUser
+                                                        comment.tb_groupUser
                                                             .tb_user.uName
                                                     }
                                                 </div>
