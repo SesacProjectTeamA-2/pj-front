@@ -24,7 +24,7 @@ import BasicLayout from './components/common/layout/BasicLayout';
 import GroupLayout from './components/common/layout/GroupLayout';
 import BoardPost from './pages/group/BoardPost';
 import GroupPostDetail from './pages/group/GroupPostDetail';
-import OldGroupPostDetail from './pages/group/OldGroupPostDetail';
+// import OldGroupPostDetail from './pages/group/OldGroupPostDetail';
 import GroupEdit from './pages/group/GroupEdit';
 import ManagementLayout from './components/common/layout/ManagementLayout';
 import AllUser from './components/management/AllUser';
@@ -196,7 +196,6 @@ function App() {
                     element={
                         <GroupLayout
                             children={<GroupPostDetail />}
-                            // children={<GroupPostDetail />}
                             showChat={showChat}
                         />
                     }
