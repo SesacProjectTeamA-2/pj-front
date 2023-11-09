@@ -54,7 +54,7 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                     }}
                     modules={[Navigation, Autoplay]}
                     loop={true}
-                    autoplay={{ delay: 20000000, disableOnInteraction: true }}
+                    autoplay={{ delay: 2000, disableOnInteraction: true }}
                     navigation={{
                         nextEl: '.swiper-button-next',
                         prevEl: '.swiper-button-prev',
