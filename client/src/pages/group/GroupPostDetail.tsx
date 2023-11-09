@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 import '../../styles/scss/pages/group/groupPostDetail.scss';
-import { ListItem, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
@@ -212,16 +212,7 @@ export default function GroupPostDetail() {
         // setFreeList(res.data.groupInfo);
     };
 
-    // =================== 수정 ==================
-    const [isEditing, setIsEditing] = useState(
-        Array(boardComments.length).fill(false)
-    );
-
-    const toggleWrite = (idx: number): void => {
-        const updatedIsEditing = [...isEditing];
-        updatedIsEditing[idx] = !updatedIsEditing[idx];
-        setIsEditing(updatedIsEditing);
-    };
+    // 수정
 
     const [commentEditInput, setCommentEditInput] = useState({
         gbcSeq: 1,
@@ -243,10 +234,7 @@ export default function GroupPostDetail() {
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
-        console.log('HEY! ', {
-            gbcSeq,
-            gbcContent: commentEditInput.gbcContent,
-        });
+        console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
 
@@ -423,8 +411,7 @@ export default function GroupPostDetail() {
                                                                       '30%',
                                                               }}
                                                           >
-                                                              {/* 원래 수정 버튼 */}
-                                                              {/* <button
+                                                              <button
                                                                   className="btn-sm"
                                                                   onClick={() =>
                                                                       commentEditHandler(
@@ -434,37 +421,7 @@ export default function GroupPostDetail() {
                                                                   }
                                                               >
                                                                   수정
-                                                              </button> */}
-
-                                                              {isEditing[
-                                                                  idx
-                                                              ] ? (
-                                                                  // 편집모드
-                                                                  <button
-                                                                      className="btn-sm"
-                                                                      onClick={() =>
-                                                                          commentEditHandler(
-                                                                              comment.gbcSeq,
-                                                                              idx
-                                                                          )
-                                                                      }
-                                                                  >
-                                                                      완료
-                                                                  </button>
-                                                              ) : (
-                                                                  // 읽기모드
-                                                                  <button
-                                                                      className="btn-sm"
-                                                                      onClick={() =>
-                                                                          toggleWrite(
-                                                                              idx
-                                                                          )
-                                                                      }
-                                                                  >
-                                                                      수정
-                                                                  </button>
-                                                              )}
-
+                                                              </button>
                                                               <button
                                                                   className="btn-sm"
                                                                   onClick={() =>

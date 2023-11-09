@@ -82,6 +82,7 @@
         min-width: 200px;
         width: 60vw;
         margin: 10px;
+        justify-content: center;
     }
 }
 
@@ -131,6 +132,7 @@
     width: 30vw;
     border-radius: 10px;
     margin-right: 10px;
+    padding: 1rem;
 }
 
 //text-area
@@ -185,8 +187,15 @@
 
 // Nickname START
 .edit-img {
-    @include box(2vw);
+    @include box(3vw);
     border: none;
+
+    @include media('<800px') {
+        @include box(4vw);
+    }
+    @include media('<500px') {
+        @include box(5vw);
+    }
 }
 // Nickname END
 
@@ -358,12 +367,3 @@ td {
     color: $color-gray1;
 }
 // Quit END
-
-// #myPage-edit-btn {
-//     width: 30vw;
-//     height: 5vh;
-//     border-radius: 10px;
-//     border: none;
-//     color: $color-white;
-//     background-color: $color-primary;
-// }
