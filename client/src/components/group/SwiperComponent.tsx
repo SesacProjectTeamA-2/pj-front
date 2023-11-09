@@ -96,28 +96,33 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                     {groupArray?.map((groupInfo: any) => {
                         return (
                             <>
-                                <Link to={`/group/home/${groupInfo.gSeq}`}>
-                                    <SwiperSlide
-                                        style={{
-                                            backgroundColor: getRandomColor(),
-                                            // padding: '10px',
-                                            fontWeight: 'bold',
-                                            color: 'white',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            flexDirection: 'column',
-                                            alignContent: 'space-between',
-                                            justifyItems: 'center',
-                                            height: '100%',
-                                        }}
-                                    >
-                                        {/* <img src="asset/images/cat1.svg" /> */}
-                                        {/* <div>{groupInfo.gCoverImg}</div> */}
+                                <SwiperSlide
+                                    style={{
+                                        backgroundColor: getRandomColor(),
+                                        // padding: '10px',
+                                        fontWeight: 'bold',
+                                        color: 'white',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        flexDirection: 'column',
+                                        alignContent: 'space-between',
+                                        justifyItems: 'center',
+                                        height: '100%',
+                                    }}
+                                >
+                                    {/* <img src="asset/images/cat1.svg" /> */}
+                                    {/* <div>{groupInfo.gCoverImg}</div> */}
+                                    <Link to={`/group/home/${groupInfo.gSeq}`}>
                                         <div
                                             style={{
-                                                margin: '0 30px',
+                                                margin: '0 45px',
                                                 fontSize: '15px',
                                                 fontWeight: 'bold',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                flexDirection: 'column',
+                                                alignContent: 'space-between',
+                                                justifyItems: 'center',
                                             }}
                                         >
                                             {groupInfo.gName}
@@ -132,7 +137,7 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                                         >
                                             <span
                                                 style={{
-                                                    margin: '0px 5px',
+                                                    margin: '0px 15px',
                                                     color: '#8D6262',
                                                     fontWeight: 'bold',
                                                 }}
@@ -142,7 +147,7 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                                             {groupInfo.gDday}
                                             <div
                                                 style={{
-                                                    margin: '2px 17px',
+                                                    margin: '2px 30px',
                                                     fontSize: '11px',
                                                 }}
                                             >
@@ -151,8 +156,8 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                                             </div>
                                         </div>
                                         {/* <div>남은 일수 : {groupInfo.gDday}</div> */}
-                                    </SwiperSlide>
-                                </Link>
+                                    </Link>
+                                </SwiperSlide>
                                 ;
                             </>
                         );
