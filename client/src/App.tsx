@@ -196,7 +196,6 @@ function App() {
                     element={
                         <GroupLayout
                             children={<GroupPostDetail />}
-                            // children={<GroupPostDetail />}
                             showChat={showChat}
                         />
                     }
