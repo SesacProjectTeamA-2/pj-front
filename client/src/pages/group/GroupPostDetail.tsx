@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 import '../../styles/scss/pages/group/groupPostDetail.scss';
-import { ListItem, TextField } from '@mui/material';
+import { ListItem, ListItemText, TextField } from '@mui/material';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import GroupContentFooter from '../../components/group/content/GroupContentFooter';
@@ -221,6 +221,23 @@ export default function GroupPostDetail() {
         const updatedIsEditing = [...isEditing];
         updatedIsEditing[idx] = !updatedIsEditing[idx];
         setIsEditing(updatedIsEditing);
+        console.log('isEditing ', isEditing);
+
+        if (isEditing[idx]) {
+            // 쓰기모드면 : 텍스트 필드 + commitEditHandler + 버튼 '완료'
+            // commentEditHandler(boardComments[idx].gbcSeq, idx);
+            setCommentEditInput({
+                gbcSeq: boardComments[idx].gbcSeq,
+                gbcContent: boardComments[idx].gbcContent,
+            });
+        } else {
+            // 읽기모드면 : 리스트 아이템 + readOnly + 버튼 '수정'
+            setCommentEditInputs((prevInputs) => {
+                const updatedInputs = [...prevInputs];
+                updatedInputs[idx] = boardComments[idx].gbcContent;
+                return updatedInputs;
+            });
+        }
     };
 
     const [commentEditInput, setCommentEditInput] = useState({
@@ -439,12 +456,15 @@ export default function GroupPostDetail() {
                                                               {isEditing[
                                                                   idx
                                                               ] ? (
-                                                                  // 편집모드
+                                                                  // 쓰기모드
                                                                   <button
                                                                       className="btn-sm"
                                                                       onClick={() =>
-                                                                          commentEditHandler(
-                                                                              comment.gbcSeq,
+                                                                          //   commentEditHandler(
+                                                                          //       comment.gbcSeq,
+                                                                          //       idx
+                                                                          //   )
+                                                                          toggleWrite(
                                                                               idx
                                                                           )
                                                                       }
@@ -480,7 +500,7 @@ export default function GroupPostDetail() {
                                                   </div>
 
                                                   {/* 댓글 내용 */}
-                                                  {
+                                                  {isEditing[idx] ? (
                                                       <TextField
                                                           value={
                                                               commentEditInputs[
@@ -497,7 +517,16 @@ export default function GroupPostDetail() {
                                                               )
                                                           }
                                                       />
-                                                  }
+                                                  ) : (
+                                                      <ListItemText
+                                                          primary={
+                                                              commentEditInputs[
+                                                                  idx
+                                                              ] ||
+                                                              comment.gbcContent
+                                                          }
+                                                      />
+                                                  )}
                                               </li>
                                               //  END
                                           );
