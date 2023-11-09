@@ -96,6 +96,9 @@ export default function ModalMemberList({
     // 모임장 위임
     const patchLeader = async () => {
         const input = { newLeaderUSeq: selectedMemberId };
+        console.log('############', input);
+        // console.log(selectedMemberId)
+
         const res = await axios
             .patch(
                 `${process.env.REACT_APP_DB_HOST}/group/leader/${gSeq}`,
@@ -112,7 +115,7 @@ export default function ModalMemberList({
                 if (!success) {
                     alert('모임장 위임에 실패하였습니다.');
                 } else {
-                    window.location.href = `http://localhost:3000/group/home/${gSeq}`;
+                    window.location.href = `${process.env.REACT_APP_DB_HOST}/group/home/${gSeq}`;
                 }
             });
     };

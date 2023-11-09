@@ -11,11 +11,13 @@ import InterestedList from '../../components/common/InterestedList';
 import GroupList from './GroupList';
 import { Divider } from '@mui/material';
 import GroupSearch from './GroupSearch';
+import GroupSearchAll from './GroupSearchAll';
 
 export default function Groups() {
     //] 검색
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
     const [search, setSearch] = useState(false);
+    const [searchAll, setSearchAll] = useState(false);
 
     const [searchInput, setSearchInput] = useState('');
 
@@ -28,8 +30,6 @@ export default function Groups() {
                 `${process.env.REACT_APP_DB_HOST}/group?search=${searchInput}`
             )
             .then((res) => {
-                console.log('??????', searchInput);
-
                 console.log('검색결과', res.data.groupArray);
 
                 console.log('#######', res.data);
@@ -37,6 +37,7 @@ export default function Groups() {
             });
     };
 
+    console.log('searchInput!!!!!!!!!!', searchInput);
     // useEffect(() => {
     //     getSearchGroupList();
     // }, [searchInput, selectedArr]);
@@ -45,6 +46,12 @@ export default function Groups() {
         getSearchGroupList();
 
         setSearch(!search);
+    };
+
+    const searchAllHandler = () => {
+        getSearchGroupList();
+
+        setSearchAll(!searchAll);
     };
 
     // key down event 입력 시
@@ -75,6 +82,9 @@ export default function Groups() {
                     <button className="btn-sm" onClick={searchHandler}>
                         {search ? '취소' : '검색'}
                     </button>
+                    <button className="btn-sm" onClick={searchAllHandler}>
+                        {searchAll ? '전체' : '전체'}
+                    </button>
                 </div>
 
                 <div className="groups-interested">
@@ -84,6 +94,15 @@ export default function Groups() {
                         num={8}
                     />
                 </div>
+
+                {searchAll ? (
+                    <GroupSearchAll
+                        searchInput={searchInput}
+                        selectedArr={selectedArr}
+                    />
+                ) : (
+                    ''
+                )}
 
                 {/* <Divider /> */}
 

@@ -20,7 +20,7 @@ export default function Mission() {
         // console.log('mission.tsx use effect')
         const getUserName = async () => {
             const res = await axios.get(
-                `http://localhost:8888/api/mission/user`,
+                `${process.env.REACT_APP_DB_HOST}/api/mission/user`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -40,7 +40,6 @@ export default function Mission() {
                 <div className="list-face">
                     <MissionList />
                     <Face />
-
                 </div>
             </div>
         </div>

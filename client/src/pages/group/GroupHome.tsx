@@ -134,6 +134,7 @@ export default function GroupHome() {
                 setTotalScoreRanking(res.data.totalRanking);
 
                 setIsLeader(res.data.isLeader);
+                setIsLeader(res.data.isJoin);
             });
     };
 
@@ -156,13 +157,15 @@ export default function GroupHome() {
                 if (!success) {
                     toast.error(msg);
                 } else {
-                    window.location.href = `http://localhost:3000/group/home/${gSeq}`;
+                    toast.success(msg);
+                    window.location.href = `${process.env.REACT_APP_DB_HOST}/group/home/${gSeq}`;
                 }
             });
     };
 
     // 모임장 / 멤버
-    const [isLeader, setIsLeader] = useState('');
+    const [isLeader, setIsLeader] = useState(false);
+    const [isJoin, setIsJoin] = useState(false);
 
     console.log('@@@@@@', isLeader);
 
@@ -254,14 +257,22 @@ export default function GroupHome() {
             <MemberList
                 gMax={groupDetail.groupMaxMember}
                 isLeader={groupDetail.isLeader}
-                groupMember={groupDetail.groupMember}
+                groupMember={groupDetail.memberArray}
                 leaderInfo={groupDetail.leaderInfo}
                 memberArray={groupDetail.memberArray}
             />
 
-            <button className="btn-fixed" onClick={postGroupJoin}>
-                가입하기
-            </button>
+            {isJoin ? (
+                ''
+            ) : groupDetail.groupMaxMember !== null &&
+              groupDetail.memberArray.length + 1 <
+                  groupDetail.groupMaxMember ? (
+                <button className="btn-fixed" onClick={postGroupJoin}>
+                    가입하기
+                </button>
+            ) : (
+                ''
+            )}
         </div>
     );
 }

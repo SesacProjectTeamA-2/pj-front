@@ -36,8 +36,8 @@ export default function GroupSearch({
 
     return (
         <div>
-            <div className="title1" style={{ margin: '2rem' }}>
-                검색 결과 입니다.
+            <div className="title1" style={{ marginBottom: '2rem' }}>
+                검색 결과
             </div>
 
             <div>
