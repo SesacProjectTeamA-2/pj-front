@@ -119,10 +119,9 @@ export default function SwiperComponent({
                                     <Link to={`/group/home/${groupInfo.gSeq}`}>
                                         <div
                                             style={{
-
-                                                margin: '0 45px',
-                                                fontSize: '15px',
-
+                                                fontSize: '2rem',
+                                                // marginLeft: '1.2rem',
+                                                textAlign: 'center',
                                                 fontWeight: 'bold',
                                                 display: 'flex',
                                                 justifyContent: 'center',
@@ -143,7 +142,7 @@ export default function SwiperComponent({
                                         >
                                             <span
                                                 style={{
-                                                    margin: '0px 15px',
+                                                    // margin: '0px 15px',
                                                     color: '#8D6262',
                                                     fontWeight: 'bold',
                                                     fontSize: '1.2rem',
@@ -155,10 +154,8 @@ export default function SwiperComponent({
                                             {groupInfo.gDday}
                                             <div
                                                 style={{
-
                                                     margin: '2px 30px',
                                                     fontSize: '11px',
-
                                                 }}
                                             >
                                                 {/* 참석인원 수 {madeNumGroup.count}
@@ -170,7 +167,6 @@ export default function SwiperComponent({
                                         {/* <div>남은 일수 : {groupInfo.gDday}</div> */}
                                     </Link>
                                 </SwiperSlide>
-
                                 ;
                             </>
                         );
