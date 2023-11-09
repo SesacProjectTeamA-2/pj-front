@@ -303,7 +303,7 @@ export default function GroupEdit() {
                 {/* </div> */}
             </div>
             <div className="group-create-content">
-                <div>분야</div>
+                <div style={{ whiteSpace: 'nowrap' }}>분야</div>
                 <div className="group-category">
                     {interestedArr.map((interest: Interested) => {
                         return (
@@ -343,7 +343,7 @@ export default function GroupEdit() {
                 </div>
             </div>
             <div className="group-create-content description-container">
-                <div>모임 설명</div>
+                <div style={{ marginRight: '5%' }}>모임 설명</div>
                 <textarea
                     className="description"
                     placeholder="500자 이내로 입력하세요."
@@ -418,9 +418,11 @@ export default function GroupEdit() {
             />
 
             {/* <Link to="/group/home/1"> */}
-            <button className="btn-fixed" onClick={groupEditHandler}>
-                모임 수정완료 !
-            </button>
+            <div className="btn-fixed-wrapper">
+                <button className="btn-fixed" onClick={groupEditHandler}>
+                    모임 수정완료 !
+                </button>
+            </div>
             {/* </Link> */}
         </div>
     );

@@ -1,5 +1,6 @@
 @import '../abstracts/variables.scss';
 @import '../abstracts/utils.scss';
+@import '~include-media/dist/include-media';
 
 //=== 미션 추가 모달 ===
 
@@ -72,6 +73,15 @@
     animation: modal-show 0.3s;
     padding: 2rem;
     background-color: white;
+    @include media('<500px') {
+        width: 20rem;
+        height: 30rem;
+    }
+    @include media('<300px') {
+        width: 10rem;
+        height: 20rem;
+        font-size: 2rem;
+    }
 }
 
 .warning-modal-style {
@@ -292,6 +302,13 @@
 .mission-cancel-back-btn {
     width: 40%;
     background-color: $color-gray4;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    @include media('<500px') {
+        height: 4rem;
+    }
 }
 
 .mission-cancel-btn-container {
