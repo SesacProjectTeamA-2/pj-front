@@ -32,6 +32,7 @@ img {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
     margin: 30px 0;
     @include media('<800px') {
         display: grid;
@@ -39,6 +40,7 @@ img {
         grid-template-rows: repeat(2, 1fr); /* 2 rows with equal height */
         gap: 16px;
     }
+
 }
 .interested-div-one {
     display: flex;

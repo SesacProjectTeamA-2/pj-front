@@ -6,8 +6,8 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
 import '../../../styles/scss/components/modal.scss';
+
 import ModalMemberList from './ModalMemberList';
 import { useSelector } from 'react-redux';
 import {

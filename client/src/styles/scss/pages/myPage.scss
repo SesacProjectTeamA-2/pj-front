@@ -233,7 +233,15 @@ button {
 // Character END
 
 // Interested START
-
+.interested-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // flex-wrap: wrap;
+    white-space: nowrap;
+}
 .tag-radio {
     display: none;
 }
@@ -243,7 +251,7 @@ button {
     background-color: white;
     color: #acacac;
     margin: 5px;
-    width: 5vw;
+    width: 8vw;
     height: 5vh;
     text-align: center;
     display: flex;
@@ -375,6 +383,7 @@ td {
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 }
 #quit-btn:hover {
     background-color: #e20606;
