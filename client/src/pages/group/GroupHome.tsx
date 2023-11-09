@@ -134,7 +134,7 @@ export default function GroupHome() {
                 setTotalScoreRanking(res.data.totalRanking);
 
                 setIsLeader(res.data.isLeader);
-                setIsLeader(res.data.isJoin);
+                setIsJoin(res.data.isJoin);
             });
     };
 
@@ -146,7 +146,7 @@ export default function GroupHome() {
     const postGroupJoin = async () => {
         const input = { gSeq };
         const res = await axios
-            .post(`${process.env.REACT_APP_DB_HOST}/group/join/`, input, {
+            .post(`${process.env.REACT_APP_DB_HOST}/group/join`, input, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
@@ -158,7 +158,7 @@ export default function GroupHome() {
                     toast.error(msg);
                 } else {
                     toast.success(msg);
-                    window.location.href = `${process.env.REACT_APP_DB_HOST}/group/home/${gSeq}`;
+                    window.location.href = `motimates.xyz/group/home/${gSeq}`;
                 }
             });
     };
@@ -167,7 +167,7 @@ export default function GroupHome() {
     const [isLeader, setIsLeader] = useState(false);
     const [isJoin, setIsJoin] = useState(false);
 
-    console.log('@@@@@@', isLeader);
+    console.log('@@@@@@isJoin', isJoin);
 
     // 현재 점수 리스트
     const [nowScoreRanking, setNowScoreRanking] = useState([]);

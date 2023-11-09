@@ -56,7 +56,7 @@ export default function GroupList() {
                 }
             );
             const data = response.data; // 데이터에 접근
-            console.log('참여한 모임', data.groupInfo);
+            console.log('참여한 모임', data);
             setJoinGroup(data.groupInfo); // 받은 데이터를 joinGroup 상태로 설정
         } catch (error) {
             console.error('Error while fetching data:', error);
