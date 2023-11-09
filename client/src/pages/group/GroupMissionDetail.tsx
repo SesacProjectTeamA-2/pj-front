@@ -70,20 +70,6 @@ export default function GroupMissionDetail() {
         warningModalSwitchHandler();
     };
 
-    // const boardDeleteHandler = async (gbSeq: number) => {
-    //     const res = await axios
-    //         .delete(`${process.env.REACT_APP_DB_HOST}/board/delete/${gbSeq}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             warningModalSwitchHandler();
-    //             // nvg(-1);
-    //         });
-    // };
-
     //] 2. 미션게시글
     const [missionList, setMissionList] = useState<any>([]);
 
@@ -261,15 +247,6 @@ export default function GroupMissionDetail() {
                         {/* </div> */}
                     </div>
                 </div>
-
-                {/* {warningModalSwitch ? (
-                    <WarningModal
-                        warningModalSwitch={warningModalSwitch}
-                        setWarningModalSwitch={setWarningModalSwitch}
-                        warningModalSwitchHandler={warningModalSwitchHandler}
-                        action={"삭제"}
-                    />
-                ) : null} */}
 
                 {/* 경고 공통 모달 */}
                 <WarningModal

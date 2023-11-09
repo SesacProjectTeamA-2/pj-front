@@ -26,15 +26,6 @@ export interface GroupDetailType {
     memberArray: [];
 }
 
-export interface GroupMission {
-    missionList: [];
-    expiredMissionList: [];
-    Dday: number;
-    uSeq: number;
-    gName: string;
-    uEmail: string;
-    uName: string;
-}
 export interface GroupMissionsType {
     createdAt: string;
     gSeq: number;
@@ -55,6 +46,16 @@ export interface BoardType {
     gbCategory: string;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface GroupMission {
+    missionList: [];
+    expiredMissionList: [];
+    Dday: number;
+    uSeq: number;
+    gName: string;
+    uEmail: string;
+    uName: string;
 }
 
 // Redux 스토어의 전체 타입 정의

@@ -148,13 +148,13 @@ export default function SideBarGroupLeader({
                     모임장 권한 넘기기
                 </li>
 
-                <li
+                {/* <li
                     onClick={() => choiceModalSwitchHandler('강제 퇴장')}
                     className="title5 leader-warning"
                     style={{ cursor: 'pointer' }}
                 >
                     강제 퇴장시키기
-                </li>
+                </li> */}
 
                 <li
                     onClick={() => tryDeleteGroupHandler(Number(gSeq))}

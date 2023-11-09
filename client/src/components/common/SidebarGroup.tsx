@@ -42,7 +42,6 @@ export default function SideBarGroup() {
     const [isLeader, setIsLeader] = useState('');
 
     const [isJoin, setIsJoin] = useState(false);
-    console.log(':::::::: ', isJoin);
 
     console.log('groupMissions', groupMissions);
     // console.log('groupMissions', groupMissions.length);
