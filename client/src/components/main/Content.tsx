@@ -259,68 +259,82 @@ export default function Content(props: any) {
     console.log('totalRates', totalPercent);
 
     return (
-        <div className="content-grid">
-            <Quotes
-                phraseCtt={phraseCtt}
-                // setPhraseCtt={setPhraseCtt}
-                // setPhraseModeSelf={setPhraseModeSelf}
-                phraseModeSelf={phraseModeSelf}
-            />
-            {/* 1. 명언 : 가로로 길게 */}
+        <div>
+            <div className="content-grid">
+                <Quotes
+                    phraseCtt={phraseCtt}
+                    // setPhraseCtt={setPhraseCtt}
+                    // setPhraseModeSelf={setPhraseModeSelf}
+                    phraseModeSelf={phraseModeSelf}
+                />
+                {/* 1. 명언 : 가로로 길게 */}
 
-            <br />
+                <br />
 
-            {/* 2. 달성률 : my, team */}
-            <div className="content-grid-box">
-                <div className="percentage-div">
-                    <div className="title4">My 달성률 </div>
-                    <div className="progress-img-flex">
-                        <div className="progress-bar-div">
-                            {groupArray.map((group: any, idx: number) => {
-                                return (
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            width: '100%',
-                                        }}
-                                    >
-                                        <div>
-                                            {/* [추후] tb_name 수정 */}
-                                            {/* <div className="title5">{groupInfo}</div> */}
-                                            {group.gName}
-                                        </div>
+                {/* 2. 달성률 : my, team */}
+                <div className="content-grid-box">
+                    <div className="percentage-div">
+                        <div
+                            className="title4"
+                            style={{ marginBottom: '10px' }}
+                            color="#ed8d8d"
+                        >
+                            My 달성률{' '}
+                        </div>
+                        <div className="progress-img-flex">
+                            <div className="progress-bar-div">
+                                {groupArray.map((group: any, idx: number) => {
+                                    return (
                                         <div
-                                            className="bar-container"
                                             style={{
                                                 display: 'flex',
                                                 width: '100%',
+                                                alignItems: 'center',
                                             }}
                                         >
-                                            <Progressbar
-                                                score={doneRates[idx]}
-                                                bg={'#f3f3f3'}
-                                            />
+                                            <div
+                                                style={{ width: '20vw' }}
+                                                className="title6"
+                                            >
+                                                {/* [추후] tb_name 수정 */}
+                                                {/* <div className="title5">{groupInfo}</div> */}
+                                                {group.gName}
+                                            </div>
+                                            <div
+                                                className="bar-container"
+                                                style={{
+                                                    display: 'flex',
+                                                    width: '30vw',
+                                                }}
+                                            >
+                                                <Progressbar
+                                                    score={doneRates[idx]}
+                                                    bg={'#f3f3f3'}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                        <div>
-                            <img
-                                src={selectedCharacter}
-                                alt="동물 이미지"
-                                className="my-progress-img"
-                            />
+                                    );
+                                })}
+                            </div>
+                            <div
+                                className="my-progress-img-background"
+                                style={{ margin: '10px' }}
+                            >
+                                <img
+                                    src={selectedCharacter}
+                                    alt="동물 이미지"
+                                    className="my-progress-img"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <br />
+                <br />
 
-            {/* Team 달성률 */}
-            {/* [첨언] 시간 없으면 빼겠습니다. */}
-            {/* <div className="content-grid-box">
+                {/* Team 달성률 */}
+                {/* [첨언] 시간 없으면 빼겠습니다. */}
+                {/* <div className="content-grid-box">
                 <div className="percentage-div">
                     <div className="title4">Team 달성률</div>
                     {mainGroup ? (
@@ -362,7 +376,7 @@ export default function Content(props: any) {
                         <div className="progress-bar-div">
                             <div className="profile-img-div-flex">
                                 멤버 리스트 동적 수정 */}
-            {/* <img
+                {/* <img
                                     src={userImgSrc || '/asset/images/user.svg'}
                                     alt="프로필 이미지"
                                     className="profile-img"
@@ -383,9 +397,10 @@ export default function Content(props: any) {
                 </div>
             </div> */}
 
-            <br />
+                <br />
 
-            <MainMission />
+                <MainMission />
+            </div>
         </div>
     );
 }
