@@ -32,13 +32,17 @@ export default function SideBarGroup() {
             setGroupName(res.data.groupName);
 
             setIsLeader(res.data.isLeader);
+            setIsJoin(res.data.isJoin);
         };
 
         getGroup();
     }, []);
 
-    // 모임장 / 멤버
+    //-- 모임장 / 멤버
     const [isLeader, setIsLeader] = useState('');
+
+    const [isJoin, setIsJoin] = useState(false);
+    console.log(':::::::: ', isJoin);
 
     console.log('groupMissions', groupMissions);
     // console.log('groupMissions', groupMissions.length);
@@ -61,107 +65,132 @@ export default function SideBarGroup() {
     };
 
     return (
-        <div className="sidebar-container">
-            <div className="sidebar-content">
-                <div className="sidebar-list">
-                    <div className="sidebar-theme-list">
-                        <div className="theme-flex">
-                            <div className="theme-title">
-                                <Link to={`/group/home/${gSeq}`}>
-                                    홈으로 가기
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div className="theme-flex">
-                            <div className="theme-title">게시판</div>
-                            <div className="board-content">
-                                <Link to={`/board/${gSeq}/notice`}>
-                                    <div className="sidebar-theme">
-                                        공지사항
-                                    </div>
-                                </Link>
-                                <Link to={`/board/${gSeq}/free`}>
-                                    <div className="sidebar-theme">자유</div>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="theme-flex">
-                            <div className="theme-title">미션</div>
-                            <div>
-                                <div className="mission-flex">
-                                    <div className="mission-title">진행 중</div>
-                                    <div>
-                                        <ul className="progress-mission">
-                                            {groupMissions.map(
-                                                (mission: any, idx: number) => {
-                                                    return (
-                                                        <li
-                                                            key={idx}
-                                                            className="sidebar-theme"
-                                                        >
-                                                            <Link
-                                                                to={`/board/${gSeq}/mission/${mission.mSeq}`}
-                                                            >
-                                                                <div
-                                                                    key={idx}
-                                                                    className=""
-                                                                >
-                                                                    {
-                                                                        mission.mTitle
-                                                                    }
-                                                                </div>
-                                                            </Link>
-                                                        </li>
-                                                    );
-                                                }
-                                            )}
-                                        </ul>
+        <div>
+            {isJoin ? (
+                <div className="sidebar-container">
+                    <div className="sidebar-content">
+                        <div className="sidebar-list">
+                            <div className="sidebar-theme-list">
+                                <div className="theme-flex">
+                                    <div className="theme-title">
+                                        <Link to={`/group/home/${gSeq}`}>
+                                            홈으로 가기
+                                        </Link>
                                     </div>
                                 </div>
-                                <Link to={`/board/${gSeq}/mission/done`}>
-                                    <div className="mission-title">완료</div>
-                                </Link>
+
+                                <div className="theme-flex">
+                                    <div className="theme-title">게시판</div>
+                                    <div className="board-content">
+                                        <Link to={`/board/${gSeq}/notice`}>
+                                            <div className="sidebar-theme">
+                                                공지사항
+                                            </div>
+                                        </Link>
+                                        <Link to={`/board/${gSeq}/free`}>
+                                            <div className="sidebar-theme">
+                                                자유
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div className="theme-flex">
+                                    <div className="theme-title">미션</div>
+                                    <div>
+                                        <div className="mission-flex">
+                                            <div className="mission-title">
+                                                진행 중
+                                            </div>
+                                            <div>
+                                                <ul className="progress-mission">
+                                                    {groupMissions.map(
+                                                        (
+                                                            mission: any,
+                                                            idx: number
+                                                        ) => {
+                                                            return (
+                                                                <li
+                                                                    key={idx}
+                                                                    className="sidebar-theme"
+                                                                >
+                                                                    <Link
+                                                                        to={`/board/${gSeq}/mission/${mission.mSeq}`}
+                                                                    >
+                                                                        <div
+                                                                            key={
+                                                                                idx
+                                                                            }
+                                                                            className=""
+                                                                        >
+                                                                            {
+                                                                                mission.mTitle
+                                                                            }
+                                                                        </div>
+                                                                    </Link>
+                                                                </li>
+                                                            );
+                                                        }
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <Link
+                                            to={`/board/${gSeq}/mission/done`}
+                                        >
+                                            <div className="mission-title">
+                                                완료
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                {isLeader ? (
+                                    <div className="theme-flex">
+                                        {/* 모임장 */}
+                                        <div className="theme-title">
+                                            모임장
+                                        </div>
+                                        <SideBarGroupLeader
+                                            warningModalSwitch={
+                                                warningModalSwitch
+                                            }
+                                            setWarningModalSwitch={
+                                                setWarningModalSwitch
+                                            }
+                                            warningModalSwitchHandler={
+                                                warningModalSwitchHandler
+                                            }
+                                            menu={menu}
+                                            setMenu={setMenu}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="theme-flex">
+                                        {/* 멤버 */}
+                                        <div className="theme-title">멤버</div>
+
+                                        <SideBarGroupMember
+                                            warningModalSwitch={
+                                                warningModalSwitch
+                                            }
+                                            setWarningModalSwitch={
+                                                setWarningModalSwitch
+                                            }
+                                            warningModalSwitchHandler={
+                                                warningModalSwitchHandler
+                                            }
+                                            menu={menu}
+                                            setMenu={setMenu}
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
-
-                        {isLeader ? (
-                            <div className="theme-flex">
-                                {/* 모임장 */}
-                                <div className="theme-title">모임장</div>
-                                <SideBarGroupLeader
-                                    warningModalSwitch={warningModalSwitch}
-                                    setWarningModalSwitch={
-                                        setWarningModalSwitch
-                                    }
-                                    warningModalSwitchHandler={
-                                        warningModalSwitchHandler
-                                    }
-                                    menu={menu}
-                                    setMenu={setMenu}
-                                />
-                            </div>
-                        ) : (
-                            <div className="theme-flex">
-                                {/* 멤버 */}
-                                <div className="theme-title">멤버</div>
-
-                                <SideBarGroupMember
-                                    warningModalSwitch={warningModalSwitch}
-                                    setWarningModalSwitch={
-                                        setWarningModalSwitch
-                                    }
-                                    warningModalSwitchHandler={
-                                        warningModalSwitchHandler
-                                    }
-                                    menu={menu}
-                                    setMenu={setMenu}
-                                />
-                            </div>
-                        )}
                     </div>
                 </div>
-            </div>
+            ) : (
+                <div></div>
+            )}
         </div>
     );
 }

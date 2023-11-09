@@ -16,7 +16,7 @@ export default function Face() {
             const res = await axios.get(
                 // 유저 미션 조회
 
-                `http://localhost:8888/api/mission/user`,
+                `${process.env.REACT_APP_DB_HOST}/mission/user`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,

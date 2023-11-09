@@ -65,9 +65,8 @@ export default function MemberList({
             <div className="members-upper-content">
                 <div className="title2">멤버</div>
                 <div className="title5">
-                    참석인원{' '}
+                    참석인원
                     <span className="member-count">
-                        {/* {memberList.length + 1} */}
                         {memberArray?.length + 1}
                     </span>
                     / {gMax}
