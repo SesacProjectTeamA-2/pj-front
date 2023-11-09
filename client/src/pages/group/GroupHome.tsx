@@ -158,7 +158,7 @@ export default function GroupHome() {
                     toast.error(msg);
                 } else {
                     toast.success(msg);
-                    window.location.href = `motimates.xyz/group/home/${gSeq}`;
+                    window.location.reload();
                 }
             });
     };
