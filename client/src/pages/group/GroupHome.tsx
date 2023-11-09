@@ -28,25 +28,25 @@ export default function GroupHome() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    //++ redux test 용
-    const test = {
-        gSeq: 1,
-        gName: '변경했어요..',
-        gDesc: '11111',
-        gDday: '2023-10-28',
-        gMaxMem: 10000000,
-        gCategory: 'it',
-        gCoverImg:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
-        mTitle: '변경했어요..',
-        mContent: '변경했어요..',
-        mLevel: 5,
-    };
+    //-- redux test 용
+    // const test = {
+    //     gSeq: 1,
+    //     gName: '변경했어요..',
+    //     gDesc: '11111',
+    //     gDday: '2023-10-28',
+    //     gMaxMem: 10000000,
+    //     gCategory: 'it',
+    //     gCoverImg:
+    //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
+    //     mTitle: '변경했어요..',
+    //     mContent: '변경했어요..',
+    //     mLevel: 5,
+    // };
 
     //=== redux 상태관리 ===
-    const dummyGroupState = useSelector(
-        (state: RootStateType) => state.dummyGroup
-    );
+    // const dummyGroupState = useSelector(
+    //     (state: RootStateType) => state.dummyGroup
+    // );
 
     // const userState = useSelector((state: RootStateType) => state.user);
 
@@ -151,7 +151,7 @@ export default function GroupHome() {
                 console.log(res.data);
                 const { success, msg } = res.data;
                 if (!success) {
-                    alert('실패');
+                    alert(msg);
                 } else {
                     window.location.href = `http://localhost:3000/group/home/${gSeq}`;
                 }

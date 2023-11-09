@@ -81,31 +81,13 @@ export default function GroupMission() {
 
     const [missionList, setMissionList] = useState<any>([]);
 
-    // const [missionIdList, setMissionIdList] = useState<any>([]);
-
-    // const [missionTitle, setMissionTitle] = useState<any>('1234');
-
     let missionTitle = '';
-
-    // useEffect(() => {
-    //     for (let mission of missionList) {
-    //         if (mission.mSeq === Number(mSeq)) {
-    //             setMissionTitle(mission.mTitle);
-    //         }
-    //     }
-    // }, []);
-
-    // useEffect(() => {
-    //     console.log('^^^^^^^^^');
 
     for (let mission of missionList) {
         if (mission.mSeq === Number(mSeq)) {
             missionTitle = mission.mTitle;
         }
     }
-    // }, [mSeq]);
-
-    console.log('jjjjjjjjjj', missionTitle);
 
     // console.log('>>>>>mm', mSeq);
     // useEffect(() => {

@@ -1,5 +1,3 @@
-//=== 공지 / 자유 게시글 수정 ===
-
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
@@ -9,31 +7,50 @@ import Editor from './Editor';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import { MissionType } from 'src/types/types';
-import { Input } from '@mui/material';
-import SuccessModal from 'src/components/common/modal/SucessModal';
-import WarningModal from 'src/components/common/modal/WarningModal';
 
-export default function BoardEdit() {
+export default function BoardMissionEdit() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    const { gSeq, mSeq, gbSeq, gCategory } = useParams();
+    const { gSeq, mSeq, gbSeq } = useParams();
 
-    console.log(gSeq, mSeq, gbSeq, gCategory);
+    console.log(gSeq, gbSeq);
 
-    //] 게시글 수정 완료 모달창
-    const [successModalSwitch, setSuccessModalSwitch] = useState(false);
+    interface Mission {
+        // mSeq: number;
+        mTitle: string;
+        mContent: string;
+        mLevel: number;
+        // map: string;
+    }
 
-    const successHandler = () => {
-        setSuccessModalSwitch(true);
+    const [missionList, setMissionList] = useState<any>([]);
+
+    const getGroup = async () => {
+        const res = await axios
+            .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            })
+            .then((res) => {
+                setMissionList(res.data.groupMission);
+            });
     };
 
-    //] 게시글 상세조회
+    useEffect(() => {
+        getGroup();
+    }, []);
 
-    const getBoardNoti = async () => {
+    console.log('>>>>>>', missionList);
+
+    const [missionBoard, setMissionBoard] = useState<any>([]);
+
+    //] 미션 게시글 조회
+    const getBoardMission = async () => {
         const res = await axios
             .get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/${gCategory}/${gbSeq}`,
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}/${gbSeq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${uToken}`,
@@ -41,13 +58,8 @@ export default function BoardEdit() {
                 }
             )
             .then((res) => {
-                console.log('getBoardNoti=======', res.data);
-                // console.log(
-                //     'userInfo',
-                //     res.data.groupInfo.tb_groupUser.tb_user
-                // );
-
-                setFreeList(res.data.groupInfo);
+                console.log('========', res.data.groupInfo);
+                setMissionBoard(res.data.groupInfo);
 
                 const { gbTitle, gbContent } = res.data.groupInfo;
 
@@ -59,19 +71,23 @@ export default function BoardEdit() {
     };
 
     useEffect(() => {
-        getBoardNoti();
+        getBoardMission();
     }, []);
 
-    const [userInfo, SetUserInfo] = useState<any>([]);
-    const [freeList, setFreeList] = useState<any>([]);
+    // 미션 제목
+    let missionTitle = '';
+
+    for (let mission of missionList) {
+        if (mission.mSeq === Number(mSeq)) {
+            missionTitle = mission.mTitle;
+        }
+    }
 
     const [board, setBoard] = useState<any>({
         gbSeq: Number(gbSeq),
         gbTitle: '',
         gbContent: '',
     });
-
-    // const [selected, setSelected] = useState<string>('');
 
     //gbTitle state 관리
     const getValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -97,20 +113,16 @@ export default function BoardEdit() {
 
     // 게시물 edit
     const boardEditHandler = async () => {
-        const res = await axios
-            .patch(
-                `${process.env.REACT_APP_DB_HOST}/board/edit/${gbSeq}`,
-                board,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res);
-                successHandler();
-            });
+        const res = await axios.patch(
+            `${process.env.REACT_APP_DB_HOST}/board/edit/${gbSeq}`,
+            board,
+            {
+                headers: {
+                    Authorization: `Bearer ${uToken}`,
+                },
+            }
+        );
+        console.log(res);
 
         // [추후] input 입력 안했을 시, 로직
 
@@ -119,25 +131,11 @@ export default function BoardEdit() {
 
     console.log(board);
 
-    const [postMenu, setPostMenu] = useState(gCategory);
-
-    useEffect(() => {
-        setPostMenu(gCategory);
-    }, []);
-
-    if (postMenu === 'notice') {
-        setPostMenu('공지사항');
-    } else if (postMenu === 'free') {
-        setPostMenu('자유/질문');
-    }
-
-    console.log('oooo', postMenu);
-
     return (
         <div className="section section-group">
             {/* [추후] title 값 넘겨 받기 ! */}
             {/* params 가져와서 : free */}
-            <GroupHeader title={postMenu} groupName={''} />
+            <GroupHeader title={`미션 ${missionTitle}`} groupName={''} />
             <div className="post-container">
                 <div className="noti-content post-header title5">
                     <div className="post-title">
@@ -159,15 +157,6 @@ export default function BoardEdit() {
                     />
                 </div>
             </div>
-            <SuccessModal
-                successModalSwitch={successModalSwitch}
-                setSuccessModalSwitch={setSuccessModalSwitch}
-                action={'게시글을 수정'}
-                gSeq={gSeq}
-                gCategory={gCategory}
-                gbSeq={gbSeq}
-            />
-
             <div>
                 {/* default : + 누른 페이지 */}
                 {/* <Link to="/group/noti/1"> */}

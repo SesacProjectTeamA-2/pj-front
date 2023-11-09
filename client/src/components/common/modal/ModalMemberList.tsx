@@ -16,12 +16,6 @@ export default function ModalMemberList({
 }: any) {
     const { gSeq } = useParams();
 
-    // interface MemberType {
-    //     id: number;
-    //     name: string;
-    //     img: string;
-    // }
-
     // const memberList: MemberType[] = [
     //     {
     //         id: 1,
@@ -112,7 +106,7 @@ export default function ModalMemberList({
                 console.log(res.data);
                 const { success, msg } = res.data;
                 if (!success) {
-                    alert('실패');
+                    alert('모임장 위임에 실패하였습니다.');
                 } else {
                     window.location.href = `http://localhost:3000/group/home/${gSeq}`;
                 }

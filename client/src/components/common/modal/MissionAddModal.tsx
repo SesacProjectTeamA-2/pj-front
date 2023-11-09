@@ -19,6 +19,7 @@ import Divider from '@mui/material/Divider';
 import '../../../styles/scss/components/modal.scss';
 
 import Dday from '../Dday';
+import useDdayCount from 'src/hooks/useDdayCount';
 
 //-- Redux
 // import { useDispatch, useSelector } from 'react-redux';
@@ -200,7 +201,19 @@ export default function MissionAddModal({
         //; 미션 수정 (PATCH, POST, DELETE)
         // missionList 최종 데이터만 보내기
         if (action === '미션수정') {
-            // console.log('------------');
+            console.log('!!!!!!!', Number(dday.slice(2)));
+
+            // missionInputs 배열을 복사하고 gDday 업데이트
+            // const updatedMissionInputs = missionInputs.map((mission: any) => {
+            //     return {
+            //         ...mission,
+            //         gDday: Number(dday.slice(2)),
+            //     };
+            // });
+
+            // setMissionInputs(updatedMissionInputs);
+
+            // console.log('+++++++++++', missionInputs);
 
             const patchMissionListHandler = async () => {
                 try {
@@ -225,7 +238,6 @@ export default function MissionAddModal({
             };
 
             patchMissionListHandler();
-            console.log('?????????????????????');
         }
     };
 
@@ -259,10 +271,40 @@ export default function MissionAddModal({
                 mTitle: missionInput.mTitle,
                 mContent: missionInput.mContent,
                 mLevel: missionInput.mLevel,
+                gDday: Number(newDay.slice(2)),
             };
             setMissionInputs(updatedMissionInputs);
         }
     };
+
+    //-- 날짜 업데이트
+
+    const handleDateChange = (e: any) => {
+        const newDay = e.target.value; // 새로운 날짜 입력값
+        setTargetDate(newDay); // 날짜 입력값 업데이트
+
+        console.log('jjjjj', newDay);
+    };
+    const dday = useDdayCount(targetDate);
+
+    useEffect(() => {
+        // missionInputs 배열을 복사하고 gDday 업데이트
+        const updatedMissionInputs = missionInputs.map((mission: any) => {
+            return {
+                ...mission,
+                gDday: Number(dday.slice(2)),
+            };
+        });
+
+        setMissionInputs(updatedMissionInputs);
+    }, [dday]);
+
+    // console.log('jjjjj', targetDate);
+    // console.log('jjjjj', Number(dday.slice(2)));
+
+    // useDdayCount(newDay)
+
+    // const updatedDday = [...missionInputs, { gDday: Number(newDay.slice(2)) }];
 
     // 각 미션 내용 저장 상태 배열
     // const [missionContentList, setMissionContentList] = useState(
@@ -294,6 +336,10 @@ export default function MissionAddModal({
         });
         setMissionList(updatedMissionList);
     };
+
+    console.log('---------', targetDate);
+
+    const newDay = useDdayCount(targetDate);
 
     ////////////////////// 삭제////////////////////////
     const deleteHandler = (targetId: number) => {
@@ -409,11 +455,24 @@ export default function MissionAddModal({
                             <div className="group-create-content">
                                 <div className="dday-title">마감일</div>
 
-                                <Dday
+                                <div className="dday-container">
+                                    <input
+                                        type="date"
+                                        id="date-input"
+                                        onChange={handleDateChange}
+                                        // value={gDday} // input default 값 처리 안됨
+                                        defaultValue={gDday}
+                                    />
+                                    <div id="dday-text">
+                                        {dday ? dday : `D-${gDday}`}
+                                    </div>
+                                </div>
+
+                                {/* <Dday
                                     targetDate={targetDate}
                                     setTargetDate={setTargetDate}
                                     gDday={gDday}
-                                />
+                                /> */}
                             </div>
                         </div>
 

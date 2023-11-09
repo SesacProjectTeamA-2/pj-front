@@ -142,6 +142,7 @@ export default function Content(props: any) {
     console.log('nowRanking', nowRanking);
     console.log('GroupRates', GroupRates);
     console.log('doneRates', doneRates);
+
     // ] 2. 유저 가입 모임
     const getJoinedGroup = async () => {
         const res = await axios
@@ -215,6 +216,48 @@ export default function Content(props: any) {
     //     getGroupDeatil();
     // }, []);
 
+    console.log('????', uCharImg.slice(-5)); // 2.svg
+    console.log('????', uCharImg.slice(-4)); // .svg
+
+    console.log('????', uCharImg.slice(0, 14)); // /asset/images/
+    console.log('????', uCharImg.slice(14, 17)); // dog
+
+    let charNum = uCharImg.slice(-5, -4); // 2
+
+    // console.log('....', uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+
+    console.log('????', doneRates);
+
+    let totalRates = 0;
+    let totalPercent = 0;
+
+    for (let i = 0; i < doneRates.length; i++) {
+        totalRates += doneRates[i];
+        totalPercent = totalRates / doneRates.length; // 평균
+    }
+
+    // if (totalPercent > 70) {
+    //     uCharImg.replace(charNum, '3');
+    // } else if (totalPercent > 30) {
+    //     uCharImg.replace(charNum, '2');
+    // } else if (totalPercent <= 30) {
+    //     uCharImg.replace(charNum, '1');
+
+    //     console.log('kkk', uCharImg);
+
+    //     console.log('kkk', charNum);
+    // }
+
+    useEffect(() => {
+        if (totalPercent > 70) {
+            setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+            console.log(setCharImg);
+        }
+        setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+    });
+    console.log('totalRates', totalRates);
+    console.log('totalRates', totalPercent);
+
     return (
         <div className="content-grid">
             <Quotes
@@ -277,7 +320,7 @@ export default function Content(props: any) {
 
             {/* Team 달성률 */}
             {/* [첨언] 시간 없으면 빼겠습니다. */}
-            <div className="content-grid-box">
+            {/* <div className="content-grid-box">
                 <div className="percentage-div">
                     <div className="title4">Team 달성률</div>
                     {mainGroup ? (
@@ -318,8 +361,8 @@ export default function Content(props: any) {
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
                             <div className="profile-img-div-flex">
-                                {/* 멤버 리스트 동적 수정 */}
-                                <img
+                                멤버 리스트 동적 수정 */}
+            {/* <img
                                     src={userImgSrc || '/asset/images/user.svg'}
                                     alt="프로필 이미지"
                                     className="profile-img"
@@ -338,7 +381,7 @@ export default function Content(props: any) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <br />
 
