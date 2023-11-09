@@ -1,13 +1,15 @@
 @import '../../abstracts/variables';
 @import '~include-media/dist/include-media';
 
-
 .group-create-contianer {
     align-items: flex-start;
     width: 90%;
     padding: 30px;
     gap: 3rem;
     margin: 0 auto;
+    position: relative;
+    height: 100vh;
+    width: 100vh;
 }
 
 .group-create-content {
@@ -41,7 +43,6 @@
     @include media('<800px') {
         grid-template-columns: repeat(4, 2fr);
     }
-   
 }
 
 .group-create-title {

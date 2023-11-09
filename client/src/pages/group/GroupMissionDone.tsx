@@ -114,9 +114,17 @@ export default function GroupMissionDone() {
                 // String(noticeList.length - index),
                 String(index + 1),
                 // replace(/(<([^>]+)>)/gi, '') => html tag 처리
-                item.mTitle.replace(/(<([^>]+)>)/gi, ''),
-                item.createdAt.replace(/(<([^>]+)>)/gi, ''),
-                item.updatedAt.replace(/(<([^>]+)>)/gi, '')
+                item.mTitle,
+                item.createdYear +
+                    '-' +
+                    item.createdMonth +
+                    '-' +
+                    item.createdDay,
+                item.updatedYear +
+                    '-' +
+                    item.updatedMonth +
+                    '-' +
+                    item.updatedDay
                 // item.createdAt
             )
     );
@@ -145,7 +153,7 @@ export default function GroupMissionDone() {
         setPage(0);
     };
 
-    // console.log('>>>>>>>>>>>', groupMission.expiredMissionList);
+    console.log('>>>>>>>>>>>', groupMission.expiredMissionList);
 
     return (
         <div className="section section-group">
