@@ -87,6 +87,7 @@ button {
     width: 100px;
     height: 100px;
     cursor: pointer;
+
     @include media('<800px') {
         right: 10%;
         bottom: 20%;
