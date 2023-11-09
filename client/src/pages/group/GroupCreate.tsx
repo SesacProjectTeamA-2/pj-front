@@ -312,7 +312,7 @@ export default function GroupCreate() {
                 {/* </form> */}
             </div>
             <div className="group-create-content">
-                <div>분야</div>
+                <div className="title3">분야</div>
 
                 {interestedArr.map((interest: Interested) => {
                     return (
@@ -350,7 +350,7 @@ export default function GroupCreate() {
                 })}
             </div>
             <div className="group-create-content description-container">
-                <div>모임 설명</div>
+                <div className="title3">모임 설명</div>
                 <textarea
                     className="description"
                     placeholder="500자 이내로 입력하세요."
@@ -361,7 +361,7 @@ export default function GroupCreate() {
                 ></textarea>
             </div>
             <div className="group-create-content">
-                <div>제한 인원</div>
+                <div className="title3">제한 인원</div>
                 <input
                     defaultValue={1}
                     className="limit-number"
@@ -371,7 +371,7 @@ export default function GroupCreate() {
                 />
             </div>
             <div className="group-create-content mission-wrapper">
-                <div>Mission</div>
+                <div className="title3">Mission</div>
                 <div className="mission-container">
                     <div onClick={missionAddHandler}>
                         <img src="/asset/icons/plus.svg" alt="plus mission" />

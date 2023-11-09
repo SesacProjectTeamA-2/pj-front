@@ -483,6 +483,7 @@ export default function MissionAddModal({
                         }}
                         noValidate
                         autoComplete="off"
+                        className="verify-box"
                     >
                         <TextField
                             id="filled-multiline-flexible"
@@ -694,11 +695,12 @@ export default function MissionAddModal({
                                                     <Divider component="li" />
 
                                                     <ListItem
-                                                        style={{
-                                                            display: 'flex',
-                                                            flexDirection:
-                                                                'row',
-                                                        }}
+                                                        className="mission-edit-list-content"
+                                                        // style={{
+                                                        //     display: 'flex',
+                                                        //     flexDirection:
+                                                        //         'row',
+                                                        // }}
                                                     >
                                                         {/* 제목, 내용 div */}
                                                         <div
