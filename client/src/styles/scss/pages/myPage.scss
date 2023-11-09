@@ -1,0 +1,369 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+@import '~include-media/dist/include-media';
+
+.myPage-p {
+    font-size: 2em;
+    margin-bottom: 5%;
+    @include media('<900px') {
+        font-size: 1em;
+    }
+}
+
+.myPage-div {
+    display: flex;
+    justify-content: center;
+}
+
+// ProfilePic START
+.myPage-div-one {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 10%;
+    width: 100%;
+    @include media('<740px') {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.myPage-div-one-one {
+    // margin-right: 10%;
+}
+.myPage-div-one-two {
+    // width: 100%;
+}
+
+.myPage-div-two {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10%;
+    align-items: center;
+    flex-direction: column;
+}
+.myPage-div-three {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10%;
+}
+.myPage-div-three-one {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // margin-right: 5%;
+    // margin-left: 10%;
+    @include media('<900px') {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+.myPage-div-three-one p {
+    margin-bottom: 5%;
+    margin-left: 3%;
+}
+.myPage-div-three-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.phrase-all-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .input-label {
+        min-width: 200px;
+        width: 60vw;
+        margin: 10px;
+    }
+}
+
+.myPage-div-four {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10%;
+}
+.myPage-div-five {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 3%;
+}
+.myPage-div-five-two {
+    display: flex;
+    flex-direction: column;
+    // margin-left: 10%;
+}
+.myPage-div-six {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+// PEN BTN
+.edit-btn {
+    @include box(2vw);
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+// INPUT
+.input-obj {
+    // border: 1px solid black;
+    border: none;
+    width: 30vw;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+//text-area
+.input-label {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    width: 40vw;
+    justify-content: start;
+    margin: 5%;
+}
+// nickname
+#input-area {
+    font-weight: bold;
+    font-size: large;
+}
+// introduce
+#text-area {
+    height: 100%;
+    font-size: large;
+    height: 20vh;
+}
+// phrase
+#text-area2 {
+    font-size: large;
+    width: 70%;
+    height: 20vh;
+    color: black;
+}
+
+//  Profile START
+#profilePic-input {
+    display: none;
+}
+#profilePic-label {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+#profilePic-user {
+    @include box(20vh);
+    cursor: pointer;
+    border-radius: 50%;
+}
+#profilePic-edit {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+// ProfilePic END
+
+// Nickname START
+.edit-img {
+    @include box(2vw);
+    border: none;
+}
+// Nickname END
+
+// Character START
+.character-list-div {
+    background-color: white;
+    width: 80%;
+    height: 100%;
+    border: 5px solid $color-primary;
+    border-radius: 10px;
+}
+.character-item-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.character-radio {
+    display: none;
+}
+.character-label {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.character-img {
+    width: 100%;
+    height: 100%;
+}
+// Character END
+
+// Interested START
+
+.tag-radio {
+    display: none;
+}
+.tag-btn {
+    border: 1px solid #acacac;
+    border-radius: 15px;
+    background-color: white;
+    color: #acacac;
+    margin: 5px;
+    width: 5vw;
+    height: 5vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+    cursor: pointer;
+}
+// Interested END
+
+// Phrase START
+.phrase-radio {
+    width: 100%;
+    display: none;
+}
+.phrase-label {
+    background-color: $color-gray2;
+    color: $color-gray7;
+    width: fit-content;
+    height: 5vh;
+    border-radius: 5px;
+    font-weight: light;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    cursor: pointer;
+}
+.phraseMode-btn-div {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    text-align: center;
+    // margin-left: 5%;
+    flex-direction: row;
+    @include media('<800px') {
+        font-size: 12px;
+    }
+}
+#phraseMode-btn1,
+#phraseMode-btn2 {
+    margin: 5%;
+    text-align: center;
+    padding: 0 10px;
+    // min-width: 100px;
+}
+
+// Phrase END
+
+// setMain START
+.setMain-table {
+    width: 30vw;
+    height: 20vh;
+    border-radius: 10px;
+    background-color: #fff;
+}
+th,
+td {
+    text-align: center;
+}
+.pin-img {
+    @include box(2vw);
+}
+.setDday-radio,
+.setDone-radio {
+    display: none;
+}
+.setDday-label,
+.setDone-label {
+    width: 2vw;
+    height: 70%;
+}
+
+// psnCoverImg START
+.psnCoverImg-div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#input-file {
+    display: none;
+}
+#input-file-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    width: 15vw;
+    height: 5vh;
+    background-color: $color-primary;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    margin-top: 10%;
+    cursor: pointer;
+}
+
+// Quit START
+
+.quit-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#quit-btn {
+    background-color: white;
+    color: #acacac;
+    width: 20vw;
+    height: 5vh;
+    border: none;
+    border-radius: 20px;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#quit-btn:hover {
+    background-color: #e20606;
+    color: #fff;
+}
+#quit-notice {
+    color: $color-gray1;
+}
+// Quit END
+
+// #myPage-edit-btn {
+//     width: 30vw;
+//     height: 5vh;
+//     border-radius: 10px;
+//     border: none;
+//     color: $color-white;
+//     background-color: $color-primary;
+// }

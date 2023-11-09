@@ -1,0 +1,62 @@
+@import '../../abstracts/variables';
+@import '../../abstracts/utils';
+
+.join-container {
+    display: flex;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+#nickname-h3 {
+    font-weight: bolder;
+}
+#interested-h3 {
+    font-weight: bolder;
+}
+img {
+    @include box(100%);
+}
+
+.nickname-sub-div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.interested-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.interested-div-one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.interested-div-two {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.character-sub-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+// #join-btn {
+//     width: 30vw;
+//     height: 5vh;
+//     border-radius: 10px;
+//     border: none;
+//     color: $color-white;
+//     background-color: $color-primary;
+// }

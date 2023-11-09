@@ -1,0 +1,151 @@
+@import '../abstracts/variables';
+@import '../abstracts/utils';
+@import '~include-media/dist/include-media';
+
+.header-container {
+    background-color: $color-primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    // position: fixed;
+    z-index: 9999;
+    // backdrop-filter: blur(3px);
+}
+.header-divOne {
+    // display: flex;
+    // flex-direction: row;
+    // background-color: $color-primary;
+}
+.header-divTwo {
+    display: flex;
+    flex-direction: row;
+    background-color: $color-primary;
+    @include media('<800px') {
+        display: none;
+        flex-direction: column;
+    }
+}
+#date-input {
+    border: none;
+    color: black;
+    width: 86%;
+}
+.header-nav {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background-color: $color-primary;
+    @include media('<800px') {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+}
+.pcMode {
+    display: flex;
+    @include media('<800px') {
+        display: none;
+    }
+}
+.mobMode {
+    display: none;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-img {
+    width: 8rem;
+    height: 4rem;
+}
+
+.tab-menu-div {
+    // display: none;
+    display: none;
+    padding: 0;
+    @include media('<800px') {
+        display: block;
+    }
+}
+#tab-menu-btn {
+    display: block;
+    border: none;
+    box-shadow: none;
+    background-color: $color-primary;
+    padding: 0;
+    width: 50px;
+}
+.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    @include media('<800px') {
+        flex-direction: column;
+        align-items: start;
+    }
+}
+.menu li a {
+    padding: 0.5rem;
+}
+#grpSearch-input {
+    width: 50%;
+}
+#grpSearch-btn {
+    @include box(40px);
+    margin-left: 2%;
+}
+
+.menu-button {
+    background-color: $color-primary;
+    color: white;
+    border: none;
+    // border-radius: 10px;
+    padding: 5px;
+    margin: 0;
+    width: 5rem;
+    @include media('<768px') {
+        border: none;
+        margin: 0rem 0.4rem;
+        text-decoration: underline;
+        // background-color: $color-primary;
+        color: white;
+        box-shadow: none;
+    }
+}
+.menu-button:focus {
+    background-color: white;
+    color: $color-gray4;
+}
+#logout-btn {
+    width: 2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: 1.2rem;
+}
+.myPage-btn {
+    // margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+}
+
+#chat-li {
+    cursor: pointer;
+    margin-left: 0.4rem;
+
+    @include media('<800px') {
+        display: flex;
+        margin-left: 1rem;
+    }
+}
+#chat-btn {
+    margin-bottom: 1rem;
+}

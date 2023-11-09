@@ -1,0 +1,129 @@
+@import '../../abstracts/variables';
+@import '~include-media/dist/include-media';
+
+
+.group-create-contianer {
+    align-items: flex-start;
+    width: 90%;
+    padding: 30px;
+    gap: 3rem;
+    margin: 0 auto;
+}
+
+.group-create-content {
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+    width: 100%;
+
+    .dday-title {
+        width: 4.4rem;
+        padding: 2rem 0;
+        font-weight: bold;
+    }
+
+    label {
+        height: 2rem;
+    }
+}
+.group-category {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 1rem;
+    align-items: center;
+
+    width: 100%;
+    // @include media('<800px') {
+    //     grid-template-columns: repeat(2, 4fr);
+
+    // }
+    @include media('<800px') {
+        grid-template-columns: repeat(4, 2fr);
+    }
+   
+}
+
+.group-create-title {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.group-img-title {
+    width: 100%;
+    margin-right: 1rem;
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.group-create-img {
+    display: flex;
+    align-items: center;
+
+    button {
+        border-radius: 10px;
+    }
+}
+
+.mission-wrapper {
+    width: 100%;
+}
+
+.mission-container {
+    background-color: $color-gray2;
+    display: flex;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
+
+    img {
+        width: 3em;
+        cursor: pointer;
+    }
+
+    div {
+        padding: 0 10px;
+    }
+}
+
+input {
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 24rem;
+}
+
+.description-container {
+    width: 100%;
+    // align-items: flex-start;
+
+    div {
+        padding-top: 10px;
+        width: 3rem;
+    }
+
+    textarea {
+        height: 200px;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 10px;
+        border: none;
+    }
+}
+
+.limit-number {
+    width: 4rem;
+}
+
+.max-number {
+    color: $color-gray4;
+    font-weight: normal;
+}

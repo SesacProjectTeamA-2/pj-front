@@ -1,0 +1,148 @@
+@import '../../abstracts/variables';
+@import '../../abstracts/utils';
+@import '~include-media/dist/include-media';
+
+.group-home {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-start;
+}
+
+.cover-img {
+    background-color: $color-gray7;
+    width: 100%;
+    height: 300px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.cover-title {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    // text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.upper-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.upper-content-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+}
+
+.group-title-text {
+    display: flex;
+    width: 100%;
+}
+
+.mission-edit {
+    color: $color-gray6;
+    cursor: pointer;
+}
+
+.group-home-mission-round-text {
+    display: flex;
+    justify-content: flex-end;
+    color: $color-gray4;
+}
+
+.group-home-duration {
+    color: $color-gray3;
+}
+
+.main-content {
+    background: $color-gray2;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 20px;
+    // padding-top: 30px;
+    // padding-bottom: 30px;
+    // padding-left: 30px;
+    padding: 30px;
+    box-sizing: border-box;
+
+    li {
+        padding: 10px 0;
+    }
+}
+
+.mission-li {
+    display: flex;
+    // gap: 3rem;
+}
+
+.mission-element {
+    width: 8rem;
+}
+
+//=== 랭킹 ===
+.ranking-container {
+    display: flex;
+    width: 100%;
+    font-weight: bold;
+    @include media('<800px') {
+        flex-direction: column;
+    }
+}
+
+.ranking-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img {
+        @include box(40px);
+        border-radius: 50%;
+    }
+}
+
+.cur-ranking-content {
+    width: 100%;
+    font-weight: bold;
+}
+
+.acc-ranking-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.score {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+//=== 멤버 ===
+.members-upper-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.member-count {
+    color: $color-warning;
+}
+
+.member-left {
+    color: $color-gray6;
+}

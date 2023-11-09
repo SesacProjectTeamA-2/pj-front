@@ -1,0 +1,21 @@
+@import '../../abstracts/variables';
+@import '../../abstracts/utils';
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+}
+#login-h1 {
+    font-weight: bold;
+}
+// #link-join-btn {
+//     border: none;
+//     background-color: rgb(180, 179, 179);
+//     margin-top: 5%;
+// }
+// #link-join-btn p {
+//     color: $color-black;
+//     font-weight: bold;
+// }
