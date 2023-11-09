@@ -32,6 +32,7 @@ import Report from './components/management/Report';
 import BoardEdit from './pages/group/BoardEdit';
 import GroupMissionDetail from './pages/group/GroupMissionDetail';
 import MissionPost from './pages/group/MissionPost';
+import BoardMissionEdit from './pages/group/BoardMissionEdit';
 
 function App() {
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
@@ -211,10 +212,21 @@ function App() {
 
                 {/* 게시물 Edit */}
                 <Route
-                    path="/board/:gSeq/edit/:gbSeq"
+                    path="/board/:gSeq/edit/:gCategory/:gbSeq"
                     element={
                         <GroupLayout
                             children={<BoardEdit />}
+                            showChat={showChat}
+                        />
+                    }
+                />
+
+                {/* 게시물 Edit */}
+                <Route
+                    path="/board/:gSeq/edit/mission/:mSeq/:gbSeq"
+                    element={
+                        <GroupLayout
+                            children={<BoardMissionEdit />}
                             showChat={showChat}
                         />
                     }

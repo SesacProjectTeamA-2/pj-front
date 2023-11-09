@@ -320,7 +320,7 @@ export default function Content(props: any) {
 
             {/* Team 달성률 */}
             {/* [첨언] 시간 없으면 빼겠습니다. */}
-            <div className="content-grid-box">
+            {/* <div className="content-grid-box">
                 <div className="percentage-div">
                     <div className="title4">Team 달성률</div>
                     {mainGroup ? (
@@ -361,8 +361,8 @@ export default function Content(props: any) {
                     <div className="progress-img-flex">
                         <div className="progress-bar-div">
                             <div className="profile-img-div-flex">
-                                {/* 멤버 리스트 동적 수정 */}
-                                <img
+                                멤버 리스트 동적 수정 */}
+            {/* <img
                                     src={userImgSrc || '/asset/images/user.svg'}
                                     alt="프로필 이미지"
                                     className="profile-img"
@@ -381,7 +381,7 @@ export default function Content(props: any) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <br />
 

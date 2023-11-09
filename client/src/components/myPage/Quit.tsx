@@ -9,10 +9,14 @@ export default function Quit() {
         setWarningModalSwitch(!warningModalSwitch);
     };
 
+    const quitHandler = () => {
+        warningModalSwitchHandler();
+    };
+
     return (
-        <div className='quit-div'>
+        <div className="quit-div">
             {/* 모달 추가 */}
-            <button id="quit-btn" onClick={warningModalSwitchHandler}>
+            <button id="quit-btn" onClick={quitHandler}>
                 회원탈퇴
             </button>
             {/* 모임장일 경우, 위임하기 페이지로 이동 */}

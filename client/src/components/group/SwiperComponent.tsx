@@ -92,22 +92,6 @@ export default function SwiperComponent({ groupArray, setGroupArray }: any) {
                             </>
                         );
                     })}
-                    {/* <SwiperSlide>
-                        <Link to="/group/home/1">
-                            <img src="asset/images/cat2.svg" />
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <Link to="/group/home/1">
-                            <img src="asset/images/rabbit1.svg" />
-                        </Link>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <Link to="/group/home/1">
-                            <img src="asset/images/rabbit2.svg" />
-                        </Link>
-                    </SwiperSlide> */}
                 </Swiper>
                 <div className="swiper-button-next">
                     <img src="/asset/icons/right.svg" />

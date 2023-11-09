@@ -5,7 +5,7 @@ interface GroupHeaderProps {
     groupName: string;
 }
 
-export default function GroupHeader({ title, groupName }: GroupHeaderProps) {
+export default function GroupHeader({ title, groupName }: any) {
     return (
         <div className="group-header title2">
             <div>{title}</div>

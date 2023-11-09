@@ -10,6 +10,10 @@ export default function Dday({ targetDate, setTargetDate, gDday }: any) {
 
     const dday = useDdayCount(targetDate);
 
+    // const onChange = (e: any) => {
+    //     setTargetDate(e.target.value);
+    // };
+
     return (
         <div className="dday-container">
             <input

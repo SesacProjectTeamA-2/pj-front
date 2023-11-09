@@ -17,6 +17,8 @@ export default function SuccessModal({
     groupName,
     gSeq,
     mSeq,
+    gCategory,
+    gbSeq,
 }: // choiceModalSwitchHandler,
 any) {
     //=== 성공 모달창 ===
@@ -69,6 +71,10 @@ any) {
             nvg('/group');
         }
 
+        if (action === '모임을 수정') {
+            nvg(`/group/home/${gSeq}`);
+        }
+
         if (action === '공지사항을 작성') {
             nvg(`/board/${gSeq}/notice`);
         }
@@ -79,6 +85,10 @@ any) {
 
         if (action === '미션 인증글을 작성') {
             nvg(`/board/${gSeq}/mission/${mSeq}`);
+        }
+
+        if (action === '게시글을 수정') {
+            nvg(`/board/${gSeq}/${gCategory}/${gbSeq}`);
         }
     };
 
