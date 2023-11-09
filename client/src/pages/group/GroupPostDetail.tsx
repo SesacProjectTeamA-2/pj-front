@@ -109,6 +109,7 @@ export default function GroupPostDetail() {
         warningModalSwitchHandler();
     };
 
+
     // 메뉴 선택
     const [menu, setMenu] = useState('');
 

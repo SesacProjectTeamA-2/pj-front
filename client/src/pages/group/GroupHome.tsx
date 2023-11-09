@@ -186,13 +186,6 @@ export default function GroupHome() {
     const [totalRanking, setTotalRanking] = useState([]);
     const [totalScoreRanking, setTotalScoreRanking] = useState([]);
 
-    // interface Mission {
-    //     id: number;
-    //     mTitle: string;
-    //     mContent: string;
-    //     mLevel: number;
-    //     // map: string;
-    // }
 
     const [missionList, setMissionList] = useState<any>(
         groupDetail.groupMission

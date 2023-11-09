@@ -13,17 +13,6 @@ $color-license: #f399ca;
 $color-economy: #b78be3;
 $color-etc: #c4c4c4; // gray3
 
-// https://www.npmjs.com/package/react-social-login-buttons
-// 소셜 로그인 버튼 (1) 구글
-$color-gg-blue: #4285f4;
-$color-gg-red: #ea4335;
-$color-gg-green: #34a853;
-$color-gg-yellow: #fbbc05;
-// 소셜 로그인 버튼 (2) 카카오
-$color-kk-yellow: #fee500;
-// 소셜 로그인 버튼 (3) 네이버
-$color-nv-green: #02c75a;
-
 // 404 page
 $color-err-txt: #704f4f;
 
@@ -38,6 +27,17 @@ $color-gray6: #8f8c8c;
 $color-gray7: #767676;
 $color-gray8: #4f4f4f;
 $color-black: #000;
+
+// https://www.npmjs.com/package/react-social-login-buttons
+// 소셜 로그인 버튼 (1) 구글
+$color-gg-blue: #4285f4;
+$color-gg-red: #ea4335;
+$color-gg-green: #34a853;
+$color-gg-yellow: #fbbc05;
+// 소셜 로그인 버튼 (2) 카카오
+$color-kk-yellow: #fee500;
+// 소셜 로그인 버튼 (3) 네이버
+$color-nv-green: #02c75a;
 
 // $animation-duration: 0.4s;
 

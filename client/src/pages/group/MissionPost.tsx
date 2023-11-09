@@ -11,7 +11,7 @@ import '../../styles/scss/pages/group/post.scss';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import Editor from './Editor';
 import { GroupDetailType, MissionType } from 'src/types/types';
-import SuccessModal from 'src/components/common/modal/SucessModal';
+import SuccessModal from 'src/components/common/modal/SuccessModal';
 
 export default function MissionPost() {
     const cookie = new Cookies();
@@ -186,10 +186,6 @@ export default function MissionPost() {
                 console.log(res);
                 successHandler();
             });
-
-        // [추후] input 입력 안했을 시, 로직
-
-        // [추후] 수정한 모임 홈 화면으로 이동
     };
 
     console.log(board);

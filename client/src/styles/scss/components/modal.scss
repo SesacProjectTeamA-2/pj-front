@@ -5,8 +5,11 @@
 //=== 미션 추가 모달 ===
 
 .modal-mission-add-container {
-    width: 62%;
-    height: 50%;
+    // width: 62%;
+    width: 76vw;
+    // background-color: aqua;
+
+    // height: 50%;
     border-radius: 10px;
     z-index: -1;
     position: fixed;
@@ -59,8 +62,8 @@
 }
 
 .modal-style {
-    width: 50rem;
-    height: 40rem;
+    width: 76vw;
+    // height: 40rem;
     z-index: 150;
     position: absolute;
     top: 50%;
@@ -84,6 +87,7 @@
     @include media('<300px') {
         width: 10rem;
         height: 20rem;
+
     }
 }
 
@@ -142,6 +146,13 @@
     width: 90%;
     align-items: center;
     gap: 4rem;
+    @include media('<860px') {
+        flex-direction: column;
+        width: 80%;
+    }
+    @include media('<500px') {
+        gap: 1rem;
+    }
 }
 
 .modal-mission-list-header {
@@ -153,6 +164,9 @@
     border-radius: 10px;
     padding: 0 2.4rem;
     margin: auto;
+    @include media('<500px') {
+        flex-direction: column;
+    }
 
     .group-create-content {
         width: 60%;
@@ -177,6 +191,13 @@
     align-items: center;
     gap: 1rem;
     width: 80%;
+    @include media('<860px') {
+        margin: 0 auto;
+        justify-content: center;
+    }
+    @include media('<500px') {
+        padding-left: 27px;
+    }
 }
 
 .modal-proof-input {
