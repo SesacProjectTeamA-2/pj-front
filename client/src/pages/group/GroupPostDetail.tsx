@@ -212,7 +212,16 @@ export default function GroupPostDetail() {
         // setFreeList(res.data.groupInfo);
     };
 
-    // 수정
+    // =================== 수정 ==================
+    const [isEditing, setIsEditing] = useState(
+        Array(boardComments.length).fill(false)
+    );
+
+    // const toggleWrite=(idx):void=>{
+    //     const updatedIsEditing = [...isEditing];
+    //     updatedIsEditing[idx] = !updatedIsEditing[idx];
+    //     setIsEditing(updatedIsEditing);
+    // }
 
     const [commentEditInput, setCommentEditInput] = useState({
         gbcSeq: 1,
@@ -234,7 +243,10 @@ export default function GroupPostDetail() {
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
-        console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
+        console.log('HEY! ', {
+            gbcSeq,
+            gbcContent: commentEditInput.gbcContent,
+        });
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
 
