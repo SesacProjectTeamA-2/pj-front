@@ -131,9 +131,12 @@
 }
 
 .ranking-list {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    // display: flex;
+    display: grid;
+    // align-items: center;
+    // gap: 10px;
+    // grid-template-columns: repeat(1, 1fr); /* 4 columns with equal width */
+    // grid-template-rows: repeat(2, 1fr);
 
     img {
         @include box(40px);
@@ -182,4 +185,14 @@
 
 .member-left {
     color: $color-gray6;
+}
+
+.ranking-list-cur {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 columns with equal width */
+}
+
+.ranking-list-acc {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }

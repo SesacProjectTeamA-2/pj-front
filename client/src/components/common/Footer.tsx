@@ -12,13 +12,13 @@ export default function Footer() {
                         alt="motimate logo"
                         className="footer-img"
                     />
-                    <div>
+                    <div className="word-break">
                         <span>Motimates</span> 서로 motivation을 주는 mates
                     </div>
-                    <div>
+                    <div className="word-break">
                         <span>Project 기간</span> 2023.10.23 - 2023.11.10
                     </div>
-                    <div>
+                    <div className="word-break">
                         <span>Skill</span> React, Typescript, Node.js, etc{' '}
                     </div>
                 </div>
