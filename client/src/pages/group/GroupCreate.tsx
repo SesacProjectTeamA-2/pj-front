@@ -313,41 +313,44 @@ export default function GroupCreate() {
             </div>
             <div className="group-create-content">
                 <div className="title3">분야</div>
-
-                {interestedArr.map((interest: Interested) => {
-                    return (
-                        <div key={interest.id}>
-                            <label
-                                onClick={() => interestTypeHandler(interest.id)}
-                                className="tag-btn"
-                                style={{
-                                    background:
-                                        selectedInterestId === interest.id
-                                            ? '#ED8D8D'
-                                            : 'white',
-                                    color:
-                                        selectedInterestId === interest.id
-                                            ? 'white'
-                                            : 'gray',
-                                    border:
-                                        selectedInterestId === interest.id
-                                            ? '1px solid #ED8D8D'
-                                            : ' #acacac',
-                                }}
-                            >
-                                <input
-                                    type="radio"
-                                    name="gCategory"
-                                    className="tag-radio"
-                                    value={interest.val}
-                                    onChange={onChange}
-                                    required
-                                />
-                                {interest.category}
-                            </label>
-                        </div>
-                    );
-                })}
+                <div className="group-create-category">
+                    {interestedArr.map((interest: Interested) => {
+                        return (
+                            <div key={interest.id}>
+                                <label
+                                    onClick={() =>
+                                        interestTypeHandler(interest.id)
+                                    }
+                                    className="tag-btn"
+                                    style={{
+                                        background:
+                                            selectedInterestId === interest.id
+                                                ? '#ED8D8D'
+                                                : 'white',
+                                        color:
+                                            selectedInterestId === interest.id
+                                                ? 'white'
+                                                : 'gray',
+                                        border:
+                                            selectedInterestId === interest.id
+                                                ? '1px solid #ED8D8D'
+                                                : ' #acacac',
+                                    }}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="gCategory"
+                                        className="tag-radio"
+                                        value={interest.val}
+                                        onChange={onChange}
+                                        required
+                                    />
+                                    {interest.category}
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
             <div className="group-create-content description-container">
                 <div className="title3">모임 설명</div>

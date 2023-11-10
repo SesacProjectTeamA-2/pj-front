@@ -86,6 +86,8 @@
     font-weight: bold;
     padding: 30px;
     box-sizing: border-box;
+    // 글씨 화면 넘김 방지
+    overflow-wrap: break-word;
 
     @include media('<800px') {
         width: 80%;
