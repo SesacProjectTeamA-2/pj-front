@@ -398,7 +398,7 @@ export default function MissionAddModal({
         const filtered = missionList.filter(
             (mission: any) => targetId !== mission.id
         );
-        console.log('targetId, filtered', targetId, filtered);
+        // console.log('targetId, filtered', targetId, filtered);
 
         setMissionList(filtered);
         console.log('set 후', filtered);
