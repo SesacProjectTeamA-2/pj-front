@@ -124,7 +124,7 @@ export default function GroupHome() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setGroupDetail(res.data);
 
                 setNowRanking(res.data.nowScoreUserInfo);
@@ -167,7 +167,7 @@ export default function GroupHome() {
     const [isLeader, setIsLeader] = useState(false);
     const [isJoin, setIsJoin] = useState(false);
 
-    console.log('@@@@@@isJoin', isJoin);
+    // console.log('@@@@@@isJoin', isJoin);
 
     // 현재 점수 리스트
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
@@ -186,14 +186,13 @@ export default function GroupHome() {
     const [totalRanking, setTotalRanking] = useState([]);
     const [totalScoreRanking, setTotalScoreRanking] = useState([]);
 
-
     const [missionList, setMissionList] = useState<any>(
         groupDetail.groupMission
     );
-    console.log('missionList GROUP', missionList);
     useEffect(() => {
         setMissionList(groupDetail.groupMission);
     }, [groupDetail.groupMission]);
+    console.log('missionList GROUP', missionList);
 
     console.log('groupDetail HOME', groupDetail);
 

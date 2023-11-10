@@ -279,7 +279,7 @@ export default function MissionAddModal({
                         .then((res) => {
                             console.log('patched', res.data);
                             // nvg(`/group/home/${gSeq}`);
-                            window.location.reload();
+                            // window.location.reload(); // 새로고침 필요없음
                         });
                 } catch (err) {
                     console.log(err);
@@ -401,6 +401,7 @@ export default function MissionAddModal({
         // console.log('targetId, filtered', targetId, filtered);
 
         setMissionList(filtered);
+        console.log('set 후 ADD', filtered);
         // console.log('set 후', filtered);
     };
 
