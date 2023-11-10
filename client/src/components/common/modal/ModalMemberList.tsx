@@ -115,7 +115,7 @@ export default function ModalMemberList({
                 if (!success) {
                     alert('모임장 위임에 실패하였습니다.');
                 } else {
-                    window.location.href = `${process.env.REACT_APP_DB_HOST}/group/home/${gSeq}`;
+                    window.location.href = `motimates.xyz/group/home${gSeq}`;
                 }
             });
     };
