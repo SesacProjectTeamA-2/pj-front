@@ -278,9 +278,8 @@ export default function MissionAddModal({
                         )
                         .then((res) => {
                             console.log('patched', res.data);
-                            nvg(`/group/home/${gSeq}`);
+                            // nvg(`/group/home/${gSeq}`);
                             // window.location.reload();
-                            // closeModalHandler();
                         });
                 } catch (err) {
                     console.log(err);
