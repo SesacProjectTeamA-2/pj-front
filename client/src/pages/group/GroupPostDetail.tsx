@@ -109,7 +109,6 @@ export default function GroupPostDetail() {
         warningModalSwitchHandler();
     };
 
-
     // 메뉴 선택
     const [menu, setMenu] = useState('');
 
@@ -149,10 +148,8 @@ export default function GroupPostDetail() {
             }
         );
 
-        console.log(res.data);
         // window.location.reload();
         getBoardNoti();
-
         // setFreeList(res.data.groupInfo);
     };
 

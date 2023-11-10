@@ -184,7 +184,9 @@ export default function GroupNoti() {
             // replace(/(<([^>]+)>)/gi, '') => html tag 처리
             item.gbTitle.replace(/(<([^>]+)>)/gi, ''),
             item.gbContent.replace(/(<([^>]+)>)/gi, ''),
-            item.tb_groupUser.tb_user.replace(/(<([^>]+)>)/gi, ''), // [추후] 작성자 닉네임 추가
+
+            item.tb_groupUser.tb_user.uName.replace(/(<([^>]+)>)/gi, ''), // [추후] 작성자 닉네임 추가
+
             item.createdAt
         )
     );
