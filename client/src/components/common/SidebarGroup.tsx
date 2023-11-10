@@ -68,7 +68,7 @@ export default function SideBarGroup() {
             {isJoin ? (
                 <div className="sidebar-container">
                     <div className="dropdown">
-                        <button style={{borderRadius: '0'}} className="dropbtn">그룹 메뉴 보기</button>
+                        <button style={{borderRadius: '0', fontWeight: 'bold'}} className="dropbtn">그룹 메뉴 보기</button>
                         <div className="sidebar-content dropdown dropdown-content">
                             <div className="sidebar-list">
                                 <div className="sidebar-theme-list">
