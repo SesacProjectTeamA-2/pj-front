@@ -16,7 +16,7 @@ export default function Intro() {
                     </video>
                 </div>
 
-                <div className="intro-title title5">
+                <div className="intro-title title2">
                     <div>We</div>
                     <div>Grow</div>
                     <div>Together</div>
@@ -28,7 +28,7 @@ export default function Intro() {
 
             <div className="wrapper">
                 <div className="intro-content">
-                    <div className="title3">손쉽게 모임을 시작해보세요.</div>
+                    <div className="title2">손쉽게 모임을 시작해보세요.</div>
                     <br />
                     <div className="intro-content-sub-title">
                         나와 관심사가 비슷한 사람들과 함께 즐겁게 성장하세요 !
@@ -43,7 +43,7 @@ export default function Intro() {
                     </div>
                     <div className="intro-story">
                         <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
-                            <div className="title4">
+                            <div className="title3">
                                 MOTIMATE
                                 <br />
                                 이야기
@@ -63,7 +63,7 @@ export default function Intro() {
                     </div>
                 </div>
                 <div className="intro-content">
-                    <div className="title4">
+                    <div className="title3">
                         여러분의 동료, <br />
                         MOTIMATE를 소개합니다 !
                     </div>
@@ -81,7 +81,7 @@ export default function Intro() {
                             }}
                         >
                             <div
-                                className="title4"
+                                className="title3"
                                 style={{
                                     textAlign: 'justify',
                                 }}
@@ -148,7 +148,7 @@ export default function Intro() {
                     <div className="intro-story">
                         <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
                             <div
-                                className="title4"
+                                className="title2"
                                 style={{
                                     textAlign: 'justify',
                                 }}

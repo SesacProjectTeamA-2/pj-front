@@ -154,7 +154,7 @@ export default function SwiperComponent({
                                                 D-day
                                             </span>
                                             <br />
-                                            <span className="title6">
+                                            <span className="title5">
                                                 {groupInfo.gDday}
                                             </span>
                                             <div
