@@ -402,7 +402,9 @@ export default function MissionAddModal({
             (mission: any) => targetId !== mission.id
         );
         console.log('targetId, filtered', targetId, filtered);
+
         setMissionList(filtered);
+        console.log('set 후', filtered);
     };
 
     return (
