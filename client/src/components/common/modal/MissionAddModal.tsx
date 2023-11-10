@@ -279,7 +279,7 @@ export default function MissionAddModal({
                         .then((res) => {
                             console.log('patched', res.data);
                             // nvg(`/group/home/${gSeq}`);
-                            // window.location.reload();
+                            // window.location.reload(); // 새로고침 필요없음
                         });
                 } catch (err) {
                     console.log(err);
