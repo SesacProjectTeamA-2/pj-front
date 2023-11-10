@@ -76,7 +76,7 @@ export default function MainMission() {
                 </div>
 
                 <div className="1">
-                    {missionArray.length > 0 ? (
+                    {missionArray?.length > 0 ? (
                         <div className="2">
                             {missionArray?.map((info: any, idx: number) => {
                                 return (
