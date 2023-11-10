@@ -181,7 +181,7 @@
         width: 60%;
 
         overflow-y: auto !important;
-    max-height: 70vh;
+        max-height: 70vh;
     }
     .dday-container {
         display: flex;
@@ -250,6 +250,7 @@
     font-size: 1.4rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     @include media('<800px') {
         width: 5rem;
     }

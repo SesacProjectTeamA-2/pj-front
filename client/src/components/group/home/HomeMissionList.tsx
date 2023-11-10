@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import TextField from '@mui/material/TextField';
@@ -132,7 +132,7 @@ export default function HomeMissionList({
         const filtered = missionList.filter(
             (mission: any) => targetId !== mission.id
         );
-        console.log('targetId, filtered', targetId, filtered);
+        console.log('HOME targetId, filtered', targetId, filtered);
         setMissionList(filtered);
     };
     console.log('missionList HOME', missionList);
