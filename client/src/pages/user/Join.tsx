@@ -36,7 +36,7 @@ export default function Join() {
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
-    const uImg: string = urlParams.get('uImg');
+    const uImg: string = urlParams.get('userImg');
 
     for (const [key, value] of urlParams.entries()) {
         console.log(`${key}: ${value}`);
