@@ -22,12 +22,12 @@ export default function AccRanking({
                     {totalRanking?.map((total: any, idx: number) => {
                         return (
                             <li>
-                                <div className="ranking-list">
+                                <div className="ranking-list-acc">
                                     <div>{idx + 1}</div>
                                     <img
                                         src={
                                             total.uImg ||
-                                            userImgSrc ||
+                                            // userImgSrc ||
                                             '/asset/images/user.svg'
                                         }
                                         alt="uerImg"

@@ -14,31 +14,6 @@ export default function Main() {
     //  null 이라면 false로 (명언 모드) : Quotes 컨텐츠 보임
     const [phraseModeSelf, setPhraseModeSelf] = useState<boolean>(false);
 
-    // const getUserData = async () => {
-    //     await axios
-    //         // .get('http://localhost:8888/api/user/mypage', {
-    //         .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             const { phrase } = res.data;
-
-    //             if (phrase) {
-    //                 setPhraseModeSelf(true);
-    //                 setPhraseCtt(phrase);
-    //             }
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     if (myCookie.get('isUser')) {
-    //         getUserData();
-    //         console.log('!!!!!!!!!!!!!!');
-    //     }
-    // }, []);
-
     // 2. 회원가입 url에서 user 정보 가져오기
     const curPath: string = window.location.href;
     const urlParams: any = new URLSearchParams(curPath);
@@ -55,14 +30,9 @@ export default function Main() {
     const cookies = new Cookies();
 
     return (
-        <div className="section">
+        <div className="section-main">
             {/* <MainImg /> */}
-            <Content
-            // phraseCtt={phraseCtt}
-            // setPhraseCtt={setPhraseCtt}
-            // phraseModeSelf={phraseModeSelf}
-            // setPhraseModeSelf={setPhraseModeSelf}
-            />
+            <Content />
         </div>
     );
 }

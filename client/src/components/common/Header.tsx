@@ -120,6 +120,7 @@ export default function Header(props: any) {
             .then((res) => {
                 const { success, msg } = res.data;
                 success ? toast.success(msg) : toast.error(msg);
+                setGrpInput('');
             });
     };
 

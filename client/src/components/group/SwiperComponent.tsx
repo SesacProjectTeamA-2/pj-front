@@ -119,10 +119,10 @@ export default function SwiperComponent({
                                     <Link to={`/group/home/${groupInfo.gSeq}`}>
                                         <div
                                             style={{
-                                                fontSize: '2rem',
+                                                // fontSize: '2rem',
                                                 // marginLeft: '1.2rem',
                                                 textAlign: 'center',
-                                                fontWeight: 'bold',
+                                                // fontWeight: 'bold',
                                                 display: 'flex',
                                                 justifyContent: 'center',
                                                 flexDirection: 'column',
@@ -130,7 +130,9 @@ export default function SwiperComponent({
                                                 justifyItems: 'center',
                                             }}
                                         >
-                                            {groupInfo.gName}
+                                            <span className="title3">
+                                                {groupInfo.gName}
+                                            </span>
                                         </div>
                                         <div
                                             style={{
@@ -144,14 +146,17 @@ export default function SwiperComponent({
                                                 style={{
                                                     // margin: '0px 15px',
                                                     color: '#8D6262',
-                                                    fontWeight: 'bold',
-                                                    fontSize: '1.2rem',
+                                                    // fontWeight: 'bold',
+                                                    // fontSize: '1.2rem',
                                                 }}
+                                                className="title5"
                                             >
                                                 D-day
                                             </span>
                                             <br />
-                                            {groupInfo.gDday}
+                                            <span className="title5">
+                                                {groupInfo.gDday}
+                                            </span>
                                             <div
                                                 style={{
                                                     margin: '2px 30px',

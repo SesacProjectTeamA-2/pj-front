@@ -19,9 +19,9 @@ export default function Join() {
         uName: string;
         uImg: string | null;
         uCharImg: string | null;
-        // uCategory1: string | null;
-        // uCategory2: string | null;
-        // uCategory3: string | null;
+        uCategory1: string | null;
+        uCategory2: string | null;
+        uCategory3: string | null;
     }
 
     // 관심사 배열
@@ -30,13 +30,13 @@ export default function Join() {
     // 1. 회원가입 url에서 user 정보 가져오기
     const curPath: string = window.location.href;
     const url: any = new URL(curPath);
-    console.log('url', url.search);
+    // console.log('url', url.search);
     const urlParams: any = new URLSearchParams(url.search);
-    console.log('params', urlParams);
+    // console.log('params', urlParams);
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
-    const uImg: string = urlParams.get('uImg');
+    const uImg: string = urlParams.get('userImg');
 
     for (const [key, value] of urlParams.entries()) {
         console.log(`${key}: ${value}`);
@@ -57,11 +57,10 @@ export default function Join() {
         uName: uName,
         uImg: uImg,
         uCharImg: selectedCharacter,
-        // uCategory1: selectedArr[0],
-        // uCategory2: selectedArr[1],
-        // uCategory3: selectedArr[2],
+        uCategory1: selectedArr[0],
+        uCategory2: selectedArr[1],
+        uCategory3: selectedArr[2],
     };
-    console.log('userInfo JOIN', userInfo);
 
     const register = async (): Promise<void> => {
         console.log('register!');
@@ -111,13 +110,15 @@ export default function Join() {
             {/* </form> */}
 
             <Link to="/login">
-                <button
-                    id="join-btn"
-                    className="btn-fixed"
-                    onClick={() => register()}
-                >
-                    시작하기
-                </button>
+                <div className="btn-fixed-wrapper">
+                    <button
+                        id="join-btn"
+                        className="btn-fixed"
+                        onClick={() => register()}
+                    >
+                        시작하기
+                    </button>
+                </div>
             </Link>
         </div>
     );

@@ -7,6 +7,7 @@
     padding: 0;
     margin: 0;
     justify-content: flex-start;
+    height: fit-content;
 }
 
 .cover-img {
@@ -40,6 +41,15 @@
     justify-content: space-between;
     align-items: flex-end;
     width: 100%;
+
+    @include media('<800px') {
+        width: 90%;
+        height: 50%;
+    }
+    @include media('<500px') {
+        width: 90%;
+        height: 50%;
+    }
 }
 
 .upper-content-wrapper {
@@ -73,11 +83,26 @@
     border-radius: 10px;
     width: 100%;
     margin-top: 20px;
-    // padding-top: 30px;
-    // padding-bottom: 30px;
-    // padding-left: 30px;
+    font-weight: bold;
     padding: 30px;
     box-sizing: border-box;
+    // 글씨 화면 넘김 방지
+    overflow-wrap: break-word;
+
+    @include media('<800px') {
+        width: 80%;
+        height: 70%;
+    }
+
+    @include media('<500px') {
+        width: 90%;
+        height: 50%;
+    }
+
+    @include media('<300px') {
+        width: 90%;
+        height: 50%;
+    }
 
     li {
         padding: 10px 0;
@@ -85,8 +110,10 @@
 }
 
 .mission-li {
-    display: flex;
+    // display: flex;
     // gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .mission-element {
@@ -104,13 +131,22 @@
 }
 
 .ranking-list {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    // display: flex;
+    display: grid;
+    // align-items: center;
+    // gap: 10px;
+    grid-template-columns: repeat(2, 1fr); /* 4 columns with equal width */
+    // grid-template-rows: repeat(2, 1fr);
 
     img {
         @include box(40px);
         border-radius: 50%;
+    }
+    .name {
+        white-space: nowrap;
+        @include media('<300px') {
+            font-size: 0.7rem;
+        }
     }
 }
 
@@ -127,8 +163,8 @@
 }
 
 .score {
-    font-weight: bold;
-    font-size: 2rem;
+    // font-weight: bold;
+    font-size: 1.5rem;
 }
 
 //=== 멤버 ===
@@ -137,6 +173,10 @@
     justify-content: space-between;
     align-items: flex-end;
     width: 100%;
+
+    @include media('<800px') {
+        width: 80%;
+    }
 }
 
 .member-count {
@@ -145,4 +185,14 @@
 
 .member-left {
     color: $color-gray6;
+}
+
+.ranking-list-cur {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 columns with equal width */
+}
+
+.ranking-list-acc {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }

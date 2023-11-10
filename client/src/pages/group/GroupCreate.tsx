@@ -12,7 +12,7 @@ import '../../styles/scss/pages/group/groupCreate.scss';
 
 import MissionAddModal from '../../components/common/modal/MissionAddModal';
 import { Divider, ListItem, ListItemText } from '@mui/material';
-import SuccessModal from 'src/components/common/modal/SucessModal';
+import SuccessModal from 'src/components/common/modal/SuccessModal';
 
 export default function GroupCreate() {
     const cookie = new Cookies();
@@ -312,45 +312,48 @@ export default function GroupCreate() {
                 {/* </form> */}
             </div>
             <div className="group-create-content">
-                <div>분야</div>
-
-                {interestedArr.map((interest: Interested) => {
-                    return (
-                        <div key={interest.id}>
-                            <label
-                                onClick={() => interestTypeHandler(interest.id)}
-                                className="tag-btn"
-                                style={{
-                                    background:
-                                        selectedInterestId === interest.id
-                                            ? '#ED8D8D'
-                                            : 'white',
-                                    color:
-                                        selectedInterestId === interest.id
-                                            ? 'white'
-                                            : 'gray',
-                                    border:
-                                        selectedInterestId === interest.id
-                                            ? '1px solid #ED8D8D'
-                                            : ' #acacac',
-                                }}
-                            >
-                                <input
-                                    type="radio"
-                                    name="gCategory"
-                                    className="tag-radio"
-                                    value={interest.val}
-                                    onChange={onChange}
-                                    required
-                                />
-                                {interest.category}
-                            </label>
-                        </div>
-                    );
-                })}
+                <div className="title3">분야</div>
+                <div className="group-create-category">
+                    {interestedArr.map((interest: Interested) => {
+                        return (
+                            <div key={interest.id}>
+                                <label
+                                    onClick={() =>
+                                        interestTypeHandler(interest.id)
+                                    }
+                                    className="tag-btn"
+                                    style={{
+                                        background:
+                                            selectedInterestId === interest.id
+                                                ? '#ED8D8D'
+                                                : 'white',
+                                        color:
+                                            selectedInterestId === interest.id
+                                                ? 'white'
+                                                : 'gray',
+                                        border:
+                                            selectedInterestId === interest.id
+                                                ? '1px solid #ED8D8D'
+                                                : ' #acacac',
+                                    }}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="gCategory"
+                                        className="tag-radio"
+                                        value={interest.val}
+                                        onChange={onChange}
+                                        required
+                                    />
+                                    {interest.category}
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
             <div className="group-create-content description-container">
-                <div>모임 설명</div>
+                <div className="title3">모임 설명</div>
                 <textarea
                     className="description"
                     placeholder="500자 이내로 입력하세요."
@@ -361,7 +364,7 @@ export default function GroupCreate() {
                 ></textarea>
             </div>
             <div className="group-create-content">
-                <div>제한 인원</div>
+                <div className="title3">제한 인원</div>
                 <input
                     defaultValue={1}
                     className="limit-number"
@@ -371,7 +374,7 @@ export default function GroupCreate() {
                 />
             </div>
             <div className="group-create-content mission-wrapper">
-                <div>Mission</div>
+                <div className="title3">Mission</div>
                 <div className="mission-container">
                     <div onClick={missionAddHandler}>
                         <img src="/asset/icons/plus.svg" alt="plus mission" />
@@ -417,9 +420,14 @@ export default function GroupCreate() {
                 action={'모임을 생성'}
                 groupName={input.gName}
             />
-            <button className="btn-fixed" onClick={() => groupCreateHandler()}>
-                모임 시작하기 !
-            </button>
+            <div className="btn-fixed-wrapper">
+                <button
+                    className="btn-fixed"
+                    onClick={() => groupCreateHandler()}
+                >
+                    모임 시작하기 !
+                </button>
+            </div>
         </div>
     );
 }

@@ -1,11 +1,15 @@
 @import '../abstracts/variables.scss';
 @import '../abstracts/utils.scss';
+@import '~include-media/dist/include-media';
 
 //=== 미션 추가 모달 ===
 
 .modal-mission-add-container {
-    width: 62%;
-    height: 50%;
+    // width: 62%;
+    width: 76vw;
+    // background-color: aqua;
+
+    // height: 50%;
     border-radius: 10px;
     z-index: -1;
     position: fixed;
@@ -17,7 +21,11 @@
 .modal-mission-add-content {
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    // overflow: auto;
+
+    // 모달 화면 안 넘어가도록 강제 scroll
+    overflow-y: auto !important;
+    max-height: 70vh;
 
     width: 100%;
     height: 80%;
@@ -36,6 +44,11 @@
         border-radius: 10px;
         width: 80%;
         margin: 1.2rem auto;
+        white-space: nowrap;
+        @include media('<800px') {
+            width: 7rem;
+            height: 3rem;
+        }
     }
 }
 
@@ -50,6 +63,7 @@
 .modal-mission-delete-btn {
     background-color: $color-gray4;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .modal-mission-delete-btn:hover {
@@ -58,8 +72,8 @@
 }
 
 .modal-style {
-    width: 50rem;
-    height: 40rem;
+    width: 76vw;
+    // height: 40rem;
     z-index: 150;
     position: absolute;
     top: 50%;
@@ -72,6 +86,18 @@
     animation: modal-show 0.3s;
     padding: 2rem;
     background-color: white;
+    @include media('<800px') {
+        width: 70%;
+        height: 20rem;
+    }
+    @include media('<500px') {
+        width: 60%;
+        height: 30rem;
+    }
+    @include media('<300px') {
+        width: 10rem;
+        height: 20rem;
+    }
 }
 
 .warning-modal-style {
@@ -89,6 +115,18 @@
     animation: modal-show 0.3s;
     padding: 2rem;
     background-color: white;
+    @include media('<800px') {
+        width: 70%;
+        height: 20rem;
+    }
+    @include media('<500px') {
+        width: 60%;
+        height: 30rem;
+    }
+    @include media('<300px') {
+        width: 10rem;
+        height: 20rem;
+    }
 }
 
 .overlay {
@@ -117,6 +155,13 @@
     width: 90%;
     align-items: center;
     gap: 4rem;
+    @include media('<860px') {
+        flex-direction: column;
+        width: 80%;
+    }
+    @include media('<500px') {
+        gap: 1rem;
+    }
 }
 
 .modal-mission-list-header {
@@ -128,11 +173,20 @@
     border-radius: 10px;
     padding: 0 2.4rem;
     margin: auto;
+    @include media('<500px') {
+        flex-direction: column;
+    }
 
     .group-create-content {
         width: 60%;
-    }
 
+        overflow-y: auto !important;
+        max-height: 70vh;
+    }
+    .dday-container {
+        display: flex;
+        justify-content: center;
+    }
     #dday-text {
         width: 30%;
     }
@@ -140,6 +194,9 @@
 
 .modal-btn-add {
     background-color: $color-gray4;
+    @include media('<800px') {
+        width: 5rem;
+    }
 }
 
 .modal-btn-add:hover {
@@ -152,6 +209,13 @@
     align-items: center;
     gap: 1rem;
     width: 80%;
+    @include media('<860px') {
+        margin: 0 auto;
+        justify-content: center;
+    }
+    @include media('<500px') {
+        padding-left: 27px;
+    }
 }
 
 .modal-proof-input {
@@ -184,6 +248,12 @@
 .modal-btn-done {
     margin: 2rem auto 0 auto;
     font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include media('<800px') {
+        width: 5rem;
+    }
 }
 
 //=== 미션 취소 모달 ===
@@ -198,6 +268,9 @@
     height: 90%;
     width: 90%;
     margin: 3rem;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
 }
 
 .modal-cancel-header {
@@ -281,6 +354,14 @@
 .mission-cancel-done-btn {
     width: 40%;
     background-color: $color-gray8;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media('<500px') {
+        height: 4rem;
+        font-size: 0.1rem;
+    }
 }
 
 .mission-cancel-done-btn:hover {
@@ -292,6 +373,19 @@
 .mission-cancel-back-btn {
     width: 40%;
     background-color: $color-gray4;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media('<500px') {
+        height: 4rem;
+        font-size: 0.1rem;
+    }
 }
 
 .mission-cancel-btn-container {
@@ -314,6 +408,9 @@
     margin: 0;
     display: flex;
     margin: 20% auto;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
 }
 
 .leave-modal-container {
@@ -322,4 +419,25 @@
     width: 100%;
     justify-content: center;
     margin-bottom: 3rem;
+}
+// #filled-multiline-flexible {
+//     background-color: palevioletred;
+//     width: 1rem;
+// }
+
+//=== 미션 수정 모달 ===
+.mission-edit-list-content {
+    display: flex;
+    flex-direction: row;
+    @include media('<800px') {
+        flex-direction: column;
+    }
+
+    overflow-y: auto !important;
+    max-height: 70vh;
+}
+.modal-mission-edit-btn {
+    background-color: $color-gray4;
+    cursor: pointer;
+    white-space: nowrap;
 }

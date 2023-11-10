@@ -8,7 +8,7 @@ import Editor from './Editor';
 
 import GroupHeader from '../../components/group/content/GroupHeader';
 import { MissionType } from 'src/types/types';
-import SuccessModal from 'src/components/common/modal/SucessModal';
+import SuccessModal from 'src/components/common/modal/SuccessModal';
 
 export default function BoardMissionEdit() {
     const cookie = new Cookies();

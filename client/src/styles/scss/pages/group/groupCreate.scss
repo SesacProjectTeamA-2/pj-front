@@ -1,13 +1,22 @@
 @import '../../abstracts/variables';
 @import '~include-media/dist/include-media';
 
-
 .group-create-contianer {
     align-items: flex-start;
-    width: 90%;
+    width: 100vw;
     padding: 30px;
     gap: 3rem;
     margin: 0 auto;
+    position: relative;
+
+    height: fit-content;
+    // width: 100vh;
+}
+
+.group-create-category {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
+    grid-template-rows: repeat(2, 1fr);
 }
 
 .group-create-content {
@@ -15,11 +24,14 @@
     gap: 1.6rem;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
 
     .dday-title {
         width: 4.4rem;
         padding: 2rem 0;
         font-weight: bold;
+        white-space: nowrap;
+        margin-left: 10%;
     }
 
     label {
@@ -41,7 +53,6 @@
     @include media('<800px') {
         grid-template-columns: repeat(4, 2fr);
     }
-   
 }
 
 .group-create-title {
@@ -104,6 +115,8 @@ input {
 .description-container {
     width: 100%;
     // align-items: flex-start;
+    //글씨 넘김 방지
+    white-space: nowrap;
 
     div {
         padding-top: 10px;
@@ -116,6 +129,9 @@ input {
         padding: 2rem;
         border-radius: 10px;
         border: none;
+        @include media('<500px') {
+            width: 70%;
+        }
     }
 }
 
@@ -126,4 +142,10 @@ input {
 .max-number {
     color: $color-gray4;
     font-weight: normal;
+}
+
+.btn-fixed-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

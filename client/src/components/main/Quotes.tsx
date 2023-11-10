@@ -8,6 +8,7 @@ export default function Quotes(props: any) {
 
     console.log(props.phraseModeSelf);
     console.log(props.phraseCtt);
+    // console.log('명언 칸에 전달된 props', props);
     return (
         // <div className="content-grid-box quotes-div-flex">
         //     <div className="quotes ">
@@ -39,11 +40,16 @@ export default function Quotes(props: any) {
                         <p>{props.phraseCtt}</p>
                         {/* <cite>{advice.author}</cite> */}
                         <br />
+                        <cite>
+                            <div>- {props.uName} -</div>
+                        </cite>
+                        <br />
                     </>
                 ) : (
                     <>
                         <br />
                         <p>{advice.message}</p>
+                        <br />
                         <cite>
                             <div>- {advice.author}</div>
                         </cite>

@@ -55,7 +55,6 @@ export default function ModalMemberList({
         }
     }, []);
 
-
     const getGroup = async () => {
         const res = await axios
             .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
@@ -97,6 +96,9 @@ export default function ModalMemberList({
     // 모임장 위임
     const patchLeader = async () => {
         const input = { newLeaderUSeq: selectedMemberId };
+        console.log('############', input);
+        // console.log(selectedMemberId)
+
         const res = await axios
             .patch(
                 `${process.env.REACT_APP_DB_HOST}/group/leader/${gSeq}`,
@@ -113,7 +115,7 @@ export default function ModalMemberList({
                 if (!success) {
                     alert('모임장 위임에 실패하였습니다.');
                 } else {
-                    window.location.href = `http://localhost:3000/group/home/${gSeq}`;
+                    window.location.href = `motimates.xyz/group/home${gSeq}`;
                 }
             });
     };
@@ -168,13 +170,13 @@ export default function ModalMemberList({
                                         <img
                                             src={
                                                 member.uImg ||
-                                                userImgSrc ||
+                                                // userImgSrc ||
                                                 '/asset/images/user.svg'
                                             }
                                             alt="userImg"
                                         />
                                         <div className="cur-ranking-content">
-                                            <div className="title4">
+                                            <div className="title4 name">
                                                 {member.uName}
                                             </div>
                                         </div>
@@ -192,13 +194,13 @@ export default function ModalMemberList({
                                     noValidate
                                     autoComplete="off"
                                 >
-                                    <TextField
+                                    {/* <TextField
                                         id="filled-multiline-flexible"
                                         label="이유가 무엇인가요 ?"
                                         multiline
                                         maxRows={4}
                                         variant="filled"
-                                    />
+                                    /> */}
                                 </Box>
                             </div>
 
@@ -231,7 +233,7 @@ export default function ModalMemberList({
                                     onClick={closeModalHandler}
                                     className="btn-md mission-cancel-back-btn"
                                 >
-                                    돌아가기
+                                    취소
                                 </button>
                             </div>
                         </div>

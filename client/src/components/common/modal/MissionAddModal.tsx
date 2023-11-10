@@ -222,10 +222,7 @@ export default function MissionAddModal({
                 gDday: targetDate,
             });
 
-            // console.log(
-            //     '<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>',
-            //     input
-            // );
+            console.log('<<<<<<input ::::::;; Input>>>>>>>>>>>', input);
 
             // console.log('!!!!!!!', Number(dday.slice(2)));
 
@@ -282,7 +279,7 @@ export default function MissionAddModal({
                         .then((res) => {
                             console.log('patched', res.data);
                             // nvg(`/group/home/${gSeq}`);
-                            window.location.reload();
+                            // window.location.reload(); // 새로고침 필요없음
                         });
                 } catch (err) {
                     console.log(err);
@@ -401,8 +398,10 @@ export default function MissionAddModal({
         const filtered = missionList.filter(
             (mission: any) => targetId !== mission.id
         );
-        console.log('targetId, filtered', targetId, filtered);
+        // console.log('targetId, filtered', targetId, filtered);
+
         setMissionList(filtered);
+        console.log('set 후 ADD', filtered);
     };
 
     return (
@@ -483,6 +482,7 @@ export default function MissionAddModal({
                         }}
                         noValidate
                         autoComplete="off"
+                        className="verify-box"
                     >
                         <TextField
                             id="filled-multiline-flexible"
@@ -694,11 +694,12 @@ export default function MissionAddModal({
                                                     <Divider component="li" />
 
                                                     <ListItem
-                                                        style={{
-                                                            display: 'flex',
-                                                            flexDirection:
-                                                                'row',
-                                                        }}
+                                                        className="mission-edit-list-content"
+                                                        // style={{
+                                                        //     display: 'flex',
+                                                        //     flexDirection:
+                                                        //         'row',
+                                                        // }}
                                                     >
                                                         {/* 제목, 내용 div */}
                                                         <div

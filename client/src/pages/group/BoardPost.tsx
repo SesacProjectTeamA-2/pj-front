@@ -11,7 +11,7 @@ import '../../styles/scss/pages/group/post.scss';
 import GroupHeader from '../../components/group/content/GroupHeader';
 import Editor from './Editor';
 import { GroupDetailType, MissionType } from 'src/types/types';
-import SuccessModal from 'src/components/common/modal/SucessModal';
+import SuccessModal from 'src/components/common/modal/SuccessModal';
 
 export default function BoardPost() {
     const cookie = new Cookies();

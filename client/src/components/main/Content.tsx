@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
+import { Paper } from '@mui/material';
+
 import Quotes from './Quotes';
 import MainMission from './MainMission';
 import MyPercentage from './MyPercentage';
@@ -216,13 +218,13 @@ export default function Content(props: any) {
     //     getGroupDeatil();
     // }, []);
 
-    console.log('????', uCharImg.slice(-5)); // 2.svg
-    console.log('????', uCharImg.slice(-4)); // .svg
+    // console.log('????', uCharImg.slice(-5)); // 2.svg
+    // console.log('????', uCharImg.slice(-4)); // .svg
 
-    console.log('????', uCharImg.slice(0, 14)); // /asset/images/
-    console.log('????', uCharImg.slice(14, 17)); // dog
+    // console.log('????', uCharImg.slice(0, 14)); // /asset/images/
+    // console.log('????', uCharImg.slice(14, 17)); // dog
 
-    let charNum = uCharImg.slice(-5, -4); // 2
+    let charNum = uCharImg?.slice(-5, -4); // 2
 
     // console.log('....', uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
 
@@ -231,9 +233,9 @@ export default function Content(props: any) {
     let totalRates = 0;
     let totalPercent = 0;
 
-    for (let i = 0; i < doneRates.length; i++) {
+    for (let i = 0; i < doneRates?.length; i++) {
         totalRates += doneRates[i];
-        totalPercent = totalRates / doneRates.length; // 평균
+        totalPercent = totalRates / doneRates?.length; // 평균
     }
 
     // if (totalPercent > 70) {
@@ -250,29 +252,32 @@ export default function Content(props: any) {
 
     useEffect(() => {
         if (totalPercent > 70) {
-            setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+            setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
             console.log(setCharImg);
         }
-        setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+        setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
     });
     console.log('totalRates', totalRates);
     console.log('totalRates', totalPercent);
 
     return (
-        <div>
+        <div
+            style={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+        >
             <div className="content-grid">
                 <Quotes
                     phraseCtt={phraseCtt}
                     // setPhraseCtt={setPhraseCtt}
                     // setPhraseModeSelf={setPhraseModeSelf}
                     phraseModeSelf={phraseModeSelf}
+                    uName={uName}
                 />
                 {/* 1. 명언 : 가로로 길게 */}
 
                 <br />
 
                 {/* 2. 달성률 : my, team */}
-                <div className="content-grid-box">
+                <Paper elevation={3} className="content-grid-box">
                     <div className="percentage-div">
                         <div
                             className="title4"
@@ -281,9 +286,10 @@ export default function Content(props: any) {
                         >
                             My 달성률{' '}
                         </div>
+
                         <div className="progress-img-flex">
                             <div className="progress-bar-div">
-                                {groupArray.map((group: any, idx: number) => {
+                                {groupArray?.map((group: any, idx: number) => {
                                     return (
                                         <div
                                             style={{
@@ -328,7 +334,7 @@ export default function Content(props: any) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Paper>
 
                 <br />
 

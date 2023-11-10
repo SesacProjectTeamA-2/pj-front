@@ -21,6 +21,7 @@
     }
     .sidebar-list {
         width: 100%;
+
         height: fit-content;
         .sidebar-theme-list {
             display: flex;
@@ -121,7 +122,7 @@
 
         @include media('<900px') {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 }
@@ -228,31 +229,53 @@
 //     display: block;
 // }
 
-// .dropdown {
-//     float: left;
-//     overflow: hidden;
-// }
+// 여기서부터 드롭 다운
 
-// .dropdown .dropbtn {
-//     font-size: 17px;
-//     border: none;
-//     outline: none;
-//     color: white;
-//     padding: 14px 16px;
-//     background-color: inherit;
-//     font-family: inherit;
-//     margin: 0;
-// }
+.dropbtn {
+    // font-size: 17px;
+    display: none;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: white;
+    // padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
 
-// .dropdown-content {
-//     display: none;
-//     position: absolute;
-//     background-color: #f9f9f9;
-//     min-width: 160px;
-//     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-//     z-index: 1;
-// }
+@include media('<900px') {
+    .dropbtn {
+        display: inherit;
+    }
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
 
-// .dropdown:hover .dropdown-content {
-//     display: block;
-// }
+    .dropdown .dropbtn {
+        // font-size: 17px;
+        width: 100vw;
+        border: none;
+        outline: none;
+        color: white;
+        // padding: 14px 16px;
+        background-color: $color-primary;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+        z-index: 100;
+    }
+}

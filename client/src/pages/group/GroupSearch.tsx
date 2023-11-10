@@ -36,11 +36,11 @@ export default function GroupSearch({
 
     return (
         <div>
-            <div className="title1" style={{ margin: '2rem' }}>
-                검색 결과 입니다.
+            <div className="title1" style={{ marginBottom: '2rem' }}>
+                검색 결과
             </div>
 
-            <div>
+            <div  className='search-group-grid'>
                 {searchGroupList?.map((searchGroup: GroupStateType) => (
                     <div
                         key={searchGroup.gSeq}
@@ -48,7 +48,7 @@ export default function GroupSearch({
                     >
                         <Link to={`/group/home/${searchGroup.gSeq}`}>
                             <div className="title2">{searchGroup.gName}</div>
-                            <div className="title5">{searchGroup.gDesc}</div>
+                            {/* <div className="title5">{searchGroup.gDesc}</div> */}
                         </Link>
                     </div>
                 ))}

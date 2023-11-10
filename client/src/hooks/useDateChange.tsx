@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function useDateChange(str: any) {
     // 주어진 날짜 문자열
-    var dateString = '2023-11-09 16:27:52';
+    var dateString = str;
 
     // Date 객체로 변환
     var date = new Date(dateString);

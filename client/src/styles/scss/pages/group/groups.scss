@@ -1,11 +1,14 @@
 @import '../../abstracts/variables';
 @import '../../abstracts/utils';
+@import '~include-media/dist/include-media';
 
 .input-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    @include media('<960px') {
+        flex-direction: column;
+    }
     input {
         width: 20rem;
     }
@@ -23,7 +26,7 @@
 
 .group-container {
     width: 80%;
-
+    // height: 100vh;
     min-height: 80vh;
 }
 
@@ -34,10 +37,10 @@
     gap: 2rem;
 }
 
-.btn-fixed-wrapper {
-    display: flex;
-    justify-content: center;
-}
+// .btn-fixed-wrapper {
+//     display: flex;
+//     justify-content: center;
+// }
 
 .groups-interested {
     label {
@@ -45,6 +48,22 @@
     }
 
     margin-bottom: 1.6rem;
+}
+
+.search-group-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        2,
+        1fr
+    ); 
+    // grid-template-rows: repeat(2, 1fr); /* 2개의 로우, 각 로우 높이는 동일합니다. */
+    gap: 10px;
+    @include media('<700px') {
+        grid-template-columns: repeat(
+            1,
+            1fr
+        ); 
+    }
 }
 
 .search-group-container {
@@ -55,4 +74,10 @@
     color: white;
     padding: 2rem;
     margin: 2rem;
+    display: flex; /* Flexbox를 사용하여 내부 컨텐츠를 가운데 정렬합니다. */
+    justify-content: center; /* 수평 방향 가운데 정렬 */
+    align-items: center; /* 수직 방향 가운데 정렬 */
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.1);
 }

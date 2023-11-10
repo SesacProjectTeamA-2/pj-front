@@ -124,7 +124,7 @@ export default function GroupHome() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setGroupDetail(res.data);
 
                 setNowRanking(res.data.nowScoreUserInfo);
@@ -134,6 +134,7 @@ export default function GroupHome() {
                 setTotalScoreRanking(res.data.totalRanking);
 
                 setIsLeader(res.data.isLeader);
+                setIsJoin(res.data.isJoin);
             });
     };
 
@@ -145,7 +146,7 @@ export default function GroupHome() {
     const postGroupJoin = async () => {
         const input = { gSeq };
         const res = await axios
-            .post(`${process.env.REACT_APP_DB_HOST}/group/join/`, input, {
+            .post(`${process.env.REACT_APP_DB_HOST}/group/join`, input, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
                 },
@@ -156,15 +157,17 @@ export default function GroupHome() {
                 if (!success) {
                     toast.error(msg);
                 } else {
-                    window.location.href = `http://localhost:3000/group/home/${gSeq}`;
+                    toast.success(msg);
+                    window.location.reload();
                 }
             });
     };
 
     // 모임장 / 멤버
-    const [isLeader, setIsLeader] = useState('');
+    const [isLeader, setIsLeader] = useState(false);
+    const [isJoin, setIsJoin] = useState(false);
 
-    console.log('@@@@@@', isLeader);
+    // console.log('@@@@@@isJoin', isJoin);
 
     // 현재 점수 리스트
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
@@ -183,21 +186,13 @@ export default function GroupHome() {
     const [totalRanking, setTotalRanking] = useState([]);
     const [totalScoreRanking, setTotalScoreRanking] = useState([]);
 
-    // interface Mission {
-    //     id: number;
-    //     mTitle: string;
-    //     mContent: string;
-    //     mLevel: number;
-    //     // map: string;
-    // }
-
     const [missionList, setMissionList] = useState<any>(
         groupDetail.groupMission
     );
-    console.log('missionList GROUP', missionList);
     useEffect(() => {
         setMissionList(groupDetail.groupMission);
     }, [groupDetail.groupMission]);
+    console.log('missionList GROUP', missionList);
 
     console.log('groupDetail HOME', groupDetail);
 
@@ -254,14 +249,22 @@ export default function GroupHome() {
             <MemberList
                 gMax={groupDetail.groupMaxMember}
                 isLeader={groupDetail.isLeader}
-                groupMember={groupDetail.groupMember}
+                groupMember={groupDetail.memberArray}
                 leaderInfo={groupDetail.leaderInfo}
                 memberArray={groupDetail.memberArray}
             />
 
-            <button className="btn-fixed" onClick={postGroupJoin}>
-                가입하기
-            </button>
+            {isJoin ? (
+                ''
+            ) : groupDetail.groupMaxMember !== null &&
+              groupDetail.memberArray.length + 1 <
+                  groupDetail.groupMaxMember ? (
+                <button className="btn-fixed" onClick={postGroupJoin}>
+                    가입하기
+                </button>
+            ) : (
+                ''
+            )}
         </div>
     );
 }
