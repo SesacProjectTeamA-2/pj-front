@@ -13,6 +13,12 @@
     // width: 100vh;
 }
 
+.group-create-category {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
+    grid-template-rows: repeat(2, 1fr);
+}
+
 .group-create-content {
     display: flex;
     gap: 1.6rem;
@@ -109,6 +115,8 @@ input {
 .description-container {
     width: 100%;
     // align-items: flex-start;
+    //글씨 넘김 방지
+    white-space: nowrap;
 
     div {
         padding-top: 10px;
