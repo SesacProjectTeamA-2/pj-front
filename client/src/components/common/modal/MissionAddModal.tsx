@@ -222,10 +222,7 @@ export default function MissionAddModal({
                 gDday: targetDate,
             });
 
-            // console.log(
-            //     '<<<<<<input : 그룹 생성에서 기존 Input>>>>>>>>>>>',
-            //     input
-            // );
+            console.log('<<<<<<input ::::::;; Input>>>>>>>>>>>', input);
 
             // console.log('!!!!!!!', Number(dday.slice(2)));
 

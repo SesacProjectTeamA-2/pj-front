@@ -218,13 +218,13 @@ export default function Content(props: any) {
     //     getGroupDeatil();
     // }, []);
 
-    console.log('????', uCharImg.slice(-5)); // 2.svg
-    console.log('????', uCharImg.slice(-4)); // .svg
+    // console.log('????', uCharImg.slice(-5)); // 2.svg
+    // console.log('????', uCharImg.slice(-4)); // .svg
 
-    console.log('????', uCharImg.slice(0, 14)); // /asset/images/
-    console.log('????', uCharImg.slice(14, 17)); // dog
+    // console.log('????', uCharImg.slice(0, 14)); // /asset/images/
+    // console.log('????', uCharImg.slice(14, 17)); // dog
 
-    let charNum = uCharImg.slice(-5, -4); // 2
+    let charNum = uCharImg?.slice(-5, -4); // 2
 
     // console.log('....', uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
 
@@ -233,9 +233,9 @@ export default function Content(props: any) {
     let totalRates = 0;
     let totalPercent = 0;
 
-    for (let i = 0; i < doneRates.length; i++) {
+    for (let i = 0; i < doneRates?.length; i++) {
         totalRates += doneRates[i];
-        totalPercent = totalRates / doneRates.length; // 평균
+        totalPercent = totalRates / doneRates?.length; // 평균
     }
 
     // if (totalPercent > 70) {
@@ -252,10 +252,10 @@ export default function Content(props: any) {
 
     useEffect(() => {
         if (totalPercent > 70) {
-            setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+            setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
             console.log(setCharImg);
         }
-        setCharImg(uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
+        setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
     });
     console.log('totalRates', totalRates);
     console.log('totalRates', totalPercent);
@@ -289,7 +289,7 @@ export default function Content(props: any) {
 
                         <div className="progress-img-flex">
                             <div className="progress-bar-div">
-                                {groupArray.map((group: any, idx: number) => {
+                                {groupArray?.map((group: any, idx: number) => {
                                     return (
                                         <div
                                             style={{
