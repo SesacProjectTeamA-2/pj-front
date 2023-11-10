@@ -402,7 +402,9 @@ export default function MissionAddModal({
             (mission: any) => targetId !== mission.id
         );
         console.log('targetId, filtered', targetId, filtered);
+
         setMissionList(filtered);
+        console.log('set 후', filtered);
     };
 
     return (
@@ -483,6 +485,7 @@ export default function MissionAddModal({
                         }}
                         noValidate
                         autoComplete="off"
+                        className="verify-box"
                     >
                         <TextField
                             id="filled-multiline-flexible"
@@ -694,11 +697,12 @@ export default function MissionAddModal({
                                                     <Divider component="li" />
 
                                                     <ListItem
-                                                        style={{
-                                                            display: 'flex',
-                                                            flexDirection:
-                                                                'row',
-                                                        }}
+                                                        className="mission-edit-list-content"
+                                                        // style={{
+                                                        //     display: 'flex',
+                                                        //     flexDirection:
+                                                        //         'row',
+                                                        // }}
                                                     >
                                                         {/* 제목, 내용 div */}
                                                         <div

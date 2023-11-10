@@ -149,12 +149,7 @@ export default function GroupMission() {
             <div className="noti-container proof-container">
                 <div className="noti-header proof-header">
                     <div className="title5">[ 인증방법 ]</div>
-                    <div>
-                        {missionProof}
-                        {/* {Object.keys(missionList)?.length
-                            ? missionList[Number(mSeq) - 1]?.mContent
-                            : ''} */}
-                    </div>
+                    <div>{missionProof}</div>
                 </div>
             </div>
             <GroupMissionList

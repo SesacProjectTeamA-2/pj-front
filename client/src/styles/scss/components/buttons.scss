@@ -101,12 +101,20 @@ button {
     height: 4rem;
     white-space: nowrap;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @include media('<800px') {
         width: 20%;
         font-size: 1rem;
     }
 }
-
+.cmt-edit-btn {
+    white-space: nowrap;
+}
+.cmt-del-btn {
+    white-space: nowrap;
+}
 //=== 빵빠레 버튼 ,,, ====
 // * {
 //     box-sizing: border-box;

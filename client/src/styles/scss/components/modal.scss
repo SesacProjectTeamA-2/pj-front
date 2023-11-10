@@ -21,7 +21,11 @@
 .modal-mission-add-content {
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    // overflow: auto;
+
+    // 모달 화면 안 넘어가도록 강제 scroll
+    overflow-y: auto !important;
+    max-height: 70vh;
 
     width: 100%;
     height: 80%;
@@ -40,6 +44,11 @@
         border-radius: 10px;
         width: 80%;
         margin: 1.2rem auto;
+        white-space: nowrap;
+        @include media('<800px') {
+            width: 7rem;
+            height: 3rem;
+        }
     }
 }
 
@@ -54,6 +63,7 @@
 .modal-mission-delete-btn {
     background-color: $color-gray4;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .modal-mission-delete-btn:hover {
@@ -87,7 +97,6 @@
     @include media('<300px') {
         width: 10rem;
         height: 20rem;
-
     }
 }
 
@@ -170,8 +179,14 @@
 
     .group-create-content {
         width: 60%;
-    }
 
+        overflow-y: auto !important;
+    max-height: 70vh;
+    }
+    .dday-container {
+        display: flex;
+        justify-content: center;
+    }
     #dday-text {
         width: 30%;
     }
@@ -179,6 +194,9 @@
 
 .modal-btn-add {
     background-color: $color-gray4;
+    @include media('<800px') {
+        width: 5rem;
+    }
 }
 
 .modal-btn-add:hover {
@@ -230,6 +248,11 @@
 .modal-btn-done {
     margin: 2rem auto 0 auto;
     font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    @include media('<800px') {
+        width: 5rem;
+    }
 }
 
 //=== 미션 취소 모달 ===
@@ -244,6 +267,9 @@
     height: 90%;
     width: 90%;
     margin: 3rem;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
 }
 
 .modal-cancel-header {
@@ -381,6 +407,9 @@
     margin: 0;
     display: flex;
     margin: 20% auto;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
 }
 
 .leave-modal-container {
@@ -389,4 +418,25 @@
     width: 100%;
     justify-content: center;
     margin-bottom: 3rem;
+}
+// #filled-multiline-flexible {
+//     background-color: palevioletred;
+//     width: 1rem;
+// }
+
+//=== 미션 수정 모달 ===
+.mission-edit-list-content {
+    display: flex;
+    flex-direction: row;
+    @include media('<800px') {
+        flex-direction: column;
+    }
+
+    overflow-y: auto !important;
+    max-height: 70vh;
+}
+.modal-mission-edit-btn {
+    background-color: $color-gray4;
+    cursor: pointer;
+    white-space: nowrap;
 }

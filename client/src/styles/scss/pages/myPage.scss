@@ -2,6 +2,11 @@
 @import '../abstracts/utils';
 @import '~include-media/dist/include-media';
 
+button {
+    border-radius: 15px;
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
 .myPage-p {
     font-size: 2em;
     margin-bottom: 5%;
@@ -228,7 +233,15 @@
 // Character END
 
 // Interested START
-
+.interested-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // flex-wrap: wrap;
+    white-space: nowrap;
+}
 .tag-radio {
     display: none;
 }
@@ -238,13 +251,22 @@
     background-color: white;
     color: #acacac;
     margin: 5px;
-    width: 5vw;
+    width: 8vw;
     height: 5vh;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: small;
+    padding: 1px 7px;
+
+    white-space: nowrap; /* 텍스트가 버튼 영역을 넘어갈 경우 줄 바꿈을 방지 */
+    overflow: hidden; /* 내용이 버튼 영역을 넘어갈 경우 숨김 처리 */
+    text-overflow: ellipsis;
+
+    border-radius: 15px;
+    box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.1);
+    
     cursor: pointer;
     @include media('<500px') {
         width: 10vw;
@@ -361,6 +383,7 @@ td {
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 }
 #quit-btn:hover {
     background-color: #e20606;

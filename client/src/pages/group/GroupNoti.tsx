@@ -102,7 +102,7 @@ function createData(
 //     createData('Brazil', 'BR', 210147125, 8515767),
 // ];
 
-export default function Groupidti() {
+export default function GroupNoti() {
     const { gSeq, gCategory } = useParams();
 
     console.log(gSeq, gCategory);
@@ -147,7 +147,7 @@ export default function Groupidti() {
                 const newNoticeList = res.data.groupInfo;
                 setNoticeList(newNoticeList);
 
-                const newGbSeqList = newNoticeList.map(
+                const newGbSeqList = newNoticeList?.map(
                     (item: any) => item.gbSeq
                 );
                 setGbSeqList(newGbSeqList);
@@ -177,7 +177,7 @@ export default function Groupidti() {
     //     )
     // );
 
-    const reversedRows = noticeList.map((item: any, index: number) =>
+    const reversedRows = noticeList?.map((item: any, index: number) =>
         createData(
             // String(noticeList.length - index),
             String(index + 1),
@@ -247,7 +247,7 @@ export default function Groupidti() {
 
                             <TableBody style={{ cursor: 'pointer' }}>
                                 {rows
-                                    .slice(
+                                    ?.slice(
                                         page * rowsPerPage,
                                         page * rowsPerPage + rowsPerPage
                                     )
@@ -259,7 +259,7 @@ export default function Groupidti() {
                                                 tabIndex={-1}
                                                 key={row.title}
                                             >
-                                                {columns.map((column) => {
+                                                {columns?.map((column) => {
                                                     const value =
                                                         row[column.id];
                                                     return (
@@ -291,7 +291,7 @@ export default function Groupidti() {
                     <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
-                        count={rows.length}
+                        count={rows?.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
