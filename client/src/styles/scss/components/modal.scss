@@ -21,7 +21,11 @@
 .modal-mission-add-content {
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    // overflow: auto;
+
+    // 모달 화면 안 넘어가도록 강제 scroll
+    overflow-y: auto !important;
+    max-height: 70vh;
 
     width: 100%;
     height: 80%;
@@ -175,6 +179,9 @@
 
     .group-create-content {
         width: 60%;
+
+        overflow-y: auto !important;
+    max-height: 70vh;
     }
     .dday-container {
         display: flex;
@@ -260,6 +267,9 @@
     height: 90%;
     width: 90%;
     margin: 3rem;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
 }
 
 .modal-cancel-header {
@@ -397,6 +407,9 @@
     margin: 0;
     display: flex;
     margin: 20% auto;
+
+    overflow-y: auto !important;
+    max-height: 70vh;
 }
 
 .leave-modal-container {
@@ -418,6 +431,9 @@
     @include media('<800px') {
         flex-direction: column;
     }
+
+    overflow-y: auto !important;
+    max-height: 70vh;
 }
 .modal-mission-edit-btn {
     background-color: $color-gray4;

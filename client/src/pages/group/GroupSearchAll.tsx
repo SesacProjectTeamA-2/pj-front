@@ -4,6 +4,8 @@ import { Cookies } from 'react-cookie';
 import { GroupStateType } from 'src/types/types';
 import { Link } from 'react-router-dom';
 
+import { Paper } from '@mui/material';
+
 export default function GroupSearchAll({
     searchInput,
     selectedArr,
@@ -39,7 +41,7 @@ export default function GroupSearchAll({
                 전체 모임
             </div>
 
-            <div>
+            <div className='search-group-grid'>
                 {!allGroupList || allGroupList?.length === 0
                     ? '생성된 모임이 없습니다.'
                     : allGroupList?.map((searchGroup: GroupStateType) => (
@@ -48,20 +50,25 @@ export default function GroupSearchAll({
                               className="search-group-container"
                           >
                               <Link to={`/group/home/${searchGroup.gSeq}`}>
-                                  <div className="title2">
+                                  <div className="title3">
                                       {searchGroup.gName}
                                   </div>
+                                  <br />
                                   <span
                                       style={{
                                           // margin: '0px 15px',
                                           color: '#8D6262',
-                                          fontWeight: 'bold',
-                                          fontSize: '1.2rem',
+                                        //   fontWeight: 'bold',
+                                        //   fontSize: '1.2rem',
+
                                       }}
                                   >
-                                      D-day
+                                    <span className='title4'>
+                                    D-day
+                                    </span>
+                                    
                                   </span>
-                                  <div className="title5">
+                                  <div className="title6">
                                       {searchGroup.gDday}
                                   </div>
                               </Link>
