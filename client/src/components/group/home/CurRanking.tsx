@@ -28,7 +28,7 @@ export default function CurRanking({
                     {nowRanking?.map((now: any, idx: number) => {
                         return (
                             <li>
-                                <div className="ranking-list">
+                                <div className="ranking-list-cur">
                                     <div>{idx + 1}</div>
                                     <img
                                         src={
