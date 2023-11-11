@@ -46,11 +46,6 @@ export default function ProfilePic(props: any) {
     return (
         <div>
             <label id="profilePic-label">
-                {/* <img
-                    src="/asset/images/user.svg"
-                    alt="profilePic"
-                    id="profilePic-user"
-                /> */}
                 <input
                     type="file"
                     id="profilePic-input"

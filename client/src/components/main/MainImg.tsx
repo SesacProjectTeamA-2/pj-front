@@ -27,7 +27,7 @@ export default function MainImg() {
     return (
         <div className="main1-div">
             <div className="main-img-div">
-                <img src={Image} className="upload-img" />
+                <img src={Image} className="upload-img" alt="upload-img" />
                 <label htmlFor="main-img-upload">
                     <img
                         src="/asset/icons/edit.svg"

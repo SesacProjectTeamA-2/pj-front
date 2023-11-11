@@ -65,7 +65,11 @@ export default function GroupBoard() {
             <GroupContent action={'자유/질문'} />
             <div>
                 <Link to={`/board/create/${gSeq}/free`}>
-                    <img src="/asset/icons/plus.svg" className="plus-fixed" />
+                    <img
+                        src="/asset/icons/plus.svg"
+                        className="plus-fixed"
+                        alt="plus-fixed"
+                    />
                 </Link>
             </div>
         </div>

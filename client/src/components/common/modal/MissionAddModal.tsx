@@ -402,6 +402,7 @@ export default function MissionAddModal({
 
         setMissionList(filtered);
         console.log('set 후 ADD', filtered);
+        // console.log('set 후', filtered);
     };
 
     return (

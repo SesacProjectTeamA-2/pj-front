@@ -32,9 +32,7 @@ export default function CurRanking({
                                     <div>{idx + 1}</div>
                                     <img
                                         src={
-                                            now.uImg ||
-                                            // userImgSrc ||
-                                            '/asset/images/user.svg'
+                                            now.uImg || '/asset/images/user.svg'
                                         }
                                         alt="userImg"
                                     />
