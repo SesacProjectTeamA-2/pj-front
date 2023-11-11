@@ -28,27 +28,6 @@ export default function Phrase(props: any): JSX.Element {
                                 : 'block',
                     }}
                 />
-                {/* <button
-                    // onClick={(e) => changeReadOnly()}
-                    className="edit-btn"
-                    id="phrase-edit"
-                    style={{
-                        display:
-                            props.phraseModeBtnVal === 'recommend'
-                                ? 'none'
-                                : 'flex',
-                        color: 'white',
-                    }}
-                    onClick={(e: React.MouseEvent) =>
-                        props.setPhreaseModeBtnVal(e)
-                    }
-                >
-                    <img
-                        src="/asset/icons/edit.svg"
-                        className="edit-img"
-                        alt="editImg"
-                    ></img>
-                </button> */}
             </label>
 
             <div className="phraseMode-btn-div">

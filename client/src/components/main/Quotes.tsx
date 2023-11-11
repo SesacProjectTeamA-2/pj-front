@@ -8,7 +8,6 @@ export default function Quotes(props: any) {
 
     console.log(props.phraseModeSelf);
     console.log(props.phraseCtt);
-    // console.log('명언 칸에 전달된 props', props);
     return (
         // <div className="content-grid-box quotes-div-flex">
         //     <div className="quotes ">

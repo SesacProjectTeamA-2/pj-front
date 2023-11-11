@@ -380,7 +380,11 @@ export default function GroupNoti() {
             </div>
             <div>
                 <Link to={`/board/create/${gSeq}/${gCategory}`}>
-                    <img src="/asset/icons/plus.svg" className="plus-fixed" />
+                    <img
+                        src="/asset/icons/plus.svg"
+                        className="plus-fixed"
+                        alt="plus-fixed"
+                    />
                 </Link>
             </div>
         </div>

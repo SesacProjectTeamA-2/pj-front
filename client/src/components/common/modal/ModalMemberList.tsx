@@ -170,7 +170,6 @@ export default function ModalMemberList({
                                         <img
                                             src={
                                                 member.uImg ||
-                                                // userImgSrc ||
                                                 '/asset/images/user.svg'
                                             }
                                             alt="userImg"
