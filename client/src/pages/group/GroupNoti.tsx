@@ -218,6 +218,8 @@ export default function GroupNoti() {
     return (
         <div className="section section-group">
             <GroupHeader title={'공지사항'} groupName={gName} />
+            <p className="noti-info">공지사항은 관리자만 작성 가능합니다.</p>
+
             {/* html tag 처리 */}
             {/* noticeList.map((notice:any)=>{
                 return(
