@@ -31,9 +31,7 @@ img {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
     margin: 30px 0;
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -58,12 +56,3 @@ img {
     align-items: center;
     width: 100%;
 }
-
-// #join-btn {
-//     width: 30vw;
-//     height: 5vh;
-//     border-radius: 10px;
-//     border: none;
-//     color: $color-white;
-//     background-color: $color-primary;
-// }

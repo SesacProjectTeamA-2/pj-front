@@ -42,13 +42,6 @@ button {
     width: 59rem;
 }
 
-//=== 하단 Fixed 버튼 ===
-// .btn-fixed-wrapper {
-//     display: flex;
-//     justify-content: center;
-
-// }
-
 .btn-fixed {
     background-color: $color-primary;
     color: $color-white;
@@ -62,7 +55,6 @@ button {
     z-index: 10;
     justify-content: center;
     margin: auto;
-    // position: sticky;
     top: 80vh;
     position: fixed;
     box-shadow: 0px 1.7px 2.2px rgba(0, 0, 0, 0.02),
@@ -77,7 +69,6 @@ button {
         font-size: 16px;
         padding: 15px 5px;
         left: 50%;
-        // position: absolute;
     }
 }
 

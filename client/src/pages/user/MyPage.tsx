@@ -12,8 +12,8 @@ import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
 import ProfilePic from '../../components/myPage/ProfilePic';
 import Quit from '../../components/myPage/Quit';
-import SetMainList from '../../components/myPage/SetMainList';
-import PsnCoverImg from '../../components/myPage/PsnCoverImg';
+// import SetMainList from '../../components/myPage/SetMainList';
+// import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 
 export default function MyPage() {
     const cookie = new Cookies();
@@ -22,7 +22,6 @@ export default function MyPage() {
     // 1. 사용자 데이터 가져오기
     const getUserData = async () => {
         await axios
-            // .get('http://localhost:8888/api/user/mypage', {
             .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
@@ -73,25 +72,14 @@ export default function MyPage() {
     //////////// props, 데이터 선언 /////////////
     // 0. 사용자 이미지
     const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
-    // console.log('바꾸기 전 userImgSrc', userImgSrc);
 
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // if (e.target.files && e.target.files[0]) {
-        //     // setUserImgSrc(e.target.files[0]); // 바꾼 이미지 값으로
-        //     console.log('바꾼 후 UserImgSrc >> ', userImgSrc);
-        // }
-
         const formData = new FormData(); // 사진 담을 formData 객체 생성
         // console.log('e.target.files ', e.target.files);
 
         if (e.target.files && e.target.files[0]) {
             formData.append('image', e.target.files[0]);
-            // formData.append('apple', 'apple');
 
-            // for (let val of formData.values()) {
-            //     // => tsConfig ver : es6 변경
-            //     console.log('formData ', val);
-            // }
             sendImg(formData);
         }
     };
@@ -123,11 +111,9 @@ export default function MyPage() {
 
     // 1. 닉네임
     const [input, setInput] = useState<string>('');
-    // console.log('닉네임', input);
 
     // 2. 자기소개
     const [content, setContent] = useState<string>('');
-    // console.log('자기소개', content);
 
     // 3. 선택한 캐릭터
     const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
@@ -136,13 +122,10 @@ export default function MyPage() {
     const selectCharacter = (characterSrc: string): void => {
         setSelectedCharacter(characterSrc);
     };
-    // console.log('캐릭터 src MY_PAGE', selectedCharacter);
 
     // 4. 관심사 배열
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
-    // console.log(selectedArr[0]);
-    // console.log(selectedArr[1]);
-    // console.log(selectedArr[2]);
+
     useEffect(() => {
         console.log(selectedArr);
     }, [selectedArr]);
@@ -152,26 +135,22 @@ export default function MyPage() {
     const handleCheckDday = (groupId: number): void => {
         setDdayPin(groupId);
     };
-    // console.log('dDayPin', dDayPin);
 
     // 6. 선택한 그룹 id
     const [donePin, setDonePin] = useState<number>(0);
     const handleCheckDone = (groupId: number): void => {
         setDonePin(groupId);
     };
-    // console.log('donePin', donePin);
 
     //  7. dDay 설정: y | 설정하지 않았을 경우: 빈값(null)
     const [checkDday, setCheckDday] = useState<string | null>(null);
     useEffect(() => {
         dDayPin === 0 && donePin === 0 ? setCheckDday(null) : setCheckDday('y');
-        // console.log('checkDday', checkDday);
     }, [dDayPin, donePin]);
 
     // 8. 명언 모드
     // 8-1. 적은 명언 내용
     const [phraseCtt, setPhraseCtt] = useState<string | null>('');
-    // console.log('명언', phraseCtt);
 
     // 8-2. 선택한 명언 모드
     const [phraseModeBtnVal, setPhraseModeBtnVal] =
@@ -182,7 +161,6 @@ export default function MyPage() {
     };
 
     useEffect(() => {
-        console.log('phraseModeBtnVal', phraseModeBtnVal, phraseCtt);
         if (phraseModeBtnVal === 'recommend') {
             // 추천 모드일 때 빈 값을 보냄
             setPhraseCtt(null);
@@ -206,12 +184,8 @@ export default function MyPage() {
         uSetDday: string | null;
         uMainDday: number;
         uMainGroup: number;
-        // userImg: any;
-        // result: boolean;
-        // message: boolean;
     }
     const patchedUserData: patchedUserDataItf = {
-        // uImg:userImgSrc,
         uName: input,
         uDesc: content,
         uPhrase: phraseCtt,
@@ -224,13 +198,6 @@ export default function MyPage() {
         uSetDday: checkDday,
         uMainDday: 1,
         uMainGroup: 1,
-        // uMainDday: dDayPin,
-        // uMainGroup: donePin,
-
-        // userImg: formData,
-        // result: true,
-        // message: true,
-        //  'false(이미 존재하는 닉네임입니다)/ true(회원정보 수정 완료)',
     };
     useEffect(() => {
         console.log('patchedUserData >>>>', patchedUserData);
@@ -241,20 +208,16 @@ export default function MyPage() {
             await axios
                 .patch(
                     `${process.env.REACT_APP_DB_HOST}/user/mypage`,
-                    // 'http://localhost:8888/api/user/mypage',
 
                     patchedUserData,
                     {
                         headers: {
                             Authorization: `Bearer ${uToken}`,
-                            // 'Content-Type': 'multipart/form-data',
                         },
                     }
                 )
                 .then((res) => {
-                    console.log('patched', res.data.message);
                     toast.success(res.data.message);
-                    console.log('patchedData2', patchedUserData);
                 });
         } catch (err) {
             console.log(err);

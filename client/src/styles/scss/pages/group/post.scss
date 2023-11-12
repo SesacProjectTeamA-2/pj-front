@@ -37,7 +37,6 @@
 
     input {
         width: 25vw;
-        // gap: 1rem;
         @include media('<800px') {
             width: 50vw;
         }

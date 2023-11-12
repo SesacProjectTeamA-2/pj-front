@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import './styles/scss/base/reset.scss';
 
@@ -40,7 +39,6 @@ function App() {
     const [showChat, setShowChat] = useState<boolean>(false);
     const showChatting = (): void => {
         setShowChat(!showChat);
-        // console.log('showChat App', showChat);
     };
 
     return (
@@ -73,17 +71,6 @@ function App() {
                         <BasicLayout children={<Main />} showChat={showChat} />
                     }
                 />
-
-                {/* 미션 헤더 제거 */}
-                {/* <Route
-                    path="/mission"
-                    element={
-                        <BasicLayout
-                            children={<Mission />}
-                            showChat={showChat}
-                        />
-                    }
-                /> */}
 
                 <Route
                     path="/group"

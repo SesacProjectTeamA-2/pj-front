@@ -170,11 +170,6 @@ export default function MissionAddModal({
     const handleEditChange = (e: any, targetId: number) => {
         const { name, value } = e.target;
 
-        // setEditedContents((prevContents) => ({
-        //     ...prevContents,
-        //     [targetId]: value,
-        // }));
-
         setMissionInput({ ...missionInput, [name]: value });
 
         console.log('<<<<<<MissionInput>>>>>>>>>>>', missionInput);
@@ -205,14 +200,6 @@ export default function MissionAddModal({
             );
         }
 
-        // {
-        //     "mSeq": 3,
-        //     "gDday": "2023-12-24",
-        //     "mTitle": "운동하기",
-        //     "mContent": "일주일에 한번 헬스장",
-        //     "mLevel": 5
-        //   }
-
         //; 미션 수정 (PATCH, POST, DELETE)
         // missionList 최종 데이터만 보내기
         if (action === '미션수정') {
@@ -221,10 +208,6 @@ export default function MissionAddModal({
                 missionArray: missionList,
                 gDday: targetDate,
             });
-
-            console.log('<<<<<<input ::::::;; Input>>>>>>>>>>>', input);
-
-            // console.log('!!!!!!!', Number(dday.slice(2)));
 
             // missionInputs 배열을 복사하고 gDday 업데이트
             // const updatedMissionInputs = missionInputs.map((mission: any) => {
@@ -236,12 +219,8 @@ export default function MissionAddModal({
 
             // setMissionInputs(updatedMissionInputs);
 
-            // console.log('+++++++++++', missionInputs);
-
             const patchDdayHandler = async () => {
                 try {
-                    console.log('!!!!!!!!!', groupEditDday);
-
                     await axios
                         .patch(
                             `${process.env.REACT_APP_DB_HOST}/group`,
@@ -278,8 +257,6 @@ export default function MissionAddModal({
                         )
                         .then((res) => {
                             console.log('patched', res.data);
-                            // nvg(`/group/home/${gSeq}`);
-                            // window.location.reload(); // 새로고침 필요없음
                         });
                 } catch (err) {
                     console.log(err);
@@ -302,7 +279,6 @@ export default function MissionAddModal({
             gDday: mission.gDday,
         }))
     );
-    console.log('missionInputs ADD MODAL', missionInputs);
 
     const editHandler = (targetId: number) => {
         const editedMissionIndex = missionInputs.findIndex(
@@ -312,7 +288,7 @@ export default function MissionAddModal({
         console.log(targetId, editedMissionIndex);
 
         if (editedMissionIndex !== -1) {
-            // 수정할 미션을 찾았을 때, 해당 미션 정보를 수정합니다.
+            // 수정할 미션을 찾았을 때, 해당 미션 정보 수정
             const updatedMissionInputs = [...missionInputs];
 
             updatedMissionInputs[editedMissionIndex] = {
@@ -332,7 +308,6 @@ export default function MissionAddModal({
         const newDay = e.target.value; // 새로운 날짜 입력값
         setTargetDate(newDay); // 날짜 입력값 업데이트
 
-        console.log('jjjjj', newDay);
         const updatedGroupEditDday = { ...groupEditDday, gDday: newDay };
         setGroupEditDday(updatedGroupEditDday);
     };
@@ -398,11 +373,8 @@ export default function MissionAddModal({
         const filtered = missionList.filter(
             (mission: any) => targetId !== mission.id
         );
-        // console.log('targetId, filtered', targetId, filtered);
 
         setMissionList(filtered);
-        console.log('set 후 ADD', filtered);
-        // console.log('set 후', filtered);
     };
 
     return (
@@ -534,8 +506,6 @@ export default function MissionAddModal({
                             </div>
                         </div>
 
-                        {/* <Divider /> */}
-
                         <br />
                         <List
                             sx={{
@@ -666,8 +636,6 @@ export default function MissionAddModal({
                                                                 >
                                                                     수정
                                                                 </button>
-                                                                {/* </div>
-                                                            <div> */}
                                                                 <button
                                                                     className="modal-mission-delete-btn btn-sm"
                                                                     onClick={() =>
@@ -694,14 +662,7 @@ export default function MissionAddModal({
                                                 <div key={mission.id}>
                                                     <Divider component="li" />
 
-                                                    <ListItem
-                                                        className="mission-edit-list-content"
-                                                        // style={{
-                                                        //     display: 'flex',
-                                                        //     flexDirection:
-                                                        //         'row',
-                                                        // }}
-                                                    >
+                                                    <ListItem className="mission-edit-list-content">
                                                         {/* 제목, 내용 div */}
                                                         <div
                                                             style={{

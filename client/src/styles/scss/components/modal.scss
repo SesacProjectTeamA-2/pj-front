@@ -5,10 +5,7 @@
 //=== 미션 추가 모달 ===
 
 .modal-mission-add-container {
-
     width: 76vw;
-
-
 
     border-radius: 10px;
     z-index: -1;
@@ -21,7 +18,6 @@
 .modal-mission-add-content {
     display: flex;
     flex-direction: column;
-
 
     // 모달 화면 안 넘어가도록 강제 scroll
     overflow-y: auto !important;
@@ -256,11 +252,6 @@
     }
 }
 
-//=== 미션 취소 모달 ===
-// .cancel-modal-description {
-//     color: $color-gray4;
-// }
-
 .modal-mission-cancel-content {
     display: flex;
     flex-direction: column;
@@ -420,10 +411,6 @@
     justify-content: center;
     margin-bottom: 3rem;
 }
-// #filled-multiline-flexible {
-//     background-color: palevioletred;
-//     width: 1rem;
-// }
 
 //=== 미션 수정 모달 ===
 .mission-edit-list-content {
