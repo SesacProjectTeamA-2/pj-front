@@ -262,10 +262,22 @@ $ npm start
 # 주요 기능
 
 ---
+✅ 헤더
+![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/d11f906c-5272-4396-a240-074c02df2380)
+![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/42836b14-9363-4345-a7c2-ad04081a8d99)
+
+- 로고
+- 초대 링크 input
+- 메인 페이지 연결
+- 모임 페이지 연결
+- 마이페이지 연결
+- 로그인 여부 및 업로드 여부에 따른 헤더 프로필사진 변경
+- 모바일 헤더 추가에 따른 반응형 적용 
+
 ✅ 인트로 페이지
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/4cfa54b6-2c05-40ae-8768-7d67784bbdfa' width='300px' height='200px' />
-
+- 동기 부여를 위한 영상/이미지 소스와 글귀 첨부 
 
 ✅ 메인페이지 
 
@@ -274,7 +286,6 @@ $ npm start
 - 사용자/모임별 미션 조회
 - 마이페이지 정보 반영
 - 명언 랜덤 API 사용
-- 로그인 여부 및 업로드 여부에 따른 헤더 프로필사진 변경
   
 
 ✅ 소셜 로그인 & 회원가입
@@ -347,6 +358,7 @@ $ npm start
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/a9f95b61-a7cc-42d8-b2d3-906b109d1232' width='300px' height='200px' />
 
+- 에러 상태 공지 
 - 돌아가기 버튼 추가
   
 
