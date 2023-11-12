@@ -122,6 +122,29 @@ October 23, 2023 ~November 10, 2023
 
  **최제윤**
 
+인트로 페이지 제작
+
+푸터 제작
+- 모바일 반응형 푸터
+
+메인페이지
+- 레이아웃 제작
+- kAdvice 명언 라이브러리를 이용해 랜더링될 때마다 랜덤 명언 생성
+- My 달성률(랭킹에 따른 이미지 변화 및 미션 달성률) 반응형 제작
+- 나의 미션(가입한 모임과 각 모임의 미션 표기) 반응형 제작
+
+그룹 공지사항/자유/미션
+- Quill Editor 도입
+  - 이미지 첨부 기능
+
+그룹페이지 반응형 사이드바
+- PC: 좌측에 위치하여 정보 표기
+- 모바일: 상단에 위치 hover 시 드롭 다운
+
+마이페이지 유효성 검사
+- slice method로 일정 글자 수 이상 입력 불가
+- 동시에 input으로 focus 
+
 ### **[FE] 3명**
 
 |  [강혜빈](https://github.com/ch0rckbean) | [김세화](https://github.com/loveflora) | [최제윤](https://github.com/lemon4974)| 
@@ -152,13 +175,17 @@ Swagger 를 통해 개인별 Token 할당 후, api 전송 정보 및 결과값�
 
 ---
 
-노션을 어떻게 활용했는지
+노션 내 회의 / 칸반보드 / 트러블 슈팅 등 문서화
 
-칸반보드, 회의록 등 화면 캡쳐본
+| 회의 | 칸반보드 | 트러블 슈팅 |
+|---|---|---|
+|![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/c22c6762-0db7-4603-bbf5-b3852e0e8d5b)|![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/a26fdae4-dfc5-46d4-8a36-e772c556dd66) |![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/5e36491d-d0da-4f1c-9bc3-7d175480c4d9) |
 
 # 브랜치 전략
 
 ---
+Main : 배포 버전 업로드
+Develop : 개별 feature를 병합 
 
 ## 이슈 관리
 
@@ -192,8 +219,6 @@ type: 제목을 작성합니다.
 description : 추가/수정한 코드에 대해 설명을 작성합니다. 
 
 (한 줄에 너무 길게 작성하지 않습니다.)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/dda6a5fe-344b-4fd8-9b95-bdd6dc31b918/ad0fb521-1d77-4b28-9112-cde48496b6d1/Untitled.png)
 
 1. **Type의 종류**
 - `feat` : 새로운 기능 추가
@@ -234,37 +259,42 @@ description : 추가/수정한 코드에 대해 설명을 작성합니다.
 9. 작업한 이슈 클로즈
 10. 로컬에서 
     
-   ``` git checkout develop
-    
-    git pull ```
-    
-    명령어 수행 후 코드가 정상적으로 작동하는지 테스트 해봅니다.
+ ``` git checkout develop
+ 
+    git pull
+```
+명령어 수행 후 코드가 정상적으로 작동하는지 테스트 해봅니다.
     
 11. 로컬에서 테스트를 해보고 이상이 없다면 로컬의 feat/login 브런치를 제거합니다.
     
-    ``` git branch -D “feat/login” ```
+``` 
+git branch -D “feat/login”
+```
     
-    깃 컨벤션
+깃 컨벤션
     
-    Feature 브랜치가 push가 다 됬다는 전제하에 진행
+Feature 브랜치가 push가 다 됬다는 전제하에 진행
     
-   ``` git fetch origin //깃 최신화 ```
+``` git fetch origin //깃 최신화
     
-    ``` git merge origin develop  //develop 브랜치와 병합하기 ```
+ git merge origin develop  //develop 브랜치와 병합하기
+```
     
-    충돌나면 해결하기
+충돌나면 해결하기
     
-    current change 누르면 solve merge 나옴 그거 누르면 됨
+current change => solve merge 클릭
     
-    ```  git add . ``` 
+```  git add . 
     
-    ``` git commit ``` 
+   git commit 
     
-    ``` git push origin feature 브랜치 이름 ``` 
+   git push origin feature 브랜치 이름
+
+``` 
     
-    PR 작성후 머지
+PR 작성후 머지
     
-    ```  git checkout develop
+```  git checkout develop
     
     git pull origin develop
     
@@ -274,8 +304,8 @@ description : 추가/수정한 코드에 대해 설명을 작성합니다.
     
     git branch feature 브랜치 이름 // 브랜치 생성
     
-    git checkout feature 브랜치 이름 //브랜치  이동 ``` 
-
+    git checkout feature 브랜치 이름 //브랜치  이동
+``` 
 
 # 시작 가이드
 
@@ -329,10 +359,6 @@ $ npm start
 
 ---
 
-`Node.js`, `Express`, `Mysql`, `Sequelize`,
-
-`git/github`, `Figma`
-
 ### Front
 <img src="https://img.shields.io/badge/HTML-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>
 <img src="https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>
@@ -341,32 +367,41 @@ $ npm start
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>
 <img src="https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=TypeScript&logoColor=white"/>
 <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=CSS3&logoColor=white"/>
+<img src="https://img.shields.io/badge/Github-000000?style=flat-square&logo=Github&logoColor=white"/>
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
 
-
-
-### Back
- <img src="https://img.shields.io/badge/mysql-4479A1?style=flat-square&logo=mysql&logoColor=white"/> 
-<img src="https://img.shields.io/badge/sequelize-52B0E7?style=flat-square&logo=sequelize&logoColor=white"/>
-<img src="https://img.shields.io/badge/nodedotjs-339933?style=flat-square&logo=nodedotjs&logoColor=white"/>
 
 # 주요 기능
 
 ---
+✅ 인트로 페이지
 
-화면 짧게 녹화해서 기능 소개
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/4cfa54b6-2c05-40ae-8768-7d67784bbdfa' width='300px' height='200px' />
+
 
 ✅ 메인페이지 
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/e8a6c282-7d47-4051-8ca6-c4abbb110baa' width='300px' height='200px' />
+
 - 마이페이지 정보 반영
 - 명언 랜덤 API 사용
 - 로그인 여부 및 업로드 여부에 따른 헤더 프로필사진 변경
   
-✅ 소셜 로그인
+
+✅ 소셜 로그인 & 회원가입
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/fc4fb772-2765-4b17-9ee9-bb79587c07bd' width='300px' height='200px' />
+
 - Google 로그인
 - Kakao 로그인
 - Naver 로그인
 - 쿠키를 통한 로그인 여부 구분
 
+
 ✅ 마이페이지
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/b4e859ef-29ac-4cd4-ade7-3f8efc6ce432' width='300px' height='200px' />
+
 - 프로필 사진 변경
 - 닉네임 & 자기소개 변경
 - 관심사 선택
@@ -374,38 +409,62 @@ $ npm start
 - 명언 모드 선택 & 작성
 - 회원 탈퇴
 
+  
 ✅ 모임 검색
 
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/6ed72434-8939-4045-b8b3-b0aad13bba84' width='300px' height='200px' />
+
+
 ✅ 모임 CRUD
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/e542b279-277b-4a2a-8724-500067ff3783' width='300px' height='200px' />
+
 - 모임 생성
 - 모임 정보 수정
 - 모임 삭제
   
+
 ✅ 모임 가입 & 탈퇴
-  
-✅ 모임장 권한 넘기기
+
+ <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/39e5b4da-c393-499c-a3a7-c2b2f9011e0b' width='300px' height='200px' />
+
+- 링크 초대 가입 기능 추가 
+
 
 ✅ 모임 게시판 CRUD
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/c12e1964-b288-474f-a26d-fc10a0490042' width='300px' height='200px' />
+
 - 미션 게시판
 - 자유 게시판
 - 공지사항 게시판
   - 관리자만 작성 가능
 
+
 ✅ 댓글 CRUD
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/bf758276-15f9-4401-9986-d4315a27dddd' width='300px' height='200px' />
+
 - 댓글 추가
 - 댓글 수정
 - 댓글 삭제
 - 사용자별 프로필 사진 & 닉네임 로드
 
+
 ✅ 404 페이지 
 
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/a9f95b61-a7cc-42d8-b2d3-906b109d1232' width='300px' height='200px' />
+
+- 돌아가기 버튼 추가
+  
 
 
 # 🚢 ****화면 설계서****
 
 ---
 
-![화면 설계서](https://prod-files-secure.s3.us-west-2.amazonaws.com/dda6a5fe-344b-4fd8-9b95-bdd6dc31b918/fec305dc-7845-4eab-98e3-288d2d3abf22/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-11-09_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.59.31.png)
+![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/2c36d5f3-dde3-4ff3-96f2-ece216ae3b87)
+
 
 # ****🎨 와이어 프레임****
 
@@ -413,7 +472,8 @@ $ npm start
 
 [Figma](https://www.figma.com/file/wiiwMEqh7oAivKKO2uwbLe/Skygrey-218's-team-library?type=design&node-id=0-1&mode=design&t=Ul65uyHVEweViBth-0)
 
-캡쳐본 추가
+![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/3515f133-f7b3-4ecb-9e0b-0eb4d8f44503)
+
 
 # ****🗄️ ERD****
 [ERD](https://www.erdcloud.com/d/koATx2ojGQyH5Y62S)
@@ -426,3 +486,188 @@ $ npm start
 ---
 
 ## [ FE ]
+```
+.
+├── App.tsx
+├── components
+│   ├── common
+│   │   ├── CharacterItem.tsx
+│   │   ├── CharacterList.tsx
+│   │   ├── Dday.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── InterestedItem.tsx
+│   │   ├── InterestedList.tsx
+│   │   ├── Nickname.tsx
+│   │   ├── NotFound
+│   │   │   ├── ErrBtn.tsx
+│   │   │   └── ErrMsg.tsx
+│   │   ├── Progressbar.tsx
+│   │   ├── SidebarChat.tsx
+│   │   ├── SidebarGroup.tsx
+│   │   ├── SidebarGroupLeader.tsx
+│   │   ├── SidebarGroupMember.tsx
+│   │   ├── layout
+│   │   │   ├── BasicLayout.tsx
+│   │   │   ├── GroupLayout.tsx
+│   │   │   ├── ManagementLayout.tsx
+│   │   │   ├── oldB.tsx
+│   │   │   └── oldG.tsx
+│   │   └── modal
+│   │       ├── ChoiceModal.tsx
+│   │       ├── MissionAddModal.tsx
+│   │       ├── MissionCancelModal.tsx
+│   │       ├── MissionTest.tsx
+│   │       ├── ModalMemberList.tsx
+│   │       ├── QuitModal.tsx
+│   │       ├── SucessModal.tsx
+│   │       ├── WarningModal.tsx
+│   │       └── oldMissionAddModal.tsx
+│   ├── group
+│   │   ├── SwiperComponent.tsx
+│   │   ├── Test.tsx
+│   │   ├── content
+│   │   │   ├── GroupContentFooter.tsx
+│   │   │   ├── GroupContentList.tsx
+│   │   │   ├── GroupHeader.tsx
+│   │   │   └── GroupMissionList.tsx
+│   │   └── home
+│   │       ├── AccRanking.tsx
+│   │       ├── CurRanking.tsx
+│   │       ├── HomeMissionList.tsx
+│   │       └── MemberList.tsx
+│   ├── login
+│   │   ├── GoogleLoginBtn.tsx
+│   │   ├── KakaoLoginBtn.tsx
+│   │   ├── NaverLoginBtn.tsx
+│   │   ├── google.svg
+│   │   ├── kakao.svg
+│   │   └── naver.svg
+│   ├── main
+│   │   ├── Content.tsx
+│   │   ├── Index.tsx
+│   │   ├── MainImg.tsx
+│   │   ├── MainMission.tsx
+│   │   ├── MyPercentage.tsx
+│   │   ├── Quotes.tsx
+│   │   └── TeamPercentage.tsx
+│   ├── management
+│   │   ├── AllGroup.tsx
+│   │   ├── AllUser.tsx
+│   │   ├── Report.tsx
+│   │   ├── SidebarManagement.tsx
+│   │   └── SummaryCard.tsx
+│   ├── mission
+│   │   ├── Face.tsx
+│   │   ├── GroupFilterTag.tsx
+│   │   ├── MissionItem.tsx
+│   │   └── MissionList.tsx
+│   └── myPage
+│       ├── Introduce.tsx
+│       ├── Phrase.tsx
+│       ├── ProfilePic.tsx
+│       ├── PsnCoverImg.tsx
+│       ├── Quit.tsx
+│       ├── SetMainDday.tsx
+│       ├── SetMainDone.tsx
+│       ├── SetMainItem.tsx
+│       └── SetMainList.tsx
+├── custum.d.ts
+├── hooks
+│   ├── useDateChange.tsx
+│   ├── useDdayCount.tsx
+│   └── usePxToRem.tsx
+├── index.tsx
+├── pages
+│   ├── Intro.tsx
+│   ├── Main.tsx
+│   ├── Management.tsx
+│   ├── Mission.tsx
+│   ├── NotFound.tsx
+│   ├── group
+│   │   ├── BoardEdit.tsx
+│   │   ├── BoardMissionEdit.tsx
+│   │   ├── BoardPost.tsx
+│   │   ├── Editor.tsx
+│   │   ├── GroupBoard.tsx
+│   │   ├── GroupCreate.tsx
+│   │   ├── GroupEdit.tsx
+│   │   ├── GroupHome.tsx
+│   │   ├── GroupList.tsx
+│   │   ├── GroupMission.tsx
+│   │   ├── GroupMissionDetail.tsx
+│   │   ├── GroupMissionDone.tsx
+│   │   ├── GroupNoti.tsx
+│   │   ├── GroupPostDetail.tsx
+│   │   ├── GroupSearch.tsx
+│   │   ├── GroupSearchAll.tsx
+│   │   ├── Groups.tsx
+│   │   ├── ImgGroupEdit.tsx
+│   │   ├── MissionPost.tsx
+│   │   ├── OldGroupPostDetail.tsx
+│   │   └── oldGroupMissionDetail.tsx
+│   └── user
+│       ├── Join.tsx
+│       ├── Login.tsx
+│       └── MyPage.tsx
+├── store
+│   ├── index.ts
+│   ├── rootReducer.ts
+│   └── slices
+│       ├── groupSlice.ts
+│       ├── missionSlice.ts
+│       ├── pageSlice.ts
+│       └── userSlice.ts
+├── styles
+│   └── scss
+│       ├── abstracts
+│       │   ├── _utils.scss
+│       │   └── _variables.scss
+│       ├── base
+│       │   └── reset.scss
+│       ├── components
+│       │   ├── buttons.scss
+│       │   ├── dday.scss
+│       │   ├── inputs.scss
+│       │   ├── modal.scss
+│       │   ├── progressbar.scss
+│       │   ├── swiper.scss
+│       │   └── titles.scss
+│       ├── layout
+│       │   ├── footer.scss
+│       │   ├── header.scss
+│       │   ├── layout.scss
+│       │   ├── sidebarChat.scss
+│       │   └── sidebarGroup.scss
+│       ├── pages
+│       │   ├── group
+│       │   │   ├── groupCreate.scss
+│       │   │   ├── groupHome.scss
+│       │   │   ├── groupMissionDone.scss
+│       │   │   ├── groupMissionList.scss
+│       │   │   ├── groupNoti.scss
+│       │   │   ├── groupPostDetail.scss
+│       │   │   ├── groupPostList.scss
+│       │   │   ├── groups.scss
+│       │   │   └── post.scss
+│       │   ├── intro.scss
+│       │   ├── main
+│       │   │   ├── mainmission.scss
+│       │   │   └── percentage.scss
+│       │   ├── main.scss
+│       │   ├── management
+│       │   │   ├── managementlist.scss
+│       │   │   ├── managementsidebar.scss
+│       │   │   └── summarycard.scss
+│       │   ├── mission.scss
+│       │   ├── myPage.scss
+│       │   ├── notFound.scss
+│       │   └── user
+│       │       ├── join.scss
+│       │       └── login.scss
+│       └── themes
+│           ├── admin.scss
+│           └── theme.scss
+└── types
+    └── types.ts 
+    ```
