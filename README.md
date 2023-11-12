@@ -152,13 +152,21 @@ Swagger 를 통해 개인별 Token 할당 후, api 전송 정보 및 결과값�
 
 ---
 
-노션을 어떻게 활용했는지
+<img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/>
 
-칸반보드, 회의록 등 화면 캡쳐본
+노션 내 회의/칸반보드/트러블슈팅 등 기록
+
+| 회의 |  칸반보드 | 트러블슈팅 |
+|---|---|---|
+| ![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/836a7db2-ac7a-4af8-bfdc-8d98bcbc41e7) | ![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/552ff6a9-9519-4495-b2b8-5c72a108ca38) | ![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/d553d6af-2e40-40d7-aad7-d8ec7da6c77f) |
+
 
 # 브랜치 전략
 
 ---
+Main : 배포 버전 업로드
+Develop : 각 feature 병합 
+
 
 ## 이슈 관리
 
@@ -192,8 +200,6 @@ type: 제목을 작성합니다.
 description : 추가/수정한 코드에 대해 설명을 작성합니다. 
 
 (한 줄에 너무 길게 작성하지 않습니다.)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/dda6a5fe-344b-4fd8-9b95-bdd6dc31b918/ad0fb521-1d77-4b28-9112-cde48496b6d1/Untitled.png)
 
 1. **Type의 종류**
 - `feat` : 새로운 기능 추가
@@ -232,39 +238,46 @@ description : 추가/수정한 코드에 대해 설명을 작성합니다.
 7. 팀원들의 승인 이후 merge pull request 버튼을 클릭하여 진행합니다.
 8. 충돌이 없다면 develop 브런치로 병합이 완료됩니다.
 9. 작업한 이슈 클로즈
-10. 로컬에서 
+10. 로컬에서 명령어 수행 후 코드가 정상적으로 작동하는지 테스트 해봅니다.
     
-   ``` git checkout develop
+```
+ git checkout develop
     
-    git pull ```
-    
-    명령어 수행 후 코드가 정상적으로 작동하는지 테스트 해봅니다.
+ git pull
+```
     
 11. 로컬에서 테스트를 해보고 이상이 없다면 로컬의 feat/login 브런치를 제거합니다.
+
+```
+git branch -D “feat/login"
+```
+
+깃 컨벤션
     
-    ``` git branch -D “feat/login” ```
+Feature 브랜치가 push가 다 됬다는 전제하에 진행
     
-    깃 컨벤션
+```
+    git fetch origin //깃 최신화 
     
-    Feature 브랜치가 push가 다 됬다는 전제하에 진행
+    git merge origin develop  //develop 브랜치와 병합하기
+```
     
-   ``` git fetch origin //깃 최신화 ```
+충돌나면 해결하기
     
-    ``` git merge origin develop  //develop 브랜치와 병합하기 ```
+current change => solve merge
     
-    충돌나면 해결하기
+```
+     git add . 
     
-    current change 누르면 solve merge 나옴 그거 누르면 됨
+     git commit  
     
-    ```  git add . ``` 
+     git push origin feature 브랜치 이름
+```
     
-    ``` git commit ``` 
-    
-    ``` git push origin feature 브랜치 이름 ``` 
-    
-    PR 작성후 머지
-    
-    ```  git checkout develop
+PR 작성후 머지
+
+ ```  
+    git checkout develop
     
     git pull origin develop
     
@@ -274,7 +287,9 @@ description : 추가/수정한 코드에 대해 설명을 작성합니다.
     
     git branch feature 브랜치 이름 // 브랜치 생성
     
-    git checkout feature 브랜치 이름 //브랜치  이동 ``` 
+    git checkout feature 브랜치 이름 //브랜치  이동 
+    
+``` 
 
 
 # 시작 가이드
@@ -283,13 +298,10 @@ description : 추가/수정한 코드에 대해 설명을 작성합니다.
 
 ``` bash
 $ git clone https://github.com/SesacProjectTeamA-2/pj-front.git
-```
 
-```
 $ npm i
 $ npm start
 ```
-
 
 ## 🗃️ ****Github****
 
@@ -306,7 +318,7 @@ $ npm start
 ---
 ✅ 메인페이지 
 
-✅ 소셜 로그인
+✅ 소셜 로그인 & 회원가입 
 
 ✅ 마이페이지
 
@@ -316,24 +328,17 @@ $ npm start
 
 ✅ 모임 가입 & 탈퇴
 
-✅ 모임장 권한 넘기기
-
 ✅ 모임 게시판 CRUD
 
 ✅ 댓글 CRUD
 
 ✅ 404 페이지 
-- 돌아가기 버튼 추가
+
 
 # ****⚙️ 개발 환경****
 
 ---
 
-`Node.js`, `Express`, `Mysql`, `Sequelize`,
-
-`git/github`, `Figma`
-
-### Front
 <img src="https://img.shields.io/badge/HTML-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>
 <img src="https://img.shields.io/badge/CSS-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>
@@ -342,31 +347,36 @@ $ npm start
 <img src="https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=TypeScript&logoColor=white"/>
 <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=CSS3&logoColor=white"/>
 
-
-
-### Back
- <img src="https://img.shields.io/badge/mysql-4479A1?style=flat-square&logo=mysql&logoColor=white"/> 
-<img src="https://img.shields.io/badge/sequelize-52B0E7?style=flat-square&logo=sequelize&logoColor=white"/>
-<img src="https://img.shields.io/badge/nodedotjs-339933?style=flat-square&logo=nodedotjs&logoColor=white"/>
+<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/>
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
 
 # 주요 기능
 
 ---
 
-화면 짧게 녹화해서 기능 소개
-
 ✅ 메인페이지 
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/e8a6c282-7d47-4051-8ca6-c4abbb110baa' width='300px' height='200px' />
+
 - 마이페이지 정보 반영
 - 명언 랜덤 API 사용
 - 로그인 여부 및 업로드 여부에 따른 헤더 프로필사진 변경
-  
-✅ 소셜 로그인
+
+
+✅ 소셜 로그인 & 회원가입
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/fc4fb772-2765-4b17-9ee9-bb79587c07bd' width='300px' height='200px' />
+
 - Google 로그인
 - Kakao 로그인
 - Naver 로그인
+- 회원정보 기입
 - 쿠키를 통한 로그인 여부 구분
 
 ✅ 마이페이지
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/f8c34ce7-6be3-4540-8802-4f6c1784fc1a' width='300px' height='200px' />
+
 - 프로필 사진 변경
 - 닉네임 & 자기소개 변경
 - 관심사 선택
@@ -376,22 +386,37 @@ $ npm start
 
 ✅ 모임 검색
 
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/f3ce0184-b938-44e7-8986-5d6c21241310)
+8802-4f6c1784fc1a' width='300px' height='200px' />
+
+
 ✅ 모임 CRUD
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/e542b279-277b-4a2a-8724-500067ff3783' width='300px' height='200px' />
+
 - 모임 생성
 - 모임 정보 수정
 - 모임 삭제
   
 ✅ 모임 가입 & 탈퇴
-  
-✅ 모임장 권한 넘기기
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/39e5b4da-c393-499c-a3a7-c2b2f9011e0b' width='300px' height='200px' />
+
+- 초대 링크 가입 추가 
 
 ✅ 모임 게시판 CRUD
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/c12e1964-b288-474f-a26d-fc10a0490042' width='300px' height='200px' />
+
 - 미션 게시판
 - 자유 게시판
 - 공지사항 게시판
   - 관리자만 작성 가능
 
 ✅ 댓글 CRUD
+
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/bf758276-15f9-4401-9986-d4315a27dddd' width='300px' height='200px' />
+
 - 댓글 추가
 - 댓글 수정
 - 댓글 삭제
@@ -399,13 +424,17 @@ $ npm start
 
 ✅ 404 페이지 
 
+<img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/a9f95b61-a7cc-42d8-b2d3-906b109d1232' width='300px' height='200px' />
+
+- 돌아가기 버튼 추가
 
 
 # 🚢 ****화면 설계서****
 
 ---
 
-![화면 설계서](https://prod-files-secure.s3.us-west-2.amazonaws.com/dda6a5fe-344b-4fd8-9b95-bdd6dc31b918/fec305dc-7845-4eab-98e3-288d2d3abf22/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-11-09_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.59.31.png)
+![화면 설계서](https://prod-files-secure.s3.us-west-2.amazonaws.com/dda6a5fe-344b-4fd8-9b95-bdd6dc31b918/7638a695-788b-4b45-bbe1-bbe426566270/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-11-11_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.59.45.png)
+
 
 # ****🎨 와이어 프레임****
 
@@ -413,7 +442,8 @@ $ npm start
 
 [Figma](https://www.figma.com/file/wiiwMEqh7oAivKKO2uwbLe/Skygrey-218's-team-library?type=design&node-id=0-1&mode=design&t=Ul65uyHVEweViBth-0)
 
-캡쳐본 추가
+![image](https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/a052e7ea-5b2d-493c-ba40-b66b408d39a2)
+
 
 # ****🗄️ ERD****
 [ERD](https://www.erdcloud.com/d/koATx2ojGQyH5Y62S)
@@ -424,5 +454,190 @@ $ npm start
 # ****📂 프로젝트 폴더 구조****
 
 ---
+```
+.
+├── App.tsx
+├── components
+│   ├── common
+│   │   ├── CharacterItem.tsx
+│   │   ├── CharacterList.tsx
+│   │   ├── Dday.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── InterestedItem.tsx
+│   │   ├── InterestedList.tsx
+│   │   ├── Nickname.tsx
+│   │   ├── NotFound
+│   │   │   ├── ErrBtn.tsx
+│   │   │   └── ErrMsg.tsx
+│   │   ├── Progressbar.tsx
+│   │   ├── SidebarChat.tsx
+│   │   ├── SidebarGroup.tsx
+│   │   ├── SidebarGroupLeader.tsx
+│   │   ├── SidebarGroupMember.tsx
+│   │   ├── layout
+│   │   │   ├── BasicLayout.tsx
+│   │   │   ├── GroupLayout.tsx
+│   │   │   ├── ManagementLayout.tsx
+│   │   │   ├── oldB.tsx
+│   │   │   └── oldG.tsx
+│   │   └── modal
+│   │       ├── ChoiceModal.tsx
+│   │       ├── MissionAddModal.tsx
+│   │       ├── MissionCancelModal.tsx
+│   │       ├── MissionTest.tsx
+│   │       ├── ModalMemberList.tsx
+│   │       ├── QuitModal.tsx
+│   │       ├── SucessModal.tsx
+│   │       ├── WarningModal.tsx
+│   │       └── oldMissionAddModal.tsx
+│   ├── group
+│   │   ├── SwiperComponent.tsx
+│   │   ├── Test.tsx
+│   │   ├── content
+│   │   │   ├── GroupContentFooter.tsx
+│   │   │   ├── GroupContentList.tsx
+│   │   │   ├── GroupHeader.tsx
+│   │   │   └── GroupMissionList.tsx
+│   │   └── home
+│   │       ├── AccRanking.tsx
+│   │       ├── CurRanking.tsx
+│   │       ├── HomeMissionList.tsx
+│   │       └── MemberList.tsx
+│   ├── login
+│   │   ├── GoogleLoginBtn.tsx
+│   │   ├── KakaoLoginBtn.tsx
+│   │   ├── NaverLoginBtn.tsx
+│   │   ├── google.svg
+│   │   ├── kakao.svg
+│   │   └── naver.svg
+│   ├── main
+│   │   ├── Content.tsx
+│   │   ├── Index.tsx
+│   │   ├── MainImg.tsx
+│   │   ├── MainMission.tsx
+│   │   ├── MyPercentage.tsx
+│   │   ├── Quotes.tsx
+│   │   └── TeamPercentage.tsx
+│   ├── management
+│   │   ├── AllGroup.tsx
+│   │   ├── AllUser.tsx
+│   │   ├── Report.tsx
+│   │   ├── SidebarManagement.tsx
+│   │   └── SummaryCard.tsx
+│   ├── mission
+│   │   ├── Face.tsx
+│   │   ├── GroupFilterTag.tsx
+│   │   ├── MissionItem.tsx
+│   │   └── MissionList.tsx
+│   └── myPage
+│       ├── Introduce.tsx
+│       ├── Phrase.tsx
+│       ├── ProfilePic.tsx
+│       ├── PsnCoverImg.tsx
+│       ├── Quit.tsx
+│       ├── SetMainDday.tsx
+│       ├── SetMainDone.tsx
+│       ├── SetMainItem.tsx
+│       └── SetMainList.tsx
+├── custum.d.ts
+├── hooks
+│   ├── useDateChange.tsx
+│   ├── useDdayCount.tsx
+│   └── usePxToRem.tsx
+├── index.tsx
+├── pages
+│   ├── Intro.tsx
+│   ├── Main.tsx
+│   ├── Management.tsx
+│   ├── Mission.tsx
+│   ├── NotFound.tsx
+│   ├── group
+│   │   ├── BoardEdit.tsx
+│   │   ├── BoardMissionEdit.tsx
+│   │   ├── BoardPost.tsx
+│   │   ├── Editor.tsx
+│   │   ├── GroupBoard.tsx
+│   │   ├── GroupCreate.tsx
+│   │   ├── GroupEdit.tsx
+│   │   ├── GroupHome.tsx
+│   │   ├── GroupList.tsx
+│   │   ├── GroupMission.tsx
+│   │   ├── GroupMissionDetail.tsx
+│   │   ├── GroupMissionDone.tsx
+│   │   ├── GroupNoti.tsx
+│   │   ├── GroupPostDetail.tsx
+│   │   ├── GroupSearch.tsx
+│   │   ├── GroupSearchAll.tsx
+│   │   ├── Groups.tsx
+│   │   ├── ImgGroupEdit.tsx
+│   │   ├── MissionPost.tsx
+│   │   ├── OldGroupPostDetail.tsx
+│   │   └── oldGroupMissionDetail.tsx
+│   └── user
+│       ├── Join.tsx
+│       ├── Login.tsx
+│       └── MyPage.tsx
+├── store
+│   ├── index.ts
+│   ├── rootReducer.ts
+│   └── slices
+│       ├── groupSlice.ts
+│       ├── missionSlice.ts
+│       ├── pageSlice.ts
+│       └── userSlice.ts
+├── styles
+│   └── scss
+│       ├── abstracts
+│       │   ├── _utils.scss
+│       │   └── _variables.scss
+│       ├── base
+│       │   └── reset.scss
+│       ├── components
+│       │   ├── buttons.scss
+│       │   ├── dday.scss
+│       │   ├── inputs.scss
+│       │   ├── modal.scss
+│       │   ├── progressbar.scss
+│       │   ├── swiper.scss
+│       │   └── titles.scss
+│       ├── layout
+│       │   ├── footer.scss
+│       │   ├── header.scss
+│       │   ├── layout.scss
+│       │   ├── sidebarChat.scss
+│       │   └── sidebarGroup.scss
+│       ├── pages
+│       │   ├── group
+│       │   │   ├── groupCreate.scss
+│       │   │   ├── groupHome.scss
+│       │   │   ├── groupMissionDone.scss
+│       │   │   ├── groupMissionList.scss
+│       │   │   ├── groupNoti.scss
+│       │   │   ├── groupPostDetail.scss
+│       │   │   ├── groupPostList.scss
+│       │   │   ├── groups.scss
+│       │   │   └── post.scss
+│       │   ├── intro.scss
+│       │   ├── main
+│       │   │   ├── mainmission.scss
+│       │   │   └── percentage.scss
+│       │   ├── main.scss
+│       │   ├── management
+│       │   │   ├── managementlist.scss
+│       │   │   ├── managementsidebar.scss
+│       │   │   └── summarycard.scss
+│       │   ├── mission.scss
+│       │   ├── myPage.scss
+│       │   ├── notFound.scss
+│       │   └── user
+│       │       ├── join.scss
+│       │       └── login.scss
+│       └── themes
+│           ├── admin.scss
+│           └── theme.scss
+└── types
+    └── types.ts
 
-## [ FE ]
+```
+
