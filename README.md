@@ -262,6 +262,16 @@ $ npm start
 # 주요 기능
 
 ---
+✅ 헤더 
+
+- 로고
+- 초대 링크 input
+- 메인 페이지 연결
+- 모임 페이지 연결
+- 마이페이지 연결
+- 로그인 여부 및 업로드 여부에 따른 헤더 프로필사진 변경
+- getUserInfo 함수를 사용해 사용자 정보를 읽어온 뒤, 유저별로 다른 정보 표시
+
 ✅ 인트로 페이지
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/4cfa54b6-2c05-40ae-8768-7d67784bbdfa' width='300px' height='200px' />
