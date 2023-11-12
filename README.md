@@ -271,6 +271,7 @@ $ npm start
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/e8a6c282-7d47-4051-8ca6-c4abbb110baa' width='300px' height='200px' />
 
+- 사용자/모임별 미션 조회
 - 마이페이지 정보 반영
 - 명언 랜덤 API 사용
 - 로그인 여부 및 업로드 여부에 따른 헤더 프로필사진 변경
@@ -290,18 +291,19 @@ $ npm start
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/b4e859ef-29ac-4cd4-ade7-3f8efc6ce432' width='300px' height='200px' />
 
-- 프로필 사진 변경
-- 닉네임 & 자기소개 변경
-- 관심사 선택
-- 캐릭터 선택
-- 명언 모드 선택 & 작성
+- 프로필 사진 설정
+- 닉네임 & 자기소개 설정 
+- 관심분야 설정
+- 캐릭터 설정
+- 명언 모드 선택(랜덤/직접 작성) 
 - 회원 탈퇴
 
   
 ✅ 모임 검색
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/6ed72434-8939-4045-b8b3-b0aad13bba84' width='300px' height='200px' />
-
+- 카테고리 필터링
+- 전체 검색
 
 ✅ 모임 CRUD
 
@@ -310,20 +312,22 @@ $ npm start
 - 모임 생성
 - 모임 정보 수정
 - 모임 삭제
-  
+- 전체 멤버 리스트 조회
+- 가입/생성 모임 조회
 
 ✅ 모임 가입 & 탈퇴
 
  <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/39e5b4da-c393-499c-a3a7-c2b2f9011e0b' width='300px' height='200px' />
 
-- 링크 초대 가입 기능 추가 
-
+- 링크 초대 가입 기능 추가
+  
 
 ✅ 모임 게시판 CRUD
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/c12e1964-b288-474f-a26d-fc10a0490042' width='300px' height='200px' />
 
 - 미션 게시판
+ - 인증 시 랭킹 반
 - 자유 게시판
 - 공지사항 게시판
   - 관리자만 작성 가능
