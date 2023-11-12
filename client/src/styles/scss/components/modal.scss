@@ -5,11 +5,11 @@
 //=== 미션 추가 모달 ===
 
 .modal-mission-add-container {
-    // width: 62%;
-    width: 76vw;
-    // background-color: aqua;
 
-    // height: 50%;
+    width: 76vw;
+
+
+
     border-radius: 10px;
     z-index: -1;
     position: fixed;
@@ -21,7 +21,7 @@
 .modal-mission-add-content {
     display: flex;
     flex-direction: column;
-    // overflow: auto;
+
 
     // 모달 화면 안 넘어가도록 강제 scroll
     overflow-y: auto !important;
@@ -73,7 +73,7 @@
 
 .modal-style {
     width: 76vw;
-    // height: 40rem;
+
     z-index: 150;
     position: absolute;
     top: 50%;
@@ -82,7 +82,7 @@
     border-radius: 10px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
     justify-content: center;
-    // overflow: auto;
+
     animation: modal-show 0.3s;
     padding: 2rem;
     background-color: white;
@@ -111,7 +111,7 @@
     border-radius: 10px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
     justify-content: center;
-    // overflow: auto;
+
     animation: modal-show 0.3s;
     padding: 2rem;
     background-color: white;

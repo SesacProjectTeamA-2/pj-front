@@ -78,20 +78,7 @@
     }
 }
 
-// .title4-hover-bigger:hover {
-//     transition: 0.3s all;
-//     font-size: 1.8rem;
-// }
 
-// .title5-hover-bigger:hover {
-//     transition: 0.3s all;
-//     font-size: 1.4rem;
-// }
-
-// .title6-hover-bigger:hover {
-//     transition: 0.3s all;
-//     font-size: 1.2rem;
-// }
 @include media('<900px') {
     .sidebar-theme {
         margin: 7px 15px;
@@ -153,12 +140,12 @@
     transition: 0.3s all;
     display: flex;
     justify-content: center;
-    // align-items: center;
-    // font-size: 1.6rem;
+
+
 }
 .leader-edit:hover {
     transition: 0.3s all;
-    // font-size: 1.6rem;
+
 }
 
 .leader-warning,
@@ -166,7 +153,7 @@
     color: $color-gray5;
     opacity: 0.5;
     @include media('<900px') {
-        // width: 100%;
+
 
         padding: 5px 25px;
     }
@@ -174,7 +161,7 @@
 
 .member-menu {
     @include media('<900px') {
-        // width: 100%;
+
 
         padding: 5px 65px;
     }
@@ -199,51 +186,20 @@
         padding: 5px 25px;
     }
 }
-// 메뉴바 드롭다운
-// .dropdown-noti {
-//     float: left;
-//     overflow: hidden;
-// }
 
-// .dropdown-noti .dropbtn-noti {
-//     font-size: 17px;
-//     border: none;
-//     outline: none;
-//     color: white;
-//     padding: 14px 16px;
-//     background-color: inherit;
-//     font-family: inherit;
-//     margin: 0;
-// }
 
-// .dropdown-content-noti {
-//     display: none;
-//     position: absolute;
-//     background-color: #f9f9f9;
-//     min-width: 160px;
-//     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-//     z-index: 1;
-// }
-
-// .dropdown-noti:hover .dropdown-content-noti {
-//     display: block;
-// }
-
-// 여기서부터 드롭 다운
-
+// 드롭 다운 기능 구현
 .dropbtn {
-    // font-size: 17px;
-    display: none;
+    display: none; //900px 이상에서는 안 보이도록
     width: 100%;
     border: none;
     outline: none;
     color: white;
-    // padding: 14px 16px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
 }
-
+// 900px 이하에서만 드롭다운 할 수 있도록
 @include media('<900px') {
     .dropbtn {
         display: inherit;
@@ -254,12 +210,10 @@
     }
 
     .dropdown .dropbtn {
-        // font-size: 17px;
         width: 100vw;
         border: none;
         outline: none;
         color: white;
-        // padding: 14px 16px;
         background-color: $color-primary;
         font-family: inherit;
         margin: 0;
