@@ -9,7 +9,6 @@
 .post-header {
     display: flex;
     justify-content: space-between;
-    // margin: 0 2rem;
     gap: 1rem;
     background-color: transparent;
     @include media('<800px') {
@@ -51,10 +50,8 @@
     padding: 5px 20px;
     margin: 20px 0;
     font-size: 1.6rem;
-    // width: 30rem;
     width: 52vw;
     @include media('<800px') {
-        // width: 25rem;
         width: 65vw;
     }
     @include media('<500px') {

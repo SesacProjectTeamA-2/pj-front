@@ -27,20 +27,17 @@ img {
 }
 
 .interested-div {
-    // display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 
     margin: 30px 0;
-    // @include media('<800px') {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
-        grid-template-rows: repeat(2, 1fr); /* 2 rows with equal height */
-        gap: 16px;
-    // }
 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
 }
 .interested-div-one {
     display: flex;
