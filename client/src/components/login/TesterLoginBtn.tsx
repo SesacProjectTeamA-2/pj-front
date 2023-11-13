@@ -1,12 +1,13 @@
+import { ReactComponent as logoSvg } from './logo.svg';
+
 import { createButton } from 'react-social-login-buttons';
+import { createSvgIcon } from 'react-social-login-buttons';
 
 const config_tester = {
-    text: 'Tester 계정으로 로그인',
-    style: {
-        background: '#000000',
-        borderRadius: '12px',
-        color: '#fff',
-    },
+    text: '테스터 로그인',
+    style: { background: '#000000', borderRadius: '12px', color: '#fff' },
+    icon: createSvgIcon(logoSvg),
+    className: 'testerLogin-btn',
 };
 
 const TesterLoginBtn = createButton(config_tester);
