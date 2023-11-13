@@ -5,10 +5,13 @@ import '../../styles/scss/pages/user/login.scss';
 import GoogleLoginBtn from '../../components/login/GoogleLoginBtn';
 import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
+import TesterLoginBtn from '../../components/login/TesterLoginBtn';
 import { Button } from '@mui/material';
-// import TesterLoginBtn from '../../components/login/TesterLoginBtn';
 
 export default function Login() {
+    const testerLogin = (): void => {
+        console.log('Tester용 로그인');
+    };
     const googleLogin = (): void => {
         window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/google`;
     };
@@ -24,16 +27,14 @@ export default function Login() {
         <div className="section">
             <div className="login-wrapper">
                 <h1 id="login-h1">안녕하세요!</h1>
-                {/* <TesterLoginBtn
+                <TesterLoginBtn
                     style={{ marginTop: '20%' }}
-                    onClick={() => googleLogin()}
+                    onClick={() => testerLogin()}
                     align="center"
                     className="googleLoginBtn"
-                ></TesterLoginBtn> */}
-                <Button>테스터용 로그인 임시버튼</Button>
-
+                ></TesterLoginBtn>
                 <GoogleLoginBtn
-                    style={{ marginTop: '20%' }}
+                    style={{ marginTop: '2%' }}
                     onClick={() => googleLogin()}
                     align="center"
                     className="googleLoginBtn"
