@@ -5,7 +5,7 @@ const config_tester = {
     style: {
         background: '#000000',
         borderRadius: '12px',
-        color: '#fff',
+        color: '#ffffff',
     },
 };
 
