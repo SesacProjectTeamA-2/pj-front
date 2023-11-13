@@ -9,14 +9,15 @@
 
 ---
 
-[포트폴리오](https://docs.google.com/presentation/d/1-889w-hx7lc29qffDdI8is45T3xxHF-RqPEXBAd9i2I/edit#slide=id.g298a1fc9f63_2_0)
+[발표자료](https://docs.google.com/presentation/d/1-889w-hx7lc29qffDdI8is45T3xxHF-RqPEXBAd9i2I/edit#slide=id.g298a1fc9f63_2_0)
 [Notion](https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4)
+
 
 ## ****🌐 웹 사이트 주소****
 
 [React App](http://motimates.xyz/)
 
-발표자료 구글 슬라이드 추가
+
 
 ## ****⏰**** 제작 기간
 
