@@ -42,9 +42,9 @@ export default function Intro() {
                         />
                     </div>
                     <div className="intro-story">
-                        <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
+                        <Link to="https://polydactyl-cello-2db.notion.site/Motimates-4617b0dbabe640deb5336bb2dddcd54a?pvs=4">
                             <div className="title3">
-                                MOTIMATE
+                                MOTIMATES
                                 <br />
                                 이야기
                             </div>
@@ -60,7 +60,7 @@ export default function Intro() {
                 <div className="intro-content">
                     <div className="title3">
                         여러분의 동료, <br />
-                        MOTIMATE를 소개합니다 !
+                        MOTIMATES를 소개합니다 !
                     </div>
                     <br />
                     <div className="intro-content-sub-title">
@@ -141,7 +141,7 @@ export default function Intro() {
                         <img src="/asset/images/dDay.jpg" alt="dDayImg" />
                     </div>
                     <div className="intro-story">
-                        <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
+                        <Link to="https://polydactyl-cello-2db.notion.site/Motimates-4617b0dbabe640deb5336bb2dddcd54a?pvs=4">
                             <div
                                 className="title2"
                                 style={{
