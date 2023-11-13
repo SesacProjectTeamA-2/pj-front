@@ -289,7 +289,8 @@ $ npm start
 ✅ 인트로 페이지
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/4cfa54b6-2c05-40ae-8768-7d67784bbdfa' width='300px' height='200px' />
-- 동기 부여를 위한 영상/이미지 소스와 글귀 첨부
+
+- 동기 부여를 위한 영상/이미지 소스/글귀 첨부
 
 ✅ 메인페이지
 
@@ -322,6 +323,7 @@ $ npm start
 ✅ 모임 검색
 
 <img src='https://github.com/SesacProjectTeamA-2/pj-front/assets/86273626/6ed72434-8939-4045-b8b3-b0aad13bba84' width='300px' height='200px' />
+
 - 카테고리 필터링
 - 전체 검색
 
