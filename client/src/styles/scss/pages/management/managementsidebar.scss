@@ -7,7 +7,6 @@
     font-size: 17pt;
     font-weight: 400;
     padding: 15px 25px;
-    /**/
     position: relative;
     display: block;
     text-decoration: none;
@@ -24,8 +23,6 @@
     width: 100%;
     height: 100%;
     background-color: $color-white;
-    // color: aqua;
-    // background-color: #fcf7f9;
     transform-origin: 100% 50%;
     transform: scale(0, 1);
     top: 0;
@@ -38,9 +35,7 @@
     position: absolute;
     width: 100%;
     height: 2px;
-    // background-color: rgba(214, 149, 29, 0.3);
     background-color: rgba(255, 255, 255, 0.3);
-    // color: aqua;
 
     left: 0;
     bottom: 0;
@@ -55,7 +50,6 @@
 .SMN_effect-42 a span:after {
     content: attr(data-hover);
     position: absolute;
-    // color: aqua;
 
     left: 0;
     width: 100%;
@@ -76,7 +70,6 @@
 }
 
 .SMN_effect-42 a:hover span:after {
-    // color: #444;
     color: $color-primary;
     transition: color 0.3s cubic-bezier(0.33, 0.91, 0.42, 1) 0.2s;
 }

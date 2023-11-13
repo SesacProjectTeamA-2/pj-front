@@ -27,11 +27,9 @@ export default function Main() {
     }
 
     console.log('isUser', myCookie.get('isUser'));
-    const cookies = new Cookies();
 
     return (
         <div className="section-main">
-            {/* <MainImg /> */}
             <Content />
         </div>
     );

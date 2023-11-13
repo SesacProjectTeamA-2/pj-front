@@ -307,7 +307,6 @@ export default function GroupMissionDetail() {
                                                     src={
                                                         comment.tb_groupUser
                                                             .tb_user.uImg ||
-                                                        // userImgSrc ||
                                                         '/asset/images/user.svg'
                                                     }
                                                     alt="profile"

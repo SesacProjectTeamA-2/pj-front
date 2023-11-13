@@ -1,6 +1,5 @@
 .summary-card-layout {
     width: 100%;
-    // background-color: aqua;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
@@ -8,7 +7,6 @@
 }
 
 .summary-paper {
-    // width: 30%;
     min-width: 130px;
     height: 100px;
 

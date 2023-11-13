@@ -30,7 +30,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    // text-align: center;
     padding: 30px;
     box-sizing: border-box;
     width: 100%;
@@ -110,8 +109,6 @@
 }
 
 .mission-li {
-    // display: flex;
-    // gap: 3rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
@@ -131,12 +128,8 @@
 }
 
 .ranking-list {
-    // display: flex;
     display: grid;
-    // align-items: center;
-    // gap: 10px;
-    grid-template-columns: repeat(2, 1fr); /* 4 columns with equal width */
-    // grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     img {
         @include box(40px);
@@ -163,7 +156,6 @@
 }
 
 .score {
-    // font-weight: bold;
     font-size: 1.5rem;
 }
 
@@ -189,7 +181,7 @@
 
 .ranking-list-cur {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 4 columns with equal width */
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .ranking-list-acc {

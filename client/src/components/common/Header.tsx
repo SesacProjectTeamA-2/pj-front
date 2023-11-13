@@ -174,12 +174,6 @@ export default function Header(props: any) {
                                     </Button>
                                 </Link>
 
-                                {/* <Link to="/mission">
-                                    <Button className="menu-button">
-                                        Mission
-                                    </Button>
-                                </Link> */}
-                                {/* <li> */}
                                 <Link to="/group">
                                     <Button className="menu-button">
                                         GROUP
@@ -194,7 +188,6 @@ export default function Header(props: any) {
                                 </Link> */}
                             </ButtonGroup>
                         </ThemeProvider>
-                        {/* {!isCookie ? '쿠키 없음' : '쿠키 있음'} */}
 
                         <ul className="menu">
                             {!isCookie ? (
@@ -233,22 +226,12 @@ export default function Header(props: any) {
                                             ></img>
                                         </Link>
                                     </li>
-                                    {/* <li id="chat-li">
-                                        <img
-                                            src="/asset/icons/chat.svg"
-                                            style={{
-                                                width: '40px',
-                                                height: '40px',
-                                            }}
-                                            alt="chatImg"
-                                            onClick={() => props.showChatting()}
-                                        />
-                                    </li> */}
                                 </>
                             )}
                         </ul>
                     </nav>
                 </div>
+
                 {/* 메뉴 탭 버튼 */}
                 <div className="tab-menu-div">
                     <button id="tab-menu-btn" onClick={() => toggleVal()}>
@@ -307,7 +290,6 @@ export default function Header(props: any) {
                             <>
                                 <li>
                                     {/* 로그인 시 */}
-
                                     <img
                                         src="/asset/icons/logout.svg"
                                         alt="logout"

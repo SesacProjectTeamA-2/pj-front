@@ -7,7 +7,6 @@
 
 .mission-item-ul1 {
     background-color: $color-IT;
-    // 그룹 별 색상 변경 가능한 코드 짜야
     margin: 10px 10px;
     padding: 20px 20px;
 
@@ -17,7 +16,6 @@
 
 .mission-item-ul2 {
     background-color: $color-exercise;
-    // 그룹 별 색상 변경 가능한 코드 짜야
     margin: 10px 10px;
     padding: 20px 20px;
 
@@ -32,16 +30,12 @@
         color: white;
         font-weight: 700;
 
-        // background-color: aqua;
-        // padding: 10px 10px;
         margin: 10px 10px;
     }
 
     .dDay {
         color: white;
         font-weight: 700;
-        // background-color: bisque;
-        // padding: 10px 10px;
         margin: 10px 10px;
     }
 }
@@ -75,7 +69,6 @@
             align-items: center;
 
             display: flex;
-            // background-color: aqua;
             border-radius: 50%;
             width: 8em;
             height: 8em;
@@ -85,7 +78,6 @@
                 width: 200px;
                 img {
                     height: 165px;
-                    // 왜 이미지 크기가 안 변하지
                 }
             }
         }

@@ -3,31 +3,24 @@
 @import '~include-media/dist/include-media';
 
 .content-grid {
-    // background: aqua;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 30px;
-    // margin: 0 auto;
+
     min-width: 200px;
-    // margin: 0 30px;
-    // width: 80%;
+
     .content-grid-box {
         width: 100%;
         height: fit-content;
         margin: 0 auto;
         padding: 5px;
-        @include media('<800px') {
-            // margin: 20px;
-        }
     }
     @include media('<800px') {
         grid-template-columns: repeat(1, 1fr);
-        // grid-gap: 30px;
     }
 }
 
 .percentage-div {
-    // width: 90%;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -52,7 +45,6 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        // width: 50vw;
         margin: 1rem 0;
         .profile-img-div-flex {
             display: flex;

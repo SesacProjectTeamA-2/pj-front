@@ -11,32 +11,7 @@ import SidebarChat from '../SidebarChat';
 import Footer from '../Footer';
 
 export default function BasicLayout({ children, showChat }: any) {
-    // 인트로에서만 Footer 보이게 하기
-    // const loc = useLocation().pathname;
-    // const [showFooter, setShowFooter] = useState<boolean>(false);
-
-    // 고치기 전 코드
-    // const setFooterShowing = (): void => {
-    //     if (loc === '/') {
-    //         setShowFooter(true);
-    //         // console.log('showFooter', showFooter); // 바로 찍으면 값 안 바뀜!!! useEffect 쓰기
-    //     } else {
-    //         setShowFooter(false);
-    //         // console.log('no Footer');
-    //         // return;
-    //     }
-    // };
-    // useEffect(() => {
-    //     setFooterShowing();
-    //     console.log('showFooter', showFooter);
-    // }, [showFooter]);
-
-    //  고친 후 코드
-    // useEffect(() => {
-    //     // console.log('loc', loc, loc === '/');
-    //     loc === '/' ? setShowFooter(true) : setShowFooter(false);
-    // }, [loc]);
-
+    
     return (
         <>
             <div className="layout-container ">

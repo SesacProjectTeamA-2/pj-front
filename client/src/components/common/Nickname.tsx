@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function Nickname(props: any): JSX.Element {
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
@@ -16,9 +16,6 @@ export default function Nickname(props: any): JSX.Element {
         if (curPath.includes('mypage')) {
             setDisplayMode('flex');
         }
-        // else if (curPath.includes('join')) {
-        //     inputRef.current?.setAttribute('readOnly', 'true');
-        // }
     }, [curPath]);
 
     if (props.input.length > 10) {
@@ -55,7 +52,6 @@ export default function Nickname(props: any): JSX.Element {
                             ref={inputRef}
                             id="input-area"
                             className="input-obj"
-                            // maxLength={10}
                         />
                     </>
                 )}

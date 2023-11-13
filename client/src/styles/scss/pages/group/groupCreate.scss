@@ -10,12 +10,11 @@
     position: relative;
 
     height: fit-content;
-    // width: 100vh;
 }
 
 .group-create-category {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
 
@@ -46,10 +45,7 @@
     align-items: center;
 
     width: 100%;
-    // @include media('<800px') {
-    //     grid-template-columns: repeat(2, 4fr);
 
-    // }
     @include media('<800px') {
         grid-template-columns: repeat(4, 2fr);
     }
@@ -114,8 +110,7 @@ input {
 
 .description-container {
     width: 100%;
-    // align-items: flex-start;
-    //글씨 넘김 방지
+
     white-space: nowrap;
 
     div {

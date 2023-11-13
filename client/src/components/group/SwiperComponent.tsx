@@ -37,7 +37,7 @@ export default function SwiperComponent({
         <div>
             <div className="swiper-button-container">
                 <div className="swiper-button-prev">
-                    <img src="/asset/icons/left.svg" />
+                    <img src="/asset/icons/left.svg" alt="swiper-button-left" />
                 </div>
 
                 <Swiper
@@ -114,8 +114,6 @@ export default function SwiperComponent({
                                         height: '100%',
                                     }}
                                 >
-                                    {/* <img src="asset/images/cat1.svg" /> */}
-                                    {/* <div>{groupInfo.gCoverImg}</div> */}
                                     <Link to={`/group/home/${groupInfo.gSeq}`}>
                                         <div
                                             style={{
@@ -178,7 +176,10 @@ export default function SwiperComponent({
                     })}
                 </Swiper>
                 <div className="swiper-button-next">
-                    <img src="/asset/icons/right.svg" />
+                    <img
+                        src="/asset/icons/right.svg"
+                        alt="swiper-button-right"
+                    />
                 </div>
             </div>
         </div>

@@ -51,11 +51,6 @@ export default function Intro() {
                             <br />
                             <div className="intro-content-sub-title">
                                 자세히 보기
-                                {/* <img
-                                    className="intro-right-double-icon"
-                                    src="/asset/icons/right_double.svg"
-                                    alt="right-double"
-                                /> */}
                                 <br />
                                 <br />
                             </div>
@@ -143,7 +138,7 @@ export default function Intro() {
 
                 <div className="intro-img-wrapper-left">
                     <div className="intro-img">
-                        <img src="/asset/images/dDay.jpg" alt="사진" />
+                        <img src="/asset/images/dDay.jpg" alt="dDayImg" />
                     </div>
                     <div className="intro-story">
                         <Link to="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">

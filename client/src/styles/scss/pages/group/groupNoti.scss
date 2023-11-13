@@ -9,6 +9,12 @@
     min-height: 70vh;
     justify-content: flex-start;
 }
+.noti-info {
+    padding: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
 
 .noti-table {
     width: 100%;
@@ -49,7 +55,6 @@
 }
 
 .noti-container {
-    // background-color: $color-gray2;
     width: 90%;
     height: fit-content;
     margin: 1rem;

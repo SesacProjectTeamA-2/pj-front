@@ -158,7 +158,11 @@ export default function GroupMission() {
                 missionBoard={missionBoard}
             />
             <Link to={`/board/create/${gSeq}/mission/${mSeq}`}>
-                <img src="/asset/icons/plus.svg" className="plus-fixed" />
+                <img
+                    src="/asset/icons/plus.svg"
+                    className="plus-fixed"
+                    alt="plus-fixed"
+                />
             </Link>
         </div>
     );

@@ -125,10 +125,9 @@ export default function MemberList({
                         <div className="ranking-list">
                             <img
                                 src={
-                                    leaderInfo.uImg ||
-                                    // userImgSrc ||
-                                    '/asset/images/user.svg'
+                                    leaderInfo.uImg || '/asset/images/user.svg'
                                 }
+                                alt="userImg"
                             />
 
                             <div className="cur-ranking-content">
@@ -148,7 +147,6 @@ export default function MemberList({
                                     <img
                                         src={
                                             member.uImg ||
-                                            // userImgSrc ||
                                             '/asset/images/user.svg'
                                         }
                                         alt="userImg"

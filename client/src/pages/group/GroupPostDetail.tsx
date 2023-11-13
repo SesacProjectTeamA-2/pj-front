@@ -224,11 +224,7 @@ export default function GroupPostDetail() {
                         <div className="post-detail-profile">
                             <img
                                 className="profile-img"
-                                src={
-                                    userInfo?.uImg ||
-                                    // userImgSrc ||
-                                    '/asset/images/user.svg'
-                                }
+                                src={userInfo?.uImg || '/asset/images/user.svg'}
                                 alt="profile"
                             />
                             {/* uSeq 사용자 닉네임 가져오기 */}
@@ -320,7 +316,6 @@ export default function GroupPostDetail() {
                                                                       .tb_groupUser
                                                                       .tb_user
                                                                       .uImg ||
-                                                                  //   userImgSrc ||
                                                                   '/asset/images/user.svg'
                                                               }
                                                               alt="profile"
