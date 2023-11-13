@@ -9,7 +9,6 @@ import Footer from '../Footer';
 
 // groupbar section chat
 export default function ManagementLayout({ children, showChat }: any) {
-    // console.log('showChat', showChat);
     return (
         <>
             {/* 전체 레이아웃 컨테이너 */}

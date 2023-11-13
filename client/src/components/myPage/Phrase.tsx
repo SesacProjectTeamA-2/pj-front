@@ -1,20 +1,16 @@
 import React, { useState, useRef } from 'react';
 
 export default function Phrase(props: any): JSX.Element {
-    // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    // console.log(props.phraseModeBtnVal);
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
         inputRef.current?.focus();
-        // setReadOnlyVal(!readOnlyVal);
     };
 
     return (
         <div className="phrase-all-div">
             <label className="input-label">
                 <textarea
-                    // readOnly={readOnlyVal}
                     onChange={(e) => props.setPhraseCtt(e.target.value)}
                     value={props.phraseCtt}
                     ref={inputRef}

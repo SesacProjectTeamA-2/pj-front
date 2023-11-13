@@ -1,21 +1,17 @@
 import React, { useRef, useState } from 'react';
 
 export default function Introduce(props: any): JSX.Element {
-    // console.log(process.env.REACT_APP_DB_HOST);
-    // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
     // edit btn 눌렀을 때 focus + 수정 가능 상태로 바뀜
     const changeReadOnly = (): void => {
         inputRef.current?.focus();
-        // setReadOnlyVal(!readOnlyVal);
     };
 
     return (
-        <div className='introduce-div'>
+        <div className="introduce-div">
             <label className="input-label">
                 <textarea
-                    // readOnly={readOnlyVal}
                     onChange={(e) => props.setContent(e.target.value)}
                     value={props.content}
                     ref={inputRef}

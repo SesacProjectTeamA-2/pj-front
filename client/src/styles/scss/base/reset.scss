@@ -57,17 +57,6 @@ a {
     text-decoration-line: none;
 }
 
-// @media ( width <= 400px ){
-//   html{
-//     font-size:65% ;
-//   }
-// }
-// @media (400px < width <= 720px){
-//   html{
-//     font-size:70% ;
-//   }
-// }
-
 /* http://meyerweb.com/eric/tools/css/reset/
      v2.0 | 20110126
      License: none (public domain)
@@ -206,7 +195,6 @@ img {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    // 임의 컬러
     background-color: $color-gray1;
     height: 100%;
     width: 100%;

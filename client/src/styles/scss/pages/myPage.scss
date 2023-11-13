@@ -32,12 +32,6 @@ button {
         align-items: center;
     }
 }
-.myPage-div-one-one {
-    // margin-right: 10%;
-}
-.myPage-div-one-two {
-    // width: 100%;
-}
 
 .myPage-div-two {
     display: flex;
@@ -59,8 +53,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    // margin-right: 5%;
-    // margin-left: 10%;
+
     @include media('<900px') {
         margin-right: 0;
         margin-left: 0;
@@ -110,7 +103,6 @@ button {
 .myPage-div-five-two {
     display: flex;
     flex-direction: column;
-    // margin-left: 10%;
 }
 .myPage-div-six {
     display: flex;
@@ -132,7 +124,6 @@ button {
 
 // INPUT
 .input-obj {
-    // border: 1px solid black;
     border: none;
     width: 30vw;
     border-radius: 10px;
@@ -187,7 +178,6 @@ button {
     height: 24px;
     cursor: pointer;
 }
-
 // ProfilePic END
 
 // Nickname START
@@ -239,7 +229,6 @@ button {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    // flex-wrap: wrap;
     white-space: nowrap;
 }
 .tag-radio {
@@ -266,7 +255,7 @@ button {
 
     border-radius: 15px;
     box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.1);
-    
+
     cursor: pointer;
     @include media('<500px') {
         width: 10vw;
@@ -309,9 +298,7 @@ button {
     margin: 5%;
     text-align: center;
     padding: 0 10px;
-    // min-width: 100px;
 }
-
 // Phrase END
 
 // setMain START
@@ -364,7 +351,6 @@ td {
 }
 
 // Quit START
-
 .quit-div {
     display: flex;
     justify-content: center;

@@ -1,6 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
-import axios from 'axios';
-import { Cookies } from 'react-cookie';
+import React from 'react';
 
 export default function ProfilePic(props: any) {
     return (

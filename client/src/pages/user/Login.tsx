@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
+import React from 'react';
 
 import '../../styles/scss/pages/user/login.scss';
 
 import GoogleLoginBtn from '../../components/login/GoogleLoginBtn';
 import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
-// import { GoogleLoginButton } from 'react-social-login-buttons';
 
 export default function Login() {
-    const nvg = useNavigate();
-
-    // 쿠키 유무 (확인용)
-    const cookie = new Cookies();
-    const uToken = cookie.get('isUser');
-
-    // useEffect(() => {
-    //     let isUser = new URL(window.location.href).searchParams.get(
-    //         'alreadyUser'
-    //     );
-    //     console.log('href', window.location.href);
-    //     console.log('isUser', isUser);
-    //     // nvg('/');
-    // });
     const googleLogin = (): void => {
         window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/google`;
     };

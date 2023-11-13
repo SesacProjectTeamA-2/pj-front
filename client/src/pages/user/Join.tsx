@@ -30,9 +30,7 @@ export default function Join() {
     // 1. 회원가입 url에서 user 정보 가져오기
     const curPath: string = window.location.href;
     const url: any = new URL(curPath);
-    // console.log('url', url.search);
     const urlParams: any = new URLSearchParams(url.search);
-    // console.log('params', urlParams);
 
     const uEmail: string = urlParams.get('userEmail');
     const uName: string = urlParams.get('userName');
@@ -63,7 +61,6 @@ export default function Join() {
     };
 
     const register = async (): Promise<void> => {
-        console.log('register!');
         await axios
             .post(`${process.env.REACT_APP_DB_HOST}/user/register`, userInfo, {
                 headers: {

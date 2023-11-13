@@ -30,12 +30,6 @@ export default function Quit() {
                 warningModalSwitchHandler={warningModalSwitchHandler}
                 action={'회원 탈퇴'}
             />
-            {/* <WarningModal
-                warningModalSwitch={warningModalSwitch}
-                setWarningModalSwitch={setWarningModalSwitch}
-                warningModalSwitchHandler={warningModalSwitchHandler}
-                action={'회원 탈퇴'}
-            /> */}
         </div>
     );
 }
