@@ -72,17 +72,14 @@ export default function Header(props: any) {
                 },
             })
             .then((res) => {
-                console.log('getUserData 로그인 후 ', res.data);
                 const { userImg } = res.data; //null
 
                 if (userImg !== null && userImg !== undefined) {
                     // user가 업로드한 값이 있을 때
                     setUserImgSrc(userImg);
-                    console.log('userImgSrc 있음', userImgSrc);
                 } else {
                     // user가 업로드한 값이 없거나 undefined일 때
                     setUserImgSrc('/asset/images/user.svg');
-                    console.log('userImgSrc 없음', userImgSrc);
                 }
             })
             .catch((err) => {
@@ -124,7 +121,13 @@ export default function Header(props: any) {
             )
             .then((res) => {
                 const { success, msg } = res.data;
-                success ? toast.success(msg) : toast.error(msg);
+                success
+                    ? toast.success(msg, {
+                          duration: 2000,
+                      })
+                    : toast.error(msg, {
+                          duration: 2000,
+                      });
                 setGrpInput('');
             });
     };

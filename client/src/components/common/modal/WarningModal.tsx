@@ -115,7 +115,9 @@ export default function WarningModal({
                     )
                     .then((res) => {
                         console.log(res.data);
-                        toast.success(`${action}하셨습니다.`);
+                        toast.success(`${action}하셨습니다.`, {
+                            duration: 2000,
+                        });
                         nvg(-1);
                     });
             };

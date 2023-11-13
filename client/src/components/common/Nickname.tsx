@@ -19,7 +19,9 @@ export default function Nickname(props: any): JSX.Element {
     }, [curPath]);
 
     if (props.input.length > 10) {
-        toast.error('10자 이내로 입력해주세요.');
+        toast.error('10자 이내로 입력해주세요.', {
+            duration: 2000,
+        });
 
         const slicedInput = props.input.slice(0, 10);
         props.setInput(slicedInput);

@@ -167,12 +167,16 @@ export default function MissionPost() {
     const boardPostHandler = async () => {
         if (!board.gbTitle) {
             // 만약 gCategory가 비어있으면 알림을 표시
-            toast.error('제목을 입력하세요');
+            toast.error('제목을 입력하세요', {
+                duration: 2000,
+            });
             return; // 함수 실행 중지
         }
 
         if (!board.gbContent) {
-            toast.error('내용을 입력하세요');
+            toast.error('내용을 입력하세요', {
+                duration: 2000,
+            });
             return;
         }
 

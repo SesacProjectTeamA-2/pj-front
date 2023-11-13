@@ -53,10 +53,11 @@ export default function MyPage() {
                 }
                 setInput(nickname);
                 setContent(coverLetter);
-                if (category1 && category2 && category3) {
-                    // 선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
-                    setSelectedArr([category1, category2, category3]);
-                }
+                // if (category1 && category2 && category3) {
+                // 선택 안 하면 undefined 들어있어서 선택이 안 됨
+                //값 있을 때만 실행하도록 조건문 넣었음
+                setSelectedArr([category1, category2, category3]);
+                // }
                 setSelectedCharacter(character);
 
                 setPhraseCtt(phrase);
@@ -102,7 +103,7 @@ export default function MyPage() {
                 )
                 .then((res) => {
                     console.log('post', res.data);
-                    getUserData(); // 이거 해야 바로 수정된 프로필 사진으로 동기화 : 하지만 저장되지 않은 다른 값들은 초기화 돼서 옴 ㅜ
+                    getUserData(); // 바로 수정된 프로필 사진으로 동기화
                 });
         } catch (err) {
             console.log(err);
@@ -124,11 +125,14 @@ export default function MyPage() {
     };
 
     // 4. 관심사 배열
+    // 선택 값 배열
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
 
-    useEffect(() => {
-        console.log(selectedArr);
-    }, [selectedArr]);
+    // 여기선 값 잘 반영 됨
+    // useEffect(() => {
+    //     console.log(selectedArr);
+    //     console.log(selectedArr.length);
+    // }, [selectedArr]);
 
     // 5. 선택한 dDay id
     const [dDayPin, setDdayPin] = useState<number>(0);
@@ -217,7 +221,9 @@ export default function MyPage() {
                     }
                 )
                 .then((res) => {
-                    toast.success(res.data.message);
+                    toast.success(res.data.message, {
+                        duration: 2000,
+                    });
                 });
         } catch (err) {
             console.log(err);
