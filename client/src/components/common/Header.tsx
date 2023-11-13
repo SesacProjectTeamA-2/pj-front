@@ -91,15 +91,20 @@ export default function Header(props: any) {
     };
     // console.log(window.location.pathname);
 
+    // 로그인 여부 구분 해 사진 넣기 => 동기화 처리
+    const [isUser, setIsUser] = useState<boolean>(false); // 비로그인 상태
+
     useEffect(() => {
-        if (cookie.get('isUser')) {
-            getUserData();
-            console.log('HEADER 로그인 상태');
-        } else {
-            console.log('HEADER 비로그인 상태');
-            return;
-        }
-    }, [window.location.pathname]);
+        const loginProfileLoad = async () => {
+            if (cookie.get('isUser')) {
+                setIsUser(true); //로그인 상태
+                await getUserData();
+            } else {
+                return;
+            }
+        };
+        loginProfileLoad();
+    }, [isUser]);
 
     // 초대장 링크 입력 후 버튼 클릭 시 그 그룹으로 이동
     const [grpInput, setGrpInput] = useState<string>('');

@@ -8,7 +8,7 @@ export default function InterestedItem({
     num,
     updateCategoryQuery,
 }: any) {
-    // 체크박스 상태 관리(색상 변경)
+    // 체크박스 상태 관리
     const [selected, setSelected] = useState<boolean>(false);
 
     // useEffect로 비동기 useState 처리

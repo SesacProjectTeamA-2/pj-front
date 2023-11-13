@@ -27,10 +27,15 @@ export default function Login() {
         <div className="section">
             <div className="login-wrapper">
                 <h1 id="login-h1">안녕하세요!</h1>
-              
-                <Button onClick={() => testLogin(1)}>테스터1 로그인</Button>
-                <Button onClick={() => testLogin(2)}>테스터2 로그인</Button>
-              
+
+                <TesterLoginBtn
+                    style={{ marginTop: '20%' }}
+                    onClick={() => testLogin(1)}
+                    // onClick={() => testLogin(2)}
+                    align="center"
+                    className="googleLoginBtn"
+                ></TesterLoginBtn>
+
                 <GoogleLoginBtn
                     style={{ marginTop: '2%' }}
                     onClick={() => googleLogin()}
