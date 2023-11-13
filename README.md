@@ -14,11 +14,11 @@
 [발표자료](https://docs.google.com/presentation/d/1-889w-hx7lc29qffDdI8is45T3xxHF-RqPEXBAd9i2I/edit#slide=id.g298a1fc9f63_2_0)
 [Notion](https://polydactyl-cello-2db.notion.site/Motimates-4617b0dbabe640deb5336bb2dddcd54a?pvs=4)
 
-## \***\*🌐 웹 사이트 주소\*\***
+## 🌐 웹 사이트 주소
 
 [React App](http://motimates.xyz/)
 
-## \***\*⏰\*\*** 제작 기간
+## ⏰ 제작 기간
 
 ---
 
