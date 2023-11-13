@@ -9,8 +9,8 @@ import TesterLoginBtn from '../../components/login/TesterLoginBtn';
 import { Button } from '@mui/material';
 
 export default function Login() {
-    const testerLogin = (): void => {
-        console.log('Tester용 로그인');
+    const testLogin = (testNum: number): void => {
+        window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/test?testNum=${testNum}`;
     };
     const googleLogin = (): void => {
         window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/google`;
@@ -27,12 +27,10 @@ export default function Login() {
         <div className="section">
             <div className="login-wrapper">
                 <h1 id="login-h1">안녕하세요!</h1>
-                <TesterLoginBtn
-                    style={{ marginTop: '20%' }}
-                    onClick={() => testerLogin()}
-                    align="center"
-                    className="googleLoginBtn"
-                ></TesterLoginBtn>
+              
+                <Button onClick={() => testLogin(1)}>테스터1 로그인</Button>
+                <Button onClick={() => testLogin(2)}>테스터2 로그인</Button>
+              
                 <GoogleLoginBtn
                     style={{ marginTop: '2%' }}
                     onClick={() => googleLogin()}
