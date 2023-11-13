@@ -40,7 +40,7 @@ export default function Footer() {
                     <div className="footer-item-title">관련 링크</div>
 
                     <div>
-                        <a href="https://polydactyl-cello-2db.notion.site/2nd-team-a-b9e8f682bbc2439991fe70b074381f32?pvs=4">
+                        <a href="https://polydactyl-cello-2db.notion.site/Motimates-4617b0dbabe640deb5336bb2dddcd54a?pvs=4">
                             Notion
                         </a>
                     </div>
