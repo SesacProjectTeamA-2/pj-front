@@ -5,7 +5,8 @@ import '../../styles/scss/pages/user/login.scss';
 import GoogleLoginBtn from '../../components/login/GoogleLoginBtn';
 import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
-import TesterLoginBtn from '../../components/login/TesterLoginBtn';
+import { Button } from '@mui/material';
+// import TesterLoginBtn from '../../components/login/TesterLoginBtn';
 
 export default function Login() {
     const googleLogin = (): void => {
@@ -23,13 +24,13 @@ export default function Login() {
         <div className="section">
             <div className="login-wrapper">
                 <h1 id="login-h1">안녕하세요!</h1>
-
-                <TesterLoginBtn
+                {/* <TesterLoginBtn
                     style={{ marginTop: '20%' }}
-                    onClick={() => console.log('테스터 로그인')}
+                    onClick={() => googleLogin()}
                     align="center"
-                    className="testerLoginBtn"
-                ></TesterLoginBtn>
+                    className="googleLoginBtn"
+                ></TesterLoginBtn> */}
+                <Button>테스터용 로그인 임시버튼</Button>
 
                 <GoogleLoginBtn
                     style={{ marginTop: '20%' }}
@@ -37,7 +38,6 @@ export default function Login() {
                     align="center"
                     className="googleLoginBtn"
                 ></GoogleLoginBtn>
-                {/* <GoogleLoginButton /> */}
 
                 <KakaoLoginBtn
                     style={{ marginTop: '2%' }}
