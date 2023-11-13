@@ -5,8 +5,8 @@ import '../../styles/scss/pages/user/login.scss';
 import GoogleLoginBtn from '../../components/login/GoogleLoginBtn';
 import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
+import TesterLoginBtn from '../../components/login/TesterLoginBtn';
 import { Button } from '@mui/material';
-// import TesterLoginBtn from '../../components/login/TesterLoginBtn';
 
 export default function Login() {
     const testLogin = (testNum: number): void => {
@@ -27,11 +27,12 @@ export default function Login() {
         <div className="section">
             <div className="login-wrapper">
                 <h1 id="login-h1">안녕하세요!</h1>
+              
                 <Button onClick={() => testLogin(1)}>테스터1 로그인</Button>
                 <Button onClick={() => testLogin(2)}>테스터2 로그인</Button>
-
+              
                 <GoogleLoginBtn
-                    style={{ marginTop: '20%' }}
+                    style={{ marginTop: '2%' }}
                     onClick={() => googleLogin()}
                     align="center"
                     className="googleLoginBtn"
