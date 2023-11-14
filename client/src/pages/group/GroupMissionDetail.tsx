@@ -60,17 +60,7 @@ export default function GroupMissionDetail() {
 
     const [userInfo, SetUserInfo] = useState<any>([]);
 
-    // ======== 게시글 조회 (GET) ========
-    // const [notiList, setNotiList] = useState<any>([]);
-    // const [missionList, setFreeList] = useState<any>([]);
-
-    // //; 게시글 삭제 (DELETE)
-
-    const boardDeleteHandler = () => {
-        warningModalSwitchHandler();
-    };
-
-    //] 2. 미션게시글
+    //==== 미션 게시글 조회 (GET) ====
     const [missionList, setMissionList] = useState<any>([]);
 
     // 미션 게시글 조회
@@ -100,6 +90,11 @@ export default function GroupMissionDetail() {
 
     console.log('MMMMM', missionList);
 
+    //; 게시글 삭제 (DELETE)
+    const boardDeleteHandler = () => {
+        warningModalSwitchHandler();
+    };
+
     // 메뉴 선택
     const [menu, setMenu] = useState('');
 
@@ -110,8 +105,7 @@ export default function GroupMissionDetail() {
         setWarningModalSwitch(!warningModalSwitch);
     };
 
-    //] 댓글
-
+    //=== 댓글 가져오기 (GET) ===
     const [commentList, setCommentList] = useState<any>([]);
     console.log('commentList', commentList);
 
@@ -205,6 +199,7 @@ export default function GroupMissionDetail() {
                 getBoardMission();
             });
     };
+
     return (
         <div className="section section-group">
             {/* <GroupHeader
@@ -235,16 +230,12 @@ export default function GroupMissionDetail() {
                         <div className="date">{missionList?.createdAt}</div>
                     </div>
                     <div className="writer-menu">
-                        {/* gSeq, gbSeq */}
                         <Link
                             to={`/board/${gSeq}/edit/mission/${mSeq}/${gbSeq}`}
                         >
                             <div>수정</div>
                         </Link>
-                        {/* [추후] 게시글 삭제 경고 모달 추가 */}
-                        {/* <div onClick={() => warningModalSwitchHandler('삭제')}> */}
                         <div onClick={boardDeleteHandler}>삭제</div>
-                        {/* </div> */}
                     </div>
                 </div>
 

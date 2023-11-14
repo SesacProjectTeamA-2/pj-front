@@ -22,30 +22,6 @@ export default function SideBarGroupLeader({
     menu,
     setMenu,
 }: any) {
-    // interface MissionType {
-    //     id: number;
-    //     name: string;
-    //     selected: boolean;
-    // }
-
-    // const missionList: MissionType[] = [
-    //     {
-    //         id: 1,
-    //         name: '알고리즘',
-    //         selected: true,
-    //     },
-    //     {
-    //         id: 2,
-    //         name: '블로깅',
-    //         selected: false,
-    //     },
-    //     {
-    //         id: 3,
-    //         name: '모각코',
-    //         selected: false,
-    //     },
-    // ];
-
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
@@ -96,19 +72,6 @@ export default function SideBarGroupLeader({
 
     const tryDeleteGroupHandler = (gSeq: number) => {
         warningModalSwitchHandler('모임 삭제');
-
-        // const deleteGroupHandler = async (gSeq: number) => {
-        //     const res = await axios
-        //         .delete(`${process.env.REACT_APP_DB_HOST}/group`, {
-        //             data: { gSeq },
-        //             headers: {
-        //                 Authorization: `Bearer ${uToken}`,
-        //             },
-        //         })
-        //         .then((res) => {
-        //             console.log(res.data);
-        //         });
-        // };
     };
 
     return (
@@ -125,14 +88,16 @@ export default function SideBarGroupLeader({
                     <li
                         className="leader-edit"
                         onClick={onClickInviteButton}
-                        style={{ cursor: 'pointer' }}
+                        style={{
+                            cursor: 'pointer',
+                            paddingTop: '1rem',
+                        }}
                     >
                         초대하기
                     </li>
                 </CopyToClipboard>
                 <Toaster />
 
-                {/* [추후] id 추가 */}
                 <Link to={`/group/edit/${gSeq}`}>
                     <li className="leader-edit leader-title">모임 수정</li>
                 </Link>
@@ -177,14 +142,6 @@ export default function SideBarGroupLeader({
                     setMissionCancelModalSwitch={setMissionCancelModalSwitch}
                 />
             ) : null}
-
-            {/* 삭제 여부 재확인 */}
-            {/* {warningModalSwitch ? (
-                <WarningModal
-                    missionCancelModalSwitch={missionCancelModalSwitch}
-                    setMissionCancelModalSwitch={setMissionCancelModalSwitch}
-                />
-            ) : null} */}
 
             {/* 멤버 선택하는 공통 모달 */}
             <ChoiceModal

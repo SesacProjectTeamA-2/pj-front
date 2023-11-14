@@ -4,15 +4,15 @@
 
 .join-container {
     display: flex;
-    justify-content: space-around;
-    height: 100vh;
+    justify-content: space-between;
+    height: 80vh;
 }
 
 #nickname-h3 {
-    font-weight: bolder;
+    font-weight: bold;
 }
 #interested-h3 {
-    font-weight: bolder;
+    font-weight: bold;
 }
 img {
     @include box(100%);
@@ -51,10 +51,8 @@ img {
 }
 
 .interested-p {
-    color: $color-gray2;
-}
-
-.interested-my-page {
+    color: $color-gray4;
+    padding: 1rem;
 }
 
 .character-sub-div {
