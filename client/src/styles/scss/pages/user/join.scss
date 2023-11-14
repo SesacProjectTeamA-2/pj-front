@@ -5,11 +5,15 @@
 .join-container {
     display: flex;
     justify-content: space-between;
-    height: 80vh;
+    height: 100vh;
+}
+.join-title {
+    margin-bottom: 5%;
 }
 
 #nickname-h3 {
     font-weight: bold;
+    margin-right: 5%;
 }
 #interested-h3 {
     font-weight: bold;
@@ -24,6 +28,7 @@ img {
     width: 100%;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .interested-div {
@@ -61,4 +66,5 @@ img {
     justify-content: start;
     align-items: center;
     width: 100%;
+    margin-bottom: 5%;
 }
