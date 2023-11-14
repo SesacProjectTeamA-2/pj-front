@@ -35,17 +35,11 @@ export default function Introduce(props: any): JSX.Element {
                     id="text-area"
                 />
                 <div className="mission-edit">
-                    {/* <button
-                        onClick={(e) => changeReadOnly()}
-                        className="edit-btn"
-                        id="introduce-edit"
-                    > */}
                     <img
                         src="/asset/icons/edit.svg"
                         className="edit-img"
                         alt="editImg"
                     ></img>
-                    {/* </button> */}
                     <div className="title8 mission-edit-text">수정하기</div>
                 </div>
             </label>
