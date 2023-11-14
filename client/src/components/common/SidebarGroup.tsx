@@ -64,7 +64,7 @@ export default function SideBarGroup() {
     };
 
     return (
-        <div>
+        <div className='sidebar-all'>
             {isJoin ? (
                 <div className="sidebar-container">
                     <div className="dropdown">
@@ -99,7 +99,7 @@ export default function SideBarGroup() {
                                     </div>
                                     <div className="theme-flex">
                                         <div className="theme-title">미션</div>
-                                        <div>
+                                        <div className='mission-res'>
                                             <div className="mission-flex">
                                                 <div className="mission-title">
                                                     진행 중
