@@ -263,9 +263,11 @@ export default function GroupHome() {
             ) : groupDetail.groupMaxMember !== null &&
               groupDetail.memberArray.length + 1 <
                   groupDetail.groupMaxMember ? (
-                <button className="btn-fixed" onClick={postGroupJoin}>
-                    가입하기
-                </button>
+                <div className="btn-fixed-wrapper">
+                    <button className="btn-fixed" onClick={postGroupJoin}>
+                        가입하기
+                    </button>
+                </div>
             ) : (
                 ''
             )}

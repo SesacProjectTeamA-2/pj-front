@@ -85,9 +85,9 @@ export default function Join() {
             <div className="interested-div">
                 <div className="interested-div-one">
                     <h3 id="interested-h3">관심 분야</h3>
-                    <p>최대 3개</p>
+                    <p className="interested-p">최대 3개</p>
                 </div>
-                <div className="interested-div-two">
+                <div className="interested-div-two interested-my-page">
                     <InterestedList
                         selectedArr={selectedArr}
                         setSelectedArr={setSelectedArr}

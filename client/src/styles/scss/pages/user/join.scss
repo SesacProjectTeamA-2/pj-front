@@ -32,10 +32,10 @@ img {
     align-items: center;
     width: 100%;
     margin: 30px 0;
-    display: grid;
+    // display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 16px;
+    // gap: 16px;
 }
 .interested-div-one {
     display: flex;
@@ -49,6 +49,14 @@ img {
     justify-content: center;
     width: 100%;
 }
+
+.interested-p {
+    color: $color-gray2;
+}
+
+.interested-my-page {
+}
+
 .character-sub-div {
     display: flex;
     flex-direction: column;
