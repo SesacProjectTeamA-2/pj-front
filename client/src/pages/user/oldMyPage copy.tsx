@@ -53,22 +53,11 @@ export default function MyPage() {
                 }
                 setInput(nickname);
                 setContent(coverLetter);
+                // if (category1 && category2 && category3) {
                 // 선택 안 하면 undefined 들어있어서 선택이 안 됨
                 //값 있을 때만 실행하도록 조건문 넣었음
-                //myPage getUserInfo: undefined가 껴있으면(1개 | 2개 선택된 상태) undefined에 값 들어갈 수 있게 해야
-                // if (category1 && category2 && category3) {
-
-                // 수정 된 값 반영이 오는 데이터에 안 되고 있음
-                const ctgrArr = [category1, category2, category3];
-                console.log('ctgr', ctgrArr);
-                for (let ctgr of ctgrArr) {
-                    if (ctgr === 'undefined') {
-                        console.log('ctgr', ctgr);
-                    }
-                }
                 setSelectedArr([category1, category2, category3]);
                 // }
-
                 setSelectedCharacter(character);
 
                 setPhraseCtt(phrase);
@@ -137,14 +126,8 @@ export default function MyPage() {
 
     // 4. 관심사 배열
     // 선택 값 배열
-    const [selectedArr, setSelectedArr] = useState<Array<any>>(
-        new Array(3).fill(undefined)
-    );
-    useEffect(() => {
-        if (setSelectedArr.length !== 0) {
-            setSelectedArr(selectedArr);
-        }
-    }, [selectedArr, setSelectedArr]);
+    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+
     // 여기선 값 잘 반영 됨
     // useEffect(() => {
     //     console.log(selectedArr);
@@ -246,18 +229,6 @@ export default function MyPage() {
             console.log(err);
         }
     };
-
-    // const checkDuplicate = (): void => {
-    //     axios
-    //         .post(`${process.env.REACT_APP_DB_HOST}/user/register`, input, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log(res);
-    //         });
-    // };
 
     // 3. 회원 탈퇴
     // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기

@@ -9,24 +9,19 @@ export default function InterestedItem({
     updateCategoryQuery,
 }: any) {
     // 체크박스 상태 관리
-    const [selected, setSelected] = useState<boolean>(false);
+    //-  InterestedItem: 초기 선택 배열 undefined로 3개 채움 ⇒ 체크박스 선택 시 undefined를 선택 value로 바꿈 / selected sum +1
+    //-  myPage getUserInfo: undefined가 껴있으면(1개 | 2개 선택된 상태) undefined에 값 들어갈 수 있게 해야
 
-    // useEffect로 비동기 useState 처리
-    useEffect(() => {
-        setSelectedArr(selectedArr);
-    }, [selectedArr]);
+    // 선택 개수
+    let selectedCnt = 0;
 
     // 체크박스 체크 여부 변경 이벤트
-
     function SelectedTag(e: React.ChangeEvent<HTMLElement>): void {
         const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼(label)
-        setSelected((prevSelected) => !prevSelected); //선택 여부 관리 (직전 상태 기반)
 
         // 동적 개수 제한
         if (selectedArr.length > num - 1) {
-            toast.error(`최대 ${num}개까지만 선택해주세요!`, {
-                duration: 2000,
-            });
+            toast.error(`최대 ${num}개까지만 선택해주세요!`);
 
             // 마지막 선택된 id 제거
             setSelectedArr(
@@ -40,6 +35,8 @@ export default function InterestedItem({
             const nextSelectedArr: Array<string> = selectedArr.filter(
                 (ele: string) => ele !== selectedBtn.id //마지막으로 선택된 버튼 id 제거
             );
+            console.log('배열에 있음 ', nextSelectedArr);
+
             setSelectedArr(nextSelectedArr);
         } else if (
             // (2) 배열에 없음 + 동적 제한 수 미만 : 배열에 추가
@@ -48,10 +45,15 @@ export default function InterestedItem({
         ) {
             setSelectedArr((prevSelectedArr: any) => {
                 const newSelectedArr = [...prevSelectedArr, selectedBtn.id];
-                return newSelectedArr;
+                console.log('selectedCnt', selectedCnt);
+                // return newSelectedArr;
             });
         }
     }
+    // useEffect로 비동기 useState 처리
+    useEffect(() => {
+        console.log('selectedArr', selectedArr);
+    }, [selectedArr]);
 
     return (
         <div>
