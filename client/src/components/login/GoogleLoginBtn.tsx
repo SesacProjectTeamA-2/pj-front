@@ -9,6 +9,9 @@ const config_google = {
         background: '#FFF',
         borderRadius: '12px',
         color: '#000000',
+        fontSize: '1rem',
+        fontWeight: 'bold',
+        wordWrap: 'breakWord',
     },
     icon: createSvgIcon(googleSvg),
 };

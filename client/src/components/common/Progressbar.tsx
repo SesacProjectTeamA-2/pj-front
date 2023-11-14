@@ -11,7 +11,7 @@ export default function Progressbar({
     // console.log(scorePercentage);
     // export default function Progressbar() {
     return (
-        <div className="progress-div">
+        <div className="progress-div" style={{ marginLeft: '10%' }}>
             <div className="my-progress" style={{ backgroundColor: `${bg}` }}>
                 <div
                     className="my-bar"
