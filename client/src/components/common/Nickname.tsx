@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { Cookies } from 'react-cookie';
+import axios from 'axios';
 
 export default function Nickname(props: any): JSX.Element {
     // const [readOnlyVal, setReadOnlyVal] = useState<boolean>(true);
@@ -28,6 +30,9 @@ export default function Nickname(props: any): JSX.Element {
     } else {
         props.setInput(props.input);
     }
+
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser'); // 토큰 값
 
     return (
         <div className="nickname-div">

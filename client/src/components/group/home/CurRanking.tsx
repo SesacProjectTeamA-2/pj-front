@@ -29,7 +29,7 @@ export default function CurRanking({
                         return (
                             <li>
                                 <div className="ranking-list-cur">
-                                    <div>{idx + 1}</div>
+                                    <div className="ranking">{idx + 1}</div>
                                     <img
                                         src={
                                             now.uImg || '/asset/images/user.svg'

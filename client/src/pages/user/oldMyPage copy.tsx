@@ -12,7 +12,6 @@ import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
 import ProfilePic from '../../components/myPage/ProfilePic';
 import Quit from '../../components/myPage/Quit';
-import { Divider } from '@mui/material';
 // import SetMainList from '../../components/myPage/SetMainList';
 // import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 
@@ -54,22 +53,11 @@ export default function MyPage() {
                 }
                 setInput(nickname);
                 setContent(coverLetter);
+                // if (category1 && category2 && category3) {
                 // 선택 안 하면 undefined 들어있어서 선택이 안 됨
                 //값 있을 때만 실행하도록 조건문 넣었음
-                //myPage getUserInfo: undefined가 껴있으면(1개 | 2개 선택된 상태) undefined에 값 들어갈 수 있게 해야
-                // if (category1 && category2 && category3) {
-
-                // 수정 된 값 반영이 오는 데이터에 안 되고 있음
-                const ctgrArr = [category1, category2, category3];
-                console.log('ctgr', ctgrArr);
-                for (let ctgr of ctgrArr) {
-                    if (ctgr === 'undefined') {
-                        console.log('ctgr', ctgr);
-                    }
-                }
                 setSelectedArr([category1, category2, category3]);
                 // }
-
                 setSelectedCharacter(character);
 
                 setPhraseCtt(phrase);
@@ -138,14 +126,8 @@ export default function MyPage() {
 
     // 4. 관심사 배열
     // 선택 값 배열
-    const [selectedArr, setSelectedArr] = useState<Array<any>>(
-        new Array(3).fill(undefined)
-    );
-    useEffect(() => {
-        if (setSelectedArr.length !== 0) {
-            setSelectedArr(selectedArr);
-        }
-    }, [selectedArr, setSelectedArr]);
+    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+
     // 여기선 값 잘 반영 됨
     // useEffect(() => {
     //     console.log(selectedArr);
@@ -248,18 +230,6 @@ export default function MyPage() {
         }
     };
 
-    // const checkDuplicate = (): void => {
-    //     axios
-    //         .post(`${process.env.REACT_APP_DB_HOST}/user/register`, input, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log(res);
-    //         });
-    // };
-
     // 3. 회원 탈퇴
     // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기
 
@@ -267,7 +237,7 @@ export default function MyPage() {
         <div className="section">
             {/* 로그인 안 했을 때: 로그인 버튼 보임 + 채팅 버튼 안 보임 <br></br>
                 로그인 했을 때: 로그인 버튼 안 보임 + 채팅 버튼/프로필 보임
-                <br></br> 관리자일 때: Management 버튼 추가로 보임 */}
+                <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}
             <div className="myPage-div-one">
                 <div className="myPage-div-one-one">
                     <ProfilePic
@@ -282,6 +252,7 @@ export default function MyPage() {
                     <Introduce content={content} setContent={setContent} />
                 </div>
             </div>
+
             <div className="myPage-div-two">
                 <br></br>
                 <h3 className="myPage-p">내 캐릭터</h3>
@@ -302,9 +273,6 @@ export default function MyPage() {
                         num={3}
                     />
                 </div>
-
-                <Divider style={{ width: '80%', margin: '2rem' }} />
-
                 <div className="myPage-div-three-two">
                     <h3 className="myPage-p">명언</h3>
                     <Phrase
@@ -331,8 +299,6 @@ export default function MyPage() {
             {/* <PsnCoverImg /> */}
             {/* </div> */}
 
-            <Divider style={{ width: '80%', marginBottom: '4rem' }} />
-
             <div className="myPage-div-five">
                 <div className="myPage-div-five-one">
                     <h3 className="myPage-p">회원탈퇴</h3>
@@ -342,8 +308,7 @@ export default function MyPage() {
                 </div>
             </div>
 
-            {/* <div className="myPage-div-six"> */}
-            <div className="btn-fixed-wrapper">
+            <div className="myPage-div-six">
                 <button
                     className="btn-fixed"
                     id="myPage-edit-btn"
@@ -352,7 +317,6 @@ export default function MyPage() {
                     수정 완료
                 </button>
             </div>
-            {/* </div> */}
         </div>
     );
 }

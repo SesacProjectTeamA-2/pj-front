@@ -71,17 +71,18 @@ export default function MemberList({
                     {/* 모임장 */}
                     <li>
                         <div className="ranking-list">
-                            <img
-                                src={
-                                    leaderInfo.uImg || '/asset/images/user.svg'
-                                }
-                                alt="userImg"
-                            />
+                            <div className="ranking-list-img-div">
+                                <img
+                                    src={
+                                        leaderInfo.uImg ||
+                                        '/asset/images/user.svg'
+                                    }
+                                    alt="userImg"
+                                />
+                            </div>
 
                             <div className="cur-ranking-content">
-                                <div className="title7 name">
-                                    {leaderInfo.uName}
-                                </div>
+                                <div className=" name">{leaderInfo.uName}</div>
 
                                 {/* <div>{leaderInfo.}</div> */}
                             </div>

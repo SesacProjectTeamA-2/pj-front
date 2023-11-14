@@ -5,7 +5,13 @@ import { createSvgIcon } from 'react-social-login-buttons';
 
 const config_naver = {
     text: '네이버 로그인',
-    style: { background: '#02c75a', borderRadius: '12px' },
+    style: {
+        background: '#02c75a',
+        borderRadius: '12px',
+        fontSize: '1rem',
+        fontWeight: 'bold',
+        wordWrap: 'breakWord',
+    },
     icon: createSvgIcon(naverSvg),
 };
 
