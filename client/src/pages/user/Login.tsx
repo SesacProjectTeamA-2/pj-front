@@ -26,7 +26,7 @@ export default function Login() {
     return (
         <div className="section">
             <div className="login-wrapper">
-                <p id="login-p">Motimates와 목표를 현실로 만들어볼까요?</p>
+                <p id="login-p">Motimates와 목표를 이뤄볼까요?</p>
 
                 <TesterLoginBtn
                     style={{ marginTop: '20%', width: '60%' }}
