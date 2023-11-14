@@ -246,15 +246,6 @@ export default function GroupPostDetail() {
                     </div>
                 </div>
 
-                {/* {warningModalSwitch ? (
-                    <WarningModal
-                        warningModalSwitch={warningModalSwitch}
-                        setWarningModalSwitch={setWarningModalSwitch}
-                        warningModalSwitchHandler={warningModalSwitchHandler}
-                        action={menu}
-                    />
-                ) : null} */}
-
                 {/* 경고 공통 모달 */}
                 <WarningModal
                     warningModalSwitch={warningModalSwitch}

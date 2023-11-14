@@ -95,7 +95,7 @@ export default function MainMission() {
                                         {info.tb_missions?.map((item: any) => (
                                             <div>
                                                 <Link
-                                                    to={`/board/${info.gSeq}/mission/${info.mSeq}`}
+                                                    to={`/board/create/${info.gSeq}/mission/${item.mSeq}`}
                                                     className="mission-grid"
                                                 >
                                                     <button className="btn-sm button mission-btn-to-group">
