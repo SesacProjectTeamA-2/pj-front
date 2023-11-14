@@ -82,7 +82,9 @@ export default function SideBarGroupLeader({
                 console.log('inviteCode:', inviteCode); // 이 줄을 추가
             } else {
                 // 에러 메시지 처리
-                toast.error('초대코드를 가져오는 데 실패했습니다.');
+                toast.error('초대코드를 가져오는 데 실패했습니다.', {
+                    duration: 2000,
+                });
             }
         } catch (error) {
             // API 호출 중 오류 처리
@@ -114,7 +116,11 @@ export default function SideBarGroupLeader({
             <ul className="leader-menu">
                 <CopyToClipboard
                     text={inviteCode}
-                    onCopy={() => toast.success(' 초대코드가 복사되었습니다 !')}
+                    onCopy={() =>
+                        toast.success(' 초대코드가 복사되었습니다 !', {
+                            duration: 2000,
+                        })
+                    }
                 >
                     <li
                         className="leader-edit"

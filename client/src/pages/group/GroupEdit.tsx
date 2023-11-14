@@ -128,7 +128,9 @@ export default function GroupEdit() {
 
         // 유효성 검사: 모임명
         if (name === 'gName' && value.length > 15) {
-            toast.error('15자 이내의 모임명을 입력해주세요!');
+            toast.error('15자 이내의 모임명을 입력해주세요!', {
+                duration: 2000,
+            });
 
             const slicedInput = value.slice(0, 15);
             setInput({ ...input, [name]: slicedInput });
@@ -140,7 +142,9 @@ export default function GroupEdit() {
 
         // 유효성 검사: 모임 설명
         if (name === 'gDesc' && value.length > 500) {
-            toast.error('500자 이내의 모임 설명을 입력해주세요!');
+            toast.error('500자 이내의 모임 설명을 입력해주세요!', {
+                duration: 2000,
+            });
             const slicedInput = value.slice(0, 500);
             setInput({ ...input, [name]: slicedInput });
             e.target.focus();
@@ -155,7 +159,9 @@ export default function GroupEdit() {
 
             if (isNaN(intValue) || intValue < 1) {
                 // 숫자가 아니거나 1 미만인 경우
-                toast.error('모임 인원은 1명 이상부터 가능합니다!');
+                toast.error('모임 인원은 1명 이상부터 가능합니다!', {
+                    duration: 2000,
+                });
                 setInput({ ...input, [name]: 1 }); // 기본값으로 설정
                 // 해당 input에 포커스를 이동
                 e.target.value = '1'; // 입력값을 1로 설정
@@ -163,7 +169,9 @@ export default function GroupEdit() {
                 return;
             } else if (isNaN(intValue) || intValue > 100) {
                 // 숫자가 아니거나 1 미만인 경우
-                toast.error('모임 인원은 100명 미만으로 가능합니다!');
+                toast.error('모임 인원은 100명 미만으로 가능합니다!', {
+                    duration: 2000,
+                });
                 setInput({ ...input, [name]: 1 }); // 기본값으로 설정
                 // 해당 input에 포커스를 이동
                 e.target.value = '1'; // 입력값을 1로 설정
@@ -181,12 +189,16 @@ export default function GroupEdit() {
         console.log('제출 전 날짜 ', input.gDday);
 
         if (!input.gCategory) {
-            toast.error('그룹의 카테고리를 선택해주세요!');
+            toast.error('그룹의 카테고리를 선택해주세요!', {
+                duration: 2000,
+            });
             return;
         }
         //유효성 검사: 모임명 미입력 방지
         if (!input.gName) {
-            toast.error('모임명을 입력해주세요!');
+            toast.error('모임명을 입력해주세요!', {
+                duration: 2000,
+            });
 
             const gNameInput = document.querySelector(
                 'input[name="gName"]'
@@ -199,7 +211,9 @@ export default function GroupEdit() {
         }
         //유효성 검사: 모임설명 미입력 방지
         if (!input.gDesc) {
-            toast.error('모임 설명을 입력해주세요!');
+            toast.error('모임 설명을 입력해주세요!', {
+                duration: 2000,
+            });
 
             const gDescInput = document.querySelector(
                 'input[name="gDesc"]'

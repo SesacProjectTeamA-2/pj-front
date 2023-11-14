@@ -70,7 +70,6 @@ export default function GroupList() {
 
     const createHandler = () => {
         if (!uToken) {
-            // toast.error('로그인이 필요합니다 !');
             alert('로그인이 필요합니다 !');
             return;
         } else nvg('/group/create');

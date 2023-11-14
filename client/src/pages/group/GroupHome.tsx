@@ -155,9 +155,13 @@ export default function GroupHome() {
                 console.log(res.data);
                 const { success, msg } = res.data;
                 if (!success) {
-                    toast.error(msg);
+                    toast.error(msg, {
+                        duration: 2000,
+                    });
                 } else {
-                    toast.success(msg);
+                    toast.success(msg, {
+                        duration: 2000,
+                    });
                     window.location.reload();
                 }
             });

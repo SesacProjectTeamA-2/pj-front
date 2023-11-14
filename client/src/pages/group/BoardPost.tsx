@@ -175,12 +175,16 @@ export default function BoardPost() {
     // 정보 post
     const boardPostHandler = async () => {
         if (!board.gbTitle) {
-            toast.error('제목을 입력하세요');
+            toast.error('제목을 입력하세요', {
+                duration: 2000,
+            });
             return;
         }
 
         if (newContent === '<br>') {
-            toast.error('내용을 입력하세요');
+            toast.error('내용을 입력하세요', {
+                duration: 2000,
+            });
             return;
         }
 

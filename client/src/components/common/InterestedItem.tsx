@@ -17,14 +17,16 @@ export default function InterestedItem({
     }, [selectedArr]);
 
     // 체크박스 체크 여부 변경 이벤트
+
     function SelectedTag(e: React.ChangeEvent<HTMLElement>): void {
         const selectedBtn: HTMLElement = e.target as HTMLElement; //선택된 버튼(label)
         setSelected((prevSelected) => !prevSelected); //선택 여부 관리 (직전 상태 기반)
 
         // 동적 개수 제한
         if (selectedArr.length > num - 1) {
-            //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ?
-            toast.error(`최대 ${num}개까지만 선택해주세요!`);
+            toast.error(`최대 ${num}개까지만 선택해주세요!`, {
+                duration: 2000,
+            });
 
             // 마지막 선택된 id 제거
             setSelectedArr(
@@ -50,6 +52,7 @@ export default function InterestedItem({
             });
         }
     }
+
     return (
         <div>
             <div className="interested-div">
@@ -61,9 +64,6 @@ export default function InterestedItem({
                         <div key={iId}>
                             <label
                                 className="tag-btn"
-                                // onClick={(e: React.MouseEvent<HTMLElement>) =>
-                                //     SelectedTag(e)
-                                // }
                                 style={{
                                     background: isSelected
                                         ? '#ED8D8D'

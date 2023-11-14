@@ -72,17 +72,14 @@ export default function Header(props: any) {
                 },
             })
             .then((res) => {
-                console.log('getUserData 로그인 후 ', res.data);
                 const { userImg } = res.data; //null
 
                 if (userImg !== null && userImg !== undefined) {
                     // user가 업로드한 값이 있을 때
                     setUserImgSrc(userImg);
-                    console.log('userImgSrc 있음', userImgSrc);
                 } else {
                     // user가 업로드한 값이 없거나 undefined일 때
                     setUserImgSrc('/asset/images/user.svg');
-                    console.log('userImgSrc 없음', userImgSrc);
                 }
             })
             .catch((err) => {
@@ -91,15 +88,20 @@ export default function Header(props: any) {
     };
     // console.log(window.location.pathname);
 
+    // 로그인 여부 구분 해 사진 넣기 => 동기화 처리
+    const [isUser, setIsUser] = useState<boolean>(false); // 비로그인 상태
+
     useEffect(() => {
-        if (cookie.get('isUser')) {
-            getUserData();
-            console.log('HEADER 로그인 상태');
-        } else {
-            console.log('HEADER 비로그인 상태');
-            return;
-        }
-    }, [window.location.pathname]);
+        const loginProfileLoad = async () => {
+            if (cookie.get('isUser')) {
+                setIsUser(true); //로그인 상태
+                await getUserData();
+            } else {
+                return;
+            }
+        };
+        loginProfileLoad();
+    }, [isUser]);
 
     // 초대장 링크 입력 후 버튼 클릭 시 그 그룹으로 이동
     const [grpInput, setGrpInput] = useState<string>('');
@@ -119,7 +121,13 @@ export default function Header(props: any) {
             )
             .then((res) => {
                 const { success, msg } = res.data;
-                success ? toast.success(msg) : toast.error(msg);
+                success
+                    ? toast.success(msg, {
+                          duration: 2000,
+                      })
+                    : toast.error(msg, {
+                          duration: 2000,
+                      });
                 setGrpInput('');
             });
     };
