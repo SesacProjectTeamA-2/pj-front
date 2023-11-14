@@ -67,7 +67,6 @@ button {
 }
 
 .plus-fixed {
-    position: fixed;
     bottom: 20%;
     right: 13%;
     bottom: 15%;
@@ -75,6 +74,7 @@ button {
     width: 100px;
     height: 100px;
     cursor: pointer;
+    border-radius: 50%;
 
     @include media('<800px') {
         right: 10%;
@@ -82,6 +82,30 @@ button {
         @include box(70px);
     }
 }
+
+.plus-text {
+    opacity: 0;
+    transition: opacity 0.4s;
+    background-color: white;
+    padding: 0.4rem;
+    width: 5rem;
+    height: 2.4rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+
+    position: relative;
+    bottom: 14%;
+    left: 4%;
+}
+
+.plus-fixed-wrapper:hover {
+    transition: all 0.4s;
+    .plus-text {
+        opacity: 1;
+    }
+}
+
 .done-btn {
     height: 4rem;
     white-space: nowrap;

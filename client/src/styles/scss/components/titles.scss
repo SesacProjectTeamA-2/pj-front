@@ -66,3 +66,23 @@
         font-size: 6px;
     }
 }
+
+.title7 {
+    font-size: 18px;
+    @include media('<800px') {
+        font-size: 10px;
+    }
+    @include media('<500px') {
+        font-size: 6px;
+    }
+}
+
+.title8 {
+    font-size: 14px;
+    @include media('<800px') {
+        font-size: 10px;
+    }
+    @include media('<500px') {
+        font-size: 6px;
+    }
+}

@@ -13,7 +13,7 @@ export default function CurRanking({
     return (
         <div className="wrapper">
             <div className="upper-content">
-                <div className="title2">현재 랭킹</div>
+                <div className="title4">현재 랭킹</div>
                 <div className="title6 group-home-duration">
                     {/* [추후] 몇회차인지 */}
                     {/* <div className="group-home-mission-round-text">5회차</div> */}

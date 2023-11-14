@@ -41,9 +41,6 @@ export default function GroupCreate() {
 
     const onChange = (e: any) => {
         const { name, value } = e.target;
-        // // for (let i = 0; i < missionList.length; i++) {
-        // setInput({ ...input, [name]: value });
-        // // }
 
         // 유효성 검사: 모임명
         if (name === 'gName' && value.length > 15) {

@@ -54,7 +54,7 @@
 .upper-content-wrapper {
     display: flex;
     align-items: flex-end;
-    gap: 2rem;
+    // gap: 1rem;
 }
 
 .group-title-text {
@@ -65,7 +65,30 @@
 .mission-edit {
     color: $color-gray6;
     cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+
+    img {
+        width: 40px;
+        height: 24px;
+    }
+
+    .mission-edit-text {
+        opacity: 0;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity 0.3s; /* 트랜지션을 여기에 적용합니다. */
+    }
 }
+
+.mission-edit:hover {
+    .mission-edit-text {
+        opacity: 100;
+        transition: all 0.3s;
+    }
+}
+
+@include fadeOut(mission-edit-text);
 
 .group-home-mission-round-text {
     display: flex;
