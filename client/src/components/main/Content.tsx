@@ -302,8 +302,6 @@ export default function Content(props: any) {
                                                 style={{ width: '20vw' }}
                                                 className="title6"
                                             >
-                                                {/* [추후] tb_name 수정 */}
-                                                {/* <div className="title5">{groupInfo}</div> */}
                                                 {group.gName}
                                             </div>
                                             <div

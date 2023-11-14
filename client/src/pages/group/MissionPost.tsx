@@ -19,14 +19,6 @@ export default function MissionPost() {
 
     const { gSeq, gCategory, mSeq } = useParams();
 
-    interface Mission {
-        // mSeq: number;
-        mTitle: string;
-        mContent: string;
-        mLevel: number;
-        // map: string;
-    }
-
     const [missionList, setMissionList] = useState<any>();
 
     const getGroup = async () => {
@@ -46,18 +38,6 @@ export default function MissionPost() {
         );
     };
 
-    // const getGroupMission = async () => {
-    //     const res = await axios
-    //         .get(`${process.env.REACT_APP_DB_HOST}/mission/group/${gSeq}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             setMissionList(res.data.groupMission);
-    //         });
-    // };
-
     useEffect(() => {
         getGroup();
         // getGroupMission();
@@ -65,15 +45,6 @@ export default function MissionPost() {
 
     console.log('missionList', missionList);
 
-    // useEffect(() => {
-    //     setMissionList(groupDetail.groupMission);
-    // }, [groupDetail.groupMission]);
-
-    // 1. 클릭한 곳 default 값
-    // 1) Header - tilte
-    // 2) select
-    // 3) Link to
-    // 2. select 변경 시 변경
     const [board, setBoard] = useState<any>({
         gSeq: Number(gSeq),
         gbTitle: '',
@@ -85,22 +56,6 @@ export default function MissionPost() {
     const [missionSelected, setMissionSelected] = useState('');
     const [selected, setSelected] = useState<any>(mSeq);
 
-    console.log('===========', selected);
-
-    // useEffect(() => {
-    //     if (selected === 'mission') {
-    //         setSelected(missionList[0]?.mSeq);
-    //     }
-    // }, []);
-
-    // console.log('=====+++++++', selected);
-
-    // useEffect(() => {
-    //     if (gCategory === 'mission') {
-    //         setSelected(missionSelected);
-    //     }
-    // });
-
     console.log('missionSelected', missionSelected);
 
     //gbTitle state 관리
@@ -111,9 +66,6 @@ export default function MissionPost() {
             ...board,
             [name]: value,
         });
-
-        // console.log(board);
-        // console.log(name, value);
     };
 
     //] select 태그 state관리
@@ -121,27 +73,12 @@ export default function MissionPost() {
         const selectedValue = e.target.value;
         setSelected(selectedValue);
 
-        // if (selectedValue === 'notice') {
-        //     setBoard((prevBoard: any) => ({
-        //         ...prevBoard,
-        //         gbCategory: 'notice',
-        //         mSeq: null,
-        //     }));
-        // } else if (selectedValue === 'free') {
-        //     setBoard({
-        //         ...board,
-        //         gbCategory: 'free',
-        //         mSeq: null,
-        //     });
-        // } else {
         setBoard({
             ...board,
             gbCategory: 'mission',
             mSeq: Number(selectedValue),
         });
-        // }
         console.log('Selected:', e.target.value);
-        // console.log('setSelected 후', board);
     };
 
     //gbContent관리
@@ -150,7 +87,6 @@ export default function MissionPost() {
             ...board,
             gbContent: value, // 에디터의 내용을 업데이트
         });
-        // console.log(board);
     };
 
     //] 게시물 작성 완료 모달창
@@ -166,11 +102,10 @@ export default function MissionPost() {
     // 정보 post
     const boardPostHandler = async () => {
         if (!board.gbTitle) {
-            // 만약 gCategory가 비어있으면 알림을 표시
             toast.error('제목을 입력하세요', {
                 duration: 2000,
             });
-            return; // 함수 실행 중지
+            return;
         }
 
         if (!board.gbContent) {
@@ -216,15 +151,7 @@ export default function MissionPost() {
                                 <select
                                     onChange={handleSelect}
                                     value={selected}
-                                    // value={postMenu}
-                                    // defaultChecked={gCategory}
                                 >
-                                    {/* default : + 누른 페이지 */}
-                                    {/* select 값에 따라 Link to 달라아야 함 */}
-                                    {/* 
-                            <option value="notice">공지사항</option>
-                            <option value="free">자유/질문</option> */}
-
                                     {missionList?.map(
                                         (mission: any, idx: number) => {
                                             return (
@@ -262,7 +189,7 @@ export default function MissionPost() {
             </div>
             <div>
                 <button className="editor-post-btn" onClick={boardPostHandler}>
-                    작성 완료
+                    인증 완료
                 </button>
 
                 <SuccessModal
