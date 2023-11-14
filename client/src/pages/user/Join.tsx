@@ -75,14 +75,13 @@ export default function Join() {
 
     return (
         <div className="section join-container">
-            <div className="title3">회원 가입</div>
+            <div className="title3 join-title">회원 가입</div>
 
-            {/* <form action="/api/user/register" method="post"> */}
             <div className="nickname-sub-div">
-                <div className="title5" id="nickname-h3">
+                <h3 className="title5" id="nickname-h3">
                     닉네임
-                </div>
-                <Nickname uName={uName} input={input} setInput={setInput} />
+                </h3>
+                <div>{uName}</div>
             </div>
 
             <div className="interested-div">
@@ -98,8 +97,6 @@ export default function Join() {
                     />
                 </div>
             </div>
-
-            {/* <Divider style={{ width: '80%', marginBottom: '2rem' }} /> */}
 
             <div className="character-sub-div">
                 <h3
