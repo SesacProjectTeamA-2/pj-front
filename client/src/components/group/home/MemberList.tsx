@@ -8,58 +8,6 @@ export default function MemberList({
     memberArray,
     groupMember,
 }: any) {
-    // interface MemberType {
-    //     id: number;
-    //     name: string;
-    //     img: string;
-    //     description: string;
-    // }
-
-    // const memberList: MemberType[] = [
-    //     {
-    //         id: 1,
-    //         img: '/asset/images/sqr1.svg',
-    //         name: '멤버1',
-    //         description: '멤버 1 입니다.',
-    //     },
-    //     {
-    //         id: 2,
-    //         img: '/asset/images/sqr1.svg',
-    //         name: '멤버2',
-    //         description: '멤버 2 입니다.',
-    //     },
-    //     {
-    //         id: 3,
-    //         img: '/asset/images/sqr1.svg',
-    //         name: '멤버3',
-    //         description: '멤버 3 입니다.',
-    //     },
-    //     {
-    //         id: 4,
-    //         img: '/asset/images/sqr1.svg',
-    //         name: '멤버4',
-    //         description: '멤버 4 입니다.',
-    //     },
-    //     {
-    //         id: 5,
-    //         img: '/asset/images/sqr1.svg',
-    //         name: '멤버5',
-    //         description: '멤버 5 입니다.',
-    //     },
-    //     {
-    //         id: 6,
-    //         img: '/asset/images/sqr1.svg',
-    //         name: '멤버6',
-    //         description: '멤버 6 입니다.',
-    //     },
-    //     {
-    //         id: 7,
-    //         img: '/asset/images/sqr1.svg',
-    //         name: '멤버7',
-    //         description: '멤버 7 입니다.',
-    //     },
-    // ];
-
     console.log('groupMember', groupMember);
     console.log('leaderInfo', leaderInfo);
 
@@ -106,8 +54,8 @@ export default function MemberList({
     return (
         <div className="wrapper">
             <div className="members-upper-content">
-                <div className="title2">멤버</div>
-                <div className="title5">
+                <div className="title4">멤버</div>
+                <div className="title8">
                     참석인원
                     <span className="member-count">
                         {memberArray?.length + 1}
@@ -131,7 +79,7 @@ export default function MemberList({
                             />
 
                             <div className="cur-ranking-content">
-                                <div className="title4 name">
+                                <div className="title7 name">
                                     {leaderInfo.uName}
                                 </div>
 
@@ -153,7 +101,7 @@ export default function MemberList({
                                     />
 
                                     <div className="cur-ranking-content">
-                                        <div className="title4 name">
+                                        <div className="title5 name">
                                             {member.uName}
                                         </div>
                                         {/* <div className="">

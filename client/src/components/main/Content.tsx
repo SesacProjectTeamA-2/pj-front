@@ -140,10 +140,10 @@ export default function Content(props: any) {
     const [nowRanking, setNowRanking] = useState([]);
     const [GroupRates, setGroupRates] = useState([]);
     const [doneRates, setDoneRates] = useState([]);
-    console.log('nowScoreUserInfo', nowScoreUserInfo);
-    console.log('nowRanking', nowRanking);
-    console.log('GroupRates', GroupRates);
-    console.log('doneRates', doneRates);
+    // console.log('nowScoreUserInfo', nowScoreUserInfo);
+    // console.log('nowRanking', nowRanking);
+    // console.log('GroupRates', GroupRates);
+    // console.log('doneRates', doneRates);
 
     // ] 2. 유저 가입 모임
     const getJoinedGroup = async () => {
@@ -218,6 +218,7 @@ export default function Content(props: any) {
     //     getGroupDeatil();
     // }, []);
 
+    //=== 캐릭터 이미지 변경
     // console.log('????', uCharImg.slice(-5)); // 2.svg
     // console.log('????', uCharImg.slice(-4)); // .svg
 
@@ -253,7 +254,6 @@ export default function Content(props: any) {
     useEffect(() => {
         if (totalPercent > 70) {
             setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
-            console.log(setCharImg);
         }
         setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
     });

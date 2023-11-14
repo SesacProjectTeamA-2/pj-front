@@ -12,6 +12,7 @@ import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
 import ProfilePic from '../../components/myPage/ProfilePic';
 import Quit from '../../components/myPage/Quit';
+import { Divider } from '@mui/material';
 // import SetMainList from '../../components/myPage/SetMainList';
 // import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 
@@ -266,7 +267,7 @@ export default function MyPage() {
         <div className="section">
             {/* 로그인 안 했을 때: 로그인 버튼 보임 + 채팅 버튼 안 보임 <br></br>
                 로그인 했을 때: 로그인 버튼 안 보임 + 채팅 버튼/프로필 보임
-                <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}
+                <br></br> 관리자일 때: Management 버튼 추가로 보임 */}
             <div className="myPage-div-one">
                 <div className="myPage-div-one-one">
                     <ProfilePic
@@ -281,7 +282,6 @@ export default function MyPage() {
                     <Introduce content={content} setContent={setContent} />
                 </div>
             </div>
-
             <div className="myPage-div-two">
                 <br></br>
                 <h3 className="myPage-p">내 캐릭터</h3>
@@ -302,6 +302,9 @@ export default function MyPage() {
                         num={3}
                     />
                 </div>
+
+                <Divider style={{ width: '80%', margin: '2rem' }} />
+
                 <div className="myPage-div-three-two">
                     <h3 className="myPage-p">명언</h3>
                     <Phrase
@@ -328,6 +331,8 @@ export default function MyPage() {
             {/* <PsnCoverImg /> */}
             {/* </div> */}
 
+            <Divider style={{ width: '80%', marginBottom: '4rem' }} />
+
             <div className="myPage-div-five">
                 <div className="myPage-div-five-one">
                     <h3 className="myPage-p">회원탈퇴</h3>
@@ -337,7 +342,8 @@ export default function MyPage() {
                 </div>
             </div>
 
-            <div className="myPage-div-six">
+            {/* <div className="myPage-div-six"> */}
+            <div className="btn-fixed-wrapper">
                 <button
                     className="btn-fixed"
                     id="myPage-edit-btn"
@@ -346,6 +352,7 @@ export default function MyPage() {
                     수정 완료
                 </button>
             </div>
+            {/* </div> */}
         </div>
     );
 }

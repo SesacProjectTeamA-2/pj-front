@@ -8,6 +8,7 @@ import '../../styles/scss/pages/user/join.scss';
 import Nickname from '../../components/common/Nickname';
 import CharacterList from '../../components/common/CharacterList';
 import InterestedList from '../../components/common/InterestedList';
+import { Divider } from '@mui/material';
 
 export default function Join() {
     const cookie = new Cookies();
@@ -74,20 +75,22 @@ export default function Join() {
 
     return (
         <div className="section join-container">
-            <h1 className="join-title">회원 가입</h1>
+            <div className="title3">회원 가입</div>
 
             {/* <form action="/api/user/register" method="post"> */}
             <div className="nickname-sub-div">
-                <h3 id="nickname-h3">닉네임</h3>
+                <div className="title5" id="nickname-h3">
+                    닉네임
+                </div>
                 <Nickname uName={uName} input={input} setInput={setInput} />
             </div>
 
             <div className="interested-div">
                 <div className="interested-div-one">
                     <h3 id="interested-h3">관심 분야</h3>
-                    <p>최대 3개</p>
+                    <p className="interested-p">최대 3개</p>
                 </div>
-                <div className="interested-div-two">
+                <div className="interested-div-two interested-my-page">
                     <InterestedList
                         selectedArr={selectedArr}
                         setSelectedArr={setSelectedArr}
@@ -96,8 +99,16 @@ export default function Join() {
                 </div>
             </div>
 
+            {/* <Divider style={{ width: '80%', marginBottom: '2rem' }} /> */}
+
             <div className="character-sub-div">
-                <h3>캐릭터를 선택해주세요.</h3>
+                <h3
+                    style={{
+                        paddingBottom: '2rem',
+                    }}
+                >
+                    캐릭터를 선택해주세요.
+                </h3>
                 <CharacterList
                     selectedCharacter={selectedCharacter}
                     setSelectedCharacter={setSelectedCharacter}

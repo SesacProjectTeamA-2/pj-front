@@ -60,10 +60,14 @@ export default function GroupBoard() {
 
     return (
         <div className="section section-group">
-            {/* [추후] 모임 제목 동적으로 수정 */}
             <GroupHeader title={'자유/질문'} groupName={gName} />
             <GroupContent action={'자유/질문'} />
-            <div>
+            <div className="plus-fixed-wrapper">
+                <span className="plus-text">
+                    자유/질문
+                    <br />
+                    작성하기 !
+                </span>
                 <Link to={`/board/create/${gSeq}/free`}>
                     <img
                         src="/asset/icons/plus.svg"

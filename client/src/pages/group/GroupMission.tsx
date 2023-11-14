@@ -14,12 +14,33 @@ export default function GroupMission() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    //=== 모임 상세화면 읽어오기 ===
-
     const { gSeq, mSeq, gCategory } = useParams();
 
     console.log('mSeq', mSeq);
 
+    //=== 모임 상세화면 읽어오기 ===
+    const getMissionBoard = async () => {
+        const res = await axios
+            .get(
+                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                setMissionBoard(res.data.groupInfo);
+            });
+    };
+
+    useEffect(() => {
+        getMissionBoard();
+    }, []);
+
+    const [missionBoard, setMissionBoard] = useState();
+
+    //=== 모임 상세화면 읽어오기 ===
     const [groupDetail, setGroupDetail] = useState<GroupDetailType>({
         grInformation: '',
         groupCategory: '',
@@ -57,12 +78,6 @@ export default function GroupMission() {
         setMissionList(res.data.groupMission);
 
         console.log('+++++++', res.data.groupMission);
-
-        // for (let mission of missionList) {
-        //     if (mission.mSeq === Number(mSeq)) {
-        //         setMissionTitle(mission.mTitle);
-        //     }
-        // }
     };
 
     useEffect(() => {
@@ -70,14 +85,6 @@ export default function GroupMission() {
     }, []);
 
     console.log(groupDetail);
-
-    interface Mission {
-        id: number;
-        mTitle: string;
-        mContent: string;
-        mLevel: number;
-        // map: string;
-    }
 
     const [missionList, setMissionList] = useState<any>([]);
 
@@ -97,52 +104,19 @@ export default function GroupMission() {
         }
     }
 
-    // console.log('>>>>>mm', mSeq);
-    // useEffect(() => {
-    //     for (let i = 0; i < missionList.length; i++) {
-    //         // missionIdList.push(missionList[i].mSeq);
-    //         // setMissionTitle([ ...missionList, mSeq: i ]);
-    //     }
-    // }, []);
+    // let missionIdList = [];
 
-    let missionIdList = [];
-
-    for (let i = 0; i < missionList.length; i++) {
-        missionIdList.push(missionList[i].mSeq);
-    }
-
-    // console.log('*********', missionIdList);
+    // for (let i = 0; i < missionList.length; i++) {
+    //     missionIdList.push(missionList[i].mSeq);
+    // }
 
     console.log('missionList=========', missionList);
 
-    const getMissionBoard = async () => {
-        const res = await axios
-            .get(
-                `${process.env.REACT_APP_DB_HOST}/board/${gSeq}/mission/${mSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                setMissionBoard(res.data.groupInfo);
-            });
-    };
-
-    useEffect(() => {
-        getMissionBoard();
-    }, [mSeq]);
-
-    const [missionBoard, setMissionBoard] = useState();
-
-    console.log('ooooooo', missionBoard);
+    console.log('missionBoard', missionBoard);
 
     return (
         <div className="section section-group">
             <GroupHeader
-                // [ 추후 ] 넘버링 id 추가
-                // title={`미션 : ${missionList[Number(mSeq) - 1]?.mTitle}`}
                 title={`미션 : ${missionTitle}`}
                 groupName={groupDetail.groupName}
             />
@@ -157,13 +131,21 @@ export default function GroupMission() {
                 groupDetail={groupDetail}
                 missionBoard={missionBoard}
             />
-            <Link to={`/board/create/${gSeq}/mission/${mSeq}`}>
-                <img
-                    src="/asset/icons/plus.svg"
-                    className="plus-fixed"
-                    alt="plus-fixed"
-                />
-            </Link>
+
+            <div className="plus-fixed-wrapper">
+                <span className="plus-text">
+                    미션 {missionTitle}
+                    <br />
+                    인증하기 !
+                </span>
+                <Link to={`/board/create/${gSeq}/mission/${mSeq}`}>
+                    <img
+                        src="/asset/icons/plus.svg"
+                        className="plus-fixed"
+                        alt="plus-fixed"
+                    />
+                </Link>
+            </div>
         </div>
     );
 }

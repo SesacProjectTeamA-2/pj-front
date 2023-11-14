@@ -30,7 +30,7 @@ export default function HomeMissionList({
         setAddModalSwitch(true);
     };
 
-    //=== redux 상태관리 ===
+    //-- redux 상태관리
     // const dummyGroupState = useSelector(
     //     (state: RootStateType) => state.dummyGroup
     // );
@@ -38,34 +38,6 @@ export default function HomeMissionList({
     // const missionList = useSelector(
     //     (state: RootStateType) => state.dummyGroup.missionArray
     // );
-
-    // interface MissionType {
-    //     id: number;
-    //     name: string;
-    //     description: string;
-    //     level: number | string;
-    // }
-
-    // const missionList: MissionType[] = [
-    //     {
-    //         id: 1,
-    //         name: dummyGroupState.mTitle,
-    //         description: dummyGroupState.mContent,
-    //         level: dummyGroupState.mLevel,
-    //     },
-    //     {
-    //         id: 2,
-    //         name: dummyGroupState.mTitle,
-    //         description: dummyGroupState.mContent,
-    //         level: dummyGroupState.mLevel,
-    //     },
-    //     {
-    //         id: 3,
-    //         name: dummyGroupState.mTitle,
-    //         description: dummyGroupState.mContent,
-    //         level: dummyGroupState.mLevel,
-    //     },
-    // ];
 
     // for (let mission of missionList) {
     //     if (mission.level === 5) {
@@ -85,7 +57,6 @@ export default function HomeMissionList({
         mTitle: '',
         mContent: '',
         mLevel: 1,
-        // completed: false,
     });
 
     const [missionInputs, setMissionInputs] = useState(
@@ -141,7 +112,7 @@ export default function HomeMissionList({
         <div className="wrapper">
             <div className="upper-content">
                 <div className="upper-content-wrapper">
-                    <div className="title2">진행 중인 미션</div>
+                    <div className="title4">진행 중인 미션</div>
 
                     {isLeader ? (
                         <div onClick={missionAddHandler}>
@@ -151,6 +122,9 @@ export default function HomeMissionList({
                                     alt="edit-img"
                                     className="edit-img"
                                 ></img>
+                                <div className="title8 mission-edit-text">
+                                    수정하기
+                                </div>
                             </div>
                         </div>
                     ) : (
@@ -168,7 +142,7 @@ export default function HomeMissionList({
                         groupDetail={groupDetail}
                     />
                 ) : null}
-                <div className="title2">
+                <div className="title4">
                     {/* {useDdayCount(dummyGroupState.gDday)} */}
                     {gDday > 0
                         ? 'D-' + gDday

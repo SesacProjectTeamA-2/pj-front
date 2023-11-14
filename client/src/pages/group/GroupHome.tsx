@@ -124,7 +124,6 @@ export default function GroupHome() {
                 },
             })
             .then((res) => {
-                // console.log(res.data);
                 setGroupDetail(res.data);
 
                 setNowRanking(res.data.nowScoreUserInfo);
@@ -171,8 +170,6 @@ export default function GroupHome() {
     const [isLeader, setIsLeader] = useState(false);
     const [isJoin, setIsJoin] = useState(false);
 
-    // console.log('@@@@@@isJoin', isJoin);
-
     // 현재 점수 리스트
     const [nowScoreRanking, setNowScoreRanking] = useState([]);
 
@@ -212,13 +209,13 @@ export default function GroupHome() {
                     </div>
                 </div>
             ) : (
-                <div className="title1" style={{ padding: '2rem' }}>
+                <div className="title2" style={{ padding: '2rem' }}>
                     {groupDetail.groupName}
                 </div>
             )}
 
             <div className="wrapper">
-                <div className="title2 group-title-text">어떤 모임인가요 ?</div>
+                <div className="title4 group-title-text">어떤 모임인가요 ?</div>
                 <div className="main-content">{groupDetail.grInformation}</div>
             </div>
 
@@ -226,11 +223,6 @@ export default function GroupHome() {
                 missionList={missionList}
                 setMissionList={setMissionList}
                 gDday={groupDetail.groupDday}
-                //    addModalSwitch={addModalSwitch}
-                //         setAddModalSwitch={setAddModalSwitch}
-                //         action={'미션생성'}
-                //         setInput={setInput}
-                //         input={input}
                 isLeader={isLeader}
                 groupDetail={groupDetail}
             />
@@ -263,9 +255,11 @@ export default function GroupHome() {
             ) : groupDetail.groupMaxMember !== null &&
               groupDetail.memberArray.length + 1 <
                   groupDetail.groupMaxMember ? (
-                <button className="btn-fixed" onClick={postGroupJoin}>
-                    가입하기
-                </button>
+                <div className="btn-fixed-wrapper">
+                    <button className="btn-fixed" onClick={postGroupJoin}>
+                        가입하기
+                    </button>
+                </div>
             ) : (
                 ''
             )}

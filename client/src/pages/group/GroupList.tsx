@@ -79,7 +79,7 @@ export default function GroupList() {
         <div>
             <div className="groups created">
                 {/* <Toaster /> */}
-                <div className="title1">내가 생성한 모임</div>
+                <div className="title3">내가 생성한 모임</div>
                 <div>
                     {madeGroup?.length > 0 ? (
                         <SwiperComponent
@@ -93,7 +93,7 @@ export default function GroupList() {
             </div>
 
             <div className="groups join">
-                <div className="title1">참여한 모임</div>
+                <div className="title3">참여한 모임</div>
 
                 {joinGroup?.length > 0 ? (
                     <SwiperComponent

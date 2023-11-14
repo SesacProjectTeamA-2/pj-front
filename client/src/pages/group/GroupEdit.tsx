@@ -76,10 +76,11 @@ export default function GroupEdit() {
                     groupCoverImg,
                     groupMaxMember,
                     groupMission,
+                    memberArray,
                 } = res.data;
 
                 setInput({
-                    gSeq, // 추후 수정
+                    gSeq,
                     gName: groupName,
                     gDesc: grInformation,
                     gDday: groupDday,
@@ -91,6 +92,8 @@ export default function GroupEdit() {
 
                 setSelectedInterestId(groupCategory);
                 setMissionList(groupMission);
+                setMemberNum(memberArray.length + 1);
+                setGroupDetail(groupMaxMember);
             });
         // setGroupName(groupName);
     };
@@ -98,6 +101,9 @@ export default function GroupEdit() {
     useEffect(() => {
         getGroup();
     }, []);
+
+    const [memberNum, setMemberNum] = useState(1);
+    const [groupMaxMem, setGroupMaxMem] = useState(1);
 
     console.log('그룹 세부사항 GET', groupDetail);
     console.log('날짜 디폴트 설정 전 날짜', groupDetail.gDday);
@@ -157,14 +163,27 @@ export default function GroupEdit() {
         if (name === 'gMaxMem') {
             const intValue = parseInt(value, 10); // 입력값을 정수로 변환
 
+            // 숫자가 아니거나 1 미만인 경우
             if (isNaN(intValue) || intValue < 1) {
-                // 숫자가 아니거나 1 미만인 경우
                 toast.error('모임 인원은 1명 이상부터 가능합니다!', {
                     duration: 2000,
                 });
                 setInput({ ...input, [name]: 1 }); // 기본값으로 설정
                 // 해당 input에 포커스를 이동
                 e.target.value = '1'; // 입력값을 1로 설정
+                e.target.focus();
+                return;
+            } else if (isNaN(intValue) || intValue < memberNum) {
+                toast.error(
+                    `현재 ${memberNum}명이 모임에 가입했습니다. 
+                    ${memberNum}명 이상으로 선택하세요 !`,
+                    {
+                        duration: 2000,
+                    }
+                );
+                setInput({ ...input, [name]: memberNum }); // 기본값으로 설정
+                // 해당 input에 포커스를 이동
+                e.target.value = memberNum; // 입력값을 1로 설정
                 e.target.focus();
                 return;
             } else if (isNaN(intValue) || intValue > 100) {
@@ -301,6 +320,8 @@ export default function GroupEdit() {
                         />
                     </Box>
                 </div>
+
+                {/* 커버 이미지 */}
                 {/* <div className="group-create-img"> */}
                 {/* <div className="group-img-title">대표 이미지</div> */}
                 {/* <Button

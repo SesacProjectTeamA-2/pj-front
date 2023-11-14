@@ -46,10 +46,10 @@
     background-color: $color-primary;
     color: $color-white;
     border: none;
-    padding: 5px 20px;
+    padding: 0.8rem;
     margin: 20px 0;
-    font-size: 1.6rem;
-    width: 52vw;
+    font-size: 1.4rem;
+    width: 54vw;
     @include media('<800px') {
         width: 65vw;
     }
@@ -76,4 +76,6 @@
     flex-direction: column;
     width: 100%;
     white-space: nowrap;
+    flex-direction: row;
+    gap: 2rem;
 }
