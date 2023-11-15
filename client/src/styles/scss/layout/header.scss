@@ -54,9 +54,6 @@
     justify-content: center;
     align-items: center;
     scale: 1.5;
-    @include media('<800px') {
-        margin-right: 100px;
-    }
 }
 .logo-img {
     width: 8rem;
