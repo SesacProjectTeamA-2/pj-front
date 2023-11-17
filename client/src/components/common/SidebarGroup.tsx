@@ -33,16 +33,19 @@ export default function SideBarGroup() {
 
             setIsLeader(res.data.isLeader);
             setIsJoin(res.data.isJoin);
+
+            setLeaderName(res.data.leaderInfo.uName);
         };
 
         getGroup();
     }, []);
 
     //-- 모임장 / 멤버
-    const [isLeader, setIsLeader] = useState('');
-
+    const [isLeader, setIsLeader] = useState(false);
     const [isJoin, setIsJoin] = useState(false);
+    const [leaderName, setLeaderName] = useState('');
 
+    console.log('leaderName', leaderName);
     console.log('groupMissions', groupMissions);
     // console.log('groupMissions', groupMissions.length);
 
@@ -64,16 +67,24 @@ export default function SideBarGroup() {
     };
 
     return (
-        <div>
+        <div className='sidebar-all'>
             {isJoin ? (
                 <div className="sidebar-container">
                     <div className="dropdown">
-                        <button style={{borderRadius: '0', fontWeight: 'bold'}} className="dropbtn">그룹 메뉴 보기</button>
+                        <button
+                            style={{ borderRadius: '0', fontWeight: 'bold' }}
+                            className="dropbtn"
+                        >
+                            그룹 메뉴 보기
+                        </button>
                         <div className="sidebar-content dropdown dropdown-content">
                             <div className="sidebar-list">
                                 <div className="sidebar-theme-list">
                                     <div className="theme-flex">
-                                        <div className="theme-title">
+                                        <div
+                                            className="theme-title"
+                                            style={{ fontWeight: 'bold' }}
+                                        >
                                             <Link to={`/group/home/${gSeq}`}>
                                                 홈으로 가기
                                             </Link>
@@ -86,12 +97,22 @@ export default function SideBarGroup() {
                                         </div>
                                         <div className="board-content">
                                             <Link to={`/board/${gSeq}/notice`}>
-                                                <div className="sidebar-theme">
+                                                <div
+                                                    className="sidebar-theme"
+                                                    style={{
+                                                        fontWeight: 'bold',
+                                                    }}
+                                                >
                                                     공지사항
                                                 </div>
                                             </Link>
                                             <Link to={`/board/${gSeq}/free`}>
-                                                <div className="sidebar-theme">
+                                                <div
+                                                    className="sidebar-theme"
+                                                    style={{
+                                                        fontWeight: 'bold',
+                                                    }}
+                                                >
                                                     자유
                                                 </div>
                                             </Link>
@@ -99,7 +120,7 @@ export default function SideBarGroup() {
                                     </div>
                                     <div className="theme-flex">
                                         <div className="theme-title">미션</div>
-                                        <div>
+                                        <div className='mission-res'>
                                             <div className="mission-flex">
                                                 <div className="mission-title">
                                                     진행 중
@@ -117,6 +138,10 @@ export default function SideBarGroup() {
                                                                             idx
                                                                         }
                                                                         className="sidebar-theme"
+                                                                        style={{
+                                                                            fontWeight:
+                                                                                'bold',
+                                                                        }}
                                                                     >
                                                                         <Link
                                                                             to={`/board/${gSeq}/mission/${mission.mSeq}`}
@@ -149,11 +174,28 @@ export default function SideBarGroup() {
                                         </div>
                                     </div>
 
+                                    <div className="empty-side-bar"></div>
+
                                     {isLeader ? (
                                         <div className="theme-flex">
                                             {/* 모임장 */}
-                                            <div className="theme-title">
-                                                모임장
+                                            <div
+                                                className="theme-title side-bar-leader-member"
+                                                style={{
+                                                    color: 'black',
+                                                    backgroundColor: '#e9e9e9',
+                                                }}
+                                            >
+                                                <div
+                                                    style={{
+                                                        fontWeight: 'bold',
+                                                        paddingBottom: '0.5rem',
+                                                        color: 'black',
+                                                    }}
+                                                >
+                                                    ⭐️ 모임장 ⭐️
+                                                </div>
+                                                <div>{leaderName}</div>
                                             </div>
                                             <SideBarGroupLeader
                                                 warningModalSwitch={
@@ -172,8 +214,14 @@ export default function SideBarGroup() {
                                     ) : (
                                         <div className="theme-flex">
                                             {/* 멤버 */}
-                                            <div className="theme-title">
-                                                멤버
+                                            <div
+                                                className="theme-title side-bar-leader-member"
+                                                style={{
+                                                    color: 'black',
+                                                    backgroundColor: '#e9e9e9',
+                                                }}
+                                            >
+                                                🌱 모임원
                                             </div>
 
                                             <SideBarGroupMember

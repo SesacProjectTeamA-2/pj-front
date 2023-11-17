@@ -60,15 +60,27 @@ button {
     }
 }
 
-.myPage-div-three-one p {
-    margin-bottom: 5%;
-    margin-left: 3%;
+.myPage-div-three-one {
+    p {
+        margin-bottom: 5%;
+        color: $color-gray4;
+    }
 }
+
+.interested-div {
+    gap: 0.6rem;
+    margin: 0;
+}
+
+.tag-btn {
+    height: 3vh !important;
+}
+
 .myPage-div-three-two {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .phrase-all-div {
@@ -104,11 +116,6 @@ button {
     display: flex;
     flex-direction: column;
 }
-.myPage-div-six {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
 
 // PEN BTN
 .edit-btn {
@@ -120,6 +127,29 @@ button {
     justify-content: center;
     align-items: center;
     margin: 0;
+}
+
+.mission-edit {
+    color: $color-gray6;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mission-edit-text {
+        opacity: 0;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity 0.3s;
+        white-space: nowrap;
+    }
+}
+
+.mission-edit:hover {
+    .mission-edit-text {
+        opacity: 100;
+        transition: all 0.3s;
+    }
 }
 
 // INPUT
@@ -136,15 +166,15 @@ button {
     display: flex;
     flex-direction: row;
     align-items: start;
-    width: 40vw;
+    width: 35vw;
     justify-content: start;
     margin: 5%;
 }
 // nickname
 #input-area {
-    font-weight: bold;
-    font-size: large;
+    font-size: 1rem;
 }
+
 // introduce
 #text-area {
     height: 100%;
@@ -182,7 +212,7 @@ button {
 
 // Nickname START
 .edit-img {
-    @include box(3vw);
+    @include box(2vw);
     border: none;
 
     @include media('<800px') {
@@ -199,8 +229,8 @@ button {
     background-color: white;
     width: 80%;
     height: 100%;
-    border: 5px solid $color-primary;
-    border-radius: 10px;
+    // border: 5px solid $color-primary;
+    border-radius: 25px;
 }
 .character-item-div {
     width: 100%;
@@ -230,7 +260,9 @@ button {
     align-items: center;
     width: 100%;
     white-space: nowrap;
+    flex-wrap: wrap;
 }
+
 .tag-radio {
     display: none;
 }
@@ -240,7 +272,7 @@ button {
     background-color: white;
     color: #acacac;
     margin: 5px;
-    width: 8vw;
+    min-width: 4vw;
     height: 5vh;
     text-align: center;
     display: flex;
@@ -379,3 +411,14 @@ td {
     color: $color-gray1;
 }
 // Quit END
+
+.btn-fixed-wrapper {
+    display: flex;
+    justify-content: center;
+
+    height: 10vh;
+    position: sticky;
+    bottom: 4%;
+    z-index: 10;
+    width: 100%;
+}

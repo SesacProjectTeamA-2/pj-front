@@ -6,7 +6,7 @@ export default function CharacterItem(props: any) {
     }, [props.selectedCharacter]);
 
     return (
-        <div className="character-item-div ">
+        <div className="character-item-div">
             {props.characterArr.map((character: any) => {
                 return (
                     <label
@@ -16,9 +16,10 @@ export default function CharacterItem(props: any) {
                         style={{
                             border:
                                 props.selectedCharacter === character.imgSrc
-                                    ? '5px double #ed8d8d'
+                                    ? '5px solid #ed8d8d'
                                     : 'none',
                             borderRadius: '25px',
+                            transition: 'all 0.2s',
                         }}
                     >
                         <input

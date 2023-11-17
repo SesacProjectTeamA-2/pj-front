@@ -7,6 +7,22 @@ export default function Introduce(props: any): JSX.Element {
     const changeReadOnly = (): void => {
         inputRef.current?.focus();
     };
+    // 펜 버튼 hover event
+    const missionEdit = document.querySelector('.mission-edit');
+    const missionEditText = document.querySelector(
+        '.mission-edit-text'
+    ) as HTMLElement | null;
+
+    missionEdit?.addEventListener('mouseover', () => {
+        if (missionEditText !== null) {
+            missionEditText.style.visibility = 'visible';
+        }
+    });
+    missionEdit?.addEventListener('mouseout', () => {
+        if (missionEditText !== null) {
+            missionEditText.style.visibility = 'hidden';
+        }
+    });
 
     return (
         <div className="introduce-div">
@@ -18,17 +34,14 @@ export default function Introduce(props: any): JSX.Element {
                     className="input-obj"
                     id="text-area"
                 />
-                <button
-                    onClick={(e) => changeReadOnly()}
-                    className="edit-btn"
-                    id="introduce-edit"
-                >
+                <div className="mission-edit">
                     <img
                         src="/asset/icons/edit.svg"
                         className="edit-img"
                         alt="editImg"
                     ></img>
-                </button>
+                    <div className="title8 mission-edit-text">수정하기</div>
+                </div>
             </label>
         </div>
     );

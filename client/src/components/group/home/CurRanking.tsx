@@ -13,7 +13,7 @@ export default function CurRanking({
     return (
         <div className="wrapper">
             <div className="upper-content">
-                <div className="title2">현재 랭킹</div>
+                <div className="title4">현재 랭킹</div>
                 <div className="title6 group-home-duration">
                     {/* [추후] 몇회차인지 */}
                     {/* <div className="group-home-mission-round-text">5회차</div> */}
@@ -29,7 +29,7 @@ export default function CurRanking({
                         return (
                             <li>
                                 <div className="ranking-list-cur">
-                                    <div>{idx + 1}</div>
+                                    <div className="ranking">{idx + 1}</div>
                                     <img
                                         src={
                                             now.uImg || '/asset/images/user.svg'

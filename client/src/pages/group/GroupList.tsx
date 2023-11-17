@@ -70,7 +70,6 @@ export default function GroupList() {
 
     const createHandler = () => {
         if (!uToken) {
-            // toast.error('로그인이 필요합니다 !');
             alert('로그인이 필요합니다 !');
             return;
         } else nvg('/group/create');
@@ -80,7 +79,7 @@ export default function GroupList() {
         <div>
             <div className="groups created">
                 {/* <Toaster /> */}
-                <div className="title1">내가 생성한 모임</div>
+                <div className="title3">내가 생성한 모임</div>
                 <div>
                     {madeGroup?.length > 0 ? (
                         <SwiperComponent
@@ -94,7 +93,7 @@ export default function GroupList() {
             </div>
 
             <div className="groups join">
-                <div className="title1">참여한 모임</div>
+                <div className="title3">참여한 모임</div>
 
                 {joinGroup?.length > 0 ? (
                     <SwiperComponent

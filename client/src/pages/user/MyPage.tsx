@@ -12,8 +12,8 @@ import InterestedList from '../../components/common/InterestedList';
 import Phrase from '../../components/myPage/Phrase';
 import ProfilePic from '../../components/myPage/ProfilePic';
 import Quit from '../../components/myPage/Quit';
-// import SetMainList from '../../components/myPage/SetMainList';
-// import PsnCoverImg from '../../components/myPage/PsnCoverImg';
+import SetMainList from '../../components/myPage/SetMainList';
+import PsnCoverImg from '../../components/myPage/PsnCoverImg';
 
 export default function MyPage() {
     const cookie = new Cookies();
@@ -75,11 +75,9 @@ export default function MyPage() {
 
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const formData = new FormData(); // 사진 담을 formData 객체 생성
-        // console.log('e.target.files ', e.target.files);
 
         if (e.target.files && e.target.files[0]) {
             formData.append('image', e.target.files[0]);
-
             sendImg(formData);
         }
     };
@@ -125,7 +123,6 @@ export default function MyPage() {
 
     // 4. 관심사 배열
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
-
     useEffect(() => {
         console.log(selectedArr);
     }, [selectedArr]);
@@ -161,6 +158,7 @@ export default function MyPage() {
     };
 
     useEffect(() => {
+        console.log('phraseModeBtnVal', phraseModeBtnVal, phraseCtt);
         if (phraseModeBtnVal === 'recommend') {
             // 추천 모드일 때 빈 값을 보냄
             setPhraseCtt(null);
@@ -186,6 +184,7 @@ export default function MyPage() {
         uMainGroup: number;
     }
     const patchedUserData: patchedUserDataItf = {
+        // uImg:userImgSrc,
         uName: input,
         uDesc: content,
         uPhrase: phraseCtt,
@@ -208,16 +207,20 @@ export default function MyPage() {
             await axios
                 .patch(
                     `${process.env.REACT_APP_DB_HOST}/user/mypage`,
+                    // 'http://localhost:8888/api/user/mypage',
 
                     patchedUserData,
                     {
                         headers: {
                             Authorization: `Bearer ${uToken}`,
+                            // 'Content-Type': 'multipart/form-data',
                         },
                     }
                 )
                 .then((res) => {
+                    console.log('patched', res.data.message);
                     toast.success(res.data.message);
+                    console.log('patchedData2', patchedUserData);
                 });
         } catch (err) {
             console.log(err);
@@ -225,7 +228,6 @@ export default function MyPage() {
     };
 
     // 3. 회원 탈퇴
-    // DELETE 요청 함수 작성 필요 + Quit에 prop으로 넘기기
 
     return (
         <div className="section">
@@ -278,20 +280,6 @@ export default function MyPage() {
                     />
                 </div>
             </div>
-
-            {/* dDay / 커버 이미지 뺌 */}
-            {/* <div className="myPage-div-four"> */}
-            {/* <h3 className="myPage-h3">메인화면 설정</h3>
-                <SetMainList
-                    setDdayPin={setDdayPin}
-                    dDayPin={dDayPin}
-                    handleCheckDday={handleCheckDday}
-                    setDonePin={setDonePin}
-                    donePin={donePin}
-                    handleCheckDone={handleCheckDone}
-                /> */}
-            {/* <PsnCoverImg /> */}
-            {/* </div> */}
 
             <div className="myPage-div-five">
                 <div className="myPage-div-five-one">

@@ -54,7 +54,7 @@
 .upper-content-wrapper {
     display: flex;
     align-items: flex-end;
-    gap: 2rem;
+    // gap: 1rem;
 }
 
 .group-title-text {
@@ -65,7 +65,30 @@
 .mission-edit {
     color: $color-gray6;
     cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+
+    img {
+        width: 40px;
+        height: 24px;
+    }
+
+    .mission-edit-text {
+        opacity: 0;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity 0.3s; /* 트랜지션을 여기에 적용합니다. */
+    }
 }
+
+.mission-edit:hover {
+    .mission-edit-text {
+        opacity: 100;
+        transition: all 0.3s;
+    }
+}
+
+@include fadeOut(mission-edit-text);
 
 .group-home-mission-round-text {
     display: flex;
@@ -105,6 +128,7 @@
 
     li {
         padding: 10px 0;
+        width: 100%;
     }
 }
 
@@ -130,6 +154,8 @@
 .ranking-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    justify-content: start;
 
     img {
         @include box(40px);
@@ -143,9 +169,24 @@
     }
 }
 
+.ranking-list-img-div {
+    // background-color: aqua;
+    width: fit-content;
+}
+
 .cur-ranking-content {
     width: 100%;
     font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    .name {
+        white-space: nowrap;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
 }
 
 .acc-ranking-content {
@@ -183,8 +224,30 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+.ranking {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ranking-list-cur img {
+    @include box(40px);
+    border-radius: 50%;
+}
 
 .ranking-list-acc {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    .name {
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.ranking-list-acc img {
+    @include box(40px);
+    border-radius: 50%;
 }

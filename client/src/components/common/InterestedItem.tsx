@@ -11,8 +11,14 @@ export default function InterestedItem({
     // 체크박스 상태 관리
     const [selected, setSelected] = useState<boolean>(false);
 
+    // 체크박스 개수 제한
+    // const [selectedArr, setSelectedArr] = useState<Set<string>>(
+    //     new Set<string>()
+    // );
+
     // useEffect로 비동기 useState 처리
     useEffect(() => {
+        // console.log('관심사>>>>', selectedArr);
         setSelectedArr(selectedArr);
     }, [selectedArr]);
 

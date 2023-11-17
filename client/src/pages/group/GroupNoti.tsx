@@ -44,13 +44,6 @@ const columns: Column[] = [
         align: 'center',
         format: (value: number) => value.toLocaleString('en-US'),
     },
-    // {
-    //     id: 'density',
-    //     label: 'Density',
-    //     minWidth: 170,
-    //     align: 'right',
-    //     format: (value: number) => value.toFixed(2),
-    // },
 ];
 
 interface Data {
@@ -68,39 +61,8 @@ function createData(
     writer: string,
     date: string
 ): Data {
-    // const density = writer / date;
     return { id, title, content, writer, date };
 }
-
-// //=== 데이터가 들어올 부분 ===
-// const reversedRows = Array.from({ length: 50 }, (_, index) =>
-//     createData(
-//         String(50 - index),
-//         `${noticeList.gbTitle} 50 - index}`,
-//         `작성자 ${50 - index}`,
-//         '2023-11-10'
-//     )
-// );
-
-// const rows = reversedRows;
-
-// const rows = [
-//     createData('India', 'IN', 1324171354, 3287263),
-//     createData('China', 'CN', 1403500365, 9596961),
-//     createData('Italy', 'IT', 60483973, 301340),
-//     createData('United States', 'US', 327167434, 9833520),
-//     createData('Canada', 'CA', 37602103, 9984670),
-//     createData('Australia', 'AU', 25475400, 7692024),
-//     createData('Germany', 'DE', 83019200, 357578),
-//     createData('Ireland', 'IE', 4857000, 70273),
-//     createData('Mexico', 'MX', 126577691, 1972550),
-//     createData('Japan', 'JP', 126317000, 377973),
-//     createData('France', 'FR', 67022000, 640679),
-//     createData('United Kingdom', 'GB', 67545757, 242495),
-//     createData('Russia', 'RU', 146793744, 17098246),
-//     createData('Nigeria', 'NG', 200962417, 923768),
-//     createData('Brazil', 'BR', 210147125, 8515767),
-// ];
 
 export default function GroupNoti() {
     const { gSeq, gCategory } = useParams();
@@ -121,6 +83,7 @@ export default function GroupNoti() {
                 console.log(res.data);
 
                 setGName(res.data.groupName);
+                setIsLeader(res.data.isLeader);
             });
     };
 
@@ -129,6 +92,7 @@ export default function GroupNoti() {
     }, []);
 
     const [gName, setGName] = useState('');
+    const [isLeader, setIsLeader] = useState(false);
 
     //] 1. 공지 조회
     const getBoardNoti = async () => {
@@ -161,25 +125,13 @@ export default function GroupNoti() {
     const [noticeList, setNoticeList] = useState<any>([]);
 
     console.log('noticeList', noticeList);
-    // console.log('>>>>', noticeList[0].gbSeq);
 
     const [gbSeqList, setGbSeqList] = useState<any>([]);
 
     console.log('gbSeqList', gbSeqList);
 
-    //=== 데이터가 들어올 부분 ===
-    // const reversedRows = Array.from({ length: 50 }, (_, index) =>
-    //     createData(
-    //         String(50 - index),
-    //         `${noticeList.gbTitle} 50 - index}`,
-    //         `작성자 ${50 - index}`,
-    //         '2023-11-10'
-    //     )
-    // );
-
     const reversedRows = noticeList?.map((item: any, index: number) =>
         createData(
-            // String(noticeList.length - index),
             String(index + 1),
             // replace(/(<([^>]+)>)/gi, '') => html tag 처리
             item.gbTitle.replace(/(<([^>]+)>)/gi, ''),
@@ -218,7 +170,7 @@ export default function GroupNoti() {
     return (
         <div className="section section-group">
             <GroupHeader title={'공지사항'} groupName={gName} />
-            <p className="noti-info">공지사항은 관리자만 작성 가능합니다.</p>
+            <p className="noti-info">공지사항은 모임장만 작성 가능합니다.</p>
 
             {/* html tag 처리 */}
             {/* noticeList.map((notice:any)=>{
@@ -302,91 +254,25 @@ export default function GroupNoti() {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
+            </div>
 
-                {/* <table classid="idti-table">
-                    <thead>
-                        <tr>
-                            <th>id.</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>날짜</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            classid="table-row-link"
-                            onClick={() => handleRowClick(1)}
-                        >
-                            <td>1</td>
-                            <td>
-                                [필독] 가입 시 채팅방에 간단한 인사말
-                                남겨주세요!
-                            </td>
-                            <td>달려라하니</td>
-                            <td>2023.10.28</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div classid="idti-header">
-                    <div>id.</div>
-                    <div>제목</div>
-                    <div>작성자</div>
-                    <div>날짜</div>
+            {isLeader ? (
+                <div className="plus-fixed-wrapper">
+                    <span className="plus-text">
+                        공지사항 <br />
+                        작성하기 !
+                    </span>
+                    <Link to={`/board/create/${gSeq}/${gCategory}`}>
+                        <img
+                            src="/asset/icons/plus.svg"
+                            className="plus-fixed"
+                            alt="plus-fixed"
+                        />
+                    </Link>
                 </div>
-                <div classid="idti-content">
-                    <ul> */}
-                {/* [추후] 동적으로 수정 */}
-                {/* <Link to="/group/idti/1/1">
-                            <li>
-                                <div>1</div>
-                                <div>
-                                    [필독] 가입 시 채팅방에 간단한 인사말
-                                    남겨주세요 !
-                                </div>
-                                <div>달려라하니</div>
-                                <div>2023.10.28</div>
-                            </li>
-                        </Link> */}
-                {/* <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li>
-                        <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li>
-                        <li>
-                            <div>1</div>
-                            <div>
-                                [필독] 가입 시 채팅방에 간단한 인사말 남겨주세요
-                                !
-                            </div>
-                            <div>달려라하니</div>
-                            <div>2023.10.28</div>
-                        </li> */}
-                {/* </ul> */}
-                {/* </div> */}
-            </div>
-            <div>
-                <Link to={`/board/create/${gSeq}/${gCategory}`}>
-                    <img
-                        src="/asset/icons/plus.svg"
-                        className="plus-fixed"
-                        alt="plus-fixed"
-                    />
-                </Link>
-            </div>
+            ) : (
+                ''
+            )}
         </div>
     );
 }

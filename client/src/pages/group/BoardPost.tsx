@@ -19,14 +19,6 @@ export default function BoardPost() {
 
     const { gSeq, gCategory, mSeq } = useParams();
 
-    interface Mission {
-        // mSeq: number;
-        mTitle: string;
-        mContent: string;
-        mLevel: number;
-        // map: string;
-    }
-
     const [missionList, setMissionList] = useState<any>();
 
     const getGroup = async () => {
@@ -46,28 +38,11 @@ export default function BoardPost() {
         );
     };
 
-    // const getGroupMission = async () => {
-    //     const res = await axios
-    //         .get(`${process.env.REACT_APP_DB_HOST}/mission/group/${gSeq}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             setMissionList(res.data.groupMission);
-    //         });
-    // };
-
     useEffect(() => {
         getGroup();
-        // getGroupMission();
     }, []);
 
     console.log('missionList', missionList);
-
-    // useEffect(() => {
-    //     setMissionList(groupDetail.groupMission);
-    // }, [groupDetail.groupMission]);
 
     // 1. 클릭한 곳 default 값
     // 1) Header - tilte
@@ -85,21 +60,7 @@ export default function BoardPost() {
     const [missionSelected, setMissionSelected] = useState('');
     const [selected, setSelected] = useState<any>(gCategory);
 
-    console.log('===========', selected);
-
-    // useEffect(() => {
-    //     if (selected === 'mission') {
-    //         setSelected(missionList[0]?.mSeq);
-    //     }
-    // }, []);
-
-    // console.log('=====+++++++', selected);
-
-    // useEffect(() => {
-    //     if (gCategory === 'mission') {
-    //         setSelected(missionSelected);
-    //     }
-    // });
+    console.log('selected', selected);
 
     console.log('missionSelected', missionSelected);
 
@@ -111,9 +72,6 @@ export default function BoardPost() {
             ...board,
             [name]: value,
         });
-
-        // console.log(board);
-        // console.log(name, value);
     };
 
     //] select 태그 state관리
@@ -121,7 +79,7 @@ export default function BoardPost() {
         const selectedValue = e.target.value;
         setSelected(selectedValue);
 
-        console.log('**********');
+        // console.log('**********');
 
         // setBoard((prevBoard: any) => ({
         //     ...prevBoard,
@@ -175,12 +133,16 @@ export default function BoardPost() {
     // 정보 post
     const boardPostHandler = async () => {
         if (!board.gbTitle) {
-            toast.error('제목을 입력하세요');
+            toast.error('제목을 입력하세요', {
+                duration: 2000,
+            });
             return;
         }
 
         if (newContent === '<br>') {
-            toast.error('내용을 입력하세요');
+            toast.error('내용을 입력하세요', {
+                duration: 2000,
+            });
             return;
         }
 
@@ -257,12 +219,9 @@ export default function BoardPost() {
                 </div>
             </div>
             <div>
-                {/* default : + 누른 페이지 */}
-                {/* <Link to="/group/noti/1"> */}
                 <button className="editor-post-btn" onClick={boardPostHandler}>
                     작성 완료
                 </button>
-                {/* </Link> */}
 
                 <SuccessModal
                     successModalSwitch={successModalSwitch}

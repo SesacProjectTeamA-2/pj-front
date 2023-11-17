@@ -4,15 +4,19 @@
 
 .join-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 100vh;
+}
+.join-title {
+    margin-bottom: 5%;
 }
 
 #nickname-h3 {
-    font-weight: bolder;
+    font-weight: bold;
+    margin-right: 5%;
 }
 #interested-h3 {
-    font-weight: bolder;
+    font-weight: bold;
 }
 img {
     @include box(100%);
@@ -24,6 +28,7 @@ img {
     width: 100%;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .interested-div {
@@ -32,10 +37,10 @@ img {
     align-items: center;
     width: 100%;
     margin: 30px 0;
-    display: grid;
+    // display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 16px;
+    // gap: 16px;
 }
 .interested-div-one {
     display: flex;
@@ -49,10 +54,17 @@ img {
     justify-content: center;
     width: 100%;
 }
+
+.interested-p {
+    color: $color-gray4;
+    padding: 1rem;
+}
+
 .character-sub-div {
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     width: 100%;
+    margin-bottom: 5%;
 }

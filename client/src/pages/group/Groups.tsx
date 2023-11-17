@@ -78,7 +78,7 @@ export default function Groups() {
                             setSearchInput(e.target.value);
                         }}
                     />
-                    <div>
+                    <div className="search-btns">
                         <button className="btn-sm" onClick={searchHandler}>
                             {search ? '취소' : '검색'}
                         </button>
@@ -87,7 +87,7 @@ export default function Groups() {
                         </button>
                     </div>
                 </div>
-           
+
                 <div className="groups-interested">
                     <InterestedList
                         selectedArr={selectedArr}

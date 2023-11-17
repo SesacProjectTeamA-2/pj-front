@@ -2,6 +2,10 @@
 @import '../abstracts/utils';
 @import '~include-media/dist/include-media';
 
+.sidebar-all {
+    width: 100%;
+}
+
 .sidebar-container {
     background-color: white;
     color: $color-primary;
@@ -32,7 +36,7 @@
                 }
                 .theme-title {
                     width: 100%;
-                    padding: 20px 0;
+                    padding: 10px 0;
 
                     @include media('<900px') {
                         width: 35vw;
@@ -42,8 +46,14 @@
                     justify-content: center;
                     background-color: $color-primary;
                     color: white;
-                    font-weight: 800;
                 }
+
+                @include media('<900px') {
+                    .mission-res {
+                        width: 65vw;
+                    }
+                }
+
                 .mission-flex {
                     display: flex;
                     flex-direction: column;
@@ -58,8 +68,9 @@
                 width: 100%;
                 background-color: $color-primary;
                 color: white;
-                opacity: 30%;
-                font-weight: 700;
+                opacity: 50%;
+                // font-weight: 700;
+                padding: 7px 0;
             }
         }
     }
@@ -79,7 +90,9 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+
         @include media('<900px') {
+            width: 65vw;
             flex-direction: row;
             .sidebar-theme {
                 margin: 7px 15px;
@@ -102,9 +115,11 @@
 // 모임장 사이드바
 .leader-menu {
     padding: 0;
+    color: $color-gray7;
 
     li {
         padding: 0.2rem 0;
+        font-weight: bold;
     }
 }
 
@@ -115,11 +130,9 @@
     flex-direction: column;
     align-items: center;
     li {
-        padding: 0.2rem 0;
+        padding: 0.4rem 0;
     }
 }
-
-// [질문] 화면 안움직이게...?
 
 .leader-edit {
     transition: 0.3s all;
@@ -209,4 +222,20 @@
         display: block;
         z-index: 100;
     }
+}
+
+.sidebar-theme {
+    margin: 7px 15px;
+}
+
+.empty-side-bar {
+    height: 5vh;
+}
+
+.side-bar-leader-member {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9e9e9;
 }
