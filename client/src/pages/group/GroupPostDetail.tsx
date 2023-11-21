@@ -12,6 +12,7 @@ import WarningModal from '../../components/common/modal/WarningModal';
 export default function GroupPostDetail() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
+
     // 0. 프로필 사진, 닉네임 가져오기
     const [userImgSrc, setUserImgSrc] = useState<any>('/asset/images/user.svg'); // 문자열 변수
     const [userNickname, setUserNickname] = useState<any>('');
@@ -55,17 +56,12 @@ export default function GroupPostDetail() {
     console.log(gSeq, mSeq, gbSeq, gCategory);
 
     //; 게시글 조회 (GET)
-    const [notiList, setNotiList] = useState<any>([]);
     const [freeList, setFreeList] = useState<any>([]);
     const [boardComments, setBoardComments] = useState<any>([]);
 
-    // // [추후] 공지 or 자유/질문 or 미션
-    // const [boardType, setBoardType] = useState('');
-
-    //] 0. 공지 게시글 상세 조회
-
     const [userInfo, SetUserInfo] = useState<any>([]);
 
+    //] 0. 공지 게시글 상세 조회
     const getBoardNoti = async () => {
         const res = await axios
             .get(
@@ -90,9 +86,6 @@ export default function GroupPostDetail() {
 
                 const boardComments = res.data.groupInfo.tb_groupBoardComments;
                 setBoardComments(boardComments);
-                // setCommentCount(res.data.commentCount);
-
-                // const userComment = res.data.groupInfo.tb_groupBoardComments;
             });
     };
 
@@ -121,7 +114,6 @@ export default function GroupPostDetail() {
 
     //] 댓글
     // 댓글 리스트 : 자유게시글에 포함
-
     const [commentList, setCommentList] = useState<any>([]);
 
     const [commentInput, setCommentInput] = useState({
@@ -148,12 +140,17 @@ export default function GroupPostDetail() {
             }
         );
 
-        // window.location.reload();
         getBoardNoti();
-        // setFreeList(res.data.groupInfo);
+
+        setCommentInput({
+            ...commentInput,
+            gbcContent: '',
+        });
     };
 
-    // ========== 수정 ===========
+    // === 수정 ===
+
+    const [isEdit, setIsEdit] = useState(false);
 
     const [commentEditInput, setCommentEditInput] = useState({
         gbcSeq: 1,
@@ -172,8 +169,18 @@ export default function GroupPostDetail() {
         setCommentEditInputs(updatedInputs);
     };
 
+    console.log('boardComments', boardComments);
+
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
+        // !!! 추가 수정 예정 !!! (edit 토글 형식)
+        //-- input 개별 토글 관리
+        // const handleEditChange = boardComments.map((comment) => comment.gbcSeq === comment)setIsEdit(true);
+
+        // const updatedBoardComments = [...boardComments];
+        // updatedBoardComments[idx] =
+        // setCommentEditInputs(updatedInputs);
+
         console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
 
         const res = await axios.patch(
@@ -275,6 +282,7 @@ export default function GroupPostDetail() {
                         <textarea
                             className="comment-textarea"
                             onChange={commentOnChange}
+                            value={commentInput.gbcContent}
                         ></textarea>
                         <button
                             className="btn-md done-btn"
@@ -343,28 +351,35 @@ export default function GroupPostDetail() {
                                                               {isWriter ? (
                                                                   // 사용자 === 작성자
                                                                   <>
-                                                                      <button
+                                                                      <div
+                                                                          className="writer-menu"
+                                                                          style={{
+                                                                              padding:
+                                                                                  '0.6rem',
+                                                                          }}
                                                                           onClick={() =>
                                                                               commentEditHandler(
                                                                                   comment.gbcSeq,
                                                                                   idx
                                                                               )
                                                                           }
-                                                                          className="btn-sm cmt-edit-btn"
                                                                       >
                                                                           수정
-                                                                      </button>
-
-                                                                      <button
+                                                                      </div>
+                                                                      <div
+                                                                          className="writer-menu"
+                                                                          style={{
+                                                                              padding:
+                                                                                  '0.6rem',
+                                                                          }}
                                                                           onClick={() =>
                                                                               commentDeleteHandler(
                                                                                   comment.gbcSeq
                                                                               )
                                                                           }
-                                                                          className="btn-sm cmt-del-btn"
                                                                       >
                                                                           삭제
-                                                                      </button>
+                                                                      </div>
                                                                   </>
                                                               ) : // 사용자 !== 작성자
                                                               null}
