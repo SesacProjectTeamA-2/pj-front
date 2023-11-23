@@ -169,14 +169,12 @@ export default function GroupPostDetail() {
         setCommentEditInputs(updatedInputs);
     };
 
-
     // 댓글 수정 여부 id 관리 state
     const [editingCommentId, setEditingCommentId] = useState<number | null>(
         null
     );
 
     console.log('boardComments', boardComments);
-
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
@@ -359,7 +357,6 @@ export default function GroupPostDetail() {
                                                           //           '30%',
                                                           //   }}
                                                           >
-
                                                               <div className="comment-header">
                                                                   {/* ... [rest of the comment header code] */}
 
@@ -407,12 +404,10 @@ export default function GroupPostDetail() {
                                                                       {isWriter && (
                                                                           <div>
                                                                               <button
-                                                                                className="writer-menu"
-                                                                          style={{
-                                                                              padding:
-                                                                                  '0.6rem',
-                                                                          }}
-                                                                                
+                                                                                  style={{
+                                                                                      padding:
+                                                                                          '0.6rem',
+                                                                                  }}
                                                                                   onClick={() => {
                                                                                       if (
                                                                                           isEditing
@@ -434,11 +429,10 @@ export default function GroupPostDetail() {
                                                                                       : '수정'}
                                                                               </button>
                                                                               <button
-                                                                                className="writer-menu"
-                                                                          style={{
-                                                                              padding:
-                                                                                  '0.6rem',
-                                                                          }}
+                                                                                  style={{
+                                                                                      padding:
+                                                                                          '0.6rem',
+                                                                                  }}
                                                                                   onClick={() =>
                                                                                       commentDeleteHandler(
                                                                                           comment.gbcSeq
@@ -452,7 +446,6 @@ export default function GroupPostDetail() {
                                                                       )}
                                                                   </div>
                                                               </div>
-
                                                           </div>
                                                       </div>
                                                   </div>
