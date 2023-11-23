@@ -161,7 +161,7 @@ export default function GroupPostDetail() {
     const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
 
     const commentEditOnChange = (
-        e: React.ChangeEvent<HTMLInputElement>,
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
         idx: number
     ) => {
         const updatedInputs = [...commentEditInputs];
@@ -169,7 +169,14 @@ export default function GroupPostDetail() {
         setCommentEditInputs(updatedInputs);
     };
 
+
+    // 댓글 수정 여부 id 관리 state
+    const [editingCommentId, setEditingCommentId] = useState<number | null>(
+        null
+    );
+
     console.log('boardComments', boardComments);
+
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
@@ -194,6 +201,8 @@ export default function GroupPostDetail() {
                 },
             }
         );
+
+        setEditingCommentId(null);
 
         getBoardNoti();
     };
@@ -296,13 +305,15 @@ export default function GroupPostDetail() {
                         <ul>
                             {boardComments.length <= 0
                                 ? ''
-                                : boardComments?.map(
+                                : boardComments.map(
                                       (comment: any, idx: number) => {
                                           const isWriter =
                                               comment.tb_groupUser.tb_user
                                                   .uName === userNickname;
                                           //   console.log('isWriter', isWriter);
-
+                                          const isEditing =
+                                              editingCommentId ===
+                                              comment.gbcSeq;
                                           return (
                                               <li key={idx}>
                                                   {/* START */}
@@ -337,58 +348,117 @@ export default function GroupPostDetail() {
 
                                                           {/* 댓글 div */}
                                                           <div
-                                                              style={{
-                                                                  display:
-                                                                      'flex',
-                                                                  flexDirection:
-                                                                      'row',
-                                                                  justifyContent:
-                                                                      'center',
-                                                                  flexBasis:
-                                                                      '30%',
-                                                              }}
+                                                          //   style={{
+                                                          //       display:
+                                                          //           'flex',
+                                                          //       flexDirection:
+                                                          //           'row',
+                                                          //       justifyContent:
+                                                          //           'center',
+                                                          //       flexBasis:
+                                                          //           '30%',
+                                                          //   }}
                                                           >
-                                                              {isWriter ? (
-                                                                  // 사용자 === 작성자
-                                                                  <>
-                                                                      <div
-                                                                          className="writer-menu"
+
+                                                              <div className="comment-header">
+                                                                  {/* ... [rest of the comment header code] */}
+
+                                                                  {/* Comment content */}
+                                                                  <div>
+                                                                      {isEditing ? (
+                                                                          <TextField
+                                                                              value={
+                                                                                  commentEditInputs[
+                                                                                      idx
+                                                                                  ] ||
+                                                                                  comment.gbcContent
+                                                                              }
+                                                                              onChange={(
+                                                                                  e
+                                                                              ) =>
+                                                                                  commentEditOnChange(
+                                                                                      e,
+                                                                                      idx
+                                                                                  )
+                                                                              }
+                                                                              onKeyPress={(
+                                                                                  e
+                                                                              ) => {
+                                                                                  if (
+                                                                                      e.key ===
+                                                                                      'Enter'
+                                                                                  ) {
+                                                                                      commentEditHandler(
+                                                                                          comment.gbcSeq,
+                                                                                          idx
+                                                                                      );
+                                                                                  }
+                                                                              }}
+                                                                          />
+                                                                      ) : (
+                                                                          <div>
+                                                                              {
+                                                                                  comment.gbcContent
+                                                                              }
+                                                                          </div>
+                                                                      )}
+
+                                                                      {/* Editing and deleting buttons */}
+                                                                      {isWriter && (
+                                                                          <div>
+                                                                              <button
+                                                                                className="writer-menu"
                                                                           style={{
                                                                               padding:
                                                                                   '0.6rem',
                                                                           }}
-                                                                          onClick={() =>
-                                                                              commentEditHandler(
-                                                                                  comment.gbcSeq,
-                                                                                  idx
-                                                                              )
-                                                                          }
-                                                                      >
-                                                                          수정
-                                                                      </div>
-                                                                      <div
-                                                                          className="writer-menu"
+                                                                                
+                                                                                  onClick={() => {
+                                                                                      if (
+                                                                                          isEditing
+                                                                                      ) {
+                                                                                          commentEditHandler(
+                                                                                              comment.gbcSeq,
+                                                                                              idx
+                                                                                          );
+                                                                                      } else {
+                                                                                          setEditingCommentId(
+                                                                                              comment.gbcSeq
+                                                                                          );
+                                                                                      }
+                                                                                  }}
+                                                                                  className="btn-sm cmt-edit-btn"
+                                                                              >
+                                                                                  {isEditing
+                                                                                      ? '수정 완료'
+                                                                                      : '수정'}
+                                                                              </button>
+                                                                              <button
+                                                                                className="writer-menu"
                                                                           style={{
                                                                               padding:
                                                                                   '0.6rem',
                                                                           }}
-                                                                          onClick={() =>
-                                                                              commentDeleteHandler(
-                                                                                  comment.gbcSeq
-                                                                              )
-                                                                          }
-                                                                      >
-                                                                          삭제
-                                                                      </div>
-                                                                  </>
-                                                              ) : // 사용자 !== 작성자
-                                                              null}
+                                                                                  onClick={() =>
+                                                                                      commentDeleteHandler(
+                                                                                          comment.gbcSeq
+                                                                                      )
+                                                                                  }
+                                                                                  className="btn-sm cmt-del-btn"
+                                                                              >
+                                                                                  삭제
+                                                                              </button>
+                                                                          </div>
+                                                                      )}
+                                                                  </div>
+                                                              </div>
+
                                                           </div>
                                                       </div>
                                                   </div>
 
                                                   {/* 댓글 내용 */}
-                                                  {
+                                                  {/* {
                                                       <TextField
                                                           value={
                                                               commentEditInputs[
@@ -405,7 +475,7 @@ export default function GroupPostDetail() {
                                                               )
                                                           }
                                                       />
-                                                  }
+                                                  } */}
                                               </li>
                                               //  END
                                           );
