@@ -42,7 +42,7 @@ export default function Login() {
                 ></TesterLoginBtn1>
 
                 <TesterLoginBtn2
-                    style={{ marginTop: '20%', width: '60%' }}
+                    style={{ width: '60%' }}
                     onClick={() => testLogin2(2)}
                     align="center"
                     className="loginBtn"

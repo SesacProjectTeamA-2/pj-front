@@ -6,7 +6,7 @@ import { createSvgIcon } from 'react-social-login-buttons';
 const config_tester = {
     text: '테스터 로그인 2',
     style: {
-        background: '#000000',
+        background: '#ed8d8d',
         borderRadius: '12px',
         color: '#ffffff',
         fontSize: '1rem',
