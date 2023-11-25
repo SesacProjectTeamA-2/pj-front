@@ -33,15 +33,13 @@ export default function GroupSearchAll({
         getSearchGroupList();
     }, [searchInput, selectedArr]);
 
-    console.log('!!!!!!!!!', allGroupList);
-
     return (
         <div>
             <div className="title1" style={{ marginBottom: '2rem' }}>
                 전체 모임
             </div>
 
-            <div className='search-group-grid'>
+            <div className="search-group-grid">
                 {!allGroupList || allGroupList?.length === 0
                     ? '생성된 모임이 없습니다.'
                     : allGroupList?.map((searchGroup: GroupStateType) => (
@@ -58,15 +56,11 @@ export default function GroupSearchAll({
                                       style={{
                                           // margin: '0px 15px',
                                           color: '#8D6262',
-                                        //   fontWeight: 'bold',
-                                        //   fontSize: '1.2rem',
-
+                                          //   fontWeight: 'bold',
+                                          //   fontSize: '1.2rem',
                                       }}
                                   >
-                                    <span className='title4'>
-                                    D-day
-                                    </span>
-                                    
+                                      <span className="title4">D-day</span>
                                   </span>
                                   <div className="title6">
                                       {searchGroup.gDday}

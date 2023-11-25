@@ -325,11 +325,6 @@ export default function MissionAddModal({
         setMissionInputs(updatedMissionInputs);
     }, [dday]);
 
-    // console.log('jjjjj', targetDate);
-    // console.log('jjjjj', Number(dday.slice(2)));
-
-    // useDdayCount(newDay)
-
     // const updatedDday = [...missionInputs, { gDday: Number(newDay.slice(2)) }];
 
     // 각 미션 내용 저장 상태 배열
@@ -363,7 +358,7 @@ export default function MissionAddModal({
         setMissionList(updatedMissionList);
     };
 
-    console.log('---------', targetDate);
+    console.log('targetDate', targetDate);
     console.log('dday', dday);
 
     const newDay = useDdayCount(targetDate);
@@ -375,6 +370,35 @@ export default function MissionAddModal({
         );
 
         setMissionList(filtered);
+    };
+
+    const EditModalDeleteHandler = (targetId: number) => {
+        const filtered = missionList.filter(
+            (mission: any) => targetId !== mission.id
+        );
+
+        setMissionList(filtered);
+
+        const deleteMissionListHandler = async () => {
+            try {
+                await axios
+                    .delete(
+                        `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${uToken}`,
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        console.log('deleted !!!', res.data);
+                    });
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        deleteMissionListHandler();
     };
 
     return (
@@ -758,7 +782,7 @@ export default function MissionAddModal({
                                                             <button
                                                                 className="modal-mission-delete-btn btn-sm"
                                                                 onClick={() =>
-                                                                    deleteHandler(
+                                                                    EditModalDeleteHandler(
                                                                         mission.id
                                                                     )
                                                                 }

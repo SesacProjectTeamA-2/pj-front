@@ -29,8 +29,7 @@ export default function GroupList() {
                 }
             );
             const data = response.data; // 데이터에 접근
-            console.log('생성한 모임', data.groupInfo);
-            console.log('생성한 모임>>>>>>>', data);
+
             setMadeGroup(data.groupInfo); // 받은 데이터를 joinGroup 상태로 설정
             setMadeNumGroup(data.groupUserCount); // 받은 데이터를 joinGroup 상태로 설정
         } catch (error) {
