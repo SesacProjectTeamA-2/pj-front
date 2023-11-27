@@ -120,7 +120,7 @@ export default function MissionAddModal({
     // const [groupDetail, setGroupDetail] = useState<any>({});
 
     const [groupEditDday, setGroupEditDday] = useState<any>({
-        gSeq,
+        gSeq: Number(gSeq),
         gName: groupDetail?.groupName,
         gDesc: groupDetail?.grInformation,
         gDday: groupDetail?.groupDday, // 숫자
@@ -223,14 +223,14 @@ export default function MissionAddModal({
     //  ‘deleteList’: [{ mSeq: 2, mLevel:1, …}, ...]
     // };
 
-    // 최종 전송 데이터
-    const [data, setData] = useState<any>({
-        missionArray: [],
-        deleteList: [],
-    });
-
     // 기존 미션에서 삭제된 미션
     const [deleteList, setDeleteList] = useState<any>([]);
+
+    // 최종 전송 데이터
+    let [data, setData] = useState<any>({
+        missionArray: [...missionList],
+        deleteList: [...deleteList],
+    });
 
     //] 최종으로 버튼 클릭 시
     const missionAddDoneHandler = () => {
@@ -259,13 +259,17 @@ export default function MissionAddModal({
                 gDday: targetDate,
             });
 
-            //~> !!!!! 재확인 !!!!!!!
             setData({
                 missionArray: [...missionList],
                 deleteList: [...deleteList],
             });
 
-            console.log('@@@@@@data@@@@@@@', data);
+            data = {
+                missionArray: missionList,
+                deleteList: deleteList,
+            };
+
+            console.log('버튼 눌렀을 경우의 data ===== ', data);
 
             // missionInputs 배열을 복사하고 gDday 업데이트
             // const updatedMissionInputs = missionInputs.map((mission: any) => {
@@ -290,7 +294,7 @@ export default function MissionAddModal({
                             }
                         )
                         .then((res) => {
-                            console.log('patched', res.data);
+                            console.log('디데이 수정 >>', res.data);
                         });
                 } catch (err) {
                     console.log(err);
@@ -301,13 +305,10 @@ export default function MissionAddModal({
 
             const patchMissionListHandler = async () => {
                 try {
-                    console.log('missionList', missionList);
-                    console.log('deletedList', deleteList);
-
                     await axios
                         .patch(
                             `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
-                            missionList,
+                            data,
                             {
                                 headers: {
                                     Authorization: `Bearer ${uToken}`,
@@ -323,8 +324,12 @@ export default function MissionAddModal({
             };
 
             patchMissionListHandler();
+
+            // window.location.reload();
         }
     };
+
+    console.log('@@@@@@data@@@@@@@', data);
 
     //=== 수정 ===
     const [missionInputs, setMissionInputs] = useState(
@@ -447,26 +452,31 @@ export default function MissionAddModal({
 
         setMissionList(filtered);
 
-        const deleteMissionListHandler = async () => {
-            try {
-                await axios
-                    .delete(
-                        `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
-                        {
-                            headers: {
-                                Authorization: `Bearer ${uToken}`,
-                            },
-                        }
-                    )
-                    .then((res) => {
-                        console.log('deleted !!!', res.data);
-                    });
-            } catch (err) {
-                console.log(err);
-            }
-        };
+        setData({
+            missionArray: [...missionList],
+            deleteList: [...deleteList, ...deleted],
+        });
 
-        deleteMissionListHandler();
+        // const deleteMissionListHandler = async () => {
+        //     try {
+        //         await axios
+        //             .delete(
+        //                 `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
+        //                 {
+        //                     headers: {
+        //                         Authorization: `Bearer ${uToken}`,
+        //                     },
+        //                 }
+        //             )
+        //             .then((res) => {
+        //                 console.log('deleted !!!', res.data);
+        //             });
+        //     } catch (err) {
+        //         console.log(err);
+        //     }
+        // };
+
+        // deleteMissionListHandler();
     };
 
     console.log('===== deleteList =====', deleteList);
