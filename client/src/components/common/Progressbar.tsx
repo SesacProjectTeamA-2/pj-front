@@ -7,9 +7,10 @@ export default function Progressbar({
     score: number;
     bg: string;
 }) {
-    const scorePercentage = `${score}%`;
+    const scorePercentage = score ? `${score}%` : '0%'; // undefined 인 경우
+
     // console.log(scorePercentage);
-    // export default function Progressbar() {
+    // console.log(score);
     return (
         <div className="progress-div" style={{ marginLeft: '10%' }}>
             <div className="my-progress" style={{ backgroundColor: `${bg}` }}>

@@ -57,12 +57,10 @@ export default function MissionAddModal({
     // const dispatch = useDispatch();
 
     const { gSeq } = useParams();
-    const nvg = useNavigate();
 
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-    console.log('groupDetail>>>>>>>>>>', groupDetail);
 
     console.log('missionList - ADD MODAL', missionList);
     // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
@@ -81,21 +79,60 @@ export default function MissionAddModal({
         // completed: false,
     });
 
-    const [groupEditDday, setGroupEditDday] = useState({
-        gSeq,
-        gName: '',
-        gDesc: '',
-        gDday: defaultDday,
-        gCategory: '',
-        gCoverImg: '',
-        gMaxMem: 1,
-        missionArray: [],
-    });
+    // //=== 그룹 가져오기 ===
+    // const getGroup = async () => {
+    //     const res = await axios
+    //         .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${uToken}`,
+    //             },
+    //         })
+    //         .then((res) => {
+    //             setGroupDetail(res.data);
 
-    // const [gDday, setGDday] = useState('');
+    //             const {
+    //                 groupName,
+    //                 grInformation,
+    //                 groupDday,
+    //                 groupCategory,
+    //                 groupCoverImg,
+    //                 groupMaxMember,
+    //             } = res.data;
+
+    //             setGroupEditDday({
+    //                 gSeq,
+    //                 gName: groupName,
+    //                 gDesc: grInformation,
+    //                 gDday: groupDday, // 숫자
+    //                 gCategory: groupCategory,
+    //                 gCoverImg: groupCoverImg,
+    //                 gMaxMem: groupMaxMember,
+    //             });
+
+    //             // groupDday(groupDday);
+    //         });
+    // };
+
+    // useEffect(() => {
+    //     getGroup();
+    // }, []);
+
+    // const [groupDetail, setGroupDetail] = useState<any>({});
+
+    const [groupEditDday, setGroupEditDday] = useState<any>({
+        gSeq,
+        gName: groupDetail?.groupName,
+        gDesc: groupDetail?.grInformation,
+        gDday: groupDetail?.groupDday, // 숫자
+        gCategory: groupDetail?.groupCategory,
+        gCoverImg: groupDetail?.groupCoverImg,
+        gMaxMem: groupDetail?.groupMaxMember,
+    });
+    // const [groupDday, setGroupDday] = useState(0);
+
+    console.log('groupEditDday~~~~~~~~~~', groupEditDday);
 
     const { mTitle, mContent, mLevel } = missionInput;
-    // const { mTitle, mContent, mLevel } = missionList;
 
     // 난이도 계산
     for (let mission of missionList) {
@@ -141,8 +178,6 @@ export default function MissionAddModal({
             // completed: false,
         });
     };
-
-    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
 
     // today.setDate(today.getDate()); // 오늘 날짜
     // const todayTargetDate = today.toISOString().split('T')[0];
@@ -243,7 +278,7 @@ export default function MissionAddModal({
 
             const patchMissionListHandler = async () => {
                 try {
-                    console.log('@@@@@@@@', missionList);
+                    console.log('missionList', missionList);
 
                     await axios
                         .patch(
@@ -305,12 +340,15 @@ export default function MissionAddModal({
     //-- 날짜 업데이트
 
     const handleDateChange = (e: any) => {
-        const newDay = e.target.value; // 새로운 날짜 입력값
-        setTargetDate(newDay); // 날짜 입력값 업데이트
+        const newDay = e.target.value; // 날짜형식 입력값
+        setTargetDate(newDay); // 날짜형식 입력값 업데이트
 
         const updatedGroupEditDday = { ...groupEditDday, gDday: newDay };
         setGroupEditDday(updatedGroupEditDday);
+
+        console.log('+++++', groupEditDday);
     };
+
     const dday = useDdayCount(targetDate);
 
     useEffect(() => {

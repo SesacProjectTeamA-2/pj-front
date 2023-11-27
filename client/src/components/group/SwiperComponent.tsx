@@ -31,8 +31,6 @@ export default function SwiperComponent({
         return colors[randomIndex];
     };
 
-    console.log('?????????', groupArray);
-
     return (
         <div>
             <div className="swiper-button-container">
@@ -115,20 +113,8 @@ export default function SwiperComponent({
                                     }}
                                 >
                                     <Link to={`/group/home/${groupInfo.gSeq}`}>
-                                        <div
-                                            style={{
-                                                // fontSize: '2rem',
-                                                // marginLeft: '1.2rem',
-                                                textAlign: 'center',
-                                                // fontWeight: 'bold',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                flexDirection: 'column',
-                                                alignContent: 'space-between',
-                                                justifyItems: 'center',
-                                            }}
-                                        >
-                                            <span className="title3">
+                                        <div className="swiper-card">
+                                            <span className="title4">
                                                 {groupInfo.gName}
                                             </span>
                                         </div>

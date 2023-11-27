@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+import { socket, SocketContext } from './components/common/SidebarChat';
 
 import './styles/scss/base/reset.scss';
 
@@ -34,6 +36,12 @@ import MissionPost from './pages/group/MissionPost';
 import BoardMissionEdit from './pages/group/BoardMissionEdit';
 
 function App() {
+    useEffect(() => {
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
+
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
     const [showChat, setShowChat] = useState<boolean>(false);
     const showChatting = (): void => {
@@ -41,246 +49,260 @@ function App() {
     };
 
     return (
-        <div className="App">
-            <Header showChatting={showChatting} showChat={showChat} />
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <BasicLayout children={<Intro />} showChat={showChat} />
-                    }
-                />
-                <Route
-                    path="/login"
-                    element={
-                        <BasicLayout children={<Login />} showChat={showChat} />
-                    }
-                />
+        <SocketContext.Provider value={socket}>
+            <div className="App">
+                <Header showChatting={showChatting} showChat={showChat} />
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <BasicLayout
+                                children={<Intro />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/login"
+                        element={
+                            <BasicLayout
+                                children={<Login />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/join"
-                    element={
-                        <BasicLayout children={<Join />} showChat={showChat} />
-                    }
-                />
+                    <Route
+                        path="/join"
+                        element={
+                            <BasicLayout
+                                children={<Join />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/main"
-                    element={
-                        <BasicLayout children={<Main />} showChat={showChat} />
-                    }
-                />
+                    <Route
+                        path="/main"
+                        element={
+                            <BasicLayout
+                                children={<Main />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/group"
-                    element={
-                        <BasicLayout
-                            children={<Groups />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-                <Route
-                    path="/group/create"
-                    element={
-                        <BasicLayout
-                            children={<GroupCreate />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    <Route
+                        path="/group"
+                        element={
+                            <BasicLayout
+                                children={<Groups />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/group/create"
+                        element={
+                            <BasicLayout
+                                children={<GroupCreate />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 그룹에만 그룹 메뉴 존재 */}
-                <Route
-                    path="/group/home/:gSeq"
-                    element={
-                        <GroupLayout
-                            children={<GroupHome />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    {/* 그룹에만 그룹 메뉴 존재 */}
+                    <Route
+                        path="/group/home/:gSeq"
+                        element={
+                            <GroupLayout
+                                children={<GroupHome />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/board/:gSeq/:gCategory"
-                    element={
-                        <GroupLayout
-                            children={<GroupNoti />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    <Route
+                        path="/board/:gSeq/:gCategory"
+                        element={
+                            <GroupLayout
+                                children={<GroupNoti />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/board/:gSeq/free"
-                    element={
-                        <GroupLayout
-                            children={<GroupBoard />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    <Route
+                        path="/board/:gSeq/free"
+                        element={
+                            <GroupLayout
+                                children={<GroupBoard />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/board/:gSeq/mission/:mSeq"
-                    element={
-                        <GroupLayout
-                            children={<GroupMission />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-                <Route
-                    path="/board/:gSeq/mission/done"
-                    element={
-                        <GroupLayout
-                            children={<GroupMissionDone />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    <Route
+                        path="/board/:gSeq/mission/:mSeq"
+                        element={
+                            <GroupLayout
+                                children={<GroupMission />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/board/:gSeq/mission/done"
+                        element={
+                            <GroupLayout
+                                children={<GroupMissionDone />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 게시물 Create - 공지, 자유 */}
-                <Route
-                    path="/board/create/:gSeq/:gCategory"
-                    // path="*/post"
-                    element={
-                        <GroupLayout
-                            children={<BoardPost />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    {/* 게시물 Create - 공지, 자유 */}
+                    <Route
+                        path="/board/create/:gSeq/:gCategory"
+                        // path="*/post"
+                        element={
+                            <GroupLayout
+                                children={<BoardPost />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 게시물 Create - 미션 */}
-                <Route
-                    path="/board/create/:gSeq/mission/:mSeq"
-                    // path="*/post"
-                    element={
-                        <GroupLayout
-                            children={<MissionPost />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    {/* 게시물 Create - 미션 */}
+                    <Route
+                        path="/board/create/:gSeq/mission/:mSeq"
+                        // path="*/post"
+                        element={
+                            <GroupLayout
+                                children={<MissionPost />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 게시물 세부사항 Read */}
+                    {/* 게시물 세부사항 Read */}
 
-                <Route
-                    path="/board/:gSeq/:gCategory"
-                    // path="*/post"
-                    element={
-                        <GroupLayout
-                            children={<BoardPost />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    <Route
+                        path="/board/:gSeq/:gCategory"
+                        // path="*/post"
+                        element={
+                            <GroupLayout
+                                children={<BoardPost />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/board/:gSeq/:gCategory/:gbSeq"
-                    element={
-                        <GroupLayout
-                            children={<GroupPostDetail />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    <Route
+                        path="/board/:gSeq/:gCategory/:gbSeq"
+                        element={
+                            <GroupLayout
+                                children={<GroupPostDetail />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                <Route
-                    path="/board/:gSeq/mission/:mSeq/:gbSeq"
-                    element={
-                        <GroupLayout
-                            children={<GroupMissionDetail />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    <Route
+                        path="/board/:gSeq/mission/:mSeq/:gbSeq"
+                        element={
+                            <GroupLayout
+                                children={<GroupMissionDetail />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 게시물 Edit */}
-                <Route
-                    path="/board/:gSeq/edit/:gCategory/:gbSeq"
-                    element={
-                        <GroupLayout
-                            children={<BoardEdit />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    {/* 게시물 Edit */}
+                    <Route
+                        path="/board/:gSeq/edit/:gCategory/:gbSeq"
+                        element={
+                            <GroupLayout
+                                children={<BoardEdit />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 게시물 Edit */}
-                <Route
-                    path="/board/:gSeq/edit/mission/:mSeq/:gbSeq"
-                    element={
-                        <GroupLayout
-                            children={<BoardMissionEdit />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    {/* 게시물 Edit */}
+                    <Route
+                        path="/board/:gSeq/edit/mission/:mSeq/:gbSeq"
+                        element={
+                            <GroupLayout
+                                children={<BoardMissionEdit />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 모임 Edit */}
-                <Route
-                    path="/group/edit/:gSeq"
-                    element={
-                        <GroupLayout
-                            children={<GroupEdit />}
-                            showChat={showChat}
-                        />
-                    }
-                />
+                    {/* 모임 Edit */}
+                    <Route
+                        path="/group/edit/:gSeq"
+                        element={
+                            <GroupLayout
+                                children={<GroupEdit />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
 
-                {/* 그룹 라우팅 끝 */}
+                    {/* 그룹 라우팅 끝 */}
 
-                <Route
-                    path="/mypage"
-                    element={
-                        <BasicLayout
-                            children={<MyPage />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-                <Route
-                    path="/management"
-                    element={
-                        <ManagementLayout
-                            children={<Management />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-                <Route
-                    path="/management/users"
-                    element={
-                        <ManagementLayout
-                            children={<AllUser />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-                <Route
-                    path="/management/groups"
-                    element={
-                        <ManagementLayout
-                            children={<AllGroup />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-                <Route
-                    path="/management/reports"
-                    element={
-                        <ManagementLayout
-                            children={<Report />}
-                            showChat={showChat}
-                        />
-                    }
-                />
-                {/* 404 처리는 제일 밑에 있어야 함 */}
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </div>
+                    <Route
+                        path="/mypage"
+                        element={
+                            <BasicLayout
+                                children={<MyPage />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/management"
+                        element={
+                            <ManagementLayout
+                                children={<Management />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/management/users"
+                        element={
+                            <ManagementLayout
+                                children={<AllUser />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/management/groups"
+                        element={
+                            <ManagementLayout
+                                children={<AllGroup />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/management/reports"
+                        element={
+                            <ManagementLayout
+                                children={<Report />}
+                                showChat={showChat}
+                            />
+                        }
+                    />
+                    {/* 404 처리는 제일 밑에 있어야 함 */}
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </div>
+        </SocketContext.Provider>
     );
 }
 
