@@ -36,7 +36,6 @@
 .title4 {
     font-size: 24px;
     font-weight: bold;
-    white-space: nowrap;
     @include media('<800px') {
         font-size: 18px;
     }
@@ -85,4 +84,14 @@
     @include media('<500px') {
         font-size: 6px;
     }
+}
+
+.title-card {
+    font-size: 22px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }

@@ -68,3 +68,13 @@
 // .swiper-slide:last-child {
 //     margin-right: 10px;
 // }
+
+.swiper-card {
+    // font-size: 22px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin: 0 16px;
+}

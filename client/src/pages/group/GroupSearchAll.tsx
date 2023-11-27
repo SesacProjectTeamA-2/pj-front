@@ -48,7 +48,7 @@ export default function GroupSearchAll({
                               className="search-group-container"
                           >
                               <Link to={`/group/home/${searchGroup.gSeq}`}>
-                                  <div className="title3">
+                                  <div className="title-card">
                                       {searchGroup.gName}
                                   </div>
                                   <br />
@@ -60,7 +60,7 @@ export default function GroupSearchAll({
                                           //   fontSize: '1.2rem',
                                       }}
                                   >
-                                      <span className="title4">D-day</span>
+                                      <span className="title5">D-day</span>
                                   </span>
                                   <div className="title6">
                                       {searchGroup.gDday}

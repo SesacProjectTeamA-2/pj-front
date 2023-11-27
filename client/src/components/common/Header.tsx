@@ -9,9 +9,6 @@ import { Button, ButtonGroup, Divider } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../../styles/scss/layout/header.scss';
 
-// dDay 제거
-// import Dday from './Dday';
-
 export default function Header(props: any) {
     const theme = createTheme({
         palette: {
@@ -26,7 +23,6 @@ export default function Header(props: any) {
     const [myWidth, setMyWidth] = useState<number>(window.innerWidth);
     window.onresize = () => {
         setMyWidth(window.innerWidth);
-        // console.log(myWidth);
     };
 
     // 헤더 메뉴 보여주기
@@ -40,7 +36,6 @@ export default function Header(props: any) {
         console.log('isVisibleMobile', isVisibleMobile);
     }, [isVisibleMobile]);
 
-    //=== 쿠키 설정 ===
     const [isCookie, setIsCookie] = useState(false); // 쿠키 유무
 
     const cookie = new Cookies();
@@ -148,12 +143,7 @@ export default function Header(props: any) {
                     </Link>
                 </div>
 
-                {/* 디데이, 메뉴  */}
                 <div className="header-divTwo pcMode">
-                    {/* <Dday /> */}
-                    {/* [추후] 대표 디데이 설정  
-                    redux에서 date 값 꺼내와서 디데이 커스텀훅 => 디데이 값만 보이게 */}
-
                     <nav className="header-nav ">
                         <ThemeProvider theme={theme}>
                             <input
@@ -215,6 +205,19 @@ export default function Header(props: any) {
                                 </li>
                             ) : (
                                 <>
+                                    {/* 채팅 컴포넌트 */}
+                                    {/* <li id="chat-li"> */}
+                                    <img
+                                        src="/asset/icons/chat.svg"
+                                        style={{
+                                            width: '40px',
+                                            height: '40px',
+                                        }}
+                                        alt="chatImg"
+                                        onClick={() => props.showChatting()}
+                                        id="chat-btn"
+                                    />
+                                    {/* </li> */}
                                     <img
                                         src="/asset/icons/logout.svg"
                                         alt="logout"
@@ -255,20 +258,13 @@ export default function Header(props: any) {
                     display: isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
                 }}
             >
-                {' '}
                 <nav className="header-nav ">
                     <ul className="menu">
-                        {/* <Dday /> */}
                         <li>
                             <Link to="/main">
                                 <button className="menu-button">MAIN</button>
                             </Link>
                         </li>
-                        {/* <li>
-                            <Link to="/mission">
-                                <button className="menu-button">Mission</button>
-                            </Link>
-                        </li> */}
                         <li>
                             <Link to="/group">
                                 <button className="menu-button">GROUP</button>
@@ -298,6 +294,19 @@ export default function Header(props: any) {
                             <>
                                 <li>
                                     {/* 로그인 시 */}
+                                    {/* 채팅 컴포넌트 */}
+                                    {/* <li id="chat-li"> */}
+                                    <img
+                                        src="/asset/icons/chat.svg"
+                                        style={{
+                                            width: '40px',
+                                            height: '40px',
+                                        }}
+                                        alt="chatImg"
+                                        onClick={() => props.showChatting()}
+                                        id="chat-btn"
+                                    />
+                                    {/* </li> */}
                                     <img
                                         src="/asset/icons/logout.svg"
                                         alt="logout"
@@ -318,16 +327,6 @@ export default function Header(props: any) {
                                 </li>
                             </>
                         )}
-                        {/* 채팅 컴포넌트 */}
-                        {/* <li id="chat-li">
-                            <img
-                                src="/asset/icons/chat.svg"
-                                style={{ width: '40px', height: '40px' }}
-                                alt="chatImg"
-                                onClick={() => props.showChatting()}
-                                id="chat-btn"
-                            />
-                        </li> */}
                     </ul>
                 </nav>
             </div>
