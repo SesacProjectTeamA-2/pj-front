@@ -18,7 +18,7 @@ export default function InterestedItem({
 
     // useEffect로 비동기 useState 처리
     useEffect(() => {
-        // console.log('관심사>>>>', selectedArr);
+        console.log('관심사>>>>', selectedArr);
         setSelectedArr(selectedArr);
     }, [selectedArr]);
 
@@ -29,9 +29,6 @@ export default function InterestedItem({
 
         // 동적 개수 제한
         if (selectedArr.length > num - 1) {
-            //2인 이유 + onClick으로 label에 줬을때는 왜 제대로 동작 x ?
-            toast.error(`최대 ${num}개까지만 선택해주세요!`);
-
             // 마지막 선택된 id 제거
             setSelectedArr(
                 selectedArr.filter((ele: string) => ele !== selectedBtn.id)
@@ -47,9 +44,14 @@ export default function InterestedItem({
             setSelectedArr(nextSelectedArr);
         } else if (
             // (2) 배열에 없음 + 동적 제한 수 미만 : 배열에 추가
-            !selectedArr.includes(selectedBtn.id) &&
-            selectedArr.length < num // 제한 카테고리수 (동적)
+            !selectedArr.includes(selectedBtn.id)
         ) {
+            if (selectedArr.length > num - 1) {
+                console.log(selectedArr.length, '????');
+                toast.error(`최대 ${num}개까지만 선택해주세요!`);
+                return;
+            }
+
             setSelectedArr((prevSelectedArr: any) => {
                 const newSelectedArr = [...prevSelectedArr, selectedBtn.id];
                 return newSelectedArr;
