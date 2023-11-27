@@ -217,6 +217,21 @@ export default function MissionAddModal({
         }
     }
 
+    //=== 생성/수정, 삭제 데이터 data 하나에 담아서 보내기 ===
+    // const data = {
+    //  ‘missionArray’: [{ mSeq: 1, mLevel:1, …}, ...],
+    //  ‘deleteList’: [{ mSeq: 2, mLevel:1, …}, ...]
+    // };
+
+    // 최종 전송 데이터
+    const [data, setData] = useState<any>({
+        missionArray: [],
+        deleteList: [],
+    });
+
+    // 기존 미션에서 삭제된 미션
+    const [deleteList, setDeleteList] = useState<any>([]);
+
     //] 최종으로 버튼 클릭 시
     const missionAddDoneHandler = () => {
         setAddModalSwitch(false);
@@ -243,6 +258,14 @@ export default function MissionAddModal({
                 missionArray: missionList,
                 gDday: targetDate,
             });
+
+            //~> !!!!! 재확인 !!!!!!!
+            setData({
+                missionArray: [...missionList],
+                deleteList: [...deleteList],
+            });
+
+            console.log('@@@@@@data@@@@@@@', data);
 
             // missionInputs 배열을 복사하고 gDday 업데이트
             // const updatedMissionInputs = missionInputs.map((mission: any) => {
@@ -279,6 +302,7 @@ export default function MissionAddModal({
             const patchMissionListHandler = async () => {
                 try {
                     console.log('missionList', missionList);
+                    console.log('deletedList', deleteList);
 
                     await axios
                         .patch(
@@ -415,6 +439,12 @@ export default function MissionAddModal({
             (mission: any) => targetId !== mission.id
         );
 
+        const deleted = missionList.filter(
+            (mission: any) => targetId === mission.id
+        );
+
+        setDeleteList([...deleteList, ...deleted]);
+
         setMissionList(filtered);
 
         const deleteMissionListHandler = async () => {
@@ -438,6 +468,8 @@ export default function MissionAddModal({
 
         deleteMissionListHandler();
     };
+
+    console.log('===== deleteList =====', deleteList);
 
     return (
         <div className="modal-mission-add-container">

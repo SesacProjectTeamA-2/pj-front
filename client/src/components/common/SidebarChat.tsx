@@ -1,22 +1,22 @@
 import React from 'react';
-import { createContext } from 'react';
-import socketIo from 'socket.io-client';
+// import { createContext } from 'react';
+// import socketIo from 'socket.io-client';
 
 import '../../styles/scss/layout/sidebarChat.scss';
 
-export const socket = socketIo(String(process.env.REACT_APP_BACK_URL), {
-    withCredentials: true,
-});
-export const SocketContext = createContext(socket);
+// export const socket = socketIo(String(process.env.REACT_APP_BACK_URL), {
+//     withCredentials: true,
+// });
+// export const SocketContext = createContext(socket);
 
 export default function SidebarChat() {
-    socket.on('connect', () => {
-        console.log('socket server connected.');
-    });
+    // socket.on('connect', () => {
+    //     console.log('socket server connected.');
+    // });
 
-    socket.on('disconnect', () => {
-        console.log('socket server disconnected.');
-    });
+    // socket.on('disconnect', () => {
+    //     console.log('socket server disconnected.');
+    // });
 
     const send = () => {
         console.log('전송');
