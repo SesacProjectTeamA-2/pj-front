@@ -300,10 +300,6 @@ export default function Header(props: any) {
                                     {/* <li id="chat-li"> */}
                                     <img
                                         src="/asset/icons/chat.svg"
-                                        style={{
-                                            width: '40px',
-                                            height: '40px',
-                                        }}
                                         alt="chatImg"
                                         onClick={() => props.showChatting()}
                                         id="chat-btn"

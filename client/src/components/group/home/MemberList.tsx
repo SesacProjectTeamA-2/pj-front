@@ -54,7 +54,7 @@ export default function MemberList({
     return (
         <div className="wrapper">
             <div className="members-upper-content">
-                <div className="title4">멤버</div>
+                <div className="title5">멤버</div>
                 <div className="title8">
                     참석인원
                     <span className="member-count">
@@ -82,9 +82,8 @@ export default function MemberList({
                             </div>
 
                             <div className="cur-ranking-content">
-                                <div className=" name">{leaderInfo.uName}</div>
-
-                                {/* <div>{leaderInfo.}</div> */}
+                                <div className="name">{leaderInfo.uName}</div>
+                                <div className="is-leader-div">(모임장) </div>
                             </div>
                         </div>
                     </li>
@@ -102,7 +101,7 @@ export default function MemberList({
                                     />
 
                                     <div className="cur-ranking-content">
-                                        <div className="title5 name">
+                                        <div className="name">
                                             {member.uName}
                                         </div>
                                         {/* <div className="">
