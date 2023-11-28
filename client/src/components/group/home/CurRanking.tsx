@@ -30,21 +30,24 @@ export default function CurRanking({
                             <li>
                                 <div className="ranking-list-cur">
                                     <div className="ranking">{idx + 1}</div>
-                                    <img
-                                        src={
-                                            now.uImg || '/asset/images/user.svg'
-                                        }
-                                        alt="userImg"
-                                    />
-
-                                    <div className="cur-ranking-content">
-                                        <div className="name">{now.uName}</div>
-
-                                        <Progressbar
-                                            score={nowScoreRanking[idx]}
-                                            bg={'white'}
+                                    <div className="ranking">
+                                        <img
+                                            src={
+                                                now.uImg ||
+                                                '/asset/images/user.svg'
+                                            }
+                                            alt="userImg"
                                         />
                                     </div>
+
+                                    {/* <div className="cur-ranking-content"> */}
+                                    <div className="name">{now.uName}</div>
+
+                                    <Progressbar
+                                        score={nowScoreRanking[idx]}
+                                        bg={'white'}
+                                    />
+                                    {/* </div> */}
                                 </div>
                             </li>
                         );

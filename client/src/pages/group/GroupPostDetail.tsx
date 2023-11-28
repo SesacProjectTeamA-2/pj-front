@@ -159,14 +159,18 @@ export default function GroupPostDetail() {
 
     // 개별 관리
     const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
+    // const [commentEditInputs, setCommentEditInputs] = useState<string>(''); //리더님
 
     const commentEditOnChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
         idx: number
     ) => {
+        // console.log('>>', commentEditInputs); //리더님
         const updatedInputs = [...commentEditInputs];
         updatedInputs[idx] = e.target.value;
         setCommentEditInputs(updatedInputs);
+
+        // setCommentEditInputs(e.target.value); //리더님
     };
 
     // 댓글 수정 여부 id 관리 state
@@ -378,13 +382,18 @@ export default function GroupPostDetail() {
                                                                                       idx
                                                                                   )
                                                                               }
-                                                                              onKeyPress={(
-                                                                                  e
+                                                                              onKeyDown={(
+                                                                                  e: React.KeyboardEvent<HTMLInputElement>
                                                                               ) => {
+                                                                                  // Correct typing for the event
                                                                                   if (
                                                                                       e.key ===
-                                                                                      'Enter'
+                                                                                          'Enter' &&
+                                                                                      !e
+                                                                                          .nativeEvent
+                                                                                          .isComposing
                                                                                   ) {
+                                                                                      //   e.preventDefault(); // Prevents the default action of the Enter key
                                                                                       commentEditHandler(
                                                                                           comment.gbcSeq,
                                                                                           idx
