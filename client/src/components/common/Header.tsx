@@ -49,11 +49,13 @@ export default function Header(props: any) {
 
     const nvg = useNavigate();
     const logoutHandler = () => {
-        cookie.remove('isUser');
-        cookie.remove('token');
-        nvg('/');
-        // alert('로그아웃!');
-        window.location.reload();
+        // [추후] 로그아웃 모달창 처리
+        if (window.confirm('로그아웃하시겠습니까 ?')) {
+            cookie.remove('isUser', { path: '/' });
+            nvg('/');
+        } else {
+            return;
+        }
     };
 
     // 프로필 사진 가져오기

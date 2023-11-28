@@ -306,6 +306,14 @@
     }
 }
 
+.modal-member-list {
+    gap: 3rem;
+    img {
+        width: 100px !important;
+        height: 55px !important;
+    }
+}
+
 .modal-member-list-label {
     width: 90%;
     display: flex;
@@ -342,9 +350,22 @@
     transition: 0.4s all;
 }
 
+.leader-patch-btn {
+    width: 40%;
+    background-color: $color-gray8 !important;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media('<500px') {
+        height: 4rem;
+        font-size: 0.1rem;
+    }
+}
+
 .mission-cancel-done-btn {
     width: 40%;
-    background-color: $color-gray8;
+    background-color: $color-gray8 !important;
     white-space: nowrap;
     display: flex;
     justify-content: center;
@@ -357,7 +378,7 @@
 
 .mission-cancel-done-btn:hover {
     width: 40%;
-    background-color: $color-warning;
+    background-color: $color-warning !important;
     transition: all 0.3s;
 }
 

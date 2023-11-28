@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
@@ -55,6 +56,43 @@ export default function ChoiceModal({
         setChoiceModalSwitch(false);
     };
 
+    //=== 모임장 위임 ===
+    const [selectedMemberId, setSelectedMemberId] = useState(0);
+    const [selectedMemberName, setSelectedMemberName] = useState('');
+
+    const patchLeader = async () => {
+        const input = { newLeaderUSeq: selectedMemberId };
+
+        if (!selectedMemberId) {
+            alert('모임장 권한 넘길 멤버를 클릭해주세요.');
+            return;
+        }
+
+        try {
+            await axios
+                .patch(
+                    `${process.env.REACT_APP_DB_HOST}/group/leader/${gSeq}`,
+                    input,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res.data);
+
+                    alert(
+                        `${selectedMemberName} 님에게 모임장을 위임하였습니다.`
+                    );
+                    window.location.reload();
+                });
+        } catch (err) {
+            console.log(err);
+            alert('모임장 위임에 실패하였습니다.');
+        }
+    };
+
     return (
         <div>
             <Modal
@@ -91,7 +129,36 @@ export default function ChoiceModal({
                         action={action}
                         setChoiceModalSwitch={setChoiceModalSwitch}
                         closeModalHandler={closeModalHandler}
+                        selectedMemberId={selectedMemberId}
+                        setSelectedMemberId={setSelectedMemberId}
+                        selectedMemberName={selectedMemberName}
+                        setSelectedMemberName={setSelectedMemberName}
                     />
+                    <div className="mission-cancel-btn-container">
+                        {action === '모임장 권한 넘기기' ? (
+                            <button
+                                onClick={patchLeader}
+                                className="btn-md leader-patch-btn"
+                            >
+                                {action}
+                            </button>
+                        ) : action === '강제 퇴장' ? (
+                            <button
+                                // onClick={missionCancelDone}
+                                className="btn-md mission-cancel-done-btn"
+                            >
+                                {action}
+                            </button>
+                        ) : (
+                            ''
+                        )}
+                        <button
+                            onClick={closeModalHandler}
+                            className="btn-md mission-cancel-back-btn"
+                        >
+                            취소
+                        </button>
+                    </div>
                     {/* <div className="modal-form">
                         <Box
                             component="form"

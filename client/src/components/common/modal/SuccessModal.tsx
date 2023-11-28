@@ -30,6 +30,8 @@ any) {
 
     //] 4. 게시글 작성 완료
 
+    //] 5. 모임장 위임 완료
+
     const nvg = useNavigate();
 
     const cookie = new Cookies();
