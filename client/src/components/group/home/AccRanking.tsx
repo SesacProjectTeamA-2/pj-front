@@ -34,7 +34,10 @@ export default function AccRanking({
                                     <div className="name">{total.uName}</div>
                                     <div className="cur-ranking-content">
                                         <div className="score">
-                                            {totalScoreRanking[idx].guNowScore}
+                                            {
+                                                totalScoreRanking[idx]
+                                                    .guTotalScore
+                                            }
                                         </div>
                                     </div>
                                 </div>

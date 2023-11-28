@@ -55,7 +55,7 @@ export default function GroupLayout({ children, showChat }: any) {
                                     paddingTop: 0,
                                 }}
                             >
-                                {/* {showChat ? <SidebarChat /> : null} */}
+                                {showChat ? <SidebarChat /> : null}
                             </Item>
                         </Grid>
                         <Footer />

@@ -14,6 +14,9 @@ export default function Join() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser'); // 토큰 값
 
+    // [참고] 회원가입 페이지 오자마자 모달창 띄우고 싶으면, 아래 주석 풀면 됩니다.
+    // alert('회원가입이 필요합니다.');
+
     // 전달할 사용자 가입 정보
     interface userInfoItf {
         uEmail: string;
@@ -41,7 +44,7 @@ export default function Join() {
         console.log(`${key}: ${value}`);
     }
     // 2. 사용자 닉네임 설정
-    const [input, setInput] = useState<string | number>('');
+    // const [input, setInput] = useState<string | number>('');
 
     // 3. 사용자 선택 캐릭터 이미지 값 설정
     const [selectedCharacter, setSelectedCharacter] = useState<string>(
@@ -70,6 +73,9 @@ export default function Join() {
             })
             .then((res) => {
                 console.log('회원가입 데이터', res.data);
+                alert(
+                    'Motimates의 회원이 되신 것을 환영합니다 ! \n로그인하여 모임에 참여해보세요 👋🏻'
+                );
             });
     };
 

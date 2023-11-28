@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
@@ -63,11 +63,7 @@ export default function MissionAddModal({
     };
 
     console.log('missionList - ADD MODAL', missionList);
-    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
 
-    const today = new Date();
-    today.setDate(today.getDate());
-    const defaultDday = today.toISOString().split('T')[0];
     const [missionInput, setMissionInput] = useState({
         // 새로 추가하는 미션
         id: missionList.length + 1,
@@ -75,60 +71,41 @@ export default function MissionAddModal({
         mContent: '',
         mLevel: 1,
         mSeq: null,
-        gDday: defaultDday,
-        // completed: false,
+        gDday: '',
     });
 
-    // //=== 그룹 가져오기 ===
-    // const getGroup = async () => {
-    //     const res = await axios
-    //         .get(`${process.env.REACT_APP_DB_HOST}/group/detail/${gSeq}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             setGroupDetail(res.data);
+    //=== 초기 날짜 계산 ===
+    const currentDate: any = new Date();
 
-    //             const {
-    //                 groupName,
-    //                 grInformation,
-    //                 groupDday,
-    //                 groupCategory,
-    //                 groupCoverImg,
-    //                 groupMaxMember,
-    //             } = res.data;
+    // gDday일 이후의 날짜 계산
+    const futureDate = new Date(currentDate);
+    futureDate.setDate(currentDate.getDate() + groupDetail?.groupDday);
 
-    //             setGroupEditDday({
-    //                 gSeq,
-    //                 gName: groupName,
-    //                 gDesc: grInformation,
-    //                 gDday: groupDday, // 숫자
-    //                 gCategory: groupCategory,
-    //                 gCoverImg: groupCoverImg,
-    //                 gMaxMem: groupMaxMember,
-    //             });
+    // 날짜를 "yyyy-mm-dd" 형식으로 변환하는 함수
+    const formatDate = (date: any) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
 
-    //             // groupDday(groupDday);
-    //         });
-    // };
+    // 초기 마감일
+    let defaultDate = formatDate(futureDate);
+    let today = formatDate(currentDate);
 
-    // useEffect(() => {
-    //     getGroup();
-    // }, []);
+    console.log('day', gDday);
 
-    // const [groupDetail, setGroupDetail] = useState<any>({});
+    const [targetDate, setTargetDate] = useState('');
 
     const [groupEditDday, setGroupEditDday] = useState<any>({
         gSeq: Number(gSeq),
         gName: groupDetail?.groupName,
         gDesc: groupDetail?.grInformation,
-        gDday: groupDetail?.groupDday, // 숫자
+        gDday: defaultDate, // 날짜
         gCategory: groupDetail?.groupCategory,
         gCoverImg: groupDetail?.groupCoverImg,
         gMaxMem: groupDetail?.groupMaxMember,
     });
-    // const [groupDday, setGroupDday] = useState(0);
 
     console.log('groupEditDday~~~~~~~~~~', groupEditDday);
 
@@ -175,23 +152,10 @@ export default function MissionAddModal({
             mLevel: 1,
             mSeq: null,
             gDday,
-            // completed: false,
         });
     };
 
-    // today.setDate(today.getDate()); // 오늘 날짜
-    // const todayTargetDate = today.toISOString().split('T')[0];
-
-    // const [targetDate, setTargetDate] = useState('todayTargetDate'); // 오늘 날짜로 수정이 안 되는데?
-    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
-
     console.log('missionList', missionList);
-
-    // useEffect(() => {
-    //     setTargetDate(`D-${gDday}`);
-    // }, []);
-
-    console.log('day', gDday);
 
     interface EditMode {
         [key: number]: boolean;
@@ -218,10 +182,6 @@ export default function MissionAddModal({
     }
 
     //=== 생성/수정, 삭제 데이터 data 하나에 담아서 보내기 ===
-    // const data = {
-    //  ‘missionArray’: [{ mSeq: 1, mLevel:1, …}, ...],
-    //  ‘deleteList’: [{ mSeq: 2, mLevel:1, …}, ...]
-    // };
 
     // 기존 미션에서 삭제된 미션
     const [deleteList, setDeleteList] = useState<any>([]);
@@ -325,11 +285,12 @@ export default function MissionAddModal({
 
             patchMissionListHandler();
 
+            // 새로고침
             // window.location.reload();
         }
     };
 
-    console.log('@@@@@@data@@@@@@@', data);
+    console.log('==== 미션 최종 patch data====', data);
 
     //=== 수정 ===
     const [missionInputs, setMissionInputs] = useState(
@@ -367,7 +328,6 @@ export default function MissionAddModal({
     };
 
     //-- 날짜 업데이트
-
     const handleDateChange = (e: any) => {
         const newDay = e.target.value; // 날짜형식 입력값
         setTargetDate(newDay); // 날짜형식 입력값 업데이트
@@ -375,7 +335,7 @@ export default function MissionAddModal({
         const updatedGroupEditDday = { ...groupEditDday, gDday: newDay };
         setGroupEditDday(updatedGroupEditDday);
 
-        console.log('+++++', groupEditDday);
+        console.log('+++++groupEditDday', groupEditDday);
     };
 
     const dday = useDdayCount(targetDate);
@@ -456,27 +416,6 @@ export default function MissionAddModal({
             missionArray: [...missionList],
             deleteList: [...deleteList, ...deleted],
         });
-
-        // const deleteMissionListHandler = async () => {
-        //     try {
-        //         await axios
-        //             .delete(
-        //                 `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
-        //                 {
-        //                     headers: {
-        //                         Authorization: `Bearer ${uToken}`,
-        //                     },
-        //                 }
-        //             )
-        //             .then((res) => {
-        //                 console.log('deleted !!!', res.data);
-        //             });
-        //     } catch (err) {
-        //         console.log(err);
-        //     }
-        // };
-
-        // deleteMissionListHandler();
     };
 
     console.log('===== deleteList =====', deleteList);
@@ -583,7 +522,7 @@ export default function MissionAddModal({
                     <div className="modal-mission-list">
                         <div className="modal-mission-list-header">
                             <div className="title4">Mission List</div>
-                            {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
+
                             <div className="group-create-content">
                                 <div className="dday-title">마감일</div>
 
@@ -592,21 +531,13 @@ export default function MissionAddModal({
                                         type="date"
                                         id="date-input"
                                         onChange={handleDateChange}
-                                        // value={gDday} // input default 값 처리 안됨
-                                        defaultValue={gDday}
+                                        defaultValue={defaultDate}
+                                        min={today}
                                     />
                                     <div id="dday-text">
-                                        {/* {dday ? dday : `D-${gDday}`} */}
-
-                                        {dday ? dday : ''}
+                                        {dday ? dday : `D-${gDday}`}
                                     </div>
                                 </div>
-
-                                {/* <Dday
-                                    targetDate={targetDate}
-                                    setTargetDate={setTargetDate}
-                                    gDday={gDday}
-                                /> */}
                             </div>
                         </div>
 
