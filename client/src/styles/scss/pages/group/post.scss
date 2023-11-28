@@ -47,7 +47,7 @@
     flex-direction: column;
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    // gap: 1rem;
     background-color: transparent;
     @include media('<800px') {
         flex-direction: column;
@@ -62,7 +62,7 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    margin-top: 1rem;
+    // margin-top: 1rem;
 
     @include media('<800px') {
         margin: 0;
@@ -109,9 +109,9 @@
 
 .mission-type {
     display: flex;
-    flex-direction: column;
     width: 100%;
     white-space: nowrap;
     flex-direction: row;
     gap: 2rem;
+    align-items: center;
 }
