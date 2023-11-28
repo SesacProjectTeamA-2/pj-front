@@ -221,7 +221,8 @@
 
 .ranking-list-cur {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 4fr;
+    gap: 6px;
 }
 .ranking {
     display: flex;
@@ -238,14 +239,14 @@
 .ranking-list-acc {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    .name {
-        white-space: nowrap;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 }
 
+.name {
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .ranking-list-acc img {
     @include box(40px);
     border-radius: 50%;
