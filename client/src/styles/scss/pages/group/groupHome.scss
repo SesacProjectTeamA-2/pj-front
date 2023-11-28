@@ -69,15 +69,16 @@
     align-items: flex-end;
 
     img {
-        width: 40px;
-        height: 24px;
+        width: 30px;
+        height: 20px;
+        padding-left: 0.5rem;
     }
 
     .mission-edit-text {
         opacity: 0;
         font-weight: 500;
         cursor: pointer;
-        transition: opacity 0.3s; /* 트랜지션을 여기에 적용합니다. */
+        transition: opacity 0.3s;
     }
 }
 
@@ -169,8 +170,12 @@
 }
 
 .ranking-list-img-div {
-    // background-color: aqua;
     width: fit-content;
+}
+
+.is-leader-div {
+    padding: 0 0.4rem;
+    font-weight: normal;
 }
 
 .cur-ranking-content {

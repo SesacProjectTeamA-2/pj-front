@@ -18,8 +18,6 @@ export default function GroupCreate() {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
-    const nvg = useNavigate();
-
     const [addModalSwitch, setAddModalSwitch] = useState(false);
 
     const [selectedArr, setSelectedArr] = useState<string[]>([]);
@@ -101,33 +99,6 @@ export default function GroupCreate() {
         setAddModalSwitch(true);
     };
 
-    // const testGroup = {
-    //     gName: 'Node 스터디 (중복 안됩니다!)',
-    //     gDesc: 'Node.js 스터디 모임입니다!',
-    //     gDday: '2023-10-28',
-    //     gMaxMem: 10,
-    //     gCategory: 'st',
-    //     gCoverImg:
-    //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
-    //     missionArray: [
-    //         {
-    //             mTitle: 'Node.js 강의 듣기',
-    //             mContent: 'Node.js 강의 쳅터 1 듣고 오기',
-    //             mLevel: 5,
-    //         },
-    //         {
-    //             mTitle: '알고리즘',
-    //             mContent: '코드 풀이 제출하기',
-    //             mLevel: 5,
-    //         },
-    //         {
-    //             mTitle: '블로깅',
-    //             mContent: '개발 블로그 포스팅 링크 올리기',
-    //             mLevel: 5,
-    //         },
-    //     ],
-    // };
-
     //] 그룹 생성 완료 모달창
     const [successModalSwitch, setSuccessModalSwitch] = useState(false);
 
@@ -137,7 +108,6 @@ export default function GroupCreate() {
 
     //] 그룹 생성 요청
     const groupCreateHandler = async () => {
-        //! [추후] input 입력 안했을 시, 로직
         // 유효성 검사: 그룹 카테고리 미설정 방지
         if (!input.gCategory) {
             // 만약 gCategory가 비어있으면 알림을 표시
@@ -179,7 +149,7 @@ export default function GroupCreate() {
                 gDescInput.focus();
             }
 
-            return; // 함수 실행 중지
+            return;
         }
 
         if (!input.missionArray.length) {
@@ -207,23 +177,18 @@ export default function GroupCreate() {
             .then((res) => {
                 console.log(res.data);
 
-                // 모달창
-                //! [추후] input 입력 안했을 시, 로직
                 if (input.gName) {
                     successHandler();
                 }
             })
             .catch((res) => {
-                // if (!input.gName) {
-                // toast.error(`${res.data.msg}`);
                 toast.error('모임이 생성되지 않았습니다 !', {
                     duration: 2000,
                 });
-                // }
             });
     };
 
-    console.log('input >> ', input); // 올바른 데이터 들어옴
+    console.log('input >> ', input);
     console.log('input.missionArray >> ', input.missionArray);
 
     //=== 관심 분야 ===
@@ -292,7 +257,7 @@ export default function GroupCreate() {
     return (
         <div className="section group-create-contianer title5">
             <Toaster />
-            <div className="title2">어떤 모임을 생성하고 싶나요 ?</div>
+            <div className="title4">어떤 모임을 생성하고 싶나요 ?</div>
             <div className="group-create-content group-create-title">
                 <div className="title-wrapper">
                     <Box
@@ -329,7 +294,7 @@ export default function GroupCreate() {
                 {/* </form> */}
             </div>
             <div className="group-create-content">
-                <div className="title3">분야</div>
+                <div className="title5">분야</div>
                 <div className="group-create-category">
                     {interestedArr.map((interest: Interested) => {
                         return (
@@ -370,7 +335,7 @@ export default function GroupCreate() {
                 </div>
             </div>
             <div className="group-create-content description-container">
-                <div className="title3">모임 설명</div>
+                <div className="title5">모임 설명</div>
                 <textarea
                     className="description"
                     placeholder="500자 이내로 입력하세요."
@@ -381,7 +346,7 @@ export default function GroupCreate() {
                 ></textarea>
             </div>
             <div className="group-create-content">
-                <div className="title3">제한 인원</div>
+                <div className="title5">제한 인원</div>
                 <input
                     defaultValue={1}
                     className="limit-number"
@@ -391,9 +356,26 @@ export default function GroupCreate() {
                 />
             </div>
             <div className="group-create-content mission-wrapper">
-                <div className="title3">Mission</div>
+                <div className="mission-box-upper">
+                    <div className="title5">Mission</div>
+                    <div id="deadline-text">
+                        {gDday ? (
+                            `마감일 : ${gDday}`
+                        ) : input.gDday ? (
+                            input.gDday
+                        ) : (
+                            <div>
+                                <strong>+ 버튼</strong>을 눌러{' '}
+                                <strong>마감일</strong>을 설정해주세요 !
+                            </div>
+                        )}
+                    </div>
+                </div>
                 <div className="mission-container">
-                    <div onClick={missionAddHandler}>
+                    <div
+                        className="mission-plus-wrapper"
+                        onClick={missionAddHandler}
+                    >
                         <img src="/asset/icons/plus.svg" alt="plus mission" />
                     </div>
 
@@ -408,12 +390,14 @@ export default function GroupCreate() {
                                                 secondary={`${mission.mContent}`}
                                             />
                                         </ListItem>
-                                        <Divider component="li" />
+                                        {/* <Divider component="li" /> */}
                                     </div>
                                 );
                             })
                         ) : (
-                            <div>팀원들과 어떤 것을 하고 싶나요 ?</div>
+                            <div className="none-mission">
+                                팀원들과 어떤 것을 하고 싶나요 ?
+                            </div>
                         )}
                     </div>
                 </div>
@@ -430,7 +414,6 @@ export default function GroupCreate() {
                     gDday={gDday}
                 />
             ) : null}
-            {/* {successModalSwitch ? ( */}
             <SuccessModal
                 successModalSwitch={successModalSwitch}
                 setSuccessModalSwitch={setSuccessModalSwitch}

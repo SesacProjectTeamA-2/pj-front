@@ -209,13 +209,13 @@ export default function GroupHome() {
                     </div>
                 </div>
             ) : (
-                <div className="title2" style={{ padding: '2rem' }}>
+                <div className="title3" style={{ padding: '2rem' }}>
                     {groupDetail.groupName}
                 </div>
             )}
 
             <div className="wrapper">
-                <div className="title4 group-title-text">어떤 모임인가요 ?</div>
+                <div className="title5 group-title-text">어떤 모임인가요 ?</div>
                 <div className="main-content">{groupDetail.grInformation}</div>
             </div>
 

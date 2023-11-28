@@ -95,7 +95,7 @@ export default function MissionAddModal({
 
     console.log('day', gDday);
 
-    const [targetDate, setTargetDate] = useState('');
+    const [targetDate, setTargetDate] = useState(gDday);
 
     const [groupEditDday, setGroupEditDday] = useState<any>({
         gSeq: Number(gSeq),
@@ -285,8 +285,7 @@ export default function MissionAddModal({
 
             patchMissionListHandler();
 
-            // 새로고침
-            // window.location.reload();
+            window.location.reload();
         }
     };
 
@@ -328,7 +327,14 @@ export default function MissionAddModal({
     };
 
     //-- 날짜 업데이트
-    const handleDateChange = (e: any) => {
+    // 1) 그룹 생성 시 마감일 지정
+    const createHandleDateChange = (e: any) => {
+        const newDay = e.target.value; // 날짜형식 입력값
+        setTargetDate(newDay); // 날짜형식 입력값 업데이트
+    };
+
+    // 2) 미션 수정 시 마감일 지정
+    const editHandleDateChange = (e: any) => {
         const newDay = e.target.value; // 날짜형식 입력값
         setTargetDate(newDay); // 날짜형식 입력값 업데이트
 
@@ -351,14 +357,6 @@ export default function MissionAddModal({
 
         setMissionInputs(updatedMissionInputs);
     }, [dday]);
-
-    // const updatedDday = [...missionInputs, { gDday: Number(newDay.slice(2)) }];
-
-    // 각 미션 내용 저장 상태 배열
-    // const [missionContentList, setMissionContentList] = useState(
-    //     missionList.map((mission: any) => mission.mContent)
-    // );
-    // console.log('missionContentList', missionContentList);
 
     //  수정 시 onChange Event
     const handleMissionTitleChange = (missionId: any, newContent: any) => {
@@ -476,7 +474,6 @@ export default function MissionAddModal({
                                 난이도
                             </InputLabel>
                             <NativeSelect
-                                // defaultValue={1}
                                 inputProps={{
                                     name: 'mLevel',
                                     id: 'uncontrolled-native',
@@ -491,26 +488,28 @@ export default function MissionAddModal({
                         </FormControl>
                     </div>
 
-                    <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 4, width: '67ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                        className="verify-box"
-                    >
-                        <TextField
-                            id="filled-multiline-flexible"
-                            label="인증 방법"
-                            multiline
-                            maxRows={4}
-                            variant="filled"
-                            name="mContent"
-                            value={mContent}
-                            onChange={onChange}
-                        />
-                    </Box>
+                    <div className="proof-box">
+                        <Box
+                            component="form"
+                            sx={{
+                                '& .MuiTextField-root': { m: 4, width: '67ch' },
+                            }}
+                            noValidate
+                            autoComplete="off"
+                            className="verify-box"
+                        >
+                            <TextField
+                                id="filled-multiline-flexible"
+                                label="인증 방법"
+                                multiline
+                                maxRows={4}
+                                variant="filled"
+                                name="mContent"
+                                value={mContent}
+                                onChange={onChange}
+                            />
+                        </Box>
+                    </div>
 
                     <button
                         onClick={oneMissionAddHandler}
@@ -523,20 +522,41 @@ export default function MissionAddModal({
                         <div className="modal-mission-list-header">
                             <div className="title4">Mission List</div>
 
-                            <div className="group-create-content">
+                            <div className="group-create-content modal-mission-box">
                                 <div className="dday-title">마감일</div>
 
                                 <div className="dday-container">
-                                    <input
-                                        type="date"
-                                        id="date-input"
-                                        onChange={handleDateChange}
-                                        defaultValue={defaultDate}
-                                        min={today}
-                                    />
-                                    <div id="dday-text">
-                                        {dday ? dday : `D-${gDday}`}
-                                    </div>
+                                    {action === '미션생성' ? (
+                                        <input
+                                            type="date"
+                                            id="date-input"
+                                            onChange={createHandleDateChange}
+                                            defaultValue={gDday}
+                                            min={today}
+                                        />
+                                    ) : (
+                                        <input
+                                            type="date"
+                                            id="date-input"
+                                            onChange={editHandleDateChange}
+                                            defaultValue={defaultDate}
+                                            min={today}
+                                        />
+                                    )}
+
+                                    {action === '미션생성' ? (
+                                        <div id="dday-text">
+                                            {gDday
+                                                ? dday
+                                                : dday
+                                                ? dday
+                                                : '언제까지 할까요 ?'}
+                                        </div>
+                                    ) : (
+                                        <div id="dday-text">
+                                            {dday ? dday : `D-${gDday}`}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -555,7 +575,6 @@ export default function MissionAddModal({
                                     ) : (
                                         <>
                                             {/* 미션생성 모달 */}
-
                                             {missionList.map((mission: any) => {
                                                 return (
                                                     <div key={mission.id}>

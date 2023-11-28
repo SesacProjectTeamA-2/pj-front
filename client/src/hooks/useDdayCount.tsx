@@ -14,9 +14,11 @@ export default function useDdayCount(targetDate: string) {
                 setDday('D-' + days);
             } else if (days == 0) {
                 setDday('D-day');
-            } else if (days < 0) {
-                setDday('D+' + String(days).slice(1, 2));
             }
+
+            // else if (days < 0) {
+            //     setDday('D+' + String(days).slice(1, 2));
+            // }
         }
     }, [targetDate]);
 
