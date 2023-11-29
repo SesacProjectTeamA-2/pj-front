@@ -28,7 +28,7 @@ export default function QuitModal({
 
     const doneHandler = () => {
         if (action === '회원 탈퇴') {
-            alert(`Motimate ${action}하셨습니다 !`);
+            alert(`Motimate을 탈퇴하셨습니다 !`);
             // 회원 탈퇴
             axios
                 .delete(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {

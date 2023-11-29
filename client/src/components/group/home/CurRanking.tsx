@@ -7,13 +7,10 @@ export default function CurRanking({
     nowScoreRanking,
     userImgSrc,
 }: any) {
-    // console.log('현재랭킹', nowRanking);
-    // console.log('----킹', nowScoreRanking);
-
     return (
         <div className="wrapper">
             <div className="upper-content">
-                <div className="title4">현재 랭킹</div>
+                <div className="title5">현재 랭킹</div>
                 <div className="title6 group-home-duration">
                     {/* [추후] 몇회차인지 */}
                     {/* <div className="group-home-mission-round-text">5회차</div> */}
@@ -30,21 +27,22 @@ export default function CurRanking({
                             <li>
                                 <div className="ranking-list-cur">
                                     <div className="ranking">{idx + 1}</div>
-                                    <img
-                                        src={
-                                            now.uImg || '/asset/images/user.svg'
-                                        }
-                                        alt="userImg"
-                                    />
-
-                                    <div className="cur-ranking-content">
-                                        <div className="name">{now.uName}</div>
-
-                                        <Progressbar
-                                            score={nowScoreRanking[idx]}
-                                            bg={'white'}
+                                    <div className="ranking">
+                                        <img
+                                            src={
+                                                now.uImg ||
+                                                '/asset/images/user.svg'
+                                            }
+                                            alt="userImg"
                                         />
                                     </div>
+
+                                    <div className="name">{now.uName}</div>
+
+                                    <Progressbar
+                                        score={nowScoreRanking[idx]}
+                                        bg={'white'}
+                                    />
                                 </div>
                             </li>
                         );

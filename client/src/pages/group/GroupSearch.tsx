@@ -21,7 +21,6 @@ export default function GroupSearch({
             const res = await axios.get(
                 // 임시로 전체 검색
                 `${process.env.REACT_APP_DB_HOST}/group?search=${searchInput}&category=${selectedArr}`
-                // `http://localhost:8888/api/group?search=${searchInput}&category=${}`,
             );
 
             console.log('검색결과', res.data.groupArray);
@@ -40,15 +39,28 @@ export default function GroupSearch({
                 검색 결과
             </div>
 
-            <div  className='search-group-grid'>
+            <div className="search-group-grid">
                 {searchGroupList?.map((searchGroup: GroupStateType) => (
                     <div
                         key={searchGroup.gSeq}
                         className="search-group-container"
                     >
                         <Link to={`/group/home/${searchGroup.gSeq}`}>
-                            <div className="title2">{searchGroup.gName}</div>
-                            {/* <div className="title5">{searchGroup.gDesc}</div> */}
+                            <div className="title-card">
+                                {searchGroup.gName}
+                            </div>
+                            <br />
+                            <span
+                                style={{
+                                    // margin: '0px 15px',
+                                    color: '#8D6262',
+                                    //   fontWeight: 'bold',
+                                    //   fontSize: '1.2rem',
+                                }}
+                            >
+                                <span className="title5">D-day</span>
+                            </span>
+                            <div className="title6">{searchGroup.gDday}</div>
                         </Link>
                     </div>
                 ))}

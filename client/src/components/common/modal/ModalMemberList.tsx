@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
-import { TextField } from '@mui/material';
+import { Divider, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 
 export default function ModalMemberList({
@@ -13,6 +13,10 @@ export default function ModalMemberList({
     missionCancelDone,
     closeModalHandler,
     setChoiceModalSwitch,
+    setSelectedMemberId,
+    selectedMemberId,
+    setSelectedMemberName,
+    selectedMemberName,
 }: any) {
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
@@ -78,52 +82,10 @@ export default function ModalMemberList({
         memberArray.id = i;
     }
 
-    const [selectedMemberId, setSelectedMemberId] = useState(0);
-
-    const listClickHandler = (uSeq: number) => {
+    const listClickHandler = (uSeq: number, uName: string) => {
         setSelectedMemberId(uSeq);
+        setSelectedMemberName(uName);
     };
-
-    const doneHandler = () => {
-        // alert(`${gName}을 ${action}하셨습니다 !`);
-        alert(`${action}하셨습니다 !`);
-
-        // [추후] 강제퇴장 멘트 작성
-
-        setChoiceModalSwitch(false);
-    };
-
-    // 모임장 위임
-    const patchLeader = async () => {
-        const input = { newLeaderUSeq: selectedMemberId };
-        console.log('############', input);
-        // console.log(selectedMemberId)
-
-        const res = await axios
-            .patch(
-                `${process.env.REACT_APP_DB_HOST}/group/leader/${gSeq}`,
-                input,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res.data);
-                const { success, msg } = res.data;
-                if (!success) {
-                    alert('모임장 위임에 실패하였습니다.');
-                } else {
-                    window.location.href = `motimates.xyz/group/home${gSeq}`;
-                }
-            });
-    };
-
-    // // 모달창 닫기
-    // const closeModalHandler = () => {
-    //     setChoiceModalSwitch(false);
-    // };
 
     return (
         <div className="modal-member-list-container">
@@ -136,25 +98,30 @@ export default function ModalMemberList({
                                 <label
                                     key={member.uSeq}
                                     onClick={() =>
-                                        listClickHandler(member.uSeq)
+                                        listClickHandler(
+                                            member.uSeq,
+                                            member.uName
+                                        )
                                     }
                                     className="modal-member-list-label"
                                     style={{
                                         backgroundColor:
                                             action === '강제 퇴장' &&
-                                            selectedMemberId === member.id
+                                            selectedMemberId === member.uSeq
                                                 ? '#e20606'
                                                 : action === '미션인증 취소' &&
-                                                  selectedMemberId === member.id
+                                                  selectedMemberId ===
+                                                      member.uSeq
                                                 ? '#e20606'
                                                 : action ===
                                                       '모임장 권한 넘기기' &&
-                                                  selectedMemberId === member.id
+                                                  selectedMemberId ===
+                                                      member.uSeq
                                                 ? '#ed8d8d'
                                                 : 'white',
 
                                         color:
-                                            selectedMemberId === member.id
+                                            selectedMemberId === member.uSeq
                                                 ? 'white'
                                                 : 'black',
 
@@ -166,7 +133,7 @@ export default function ModalMemberList({
                                         type="radio"
                                         name="missionType"
                                     />
-                                    <div className="ranking-list">
+                                    <div className="ranking-list modal-member-list">
                                         <img
                                             src={
                                                 member.uImg ||
@@ -181,6 +148,7 @@ export default function ModalMemberList({
                                         </div>
                                     </div>
                                 </label>
+                                {/* <Divider /> */}
                             </ul>
                             <div>
                                 <Box
@@ -203,7 +171,7 @@ export default function ModalMemberList({
                                 </Box>
                             </div>
 
-                            <div className="mission-cancel-btn-container">
+                            {/* <div className="mission-cancel-btn-container">
                                 {action === '미션인증 취소' ? (
                                     <button
                                         onClick={missionCancelDone}
@@ -234,7 +202,7 @@ export default function ModalMemberList({
                                 >
                                     취소
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                     );
                 })

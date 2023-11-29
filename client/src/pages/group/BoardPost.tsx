@@ -199,7 +199,6 @@ export default function BoardPost() {
                             })} */}
                         </select>
                     </div>
-
                     <div className="post-title">
                         <div>제목</div>
                         <input

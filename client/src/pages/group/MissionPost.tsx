@@ -143,7 +143,7 @@ export default function MissionPost() {
         <div className="section section-group">
             {/* <GroupHeader title={postMenu} groupName={''} /> */}
             <div className="post-container">
-                <div className="noti-content post-header title5">
+                <div className="noti-content post-mission-header title5">
                     <div className="mission-type">
                         <div style={{ width: '7rem' }}>어떤 미션인가요 ?</div>
                         <div className="select-box">
@@ -169,9 +169,10 @@ export default function MissionPost() {
                         </div>
                     </div>
 
-                    <div className="post-title">
+                    <div className="post-mission-title">
                         <div>제목</div>
                         <input
+                            className="mission-input"
                             type="text"
                             placeholder="제목을 입력해주세요."
                             onChange={getValue}

@@ -13,9 +13,18 @@
 }
 
 .group-create-category {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // grid-template-rows: repeat(2, 1fr);
+}
+
+.none-mission {
+    font-size: 1rem;
+    font-weight: normal;
 }
 
 .group-create-content {
@@ -26,11 +35,10 @@
     flex-wrap: wrap;
 
     .dday-title {
-        width: 4.4rem;
-        padding: 2rem 0;
+        // width: 4.4rem;
         font-weight: bold;
         white-space: nowrap;
-        margin-left: 10%;
+        // margin-left: 10%;
     }
 
     label {
@@ -81,8 +89,23 @@
     width: 100%;
 }
 
+.mission-list-container {
+    width: 100%;
+}
+
+.mission-box-upper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    #deadline-text {
+        font-size: 1rem;
+        font-weight: normal;
+    }
+}
+
 .mission-container {
-    background-color: $color-gray2;
+    background-color: white;
     display: flex;
     padding: 30px;
     border-radius: 10px;

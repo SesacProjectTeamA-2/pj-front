@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+// import { socket, SocketContext } from './components/common/SidebarChat';
 
 import './styles/scss/base/reset.scss';
 
@@ -34,6 +36,12 @@ import MissionPost from './pages/group/MissionPost';
 import BoardMissionEdit from './pages/group/BoardMissionEdit';
 
 function App() {
+    // useEffect(() => {
+    //     return () => {
+    //         socket.disconnect();
+    //     };
+    // }, []);
+
     // 헤더 채팅 버튼 눌렀을 때 채팅창 보여주는 함수
     const [showChat, setShowChat] = useState<boolean>(false);
     const showChatting = (): void => {
@@ -41,6 +49,7 @@ function App() {
     };
 
     return (
+        // <SocketContext.Provider value={socket}>
         <div className="App">
             <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
@@ -281,6 +290,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>
+        // </SocketContext.Provider>
     );
 }
 

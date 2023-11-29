@@ -53,10 +53,31 @@ export default function MyPage() {
                 }
                 setInput(nickname);
                 setContent(coverLetter);
-                if (category1 && category2 && category3) {
-                    // 선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
-                    setSelectedArr([category1, category2, category3]);
-                }
+                // 선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
+                // if (category1 && category2 && category3) {
+                // 중복 제거
+                const uniqueSelectedArr = Array.from(
+                    new Set(
+                        [category1, category2, category3].filter(
+                            (category) =>
+                                category !== null && category !== undefined
+                        )
+                    )
+                );
+
+                setSelectedArr(uniqueSelectedArr);
+                // const uniqueSelectedArr = Array.from(
+                //     new Set([
+                //         category1?.category1,
+                //         category2?.category2,
+                //         category3?.category3,
+                //     ])
+                // );
+                // setSelectedArr(uniqueSelectedArr);
+                // setSelectedArr([category1, category2, category3]);
+                // const uniqueSelectedArr = Array.from(new Set(selectedArr));
+                // setSelectedArr(uniqueSelectedArr);
+                // }
                 setSelectedCharacter(character);
 
                 setPhraseCtt(phrase);
@@ -122,7 +143,7 @@ export default function MyPage() {
     };
 
     // 4. 관심사 배열
-    const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+    const [selectedArr, setSelectedArr] = useState<any>([]);
     useEffect(() => {
         console.log(selectedArr);
     }, [selectedArr]);
@@ -183,14 +204,16 @@ export default function MyPage() {
         uMainDday: number;
         uMainGroup: number;
     }
+
     const patchedUserData: patchedUserDataItf = {
         // uImg:userImgSrc,
         uName: input,
         uDesc: content,
         uPhrase: phraseCtt,
-        uCategory1: selectedArr[0],
-        uCategory2: selectedArr[1],
-        uCategory3: selectedArr[2],
+        uCategory1: selectedArr[0] ? selectedArr[0] : null,
+        uCategory2: selectedArr[1] ? selectedArr[1] : null,
+        uCategory3: selectedArr[2] ? selectedArr[2] : null,
+
         uCharImg: selectedCharacter,
 
         // 제거 컴포넌트
@@ -202,13 +225,12 @@ export default function MyPage() {
         console.log('patchedUserData >>>>', patchedUserData);
     });
 
+    //=== 유저 정보 수정 ===
     const patchUserData = async () => {
         try {
             await axios
                 .patch(
                     `${process.env.REACT_APP_DB_HOST}/user/mypage`,
-                    // 'http://localhost:8888/api/user/mypage',
-
                     patchedUserData,
                     {
                         headers: {
@@ -220,14 +242,12 @@ export default function MyPage() {
                 .then((res) => {
                     console.log('patched', res.data.message);
                     toast.success(res.data.message);
-                    console.log('patchedData2', patchedUserData);
+                    console.log('patchedUserData 요청 성공', patchedUserData);
                 });
         } catch (err) {
             console.log(err);
         }
     };
-
-    // 3. 회원 탈퇴
 
     return (
         <div className="section">
@@ -251,7 +271,7 @@ export default function MyPage() {
 
             <div className="myPage-div-two">
                 <br></br>
-                <h3 className="myPage-p">내 캐릭터</h3>
+                <h3 className="myPage-p title4">내 캐릭터</h3>
                 <CharacterList
                     selectedCharacter={selectedCharacter}
                     setSelectedCharacter={setSelectedCharacter}
@@ -261,7 +281,7 @@ export default function MyPage() {
 
             <div className="myPage-div-three">
                 <div className="myPage-div-three-one">
-                    <h3 className="myPage-p">관심분야</h3>
+                    <h3 className="myPage-p title4">관심분야</h3>
                     <p>최대 3개</p>
                     <InterestedList
                         selectedArr={selectedArr}
@@ -270,7 +290,7 @@ export default function MyPage() {
                     />
                 </div>
                 <div className="myPage-div-three-two">
-                    <h3 className="myPage-p">명언</h3>
+                    <h3 className="myPage-p title4">명언</h3>
                     <Phrase
                         phraseCtt={phraseCtt}
                         setPhraseCtt={setPhraseCtt}
@@ -283,7 +303,7 @@ export default function MyPage() {
 
             <div className="myPage-div-five">
                 <div className="myPage-div-five-one">
-                    <h3 className="myPage-p">회원탈퇴</h3>
+                    <h3 className="myPage-p title4">회원탈퇴</h3>
                 </div>
                 <div className="myPage-div-five-two">
                     <Quit />

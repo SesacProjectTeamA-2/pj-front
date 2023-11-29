@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
 import '../../styles/scss/components/inputs.scss';
 import '../../styles/scss/pages/group/groups.scss';
+
 import InterestedList from '../../components/common/InterestedList';
 import GroupList from './GroupList';
-import { Divider } from '@mui/material';
 import GroupSearch from './GroupSearch';
 import GroupSearchAll from './GroupSearchAll';
 
 export default function Groups() {
+    const cookie = new Cookies();
+    const uToken = cookie.get('isUser');
+
     //] 검색
     const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
     const [search, setSearch] = useState(false);
@@ -30,28 +34,28 @@ export default function Groups() {
                 `${process.env.REACT_APP_DB_HOST}/group?search=${searchInput}`
             )
             .then((res) => {
-                console.log('검색결과', res.data.groupArray);
-
-                console.log('#######', res.data);
                 setSearchGroupList(res.data.groupArray);
             });
     };
 
-    console.log('searchInput!!!!!!!!!!', searchInput);
-    // useEffect(() => {
-    //     getSearchGroupList();
-    // }, [searchInput, selectedArr]);
-
     const searchHandler = () => {
-        getSearchGroupList();
-
-        setSearch(!search);
+        if (!uToken) {
+            alert('로그인이 필요합니다 !');
+            return;
+        } else {
+            getSearchGroupList();
+            setSearch(!search);
+        }
     };
 
     const searchAllHandler = () => {
-        getSearchGroupList();
-
-        setSearchAll(!searchAll);
+        if (!uToken) {
+            alert('로그인이 필요합니다 !');
+            return;
+        } else {
+            getSearchGroupList();
+            setSearchAll(!searchAll);
+        }
     };
 
     // key down event 입력 시
@@ -89,11 +93,10 @@ export default function Groups() {
                 </div>
 
                 <div className="groups-interested">
-                    <InterestedList
+                    {/* <InterestedList
                         selectedArr={selectedArr}
                         setSelectedArr={setSelectedArr}
-                        num={8}
-                    />
+                    /> */}
                 </div>
 
                 {searchAll ? (
@@ -104,8 +107,6 @@ export default function Groups() {
                 ) : (
                     ''
                 )}
-
-                {/* <Divider /> */}
 
                 {search ? (
                     <GroupSearch

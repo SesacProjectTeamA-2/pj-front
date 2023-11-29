@@ -57,14 +57,14 @@
 }
 
 .modal-mission-delete-btn {
-    background-color: $color-gray4;
+    background-color: $color-gray6 !important;
     cursor: pointer;
     white-space: nowrap;
 }
 
 .modal-mission-delete-btn:hover {
     transition: 0.3s all;
-    background-color: $color-warning;
+    background-color: $color-warning-menu !important;
 }
 
 .modal-style {
@@ -84,7 +84,7 @@
     background-color: white;
     @include media('<800px') {
         width: 70%;
-        height: 20rem;
+        height: 30rem;
     }
     @include media('<500px') {
         width: 60%;
@@ -151,6 +151,13 @@
     width: 90%;
     align-items: center;
     gap: 4rem;
+
+    .css-q8hpuo-MuiFormControl-root {
+        @include media('<860px') {
+            width: 60%;
+        }
+    }
+
     @include media('<860px') {
         flex-direction: column;
         width: 80%;
@@ -169,12 +176,14 @@
     border-radius: 10px;
     padding: 0 2.4rem;
     margin: auto;
+    flex-direction: column;
+
     @include media('<500px') {
         flex-direction: column;
     }
 
     .group-create-content {
-        width: 60%;
+        width: 100%;
 
         overflow-y: auto !important;
         max-height: 70vh;
@@ -182,14 +191,37 @@
     .dday-container {
         display: flex;
         justify-content: center;
+        align-items: center;
+        width: 50%;
+
+        @include media('<800px') {
+            width: 100%;
+        }
+
+        input {
+            width: 60%;
+
+            @include media('<800px') {
+                width: 100%;
+            }
+        }
     }
     #dday-text {
-        width: 30%;
+        width: 100%;
+    }
+}
+
+.modal-mission-box {
+    justify-content: center;
+    padding: 1rem 0;
+
+    @include media('<800px') {
+        flex-direction: column;
     }
 }
 
 .modal-btn-add {
-    background-color: $color-gray4;
+    background-color: $color-gray4 !important;
     @include media('<800px') {
         width: 5rem;
     }
@@ -216,6 +248,20 @@
 
 .modal-proof-input {
     margin: 2rem;
+}
+
+.proof-box {
+    .css-xybfnn {
+        .MuiTextField-root {
+            @include media('<800px') {
+                width: 40ch;
+            }
+
+            @include media('<500px') {
+                width: 20ch;
+            }
+        }
+    }
 }
 
 .modal-mission-list {
@@ -306,6 +352,14 @@
     }
 }
 
+.modal-member-list {
+    gap: 3rem;
+    img {
+        width: 100px !important;
+        height: 55px !important;
+    }
+}
+
 .modal-member-list-label {
     width: 90%;
     display: flex;
@@ -342,9 +396,22 @@
     transition: 0.4s all;
 }
 
+.leader-patch-btn {
+    width: 40%;
+    background-color: $color-gray8 !important;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media('<500px') {
+        height: 4rem;
+        font-size: 0.1rem;
+    }
+}
+
 .mission-cancel-done-btn {
     width: 40%;
-    background-color: $color-gray8;
+    background-color: $color-gray8 !important;
     white-space: nowrap;
     display: flex;
     justify-content: center;
@@ -357,7 +424,7 @@
 
 .mission-cancel-done-btn:hover {
     width: 40%;
-    background-color: $color-warning;
+    background-color: $color-warning !important;
     transition: all 0.3s;
 }
 
@@ -424,7 +491,7 @@
     max-height: 70vh;
 }
 .modal-mission-edit-btn {
-    background-color: $color-gray4;
+    background-color: $color-gray3 !important;
     cursor: pointer;
     white-space: nowrap;
 }

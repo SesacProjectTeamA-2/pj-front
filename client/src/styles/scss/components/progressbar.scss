@@ -2,8 +2,12 @@
 
 .progress-div {
     width: 100%;
-    margin-top: 4%;
-
+    // margin-top: 4%;
+    // background-color: aqua;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     .my-progress {
         width: 100%;
         background-color: $color-white;

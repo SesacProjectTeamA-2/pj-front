@@ -11,7 +11,6 @@ import SidebarChat from '../SidebarChat';
 import Footer from '../Footer';
 
 export default function BasicLayout({ children, showChat }: any) {
-    
     return (
         <>
             <div className="layout-container ">
@@ -56,8 +55,7 @@ export default function BasicLayout({ children, showChat }: any) {
                                     paddingTop: 0,
                                 }}
                             >
-                                {' '}
-                                {/* {showChat ? <SidebarChat /> : null} */}
+                                {showChat ? <SidebarChat /> : null}
                             </Item>
                         </Grid>
                         <Footer />

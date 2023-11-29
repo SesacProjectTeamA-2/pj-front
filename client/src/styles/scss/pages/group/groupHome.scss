@@ -69,15 +69,16 @@
     align-items: flex-end;
 
     img {
-        width: 40px;
-        height: 24px;
+        width: 30px;
+        height: 20px;
+        padding-left: 0.5rem;
     }
 
     .mission-edit-text {
         opacity: 0;
         font-weight: 500;
         cursor: pointer;
-        transition: opacity 0.3s; /* 트랜지션을 여기에 적용합니다. */
+        transition: opacity 0.3s;
     }
 }
 
@@ -105,11 +106,10 @@
     border-radius: 10px;
     width: 100%;
     margin-top: 20px;
-    font-weight: bold;
     padding: 30px;
     box-sizing: border-box;
-    // 글씨 화면 넘김 방지
-    overflow-wrap: break-word;
+    white-space: pre-line; // textarea 에서 작성한 그대로 저장
+    overflow-wrap: break-word; // 글씨 화면 넘김 방지
 
     @include media('<800px') {
         width: 80%;
@@ -170,8 +170,12 @@
 }
 
 .ranking-list-img-div {
-    // background-color: aqua;
     width: fit-content;
+}
+
+.is-leader-div {
+    padding: 0 0.4rem;
+    font-weight: normal;
 }
 
 .cur-ranking-content {
@@ -222,7 +226,8 @@
 
 .ranking-list-cur {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 4fr;
+    gap: 6px;
 }
 .ranking {
     display: flex;
@@ -239,14 +244,14 @@
 .ranking-list-acc {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    .name {
-        white-space: nowrap;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 }
 
+.name {
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .ranking-list-acc img {
     @include box(40px);
     border-radius: 50%;

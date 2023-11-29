@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
@@ -57,19 +57,13 @@ export default function MissionAddModal({
     // const dispatch = useDispatch();
 
     const { gSeq } = useParams();
-    const nvg = useNavigate();
 
     const closeModalHandler = () => {
         setAddModalSwitch(false);
     };
-    console.log('groupDetail>>>>>>>>>>', groupDetail);
 
     console.log('missionList - ADD MODAL', missionList);
-    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
 
-    const today = new Date();
-    today.setDate(today.getDate());
-    const defaultDday = today.toISOString().split('T')[0];
     const [missionInput, setMissionInput] = useState({
         // 새로 추가하는 미션
         id: missionList.length + 1,
@@ -77,25 +71,45 @@ export default function MissionAddModal({
         mContent: '',
         mLevel: 1,
         mSeq: null,
-        gDday: defaultDday,
-        // completed: false,
+        gDday: '',
     });
 
-    const [groupEditDday, setGroupEditDday] = useState({
-        gSeq,
-        gName: '',
-        gDesc: '',
-        gDday: defaultDday,
-        gCategory: '',
-        gCoverImg: '',
-        gMaxMem: 1,
-        missionArray: [],
+    //=== 초기 날짜 계산 ===
+    const currentDate: any = new Date();
+
+    // gDday일 이후의 날짜 계산
+    const futureDate = new Date(currentDate);
+    futureDate.setDate(currentDate.getDate() + groupDetail?.groupDday);
+
+    // 날짜를 "yyyy-mm-dd" 형식으로 변환하는 함수
+    const formatDate = (date: any) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    // 초기 마감일
+    let defaultDate = formatDate(futureDate);
+    let today = formatDate(currentDate);
+
+    console.log('day', gDday);
+
+    const [targetDate, setTargetDate] = useState(gDday);
+
+    const [groupEditDday, setGroupEditDday] = useState<any>({
+        gSeq: Number(gSeq),
+        gName: groupDetail?.groupName,
+        gDesc: groupDetail?.grInformation,
+        gDday: defaultDate, // 날짜
+        gCategory: groupDetail?.groupCategory,
+        gCoverImg: groupDetail?.groupCoverImg,
+        gMaxMem: groupDetail?.groupMaxMember,
     });
 
-    // const [gDday, setGDday] = useState('');
+    console.log('groupEditDday~~~~~~~~~~', groupEditDday);
 
     const { mTitle, mContent, mLevel } = missionInput;
-    // const { mTitle, mContent, mLevel } = missionList;
 
     // 난이도 계산
     for (let mission of missionList) {
@@ -138,25 +152,10 @@ export default function MissionAddModal({
             mLevel: 1,
             mSeq: null,
             gDday,
-            // completed: false,
         });
     };
 
-    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
-
-    // today.setDate(today.getDate()); // 오늘 날짜
-    // const todayTargetDate = today.toISOString().split('T')[0];
-
-    // const [targetDate, setTargetDate] = useState('todayTargetDate'); // 오늘 날짜로 수정이 안 되는데?
-    const [targetDate, setTargetDate] = useState(''); // 오늘 날짜로 수정
-
     console.log('missionList', missionList);
-
-    // useEffect(() => {
-    //     setTargetDate(`D-${gDday}`);
-    // }, []);
-
-    console.log('day', gDday);
 
     interface EditMode {
         [key: number]: boolean;
@@ -181,6 +180,17 @@ export default function MissionAddModal({
             missionList[i].id = i + 1;
         }
     }
+
+    //=== 생성/수정, 삭제 데이터 data 하나에 담아서 보내기 ===
+
+    // 기존 미션에서 삭제된 미션
+    const [deleteList, setDeleteList] = useState<any>([]);
+
+    // 최종 전송 데이터
+    let [data, setData] = useState<any>({
+        missionArray: [...missionList],
+        deleteList: [...deleteList],
+    });
 
     //] 최종으로 버튼 클릭 시
     const missionAddDoneHandler = () => {
@@ -209,6 +219,18 @@ export default function MissionAddModal({
                 gDday: targetDate,
             });
 
+            setData({
+                missionArray: [...missionList],
+                deleteList: [...deleteList],
+            });
+
+            data = {
+                missionArray: missionList,
+                deleteList: deleteList,
+            };
+
+            console.log('버튼 눌렀을 경우의 data ===== ', data);
+
             // missionInputs 배열을 복사하고 gDday 업데이트
             // const updatedMissionInputs = missionInputs.map((mission: any) => {
             //     return {
@@ -232,7 +254,7 @@ export default function MissionAddModal({
                             }
                         )
                         .then((res) => {
-                            console.log('patched', res.data);
+                            console.log('디데이 수정 >>', res.data);
                         });
                 } catch (err) {
                     console.log(err);
@@ -243,12 +265,10 @@ export default function MissionAddModal({
 
             const patchMissionListHandler = async () => {
                 try {
-                    console.log('@@@@@@@@', missionList);
-
                     await axios
                         .patch(
                             `${process.env.REACT_APP_DB_HOST}/mission/${gSeq}`,
-                            missionList,
+                            data,
                             {
                                 headers: {
                                     Authorization: `Bearer ${uToken}`,
@@ -264,8 +284,12 @@ export default function MissionAddModal({
             };
 
             patchMissionListHandler();
+
+            window.location.reload();
         }
     };
+
+    console.log('==== 미션 최종 patch data====', data);
 
     //=== 수정 ===
     const [missionInputs, setMissionInputs] = useState(
@@ -303,14 +327,23 @@ export default function MissionAddModal({
     };
 
     //-- 날짜 업데이트
+    // 1) 그룹 생성 시 마감일 지정
+    const createHandleDateChange = (e: any) => {
+        const newDay = e.target.value; // 날짜형식 입력값
+        setTargetDate(newDay); // 날짜형식 입력값 업데이트
+    };
 
-    const handleDateChange = (e: any) => {
-        const newDay = e.target.value; // 새로운 날짜 입력값
-        setTargetDate(newDay); // 날짜 입력값 업데이트
+    // 2) 미션 수정 시 마감일 지정
+    const editHandleDateChange = (e: any) => {
+        const newDay = e.target.value; // 날짜형식 입력값
+        setTargetDate(newDay); // 날짜형식 입력값 업데이트
 
         const updatedGroupEditDday = { ...groupEditDday, gDday: newDay };
         setGroupEditDday(updatedGroupEditDday);
+
+        console.log('+++++groupEditDday', groupEditDday);
     };
+
     const dday = useDdayCount(targetDate);
 
     useEffect(() => {
@@ -324,19 +357,6 @@ export default function MissionAddModal({
 
         setMissionInputs(updatedMissionInputs);
     }, [dday]);
-
-    // console.log('jjjjj', targetDate);
-    // console.log('jjjjj', Number(dday.slice(2)));
-
-    // useDdayCount(newDay)
-
-    // const updatedDday = [...missionInputs, { gDday: Number(newDay.slice(2)) }];
-
-    // 각 미션 내용 저장 상태 배열
-    // const [missionContentList, setMissionContentList] = useState(
-    //     missionList.map((mission: any) => mission.mContent)
-    // );
-    // console.log('missionContentList', missionContentList);
 
     //  수정 시 onChange Event
     const handleMissionTitleChange = (missionId: any, newContent: any) => {
@@ -363,7 +383,7 @@ export default function MissionAddModal({
         setMissionList(updatedMissionList);
     };
 
-    console.log('---------', targetDate);
+    console.log('targetDate', targetDate);
     console.log('dday', dday);
 
     const newDay = useDdayCount(targetDate);
@@ -376,6 +396,27 @@ export default function MissionAddModal({
 
         setMissionList(filtered);
     };
+
+    const EditModalDeleteHandler = (targetId: number) => {
+        const filtered = missionList.filter(
+            (mission: any) => targetId !== mission.id
+        );
+
+        const deleted = missionList.filter(
+            (mission: any) => targetId === mission.id
+        );
+
+        setDeleteList([...deleteList, ...deleted]);
+
+        setMissionList(filtered);
+
+        setData({
+            missionArray: [...missionList],
+            deleteList: [...deleteList, ...deleted],
+        });
+    };
+
+    console.log('===== deleteList =====', deleteList);
 
     return (
         <div className="modal-mission-add-container">
@@ -433,7 +474,6 @@ export default function MissionAddModal({
                                 난이도
                             </InputLabel>
                             <NativeSelect
-                                // defaultValue={1}
                                 inputProps={{
                                     name: 'mLevel',
                                     id: 'uncontrolled-native',
@@ -448,26 +488,28 @@ export default function MissionAddModal({
                         </FormControl>
                     </div>
 
-                    <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 4, width: '67ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                        className="verify-box"
-                    >
-                        <TextField
-                            id="filled-multiline-flexible"
-                            label="인증 방법"
-                            multiline
-                            maxRows={4}
-                            variant="filled"
-                            name="mContent"
-                            value={mContent}
-                            onChange={onChange}
-                        />
-                    </Box>
+                    <div className="proof-box">
+                        <Box
+                            component="form"
+                            sx={{
+                                '& .MuiTextField-root': { m: 4, width: '67ch' },
+                            }}
+                            noValidate
+                            autoComplete="off"
+                            className="verify-box"
+                        >
+                            <TextField
+                                id="filled-multiline-flexible"
+                                label="인증 방법"
+                                multiline
+                                maxRows={4}
+                                variant="filled"
+                                name="mContent"
+                                value={mContent}
+                                onChange={onChange}
+                            />
+                        </Box>
+                    </div>
 
                     <button
                         onClick={oneMissionAddHandler}
@@ -479,30 +521,43 @@ export default function MissionAddModal({
                     <div className="modal-mission-list">
                         <div className="modal-mission-list-header">
                             <div className="title4">Mission List</div>
-                            {/* 모임장 - 그룹 홈에서 마감기한 수정가능 */}
-                            <div className="group-create-content">
+
+                            <div className="group-create-content modal-mission-box">
                                 <div className="dday-title">마감일</div>
 
                                 <div className="dday-container">
-                                    <input
-                                        type="date"
-                                        id="date-input"
-                                        onChange={handleDateChange}
-                                        // value={gDday} // input default 값 처리 안됨
-                                        defaultValue={gDday}
-                                    />
-                                    <div id="dday-text">
-                                        {/* {dday ? dday : `D-${gDday}`} */}
+                                    {action === '미션생성' ? (
+                                        <input
+                                            type="date"
+                                            id="date-input"
+                                            onChange={createHandleDateChange}
+                                            defaultValue={gDday}
+                                            min={today}
+                                        />
+                                    ) : (
+                                        <input
+                                            type="date"
+                                            id="date-input"
+                                            onChange={editHandleDateChange}
+                                            defaultValue={defaultDate}
+                                            min={today}
+                                        />
+                                    )}
 
-                                        {dday ? dday : ''}
-                                    </div>
+                                    {action === '미션생성' ? (
+                                        <div id="dday-text">
+                                            {gDday
+                                                ? dday
+                                                : dday
+                                                ? dday
+                                                : '언제까지 할까요 ?'}
+                                        </div>
+                                    ) : (
+                                        <div id="dday-text">
+                                            {dday ? dday : `D-${gDday}`}
+                                        </div>
+                                    )}
                                 </div>
-
-                                {/* <Dday
-                                    targetDate={targetDate}
-                                    setTargetDate={setTargetDate}
-                                    gDday={gDday}
-                                /> */}
                             </div>
                         </div>
 
@@ -520,7 +575,6 @@ export default function MissionAddModal({
                                     ) : (
                                         <>
                                             {/* 미션생성 모달 */}
-
                                             {missionList.map((mission: any) => {
                                                 return (
                                                     <div key={mission.id}>
@@ -758,7 +812,7 @@ export default function MissionAddModal({
                                                             <button
                                                                 className="modal-mission-delete-btn btn-sm"
                                                                 onClick={() =>
-                                                                    deleteHandler(
+                                                                    EditModalDeleteHandler(
                                                                         mission.id
                                                                     )
                                                                 }

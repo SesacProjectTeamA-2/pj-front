@@ -42,6 +42,42 @@
         }
     }
 }
+
+.post-mission-header {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    // gap: 1rem;
+    background-color: transparent;
+    @include media('<800px') {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+    }
+}
+
+.post-mission-title {
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    // margin-top: 1rem;
+
+    @include media('<800px') {
+        margin: 0;
+    }
+    @include media('<500px') {
+        width: 4rem;
+    }
+}
+
+.mission-input {
+    @include media('<800px') {
+        width: 50vw;
+    }
+}
+
 .editor-post-btn {
     background-color: $color-primary;
     color: $color-white;
@@ -73,9 +109,9 @@
 
 .mission-type {
     display: flex;
-    flex-direction: column;
     width: 100%;
     white-space: nowrap;
     flex-direction: row;
     gap: 2rem;
+    align-items: center;
 }
