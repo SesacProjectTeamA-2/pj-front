@@ -53,8 +53,7 @@ export default function MyPage() {
                 }
                 setInput(nickname);
                 setContent(coverLetter);
-                // 선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
-                // if (category1 && category2 && category3) {
+
                 // 중복 제거
                 const uniqueSelectedArr = Array.from(
                     new Set(
@@ -66,18 +65,7 @@ export default function MyPage() {
                 );
 
                 setSelectedArr(uniqueSelectedArr);
-                // const uniqueSelectedArr = Array.from(
-                //     new Set([
-                //         category1?.category1,
-                //         category2?.category2,
-                //         category3?.category3,
-                //     ])
-                // );
-                // setSelectedArr(uniqueSelectedArr);
-                // setSelectedArr([category1, category2, category3]);
-                // const uniqueSelectedArr = Array.from(new Set(selectedArr));
-                // setSelectedArr(uniqueSelectedArr);
-                // }
+
                 setSelectedCharacter(character);
 
                 setPhraseCtt(phrase);
