@@ -294,7 +294,14 @@ export default function Header(props: any) {
                             </li>
                         ) : (
                             <>
-                                <li>
+                                <li
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        width: '100%',
+                                        alignItems: 'center',
+                                    }}
+                                >
                                     {/* 로그인 시 */}
                                     {/* 채팅 컴포넌트 */}
                                     {/* <li id="chat-li"> */}
