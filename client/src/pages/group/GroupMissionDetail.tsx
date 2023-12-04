@@ -153,13 +153,19 @@ export default function GroupMissionDetail() {
     // 개별 관리
     const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
     const commentEditOnChange = (
-        e: React.ChangeEvent<HTMLInputElement>,
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+
         idx: number
     ) => {
         const updatedInputs = [...commentEditInputs];
         updatedInputs[idx] = e.target.value;
         setCommentEditInputs(updatedInputs);
     };
+
+    // 댓글 수정 여부 id 관리 state
+    const [editingCommentId, setEditingCommentId] = useState<number | null>(
+        null
+    );
 
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
@@ -175,6 +181,8 @@ export default function GroupMissionDetail() {
                 },
             }
         );
+
+        setEditingCommentId(null);
 
         getBoardMission();
     };
@@ -294,6 +302,8 @@ export default function GroupMissionDetail() {
                                 const isWriter =
                                     comment.tb_groupUser.tb_user.uName ===
                                     userNickname;
+                                const isEditing =
+                                    editingCommentId === comment.gbcSeq;
                                 return (
                                     <li key={idx}>
                                         {/* START */}
@@ -335,7 +345,7 @@ export default function GroupMissionDetail() {
                                                         {isWriter ? (
                                                             // 사용자 === 작성자
                                                             <div className="writer-menu">
-                                                                <div
+                                                                {/* <div
                                                                     onClick={() =>
                                                                         commentEditHandler(
                                                                             comment.gbcSeq,
@@ -345,15 +355,43 @@ export default function GroupMissionDetail() {
                                                                     // className="writer-menu"
                                                                 >
                                                                     수정
-                                                                </div>
-
+                                                                </div> */}
                                                                 <div
+                                                                    style={{
+                                                                        padding:
+                                                                            '0.6rem',
+                                                                    }}
+                                                                    onClick={() => {
+                                                                        if (
+                                                                            isEditing
+                                                                        ) {
+                                                                            commentEditHandler(
+                                                                                comment.gbcSeq,
+                                                                                idx
+                                                                            );
+                                                                        } else {
+                                                                            setEditingCommentId(
+                                                                                comment.gbcSeq
+                                                                            );
+                                                                        }
+                                                                    }}
+                                                                    //   className=" cmt-edit-btn"
+                                                                >
+                                                                    {isEditing
+                                                                        ? '수정 완료'
+                                                                        : '수정'}
+                                                                </div>
+                                                                <div
+                                                                    style={{
+                                                                        padding:
+                                                                            '0.6rem',
+                                                                    }}
                                                                     onClick={() =>
                                                                         commentDeleteHandler(
                                                                             comment.gbcSeq
                                                                         )
                                                                     }
-                                                                    className="cmt-del-btn"
+                                                                    // className="cmt-del-btn"
                                                                 >
                                                                     삭제
                                                                 </div>
@@ -364,7 +402,7 @@ export default function GroupMissionDetail() {
                                             </div>
                                         </div>
                                         {/* 댓글 내용 */}
-                                        <TextField
+                                        {/* <TextField
                                             // value={comment.gbcContent}
                                             value={
                                                 commentEditInputs[idx] ||
@@ -374,7 +412,36 @@ export default function GroupMissionDetail() {
                                             onChange={(
                                                 e: React.ChangeEvent<HTMLInputElement>
                                             ) => commentEditOnChange(e, idx)}
-                                        ></TextField>
+                                        ></TextField> */}
+                                        {isEditing ? (
+                                            <TextField
+                                                value={
+                                                    commentEditInputs[idx] ||
+                                                    comment.gbcContent
+                                                }
+                                                onChange={(e) =>
+                                                    commentEditOnChange(e, idx)
+                                                }
+                                                onKeyDown={(
+                                                    e: React.KeyboardEvent<HTMLInputElement>
+                                                ) => {
+                                                    // Correct typing for the event
+                                                    if (
+                                                        e.key === 'Enter' &&
+                                                        !e.nativeEvent
+                                                            .isComposing
+                                                    ) {
+                                                        //   e.preventDefault(); // Prevents the default action of the Enter key
+                                                        commentEditHandler(
+                                                            comment.gbcSeq,
+                                                            idx
+                                                        );
+                                                    }
+                                                }}
+                                            />
+                                        ) : (
+                                            <div>{comment.gbcContent}</div>
+                                        )}
 
                                         {/* END */}
                                     </li>
