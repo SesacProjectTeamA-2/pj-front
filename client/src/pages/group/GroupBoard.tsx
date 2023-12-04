@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
-// import AddIcon from '@mui/icons-material/Add';
 
 import '../../styles/scss/pages/group/groupPostList.scss';
 

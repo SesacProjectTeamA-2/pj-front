@@ -93,7 +93,7 @@ export default function MissionAddModal({
     let defaultDate = formatDate(futureDate);
     let today = formatDate(currentDate);
 
-    console.log('day', gDday);
+    console.log('gDday', gDday);
 
     const [targetDate, setTargetDate] = useState(gDday);
 
@@ -230,16 +230,6 @@ export default function MissionAddModal({
             };
 
             console.log('버튼 눌렀을 경우의 data ===== ', data);
-
-            // missionInputs 배열을 복사하고 gDday 업데이트
-            // const updatedMissionInputs = missionInputs.map((mission: any) => {
-            //     return {
-            //         ...mission,
-            //         gDday: Number(dday.slice(2)),
-            //     };
-            // });
-
-            // setMissionInputs(updatedMissionInputs);
 
             const patchDdayHandler = async () => {
                 try {
@@ -554,7 +544,22 @@ export default function MissionAddModal({
                                         </div>
                                     ) : (
                                         <div id="dday-text">
-                                            {dday ? dday : `D-${gDday}`}
+                                            {/* {dday.length > 0
+                                                ? dday
+                                                : !isNaN(gDday)
+                                                ? gDday < 0
+                                                : `D+${gDday.substr(1)}`
+                                                ? gDday == 0
+                                                : 'D-DAY'
+                                                ? `D-${gDday}`
+                                                : gDday} */}
+                                            {dday.length > 0
+                                                ? dday
+                                                : Number(gDday) < 0
+                                                ? `D+${gDday * -1}`
+                                                : Number(gDday) == 0
+                                                ? 'D-DAY'
+                                                : `D-${gDday}`}
                                         </div>
                                     )}
                                 </div>
