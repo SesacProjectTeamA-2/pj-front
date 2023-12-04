@@ -170,11 +170,18 @@ export default function GroupMissionDetail() {
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
         console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
+
+        if (commentEditInputs[idx]?.length === 0) {
+            alert('댓글을 입력해주세요 !');
+            return;
+        }
+
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
 
             { gbcSeq, gbcContent: commentEditInputs[idx] },
             // commentEditInput,
+
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
@@ -189,26 +196,26 @@ export default function GroupMissionDetail() {
 
     //; 댓글 삭제 (DELETE)
     const commentDeleteHandler = async (gbcSeq: number) => {
-        console.log(gbcSeq);
-
-        const res = await axios
-            .delete(
-                `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res.data);
-                setCommentList((prevComments: any) =>
-                    prevComments.filter(
-                        (comment: any) => comment.gbcSeq !== gbcSeq
-                    )
-                );
-                getBoardMission();
-            });
+        if (window.confirm('댓글을 삭제하시겠습니까 ?')) {
+            const res = await axios
+                .delete(
+                    `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res.data);
+                    setCommentList((prevComments: any) =>
+                        prevComments.filter(
+                            (comment: any) => comment.gbcSeq !== gbcSeq
+                        )
+                    );
+                    getBoardMission();
+                });
+        } else return;
     };
 
     return (
@@ -401,22 +408,11 @@ export default function GroupMissionDetail() {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* 댓글 내용 */}
-                                        {/* <TextField
-                                            // value={comment.gbcContent}
-                                            value={
-                                                commentEditInputs[idx] ||
-                                                comment.gbcContent
-                                            }
-                                            name="gbcContent"
-                                            onChange={(
-                                                e: React.ChangeEvent<HTMLInputElement>
-                                            ) => commentEditOnChange(e, idx)}
-                                        ></TextField> */}
+
                                         {isEditing ? (
                                             <TextField
-                                                value={
-                                                    commentEditInputs[idx] ||
+                                                value={commentEditInputs[idx]}
+                                                defaultValue={
                                                     comment.gbcContent
                                                 }
                                                 onChange={(e) =>
@@ -431,7 +427,6 @@ export default function GroupMissionDetail() {
                                                         !e.nativeEvent
                                                             .isComposing
                                                     ) {
-                                                        //   e.preventDefault(); // Prevents the default action of the Enter key
                                                         commentEditHandler(
                                                             comment.gbcSeq,
                                                             idx

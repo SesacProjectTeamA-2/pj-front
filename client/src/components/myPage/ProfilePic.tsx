@@ -37,7 +37,7 @@ export default function ProfilePic(props: any) {
                         alt="profilePicEdit"
                         id="profilePic-edit"
                     />
-                    <div className="title8 mission-edit-text">수정하기</div>
+                    <div className="title8 mission-edit-text">수정</div>
                 </div>
             </label>
         </div>

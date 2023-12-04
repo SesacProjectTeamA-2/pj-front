@@ -79,11 +79,25 @@ export default function GroupEdit() {
                     memberArray,
                 } = res.data;
 
+                const currentDate: any = new Date();
+
+                // groupDday일 이후의 날짜 계산
+                const gDday = new Date(currentDate);
+                gDday.setDate(currentDate.getDate() + groupDday);
+
+                // 날짜를 "yyyy-mm-dd" 형식으로 변환하는 함수
+                const formatDate = (date: any) => {
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                };
+
                 setInput({
                     gSeq,
                     gName: groupName,
                     gDesc: grInformation,
-                    gDday: groupDday,
+                    gDday: formatDate(gDday),
                     gCategory: groupCategory,
                     gCoverImg: groupCoverImg,
                     gMaxMem: groupMaxMember,
@@ -106,20 +120,16 @@ export default function GroupEdit() {
     const [groupMaxMem, setGroupMaxMem] = useState(1);
 
     console.log('그룹 세부사항 GET', groupDetail);
-    console.log('날짜 디폴트 설정 전 날짜', groupDetail.gDday);
 
-    // console.log('groupName', groupName); // 이건 잘 찍힘
-
-    // 유효성 검사?: 날짜 미제출 방지를 위한 디폴트 설정
-    const today = new Date();
-    today.setDate(today.getDate() + 7); // 오늘 날짜로부터 7일 후
-    const defaultDday = today.toISOString().split('T')[0];
+    // const today = new Date();
+    // today.setDate(today.getDate() + 7); // 오늘 날짜로부터 7일 후
+    // const defaultDday = today.toISOString().split('T')[0];
 
     const [input, setInput] = useState({
         gSeq,
         gName: '',
         gDesc: '',
-        gDday: defaultDday,
+        gDday: '',
         gCategory: '',
         gCoverImg: '',
         gMaxMem: 1,
@@ -204,7 +214,6 @@ export default function GroupEdit() {
 
     //; 모임 수정 (PATCH)
     const groupEditHandler = async () => {
-        // 유효성 검사: 그룹 카테고리 미설정 방지
         console.log('제출 전 날짜 ', input.gDday);
 
         if (!input.gCategory) {
@@ -213,7 +222,7 @@ export default function GroupEdit() {
             });
             return;
         }
-        //유효성 검사: 모임명 미입력 방지
+
         if (!input.gName) {
             toast.error('모임명을 입력해주세요!', {
                 duration: 2000,
@@ -226,9 +235,9 @@ export default function GroupEdit() {
                 gNameInput.focus();
             }
 
-            return; // 함수 실행 중지
+            return;
         }
-        //유효성 검사: 모임설명 미입력 방지
+
         if (!input.gDesc) {
             toast.error('모임 설명을 입력해주세요!', {
                 duration: 2000,
@@ -241,7 +250,7 @@ export default function GroupEdit() {
                 gDescInput.focus();
             }
 
-            return; // 함수 실행 중지
+            return;
         }
 
         const res = await axios
@@ -455,7 +464,7 @@ export default function GroupEdit() {
             {/* <Link to="/group/home/1"> */}
             <div className="btn-fixed-wrapper">
                 <button className="btn-fixed" onClick={groupEditHandler}>
-                    모임 수정완료 !
+                    수정 완료
                 </button>
             </div>
             {/* </Link> */}

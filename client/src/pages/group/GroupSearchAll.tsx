@@ -35,7 +35,7 @@ export default function GroupSearchAll({
 
     return (
         <div>
-            <div className="title1" style={{ marginBottom: '2rem' }}>
+            <div className="title3" style={{ marginBottom: '2rem' }}>
                 전체 모임
             </div>
 
