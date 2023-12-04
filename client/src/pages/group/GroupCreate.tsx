@@ -177,7 +177,7 @@ export default function GroupCreate() {
             .then((res) => {
                 console.log(res.data);
 
-                if ((res.data.msg = '모임명이 중복되었습니다.')) {
+                if (res.data.msg === '모임명이 중복되었습니다.') {
                     toast.error(res.data.msg);
                     return;
                 } else if (input.gName) {
@@ -185,12 +185,7 @@ export default function GroupCreate() {
                 }
             })
             .catch((res) => {
-                if (res.data.msg) {
-                    toast.error(res.data.msg);
-                } else
-                    toast.error('모임이 생성되지 않았습니다 !', {
-                        duration: 2000,
-                    });
+                toast.error(res.data.msg);
             });
     };
 

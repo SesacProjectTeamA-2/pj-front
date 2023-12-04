@@ -33,6 +33,11 @@
     gap: 0.8rem;
     padding-bottom: 2rem;
     cursor: pointer;
+
+    .writer-menu-content {
+        display: flex;
+        gap: 1rem;
+    }
 }
 
 .post-detail-profile {
@@ -54,6 +59,11 @@
 
 .writer-menu {
     display: flex;
+
+    .writer-menu-content {
+        display: flex;
+        gap: 1rem;
+    }
 }
 
 .post-detail-content {

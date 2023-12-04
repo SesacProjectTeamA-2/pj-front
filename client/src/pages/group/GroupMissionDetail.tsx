@@ -45,7 +45,6 @@ export default function GroupMissionDetail() {
                 console.log('error 발생: ', err);
             });
     };
-    // console.log(window.location.pathname);
 
     useEffect(() => {
         if (cookie.get('isUser')) {
@@ -56,12 +55,12 @@ export default function GroupMissionDetail() {
     }, []);
 
     const { gSeq, mSeq, gbSeq } = useParams();
-    console.log(gSeq, mSeq, gbSeq); // 1 1 4
 
     const [userInfo, SetUserInfo] = useState<any>([]);
 
     //==== 미션 게시글 조회 (GET) ====
     const [missionList, setMissionList] = useState<any>([]);
+    const [boardUName, setBoardUName] = useState<any>('');
 
     // 미션 게시글 조회
     const getBoardMission = async () => {
@@ -81,6 +80,8 @@ export default function GroupMissionDetail() {
                 SetUserInfo(userInfo);
 
                 setCommentList(res.data.groupInfo.tb_groupBoardComments);
+
+                setBoardUName(userInfo.uName);
             });
     };
 
@@ -88,7 +89,11 @@ export default function GroupMissionDetail() {
         getBoardMission();
     }, []);
 
-    console.log('MMMMM', missionList);
+    // 작성자인지 조회
+    let isBoardWriter = false;
+    if (userNickname === boardUName) {
+        isBoardWriter = true;
+    }
 
     //; 게시글 삭제 (DELETE)
     const boardDeleteHandler = () => {
@@ -161,10 +166,8 @@ export default function GroupMissionDetail() {
         console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-            // commentEditTestInput, // [임시 test용]
-            // [추후] commentEditInput으로 변경
-            { gbcSeq, gbcContent: commentEditInputs[idx] },
 
+            { gbcSeq, gbcContent: commentEditInputs[idx] },
             // commentEditInput,
             {
                 headers: {
@@ -230,12 +233,18 @@ export default function GroupMissionDetail() {
                         <div className="date">{missionList?.createdAt}</div>
                     </div>
                     <div className="writer-menu">
-                        <Link
-                            to={`/board/${gSeq}/edit/mission/${mSeq}/${gbSeq}`}
-                        >
-                            <div>수정</div>
-                        </Link>
-                        <div onClick={boardDeleteHandler}>삭제</div>
+                        {isBoardWriter ? (
+                            <div className="writer-menu-content">
+                                <Link
+                                    to={`/board/${gSeq}/edit/mission/${mSeq}/${gbSeq}`}
+                                >
+                                    <div>수정</div>
+                                </Link>
+                                <div onClick={boardDeleteHandler}>삭제</div>
+                            </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
                 </div>
 
@@ -280,14 +289,11 @@ export default function GroupMissionDetail() {
 
                     <div className="comment-list">
                         <ul>
-                            {/* commentList, comments 둘다 되네요..^^ */}
                             {commentList?.map((comment: any, idx: number) => {
                                 // 사용자 == 작성자 여부 구분
                                 const isWriter =
                                     comment.tb_groupUser.tb_user.uName ===
                                     userNickname;
-                                // console.log('isWriter', isWriter);
-
                                 return (
                                     <li key={idx}>
                                         {/* START */}
@@ -328,32 +334,31 @@ export default function GroupMissionDetail() {
                                                     >
                                                         {isWriter ? (
                                                             // 사용자 === 작성자
-                                                            <>
-                                                                <button
+                                                            <div className="writer-menu">
+                                                                <div
                                                                     onClick={() =>
                                                                         commentEditHandler(
                                                                             comment.gbcSeq,
                                                                             idx
                                                                         )
                                                                     }
-                                                                    className="btn-sm cmt-edit-btn"
+                                                                    // className="writer-menu"
                                                                 >
                                                                     수정
-                                                                </button>
+                                                                </div>
 
-                                                                <button
+                                                                <div
                                                                     onClick={() =>
                                                                         commentDeleteHandler(
                                                                             comment.gbcSeq
                                                                         )
                                                                     }
-                                                                    className="btn-sm cmt-del-btn"
+                                                                    className="cmt-del-btn"
                                                                 >
                                                                     삭제
-                                                                </button>
-                                                            </>
-                                                        ) : // 사용자 !== 작성자
-                                                        null}
+                                                                </div>
+                                                            </div>
+                                                        ) : null}
                                                     </div>
                                                 </div>
                                             </div>
