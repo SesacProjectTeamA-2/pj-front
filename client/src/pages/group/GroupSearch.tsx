@@ -24,46 +24,49 @@ export default function GroupSearch({
             );
 
             console.log('검색결과', res.data.groupArray);
-            console.log(res);
             setSearchGroupList(res.data.groupArray);
         };
 
         getSearchGroupList();
     }, [searchInput, selectedArr]);
 
-    console.log(searchGroupList);
+    console.log('searchGroupList', searchGroupList);
 
     return (
         <div>
-            <div className="title1" style={{ marginBottom: '2rem' }}>
+            <div className="title3" style={{ marginBottom: '2rem' }}>
                 검색 결과
             </div>
 
             <div className="search-group-grid">
-                {searchGroupList?.map((searchGroup: GroupStateType) => (
-                    <div
-                        key={searchGroup.gSeq}
-                        className="search-group-container"
-                    >
-                        <Link to={`/group/home/${searchGroup.gSeq}`}>
-                            <div className="title-card">
-                                {searchGroup.gName}
-                            </div>
-                            <br />
-                            <span
-                                style={{
-                                    // margin: '0px 15px',
-                                    color: '#8D6262',
-                                    //   fontWeight: 'bold',
-                                    //   fontSize: '1.2rem',
-                                }}
-                            >
-                                <span className="title5">D-day</span>
-                            </span>
-                            <div className="title6">{searchGroup.gDday}</div>
-                        </Link>
-                    </div>
-                ))}
+                {searchGroupList?.length === 0 || searchGroupList == undefined
+                    ? '검색 결과가 없습니다.'
+                    : searchGroupList?.map((searchGroup: GroupStateType) => (
+                          <div
+                              key={searchGroup.gSeq}
+                              className="search-group-container"
+                          >
+                              <Link to={`/group/home/${searchGroup.gSeq}`}>
+                                  <div className="title-card">
+                                      {searchGroup.gName}
+                                  </div>
+                                  <br />
+                                  <span
+                                      style={{
+                                          // margin: '0px 15px',
+                                          color: '#8D6262',
+                                          //   fontWeight: 'bold',
+                                          //   fontSize: '1.2rem',
+                                      }}
+                                  >
+                                      <span className="title5">D-day</span>
+                                  </span>
+                                  <div className="title6">
+                                      {searchGroup.gDday}
+                                  </div>
+                              </Link>
+                          </div>
+                      ))}
             </div>
         </div>
     );

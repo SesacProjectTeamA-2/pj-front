@@ -105,9 +105,6 @@ export default function GroupPostDetail() {
         warningModalSwitchHandler();
     };
 
-    // 메뉴 선택
-    const [menu, setMenu] = useState('');
-
     // 경고 공통 모달
     const [warningModalSwitch, setWarningModalSwitch] = useState(false);
 
@@ -157,16 +154,8 @@ export default function GroupPostDetail() {
 
     // === 수정 ===
 
-    // const [isEdit, setIsEdit] = useState(false);
-
-    // const [commentEditInput, setCommentEditInput] = useState({
-    //     gbcSeq: 1,
-    //     gbcContent: '',
-    // });
-
     // 개별 관리
     const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
-    // const [commentEditInputs, setCommentEditInputs] = useState<string>(''); //리더님
 
     const commentEditOnChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -182,11 +171,14 @@ export default function GroupPostDetail() {
         null
     );
 
-    console.log('boardComments', boardComments);
-
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
         // console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
+
+        if (commentEditInputs[idx]?.length === 0) {
+            alert('댓글을 입력해주세요 !');
+            return;
+        }
 
         const res = await axios
             .patch(
@@ -211,27 +203,27 @@ export default function GroupPostDetail() {
 
     //; 댓글 삭제 (DELETE)
     const commentDeleteHandler = async (gbcSeq: number) => {
-        console.log(gbcSeq);
+        if (window.confirm('댓글을 삭제하시겠습니까 ?')) {
+            const res = await axios
+                .delete(
+                    `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
 
-        const res = await axios
-            .delete(
-                `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res.data);
-                setCommentList((prevComments: any) =>
-                    prevComments.filter(
-                        (comment: any) => comment.gbcSeq !== gbcSeq
-                    )
-                );
-                getBoardNoti();
-            });
+                    {
+                        headers: {
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res.data);
+                    setCommentList((prevComments: any) =>
+                        prevComments.filter(
+                            (comment: any) => comment.gbcSeq !== gbcSeq
+                        )
+                    );
+                    getBoardNoti();
+                });
+        } else return;
     };
 
     return (
@@ -356,18 +348,7 @@ export default function GroupPostDetail() {
                                                           </div>
 
                                                           {/* 댓글 div */}
-                                                          <div
-                                                          //   style={{
-                                                          //       display:
-                                                          //           'flex',
-                                                          //       flexDirection:
-                                                          //           'row',
-                                                          //       justifyContent:
-                                                          //           'center',
-                                                          //       flexBasis:
-                                                          //           '30%',
-                                                          //   }}
-                                                          >
+                                                          <div>
                                                               <div className="comment-header">
                                                                   {/* Comment content */}
                                                                   <div>
@@ -420,31 +401,14 @@ export default function GroupPostDetail() {
                                                       </div>
                                                   </div>
 
-                                                  {/* 댓글 내용 */}
-                                                  {/* {
-                                                      <TextField
-                                                          value={
-                                                              commentEditInputs[
-                                                                  idx
-                                                              ] ||
-                                                              comment.gbcContent
-                                                          }
-                                                          onChange={(
-                                                              e: React.ChangeEvent<HTMLInputElement>
-                                                          ) =>
-                                                              commentEditOnChange(
-                                                                  e,
-                                                                  idx
-                                                              )
-                                                          }
-                                                      />
-                                                  } */}
                                                   {isEditing ? (
                                                       <TextField
                                                           value={
                                                               commentEditInputs[
                                                                   idx
-                                                              ] ||
+                                                              ]
+                                                          }
+                                                          defaultValue={
                                                               comment.gbcContent
                                                           }
                                                           onChange={(e) =>
@@ -456,14 +420,12 @@ export default function GroupPostDetail() {
                                                           onKeyDown={(
                                                               e: React.KeyboardEvent<HTMLInputElement>
                                                           ) => {
-                                                              // Correct typing for the event
                                                               if (
                                                                   e.key ===
                                                                       'Enter' &&
                                                                   !e.nativeEvent
                                                                       .isComposing
                                                               ) {
-                                                                  //   e.preventDefault(); // Prevents the default action of the Enter key
                                                                   commentEditHandler(
                                                                       comment.gbcSeq,
                                                                       idx

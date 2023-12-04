@@ -426,7 +426,7 @@ export default function GroupCreate() {
                     className="btn-fixed"
                     onClick={() => groupCreateHandler()}
                 >
-                    모임 시작하기 !
+                    시작하기 !
                 </button>
             </div>
         </div>

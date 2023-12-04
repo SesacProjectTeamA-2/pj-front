@@ -40,7 +40,7 @@ export default function Introduce(props: any): JSX.Element {
                         className="edit-img"
                         alt="editImg"
                     ></img>
-                    <div className="title8 mission-edit-text">수정하기</div>
+                    <div className="title8 mission-edit-text">수정</div>
                 </div>
             </label>
         </div>

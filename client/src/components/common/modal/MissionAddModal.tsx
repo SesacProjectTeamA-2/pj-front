@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
@@ -140,12 +141,24 @@ export default function MissionAddModal({
     /////////// 추가 //////////////
 
     const oneMissionAddHandler = () => {
+        // 유효성 검사
+        if (!missionInput.mTitle) {
+            toast.error('미션 제목을 입력해주세요', {
+                duration: 2000,
+            });
+            return;
+        } else if (!missionInput.mContent) {
+            toast.error('미션 인증방법을 입력해주세요', {
+                duration: 2000,
+            });
+            return;
+        }
+
         const newMissions = [...missionList, missionInput];
         setMissionList(newMissions);
 
         // 입력 필드 초기화
         setMissionInput({
-            // id: Object.keys(missionList).length + 1,
             id: missionList.length + 2,
             mTitle: '',
             mContent: '',
