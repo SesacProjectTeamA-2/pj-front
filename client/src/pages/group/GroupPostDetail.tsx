@@ -130,22 +130,26 @@ export default function GroupPostDetail() {
 
     //; 댓글 등록 (POST)
     const postCommentHandler = async () => {
-        const res = await axios.post(
-            `${process.env.REACT_APP_DB_HOST}/comment/create/${gbSeq}`,
-            commentInput,
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
+        const res = await axios
+            .post(
+                `${process.env.REACT_APP_DB_HOST}/comment/create/${gbSeq}`,
+                commentInput,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
 
-        getBoardNoti();
+                getBoardNoti();
 
-        setCommentInput({
-            ...commentInput,
-            gbcContent: '',
-        });
+                setCommentInput({
+                    ...commentInput,
+                    gbcContent: '',
+                });
+            });
     };
 
     // === 수정 ===
@@ -192,21 +196,25 @@ export default function GroupPostDetail() {
 
         console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
 
-        const res = await axios.patch(
-            `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
+        const res = await axios
+            .patch(
+                `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
 
-            { gbcSeq, gbcContent: commentEditInputs[idx] },
+                { gbcSeq, gbcContent: commentEditInputs[idx] },
 
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
 
-        setEditingCommentId(null);
+                setEditingCommentId(null);
 
-        getBoardNoti();
+                getBoardNoti();
+            });
     };
 
     //; 댓글 삭제 (DELETE)

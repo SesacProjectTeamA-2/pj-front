@@ -150,8 +150,6 @@ export default function BoardEdit() {
 
     return (
         <div className="section section-group">
-            {/* [추후] title 값 넘겨 받기 ! */}
-            {/* params 가져와서 : free */}
             <GroupHeader title={postMenu} groupName={''} />
             <div className="post-container">
                 <div className="noti-content post-header title5">

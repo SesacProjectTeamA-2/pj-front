@@ -79,15 +79,6 @@ export default function BoardPost() {
         const selectedValue = e.target.value;
         setSelected(selectedValue);
 
-        // console.log('**********');
-
-        // setBoard((prevBoard: any) => ({
-        //     ...prevBoard,
-        //     gbCategory: selectedValue,
-        //     mSeq: null,
-        // }));
-        // console.log('setSelected 전', selectedValue);
-
         if (selectedValue === 'notice') {
             setBoard((prevBoard: any) => ({
                 ...prevBoard,
@@ -176,27 +167,13 @@ export default function BoardPost() {
 
     return (
         <div className="section section-group">
-            {/* <GroupHeader title={postMenu} groupName={''} /> */}
             <div className="post-container">
                 <div className="noti-content post-header title5">
                     <div className="select-box">
                         <div>종류</div>
-                        <select
-                            onChange={handleSelect}
-                            value={selected}
-                            // value={postMenu}
-                            // defaultChecked={gCategory}
-                        >
+                        <select onChange={handleSelect} value={selected}>
                             <option value="notice">공지사항</option>
                             <option value="free">자유/질문</option>
-
-                            {/* {missionList?.map((mission: any, idx: number) => {
-                                return (
-                                    <option value={mission.mSeq} key={idx}>
-                                        {mission.mTitle}
-                                    </option>
-                                );
-                            })} */}
                         </select>
                     </div>
                     <div className="post-title">
