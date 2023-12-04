@@ -371,49 +371,6 @@ export default function GroupPostDetail() {
                                                               <div className="comment-header">
                                                                   {/* Comment content */}
                                                                   <div>
-                                                                      {isEditing ? (
-                                                                          <TextField
-                                                                              value={
-                                                                                  commentEditInputs[
-                                                                                      idx
-                                                                                  ] ||
-                                                                                  comment.gbcContent
-                                                                              }
-                                                                              onChange={(
-                                                                                  e
-                                                                              ) =>
-                                                                                  commentEditOnChange(
-                                                                                      e,
-                                                                                      idx
-                                                                                  )
-                                                                              }
-                                                                              onKeyDown={(
-                                                                                  e: React.KeyboardEvent<HTMLInputElement>
-                                                                              ) => {
-                                                                                  // Correct typing for the event
-                                                                                  if (
-                                                                                      e.key ===
-                                                                                          'Enter' &&
-                                                                                      !e
-                                                                                          .nativeEvent
-                                                                                          .isComposing
-                                                                                  ) {
-                                                                                      //   e.preventDefault(); // Prevents the default action of the Enter key
-                                                                                      commentEditHandler(
-                                                                                          comment.gbcSeq,
-                                                                                          idx
-                                                                                      );
-                                                                                  }
-                                                                              }}
-                                                                          />
-                                                                      ) : (
-                                                                          <div>
-                                                                              {
-                                                                                  comment.gbcContent
-                                                                              }
-                                                                          </div>
-                                                                      )}
-
                                                                       {isWriter && (
                                                                           <div className="writer-menu">
                                                                               <div
@@ -482,6 +439,43 @@ export default function GroupPostDetail() {
                                                           }
                                                       />
                                                   } */}
+                                                  {isEditing ? (
+                                                      <TextField
+                                                          value={
+                                                              commentEditInputs[
+                                                                  idx
+                                                              ] ||
+                                                              comment.gbcContent
+                                                          }
+                                                          onChange={(e) =>
+                                                              commentEditOnChange(
+                                                                  e,
+                                                                  idx
+                                                              )
+                                                          }
+                                                          onKeyDown={(
+                                                              e: React.KeyboardEvent<HTMLInputElement>
+                                                          ) => {
+                                                              // Correct typing for the event
+                                                              if (
+                                                                  e.key ===
+                                                                      'Enter' &&
+                                                                  !e.nativeEvent
+                                                                      .isComposing
+                                                              ) {
+                                                                  //   e.preventDefault(); // Prevents the default action of the Enter key
+                                                                  commentEditHandler(
+                                                                      comment.gbcSeq,
+                                                                      idx
+                                                                  );
+                                                              }
+                                                          }}
+                                                      />
+                                                  ) : (
+                                                      <div>
+                                                          {comment.gbcContent}
+                                                      </div>
+                                                  )}
                                               </li>
                                               //  END
                                           );
