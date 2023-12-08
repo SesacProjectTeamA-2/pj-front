@@ -4,14 +4,18 @@ import { createButton } from 'react-social-login-buttons';
 import { createSvgIcon } from 'react-social-login-buttons';
 
 const config_kakao = {
-    text: '카카오 로그인',
+    text: 'KAKAO',
     style: {
         background: '#FEE500',
-        borderRadius: '12px',
         color: '#000000',
         fontSize: '1rem',
         fontWeight: 'bold',
-        wordWrap: 'breakWord',
+        margin: '0.5rem auto',
+        width: '90%',
+        alignItems: 'center',
+        display: 'flex',
+        borderRadius: '12px',
+        boxShadow: '-11px 11px 22px #bebebe, 11px -11px 22px #ffffff',
     },
     icon: createSvgIcon(kakaoSvg),
     className: 'kakaoLogin-btn',
