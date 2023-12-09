@@ -4,16 +4,16 @@ import { createButton } from 'react-social-login-buttons';
 import { createSvgIcon } from 'react-social-login-buttons';
 
 const config_tester = {
-    text: '테스터 로그인 2',
+    text: 'Guest 2',
     style: {
-        background: '#ed8d8d',
+        background: '#fcfcfc',
         borderRadius: '12px',
-        color: '#ffffff',
+        color: '#5d5d5d',
+        boxShadow: '-11px 11px 22px #bebebe, 11px -11px 22px #ffffff',
         fontSize: '1rem',
         fontWeight: 'bold',
-        wordWrap: 'breakWord',
     },
-    icon: createSvgIcon(logoSvg),
+    icon: '',
     className: 'testerLogin-btn',
 };
 

@@ -1,5 +1,131 @@
 @import '~include-media/dist/include-media';
 
+// [START] MOTIMATES
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
+
+$color-light-gray: #eaece5;
+
+.intro-container {
+    font-family: 'Raleway', sans-serif;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-light-gray;
+}
+
+.empty-div {
+    height: 8rem;
+}
+
+.text {
+    font-size: 8em;
+    position: relative;
+    text-transform: full-width;
+    display: flex;
+
+    .letter {
+        position: relative;
+        display: flex;
+
+        .source {
+            color: gray;
+            -webkit-text-stroke: 0.01em rgba(black, 0.3);
+            display: flex;
+        }
+
+        .overlay,
+        .shadow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .overlay {
+            background-image: linear-gradient(
+                90deg,
+                white 50%,
+                lighten($color-light-gray, 2)
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: rotateY(-30deg) skew(0, -10deg);
+            transform-origin: left;
+            animation: overlay 3s infinite ease-out var(--delay);
+        }
+
+        .shadow {
+            filter: blur(5px);
+            background-image: linear-gradient(
+                90deg,
+                rgba(black, 0.4) 30%,
+                transparent
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: skew(0, 20deg) translateY(0.1em) translateX(0.05em);
+            animation: shadow 3s infinite var(--delay);
+        }
+    }
+}
+
+@keyframes shadow {
+    0%,
+    20%,
+    100% {
+        transform: skew(0, 20deg) translateY(0.1em) translateX(0.05em);
+        opacity: 1;
+    }
+    10% {
+        transform: skew(0, 0) translateY(0) translateX(0);
+        opacity: 0;
+    }
+}
+
+@keyframes overlay {
+    0%,
+    20%,
+    100% {
+        transform: rotateY(-30deg) skew(0, -10deg);
+    }
+    10% {
+        transform: rotateY(0deg) skew(0, 0);
+    }
+}
+
+// [END] MOTIMATES
+
+canvas {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+
+    left: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem;
+    text-align: center;
+    z-index: 100;
+}
+
+.main-text {
+    color: #001f42;
+    // color: #151b1f;
+    position: relative;
+    margin: 14rem 0;
+}
+
+.intro-moti-text {
+    font-size: 4rem;
+}
+
 .intro-container {
     display: flex;
     width: 100%;
@@ -16,17 +142,25 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 3rem;
+    font-size: 4rem;
 
     position: absolute;
     z-index: 10;
-    left: 16%;
+    left: 6%;
     top: 20%;
     color: white;
 }
 
+.video-title {
+    font-size: 7rem;
+}
+
+.start-group-title {
+    font-size: 3rem;
+}
+
 .sub-title {
-    padding: 1rem 0;
+    padding: 2rem 0;
 }
 
 .video-container {
@@ -35,20 +169,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // width: 85.5rem;
     width: 100%;
 }
 
 video {
     max-width: 100%;
     height: auto;
-}
-
-.intro-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4rem;
 }
 
 .intro-img-wrapper-left {
@@ -107,4 +233,168 @@ video {
     height: 100%;
     align-items: center;
     justify-content: center;
+    font-size: 2rem;
+}
+
+.debate-title {
+    display: flex;
+    flex-direction: column;
+    // width: 100%;
+    position: absolute;
+    z-index: 10;
+    left: 17%;
+    bottom: 32%;
+    color: white;
+
+    .debate-title-text {
+        font-size: 3.6rem;
+        justify-content: center;
+        align-items: center;
+
+        @include media('<800px') {
+            font-size: 3rem;
+        }
+    }
+}
+
+.win-vid {
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 3rem 0;
+}
+
+.win-title {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    color: white;
+    text-align: center;
+
+    .win-title-text {
+        font-size: 5rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .win-sub-title {
+        padding: 1rem 0;
+        line-height: 1.8;
+    }
+}
+
+.dday-title {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    bottom: 10%;
+    color: white;
+    text-align: center;
+
+    .dday-title-text {
+        font-size: 4.3rem;
+        padding: 1rem 0;
+    }
+
+    .dday-sub-title {
+        padding: 1rem 0;
+        line-height: 1.8;
+    }
+}
+
+// cursor
+.custom-cursor {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    width: 50px;
+    margin-left: -25px;
+    margin-top: -25px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: white;
+    transition-property: transform, scale, opacity;
+    transition-duration: 20ms;
+    transition-timing-function: ease-in-out;
+    scale: 1;
+    z-index: 1000;
+}
+
+.custom-cursor--link {
+    scale: 0.6;
+}
+.custom-cursor--init {
+    opacity: 1;
+}
+
+// .block {
+//     display: grid;
+//     place-content: center;
+//     place-items: center;
+//     height: 80vh;
+//     min-height: 300px;
+// }
+// .block--black {
+//     background-color: black;
+//     color: white;
+// }
+// .block--white {
+//     background-color: white;
+//     color: black;
+// }
+// .block__title,
+// .block__link {
+//     color: currentColor;
+// }
+// .block__title {
+//     margin-bottom: 1em;
+//     font-size: 4rem;
+//     font-weight: 300;
+//     text-align: center;
+// }
+// .block__link {
+//     padding: 0.5em;
+//     text-decoration: none;
+//     transition: letter-spacing 200ms ease;
+// }
+// .block__link:hover {
+//     letter-spacing: 0.2em;
+// }
+
+// 빵빠레 버튼
+.party-btn {
+    background-color: #404663;
+    color: #fff;
+    border: 0;
+    font-size: 2rem;
+    font-weight: 400;
+    padding: 0.5em 1.25em;
+    border-radius: 0.5em;
+    z-index: 999;
+    position: relative;
+    display: flex;
+    gap: 0.5em;
+    box-shadow: 0px 1.7px 2.2px rgba(0, 0, 0, 0.02),
+        0px 4px 5.3px rgba(0, 0, 0, 0.028), 0px 7.5px 10px rgba(0, 0, 0, 0.035),
+        0px 13.4px 17.9px rgba(0, 0, 0, 0.042),
+        0px 25.1px 33.4px rgba(0, 0, 0, 0.05), 0px 60px 80px rgba(0, 0, 0, 0.07);
+    width: 14%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.party-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.party-btn:active {
+    transform: scale(1.01);
 }

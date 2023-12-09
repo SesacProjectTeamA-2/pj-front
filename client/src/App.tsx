@@ -53,12 +53,7 @@ function App() {
         <div className="App">
             <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <BasicLayout children={<Intro />} showChat={showChat} />
-                    }
-                />
+                <Route path="/" element={<Intro />} />
                 <Route
                     path="/login"
                     element={
