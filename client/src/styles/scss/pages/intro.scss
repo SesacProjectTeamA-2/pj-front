@@ -3,7 +3,8 @@
 // [START] MOTIMATES
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
 
-$color-light-gray: #eaece5;
+// $color-light-gray: #eaece5;
+$color-light-gray: #e0e0e0;
 
 .intro-container {
     font-family: 'Raleway', sans-serif;
@@ -16,11 +17,35 @@ $color-light-gray: #eaece5;
     height: 8rem;
 }
 
+.vid-empty-div {
+    height: 10rem;
+
+    @include media('<800px') {
+        display: none;
+    }
+}
+
+// .char-empty-div {
+//     height: 10rem;
+// }
+
 .text {
     font-size: 8em;
     position: relative;
     text-transform: full-width;
     display: flex;
+
+    @include media('<800px') {
+        font-size: 6rem;
+    }
+
+    @include media('<600px') {
+        font-size: 5rem;
+    }
+
+    @include media('<480px') {
+        font-size: 4rem;
+    }
 
     .letter {
         position: relative;
@@ -103,6 +128,10 @@ canvas {
     left: 0;
     position: absolute;
     z-index: 0;
+
+    @include media('<800px') {
+        margin-top: 6rem;
+    }
 }
 
 .intro-content {
@@ -117,13 +146,25 @@ canvas {
 
 .main-text {
     color: #001f42;
-    // color: #151b1f;
+
     position: relative;
     margin: 14rem 0;
+
+    @include media('<800px') {
+        margin: 6rem 0 0 0;
+    }
 }
 
 .intro-moti-text {
     font-size: 4rem;
+
+    @include media('<800px') {
+        font-size: 3rem;
+    }
+
+    @include media('<480px') {
+        font-size: 2rem;
+    }
 }
 
 .intro-container {
@@ -136,6 +177,10 @@ canvas {
     display: flex;
     position: relative;
     width: 100%;
+
+    @include media('<800px') {
+        margin-top: 5rem;
+    }
 }
 
 .intro-title {
@@ -151,12 +196,44 @@ canvas {
     color: white;
 }
 
+.char-img {
+    position: relative;
+    z-index: 999;
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
 .video-title {
     font-size: 7rem;
+    @include media('<1200px') {
+        font-size: 4rem;
+    }
+
+    @include media('<800px') {
+        font-size: 3rem;
+    }
+
+    @include media('<700px') {
+        font-size: 2rem;
+    }
+
+    @include media('<480px') {
+        font-size: 1rem;
+    }
 }
 
 .start-group-title {
     font-size: 3rem;
+
+    @include media('<800px') {
+        font-size: 2rem;
+    }
+
+    @include media('<480px') {
+        font-size: 1.8rem;
+    }
 }
 
 .sub-title {
@@ -177,46 +254,9 @@ video {
     height: auto;
 }
 
-.intro-img-wrapper-left {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 4rem;
-    @include media('<800px') {
-        flex-direction: column-reverse;
-    }
-}
-
 .intro-img {
     width: 24rem;
     margin: 0 3rem;
-}
-
-.intro-story {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.intro-img-wrapper-right {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 4rem;
-    justify-content: flex-end;
-    @include media('<800px') {
-        flex-direction: column-reverse;
-    }
-
-    .intro-story {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-.intro-right-double-icon {
-    width: 1rem;
-    height: 1rem;
 }
 
 .wrapper {
@@ -234,25 +274,68 @@ video {
     align-items: center;
     justify-content: center;
     font-size: 2rem;
+
+    @include media('<800px') {
+        font-size: 1.5rem;
+    }
+
+    @include media('<480px') {
+        font-size: 1.2rem;
+    }
+}
+
+.debate-video {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .debate-title {
     display: flex;
     flex-direction: column;
-    // width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: white;
     position: absolute;
     z-index: 10;
-    left: 17%;
-    bottom: 32%;
-    color: white;
+    left: 4%;
+    bottom: 34%;
+
+    @include media('<800px') {
+        bottom: 15%;
+    }
 
     .debate-title-text {
         font-size: 3.6rem;
-        justify-content: center;
-        align-items: center;
+
+        @include media('<900px') {
+            font-size: 3.2rem;
+        }
 
         @include media('<800px') {
             font-size: 3rem;
+        }
+
+        @include media('<600px') {
+            font-size: 1.8rem;
+        }
+        @include media('<480px') {
+            font-size: 1.4rem;
+        }
+    }
+
+    .debate-sub-title {
+        padding: 1rem 0;
+        line-height: 1.8;
+
+        @include media('<1200px') {
+            font-size: 1.2rem;
+        }
+
+        @include media('<600px') {
+            display: none;
         }
     }
 }
@@ -266,7 +349,6 @@ video {
 .win-title {
     display: flex;
     flex-direction: column;
-    width: 100%;
     position: absolute;
     z-index: 10;
     color: white;
@@ -276,10 +358,34 @@ video {
         font-size: 5rem;
         justify-content: center;
         align-items: center;
+
+        @include media('<1200px') {
+            font-size: 3rem;
+        }
+
+        @include media('<900px') {
+            font-size: 2rem;
+        }
+
+        @include media('<600px') {
+            font-size: 2rem;
+        }
+        @include media('<480px') {
+            font-size: 1.4rem;
+        }
     }
+
     .win-sub-title {
         padding: 1rem 0;
         line-height: 1.8;
+
+        @include media('<1200px') {
+            font-size: 1rem;
+        }
+
+        @include media('<600px') {
+            display: none;
+        }
     }
 }
 
@@ -296,15 +402,37 @@ video {
     .dday-title-text {
         font-size: 4.3rem;
         padding: 1rem 0;
+
+        @include media('<900px') {
+            font-size: 3.2rem;
+        }
+
+        @include media('<800px') {
+            font-size: 3rem;
+        }
+
+        @include media('<600px') {
+            font-size: 2rem;
+        }
+        @include media('<480px') {
+            font-size: 1.4rem;
+        }
     }
 
     .dday-sub-title {
-        padding: 1rem 0;
         line-height: 1.8;
+
+        @include media('<1200px') {
+            font-size: 1.2rem;
+        }
+
+        @include media('<600px') {
+            display: none;
+        }
     }
 }
 
-// cursor
+//-- cursor
 .custom-cursor {
     position: fixed;
     opacity: 0;
@@ -332,41 +460,22 @@ video {
     opacity: 1;
 }
 
-// .block {
-//     display: grid;
-//     place-content: center;
-//     place-items: center;
-//     height: 80vh;
-//     min-height: 300px;
-// }
-// .block--black {
-//     background-color: black;
-//     color: white;
-// }
-// .block--white {
-//     background-color: white;
-//     color: black;
-// }
-// .block__title,
-// .block__link {
-//     color: currentColor;
-// }
-// .block__title {
-//     margin-bottom: 1em;
-//     font-size: 4rem;
-//     font-weight: 300;
-//     text-align: center;
-// }
-// .block__link {
-//     padding: 0.5em;
-//     text-decoration: none;
-//     transition: letter-spacing 200ms ease;
-// }
-// .block__link:hover {
-//     letter-spacing: 0.2em;
-// }
+.block__title,
+a {
+    color: currentColor;
+}
 
-// 빵빠레 버튼
+a {
+    padding: 0.5em;
+    text-decoration: none;
+    transition: letter-spacing 200ms ease;
+}
+
+a:hover {
+    letter-spacing: 0.2em;
+}
+
+//-- 빵빠레 버튼
 .party-btn {
     background-color: #404663;
     color: #fff;
@@ -383,18 +492,141 @@ video {
         0px 4px 5.3px rgba(0, 0, 0, 0.028), 0px 7.5px 10px rgba(0, 0, 0, 0.035),
         0px 13.4px 17.9px rgba(0, 0, 0, 0.042),
         0px 25.1px 33.4px rgba(0, 0, 0, 0.05), 0px 60px 80px rgba(0, 0, 0, 0.07);
-    width: 14%;
     text-align: center;
     display: flex;
     justify-content: center;
+    width: 20%;
+
+    @include media('<1200px') {
+        width: 30%;
+        font-size: 1.4rem;
+    }
+
+    @include media('<900px') {
+        width: 40%;
+        font-size: 1.2rem;
+    }
+
+    @include media('<480px') {
+        font-size: 1rem;
+    }
 }
 
 .party-btn-wrapper {
     display: flex;
     justify-content: center;
     padding: 1rem;
+
+    @include media('<480px') {
+        padding: 0rem;
+    }
 }
 
 .party-btn:active {
     transform: scale(1.01);
+}
+
+// wave
+#ui {
+    position: absolute;
+    // top: 80%;
+    // left: 50%;
+    width: 100%;
+    height: 500px;
+    // margin: -250px 0 0 -250px;
+
+    .sun {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        height: 150px;
+        margin: -150px 0 0 -150px;
+        border-radius: 300px 300px 0 0;
+        background: white;
+        z-index: 10;
+        box-shadow: 0 0 100px white;
+        filter: blur(0px) contrast(10);
+    }
+    .sea {
+        position: absolute;
+        // top: 50%;
+        // left: 50%;
+        width: 100%;
+        height: 500px;
+        // margin: -250px 0 0 -250px;
+        background: #000;
+
+        filter: blur(10px) contrast(30);
+
+        .wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 340px;
+            height: 40px;
+            margin: -20px 0 0 -170px;
+            background: white;
+            border-radius: 100%;
+
+            &:nth-child(2) {
+                animation: wave 2000ms infinite linear -500ms;
+            }
+            &:nth-child(3) {
+                animation: wave 2000ms infinite linear -1000ms;
+            }
+            &:nth-child(4) {
+                animation: wave 2000ms infinite linear -1500ms;
+            }
+            &:nth-child(5) {
+                animation: wave 2000ms infinite linear -1500ms;
+            }
+            &:nth-child(6) {
+                animation: wave 2000ms infinite linear -2000ms;
+            }
+        }
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0) sclae(1) rotateZ(0);
+    }
+    50% {
+        transform: translateY(80px) scale(0.5) rotateZ(5deg);
+    }
+    100% {
+        transform: translateY(120px) scale(0) rotateZ(-40deg);
+    }
+}
+
+.intro-story {
+    position: relative;
+
+    .story-content {
+        z-index: 100;
+        position: absolute;
+        left: 27%;
+        padding-top: 3rem;
+        text-align: center;
+
+        @include media('<800px') {
+            font-size: 1rem;
+        }
+
+        .story-title {
+            font-size: 1.4rem;
+        }
+
+        .story-detail {
+            // color: #aaa;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.story-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
 }

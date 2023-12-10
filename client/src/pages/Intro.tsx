@@ -32,6 +32,7 @@ export default function Intro() {
         link.addEventListener('mouseover', () => {
             if (cursor) {
                 cursor.classList.add('custom-cursor--link');
+                cursor.classList.remove('custom-cursor--link');
             }
         });
 
@@ -158,7 +159,7 @@ export default function Intro() {
             }
         };
 
-        setInterval(draw, 33);
+        setInterval(draw, 40);
     }, []); // 두 번째 매개변수로 빈 배열을 전달하여 최초 렌더링 시에만 useEffect가 실행되도록 설정
 
     //색종이 커스터마이징
@@ -173,7 +174,7 @@ export default function Intro() {
             //     '#f9bec7',
             // ],
             emojis: ['🎉', '💵', '🏆'],
-            emojiSize: 80,
+            emojiSize: 60,
             confettiNumber: 30,
         });
     };
@@ -196,8 +197,6 @@ export default function Intro() {
 
     return (
         <div className="section intro-container">
-            <div className="custom-cursor custom-cursor--init"></div>
-
             <div className="intro-header">
                 <div className="video-container">
                     <video muted autoPlay loop>
@@ -247,8 +246,25 @@ export default function Intro() {
                 </div>
             </div>
 
+            <div className="empty-div"></div>
+
+            <div className="char-img">
+                <img src="/asset/images/rab1.svg" alt="" />
+                <img src="/asset/images/rab2.svg" alt="" />
+                <img src="/asset/images/rab3.svg" alt="" />
+            </div>
+            <div className="intro-content">
+                <div className="start-group-title">
+                    귀여운 캐릭터의 표정이 변해요 !
+                </div>
+                <br />
+                <div className="intro-content-sub-title">
+                    달성률에 따라 캐릭터가 웃을 수도, 울 수도 있어요 ~ 😆 🙂 😭
+                </div>
+            </div>
+
             <div className="wrapper">
-                <div className="video-container">
+                <div className="debate-video">
                     <video muted autoPlay loop>
                         <source src="/asset/whiteboard.mp4" type="video/mp4" />
                     </video>
@@ -257,7 +273,7 @@ export default function Intro() {
                         <div className="debate-title-text">
                             <div>열띤 토론을 즐겨요</div>
                         </div>
-                        <div className="sub-title title3">
+                        <div className="debate-sub-title title3">
                             동료들과 의견을 주고 받으며,
                             <br />
                             새로운 인사이트를 서로 얻어가요.
@@ -265,7 +281,7 @@ export default function Intro() {
                     </div>
                 </div>
 
-                <div className="empty-div"></div>
+                <div className="vid-empty-div"></div>
 
                 <div className="video-container win-vid">
                     <video muted autoPlay loop>
@@ -283,13 +299,7 @@ export default function Intro() {
                     </div>
                 </div>
 
-                <div className="intro-img-wrapper-right">
-                    <div className="intro-story">
-                        <div className="title3"></div>
-                        <div className="intro-content-sub-title"></div>
-                    </div>
-                    <div className="intro-img"></div>
-                </div>
+                <div className="vid-empty-div"></div>
 
                 <div className="video-container win-vid">
                     <video muted autoPlay loop>
@@ -322,6 +332,8 @@ export default function Intro() {
                     </div>
                 </div>
 
+                <div className="vid-empty-div"></div>
+
                 <div className="video-container win-vid">
                     <video muted autoPlay loop>
                         <source src="/asset/chat.mp4" type="video/mp4" />
@@ -338,35 +350,41 @@ export default function Intro() {
                 </div>
             </div>
 
-            <div className="intro-story">
-                <Link to="https://polydactyl-cello-2db.notion.site/Motimates-4617b0dbabe640deb5336bb2dddcd54a?pvs=4">
-                    <div className="title3">
-                        MOTIMATES
-                        <br />
-                        이야기
-                    </div>
-                    <br />
-                    <div className="intro-content-sub-title">
-                        자세히 보기
-                        <br />
-                        <br />
-                    </div>
-                </Link>
-            </div>
+            <div className="empty-div"></div>
+            <div className="custom-cursor "></div>
 
-            {/* 마우스 조작되게 ! */}
-            {/* <div className="block block--black">
-                <h5 className="block__title">Hello World!</h5>
-                <a href="#!" className="block__link">
-                    I'm link :)
-                </a>
+            <div className="story-wrapper">
+                <div className="intro-story">
+                    <div id="ui">
+                        <div className="sun">
+                            <div className="story-content">
+                                <Link to="https://polydactyl-cello-2db.notion.site/Motimates-4617b0dbabe640deb5336bb2dddcd54a?pvs=4">
+                                    <div className="title3 story-title">
+                                        MOTIMATES
+                                        <br />
+                                        이야기
+                                    </div>
+                                    <br />
+                                    {/* <div className="story-detail">
+                                        자세히 보기
+                                        <br />
+                                        <br />
+                                    </div> */}
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="sea">
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="block block--white">
-                <h5 className="block__title">Hello World!</h5>
-                <a href="#!" className="block__link">
-                    I'm link :)
-                </a>
-            </div> */}
         </div>
     );
 }

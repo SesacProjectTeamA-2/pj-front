@@ -32,9 +32,9 @@ export default function Header(props: any) {
             setIsVisibleMobile((prev) => !prev);
         }
     };
-    useEffect(() => {
-        console.log('isVisibleMobile', isVisibleMobile);
-    }, [isVisibleMobile]);
+    // useEffect(() => {
+    //     console.log('isVisibleMobile', isVisibleMobile);
+    // }, [isVisibleMobile]);
 
     const [isCookie, setIsCookie] = useState(false); // 쿠키 유무
 

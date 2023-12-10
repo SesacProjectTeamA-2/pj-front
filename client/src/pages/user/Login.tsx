@@ -32,8 +32,21 @@ export default function Login() {
         setIsHingeAnimated(!isHingeAnimated);
     };
 
+    function clickEffect(e: MouseEvent): void {
+        const d = document.createElement('div');
+        d.className = 'clickEffect';
+        d.style.top = e.clientY + 'px';
+        d.style.left = e.clientX + 'px';
+        document.body.appendChild(d);
+        d.addEventListener('animationend', () => {
+            d.parentElement?.removeChild(d);
+        });
+    }
+
+    document.addEventListener('click', clickEffect);
+
     return (
-        <div className="section">
+        <div className="section login-section">
             <p
                 id="welcome"
                 onClick={toggleHingeAnimation}
@@ -76,6 +89,13 @@ export default function Login() {
                             className="loginBtn"
                         />
                     </form>
+
+                    <img
+                        src="asset/images/pebble.png"
+                        alt=""
+                        className="pebble-img"
+                    />
+                    <div className="pebble-text">Are you admin ?</div>
                 </div>
             </div>
         </div>
