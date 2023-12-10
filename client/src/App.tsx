@@ -54,19 +54,8 @@ function App() {
             <Header showChatting={showChatting} showChat={showChat} />
             <Routes>
                 <Route path="/" element={<Intro />} />
-                <Route
-                    path="/login"
-                    element={
-                        <BasicLayout children={<Login />} showChat={showChat} />
-                    }
-                />
-
-                <Route
-                    path="/join"
-                    element={
-                        <BasicLayout children={<Join />} showChat={showChat} />
-                    }
-                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/join" element={<Join />} />
 
                 <Route
                     path="/main"
@@ -281,7 +270,7 @@ function App() {
                         />
                     }
                 />
-                {/* 404 처리는 제일 밑에 있어야 함 */}
+
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>

@@ -17,6 +17,7 @@
 .header-divTwo {
     display: flex;
     flex-direction: row;
+    transition: all 1s;
 
     @include media('<800px') {
         display: none;
@@ -28,17 +29,19 @@
     color: black;
     width: 86%;
 }
+
 .header-nav {
     border: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    // background-color: $color-primary;
+
     @include media('<800px') {
         flex-direction: column;
         justify-content: start;
         align-items: start;
+        margin-top: 5rem;
     }
 }
 .pcMode {
@@ -74,27 +77,33 @@
         display: block;
     }
 }
+
 #tab-menu-btn {
     display: block;
     border: none;
     box-shadow: none;
-    // background-color: $color-primary;
+    background-color: inherit;
     padding: 0;
     width: 50px;
+    height: 50px;
 }
+
 .menu {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
     @include media('<800px') {
         flex-direction: column;
         width: 100%;
     }
 }
+
 .menu li a {
     padding: 0.5rem;
 }
+
 #grpSearch-input {
     width: 50%;
     box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.1);
@@ -106,8 +115,8 @@
 }
 
 .menu-button {
-    // background-color: $color-primary;
-    color: white;
+    background-color: #e0e0e0;
+
     border: none;
     padding: 5px;
     margin: 0;
@@ -115,12 +124,12 @@
     @include media('<800px') {
         border: none;
         margin: 0rem 0.4rem;
-        color: white;
+        // color: white;
         box-shadow: none;
     }
 }
 .menu-button:focus {
-    background-color: white;
+    // background-color: white;
     color: $color-gray4;
 }
 #logout-btn {

@@ -21,7 +21,7 @@ export default function GroupLayout({ children, showChat }: any) {
                                 style={{
                                     paddingLeft: 0,
                                     paddingRight: 0,
-                                    paddingTop: 0,
+                                    paddingTop: '5rem',
                                 }}
                             >
                                 <SideBarGroup />
@@ -39,7 +39,7 @@ export default function GroupLayout({ children, showChat }: any) {
                                 style={{
                                     paddingLeft: 0,
                                     paddingRight: 0,
-                                    paddingTop: 0,
+                                    paddingTop: '5rem',
                                 }}
                             >
                                 {children}
