@@ -33,6 +33,12 @@
     gap: 0.8rem;
     padding-bottom: 2rem;
     cursor: pointer;
+
+    .writer-menu-content {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
 }
 
 .post-detail-profile {
@@ -54,6 +60,11 @@
 
 .writer-menu {
     display: flex;
+
+    .writer-menu-content {
+        display: flex;
+        gap: 1rem;
+    }
 }
 
 .post-detail-content {
@@ -92,7 +103,6 @@
     justify-content: space-between;
     margin: 1.5rem 0 0.5rem 0;
     padding-top: 1rem;
-    border-top: 1px solid $color-gray1;
 
     ul {
         display: flex;

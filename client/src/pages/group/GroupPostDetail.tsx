@@ -60,8 +60,9 @@ export default function GroupPostDetail() {
     const [boardComments, setBoardComments] = useState<any>([]);
 
     const [userInfo, SetUserInfo] = useState<any>([]);
+    const [boardUName, setBoardUName] = useState<any>('');
 
-    //] 0. 공지 게시글 상세 조회
+    //; 게시글 상세 조회 (공지/자유)
     const getBoardNoti = async () => {
         const res = await axios
             .get(
@@ -74,10 +75,6 @@ export default function GroupPostDetail() {
             )
             .then((res) => {
                 console.log('getBoardNoti=======', res.data);
-                // console.log(
-                //     'userInfo',
-                //     res.data.groupInfo.tb_groupUser.tb_user
-                // );
 
                 setFreeList(res.data.groupInfo);
 
@@ -86,6 +83,8 @@ export default function GroupPostDetail() {
 
                 const boardComments = res.data.groupInfo.tb_groupBoardComments;
                 setBoardComments(boardComments);
+
+                setBoardUName(userInfo.uName);
             });
     };
 
@@ -93,17 +92,18 @@ export default function GroupPostDetail() {
         getBoardNoti();
     }, []);
 
-    console.log('boardComments', boardComments);
+    // 작성자인지 조회
+    let isBoardWriter = false;
+    if (userNickname === boardUName) {
+        isBoardWriter = true;
+    }
 
-    //] 1. 자유 게시글 상세 조회
+    console.log('boardComments', boardComments);
 
     //; 게시글 삭제 (DELETE)
     const boardDeleteHandler = () => {
         warningModalSwitchHandler();
     };
-
-    // 메뉴 선택
-    const [menu, setMenu] = useState('');
 
     // 경고 공통 모달
     const [warningModalSwitch, setWarningModalSwitch] = useState(false);
@@ -130,47 +130,40 @@ export default function GroupPostDetail() {
 
     //; 댓글 등록 (POST)
     const postCommentHandler = async () => {
-        const res = await axios.post(
-            `${process.env.REACT_APP_DB_HOST}/comment/create/${gbSeq}`,
-            commentInput,
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
+        const res = await axios
+            .post(
+                `${process.env.REACT_APP_DB_HOST}/comment/create/${gbSeq}`,
+                commentInput,
+                {
+                    headers: {
+                        Authorization: `Bearer ${uToken}`,
+                    },
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
 
-        getBoardNoti();
+                getBoardNoti();
 
-        setCommentInput({
-            ...commentInput,
-            gbcContent: '',
-        });
+                setCommentInput({
+                    ...commentInput,
+                    gbcContent: '',
+                });
+            });
     };
 
     // === 수정 ===
 
-    const [isEdit, setIsEdit] = useState(false);
-
-    const [commentEditInput, setCommentEditInput] = useState({
-        gbcSeq: 1,
-        gbcContent: '',
-    });
-
     // 개별 관리
     const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
-    // const [commentEditInputs, setCommentEditInputs] = useState<string>(''); //리더님
 
     const commentEditOnChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
         idx: number
     ) => {
-        // console.log('>>', commentEditInputs); //리더님
         const updatedInputs = [...commentEditInputs];
         updatedInputs[idx] = e.target.value;
         setCommentEditInputs(updatedInputs);
-
-        // setCommentEditInputs(e.target.value); //리더님
     };
 
     // 댓글 수정 여부 id 관리 state
@@ -178,44 +171,20 @@ export default function GroupPostDetail() {
         null
     );
 
-    console.log('boardComments', boardComments);
-
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
-        // !!! 추가 수정 예정 !!! (edit 토글 형식)
-        //-- input 개별 토글 관리
-        // const handleEditChange = boardComments.map((comment) => comment.gbcSeq === comment)setIsEdit(true);
+        // console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
 
-        // const updatedBoardComments = [...boardComments];
-        // updatedBoardComments[idx] =
-        // setCommentEditInputs(updatedInputs);
-
-        console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
-
-        const res = await axios.patch(
-            `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-
-            { gbcSeq, gbcContent: commentEditInputs[idx] },
-
-            {
-                headers: {
-                    Authorization: `Bearer ${uToken}`,
-                },
-            }
-        );
-
-        setEditingCommentId(null);
-
-        getBoardNoti();
-    };
-
-    //; 댓글 삭제 (DELETE)
-    const commentDeleteHandler = async (gbcSeq: number) => {
-        console.log(gbcSeq);
+        if (commentEditInputs[idx]?.length === 0) {
+            alert('댓글을 입력해주세요 !');
+            return;
+        }
 
         const res = await axios
-            .delete(
-                `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
+            .patch(
+                `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
+
+                { gbcSeq, gbcContent: commentEditInputs[idx] },
 
                 {
                     headers: {
@@ -225,13 +194,36 @@ export default function GroupPostDetail() {
             )
             .then((res) => {
                 console.log(res.data);
-                setCommentList((prevComments: any) =>
-                    prevComments.filter(
-                        (comment: any) => comment.gbcSeq !== gbcSeq
-                    )
-                );
+
+                setEditingCommentId(null);
+
                 getBoardNoti();
             });
+    };
+
+    //; 댓글 삭제 (DELETE)
+    const commentDeleteHandler = async (gbcSeq: number) => {
+        if (window.confirm('댓글을 삭제하시겠습니까 ?')) {
+            const res = await axios
+                .delete(
+                    `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
+
+                    {
+                        headers: {
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res.data);
+                    setCommentList((prevComments: any) =>
+                        prevComments.filter(
+                            (comment: any) => comment.gbcSeq !== gbcSeq
+                        )
+                    );
+                    getBoardNoti();
+                });
+        } else return;
     };
 
     return (
@@ -245,7 +237,7 @@ export default function GroupPostDetail() {
                                 src={userInfo?.uImg || '/asset/images/user.svg'}
                                 alt="profile"
                             />
-                            {/* uSeq 사용자 닉네임 가져오기 */}
+
                             <div>
                                 <div className="title4">
                                     {freeList.gbTitle}{' '}
@@ -256,11 +248,18 @@ export default function GroupPostDetail() {
                         <div className="date">{freeList?.createdAt}</div>
                     </div>
                     <div className="writer-menu">
-                        {/* gSeq, gbSeq */}
-                        <Link to={`/board/${gSeq}/edit/${gCategory}/${gbSeq}`}>
-                            <div>수정</div>
-                        </Link>
-                        <div onClick={boardDeleteHandler}>삭제</div>
+                        {isBoardWriter ? (
+                            <div className="writer-menu-content">
+                                <Link
+                                    to={`/board/${gSeq}/edit/${gCategory}/${gbSeq}`}
+                                >
+                                    <div>수정</div>
+                                </Link>
+                                <div onClick={boardDeleteHandler}>삭제</div>
+                            </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
                 </div>
 
@@ -312,7 +311,7 @@ export default function GroupPostDetail() {
                                           const isWriter =
                                               comment.tb_groupUser.tb_user
                                                   .uName === userNickname;
-                                          //   console.log('isWriter', isWriter);
+
                                           const isEditing =
                                               editingCommentId ===
                                               comment.gbcSeq;
@@ -349,70 +348,13 @@ export default function GroupPostDetail() {
                                                           </div>
 
                                                           {/* 댓글 div */}
-                                                          <div
-                                                          //   style={{
-                                                          //       display:
-                                                          //           'flex',
-                                                          //       flexDirection:
-                                                          //           'row',
-                                                          //       justifyContent:
-                                                          //           'center',
-                                                          //       flexBasis:
-                                                          //           '30%',
-                                                          //   }}
-                                                          >
+                                                          <div>
                                                               <div className="comment-header">
-                                                                  {/* ... [rest of the comment header code] */}
-
                                                                   {/* Comment content */}
                                                                   <div>
-                                                                      {isEditing ? (
-                                                                          <TextField
-                                                                              value={
-                                                                                  commentEditInputs[
-                                                                                      idx
-                                                                                  ] ||
-                                                                                  comment.gbcContent
-                                                                              }
-                                                                              onChange={(
-                                                                                  e
-                                                                              ) =>
-                                                                                  commentEditOnChange(
-                                                                                      e,
-                                                                                      idx
-                                                                                  )
-                                                                              }
-                                                                              onKeyDown={(
-                                                                                  e: React.KeyboardEvent<HTMLInputElement>
-                                                                              ) => {
-                                                                                  // Correct typing for the event
-                                                                                  if (
-                                                                                      e.key ===
-                                                                                          'Enter' &&
-                                                                                      !e
-                                                                                          .nativeEvent
-                                                                                          .isComposing
-                                                                                  ) {
-                                                                                      //   e.preventDefault(); // Prevents the default action of the Enter key
-                                                                                      commentEditHandler(
-                                                                                          comment.gbcSeq,
-                                                                                          idx
-                                                                                      );
-                                                                                  }
-                                                                              }}
-                                                                          />
-                                                                      ) : (
-                                                                          <div>
-                                                                              {
-                                                                                  comment.gbcContent
-                                                                              }
-                                                                          </div>
-                                                                      )}
-
-                                                                      {/* Editing and deleting buttons */}
                                                                       {isWriter && (
-                                                                          <div>
-                                                                              <button
+                                                                          <div className="writer-menu">
+                                                                              <div
                                                                                   style={{
                                                                                       padding:
                                                                                           '0.6rem',
@@ -431,13 +373,13 @@ export default function GroupPostDetail() {
                                                                                           );
                                                                                       }
                                                                                   }}
-                                                                                  className="btn-sm cmt-edit-btn"
+                                                                                  //   className=" cmt-edit-btn"
                                                                               >
                                                                                   {isEditing
                                                                                       ? '수정 완료'
                                                                                       : '수정'}
-                                                                              </button>
-                                                                              <button
+                                                                              </div>
+                                                                              <div
                                                                                   style={{
                                                                                       padding:
                                                                                           '0.6rem',
@@ -447,10 +389,10 @@ export default function GroupPostDetail() {
                                                                                           comment.gbcSeq
                                                                                       )
                                                                                   }
-                                                                                  className="btn-sm cmt-del-btn"
+                                                                                  //   className="cmt-del-btn"
                                                                               >
                                                                                   삭제
-                                                                              </button>
+                                                                              </div>
                                                                           </div>
                                                                       )}
                                                                   </div>
@@ -459,25 +401,43 @@ export default function GroupPostDetail() {
                                                       </div>
                                                   </div>
 
-                                                  {/* 댓글 내용 */}
-                                                  {/* {
+                                                  {isEditing ? (
                                                       <TextField
                                                           value={
                                                               commentEditInputs[
                                                                   idx
-                                                              ] ||
+                                                              ]
+                                                          }
+                                                          defaultValue={
                                                               comment.gbcContent
                                                           }
-                                                          onChange={(
-                                                              e: React.ChangeEvent<HTMLInputElement>
-                                                          ) =>
+                                                          onChange={(e) =>
                                                               commentEditOnChange(
                                                                   e,
                                                                   idx
                                                               )
                                                           }
+                                                          onKeyDown={(
+                                                              e: React.KeyboardEvent<HTMLInputElement>
+                                                          ) => {
+                                                              if (
+                                                                  e.key ===
+                                                                      'Enter' &&
+                                                                  !e.nativeEvent
+                                                                      .isComposing
+                                                              ) {
+                                                                  commentEditHandler(
+                                                                      comment.gbcSeq,
+                                                                      idx
+                                                                  );
+                                                              }
+                                                          }}
                                                       />
-                                                  } */}
+                                                  ) : (
+                                                      <div>
+                                                          {comment.gbcContent}
+                                                      </div>
+                                                  )}
                                               </li>
                                               //  END
                                           );

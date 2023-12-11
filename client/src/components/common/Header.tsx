@@ -32,9 +32,6 @@ export default function Header(props: any) {
             setIsVisibleMobile((prev) => !prev);
         }
     };
-    useEffect(() => {
-        console.log('isVisibleMobile', isVisibleMobile);
-    }, [isVisibleMobile]);
 
     const [isCookie, setIsCookie] = useState(false); // 쿠키 유무
 
@@ -83,7 +80,6 @@ export default function Header(props: any) {
                 console.log('error 발생: ', err);
             });
     };
-    // console.log(window.location.pathname);
 
     // 로그인 여부 구분 해 사진 넣기 => 동기화 처리
     const [isUser, setIsUser] = useState<boolean>(false); // 비로그인 상태
@@ -131,102 +127,215 @@ export default function Header(props: any) {
 
     return (
         <>
-            <div className="header-container">
-                {/* 로고 */}
-                <div className="header-divOne">
-                    <Link to="/">
-                        <div className="logo-container">
+            <div className="header-blur">
+                <div className="header-container">
+                    {/* 로고 */}
+                    <div className="header-divOne">
+                        <Link to="/">
+                            <div className="title1 logo-text">MOTI</div>
+                            {/* <div className="logo-container">
                             <img
                                 src="/asset/logo.svg"
                                 className="logo-img"
                                 alt="logo"
                             />
-                        </div>
-                    </Link>
-                </div>
+                        </div> */}
+                        </Link>
+                    </div>
 
-                <div className="header-divTwo pcMode">
-                    <nav className="header-nav ">
-                        <ThemeProvider theme={theme}>
-                            <input
-                                type="text"
-                                id="grpSearch-input"
-                                value={grpInput}
-                                placeholder="초대 링크를 넣어보세요"
-                                onChange={(
-                                    e: React.ChangeEvent<HTMLInputElement>
-                                ) => setGrpInput(e.target.value)}
-                            />
-                            <img
-                                src="/asset/icons/search.svg"
-                                id="grpSearch-btn"
-                                onClick={(e: React.MouseEvent) => goInvited()}
-                                alt="search"
-                            ></img>
-                            <ButtonGroup
-                                aria-label="outlined button group"
-                                variant="outlined"
-                                sx={{ p: 1 }}
-                            >
-                                <Link to="/main">
-                                    <Button className="menu-button">
-                                        MAIN
-                                    </Button>
-                                </Link>
+                    <div className="header-divTwo pcMode">
+                        <nav className="header-nav ">
+                            <ThemeProvider theme={theme}>
+                                <input
+                                    type="text"
+                                    id="grpSearch-input"
+                                    value={grpInput}
+                                    placeholder="초대 링크를 넣어보세요"
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>
+                                    ) => setGrpInput(e.target.value)}
+                                />
+                                <img
+                                    src="/asset/icons/search.svg"
+                                    id="grpSearch-btn"
+                                    onClick={(e: React.MouseEvent) =>
+                                        goInvited()
+                                    }
+                                    alt="search"
+                                ></img>
+                                <ButtonGroup
+                                    aria-label="outlined button group"
+                                    variant="outlined"
+                                    sx={{ p: 1 }}
+                                >
+                                    <Link to="/main">
+                                        <Button className="menu-button">
+                                            MAIN
+                                        </Button>
+                                    </Link>
 
-                                <Link to="/group">
-                                    <Button className="menu-button">
-                                        GROUP
-                                    </Button>
-                                </Link>
-                                {/* </li> */}
-                                {/* 관리자만 보이는 버튼 */}
-                                {/* <Link to="/management/users">
+                                    <Link to="/group">
+                                        <Button className="menu-button">
+                                            GROUP
+                                        </Button>
+                                    </Link>
+                                    {/* </li> */}
+                                    {/* 관리자만 보이는 버튼 */}
+                                    {/* <Link to="/management/users">
                                     <Button className="menu-button">
                                         Management
                                     </Button>
                                 </Link> */}
-                            </ButtonGroup>
-                        </ThemeProvider>
+                                </ButtonGroup>
+                            </ThemeProvider>
 
+                            <ul className="menu">
+                                {!isCookie ? (
+                                    <li>
+                                        {/* 비로그인 시 */}
+                                        <ThemeProvider theme={theme}>
+                                            <Link to="/login">
+                                                <Button
+                                                    aria-label="outlined button group"
+                                                    variant="outlined"
+                                                    className="menu-button"
+                                                >
+                                                    Login
+                                                </Button>
+                                            </Link>
+                                        </ThemeProvider>
+                                    </li>
+                                ) : (
+                                    <>
+                                        {!props.isIntro && (
+                                            <div className="chat-icon-container">
+                                                <img
+                                                    src="/asset/icons/chat.svg"
+                                                    style={{
+                                                        width: '40px',
+                                                        height: '40px',
+                                                    }}
+                                                    alt="chatImg"
+                                                    onClick={() =>
+                                                        props.showChatting()
+                                                    }
+                                                    id="chat-btn"
+                                                />
+                                                <span id="chat-text">Chat</span>
+                                            </div>
+                                        )}
+
+                                        <div className="logout-icon-container">
+                                            <img
+                                                src="/asset/icons/logout.svg"
+                                                alt="logout"
+                                                onClick={logoutHandler}
+                                                id="logout-btn"
+                                            />
+                                            <span id="logout-text">Logout</span>
+                                        </div>
+
+                                        <li>
+                                            {/* <div className="mypage-icon-container"> */}
+                                            <Link to="/mypage">
+                                                <img
+                                                    src={userImgSrc}
+                                                    style={{
+                                                        width: '40px',
+                                                        height: '40px',
+                                                    }}
+                                                    alt="userImg"
+                                                    className="myPage-btn"
+                                                />
+                                            </Link>
+
+                                            {/* <span id="mypage-text">My</span>
+                                            </div> */}
+                                        </li>
+                                    </>
+                                )}
+                            </ul>
+                        </nav>
+                    </div>
+
+                    {/* 메뉴 탭 버튼 */}
+                    <div className="tab-menu-div">
+                        <button id="tab-menu-btn" onClick={() => toggleVal()}>
+                            <img src="/asset/icons/Menu.svg" alt="tabMenu" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* 모바일일 때 메뉴 바*/}
+                <div
+                    className="header-divTwo mobMode "
+                    style={{
+                        display:
+                            isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
+                    }}
+                >
+                    <nav className="header-nav ">
                         <ul className="menu">
+                            <li>
+                                <Link to="/main">
+                                    <button className="menu-button">
+                                        MAIN
+                                    </button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/group">
+                                    <button className="menu-button">
+                                        GROUP
+                                    </button>
+                                </Link>
+                            </li>
+
+                            {/* 관리자만 보이는 버튼 */}
+                            {/* <li>
+                            <Link to="/management/users">
+                                <button className="menu-button">
+                                    Management
+                                </button>
+                            </Link>
+                        </li> */}
+
+                            {/* 로그인/비로그인 구분 */}
                             {!isCookie ? (
                                 <li>
                                     {/* 비로그인 시 */}
-                                    <ThemeProvider theme={theme}>
-                                        <Link to="/login">
-                                            <Button
-                                                aria-label="outlined button group"
-                                                variant="outlined"
-                                                className="menu-button"
-                                            >
-                                                Login
-                                            </Button>
-                                        </Link>
-                                    </ThemeProvider>
+                                    <Link to="/login">
+                                        <button className="menu-button">
+                                            Login
+                                        </button>
+                                    </Link>
                                 </li>
                             ) : (
                                 <>
-                                    {/* 채팅 컴포넌트 */}
-                                    {/* <li id="chat-li"> */}
-                                    <img
-                                        src="/asset/icons/chat.svg"
+                                    <li
                                         style={{
-                                            width: '40px',
-                                            height: '40px',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            width: '100%',
+                                            alignItems: 'center',
                                         }}
-                                        alt="chatImg"
-                                        onClick={() => props.showChatting()}
-                                        id="chat-btn"
-                                    />
-                                    {/* </li> */}
-                                    <img
-                                        src="/asset/icons/logout.svg"
-                                        alt="logout"
-                                        onClick={logoutHandler}
-                                        id="logout-btn"
-                                    />
-                                    <li>
+                                    >
+                                        {/* 로그인 시 */}
+                                        {/* 채팅 컴포넌트 */}
+                                        {/* <li id="chat-li"> */}
+                                        <img
+                                            src="/asset/icons/chat.svg"
+                                            alt="chatImg"
+                                            onClick={() => props.showChatting()}
+                                            id="chat-btn"
+                                        />
+                                        {/* </li> */}
+                                        <img
+                                            src="/asset/icons/logout.svg"
+                                            alt="logout"
+                                            onClick={logoutHandler}
+                                            id="logout-btn"
+                                        />
                                         <Link to="/mypage">
                                             <img
                                                 src={userImgSrc}
@@ -234,8 +343,8 @@ export default function Header(props: any) {
                                                     width: '40px',
                                                     height: '40px',
                                                 }}
-                                                alt="userImg"
                                                 className="myPage-btn"
+                                                alt="userImg"
                                             ></img>
                                         </Link>
                                     </li>
@@ -244,89 +353,6 @@ export default function Header(props: any) {
                         </ul>
                     </nav>
                 </div>
-
-                {/* 메뉴 탭 버튼 */}
-                <div className="tab-menu-div">
-                    <button id="tab-menu-btn" onClick={() => toggleVal()}>
-                        <img src="/asset/icons/Menu.svg" alt="tabMenu" />
-                    </button>
-                </div>
-            </div>
-
-            {/* 모바일일 때 메뉴 바*/}
-            <div
-                className="header-divTwo mobMode "
-                style={{
-                    display: isVisibleMobile && myWidth < 800 ? 'flex' : 'none',
-                }}
-            >
-                <nav className="header-nav ">
-                    <ul className="menu">
-                        <li>
-                            <Link to="/main">
-                                <button className="menu-button">MAIN</button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/group">
-                                <button className="menu-button">GROUP</button>
-                            </Link>
-                        </li>
-
-                        {/* 관리자만 보이는 버튼 */}
-                        {/* <li>
-                            <Link to="/management/users">
-                                <button className="menu-button">
-                                    Management
-                                </button>
-                            </Link>
-                        </li> */}
-
-                        {/* 로그인/비로그인 구분 */}
-                        {!isCookie ? (
-                            <li>
-                                {/* 비로그인 시 */}
-                                <Link to="/login">
-                                    <button className="menu-button">
-                                        Login
-                                    </button>
-                                </Link>
-                            </li>
-                        ) : (
-                            <>
-                                <li>
-                                    {/* 로그인 시 */}
-                                    {/* 채팅 컴포넌트 */}
-                                    {/* <li id="chat-li"> */}
-                                    <img
-                                        src="/asset/icons/chat.svg"
-                                        alt="chatImg"
-                                        onClick={() => props.showChatting()}
-                                        id="chat-btn"
-                                    />
-                                    {/* </li> */}
-                                    <img
-                                        src="/asset/icons/logout.svg"
-                                        alt="logout"
-                                        onClick={logoutHandler}
-                                        id="logout-btn"
-                                    />
-                                    <Link to="/mypage">
-                                        <img
-                                            src={userImgSrc}
-                                            style={{
-                                                width: '40px',
-                                                height: '40px',
-                                            }}
-                                            className="myPage-btn"
-                                            alt="userImg"
-                                        ></img>
-                                    </Link>
-                                </li>
-                            </>
-                        )}
-                    </ul>
-                </nav>
             </div>
         </>
     );

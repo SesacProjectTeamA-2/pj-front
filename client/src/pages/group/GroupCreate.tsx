@@ -177,14 +177,15 @@ export default function GroupCreate() {
             .then((res) => {
                 console.log(res.data);
 
-                if (input.gName) {
+                if (res.data.msg === '모임명이 중복되었습니다.') {
+                    toast.error(res.data.msg);
+                    return;
+                } else if (input.gName) {
                     successHandler();
                 }
             })
             .catch((res) => {
-                toast.error('모임이 생성되지 않았습니다 !', {
-                    duration: 2000,
-                });
+                toast.error(res.data.msg);
             });
     };
 
@@ -425,7 +426,7 @@ export default function GroupCreate() {
                     className="btn-fixed"
                     onClick={() => groupCreateHandler()}
                 >
-                    모임 시작하기 !
+                    시작하기 !
                 </button>
             </div>
         </div>

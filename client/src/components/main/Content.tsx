@@ -33,7 +33,7 @@ export default function Content(props: any) {
     // -4) 캐릭터 가져오기
     const [selectedCharacter, setSelectedCharacter] = useState<
         string | undefined
-    >('/asset/images/sqr1.svg');
+    >('/asset/images/sqr2.svg');
     const getUserData = async () => {
         await axios
             .get(`${process.env.REACT_APP_DB_HOST}/user/mypage`, {
@@ -140,10 +140,6 @@ export default function Content(props: any) {
     const [nowRanking, setNowRanking] = useState([]);
     const [GroupRates, setGroupRates] = useState([]);
     const [doneRates, setDoneRates] = useState([]);
-    // console.log('nowScoreUserInfo', nowScoreUserInfo);
-    // console.log('nowRanking', nowRanking);
-    // console.log('GroupRates', GroupRates);
-    // console.log('doneRates', doneRates);
 
     // ] 2. 유저 가입 모임
     const getJoinedGroup = async () => {
@@ -154,8 +150,6 @@ export default function Content(props: any) {
                 },
             })
             .then((res) => {
-                console.log('joined----', res.data);
-
                 const { groupInfo } = res.data;
 
                 setJoinGroupInfo(groupInfo);
@@ -168,8 +162,6 @@ export default function Content(props: any) {
         }
     }, []);
 
-    // [추후] joinGroupInfo 정보 맞는지 재확인
-
     const [madeJoinInfo, setJoinGroupInfo] = useState<any>([]);
 
     //] 3. 유저 생성 모임
@@ -181,8 +173,6 @@ export default function Content(props: any) {
                 },
             })
             .then((res) => {
-                console.log('made----', res.data);
-
                 const { groupInfo } = res.data;
 
                 setMadeGroupInfo(groupInfo);
@@ -197,39 +187,10 @@ export default function Content(props: any) {
 
     const [madeGroupInfo, setMadeGroupInfo] = useState<any>([]);
 
-    // //] 4. 모임 상세정보 조회
-    // const getGroupDeatil = async () => {
-    //     const res = await axios
-    //         .get(`${process.env.REACT_APP_DB_HOST}/group/made`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${uToken}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             console.log('detail----', res.data);
+    //=== 달성률에 따른 캐릭터 이미지 변경
+    console.log('selectedCharacter', selectedCharacter); // /asset/images/sqr1.svg
 
-    //             const { groupInfo } = res.data;
-
-    //             setMadeGroupInfo(groupInfo);
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     getGroupDeatil();
-    // }, []);
-
-    //=== 캐릭터 이미지 변경
-    // console.log('????', uCharImg.slice(-5)); // 2.svg
-    // console.log('????', uCharImg.slice(-4)); // .svg
-
-    // console.log('????', uCharImg.slice(0, 14)); // /asset/images/
-    // console.log('????', uCharImg.slice(14, 17)); // dog
-
-    let charNum = uCharImg?.slice(-5, -4); // 2
-
-    // console.log('....', uCharImg.slice(0, 14) + '3' + uCharImg.slice(-4));
-
-    console.log('????', doneRates);
+    let charNum = selectedCharacter?.slice(-5, -4); // 2
 
     let totalRates = 0;
     let totalPercent = 0;
@@ -239,26 +200,25 @@ export default function Content(props: any) {
         totalPercent = totalRates / doneRates?.length; // 평균
     }
 
-    // if (totalPercent > 70) {
-    //     uCharImg.replace(charNum, '3');
-    // } else if (totalPercent > 30) {
-    //     uCharImg.replace(charNum, '2');
-    // } else if (totalPercent <= 30) {
-    //     uCharImg.replace(charNum, '1');
+    if (totalPercent > 70) {
+        charNum = '1';
+    } else if (totalPercent < 30) {
+        charNum = '3';
+    }
 
-    //     console.log('kkk', uCharImg);
+    let newChar =
+        selectedCharacter?.slice(0, 17) +
+        (charNum ?? '') +
+        selectedCharacter?.slice(-4);
 
-    //     console.log('kkk', charNum);
-    // }
+    // console.log('charNum', charNum);
+    // console.log('newChar ::: ', newChar);
+    // console.log('totalRates', totalRates);
+    // console.log('totalPercent', totalPercent);
 
     useEffect(() => {
-        if (totalPercent > 70) {
-            setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
-        }
-        setCharImg(uCharImg?.slice(0, 14) + '3' + uCharImg?.slice(-4));
-    });
-    console.log('totalRates', totalRates);
-    console.log('totalRates', totalPercent);
+        setSelectedCharacter(newChar);
+    }, [totalPercent]);
 
     return (
         <div
@@ -296,10 +256,11 @@ export default function Content(props: any) {
                                                 display: 'flex',
                                                 width: '100%',
                                                 alignItems: 'center',
+                                                padding: '1rem',
                                             }}
                                         >
                                             <div
-                                                style={{ width: '20vw' }}
+                                                style={{ width: '10vw' }}
                                                 className="title6"
                                             >
                                                 {group.gName}

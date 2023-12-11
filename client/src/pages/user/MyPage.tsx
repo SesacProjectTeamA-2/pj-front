@@ -53,8 +53,7 @@ export default function MyPage() {
                 }
                 setInput(nickname);
                 setContent(coverLetter);
-                // 선택 안 하면 null 값 들어있어서 값 있을 때만 실행하도록 조건문 넣었음
-                // if (category1 && category2 && category3) {
+
                 // 중복 제거
                 const uniqueSelectedArr = Array.from(
                     new Set(
@@ -66,18 +65,7 @@ export default function MyPage() {
                 );
 
                 setSelectedArr(uniqueSelectedArr);
-                // const uniqueSelectedArr = Array.from(
-                //     new Set([
-                //         category1?.category1,
-                //         category2?.category2,
-                //         category3?.category3,
-                //     ])
-                // );
-                // setSelectedArr(uniqueSelectedArr);
-                // setSelectedArr([category1, category2, category3]);
-                // const uniqueSelectedArr = Array.from(new Set(selectedArr));
-                // setSelectedArr(uniqueSelectedArr);
-                // }
+
                 setSelectedCharacter(character);
 
                 setPhraseCtt(phrase);
@@ -241,7 +229,11 @@ export default function MyPage() {
                 )
                 .then((res) => {
                     console.log('patched', res.data.message);
-                    toast.success(res.data.message);
+
+                    if (res.data.message === '이미 존재하는 닉네임입니다.') {
+                        toast.error(res.data.message);
+                    } else toast.success(res.data.message);
+
                     console.log('patchedUserData 요청 성공', patchedUserData);
                 });
         } catch (err) {
@@ -253,7 +245,7 @@ export default function MyPage() {
         <div className="section">
             {/* 로그인 안 했을 때: 로그인 버튼 보임 + 채팅 버튼 안 보임 <br></br>
                 로그인 했을 때: 로그인 버튼 안 보임 + 채팅 버튼/프로필 보임
-                <br></br>ㄴ 관리자일 때: Management 버튼 추가로 보임 */}
+                <br></br> 관리자일 때: Management 버튼 추가로 보임 */}
             <div className="myPage-div-one">
                 <div className="myPage-div-one-one">
                     <ProfilePic

@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { changeGroup } from '../../store/slices/groupSlice';
+// import { changeGroup } from '../../store/slices/groupSlice';
 
 import '../../styles/scss/components/titles.scss';
 import '../../styles/scss/components/buttons.scss';
@@ -21,30 +21,12 @@ import { GroupDetailType, RootStateType } from '../../../src/types/types'; // Re
 // import JSConfetti from 'js-confetti'; //_ 빵빠레
 
 export default function GroupHome() {
-    //HTML Canvas 요소를 생성하여 페이지에 추가
-    // const jsConfetti = new JSConfetti();
-
-    const dispatch = useDispatch();
-
     const cookie = new Cookies();
     const uToken = cookie.get('isUser');
 
     //-- redux test 용
-    // const test = {
-    //     gSeq: 1,
-    //     gName: '변경했어요..',
-    //     gDesc: '11111',
-    //     gDday: '2023-10-28',
-    //     gMaxMem: 10000000,
-    //     gCategory: 'it',
-    //     gCoverImg:
-    //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr1_J07ruu0QuBhaD6HSDkvbQdW_OOENXmiA&usqp=CAU',
-    //     mTitle: '변경했어요..',
-    //     mContent: '변경했어요..',
-    //     mLevel: 5,
-    // };
+    // const dispatch = useDispatch();
 
-    //=== redux 상태관리 ===
     // const dummyGroupState = useSelector(
     //     (state: RootStateType) => state.dummyGroup
     // );
@@ -134,6 +116,33 @@ export default function GroupHome() {
 
                 setIsLeader(res.data.isLeader);
                 setIsJoin(res.data.isJoin);
+
+                switch (res.data.groupCategory) {
+                    case 'ex':
+                        setGCategory('운동');
+                        break;
+                    case 're':
+                        setGCategory('독서');
+                        break;
+                    case 'lan':
+                        setGCategory('언어');
+                        break;
+                    case 'cert':
+                        setGCategory('자격증');
+                        break;
+                    case 'st':
+                        setGCategory('스터디');
+                        break;
+                    case 'eco':
+                        setGCategory('경제');
+                        break;
+                    case 'it':
+                        setGCategory('IT');
+                        break;
+                    case 'etc':
+                        setGCategory('기타');
+                        break;
+                }
             });
     };
 
@@ -165,6 +174,8 @@ export default function GroupHome() {
                 }
             });
     };
+
+    const [gCategory, setGCategory] = useState('');
 
     // 모임장 / 멤버
     const [isLeader, setIsLeader] = useState(false);
@@ -215,7 +226,12 @@ export default function GroupHome() {
             )}
 
             <div className="wrapper">
-                <div className="title5 group-title-text">어떤 모임인가요 ?</div>
+                <div className="group-title-wrapper">
+                    <div className="title5 group-title-text">
+                        어떤 모임인가요 ?
+                    </div>
+                    <div className="group-category-label">{gCategory}</div>
+                </div>
                 <div className="main-content">{groupDetail.grInformation}</div>
             </div>
 

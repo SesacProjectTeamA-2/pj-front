@@ -153,18 +153,12 @@ export default function BoardMissionEdit() {
         console.log(res);
 
         successHandler();
-
-        // [추후] input 입력 안했을 시, 로직
-
-        // [추후] 수정한 모임 홈 화면으로 이동
     };
 
     console.log(board);
 
     return (
         <div className="section section-group">
-            {/* [추후] title 값 넘겨 받기 ! */}
-            {/* params 가져와서 : free */}
             <GroupHeader title={`미션 ${missionTitle}`} groupName={''} />
             <div className="post-container">
                 <div className="noti-content post-header title5">
@@ -193,7 +187,6 @@ export default function BoardMissionEdit() {
                 setSuccessModalSwitch={setSuccessModalSwitch}
                 action={'게시글을 수정'}
                 gSeq={gSeq}
-                // gCategory={gCategory}
                 gbSeq={gbSeq}
             />
             <div>

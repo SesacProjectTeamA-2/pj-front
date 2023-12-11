@@ -37,7 +37,7 @@ export default function BasicLayout({ children, showChat }: any) {
                                 style={{
                                     paddingLeft: 0,
                                     paddingRight: 0,
-                                    paddingTop: 0,
+                                    paddingTop: '4rem',
                                     justifyContent: 'center',
                                 }}
                             >

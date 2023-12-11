@@ -4,13 +4,18 @@ import { createButton } from 'react-social-login-buttons';
 import { createSvgIcon } from 'react-social-login-buttons';
 
 const config_naver = {
-    text: '네이버 로그인',
+    text: 'NAVER',
     style: {
-        background: '#02c75a',
-        borderRadius: '12px',
+        background: '#fcfcfc',
+        color: '#000000',
         fontSize: '1rem',
         fontWeight: 'bold',
-        wordWrap: 'breakWord',
+        margin: '1rem auto',
+        width: '90%',
+        alignItems: 'center',
+        display: 'flex',
+        borderRadius: '12px',
+        boxShadow: '-11px 11px 22px #bebebe, 11px -11px 22px #ffffff',
     },
     icon: createSvgIcon(naverSvg),
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
+import toast, { Toaster } from 'react-hot-toast';
 
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
@@ -93,7 +94,7 @@ export default function MissionAddModal({
     let defaultDate = formatDate(futureDate);
     let today = formatDate(currentDate);
 
-    console.log('day', gDday);
+    console.log('gDday', gDday);
 
     const [targetDate, setTargetDate] = useState(gDday);
 
@@ -140,12 +141,24 @@ export default function MissionAddModal({
     /////////// 추가 //////////////
 
     const oneMissionAddHandler = () => {
+        // 유효성 검사
+        if (!missionInput.mTitle) {
+            toast.error('미션 제목을 입력해주세요', {
+                duration: 2000,
+            });
+            return;
+        } else if (!missionInput.mContent) {
+            toast.error('미션 인증방법을 입력해주세요', {
+                duration: 2000,
+            });
+            return;
+        }
+
         const newMissions = [...missionList, missionInput];
         setMissionList(newMissions);
 
         // 입력 필드 초기화
         setMissionInput({
-            // id: Object.keys(missionList).length + 1,
             id: missionList.length + 2,
             mTitle: '',
             mContent: '',
@@ -230,16 +243,6 @@ export default function MissionAddModal({
             };
 
             console.log('버튼 눌렀을 경우의 data ===== ', data);
-
-            // missionInputs 배열을 복사하고 gDday 업데이트
-            // const updatedMissionInputs = missionInputs.map((mission: any) => {
-            //     return {
-            //         ...mission,
-            //         gDday: Number(dday.slice(2)),
-            //     };
-            // });
-
-            // setMissionInputs(updatedMissionInputs);
 
             const patchDdayHandler = async () => {
                 try {
@@ -554,7 +557,22 @@ export default function MissionAddModal({
                                         </div>
                                     ) : (
                                         <div id="dday-text">
-                                            {dday ? dday : `D-${gDday}`}
+                                            {/* {dday.length > 0
+                                                ? dday
+                                                : !isNaN(gDday)
+                                                ? gDday < 0
+                                                : `D+${gDday.substr(1)}`
+                                                ? gDday == 0
+                                                : 'D-DAY'
+                                                ? `D-${gDday}`
+                                                : gDday} */}
+                                            {dday.length > 0
+                                                ? dday
+                                                : Number(gDday) < 0
+                                                ? `D+${gDday * -1}`
+                                                : Number(gDday) == 0
+                                                ? 'D-DAY'
+                                                : `D-${gDday}`}
                                         </div>
                                     )}
                                 </div>

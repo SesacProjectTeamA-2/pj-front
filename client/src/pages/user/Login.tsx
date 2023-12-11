@@ -1,13 +1,10 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import 'animate.css';
 import '../../styles/scss/pages/user/login.scss';
 
 import GoogleLoginBtn from '../../components/login/GoogleLoginBtn';
 import NaverLoginBtn from '../../components/login/NaverLoginBtn';
 import KakaoLoginBtn from '../../components/login/KakaoLoginBtn';
-import TesterLoginBtn1 from '../../components/login/TesterLoginBtn1';
-import TesterLoginBtn2 from '../../components/login/TesterLoginBtn2';
-import { Button } from '@mui/material';
 
 export default function Login() {
     const testLogin1 = (testNum: number): void => {
@@ -29,45 +26,77 @@ export default function Login() {
         window.location.href = `${process.env.REACT_APP_DB_HOST}/user/login/naver`;
     };
 
+    const [isHingeAnimated, setIsHingeAnimated] = useState(false);
+
+    const toggleHingeAnimation = () => {
+        setIsHingeAnimated(!isHingeAnimated);
+    };
+
+    function clickEffect(e: MouseEvent): void {
+        const d = document.createElement('div');
+        d.className = 'clickEffect';
+        d.style.top = e.clientY + 'px';
+        d.style.left = e.clientX + 'px';
+        document.body.appendChild(d);
+        d.addEventListener('animationend', () => {
+            d.parentElement?.removeChild(d);
+        });
+    }
+
+    document.addEventListener('click', clickEffect);
+
     return (
-        <div className="section">
-            <div className="login-wrapper">
-                <p id="login-p">Motimates와 목표를 이뤄볼까요?</p>
+        <div className="section login-section">
+            <p
+                id="welcome"
+                onClick={toggleHingeAnimation}
+                className={`${isHingeAnimated ? 'animate__hinge' : ''}`}
+            >
+                welcome
+            </p>
+            <div className="login">
+                <div className="form">
+                    <form className="login-form">
+                        <button
+                            className="guest-btn"
+                            onClick={() => testLogin1(1)}
+                        >
+                            GUEST 1
+                        </button>
 
-                <TesterLoginBtn1
-                    style={{ marginTop: '20%', width: '60%' }}
-                    onClick={() => testLogin1(1)}
-                    align="center"
-                    className="loginBtn"
-                ></TesterLoginBtn1>
+                        <button
+                            className="guest-btn"
+                            onClick={() => testLogin2(2)}
+                        >
+                            GUEST 2
+                        </button>
 
-                <TesterLoginBtn2
-                    style={{ width: '60%' }}
-                    onClick={() => testLogin2(2)}
-                    align="center"
-                    className="loginBtn"
-                ></TesterLoginBtn2>
+                        <GoogleLoginBtn
+                            onClick={() => googleLogin()}
+                            align="center"
+                            className="loginBtn"
+                        ></GoogleLoginBtn>
 
-                <GoogleLoginBtn
-                    style={{ marginTop: '2%', width: '60%' }}
-                    onClick={() => googleLogin()}
-                    align="center"
-                    className="loginBtn"
-                ></GoogleLoginBtn>
+                        <KakaoLoginBtn
+                            onClick={(): void => kakaoLogin()}
+                            align="center"
+                            className="loginBtn"
+                        />
 
-                <KakaoLoginBtn
-                    style={{ marginTop: '2%', width: '60%' }}
-                    onClick={(): void => kakaoLogin()}
-                    align="center"
-                    className="loginBtn"
-                />
+                        <NaverLoginBtn
+                            onClick={(): void => naverLogin()}
+                            align="center"
+                            className="loginBtn"
+                        />
+                    </form>
 
-                <NaverLoginBtn
-                    style={{ marginTop: '2%', width: '60%' }}
-                    onClick={(): void => naverLogin()}
-                    align="center"
-                    className="loginBtn"
-                />
+                    <img
+                        src="asset/images/pebble.png"
+                        alt=""
+                        className="pebble-img"
+                    />
+                    <div className="pebble-text">Are you admin ?</div>
+                </div>
             </div>
         </div>
     );

@@ -45,7 +45,6 @@ export default function GroupMissionDetail() {
                 console.log('error 발생: ', err);
             });
     };
-    // console.log(window.location.pathname);
 
     useEffect(() => {
         if (cookie.get('isUser')) {
@@ -56,12 +55,12 @@ export default function GroupMissionDetail() {
     }, []);
 
     const { gSeq, mSeq, gbSeq } = useParams();
-    console.log(gSeq, mSeq, gbSeq); // 1 1 4
 
     const [userInfo, SetUserInfo] = useState<any>([]);
 
     //==== 미션 게시글 조회 (GET) ====
     const [missionList, setMissionList] = useState<any>([]);
+    const [boardUName, setBoardUName] = useState<any>('');
 
     // 미션 게시글 조회
     const getBoardMission = async () => {
@@ -81,6 +80,8 @@ export default function GroupMissionDetail() {
                 SetUserInfo(userInfo);
 
                 setCommentList(res.data.groupInfo.tb_groupBoardComments);
+
+                setBoardUName(userInfo.uName);
             });
     };
 
@@ -88,7 +89,11 @@ export default function GroupMissionDetail() {
         getBoardMission();
     }, []);
 
-    console.log('MMMMM', missionList);
+    // 작성자인지 조회
+    let isBoardWriter = false;
+    if (userNickname === boardUName) {
+        isBoardWriter = true;
+    }
 
     //; 게시글 삭제 (DELETE)
     const boardDeleteHandler = () => {
@@ -148,7 +153,8 @@ export default function GroupMissionDetail() {
     // 개별 관리
     const [commentEditInputs, setCommentEditInputs] = useState<string[]>([]);
     const commentEditOnChange = (
-        e: React.ChangeEvent<HTMLInputElement>,
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+
         idx: number
     ) => {
         const updatedInputs = [...commentEditInputs];
@@ -156,16 +162,26 @@ export default function GroupMissionDetail() {
         setCommentEditInputs(updatedInputs);
     };
 
+    // 댓글 수정 여부 id 관리 state
+    const [editingCommentId, setEditingCommentId] = useState<number | null>(
+        null
+    );
+
     //; 댓글 수정 (PATCH)
     const commentEditHandler = async (gbcSeq: number, idx: number) => {
         console.log({ gbcSeq, gbcContent: commentEditInput.gbcContent });
+
+        if (commentEditInputs[idx]?.length === 0) {
+            alert('댓글을 입력해주세요 !');
+            return;
+        }
+
         const res = await axios.patch(
             `${process.env.REACT_APP_DB_HOST}/comment/edit/${gbcSeq}`,
-            // commentEditTestInput, // [임시 test용]
-            // [추후] commentEditInput으로 변경
-            { gbcSeq, gbcContent: commentEditInputs[idx] },
 
+            { gbcSeq, gbcContent: commentEditInputs[idx] },
             // commentEditInput,
+
             {
                 headers: {
                     Authorization: `Bearer ${uToken}`,
@@ -173,31 +189,33 @@ export default function GroupMissionDetail() {
             }
         );
 
+        setEditingCommentId(null);
+
         getBoardMission();
     };
 
     //; 댓글 삭제 (DELETE)
     const commentDeleteHandler = async (gbcSeq: number) => {
-        console.log(gbcSeq);
-
-        const res = await axios
-            .delete(
-                `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${uToken}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res.data);
-                setCommentList((prevComments: any) =>
-                    prevComments.filter(
-                        (comment: any) => comment.gbcSeq !== gbcSeq
-                    )
-                );
-                getBoardMission();
-            });
+        if (window.confirm('댓글을 삭제하시겠습니까 ?')) {
+            const res = await axios
+                .delete(
+                    `${process.env.REACT_APP_DB_HOST}/comment/delete/${gbcSeq}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${uToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res.data);
+                    setCommentList((prevComments: any) =>
+                        prevComments.filter(
+                            (comment: any) => comment.gbcSeq !== gbcSeq
+                        )
+                    );
+                    getBoardMission();
+                });
+        } else return;
     };
 
     return (
@@ -230,12 +248,18 @@ export default function GroupMissionDetail() {
                         <div className="date">{missionList?.createdAt}</div>
                     </div>
                     <div className="writer-menu">
-                        <Link
-                            to={`/board/${gSeq}/edit/mission/${mSeq}/${gbSeq}`}
-                        >
-                            <div>수정</div>
-                        </Link>
-                        <div onClick={boardDeleteHandler}>삭제</div>
+                        {isBoardWriter ? (
+                            <div className="writer-menu-content">
+                                <Link
+                                    to={`/board/${gSeq}/edit/mission/${mSeq}/${gbSeq}`}
+                                >
+                                    <div>수정</div>
+                                </Link>
+                                <div onClick={boardDeleteHandler}>삭제</div>
+                            </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
                 </div>
 
@@ -280,14 +304,13 @@ export default function GroupMissionDetail() {
 
                     <div className="comment-list">
                         <ul>
-                            {/* commentList, comments 둘다 되네요..^^ */}
                             {commentList?.map((comment: any, idx: number) => {
                                 // 사용자 == 작성자 여부 구분
                                 const isWriter =
                                     comment.tb_groupUser.tb_user.uName ===
                                     userNickname;
-                                // console.log('isWriter', isWriter);
-
+                                const isEditing =
+                                    editingCommentId === comment.gbcSeq;
                                 return (
                                     <li key={idx}>
                                         {/* START */}
@@ -328,48 +351,92 @@ export default function GroupMissionDetail() {
                                                     >
                                                         {isWriter ? (
                                                             // 사용자 === 작성자
-                                                            <>
-                                                                <button
+                                                            <div className="writer-menu">
+                                                                {/* <div
                                                                     onClick={() =>
                                                                         commentEditHandler(
                                                                             comment.gbcSeq,
                                                                             idx
                                                                         )
                                                                     }
-                                                                    className="btn-sm cmt-edit-btn"
+                                                                    // className="writer-menu"
                                                                 >
                                                                     수정
-                                                                </button>
-
-                                                                <button
+                                                                </div> */}
+                                                                <div
+                                                                    style={{
+                                                                        padding:
+                                                                            '0.6rem',
+                                                                    }}
+                                                                    onClick={() => {
+                                                                        if (
+                                                                            isEditing
+                                                                        ) {
+                                                                            commentEditHandler(
+                                                                                comment.gbcSeq,
+                                                                                idx
+                                                                            );
+                                                                        } else {
+                                                                            setEditingCommentId(
+                                                                                comment.gbcSeq
+                                                                            );
+                                                                        }
+                                                                    }}
+                                                                    //   className=" cmt-edit-btn"
+                                                                >
+                                                                    {isEditing
+                                                                        ? '수정 완료'
+                                                                        : '수정'}
+                                                                </div>
+                                                                <div
+                                                                    style={{
+                                                                        padding:
+                                                                            '0.6rem',
+                                                                    }}
                                                                     onClick={() =>
                                                                         commentDeleteHandler(
                                                                             comment.gbcSeq
                                                                         )
                                                                     }
-                                                                    className="btn-sm cmt-del-btn"
+                                                                    // className="cmt-del-btn"
                                                                 >
                                                                     삭제
-                                                                </button>
-                                                            </>
-                                                        ) : // 사용자 !== 작성자
-                                                        null}
+                                                                </div>
+                                                            </div>
+                                                        ) : null}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* 댓글 내용 */}
-                                        <TextField
-                                            // value={comment.gbcContent}
-                                            value={
-                                                commentEditInputs[idx] ||
-                                                comment.gbcContent
-                                            }
-                                            name="gbcContent"
-                                            onChange={(
-                                                e: React.ChangeEvent<HTMLInputElement>
-                                            ) => commentEditOnChange(e, idx)}
-                                        ></TextField>
+
+                                        {isEditing ? (
+                                            <TextField
+                                                value={commentEditInputs[idx]}
+                                                defaultValue={
+                                                    comment.gbcContent
+                                                }
+                                                onChange={(e) =>
+                                                    commentEditOnChange(e, idx)
+                                                }
+                                                onKeyDown={(
+                                                    e: React.KeyboardEvent<HTMLInputElement>
+                                                ) => {
+                                                    // Correct typing for the event
+                                                    if (
+                                                        e.key === 'Enter' &&
+                                                        !e.nativeEvent
+                                                            .isComposing
+                                                    ) {
+                                                        commentEditHandler(
+                                                            comment.gbcSeq,
+                                                            idx
+                                                        );
+                                                    }
+                                                }}
+                                            />
+                                        ) : (
+                                            <div>{comment.gbcContent}</div>
+                                        )}
 
                                         {/* END */}
                                     </li>

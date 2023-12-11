@@ -48,30 +48,27 @@ function App() {
         setShowChat(!showChat);
     };
 
+    const [isIntro, setIsIntro] = useState<boolean>(false);
+
     return (
         // <SocketContext.Provider value={socket}>
         <div className="App">
-            <Header showChatting={showChatting} showChat={showChat} />
+            <Header
+                showChatting={showChatting}
+                showChat={showChat}
+                isIntro={isIntro}
+                setIsIntro={setIsIntro}
+            />
+
             <Routes>
                 <Route
                     path="/"
                     element={
-                        <BasicLayout children={<Intro />} showChat={showChat} />
+                        <Intro isIntro={isIntro} setIsIntro={setIsIntro} />
                     }
                 />
-                <Route
-                    path="/login"
-                    element={
-                        <BasicLayout children={<Login />} showChat={showChat} />
-                    }
-                />
-
-                <Route
-                    path="/join"
-                    element={
-                        <BasicLayout children={<Join />} showChat={showChat} />
-                    }
-                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/join" element={<Join />} />
 
                 <Route
                     path="/main"
@@ -177,7 +174,6 @@ function App() {
 
                 <Route
                     path="/board/:gSeq/:gCategory"
-                    // path="*/post"
                     element={
                         <GroupLayout
                             children={<BoardPost />}
@@ -286,7 +282,7 @@ function App() {
                         />
                     }
                 />
-                {/* 404 처리는 제일 밑에 있어야 함 */}
+
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>
